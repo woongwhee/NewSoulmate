@@ -1,0 +1,47 @@
+#Fcontent, h3, #FQ_bt, #Qcontent{
+    text-align: center;
+    margin: auto;
+    margin-top: 15px;
+
+}
+#Fcontent div{
+    background-color: #f8f5f2;
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 10px;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    margin-top: 15px;
+}
+#Fcontent p{
+    background-color: lightgray;
+    width: 300px;
+    height: 100px;
+    margin: auto;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: none;
+}
+#faq_bt{
+    background-color: #f45d48;
+    color: #f8f5f2;
+    border: 1px;
+    border-radius: 5px;
+    height: 40px;
+    width: 100px;
+}
+
+#qna_bt{
+    background-color: lightgray;
+    color: black;
+    border: 1px;
+    border-radius: 5px;
+    height: 40px;
+    width: 100px;
+}
+
+

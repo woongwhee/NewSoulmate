@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+    <entry key="selectCategoryList">
+        SELECT CATEGORY_NO, CATEGORY_NAME
+        FROM CATEGORY
+        WHERE TYPE_NO = 4
+    </entry>
+</properties>

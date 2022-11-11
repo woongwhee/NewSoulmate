@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<!--API키는 이파일에서 관리할것!-->
+<properties>
+
+
+    <entry key="adoptReviewList">
+        SELECT *
+        FROM (
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT BOARD_NO,
+        BOARD_TITLE,
+        MEMBER_NO,
+        READ_COUNT,
+        CREATE_DATE
+        FROM BOARD
+        WHERE BOARD_STATUS = 'Y'
+        ORDER BY CREATE_DATE DESC) A )
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+
+    <entry key="readCount">
+        UPDATE BOARD
+        SET READ_COUNT = READ_COUNT +1
+        WHERE BOARD_NO = ?
+        AND BOARD_STATUS = 'Y'
+    </entry>
+
+    <entry key="selectAdoptReviewDetail">
+        SELECT BOARD_TITLE,
+        MEMBER_NO,
+        ISSUE_DATE,
+        CREATE_DATE,
+        READ_COUNT,
+        BOARD_CONTENT
+        FROM BOARD
+        WHERE BOARD_NO = ?
+        AND BOARD_STATUS = 'Y'
+    </entry>
+
+    <entry key="insertReply">
+        INSERT INTO REPLY
+        (REPLY_NO,
+        BOARD_NO,
+        USER_NO,
+        REPLY_CONTENT)
+        VALUES
+        (SEQ_BNO.NEXTVAL,
+        ?,?,?)
+    </entry>
+
+    <entry key="selectReplyList">
+        SELECT REPLY_NO,
+        USER_NO,
+        REPLY_CONTENT,
+        TO_CHAR(REPLY_DATE , 'YY/MM/DD HH:MI:SS') REPLY_DATE
+        FROM REPLY R
+        JOIN MEMBER ON (REPLY_WRITER = USER_NO)
+        WHERE R.REPLY_STATUS = 'Y'
+        AND BOARD_NO = ?
+        ORDER BY CREATE_DATE DESC , REPLY_NO
+    </entry>
+
+    <entry key="selectListCount">
+        SELECT COUNT(*) as cnt
+        FROM BOARD
+        JOIN BOARD_TYPE USING(TYPE_NO)
+        WHERE BOARD_NAME = ?
+    </entry>
+
+    <entry key="selectQnAList">
+        SELECT *
+        FROM(SELECT
+        ROWNUM AS "RNUM",
+        A.*
+        FROM (SELECT
+        CASE WHEN REPLY_CONTENT IS NULL THEN 'N' ELSE 'Y' END AS "RESULTSTATUS",
+        BOARD_NO,
+        BOARD_TITLE,
+        MEMBER_NAME,
+        CREATE_DATE
+        FROM BOARD B
+        JOIN BOARD_TYPE USING(TYPE_NO)
+        JOIN MEMBER USING(MEMBER_NO)
+        JOIN REPLY R on B.BOARD_NO = R.BOARD_NO
+        WHERE BOARD_NAME = '문의'
+        ORDER BY CREATE_DATE DESC) A
+        )
+        WHERE RNUM BETWEEN ? AND ?;
+    </entry>
+
+</properties>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="insertMember">
+        INSERT INTO MEMBER(MEMBER_NO, MEMBER_ID, MEMBER_PWD, MEMBER_NAME, NICKNAME, PHONE, EMAIL, MEMBER_GRADE)
+        VALUES(SQ_MEMBER_PK.NEXTVAL,?,?,?,?,?,?,'일반')
+    </entry>
+
+    <entry key="idCheck">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE MEMBER_ID = ?
+    </entry>
+
+    <entry key="nicknameCheck">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE NICKNAME = ?
+    </entry>
+
+    <entry key="loginMember">
+        SELECT *
+        FROM MEMBER
+        WHERE MEMBER_ID = ?
+        AND MEMBER_PWD = ?
+        AND STATUS = 'Y'
+    </entry>
+
+    <entry key="searchId">
+        SELECT *
+        FROM MEMBER
+        WHERE MEMBER_NAME = ?
+        AND EMAIL = ?
+    </entry>
+
+    <entry key="searchPwd">
+        SELECT *
+        FROM MEMBER
+        WHERE MEMBER_NAME = ?
+        AND MEMBER_ID = ?
+        AND EMAIL = ?
+
+    </entry>
+
+</properties>
+
+
+
+
+

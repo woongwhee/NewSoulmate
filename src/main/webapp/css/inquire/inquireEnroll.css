@@ -1,0 +1,13 @@
+.outer{
+    background-color:#f8f5f2;
+
+    width: 1000px;
+    height: 550px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+#enroll-form input, #enroll-form textarea{
+    width: 100%;
+    box-sizing: border-box;
+}

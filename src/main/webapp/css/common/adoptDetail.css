@@ -1,0 +1,20 @@
+
+.outer {
+    background-color: lightgray;
+    color: black;
+    width: auto;
+    margin: auto;
+}
+#detail-area{
+    border: solid 2px black;
+}
+
+#title th{
+    width:10px;
+}
+#title td{
+    width:100px;
+    font-size: large;
+}
+
+

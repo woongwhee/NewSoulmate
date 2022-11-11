@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="selectThumbNail">
+        SELECT *
+        FROM(
+        SELECT
+        ROWNUM as rnum
+        ,a.*
+        FROM(
+        SELECT
+        "desertionNo",
+        "filename"
+        FROM ANIMAL
+        WHERE SYSDATE-2 &lt;"noticeSdt"
+        ORDER BY "noticeSdt")a
+        )
+        WHERE rnum between ? and ?
+
+
+    </entry>
+    <entry key="selectNotice">
+        select *
+        from ANIMAL
+        where "desertionNo"=?
+
+
+    </entry>
+    <entry key="truncNotice">
+        TRUNCATE TABLE ANIMAL
+    </entry>
+    <entry key="insertNotice">
+        INSERT INTO ANIMAL (
+        "desertionNo" ,"filename" ,
+        "happenDt" ,"happenPlace" ,
+        "kindCd" ,"colorCd" ,
+        "age" , "weight" ,
+        "noticeNo" , "noticeSdt" ,
+        "noticeEdt" , "popfile" ,
+        "processState" , "sexCd",
+        "neuterYn", "specialMark",
+        "careNm", "careTel",
+        "careAddr" , "orgNm",
+        "chargeNm" , "officetel")
+        VALUES (
+        ?,?,?,?,
+        ?,?,?,?,
+        ?,?,?,?,
+        ?,?,?,?,
+        ?,?,?,?,
+        ?,?)
+    </entry>
+
+</properties>

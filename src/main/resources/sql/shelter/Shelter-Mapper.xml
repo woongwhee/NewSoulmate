@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="selectShelterList"> <!-- shelter 전체 조회-->
+        SELECT
+        SHELTER_NO,
+        SHELTER_NAME,
+        SHELTER_ADDRESS,
+        SHELTER_LANDLINE,
+        CITY_NO,
+        VILLAGE_NO
+        FROM SHELTER
+        WHERE SHELTER_ADDRESS IS NOT NULL
+    </entry>
+
+    <entry key="selectCityAll">
+        SELECT *
+        FROM CITY
+    </entry>
+
+    <entry key="selectVillageAll">
+        SELECT *
+        FROM VILLAGE
+    </entry>
+
+    <entry key="selectVillage">
+        SELECT *
+        FROM VILLAGE
+        WHERE CITY_NO = ?
+    </entry>
+
+    <entry key="ShelterListByVillage"> <!-- 둘다 선택했을때 -->
+        SELECT
+        SHELTER_NO,
+        SHELTER_NAME,
+        SHELTER_ADDRESS,
+        SHELTER_LANDLINE,
+        CITY_NO,
+        VILLAGE_NO
+        FROM SHELTER
+        WHERE VILLAGE_NO = ?
+        AND SHELTER_ADDRESS IS NOT NULL
+    </entry>
+
+    <entry key="ShelterListByCity"> <!-- 도만 선택했을 경우 -->
+        SELECT
+        SHELTER_NO,
+        SHELTER_NAME,
+        SHELTER_ADDRESS,
+        SHELTER_LANDLINE,
+        CITY_NO,
+        VILLAGE_NO
+        FROM SHELTER
+        WHERE CITY_NO = ?
+        AND SHELTER_ADDRESS IS NOT NULL
+    </entry>
+    
+    <entry key="shelterListByShelterNo">
+        SELECT
+        SHELTER_NO,
+        SHELTER_NAME,
+        SHELTER_ADDRESS,
+        SHELTER_LANDLINE,
+        CITY_NO,
+        VILLAGE_NO
+        FROM SHELTER
+        WHERE SHELTER_NO = ?
+        AND SHELTER_ADDRESS IS NOT NULL
+    </entry>
+
+    <entry key="impossible">
+        SELECT *
+        FROM SHELTER
+        WHERE SHELTER_NO IN(SELECT
+                                SHELTER_NO
+                            FROM MEMBER
+                            WHERE MEMBER_GRADE = 1)
+        AND SHELTER_ADDRESS IS NOT NULL
+    </entry>
+
+
+</properties>
+
+
+
+
