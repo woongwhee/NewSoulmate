@@ -14,6 +14,7 @@
 <html>
 <head>
     <title>보호소 상세 페이지</title>
+    <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>

@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "ShelterDetatilViewController", value = "/Shelter/Detail")
+@WebServlet(name = "ShelterDetatilViewController", value = "/Detail")
 public class ShelterDetailViewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

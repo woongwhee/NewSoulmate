@@ -4,6 +4,8 @@ public class Category {
     private int categoryNo;
     private String categoryName;
 
+    private int typeNo;
+
     public Category(){
         super();
     }
@@ -28,5 +30,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public int getTypeNo() {
+        return typeNo;
+    }
+
+    public void setTypeNo(int typeNo) {
+        this.typeNo = typeNo;
     }
 }

@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.common.controller;
 
+import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.web.common.service.MainService;
 
@@ -17,6 +18,7 @@ public class MainPageController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Notice> nList =new MainService().selectThumbNail(0);
+        List<Board>vList =new MainService().selectVolunteerThumbNail(0);
         System.out.println(nList);
         request.setAttribute("nList",nList);
         request.getRequestDispatcher("views/common/mainPage.jsp").forward(request,response);

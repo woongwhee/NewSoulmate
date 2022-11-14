@@ -77,19 +77,17 @@ public class MemberService {
     }
 
 
-
-
-/*    public Member findPwd(Connection conn, String memberName, String memberId, String Email) {
+    public Member findPwd(String memberName, String memberId, String Email) {
 
         Connection conn = JDBCTemplet.getConnection();
 
-        Member m = MemberDao.searchMemberPw(conn, memberName, memberId, Email);
+        Member m = new MemberDao().findPwd(conn, memberName, memberId, Email);
 
-        JDBCTemplet.close(conn);
+        JDBCTemplet.close();
 
         return m;
 
-    }*/
+    }
 
 
 

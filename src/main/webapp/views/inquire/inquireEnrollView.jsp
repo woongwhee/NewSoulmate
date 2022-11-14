@@ -12,7 +12,18 @@
 <%
     ArrayList<Category> list = (ArrayList<Category>) request.getAttribute("list");
 %>
+
+<%
+    String alertMsg = (String)session.getAttribute("alertMsg");
+    // 서비스 요청 전 : null
+    // 서비스 요청성공 후 : alert로 띄어줄 메시지 문구.
+%>
+
 <html>
+<head>
+    <title>1:1 문의 등록페이지</title>
+    <%@ include file="/views/template/styleTemplate.jsp"%>
+</head>
 <body>
     <%@include file="/views/template/menubar.jsp"%>
     <div class="outer">
@@ -63,19 +74,25 @@
 
             <div align="right" style="margin-right: 200px;">
 <%--                <button type="reset" class="btn btn-secondary btn-sm">취소하기</button>--%>
-                <a href="<%=request.getContextPath()%>/inquire.bo" class="btn btn-secondary btn-sm">취소하기</a>
+                <a href="<%=request.getContextPath()%>/inquire" class="btn btn-secondary btn-sm">취소하기</a>
                 <button type="submit" class="btn btn-secondary btn-sm">작성하기</button>
 
             </div>
         </form>
 
     </div>
+    <script>
+        let msg = "<%= alertMsg %>"; // let msg = 성공적으로 로그인이 되었습니다.
+
+        if(msg != "null") {
+            alert(msg);
+            // 알림창을 띄워준 후 session에 담긴 해당메세지는 지워줘야함.
+            // 안그러면 menubar.jsp가 로딩될때마다 매번 alert가 계속 뜰 것.
+
+            <% session.removeAttribute("alertMsg");%>
+        }
+
+    </script>
     <%@include file="/views/template/footer.jsp"%>
 </body>
-<head>
-    <title>문의내역 작성하기</title>
-    <%@ include file="/views/template/styleTemplate.jsp"%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <link href="<%=request.getContextPath()%>>/css/inquire/inquireEnroll.css" rel="stylesheet">
-</head>
 </html>

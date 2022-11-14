@@ -12,7 +12,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "UpdateShelterServlet", value = "/shelter/updateShelter")
+@WebServlet(name = "UpdateShelterServlet", value = "/updateShelter")
 public class UpdateShelterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

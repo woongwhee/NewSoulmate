@@ -23,7 +23,7 @@
         <h2>로그인</h2>
     </div>
     <div class="content-box">
-        <form action="/login.do" value="loginform" method="post">
+        <form id="loginForm" action="login.do" method="post">
             <table class="logintable">
                 <tr>
                     <th><label for="loginId">아이디</label></th>
@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                     <td><input type="checkbox" id="saveId"><label for="saveId">아이디 저장</label></td>
-                    <td><button onclick="" type="submit" class="loginBtn">로그인하기</button></td>
+                    <td><button onclick="submitLogin()" class="loginBtn">로그인하기</button></td>
                 </tr>
                 <tr>
                     <td><a href="findId.jsp">아이디찾기</a>/<a href="findPwd.jsp">비밀번호 찾기</a></td>
@@ -50,11 +50,8 @@
 
 
 
+<script>
 
-
-<%--<script>
-
-    // 아아디 저장
 
     $(function(){
         getCookie();
@@ -62,13 +59,13 @@
 
     function submitLogin(){
 
-        let userId = $("input[name=userId]").val();
-        console.log(userId);
+        let memberId = $("input[name=memberId]").val();
+        console.log(memberId);
 
         if($("#saveId").is(":checked")){ // true 체크된 상태
-            document.cookie = "saveId="+userId+"; path=/; max-age="+60*60*24*7; //쿠키 최대 시간 설정(7일)
+            document.cookie = "saveId="+memberId+"; path=/; max-age="+60*60*24*7; //쿠키 최대 시간 설정(7일)
         }else{ // 체크안된상태
-            document.cookie = "saveId="+userId+"; path=/; max-age="+0; //최대시간을 0으로 설정해서 해당쿠키를 제거
+            document.cookie = "saveId="+memberId+"; path=/; max-age="+0; //최대시간을 0으로 설정해서 해당쿠키를 제거
         }
         let form = $("#login-form");
         form.submit();
@@ -89,7 +86,7 @@
                     value = document.cookie.substring(index,end);
 
                 }
-                $("input[name=userId]").val(value);
+                $("input[name=memberId]").val(value);
                 $("#saveId").attr("checked","true");
             }
         }
@@ -97,7 +94,7 @@
 
 
 
-</script>--%>
+</script>
 
 
 

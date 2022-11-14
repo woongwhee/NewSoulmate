@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "MemberSignup", value = "/signup.do")
+@WebServlet(name = "MemberSignup", value = "/signupForm")
 public class MemberSignupController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,13 +36,13 @@ public class MemberSignupController extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-    /*    session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
+        session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
 
         RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 
-        view.forward(request, response);*/
+        view.forward(request, response);
 
-        if(result > 0) { // 성공
+/*        if(result > 0) { // 성공
 
             session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
 
@@ -51,8 +51,8 @@ public class MemberSignupController extends HttpServlet {
         } else { // 실패
             request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
 
-            request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-        }
+            request.getRequestDispatcher("views/error/errorPage.jsp").forward(request, response);
+        }*/
 
 
 

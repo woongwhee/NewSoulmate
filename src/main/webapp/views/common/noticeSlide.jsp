@@ -9,5 +9,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%List<Notice> nlist= (List<Notice>) request.getAttribute("nList");%>
 <%for(Notice n:nlist){
-%><div class="post"><img src="<%=n.getFilename()%>" id="<%=n.getDesertionNo()%>" alt=""></div><%
+%>
+<div class="post"><a href="<%=request.getContextPath()%>/noticeDetail?dno=<%=n.getDesertionNo()%>"><img src="<%=n.getFilename()%>" id= alt=""></a></div><%
 }%>

@@ -178,7 +178,7 @@ public class MemberDao {
         return m;
     }
 
-/*
+
     public Member findPwd(Connection conn, String memberName, String memberId, String email) {
 
         PreparedStatement psmt = null;
@@ -206,7 +206,6 @@ public class MemberDao {
         }
         return m;
     }
-*/
 
 
 }

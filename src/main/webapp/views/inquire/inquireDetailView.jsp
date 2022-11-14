@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>문의내역 상세보기</title>
+    <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 
