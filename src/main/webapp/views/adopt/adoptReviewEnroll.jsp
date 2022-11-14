@@ -27,9 +27,9 @@
             sSkinURI : "<%=request.getContextPath() %>/smarteditor2/SmartEditor2Skin.html",
             fCreator : "createSEditor2",
             htParams : {
-                bUseToolbar : true,
-                bUseVerticalResizer : true,
-                bUseModeChanger : true,
+                bUseToolbar: true,
+                bUseVerticalResizer: true,
+                bUseModeChanger: true
             }
         });
         $("#formBtn").click(function(){
@@ -58,7 +58,7 @@
                 <td>제목<input type="text" name="adReviewTitle" id="adReviewTitle"></td>
             </tr>
             <tr>
-                <td>내용<textarea name="adReviewContent" id="adReviewContent"></textarea></td>
+                <td>내용<textarea name="adReviewContent" id="adReviewContent" rows="20"></textarea></td>
             </tr>
         </table>
         <button type="submit" id="formBtn" >작성하기</button>
