@@ -13,6 +13,10 @@
     ArrayList<Category> list = (ArrayList<Category>) request.getAttribute("list");
 %>
 <html>
+<head>
+    <title>1:1 문의 등록페이지</title>
+    <%@ include file="/views/template/styleTemplate.jsp"%>
+</head>
 <body>
     <%@include file="/views/template/menubar.jsp"%>
     <div class="outer">

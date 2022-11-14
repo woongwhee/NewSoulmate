@@ -88,7 +88,17 @@
         WHERE BOARD_NAME = '문의'
         ORDER BY CREATE_DATE DESC) A
         )
-        WHERE RNUM BETWEEN ? AND ?;
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="insertBoard">
+        INSERT INTO BOARD(BOARD_NO, TYPE_NO, CATEGORY_NO, BOARD_TITLE, BOARD_CONTENT, MEMBER_NO)
+        VALUES (SQ_BOARD_PK.NEXTVAL, 4, ?, ?, ?, ?)
+    </entry>
+
+    <entry key="insertAttachment">
+        INSERT INTO ATTACHMENT(FILE_NO, REPLY_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+        VALUES (SQ_ATTACHMENT_PK.NEXTVAL, SQ_COMMENT_PK.CURRVAL, ?, ?, ?)
     </entry>
 
 </properties>
