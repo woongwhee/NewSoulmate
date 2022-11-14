@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+#container {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.support_notice {
+    height: 200px;
+    margin: 20px 0 20px 0;
+    background-color: #f45d48;
+    border-radius: 40px 40px 40px 40px;
+}
+
+#notice_left_box {
+    float: left;
+    margin: 60px 0 0 100px;
+    color: white;
+}
+
+#notice_right_box {
+    float: right;
+    margin: 40px 120px 0 45px;
+    color: white;
+    line-height: 30px;
+}
+
+#hr_1 hr {
+    height: 5px;
+    background-color: #f45d48;
+    border: 0;
+
+}
