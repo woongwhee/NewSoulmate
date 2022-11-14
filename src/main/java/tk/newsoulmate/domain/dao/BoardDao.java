@@ -1,9 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
-import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.Category;
-import tk.newsoulmate.domain.vo.PageInfo;
-import tk.newsoulmate.domain.vo.Reply;
+import oracle.jdbc.proxy.annotation.Pre;
+import tk.newsoulmate.domain.vo.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
@@ -270,31 +269,63 @@ public class BoardDao {
         return listCount;
     }
 
+    public int insertBoard(Board b, Connection conn){
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("insertBoard");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, b.getCategoryNo());
+            psmt.setString(2, b.getBoardTitle());
+            psmt.setString(3, b.getBoardContent());
+            psmt.setInt(4,b.getMemberNo());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+
+    }
+
+    public int insertAttachment(Attachment at, Connection conn){
+
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("insertAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1, at.getOriginName());
+            psmt.setString(2, at.getChangeName());
+            psmt.setString(3, at.getFilePath());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+
+        return result;
 
 
+    }
 
 
+    public List<Board> selectVolunteerThumNail(Connection conn, int page) {
+        List<Board> vList=new ArrayList<>();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return vList;
+    }
 }
