@@ -13,7 +13,7 @@
         <div id="user">
             <ul>
                 <li><a href="${context}/memberSignupTerm">회원가입</a></li>
-                <li><a href="${context}/login.do">로그인</a></li>
+                <li><a href="${context}/loginpage">로그인</a></li>
             </ul>
         </div>
     </div>
