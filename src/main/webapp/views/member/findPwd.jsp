@@ -50,9 +50,8 @@
         </div>
 
         <div class="search-content">
-            <button type="submit" class="searchIdBtn">비밀번호 찾기</button>
+            <button type="submit" class="findpwBtn">비밀번호 찾기</button>
         </div>
-
     </div>
 </div>
 
@@ -61,32 +60,34 @@
 <script>
 
 
-    /*$(".searchIdBtn").on("click", function() {
-      const memberId = $("#searchId").val();
-      const memberMail = $("#searchMail2").val();
-      const result = $(".result");
-      result.empty();
-      $.ajax({
-        url: "/searchMemberPw.do",
-        type: "get",
-        data: {
-          memberId: memberId,
-          memberMail: memberMail
+    $(".findpwdBtn").on("click", function() {
+        const memberId = $("#findId").val();
+        const memberName = $("#findName").val();
+        const memberMail = $("#findMail2").val();
+        const result = $(".result");
+        result.empty();
+        $.ajax({
+            url: "/findPwd",
+            type: "get",
+            data: {
+            memberId: memberId,
+            memberName: memberName,
+            memberMail: memberMail
         },
-        dataType: "json",
-        success: function(data) {
-          //console.log(data);
-          if (data == null) {
-            result.append("회원정보가 없습니다.")
-          } else {
-            result.append("비밀번호 : " + data.memberPw);
-          }
-        },
-        error: function() {
-          console.log("서버호출실패");
-        }
-      });
-    });*/
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+                if (data == null) {
+                    result.append("회원정보가 없습니다.")
+                } else {
+                    result.append("비밀번호 : " + data.memberPw);
+                }
+                },
+            error: function() {
+                console.log("서버호출실패");
+            }
+        });
+    });
 
     // 메일 인증
 

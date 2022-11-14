@@ -64,9 +64,6 @@
 
 
 <script>
-
-  let regCheckMail = 0;
-
   $(".searchId").click();
 
   const searchId = document.querySelector("#searchId");
@@ -81,7 +78,7 @@
     const result = $(".result");
     result.empty();
     $.ajax({
-      url: "searchMemberId.do",
+      url: "findId",
       type: "get",
       data: {
         memberName: memberName,
@@ -106,6 +103,7 @@
 
 
   // 메일 인증
+
 
   let checkMail = 0;
   let mailCode;

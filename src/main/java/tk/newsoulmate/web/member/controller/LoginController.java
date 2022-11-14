@@ -20,7 +20,6 @@ public class LoginController extends HttpServlet {
         String memberPwd = request.getParameter("memberPwd");
 
         MemberService ms = new MemberService();
-        System.out.println("ms"+ms);
 
         Member loginUser = ms.loginMember(memberId, memberPwd);
         System.out.println(loginUser);
@@ -32,13 +31,11 @@ public class LoginController extends HttpServlet {
             view.forward(request, response);
 
         }else {
-
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", loginUser);
             session.setAttribute("alertMsg", "로그인 되었습니다.");
 
             response.sendRedirect(request.getContextPath());
-
         }
 
     }

@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "memberSignupTermController", value = "/memberSignupTerm")
+@WebServlet(name = "memberSignupTerm", value = "/memberSignupTerm")
 public class MemberSignupTermController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
