@@ -12,11 +12,13 @@
     background-color: rgba(255, 99, 71, 0.708);
     border-radius: 25px;
 }
+.post{
+    width:160px;
+    height:250px;
+    border-radius: 20px;
+    background-color: aliceblue;
+}
+
 .slick-prev:before, .slick-next:before {
     color: darkcyan;
-}
-.post-wrapper .post{
-    /*display:inline-block;*/
-    width:160px;
-    height:90px;
 }
