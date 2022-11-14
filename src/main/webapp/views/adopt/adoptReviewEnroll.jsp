@@ -9,11 +9,10 @@
 <html>
 <head>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/HuskyEZCreator.js?1234" charset="UTF-8"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/smarteditor2.js?1234" charset="UTF-8"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/SE2M_Configuration.js?1234" charset="UTF-8"></script>
-
-    <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/SE2BasicCreator.js?1234" charset="UTF-8"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/smarteditor2.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/SE2M_Configuration.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/SE2BasicCreator.js" charset="UTF-8"></script>
 </head>
 <body>
 <script>
@@ -52,8 +51,8 @@
     }
     </script>
 
-    <form action="<%=request.getContextPath() %>/adoptReInsert.bo" method="post" id="adoptReview">
-        <table>
+    <form action="<%=request.getContextPath() %>/adoptReDetail.bo" method="post" id="adoptReview">
+        <table style="width: 700px">
             <tr>
                 <td>제목<input type="text" name="adReviewTitle" id="adReviewTitle"></td>
             </tr>
@@ -64,6 +63,8 @@
         <button type="submit" id="formBtn" >작성하기</button>
         <button type="button" onclick = "location.href = '<%=request.getContextPath()%>/adoptReList.bo'">목록으로 돌아가기</button>
     </form>
+
+
 
 </body>
 </html>
