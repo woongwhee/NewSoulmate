@@ -24,6 +24,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>보호소리스트</title>
+    <%@ include file="/views/template/styleTemplate.jsp"%>
     <style>
         .list-area{
             border: 1px solid black;
@@ -34,7 +35,7 @@
 <body>
 <%@include file="/views/template/menubar.jsp"%>
 
-    <form action="<%=request.getContextPath()%>/shelter/updateShelter" method="get">
+    <form action="<%=request.getContextPath()%>/updateShelter" method="get">
         <table>
             <tr>
             <td>시도</td>
@@ -115,7 +116,7 @@
             // textnode를 가져옴
             console.log(shelterNo);
 
-            location.href = '<%=request.getContextPath()%>/Shelter/Detail?shelterNo='+shelterNo;
+            location.href = '<%=request.getContextPath()%>/Detail?shelterNo='+shelterNo;
         })
 
 </script>
