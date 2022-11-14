@@ -20,8 +20,10 @@ public class LoginController extends HttpServlet {
         String memberPwd = request.getParameter("memberPwd");
 
         MemberService ms = new MemberService();
+        System.out.println("ms"+ms);
 
         Member loginUser = ms.loginMember(memberId, memberPwd);
+        System.out.println(loginUser);
 
         if(loginUser == null) {
 
@@ -33,13 +35,11 @@ public class LoginController extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", loginUser);
-            session.setAttribute("alertMsg", "성공적으로 로그인이 되었습니다.");
+            session.setAttribute("alertMsg", "로그인 되었습니다.");
 
             response.sendRedirect(request.getContextPath());
 
         }
-
-
 
     }
 

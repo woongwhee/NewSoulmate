@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>회원가입</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <%--<link href="css/memberSignupForm.css" rel="stylesheet">--%>
     <%--<script src="/JS/member/memberSignupForm.js"></script>--%>
 
@@ -112,10 +113,29 @@
 
 <script>
 
-    let checkMail = 0;
+    // 메일 인증번호 - 완료
 
+    let checkMail = 0;
     let mailCode;
     let intervalId;
+
+    function sendMail() {
+        const memberMail2 = $("#memberMail").val();
+        $.ajax({
+            url: "<%= request.getContextPath()%>/sendMail.do",
+            data: { memberMail: memberMail2 },
+            type: "get",
+            success: function(data) {
+                if (data != null) {
+                    mailCode = "notNull";
+                    $("#auth").css("display","flex");
+                    authTime();
+                }
+            }
+        });
+    }
+
+    // 입력시간 출력
     function authTime() {
         $("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
         intervalId = window.setInterval(function() {
@@ -179,34 +199,10 @@
         console.log(mailCode);
     };
 
-    // 메일 인증번호
-
-
-    function sendMail() {
-        const memberMail2 = $("#memberMail").val();
-        $.ajax({
-            url: "<%= request.getContextPath()%>/sendMail.do",
-            data: { memberMail: memberMail2 },
-            type: "get",
-            success: function(data) {
-                if (data != null) {
-                    mailCode = "notNull";
-                    $("#auth").css("display","flex");
-                    authTime();
-                }
-            }
-        });
-    }
-
-
-</script>
 
 
 
-
-<script>
-
-    // number maxlength 지정
+    // Phone - number maxlength 지정
 
     function maxLengthChk(pNum){
         if (pNum.value.length > pNum.maxLength){
@@ -218,6 +214,8 @@
     let checkPwd = 0;
     let checkPwdRe = 0;
     let checkNickname = 0;
+
+
 
     $(document).ready(function () {
 
@@ -344,11 +342,9 @@
     });
 
 
-
-
        });
 
-    // 필수입력사항 모두 입력돼야 회원가입 할 수 있게
+    // 필수입력사항 모두 입력돼야 회원가입 할 수 있게 - 완료
     function signupCheck(){
         if (!(checkId == 1 && checkPwd == 1 && checkPwdRe == 1 && checkNickname == 1 && checkMail ==1)) {
             alert("필수 입력창을 모두 입력해주세요.")

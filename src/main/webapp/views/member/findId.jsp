@@ -11,6 +11,8 @@
   <meta charset="UTF-8">
   <title>아이디 찾기</title>
 
+  <%--<script src="/JS/searchMemberId.js"></script>--%>
+
 </head>
 <body>
 
@@ -22,7 +24,7 @@
     <h2>아이디 찾기</h2>
   </div>
 
-  <div class="content-box">
+  <div class="searchid-wrap">
     <div>
 
       <div class="search-content">
@@ -42,7 +44,7 @@
         </div>
       </div>
 
-      <div class="span-box">
+      <div class="span-wrap">
         <span id="timeZone"></span>
         <span id="authMsg"></span>
       </div>
@@ -59,9 +61,6 @@
 
 
 <%@include file="/views/template/footer.jsp"%>
-<%--<script src="/JS/searchMemberId.js"></script>--%>
-
-
 
 
 

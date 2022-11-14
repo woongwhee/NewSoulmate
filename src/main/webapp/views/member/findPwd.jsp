@@ -58,5 +58,7 @@
 
 <%@include file="/views/template/footer.jsp"%>
 
+
+
 </body>
 </html>

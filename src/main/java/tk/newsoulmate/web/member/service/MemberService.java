@@ -9,19 +9,6 @@ import java.sql.Connection;
 
 public class MemberService {
 
-
-    public Member loginMember(String memberId, String memberPwd) {
-
-        Connection conn = JDBCTemplet.getConnection();
-
-        Member m = new MemberDao().loginMember(memberId, memberPwd, conn);
-
-        JDBCTemplet.close();
-
-        return m;
-
-    }
-
     public int insertMember(Member m) {
         Connection conn = JDBCTemplet.getConnection();
 
@@ -64,22 +51,39 @@ public class MemberService {
 
     }
 
-  /*  public Member searchMemberId(Connection conn, String memberName, String email) {
+
+    public Member loginMember(String memberId, String memberPwd) {
 
         Connection conn = JDBCTemplet.getConnection();
 
-        Member m = MemberDao.searchMemberId(conn, memberName, email);
+        Member m = new MemberDao().loginMember(memberId, memberPwd, conn);
 
-        JDBCTemplet.close(conn);
+        JDBCTemplet.close();
+
+        return m;
+
+    }
+
+
+    public Member findId(String memberName, String Email) {
+
+        Connection conn = JDBCTemplet.getConnection();
+
+        Member m = new MemberDao().findId(conn, memberName, Email);
+
+        JDBCTemplet.close();
 
         return m;
     }
 
-    public Member searchMemberPw(Connection conn, String memberName, String memberId, String email) {
+
+
+
+/*    public Member findPwd(Connection conn, String memberName, String memberId, String Email) {
 
         Connection conn = JDBCTemplet.getConnection();
 
-        Member m = MemberDao.searchMemberPw(conn, memberName, memberId, email);
+        Member m = MemberDao.searchMemberPw(conn, memberName, memberId, Email);
 
         JDBCTemplet.close(conn);
 
