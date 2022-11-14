@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet(name = "adoptApplyInsertController", value = "/adoptApplyInsertController")
+@WebServlet(name = "adoptApplyInsertController", value = "/adoptApplyInsert")
 public class adoptApplyInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,9 +26,10 @@ public class adoptApplyInsertController extends HttpServlet {
         String agreement = request.getParameter("agreement");
         String whenSick = request.getParameter("whenSick");
         String bigDuty = request.getParameter("bigDuty");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd : hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date wishDate;
         try {
-            Date date = sdf.parse("wishDate");
+            wishDate = sdf.parse(request.getParameter("wishDate"));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -45,14 +46,11 @@ public class adoptApplyInsertController extends HttpServlet {
         sb.setWhenSick(whenSick);
         sb.setBigDuty(bigDuty);
         sb.setWishDate(wishDate);
-
-
-
-
+        System.out.println(sb);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 }

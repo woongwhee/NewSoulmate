@@ -11,6 +11,8 @@
 <%
     Calendar date = Calendar.getInstance();
     SimpleDateFormat today = new SimpleDateFormat("yyy년 MM월 dd일");
+    String dno= (String) request.getAttribute("dno");
+    dno=dno!=null?dno:"";
 %>
 
 <!doctype html>
@@ -28,7 +30,7 @@
             <th>이름</th>
             <td><input type="text" name="name"></td>
             <th>공고번호</th>
-            <td><input type="text" name="animalNo"></td>
+            <td><input type="text" name="animalNo" value="${dno}"></td>
         </tr>
         <tr>
             <th>전화번호</th>
