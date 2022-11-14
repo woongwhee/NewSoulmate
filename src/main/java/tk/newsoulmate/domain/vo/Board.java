@@ -92,6 +92,13 @@ public class Board {
         return b;
     }
 
+    public static Board insertInquire(String boardTitle, String boardContent, String memberName){
+        Board b = new Board();
+        b.setBoardTitle(boardTitle);
+        b.setBoardContent(boardContent);
+        b.setMemberName(memberName);
+    }
+
 
 
     /**
