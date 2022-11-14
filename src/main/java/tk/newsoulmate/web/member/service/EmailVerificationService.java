@@ -18,16 +18,16 @@ public class EmailVerificationService {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 6; i++) {
 
-            int sq = rcode.nextInt(3);
-            System.out.println(sq);
-            if (sq == 0) {
+            int rcd = rcode.nextInt(3);
+            System.out.println(rcd);
+            if (rcd == 0) {
                 int randomNum = rcode.nextInt(10);
                 sb.append(randomNum);
 
-            } else if (sq == 1) {
+            } else if (rcd == 1) {
                 char randomChar = (char) (rcode.nextInt(26) + 65);
                 sb.append(randomChar);
-            } else if (sq == 2) {
+            } else if (rcd == 2) {
                 char randomChar = (char) (rcode.nextInt(26) + 97);
                 sb.append(randomChar);
             }

@@ -1,42 +1,88 @@
 package tk.newsoulmate.domain.vo;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Notice{
+    @SerializedName("desertionNo")
+    @Expose
     private long desertionNo;
-    private String noticeNo;
+    @SerializedName("filename")
+    @Expose
     private String filename;
+    @SerializedName("happenDt")
+    @Expose
     private String happenDt;
+    @SerializedName("happenPlace")
+    @Expose
     private String happenPlace;
+    @SerializedName("kindCd")
+    @Expose
     private String kindCd;
-    private String color;
+    @SerializedName("colorCd")
+    @Expose
+    private String colorCd;
+    @SerializedName("age")
+    @Expose
     private String age;
-    private String  weight;
+    @SerializedName("weight")
+    @Expose
+    private String weight;
+    @SerializedName("noticeNo")
+    @Expose
+    private String noticeNo;
+    @SerializedName("noticeSdt")
+    @Expose
     private String noticeSdt;
+    @SerializedName("noticeEdt")
+    @Expose
     private String noticeEdt;
+    @SerializedName("popfile")
+    @Expose
     private String popfile;
-    private String processState ;
+    @SerializedName("processState")
+    @Expose
+    private String processState;
+    @SerializedName("sexCd")
+    @Expose
     private String sexCd;
+    @SerializedName("neuterYn")
+    @Expose
     private String neuterYn;
+    @SerializedName("specialMark")
+    @Expose
     private String specialMark;
+    @SerializedName("careNm")
+    @Expose
     private String careNm;
+    @SerializedName("careTel")
+    @Expose
     private String careTel;
+    @SerializedName("careAddr")
+    @Expose
     private String careAddr;
+    @SerializedName("orgNm")
+    @Expose
     private String orgNm;
+    @SerializedName("chargeNm")
+    @Expose
     private String chargeNm;
+    @SerializedName("officetel")
+    @Expose
     private String officetel;
-
     public Notice() {
     }
 
-    public Notice(long desertionNo, String noticeNo, String filename, String happenDt, String happenPlace, String kindCd, String color, String age, String weight, String noticeSdt, String noticeEdt, String popfile, String processState, String sexCd, String neuterYn, String specialMark, String careNm, String careTel, String careAddr, String orgNm, String chargeNm, String officetel) {
+    public Notice(long desertionNo, String noticeNo, String filename, String happenDt, String happenPlace, String kindCd, String colorCd, String age, String weight, String noticeSdt, String noticeEdt, String popfile, String processState, String sexCd, String neuterYn, String specialMark, String careNm, String careTel, String careAddr, String orgNm, String chargeNm, String officetel) {
         this.desertionNo = desertionNo;
         this.noticeNo = noticeNo;
         this.filename = filename;
         this.happenDt = happenDt;
         this.happenPlace = happenPlace;
         this.kindCd = kindCd;
-        this.color = color;
+        this.colorCd = colorCd;
         this.age = age;
         this.weight = weight;
         this.noticeSdt = noticeSdt;
@@ -124,12 +170,12 @@ public class Notice{
         this.kindCd = kindCd;
     }
 
-    public String getColor() {
-        return color;
+    public String getColorCd() {
+        return colorCd;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColor(String colorCd) {
+        this.colorCd = colorCd;
     }
 
     public String getAge() {
@@ -247,7 +293,7 @@ public class Notice{
                 ", happenDt=" + happenDt +
                 ", happenPlace='" + happenPlace + '\'' +
                 ", kindCd='" + kindCd + '\'' +
-                ", color='" + color + '\'' +
+                ", colorCd='" + colorCd + '\'' +
                 ", age='" + age + '\'' +
                 ", weight='" + weight + '\'' +
                 ", noticeSdt=" + noticeSdt +

@@ -21,7 +21,6 @@ public class MainPageController extends HttpServlet {
         request.setAttribute("nList",nList);
         request.getRequestDispatcher("views/common/mainPage.jsp").forward(request,response);
 
-
     }
 
     @Override

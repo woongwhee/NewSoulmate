@@ -33,23 +33,27 @@ public class ScheduleService {
         request.setPageNo(1);
         request.setNumberOfRows(1);
         int count=getTotalCount(request);
-        request.setNumberOfRows(500);
+        request.setNumberOfRows(200);
         Connection conn=JDBCTemplet.getConnection();
-        result=new NoticeDao().trunkNotice(conn);
-//        JDBCTemplet.close();
-        for (int i = 1; i <= count/500+1; i++) {
+        Boolean tresult=new NoticeDao().trunkNotice(conn);
+        JDBCTemplet.commit();
+        System.out.println(tresult);
+        JDBCTemplet.close();
+
+        for (int i = 1; i <= count/300+1; i++) {
             request.setPageNo(i);
             List<Notice> list=getNoticeList(request);
             Thread tread=new Thread(new Runnable() {
                 @Override
                 public void run() {
                     Connection conn= JDBCTemplet.getConnection();
-            int result=new NoticeDao().insertNotice(conn,list);
-            if(result>0){
-                JDBCTemplet.commit();
-            }else{
-                JDBCTemplet.rollback();
-            }
+                int result=new NoticeDao().insertNotice(conn,list);
+                if(result>0){
+                    JDBCTemplet.commit();
+                }else{
+                    JDBCTemplet.rollback();
+                }
+                JDBCTemplet.close();
                 }
             });
             tread.run();
@@ -74,6 +78,7 @@ public class ScheduleService {
                 responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"), ResponseMapper.class);
                 Body b = responseMapper.getResponse().getBody();
                 totalCount = b.getTotalCount();
+                httpConn.disconnect();
             }
         } catch (
                 IOException e) {
@@ -97,6 +102,7 @@ public class ScheduleService {
                 Nlist = responseMapper.getResponse().getBody().getItems().getItem();
                 System.out.println(Nlist.get(0));
             }
+            httpConn.disconnect();
         } catch (
                 IOException e) {
             throw new RuntimeException(e);

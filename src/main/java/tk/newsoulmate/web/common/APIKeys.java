@@ -13,8 +13,7 @@ public  class APIKeys {
     public static Properties prop=new Properties();
     public static String NoticeKey;
     public APIKeys(){
-        if(prop==null){
-            String FilePath= APIKeys.class.getResource("/key/APIkey.xml").getPath();
+            String FilePath= APIKeys.class.getResource("/key/APIKey.xml").getPath();
             this.prop=new Properties();
             try {
                 prop.loadFromXML(new FileInputStream(FilePath) );
@@ -22,6 +21,5 @@ public  class APIKeys {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
     }
 }

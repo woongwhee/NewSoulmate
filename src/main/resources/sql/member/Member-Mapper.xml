@@ -27,20 +27,19 @@
         AND STATUS = 'Y'
     </entry>
 
-    <entry key="searchId">
+    <entry key="findId">
         SELECT *
         FROM MEMBER
         WHERE MEMBER_NAME = ?
         AND EMAIL = ?
     </entry>
 
-    <entry key="searchPwd">
+    <entry key="findPwd">
         SELECT *
         FROM MEMBER
         WHERE MEMBER_NAME = ?
         AND MEMBER_ID = ?
         AND EMAIL = ?
-
     </entry>
 
 </properties>

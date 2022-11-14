@@ -21,16 +21,16 @@ $(function(){
             }
         }
 
-});
+    });
 
 // 동의 항목 모두 체크돼야 회원가입 페이지로 넘어갈 수 있음
-$("#signupBtn").click(function () {
+    $("#signupBtn").click(function () {
 
-    if ($('.required_checked:checked').length != $('.required_checked').length) {
-        alert("동의 항목을 모두 선택해주세요.");
-        return;
-    }
-    $(location).attr("href","memberSignupForm.jsp");
-});
+        if ($('.required_checked:checked').length != $('.required_checked').length) {
+            alert("동의 항목을 모두 선택해주세요.");
+            return;
+        }
+        $(location).attr("href","memberSignupForm.jsp");
+    });
 
 });

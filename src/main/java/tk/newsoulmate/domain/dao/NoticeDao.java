@@ -1,8 +1,6 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Notice;
-import tk.newsoulmate.web.common.JDBCTemplet;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -127,7 +125,7 @@ public class NoticeDao {
                     psmt.setDate(3,hd);
                     psmt.setString(4,n.getHappenPlace());
                     psmt.setString(5,n.getKindCd());
-                    psmt.setString(6,n.getColor());
+                    psmt.setString(6,n.getColorCd());
                     psmt.setString(7,n.getAge());
                     psmt.setString(8,n.getWeight());
                     psmt.setString(9,n.getNoticeNo());
@@ -164,13 +162,13 @@ public class NoticeDao {
      * @param conn
      * @return
      */
-    public int trunkNotice(Connection conn) {
+    public boolean trunkNotice(Connection conn) {
         PreparedStatement psmt=null;
         String sql=prop.getProperty("truncNotice");
-        int result=0;
+        boolean result=false;
         try {
             psmt=conn.prepareStatement(sql);
-            result=psmt.executeUpdate();
+            result=psmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {

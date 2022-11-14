@@ -149,15 +149,13 @@ public class MemberDao {
     }
 
 
-    public Member searchMemberId(Connection conn, String memberName, String Email) {
+    public Member findId(Connection conn, String memberName, String Email) {
 
         PreparedStatement psmt = null;
-
         ResultSet rset = null;
-
         Member m = null;
 
-        String sql = prop.getProperty("searchId");
+        String sql = prop.getProperty("findId");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -167,9 +165,8 @@ public class MemberDao {
             rset = psmt.executeQuery();
 
             if(rset.next()) {
-
                 m = new Member();
-                m.setMemberId(rset.getString("memberid"));
+                m.setMemberId(rset.getString("memberId"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -181,7 +178,8 @@ public class MemberDao {
         return m;
     }
 
-    public Member searchMemberPw(Connection conn, String memberName, String memberId, String email) {
+/*
+    public Member findPwd(Connection conn, String memberName, String memberId, String email) {
 
         PreparedStatement psmt = null;
 
@@ -208,6 +206,7 @@ public class MemberDao {
         }
         return m;
     }
+*/
 
 
 }
