@@ -29,3 +29,4 @@
     }
 
 </script>
+<link href="<%=request.getContextPath()%>/css/main.css" rel="stylesheet">
