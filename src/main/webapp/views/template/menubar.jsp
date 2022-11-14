@@ -39,7 +39,7 @@
             <div class="dropdown">
                 <button class="dropdown-btn"><a href="#">입양</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">입양신청</a>
+                    <a href="${context}/adoptApply">입양신청</a>
                     <a href="#">입양후기</a>
                     <a href="#">입양절차</a>
                 </div>
