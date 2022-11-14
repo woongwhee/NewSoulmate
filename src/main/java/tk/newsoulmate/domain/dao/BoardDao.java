@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
@@ -271,30 +272,10 @@ public class BoardDao {
     }
 
 
+    public List<Board> selectVolunteerThumNail(Connection conn, int page) {
+        List<Board> vList=new ArrayList<>();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return vList;
+    }
 }

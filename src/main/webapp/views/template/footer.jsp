@@ -3,7 +3,7 @@
 <div class="footer_all">
     <div id="footer_box">
         <div id="footer_logo">
-            <a href="#"><img src="<%=request.getContextPath()%>/image/logo.png"></a>
+            <a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath()%>/image/logo.png"></a>
         </div>
         <div id="address">
             <ul>
