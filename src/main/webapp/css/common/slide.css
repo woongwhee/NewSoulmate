@@ -1,0 +1,22 @@
+.slider>div>img {
+    max-height: 140px;
+    max-width: 70px;
+    height: auto;
+    display:inline;
+    margin-top: 30px;
+}
+.slider {
+    height: 200px;
+    width: 600px;
+    margin: 0px auto;
+    background-color: rgba(255, 99, 71, 0.708);
+    border-radius: 25px;
+}
+.slick-prev:before, .slick-next:before {
+    color: darkcyan;
+}
+.post-wrapper .post{
+    /*display:inline-block;*/
+    width:160px;
+    height:90px;
+}

@@ -13,16 +13,8 @@
     ArrayList<Category> list = (ArrayList<Category>) request.getAttribute("list");
 %>
 <html>
-<head>
-    <title>문의내역 작성하기</title>
-    <link href="/NewSoulmate/css/inquire/inquireEnroll.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-</head>
 <body>
-    <jsp:include page="/views/template/menubar.jsp"/>
+    <%@include file="/views/template/menubar.jsp"%>
     <div class="outer">
         <br>
         <h2 style="text-align:center;">1:1 문의</h2>
@@ -78,19 +70,12 @@
         </form>
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
     <%@include file="/views/template/footer.jsp"%>
 </body>
+<head>
+    <title>문의내역 작성하기</title>
+    <%@ include file="/views/template/styleTemplate.jsp"%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link href="<%=request.getContextPath()%>>/css/inquire/inquireEnroll.css" rel="stylesheet">
+</head>
 </html>

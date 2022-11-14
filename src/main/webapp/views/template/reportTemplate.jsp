@@ -7,8 +7,4 @@
 
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-
-
-
 <%--modal창으로 넘길것--%>

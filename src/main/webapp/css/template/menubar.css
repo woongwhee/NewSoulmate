@@ -1,0 +1,134 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #f8f5f2;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#header_total {
+    width: 1200px;
+    height: auto;
+}
+
+
+.headcontainer {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#header_all {
+    width: 1200px;
+    height: auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 90px;
+}
+
+.navbar_logo {}
+
+#user {
+    padding: 80px 12px;
+}
+
+#user ul {
+    list-style: none;
+}
+
+#user li {
+    float: right;
+    width: 100px;
+}
+
+
+#header_box {
+    width: 1200px;
+    margin: 80px auto 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 400px);
+
+}
+
+
+.navbar_menu {
+    display: flex;
+    padding-left: 0;
+}
+
+.navbar_menu li {
+    padding: 8px 12px;
+}
+
+.navbar_menu li:hover {
+    background-color: #f45d48;
+    border-radius: 4px;
+}
+
+
+.navbar_toogleBtn {
+    display: none;
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: #d49466
+}
+
+.saveanimal {
+    width: 420px;
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background-color: #f45d48;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-btn {
+    font-weight: bold;
+    width: 150px;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    background-color: #f8f5f2;
+}
+
+.dropdown-submenu {
+    width: 150px;
+    display: none;
+}
+
+.dropdown-submenu a {
+    display: block;
+    padding: 7px;
+    text-align: center;
+}
+
+.dropdown-btn a:hover {
+    color: #f45d48;
+}
+
+.dropdown-submenu a:hover {
+    color: #319493;
+}
+
+.dropdown:hover .dropdown-submenu {
+    display: block;
+}

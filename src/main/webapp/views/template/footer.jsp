@@ -1,10 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/template/footer.css">
-</head>
-<body>
+<footer>
 <div class="footer_all">
     <div id="footer_box">
         <div id="footer_logo">
@@ -19,6 +14,4 @@
         </div>
     </div>
 </div>
-</div>
-</body>
-</html>
+</footer>
