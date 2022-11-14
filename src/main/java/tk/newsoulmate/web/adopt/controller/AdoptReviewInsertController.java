@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "AdoptReviewInsertController", value = "/adoptReInsert.bo")
+@WebServlet(name = "AdoptReviewInsertController", value = "/adoptReInsert")
 public class AdoptReviewInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

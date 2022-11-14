@@ -10,7 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "ReplyListController", value = "/rList.bo")
+@WebServlet(name = "ReplyListController", value = "/rList.ad")
 public class ReplyListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

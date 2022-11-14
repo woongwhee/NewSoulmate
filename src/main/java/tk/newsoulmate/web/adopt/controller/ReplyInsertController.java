@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "ReplyInsertController", value = "/replyInsert.bo")
+@WebServlet(name = "ReplyInsertController", value = "/replyInsert.ad")
 public class ReplyInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

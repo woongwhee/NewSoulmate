@@ -20,14 +20,13 @@
 <html>
 <head>
     <title>고객센터 FAQ,Q&A</title>
-    <link href="/NewSoulmate/css/inquire/inquireFQ.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>>/css/inquire/inquireFQ.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
-    <jsp:include page="/views/template/menubar.jsp"/>
+    <%@ include file="/views/template/menubar.jsp"%>
     <br><br><br>
     <div id="FQ_bt">
         <button type="button" id="faq_bt" class="btn btn-secondary btn-sm">FAQ</button>

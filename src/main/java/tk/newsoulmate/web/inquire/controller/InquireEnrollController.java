@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "InquireEnrollController", value = "/inquireEnroll.bo")
+@WebServlet(name = "InquireEnrollController", value = "/inquireEnroll")
 public class InquireEnrollController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
