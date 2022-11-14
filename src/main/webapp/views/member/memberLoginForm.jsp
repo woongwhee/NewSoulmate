@@ -6,9 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>로그인</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -31,24 +34,72 @@
                     <td> <input class="input-form" type="password" name="loginPw" id="loginPw"placeholder="비밀번호"></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox">아이디 저장</td>
-                    <td></td>
-
+                    <td><input type="checkbox" id="saveId"><label for="saveId">아이디 저장</label></td>
+                    <td><button onclick="" type="submit" class="loginBtn">로그인하기</button></td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="center"><button type="submit" class="btn3">로그인하기</button></td>
-                </tr>
-                <tr>
-                    <th><a href="searchMember.do">아이디/비밀번호 찾기</a></th>
+                    <td><a href="findId.jsp">아이디찾기</a>/<a href="findPwd.jsp">비밀번호 찾기</a></td>
                     <th><a href="memberSignupTerm.jsp">신규 회원가입</a></th>
                 </tr>
-
             </table>
         </form>
     </div>
 </div>
 
 <%@include file="/views/template/footer.jsp"%>
+
+
+
+
+
+<%--<script>
+
+    // 아아디 저장
+
+    $(function(){
+        getCookie();
+    });
+
+    function submitLogin(){
+
+        let userId = $("input[name=userId]").val();
+        console.log(userId);
+
+        if($("#saveId").is(":checked")){ // true 체크된 상태
+            document.cookie = "saveId="+userId+"; path=/; max-age="+60*60*24*7; //쿠키 최대 시간 설정(7일)
+        }else{ // 체크안된상태
+            document.cookie = "saveId="+userId+"; path=/; max-age="+0; //최대시간을 0으로 설정해서 해당쿠키를 제거
+        }
+        let form = $("#login-form");
+        form.submit();
+    }
+
+    function getCookie() {
+        let value = "";
+        if(document.cookie.length > 0) {
+            let index = documnet.cookie.indexOf("saveId="); // saveId = admin; path =/; max-age = 5660;
+            if(index != -1) { // 쿠키값이 있다면
+                index += "saveId=".length;
+                let end = document.cookie.indexOf(";", index);
+                console.log(index, end);
+                if(end == -1) {
+                    value = document.cookie.substring(index);
+
+                }else {
+                    value = document.cookie.substring(index,end);
+
+                }
+                $("input[name=userId]").val(value);
+                $("#saveId").attr("checked","true");
+            }
+        }
+    }
+
+
+
+</script>--%>
+
+
 
 
 </body>

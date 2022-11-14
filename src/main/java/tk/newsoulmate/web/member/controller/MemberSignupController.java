@@ -35,11 +35,27 @@ public class MemberSignupController extends HttpServlet {
         int result = service.insertMember(m);
 
         HttpSession session = request.getSession();
-        session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
+
+    /*    session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
 
         RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 
-        view.forward(request, response);
+        view.forward(request, response);*/
+
+        if(result > 0) { // 성공
+
+            session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
+
+            response.sendRedirect(request.getContextPath());
+
+        } else { // 실패
+            request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
+
+            request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+        }
+
+
+
 
     }
 
