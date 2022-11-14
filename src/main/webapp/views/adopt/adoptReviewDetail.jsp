@@ -5,70 +5,48 @@
   Time: 오후 5:24
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-         pageEncoding="UTF-8" import="tk.newsoulmate.domain.vo.Board"%>
+<%@ page import="java.io.File" %>
+<%@ page import="java.util.UUID" %>
+<%@ page import="java.io.InputStream" %>
+<%@ page import="java.io.OutputStream" %>
+<%@ page import="java.io.FileOutputStream" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    //한글 인코딩을 위한 UTF-8 설정
+    request.setCharacterEncoding("utf-8");
+    out.println(request.getParameter("adReviewContent"));	// html코드형식의 데이터
+%>
+<%--<%--%>
+<%--    String sFileInfo = "";--%>
+<%--    String name = request.getHeader("file-name");--%>
+<%--    String ext = name.substring(name.lastIndexOf(".")+1);--%>
+<%--    String defaultPath = request.getServletContext().getRealPath("/");--%>
+<%--    String path = defaultPath + "upload" + File.separator;--%>
 
-<%@ page import="java.util.List"%>
-<%@ page import="java.util.UUID"%>
-<%@ page import="java.io.File"%>
-<%@ page import="java.io.FileOutputStream"%>
-<%@ page import="java.io.InputStream"%>
-<%@ page import="java.io.OutputStream"%>
-<%@ page import="java.text.SimpleDateFormat"%>
-<% 	Board b = (Board) request.getAttribute("b"); %>
-<%@ page import="org.apache.commons.fileupload.FileItem"%>
-<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
-<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
-<html>
-<head>
-    <title>입양후기 상세보기</title>
-<%--    <link rel="stylesheet" href="CSS/common/adoptDetail.css" type="text/css">--%>
-<%--    <script src="JS/common/adoptDetail.js"></script>--%>
-</head>
-<body>
+<%--    File file = new File(path);--%>
+<%--    if(!file.exists()) {--%>
+<%--        file.mkdirs();--%>
+<%--    }--%>
 
-<%--<div class="outer">--%>
-<%--    <table id="detail-area">--%>
-<%--        <tr id="title">--%>
-<%--            <th>제목</th>--%>
-<%--            <td><%=b.getBoardTitle() %></td>--%>
-<%--        </tr>--%>
-<%--        <tr>--%>
-<%--            <th>작성자</th>--%>
-<%--            <td><%=b.getMemberName()%></td>--%>
-<%--            <th>작성일</th>--%>
-<%--            <td><%=b.getCreateDate()%></td>--%>
-<%--            <th>입양날짜</th>--%>
-<%--            <td><%=b.getIssueDate()%></td>--%>
-<%--            <th>조회수</th>--%>
-<%--            <td><%=b.getReadCount()%></td>--%>
-<%--        </tr>--%>
-<%--        <hr>--%>
-<%--        <tr id="content">--%>
-<%--            <td>--%>
-<%--                <p><%=b.getBoardContent() %></p>--%>
-<%--            </td>--%>
-<%--        </tr>--%>
-<%--    </table>--%>
-<%--    <table id="reply-area">--%>
-<%--        <thead>--%>
-<%--&lt;%&ndash;            댓글리스트 출력&ndash;%&gt;--%>
-<%--        </thead>--%>
-<%--        <tbody>--%>
-<%--        <tr>--%>
-<%--            <td><textarea placeholder="댓글을 작성해주세요"></textarea></td>--%>
-<%--            <td> <button onclick="insertReply();">댓글등록</button></td>--%>
-<%--        </tr>--%>
-<%--        <tr>--%>
-<%--            <td><textarea readonly>로그인후 댓글작성이 가능합니다.</textarea></td>--%>
-<%--            <td><button disabled>댓글등록</button></td>--%>
-<%--        </tr>--%>
-<%--        </tbody>--%>
-<%--    </table>--%>
-<%--</div>--%>
+<%--    String realname = UUID.randomUUID().toString() + "." + ext;--%>
+<%--    InputStream is = request.getInputStream();--%>
+<%--    OutputStream os = new FileOutputStream(path + realname);--%>
+<%--    int numRead;--%>
 
+<%--    byte bt[] = new byte[Integer.parseInt(request.getHeader("file-size"))];--%>
+<%--    while((numRead = is.read(bt,0,bt.length)) != -1) {--%>
+<%--        os.write(bt,0,numRead);--%>
+<%--    }--%>
+<%--    if(is != null) {--%>
+<%--        is.close();--%>
+<%--    }--%>
 
+<%--    os.flush();--%>
+<%--    os.close();--%>
 
+<%--    out.println("path : "+path);--%>
+<%--    out.println("realname : "+realname);--%>
 
-</body>
-</html>
+<%--    sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL="+"/upload/"+realname;--%>
+<%--    out.println(sFileInfo);--%>
+<%--%>--%>

@@ -1,4 +1,5 @@
-	//변수 선언 및 초기화
+
+//변수 선언 및 초기화
 	var nImageInfoCnt = 0;
 	var htImageInfo = [];		//image file정보 저장
 	var aResult = [];
@@ -334,7 +335,7 @@
     	var tempFile,
     		sUploadURL;
     	
-    	sUploadURL= '/smarteditorMultiImageUpload'; 	//upload URL
+    	sUploadURL= '/views/adopt/adoptReviewDetail.jsp'
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
