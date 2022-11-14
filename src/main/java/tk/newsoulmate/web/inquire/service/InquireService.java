@@ -2,6 +2,7 @@ package tk.newsoulmate.web.inquire.service;
 
 import tk.newsoulmate.domain.dao.BoardDao;
 import tk.newsoulmate.domain.dao.CategoryDao;
+import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Category;
 import tk.newsoulmate.domain.vo.PageInfo;
@@ -42,6 +43,26 @@ public class InquireService {
         close();
 
         return list;
+    }
+
+    public int insertInquire(Board b, Attachment at){
+        Connection conn = getConnection();
+
+        int result1 = new BoardDao().insertBoard(b, conn);
+
+        int result2 = 1;
+
+        if(at != null){
+            result2 = new BoardDao().insertAttachment(at, conn);
+        }
+
+        if(result1 > 0 && result2 > 0){
+            commit();
+        } else{
+            rollback(conn);
+        }
+        close();
+        return result1*result2;
     }
 
 }
