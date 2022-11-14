@@ -77,7 +77,7 @@
         A.*
         FROM (SELECT
         CASE WHEN REPLY_CONTENT IS NULL THEN 'N' ELSE 'Y' END AS "RESULTSTATUS",
-        BOARD_NO,
+        B.BOARD_NO,
         BOARD_TITLE,
         MEMBER_NAME,
         CREATE_DATE

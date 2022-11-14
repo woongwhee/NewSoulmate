@@ -97,12 +97,12 @@ public class Board {
         return b;
     }
 
-    public static Board insertInquire(String categoryNo, String boardTitle, String boardContent, String memberNo){
+    public static Board insertInquire(int categoryNo, String boardTitle, String boardContent, int memberNo){
         Board b = new Board();
-        b.setCategoryNo(Integer.parseInt(categoryNo));
+        b.setCategoryNo(categoryNo);
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
-        b.setMemberNo(Integer.parseInt(memberNo));
+        b.setMemberNo(memberNo);
         return b;
     }
 
