@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <c:set var="alertMsg" value="${sessionScope.alertMsg}"/>
+<c:set var="loginUser" value="${requestScope.loginUser}"/>
 <div id="header_total">
+
     <div id="teams">
         <div>
             <p> </p>
@@ -10,6 +12,7 @@
         <div class="navbar_logo">
             <a href="${context}"><img src="${context}/image/logo.png"></a>
         </div>
+
         <div id="user">
             <ul>
                 <li><a href="${context}/memberSignupTerm">회원가입</a></li>

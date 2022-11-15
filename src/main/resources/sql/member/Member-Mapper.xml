@@ -24,7 +24,7 @@
         FROM MEMBER
         WHERE MEMBER_ID = ?
         AND MEMBER_PWD = ?
-        AND STATUS = 'Y'
+        <!--AND MEMBER_STATUS = 'Y'-->
     </entry>
 
     <entry key="findId">
@@ -42,9 +42,10 @@
         AND EMAIL = ?
     </entry>
 
+    <entry key="updatePwd">
+        UPDATE MEMBER SET
+        MEMBER_PWD = ?
+        WHERE
+        MEMBER_ID = ?
+    </entry>
 </properties>
-
-
-
-
-
