@@ -81,7 +81,5 @@
         alert(msg);
         // 알림창을 띄워준 후 session에 담긴 해당메세지는 지워줘야함.
         // 안그러면 menubar.jsp가 로딩될때마다 매번 alert가 계속 뜰 것.
-
-        <% session.removeAttribute("alertMsg");%>
     }
 </script>

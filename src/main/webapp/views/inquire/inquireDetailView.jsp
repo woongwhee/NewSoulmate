@@ -55,7 +55,7 @@
                 <td colspan="3">
                     <% if(at == null) { %>
                     <!-- 첨부파일이 없는경우 -->
-                    첨부파일이 없습니다.
+                    첨부파일된 파일 없음.
                     <% } else { %>
                     <!-- 첨부파일이 있는경우 -->
                     <a href="<%=request.getContextPath() %>/<%=at.getFilePath() + at.getChangeName() %>"
@@ -77,24 +77,13 @@
             <a href="<%=request.getContextPath() %>/inquireInsert.bo?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
 <%--            <% if(loginUser != null && loginUser.getMemberNo().equals(b.getMemberNo())) { %>--%>
             <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. -->
-            <a href="<%=request.getContextPath() %>/inquireUpdateForm.bo?bno=<%=b.getBoardNo() %>" class="btn btn-secondary btn-sm">수정하기</a>
-            <a href="<%=request.getContextPath() %>/inquireDelete.bo?bno=<%=b.getBoardNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
+            <a href="<%=request.getContextPath() %>/inquireUpdateForm.bo?bno=<%=b.getBoardNo() %>" class="btn btn-secondary btn-sm">수정</a>
+            <a href="<%=request.getContextPath() %>/inquireDelete.bo?bno=<%=b.getBoardNo() %>" class="btn btn-danger btn-sm">삭제</a>
 <%--            <% } %>--%>
 
         </div>
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
     <%@include file="/views/template/footer.jsp"%>
 </body>
