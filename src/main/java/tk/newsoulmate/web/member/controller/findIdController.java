@@ -1,6 +1,5 @@
 package tk.newsoulmate.web.member.controller;
 
-import com.google.gson.Gson;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.member.service.MemberService;
 
@@ -8,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "findId", value = "/findId.do")
 public class findIdController extends HttpServlet {

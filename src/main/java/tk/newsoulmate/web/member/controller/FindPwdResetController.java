@@ -19,6 +19,7 @@ public class FindPwdResetController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*
         BufferedReader reader = request.getReader();
         Gson gson = new Gson();
         PwdReset pwdReset = gson.fromJson(reader, PwdReset.class);
@@ -27,6 +28,7 @@ public class FindPwdResetController extends HttpServlet {
         int result = ms.updatePassword(pwdReset);
         response.getWriter().println(result);
         response.getWriter().flush();
+*/
 
 
     }
