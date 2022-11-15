@@ -52,10 +52,10 @@ public class MemberService {
         return m;
     }
 
-    public Member findId(String memberName, String Email) {
+    public String findId(String memberName, String Email) {
 
         Connection conn = getConnection();
-        Member m = new MemberDao().findId(conn, memberName, Email);
+        String m = new MemberDao().findId(conn, memberName, Email);
         close();
         return m;
     }
