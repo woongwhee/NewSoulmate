@@ -210,7 +210,7 @@ public class MemberDao {
         return m;
     }
 
-    public int updatePassword(Connection conn, String memberId, String password) {
+ /*   public int updatePassword(Connection conn, String memberId, String password) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         int result = 0;
@@ -231,5 +231,80 @@ public class MemberDao {
             JDBCTemplet.close(psmt);
         }
         return result;
+    }*/
+
+    public int updatePwdMember(String memberId, String memberPwd, String updatePwd, Connection conn) {
+
+        int result = 0;
+
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("updatePwdMember");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1, updatePwd);
+            psmt.setString(2, memberId);
+            psmt.setString(3, memberPwd);
+
+            result = psmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+
+        return result;
+
     }
+
+
+    public Member selectMember(String userId, Connection conn) {
+
+        Member m = null;
+
+        PreparedStatement psmt = null;
+
+        ResultSet rset = null;
+
+        String sql = prop.getProperty("selectMember");
+
+        /*
+         * SELECT * FROM MEMBER WHERE USER_ID = ?
+         */
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1, userId);
+            rset = psmt.executeQuery();
+
+/*            if(rset.next()) {
+                m = new Member(rset.getInt("MEMBER_NO"), // member 객체에 생성자 매개변수로 넘겨줌
+                        rset.getString("MEMBER_ID"),
+                        rset.getString("MEMBER_PWD"),
+                        rset.getString("MEMBER_NAME"),
+                        rset.getString("PHONE"),
+                        rset.getString("EMAIL"),
+                        rset.getString("NICKNAME"),
+                        rset.getString("MEMBER_GRADE"),
+                        rset.getString("MEMBER_STATUS")),
+                        rset.getDate("ENROLL_DATE");
+
+            }*/
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+
+        return m;
+
+    }
+
 }

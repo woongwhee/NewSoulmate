@@ -49,7 +49,7 @@
 
         $.ajax({
             url: '<%=request.getContextPath()%>/pwdReset.do',
-            type: 'post',
+            type: 'get',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
                 'memberId': memberId,
