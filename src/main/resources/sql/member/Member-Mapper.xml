@@ -20,7 +20,7 @@
     </entry>
 
     <entry key="loginMember">
-        SELECT *
+        SELECT MEMBER_NO
         FROM MEMBER
         WHERE MEMBER_ID = ?
         AND MEMBER_PWD = ?

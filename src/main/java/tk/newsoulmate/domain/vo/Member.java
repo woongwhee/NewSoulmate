@@ -6,12 +6,12 @@ public class Member {
     private int memberNo;
     private String memberId;
     private String memberPwd;
-    private String memberName;//
-    private String Phone;//전화번호
-    private String Email;//이메일
+    private String memberName;
+    private String phone;//전화번호
+    private String email;//이메일
     private String nickName;//닉네임
     private MemberGrade memberGrade;//유저등급
-    private long shelterNo;
+    private Long shelterNo;
     private Date resentConnection;//최근접속일
     private Date enrollDate;
     public Member() {
@@ -23,9 +23,19 @@ public class Member {
         this.memberPwd = memberPwd;
         this.memberName = memberName;
         this.nickName = nickName;
-        this.Phone = Phone;
-        this.Email = Email;
+        this.phone = Phone;
+        this.email = Email;
         this.memberGrade=MemberGrade.USER;
+    }
+
+    public Member(int memberNo, String memberId, String memberName, String phone, String email, String nickName, MemberGrade memberGrade) {
+        this.memberNo = memberNo;
+        this.memberId = memberId;
+        this.memberName = memberName;
+        this.phone = phone;
+        this.email = email;
+        this.nickName = nickName;
+        this.memberGrade = memberGrade;
     }
 
     public int getMemberNo() {
@@ -61,19 +71,19 @@ public class Member {
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        Phone = phone;
+        phone = phone;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        email = email;
     }
 
     public String getNickName() {
@@ -92,11 +102,11 @@ public class Member {
         this.memberGrade = memberGrade;
     }
 
-    public long getShelterNo() {
+    public Long getShelterNo() {
         return shelterNo;
     }
 
-    public void setShelterNo(long shelterNo) {
+    public void setShelterNo(Long shelterNo) {
         this.shelterNo = shelterNo;
     }
 

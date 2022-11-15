@@ -1,5 +1,8 @@
 package tk.newsoulmate.domain.vo;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  *
  */
@@ -12,6 +15,14 @@ public enum MemberGrade {
         this.gradeName =greedName;
     }
 
+    public static MemberGrade valueOfNumber(int gradeNumber){
+        MemberGrade memberGrades [] = MemberGrade.values();
+        return Arrays.asList(memberGrades).stream().filter(e->e.gradeNumber==gradeNumber).findAny().orElse(USER);
+    }
+    public static MemberGrade valueOfName(String gradeName){
+        MemberGrade memberGrades [] = MemberGrade.values();
+        return Arrays.asList(memberGrades).stream().filter(e->e.gradeName.equals(gradeName)).findAny().orElse(USER);
+    }
     public int getGradeNumber() {
         return gradeNumber;
     }
