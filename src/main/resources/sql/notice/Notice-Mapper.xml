@@ -12,7 +12,7 @@
         "desertionNo",
         "filename"
         FROM ANIMAL
-        WHERE SYSDATE-2 &lt;"noticeSdt"
+        WHERE SYSDATE-2 &lt;"noticeEdt"
         ORDER BY "noticeSdt")a
         )
         WHERE rnum between ? and ?

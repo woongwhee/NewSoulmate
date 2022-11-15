@@ -25,8 +25,8 @@ public class Member {
         this.nickName = nickName;
         this.Phone = Phone;
         this.Email = Email;
+        this.memberGrade=MemberGrade.USER;
     }
-
 
     public int getMemberNo() {
         return memberNo;

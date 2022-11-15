@@ -15,7 +15,7 @@ public class NoticeListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-//        new APIKeys();
+        new APIKeys();
 //        Timer m = new Timer();
 //        ScrapTimmer task = new ScrapTimmer();
 //        long time = task.StartTimming();
