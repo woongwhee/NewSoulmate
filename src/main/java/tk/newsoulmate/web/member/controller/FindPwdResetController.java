@@ -32,7 +32,7 @@ public class FindPwdResetController extends HttpServlet {
         response.getWriter().println(result);
         response.getWriter().flush();*/
 
-        request.setCharacterEncoding("UTF-8");
+  /*      request.setCharacterEncoding("UTF-8");
 
         String userId = request.getParameter("MemberId");
         String userPwd = request.getParameter("MemberPwd");
@@ -51,7 +51,7 @@ public class FindPwdResetController extends HttpServlet {
 
         }
 
-        request.getRequestDispatcher("views/member/memberLoginForm.jsp").forward(request, response);
+        request.getRequestDispatcher("views/member/memberLoginForm.jsp").forward(request, response);*/
 
     }
 

@@ -233,7 +233,7 @@ public class MemberDao {
         return result;
     }*/
 
-    public int updatePwdMember(String memberId, String memberPwd, String updatePwd, Connection conn) {
+    /*public int updatePwdMember(String memberId, String memberPwd, String updatePwd, Connection conn) {
 
         int result = 0;
 
@@ -272,9 +272,9 @@ public class MemberDao {
 
         String sql = prop.getProperty("selectMember");
 
-        /*
+        *//*
          * SELECT * FROM MEMBER WHERE USER_ID = ?
-         */
+         *//*
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -282,7 +282,7 @@ public class MemberDao {
             psmt.setString(1, userId);
             rset = psmt.executeQuery();
 
-/*            if(rset.next()) {
+*//*            if(rset.next()) {
                 m = new Member(rset.getInt("MEMBER_NO"), // member 객체에 생성자 매개변수로 넘겨줌
                         rset.getString("MEMBER_ID"),
                         rset.getString("MEMBER_PWD"),
@@ -294,7 +294,7 @@ public class MemberDao {
                         rset.getString("MEMBER_STATUS")),
                         rset.getDate("ENROLL_DATE");
 
-            }*/
+            }*//*
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -305,6 +305,6 @@ public class MemberDao {
 
         return m;
 
-    }
+    }*/
 
 }

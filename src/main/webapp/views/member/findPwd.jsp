@@ -25,18 +25,18 @@
         <div>
 
             <div class="search-content">
-                <input type="text" name="searchId" id="searchId" placeholder="*아이디" required>
+                <input type="text" name="searchId" id="searchId" placeholder="아이디">
             </div>
 
             <div class="search-content">
-                <input type="text" name="searchName" id="searchName" placeholder="*이름" required>
+                <input type="text" name="searchName" id="searchName" placeholder="이름">
             </div>
         </div>
 
         <div class="email-wrap">
             <div>
                 <label for="memberMail">이메일</label>
-                <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" required>
+                <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" >
                 <button type="button" onclick="sendMail();" >인증번호 발송</button>
 
                 <div id="auth">
@@ -52,7 +52,7 @@
         <span id="authMsg"></span>
 
         <div class="search-content">
-            <button type="submit" class="findpwBtn">비밀번호 찾기</button>
+            <button type="submit" class="searchPwdBtn">비밀번호 찾기</button>
         </div>
     </div>
 </div>
@@ -62,27 +62,27 @@
 <script>
 
 
-    $(".findpwdBtn").on("click", function() {
-        const memberId = $("#findId").val();
-        const memberName = $("#findName").val();
-        const memberMail = $("#findMail2").val();
-        const result = $(".result");
-        result.empty();
+
+    $(".searchPwdBtn").on("click", function() {
+        const memberId = $("#memberId").val();
+        const memberName = $("#memberName").val();
+        const Email = $("#Email").val();
+
         $.ajax({
-            url: "/findPwd",
+            url: "${context}/findPwd.do",
             type: "get",
             data: {
                 memberId: memberId,
                 memberName: memberName,
-                memberMail: memberMail
+                Email: Email
             },
             dataType: "json",
             success: function(data) {
                 console.log(data);
                 if (data == null) {
-                    result.append("회원정보가 없습니다.")
+                    //result.append("회원정보가 없습니다.")
                 } else {
-                    result.append("비밀번호 : " + data.memberPw);
+                    //result.append("비밀번호 : " + data.memberPwd);
                 }
             },
             error: function() {
@@ -179,8 +179,6 @@
 
 
 </script>
-
-
 
 </body>
 </html>

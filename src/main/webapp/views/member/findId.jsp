@@ -65,19 +65,11 @@
 
 
 <script>
-    $(".searchId").click();
-
-    const searchId = document.querySelector("#searchId");
-    const searchName = document.querySelector("#searchName");
-    const searchMail = document.querySelector("input[name=searchMail]");
-
 
     $(".searchIdBtn").on("click", function () {
         const memberName = $("#searchName").val();
         const Email = $("#memberMail").val();
-
-        const result = $(".result");
-        result.empty();
+        const result = /*$(".result");*/ result.empty();
         $.ajax({
             url: "findId",
             type: "get",

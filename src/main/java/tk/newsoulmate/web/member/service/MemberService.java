@@ -70,6 +70,7 @@ public class MemberService {
 
     }
 
+
     /*public int updatePassword(PwdReset pwdReset) {
         if (!pwdReset.getPassword().equals(pwdReset.getPasswordConfirm())) {
             return 0;
@@ -81,7 +82,7 @@ public class MemberService {
         return result;
     }*/
 
-    public Member updatePwdMember(String MemberId, String MemberPwd, String updatePwd) {
+/*    public Member updatePwdMember(String MemberId, String MemberPwd, String updatePwd) {
 
         Connection conn = JDBCTemplet.getConnection();
 
@@ -106,7 +107,7 @@ public class MemberService {
         JDBCTemplet.close();
 
         return updateMem;
-    }
+    }*/
 
 
 }
