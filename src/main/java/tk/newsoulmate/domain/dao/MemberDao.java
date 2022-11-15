@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Member;
+import tk.newsoulmate.domain.vo.MemberGrade;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.*;
@@ -59,14 +60,14 @@ public class MemberDao {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("loginMember");
-
+        Member m=null;
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, memberId);
             psmt.setString(2, memberPwd);
             rset = psmt.executeQuery();
             if (rset.next()) {
-                return this.mapToMember(rset);
+                m=mapToLoginMember(rset);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,17 +75,25 @@ public class MemberDao {
             JDBCTemplet.close(rset);
             JDBCTemplet.close(psmt);
         }
-        return null;
+        return m;
     }
 
-    public Member mapToMember(ResultSet resultSet) throws SQLException {
+    public Member mapToLoginMember(ResultSet resultSet) throws SQLException {
+        int memberNo=resultSet.getInt("MEMBER_NO");
         String memberId = resultSet.getString("MEMBER_ID");
         String memberPwd = resultSet.getString("MEMBER_PWD");
         String memberName = resultSet.getString("MEMBER_NAME");
         String nickname = resultSet.getString("NICKNAME");
+        MemberGrade mg= MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GREED"));
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
-        return new Member(memberId, memberPwd, memberName, nickname, phone, email);
+
+        Member m=new Member(memberNo,memberId, memberName, nickname, phone, email,mg);
+        if(m.getMemberGrade()==MemberGrade.SHELTER_MANAGER){
+            long shelterNo=resultSet.getLong("SHLETER_NO");
+            m.setShelterNo(shelterNo);
+        }
+        return m;
     }
 
 
@@ -169,7 +178,7 @@ public class MemberDao {
             rset = psmt.executeQuery();
 
             if(rset.next()) {
-                m = this.mapToMember(rset);
+                m = mapToMember(rset);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -178,6 +187,18 @@ public class MemberDao {
             JDBCTemplet.close(psmt);
         }
 
+        return m;
+    }
+
+    private Member mapToMember(ResultSet resultSet) throws SQLException {
+        String memberId = resultSet.getString("MEMBER_ID");
+        String memberPwd = resultSet.getString("MEMBER_PWD");
+        String memberName = resultSet.getString("MEMBER_NAME");
+        String nickname = resultSet.getString("NICKNAME");
+        MemberGrade mg= MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GREED"));
+        String email = resultSet.getString("EMAIL");
+        String phone = resultSet.getString("PHONE");
+        Member m=new Member(memberId,memberPwd, memberName, nickname, phone, email);
         return m;
     }
 

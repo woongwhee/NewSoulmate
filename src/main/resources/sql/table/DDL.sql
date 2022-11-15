@@ -5,7 +5,6 @@ DROP TABLE "GRADE_UP" CASCADE CONSTRAINTS PURGE;
 DROP TABLE NewSoulmate.MEMBER CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NEWSOULMATE.MESSAGE CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.SUBSCRIPTION CASCADE CONSTRAINTS PURGE ;
-DROP TABLE NewSoulmate."COMMENT" CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate."REPLY" CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate."CONFIRM" CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.SUPPORT CASCADE CONSTRAINTS PURGE ;
@@ -16,16 +15,64 @@ DROP TABLE NewSoulmate.ATTACHMENT CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.CARD CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.CITY CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.VILLAGE CASCADE CONSTRAINTS PURGE ;
-DROP TABLE NewSoulmate.REPORT CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.CATEGORY CASCADE CONSTRAINTS PURGE ;
-
+DROP TABLE ANIMAL;
 DROP SEQUENCE SQ_BOARD_PK;
 DROP SEQUENCE SQ_CARD_PK;
 DROP SEQUENCE SQ_COMMENT_PK;
 DROP SEQUENCE SQ_MEMBER_PK;
 DROP SEQUENCE SQ_VOLUNTEER_PK;
+DROP SEQUENCE SQ_ATTACHMENT_PK;
 
 
+create table ANIMAL
+(
+    "desertionNo"  number,
+    "filename"     VARCHAR2(200),
+    "happenDt"     DATE,
+    "happenPlace"  VARCHAR2(200),
+    "kindCd"       VARCHAR2(50),
+    "colorCd"      VARCHAR2(40),
+    "age"          VARCHAR2(40),
+    "weight"       VARCHAR2(40),
+    "noticeNo"     VARCHAR2(40),
+    "noticeSdt"    DATE,
+    "noticeEdt"    DATE,
+    "popfile"      VARCHAR2(200),
+    "processState" VARCHAR2(30),
+    "sexCd"        VARCHAR2(1),
+    "neuterYn"     VARCHAR2(1),
+    "specialMark"  VARCHAR2(200),
+    "careNm"       VARCHAR2(50),
+    "careTel"      VARCHAR2(30),
+    "careAddr"     VARCHAR2(200),
+    "orgNm"        VARCHAR2(60),
+    "chargeNm"     VARCHAR2(40),
+    "officetel"    VARCHAR2(30)
+);
+
+comment on column ANIMAL."desertionNo" is '유기번호';
+comment on column ANIMAL."filename" is '섬네일이미지';
+comment on column ANIMAL."happenDt" is '접수일';
+comment on column ANIMAL."happenPlace" is '발견장소';
+comment on column ANIMAL."kindCd" is '품종';
+comment on column ANIMAL."colorCd" is '색상';
+comment on column ANIMAL."age" is '나이';
+comment on column ANIMAL."weight" is '체중';
+comment on column ANIMAL."noticeNo" is '공고번호';
+comment on column ANIMAL."noticeSdt" is '공고시작';
+comment on column ANIMAL."noticeEdt" is '공고종료';
+comment on column ANIMAL."popfile" is 'Image';
+comment on column ANIMAL."processState" is '상태';
+comment on column ANIMAL."sexCd" is '성별';
+comment on column ANIMAL."neuterYn" is '중성화여부';
+comment on column ANIMAL."specialMark" is '특징';
+comment on column ANIMAL."careNm" is '보호소이름';
+comment on column ANIMAL."careTel" is '보호소전화번호';
+comment on column ANIMAL."careAddr" is '보호장소';
+comment on column ANIMAL."orgNm" is '관할기관';
+comment on column ANIMAL."chargeNm" is '담당자';
+comment on column ANIMAL."officetel" is '담당자연락처';
 CREATE TABLE "MEMBER" (
 	"MEMBER_NO"	NUMBER
 	    CONSTRAINT PK_MEMBER PRIMARY KEY,
@@ -43,10 +90,10 @@ CREATE TABLE "MEMBER" (
 	"NICKNAME"	VARCHAR2(50)
         CONSTRAINT MEM_NIK_NN NOT NULL
 	    CONSTRAINT MEM_NIK_UQ UNIQUE,
-	MEMBER_GRADE	VARCHAR2(20)
-	    CONSTRAINT MEM_GRD_CK CHECK(MEMBER_GRADE in('일반','보호소관계자','사이트관리자'))
+	MEMBER_GRADE	NUMBER
+	    CONSTRAINT MEM_GRD_CK CHECK(MEMBER_GRADE in(0,1,2))
         CONSTRAINT MEM_GRD_NN NOT NULL,
-	"MEMBER_STATUS"	VARCHAR2(1)	DEFAULT 'N'
+	"MEMBER_STATUS"	VARCHAR2(1)	DEFAULT 'Y'
         CONSTRAINT MEM_STU_CK CHECK(MEMBER_STATUS in('Y','N')),
 	"SHELTER_NO"	NUMBER	DEFAULT NULL,
 	RESENT_CONNECTION DATE DEFAULT SYSDATE,
@@ -64,7 +111,7 @@ CREATE TABLE "SHELTER" (
     "SHELTER_TEL"	VARCHAR2(20),
 	"SHELTER_LANDLINE"	VARCHAR2(20),
 	"COMPANY_NUM"	VARCHAR2(20),
-	"TRANSFER_ACCOUNT" NUMBER,
+	"TRANSFER_ACCOUNT" VARCHAR2(20),
 	"CITY_NO" NUMBER,
 	"VILLAGE_NO" NUMBER
 );
@@ -400,6 +447,28 @@ COMMENT ON COLUMN "BREED"."BREED_NO" IS '품종번호';
 COMMENT ON COLUMN "BREED"."BREED_NAME" IS '품종명';
 COMMENT ON COLUMN "BREED"."SPECIES_NO" IS '종명';
 
+comment on column ANIMAL."desertionNo" is '유기번호';
+comment on column ANIMAL."filename" is '섬네일이미지';
+comment on column ANIMAL."happenDt" is '접수일';
+comment on column ANIMAL."happenPlace" is '발견장소';
+comment on column ANIMAL."kindCd" is '품종';
+comment on column ANIMAL."colorCd" is '색상';
+comment on column ANIMAL."age" is '나이';
+comment on column ANIMAL."weight" is '체중';
+comment on column ANIMAL."noticeNo" is '공고번호';
+comment on column ANIMAL."noticeSdt" is '공고시작';
+comment on column ANIMAL."noticeEdt" is '공고종료';
+comment on column ANIMAL."popfile" is 'Image';
+comment on column ANIMAL."processState" is '상태';
+comment on column ANIMAL."sexCd" is '성별';
+comment on column ANIMAL."neuterYn" is '중성화여부';
+comment on column ANIMAL."specialMark" is '특징';
+comment on column ANIMAL."careNm" is '보호소이름';
+comment on column ANIMAL."careTel" is '보호소전화번호';
+comment on column ANIMAL."careAddr" is '보호장소';
+comment on column ANIMAL."orgNm" is '관할기관';
+comment on column ANIMAL."chargeNm" is '담당자';
+comment on column ANIMAL."officetel" is '담당자연락처';
 
 --보호소관계자신청
 COMMENT ON COLUMN "GRADE_UP"."GRADE_NO" IS '신청번호';
@@ -571,6 +640,7 @@ CREATE SEQUENCE SQ_ATTACHMENT_PK
     NOCYCLE
     NOCACHE
     NOORDER;
+
 COMMIT;
 
 
