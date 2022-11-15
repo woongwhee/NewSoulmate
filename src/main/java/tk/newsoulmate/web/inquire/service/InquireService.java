@@ -65,4 +65,29 @@ public class InquireService {
         return result1*result2;
     }
 
+    public int increaseCount(int boardNo) {
+        Connection conn = getConnection();
+
+        int result = new BoardDao().increaseCount(conn, boardNo);
+
+        if(result > 0){
+            commit();
+        } else {
+            rollback(conn);
+        }
+        close();
+
+        return result;
+    }
+
+    public Board selectInquireBoard(int boardNo){
+        Connection conn = getConnection();
+
+        Board b = new BoardDao().selectInquireBoard(conn, boardNo);
+
+        close();
+
+        return b;
+    }
+
 }

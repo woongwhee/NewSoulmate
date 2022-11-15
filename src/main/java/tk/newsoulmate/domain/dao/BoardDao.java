@@ -328,4 +328,119 @@ public class BoardDao {
 
         return vList;
     }
+
+    public int increaseCount(Connection conn, int boardNo){
+        int result = 0;
+
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("increaseCount");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, boardNo);
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
+
+    public Board selectInquireBoard(Connection conn, int boardNo){
+
+        Board b = null;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+
+        String sql = prop.getProperty("selectInquireBoard");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1,boardNo);
+
+            rset = psmt.executeQuery();
+
+            if (rset.next()){
+                b = Board.selectInquireBoard(
+                        rset.getInt("BOARD_NO"),
+                        rset.getString("CATEGORY_NAME"),
+                        rset.getString("BOARD_TITLE"),
+                        rset.getString("BOARD_CONTENT"),
+                        rset.getString("MEMBER_ID"),
+                        rset.getDate("CREATE_DATE"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return b;
+    }
+
+    public Attachment selectInquireAttachment(Connection conn, int boardNo){
+
+        Attachment at = null;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+
+        String sql = prop.getProperty("selectInquireAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1,boardNo);
+
+            rset = psmt.executeQuery();
+
+            if(rset.next()){
+                at = new Attachment();
+
+                at.setFileNo(rset.getInt("FILE_NO"));
+                at.setOriginName(rset.getString("ORIGIN_NAME"));
+                at.setChangeName(rset.getString("CHANGE_NAME"));
+                at.setFilePath(rset.getString("FILE_PATH"));
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return at;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

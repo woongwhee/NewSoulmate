@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
-
+<c:set var="alertMsg" value="${sessionScope.alertMsg}"/>
 <div id="header_total">
     <div id="teams">
-        <div><%=request.getContextPath()%>
+        <div>
             <p> </p>
         </div>
         <div class="navbar_logo">
@@ -72,4 +72,13 @@
     </nav>
 </div>
 </div>
+<script>
+    let msg = "${alertMsg}"; // let msg = 성공적으로 로그인이 되었습니다.
+    if(msg != "") {
+        alert(msg);
+        // 알림창을 띄워준 후 session에 담긴 해당메세지는 지워줘야함.
+        // 안그러면 menubar.jsp가 로딩될때마다 매번 alert가 계속 뜰 것.
 
+        <% session.removeAttribute("alertMsg");%>
+    }
+</script>

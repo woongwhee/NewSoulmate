@@ -96,9 +96,25 @@
         VALUES (SQ_BOARD_PK.NEXTVAL, 4, ?, ?, ?, ?)
     </entry>
 
-    <entry key="insertAttachment">
-        INSERT INTO ATTACHMENT(FILE_NO, REPLY_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
-        VALUES (SQ_ATTACHMENT_PK.NEXTVAL, SQ_COMMENT_PK.CURRVAL, ?, ?, ?)
+    <entry key="increaseCount">
+        UPDATE BOARD
+        SET READ_COUNT = READ_COUNT + 1
+        WHERE BOARD_NO = ?
+        AND BOARD_STATUS = 'Y'
+    </entry>
+
+    <entry key="selectInquireBoard">
+        SELECT BOARD_NO,
+            CATEGORY_NAME,
+            BOARD_TITLE,
+            BOARD_CONTENT,
+            MEMBER_ID,
+            CREATE_DATE
+        FROM BOARD B
+        LEFT JOIN CATEGORY USING(CATEGORY_NO)
+        JOIN MEMBER USING(MEMBER_NO)
+        WHERE BOARD_NO = ?
+            AND B.MEMBER_STATUS = 'Y'
     </entry>
 
 </properties>

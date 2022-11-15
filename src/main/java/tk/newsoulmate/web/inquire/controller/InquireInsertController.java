@@ -36,10 +36,10 @@ public class InquireInsertController extends HttpServlet {
             // - 카테고리번호, 제목, 내용, 작성자회원번호 -> Board에 INSERT
             // - 넘어온 첨부파일이 있다면 원본명, 수정명, 폴더경로를 뽑아서 -> Attachment에 INSERT
 
-            int categoryNo = Integer.parseInt(multipartRequest.getParameter("categoryNo"));
+            String categoryNo = multipartRequest.getParameter("categoryNo");
             String boardTitle = multipartRequest.getParameter("boardTitle");
             String boardContent = multipartRequest.getParameter("boardContent");
-            int memberNo = Integer.parseInt(multipartRequest.getParameter("memberNo"));
+            String memberNo = multipartRequest.getParameter("memberNo");
 
             Board b = Board.insertInquire(categoryNo,boardTitle, boardContent, memberNo);
 
