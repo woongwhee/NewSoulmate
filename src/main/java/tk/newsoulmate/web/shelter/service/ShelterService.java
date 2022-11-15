@@ -78,4 +78,14 @@ public class ShelterService {
 
         return s;
     }
+
+    public long shelterNoByName(long animalNo){
+        Connection conn = JDBCTemplet.getConnection();
+
+        long shelterNo = new ShelterDao().shelterNoByName(conn,animalNo);
+
+        JDBCTemplet.close();
+
+        return shelterNo;
+    }
 }

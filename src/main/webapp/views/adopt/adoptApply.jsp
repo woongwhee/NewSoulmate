@@ -11,8 +11,7 @@
 <%
     Calendar date = Calendar.getInstance();
     SimpleDateFormat today = new SimpleDateFormat("yyy년 MM월 dd일");
-    String dno= (String) request.getAttribute("dno");
-    dno=dno!=null?dno:"";
+    String dno= (String)request.getAttribute("dno");
 %>
 
 <!doctype html>
@@ -25,12 +24,20 @@
 <form action="<%=request.getContextPath()%>/adoptApplyInsert" method="post">
 
     // login_no hidden으로 숨겨서 넘기기 loginUserNo -> 나중에 작업
+    <input type="hidden" name="subRead" value="N">
     <table>
         <tr>
             <th>이름</th>
             <td><input type="text" name="name"></td>
+
+            <!--
+                dno값이 있다면 dno를 서블릿으로 넘겨주고
+                dno값이 없다면 사용자가 입력한 animalNo를 서블릿으로 넘겨주기
+            -->
+
             <th>공고번호</th>
-            <td><input type="text" name="animalNo" value="${dno}"></td>
+            <td><% if(dno==null){%><input type="text" id="animalNo" name="animalNo"></td>
+            <td><% }else{ %> <input type="text" id="animalNo" name="animalNo" value="${dno}" disabled></td><%}%>
         </tr>
         <tr>
             <th>전화번호</th>
