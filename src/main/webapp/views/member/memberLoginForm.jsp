@@ -23,7 +23,7 @@
         <h2>로그인</h2>
     </div>
     <div class="content-box">
-        <form id="loginForm" action="<%=request.getContextPath()%>/login.do" method="get">
+        <form id="loginForm" action="<%=request.getContextPath()%>/login.do" method="post">
             <table class="logintable">
                 <tr>
                     <th><label for="loginId">아이디</label></th>
