@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Member;
+import tk.newsoulmate.domain.vo.MemberGrade;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.*;
@@ -24,8 +25,6 @@ public class MemberDao {
             e.printStackTrace();
         }
     }
-
-
 
 
     public int insertMember(Member m, Connection conn) {
@@ -58,28 +57,42 @@ public class MemberDao {
     }
 
     public Member loginMember(String memberId, String memberPwd, Connection conn) {
-
-        Member m = null;
-
         PreparedStatement psmt = null;
-
         ResultSet rset = null;
-
         String sql = prop.getProperty("loginMember");
-
+        Member m=null;
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, memberId);
             psmt.setString(2, memberPwd);
             rset = psmt.executeQuery();
-
+            if (rset.next()) {
+                m=mapToLoginMember(rset);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             JDBCTemplet.close(rset);
             JDBCTemplet.close(psmt);
         }
+        return m;
+    }
 
+    public Member mapToLoginMember(ResultSet resultSet) throws SQLException {
+        int memberNo=resultSet.getInt("MEMBER_NO");
+        String memberId = resultSet.getString("MEMBER_ID");
+        String memberPwd = resultSet.getString("MEMBER_PWD");
+        String memberName = resultSet.getString("MEMBER_NAME");
+        String nickname = resultSet.getString("NICKNAME");
+        MemberGrade mg= MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GREED"));
+        String email = resultSet.getString("EMAIL");
+        String phone = resultSet.getString("PHONE");
+
+        Member m=new Member(memberNo,memberId, memberName, nickname, phone, email,mg);
+        if(m.getMemberGrade()==MemberGrade.SHELTER_MANAGER){
+            long shelterNo=resultSet.getLong("SHLETER_NO");
+            m.setShelterNo(shelterNo);
+        }
         return m;
     }
 
@@ -165,8 +178,7 @@ public class MemberDao {
             rset = psmt.executeQuery();
 
             if(rset.next()) {
-                m = new Member();
-                m.setMemberId(rset.getString("memberId"));
+                m = mapToMember(rset);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -175,6 +187,18 @@ public class MemberDao {
             JDBCTemplet.close(psmt);
         }
 
+        return m;
+    }
+
+    private Member mapToMember(ResultSet resultSet) throws SQLException {
+        String memberId = resultSet.getString("MEMBER_ID");
+        String memberPwd = resultSet.getString("MEMBER_PWD");
+        String memberName = resultSet.getString("MEMBER_NAME");
+        String nickname = resultSet.getString("NICKNAME");
+        MemberGrade mg= MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GREED"));
+        String email = resultSet.getString("EMAIL");
+        String phone = resultSet.getString("PHONE");
+        Member m=new Member(memberId,memberPwd, memberName, nickname, phone, email);
         return m;
     }
 
@@ -207,5 +231,26 @@ public class MemberDao {
         return m;
     }
 
+    public int updatePassword(Connection conn, String memberId, String password) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        int result = 0;
+        String sql = prop.getProperty("updatePwd");
 
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, password);
+            psmt.setString(2, memberId);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                result = 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return result;
+    }
 }

@@ -23,7 +23,7 @@
             <h1>회원가입</h1>
         </div>
         <div>
-            <form action="/NewSoulmate/signup.do" id="myForm" method="get">
+            <form action="<%=request.getContextPath()%>/signupForm.do" id="myForm" method="get">
                 <div class="input-id-wrap">
                     <div>
                         <label for="memberId">아이디 <span id="ajaxCheckId"></span></label>
@@ -170,7 +170,7 @@
     function authenticationMail() {
         const inputValue = $("#authCode").val();
         if (mailCode != null) {
-        $.ajax({
+            $.ajax({
                 url: '<%= request.getContextPath()%>/checkAuth',
                 type: 'get',
                 data: {authCode: inputValue},
@@ -219,131 +219,132 @@
 
     $(document).ready(function () {
 
-    // 아이디 유효성검사 & 중복 검사 - 완료
-    const memberId = document.querySelector("#memberId");
-    const idReg = /^[a-zA-Z0-9]{6,}/;
+        // 아이디 유효성검사 & 중복 검사 - 완료
+        const memberId = document.querySelector("#memberId");
+        const idReg = /^[a-zA-Z0-9]{6,}/;
 
-    $('#checkid').click(function() {
+        $('#checkid').click(function() {
 
-        let memberIds = $('#memberId').val();
-        if(idReg.test(memberIds)){
-            $.ajax({
-                url : '<%= request.getContextPath()%>/ajaxCheckId.do',
-                type: 'get',
-                data : { memberId: memberIds },
-                dataType : 'json',
-                success: function(result) {
+            let memberIds = $('#memberId').val();
+            if(idReg.test(memberIds)){
+                $.ajax({
+                    url : '<%= request.getContextPath()%>/ajaxCheckId.do',
+                    type: 'get',
+                    data : { memberId: memberIds },
+                    dataType : 'json',
+                    success: function(result) {
 
-                    if (result == 1) {
-                        alert("이미 사용중인 아이디 입니다.");
+                        if (result == 1) {
+                            alert("이미 사용중인 아이디 입니다.");
+                            checkId = 0;
+                        } else if (result == 0) {
+                            alert("사용가능한 아이디 입니다.");
+                            checkId = 1;
+                        }
+                    },
+                    error : function(){
+                        alert("서버요청실패");
                         checkId = 0;
-                    } else if (result == 0) {
-                        alert("사용가능한 아이디 입니다.");
-                        checkId = 1;
                     }
-                },
-                error : function(){
-                    alert("서버요청실패");
-                    checkId = 0;
+                })
+            }else {
+                alert("아이디가 6자 이상이어야 합니다.")
+                checkId = 0;
+            }
+        });
+
+
+
+
+        //비밀번호 유효성 검사 - 완료
+        const memberPw = document.querySelector("#memberPw");
+        const memberPwRe = document.querySelector("#memberPwRe");
+
+        memberPw.addEventListener("change", function() {
+
+            const inputPw = memberPw.value;
+            const pwReg = /^[a-zA-Z0-9]{8,}$/;
+            const pwChkMsg = document.querySelector("#pwChkMsg");
+
+            const inputPwRe = memberPwRe.value;
+            const pwReChkMsg = document.querySelector("#pwReChkMsg");
+
+            if (pwReg.test(inputPw)) {
+                pwChkMsg.innerText = "사용 가능한 비밀번호 입니다."
+                checkPwd = 1;
+            } else {
+                pwChkMsg.innerText = "사용 불가능한 비밀번호 입니다."
+                checkPwd = 0;
+            }
+            if(inputPwRe != ""){
+                if(inputPw == inputPwRe){
+                    pwReChkMsg.innerText = "비밀번호가 일치합니다."
+                    checkPwdRe = 1;
+                }else{
+                    pwReChkMsg.innerText = "비밀번호가 일치하지않습니다."
+                    checkPwdRe = 0;
                 }
-            })
-        }else {
-            alert("아이디가 6자 이상이어야 합니다.")
-            checkId = 0;
-        }
-    });
+            }else{
+
+            }
+        });
 
 
-
-
-    //비밀번호 유효성 검사 - 완료
-    const memberPw = document.querySelector("#memberPw");
-    const memberPwRe = document.querySelector("#memberPwRe");
-
-    memberPw.addEventListener("change", function() {
-
-        const inputPw = memberPw.value;
-        const pwReg = /^[a-zA-Z0-9]{8,}$/;
-        const pwChkMsg = document.querySelector("#pwChkMsg");
-
-        const inputPwRe = memberPwRe.value;
-        const pwReChkMsg = document.querySelector("#pwReChkMsg");
-
-        if (pwReg.test(inputPw)) {
-            pwChkMsg.innerText = "사용 가능한 비밀번호 입니다."
-            checkPwd = 1;
-        } else {
-            pwChkMsg.innerText = "사용 불가능한 비밀번호 입니다."
-            checkPwd = 0;
-        }
-        if(inputPwRe != ""){
-            if(inputPw == inputPwRe){
+        // 비밀번호 일치 검사 - 완료
+        memberPwRe.addEventListener("change", function() {
+            const inputPw = memberPw.value;
+            const inputPwRe = memberPwRe.value;
+            const pwReChkMsg = document.querySelector("#pwReChkMsg");
+            if (inputPw == inputPwRe) {
                 pwReChkMsg.innerText = "비밀번호가 일치합니다."
                 checkPwdRe = 1;
-            }else{
+            } else {
                 pwReChkMsg.innerText = "비밀번호가 일치하지않습니다."
                 checkPwdRe = 0;
             }
-        }else{
-
-        }
-    });
+        });
 
 
-    // 비밀번호 일치 검사 - 완료
-    memberPwRe.addEventListener("change", function() {
-        const inputPw = memberPw.value;
-        const inputPwRe = memberPwRe.value;
-        const pwReChkMsg = document.querySelector("#pwReChkMsg");
-        if (inputPw == inputPwRe) {
-            pwReChkMsg.innerText = "비밀번호가 일치합니다."
-            checkPwdRe = 1;
-        } else {
-            pwReChkMsg.innerText = "비밀번호가 일치하지않습니다."
-            checkPwdRe = 0;
-        }
-    });
+        // 닉네임 중복체크 - 완료
 
+        const nickName = document.querySelector("#nickName");
+        const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,}/;
 
-    // 닉네임 중복체크 - 완료
+        $('#checkNickname').click(function() {
 
-    const nickName = document.querySelector("#nickName");
-    const nickReg = /^[a-zA-Zㄱ-힣]{3,}/;
+            let nickNames = $('#nickName').val();
 
-    $('#checkNickname').click(function() {
+            if(nickReg.test(nickNames)){
+                $.ajax({
+                    url : '<%= request.getContextPath()%>/ajaxCheckNickname.do',
+                    type: 'get',
+                    data : { nickName: nickNames },
+                    dataType : 'json',
+                    success: function(result) {
 
-        let nickNames = $('#nickName').val();
-
-        if(nickReg.test(nickNames)){
-            $.ajax({
-                url : '<%= request.getContextPath()%>/ajaxCheckNickname.do',
-                type: 'get',
-                data : { nickName: nickNames },
-                dataType : 'json',
-                success: function(result) {
-
-                    if (result == 1) {
-                        alert("이미 사용중인 닉네임 입니다.");
+                        if (result == 1) {
+                            alert("이미 사용중인 닉네임 입니다.");
+                            checkNickname = 0;
+                        } else if (result == 0) {
+                            alert("사용가능한 닉네임 입니다.");
+                            checkNickname = 1;
+                        }
+                    },
+                    error : function(){
+                        alert("서버요청실패");
                         checkNickname = 0;
-                    } else if (result == 0) {
-                        alert("사용가능한 닉네임 입니다.");
-                        checkNickname = 1;
                     }
-                },
-                error : function(){
-                    alert("서버요청실패");
-                    checkNickname = 0;
-                }
-            })
-        }else {
-            alert("닉네임은 3자 이상이어야 합니다.")
-            checkNickname = 0;
-        }
+                })
+            }else {
+                alert("닉네임은 3자 이상이어야 합니다.")
+                checkNickname = 0;
+            }
+        });
+
+
     });
 
-
-       });
-
+/*
     // 필수입력사항 모두 입력돼야 회원가입 할 수 있게 - 완료
     function signupCheck(){
         if (!(checkId == 1 && checkPwd == 1 && checkPwdRe == 1 && checkNickname == 1 && checkMail ==1)) {
@@ -351,6 +352,7 @@
             return false;
         }
     };
+*/
 
 
 </script>
