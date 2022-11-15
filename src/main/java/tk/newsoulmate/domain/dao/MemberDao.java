@@ -26,8 +26,6 @@ public class MemberDao {
     }
 
 
-
-
     public int insertMember(Member m, Connection conn) {
 
         int result = 0;
@@ -58,13 +56,8 @@ public class MemberDao {
     }
 
     public Member loginMember(String memberId, String memberPwd, Connection conn) {
-
-        Member m = null;
-
         PreparedStatement psmt = null;
-
         ResultSet rset = null;
-
         String sql = prop.getProperty("loginMember");
 
         try {
@@ -72,15 +65,26 @@ public class MemberDao {
             psmt.setString(1, memberId);
             psmt.setString(2, memberPwd);
             rset = psmt.executeQuery();
-
+            if (rset.next()) {
+                return this.mapToMember(rset);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             JDBCTemplet.close(rset);
             JDBCTemplet.close(psmt);
         }
+        return null;
+    }
 
-        return m;
+    public Member mapToMember(ResultSet resultSet) throws SQLException {
+        String memberId = resultSet.getString("MEMBER_ID");
+        String memberPwd = resultSet.getString("MEMBER_PWD");
+        String memberName = resultSet.getString("MEMBER_NAME");
+        String nickname = resultSet.getString("NICKNAME");
+        String email = resultSet.getString("EMAIL");
+        String phone = resultSet.getString("PHONE");
+        return new Member(memberId, memberPwd, memberName, nickname, phone, email);
     }
 
 
@@ -165,8 +169,7 @@ public class MemberDao {
             rset = psmt.executeQuery();
 
             if(rset.next()) {
-                m = new Member();
-                m.setMemberId(rset.getString("memberId"));
+                m = this.mapToMember(rset);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -207,5 +210,26 @@ public class MemberDao {
         return m;
     }
 
+    public int updatePassword(Connection conn, String memberId, String password) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        int result = 0;
+        String sql = prop.getProperty("updatePwd");
 
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, password);
+            psmt.setString(2, memberId);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                result = 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return result;
+    }
 }
