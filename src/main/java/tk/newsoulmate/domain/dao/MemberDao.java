@@ -44,6 +44,7 @@ public class MemberDao {
             psmt.setString(4, m.getNickName());
             psmt.setString(5, m.getPhone());
             psmt.setString(6, m.getEmail());
+            psmt.setInt(7, m.getMemberGrade().gradeNumber);
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -162,11 +163,11 @@ public class MemberDao {
     }
 
 
-    public Member findId(Connection conn, String memberName, String Email) {
+    public String findId(Connection conn, String memberName, String Email) {
 
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        Member m = null;
+        String userId = null;
 
         String sql = prop.getProperty("findId");
 
@@ -178,7 +179,7 @@ public class MemberDao {
             rset = psmt.executeQuery();
 
             if(rset.next()) {
-                m = mapToMember(rset);
+                userId=rset.getString("USER_ID");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -187,7 +188,7 @@ public class MemberDao {
             JDBCTemplet.close(psmt);
         }
 
-        return m;
+        return userId;
     }
 
     private Member mapToMember(ResultSet resultSet) throws SQLException {
@@ -220,7 +221,7 @@ public class MemberDao {
             rset = psmt.executeQuery();
             if (rset.next()) {
                 m = new Member();
-                m.setMemberPwd(rset.getString("memberpwd"));
+                m.setMemberPwd(rset.getString("MEMBER_PWD"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
