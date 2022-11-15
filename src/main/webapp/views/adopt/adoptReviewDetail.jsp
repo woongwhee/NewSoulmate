@@ -5,48 +5,51 @@
   Time: 오후 5:24
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.io.File" %>
-<%@ page import="java.util.UUID" %>
-<%@ page import="java.io.InputStream" %>
-<%@ page import="java.io.OutputStream" %>
-<%@ page import="java.io.FileOutputStream" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.io.*"%>
+<%@page import="java.util.UUID"%>
 <%
     //한글 인코딩을 위한 UTF-8 설정
-    request.setCharacterEncoding("utf-8");
-    out.println(request.getParameter("adReviewContent"));	// html코드형식의 데이터
+    String title = request.getParameter("adTitle");
+    String content = request.getParameter("adContent");
 %>
-<%--<%--%>
-<%--    String sFileInfo = "";--%>
-<%--    String name = request.getHeader("file-name");--%>
-<%--    String ext = name.substring(name.lastIndexOf(".")+1);--%>
-<%--    String defaultPath = request.getServletContext().getRealPath("/");--%>
-<%--    String path = defaultPath + "upload" + File.separator;--%>
+<%
+    String fileInfo = "";
+    String fileName = request.getHeader("file-name");
+    String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1);
 
-<%--    File file = new File(path);--%>
-<%--    if(!file.exists()) {--%>
-<%--        file.mkdirs();--%>
-<%--    }--%>
+        //이미지이므로 신규 파일로 디렉토리 설정 및 업로드
+        //파일 기본경로
+        String defaultPath  = request.getSession().getServletContext().getRealPath("/");
+        String filePath = defaultPath  + "/smarteditor2/upload/" + File.separator;
 
-<%--    String realname = UUID.randomUUID().toString() + "." + ext;--%>
-<%--    InputStream is = request.getInputStream();--%>
-<%--    OutputStream os = new FileOutputStream(path + realname);--%>
-<%--    int numRead;--%>
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        String autoFileName = UUID.randomUUID()+ "." + fileExt;
+        String realFileName = filePath + autoFileName;
 
-<%--    byte bt[] = new byte[Integer.parseInt(request.getHeader("file-size"))];--%>
-<%--    while((numRead = is.read(bt,0,bt.length)) != -1) {--%>
-<%--        os.write(bt,0,numRead);--%>
-<%--    }--%>
-<%--    if(is != null) {--%>
-<%--        is.close();--%>
-<%--    }--%>
+        InputStream is = request.getInputStream();
+        OutputStream os = new FileOutputStream(realFileName);
+        int num;
 
-<%--    os.flush();--%>
-<%--    os.close();--%>
+        byte bt[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
+        while ((num = is.read(bt, 0, bt.length)) != -1) {
+            os.write(bt, 0, num);
+        }
+        if (is != null) {
+            is.close();
+        }
+        os.flush();
+        os.close();
 
-<%--    out.println("path : "+path);--%>
-<%--    out.println("realname : "+realname);--%>
+        fileInfo += "&bNewLine=true&sFileName="+ fileName+"&sFileURL="+"/NewSoulmate/smarteditor2/upload/"+autoFileName;
+        out.println(fileInfo);
 
-<%--    sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL="+"/upload/"+realname;--%>
-<%--    out.println(sFileInfo);--%>
-<%--%>--%>
+%>
+
+제목  <%=title%> <br>
+내용 <br> <%=content%>
+사진 <%=fileInfo%>
