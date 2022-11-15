@@ -52,11 +52,11 @@ public class MemberService {
         return m;
     }
 
-    public String findId(String memberName, String Email) {
+    public Member findId(String memberName, String Email) {
 
-        Connection conn = getConnection();
-        String m = new MemberDao().findId(conn, memberName, Email);
-        close();
+        Connection conn = JDBCTemplet.getConnection();
+        Member m = new MemberDao().findId(conn, memberName, Email);
+        JDBCTemplet.close();
         return m;
     }
 

@@ -262,7 +262,7 @@
         memberPw.addEventListener("change", function() {
 
             const inputPw = memberPw.value;
-            const pwReg = /^[a-zA-Z0-9]{8,}$/;
+            const pwReg = /^[a-zA-Z0-9]{6,}$/;
             const pwChkMsg = document.querySelector("#pwChkMsg");
 
             const inputPwRe = memberPwRe.value;

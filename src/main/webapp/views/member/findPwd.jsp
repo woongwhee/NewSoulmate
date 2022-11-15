@@ -80,9 +80,9 @@
             success: function(data) {
                 console.log(data);
                 if (data == null) {
-                    //result.append("회원정보가 없습니다.")
+
                 } else {
-                    //result.append("비밀번호 : " + data.memberPwd);
+
                 }
             },
             error: function() {

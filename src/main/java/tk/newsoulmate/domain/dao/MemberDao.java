@@ -30,11 +30,8 @@ public class MemberDao {
     public int insertMember(Member m, Connection conn) {
 
         int result = 0;
-
         PreparedStatement psmt = null;
-
         String sql = prop.getProperty("insertMember");
-
         try {
             psmt = conn.prepareStatement(sql);
 
@@ -46,13 +43,11 @@ public class MemberDao {
             psmt.setString(6, m.getEmail());
             psmt.setInt(7, m.getMemberGrade().gradeNumber);
             result = psmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             JDBCTemplet.close(psmt);
         }
-
         return result;
 
     }
@@ -61,14 +56,14 @@ public class MemberDao {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("loginMember");
-        Member m=null;
+        Member m = null;
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, memberId);
             psmt.setString(2, memberPwd);
             rset = psmt.executeQuery();
             if (rset.next()) {
-                m=mapToLoginMember(rset);
+                m = mapToLoginMember(rset);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,18 +74,21 @@ public class MemberDao {
         return m;
     }
 
+
+    //ResultSet에서 데이터를 꺼내서 객체로 변경해주는 역할
     public Member mapToLoginMember(ResultSet resultSet) throws SQLException {
-        int memberNo=resultSet.getInt("MEMBER_NO");
+        int memberNo = resultSet.getInt("MEMBER_NO");
         String memberId = resultSet.getString("MEMBER_ID");
         String memberPwd = resultSet.getString("MEMBER_PWD");
         String memberName = resultSet.getString("MEMBER_NAME");
         String nickname = resultSet.getString("NICKNAME");
-        MemberGrade mg= MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
+        MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
-        Member m=new Member(memberNo,memberId, memberName, nickname, phone, email,mg);
-        if(m.getMemberGrade()==MemberGrade.SHELTER_MANAGER){
-            long shelterNo=resultSet.getLong("SHLETER_NO");
+
+        Member m = new Member(memberNo, memberId, memberName, nickname, phone, email, mg);
+        if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
+            long shelterNo = resultSet.getLong("SHLETER_NO");
             m.setShelterNo(shelterNo);
         }
         System.out.println(m);
@@ -98,24 +96,17 @@ public class MemberDao {
     }
 
 
-
     public int idCheck(Connection conn, String checkId) {
 
         int count = 0;
-
         PreparedStatement psmt = null;
-
         ResultSet rset = null;
-
         String sql = prop.getProperty("idCheck");
-
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, checkId);
-
             rset = psmt.executeQuery();
-
-            if(rset.next()) {
+            if (rset.next()) {
                 count = rset.getInt(1);
             }
         } catch (SQLException e) {
@@ -124,30 +115,23 @@ public class MemberDao {
             JDBCTemplet.close(rset);
             JDBCTemplet.close(psmt);
         }
-
         return count;
-
-
     }
 
 
     public int nicknameCheck(Connection conn, String checkNickname) {
 
         int count = 0;
-
         PreparedStatement psmt = null;
-
         ResultSet rset = null;
-
         String sql = prop.getProperty("nicknameCheck");
-
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, checkNickname);
 
             rset = psmt.executeQuery();
 
-            if(rset.next()) {
+            if (rset.next()) {
                 count = rset.getInt(1);
             }
         } catch (SQLException e) {
@@ -156,18 +140,15 @@ public class MemberDao {
             JDBCTemplet.close(rset);
             JDBCTemplet.close(psmt);
         }
-
         return count;
-
-
     }
 
 
-    public String findId(Connection conn, String memberName, String Email) {
+    public Member findId(Connection conn, String memberName, String Email) {
 
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        String userId = null;
+        Member m = null;
 
         String sql = prop.getProperty("findId");
 
@@ -179,7 +160,7 @@ public class MemberDao {
             rset = psmt.executeQuery();
 
             if(rset.next()) {
-                userId=rset.getString("USER_ID");
+                m = this.mapToMember(rset);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -188,8 +169,9 @@ public class MemberDao {
             JDBCTemplet.close(psmt);
         }
 
-        return userId;
+        return m;
     }
+
 
     private Member mapToMember(ResultSet resultSet) throws SQLException {
         String memberId = resultSet.getString("MEMBER_ID");
@@ -199,7 +181,7 @@ public class MemberDao {
         MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
-        Member m=new Member(memberId,memberPwd, memberName, nickname, phone, email);
+        Member m = new Member(memberId, memberPwd, memberName, nickname, phone, email);
         return m;
     }
 
@@ -207,13 +189,9 @@ public class MemberDao {
     public Member findPwd(Connection conn, String memberName, String memberId, String email) {
 
         PreparedStatement psmt = null;
-
         ResultSet rset = null;
-
         Member m = null;
-
         String sql = prop.getProperty("searchPwd");
-
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, memberId);
@@ -295,8 +273,8 @@ public class MemberDao {
         String sql = prop.getProperty("selectMember");
 
         *//*
-         * SELECT * FROM MEMBER WHERE USER_ID = ?
-         *//*
+     * SELECT * FROM MEMBER WHERE USER_ID = ?
+     *//*
 
         try {
             psmt = conn.prepareStatement(sql);
