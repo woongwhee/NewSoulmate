@@ -5,11 +5,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "memberSignupTermController", value = "/memberSignupTermController")
-public class MemberSignupTermController extends HttpServlet {
+@WebServlet(name = "LoginServlet", value = "/loginpage")
+public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.getRequestDispatcher("views/member/memberLoginForm.jsp").forward(request,response);
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.oreilly.servlet.MultipartRequest;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.Category;
+
 import tk.newsoulmate.web.common.MyFileRenamePolicy;
 import tk.newsoulmate.web.inquire.service.InquireService;
 
@@ -14,7 +14,7 @@ import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet(name = "InquireInsertController", value = "/inquireInsert")
+@WebServlet(name = "InquireInsertController", value = "/inquireInsert.bo")
 public class InquireInsertController extends HttpServlet {
     public InquireInsertController(){
         super();
@@ -28,7 +28,7 @@ public class InquireInsertController extends HttpServlet {
 
             int maxSize = 1024 * 1024 * 20;
 
-            String savePath = request.getSession().getServletContext().getRealPath("/resources/board_upfiles/");
+            String savePath = request.getSession().getServletContext().getRealPath("/resources/inquire_upfiles/");
 
             MultipartRequest multipartRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 
@@ -36,12 +36,12 @@ public class InquireInsertController extends HttpServlet {
             // - 카테고리번호, 제목, 내용, 작성자회원번호 -> Board에 INSERT
             // - 넘어온 첨부파일이 있다면 원본명, 수정명, 폴더경로를 뽑아서 -> Attachment에 INSERT
 
-            String categoryNo = multipartRequest.getParameter("categoryNo");
+            int categoryNo = Integer.parseInt(multipartRequest.getParameter("categoryNo"));
             String boardTitle = multipartRequest.getParameter("boardTitle");
             String boardContent = multipartRequest.getParameter("boardContent");
-            String boardWriter = multipartRequest.getParameter("memberNo");
+            int memberNo = Integer.parseInt(multipartRequest.getParameter("memberNo"));
 
-            Board b = Board.insertInquire(categoryNo,boardTitle, boardContent, boardWriter);
+            Board b = Board.insertInquire(categoryNo,boardTitle, boardContent, memberNo);
 
             Attachment at = null;
 

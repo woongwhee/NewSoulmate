@@ -12,8 +12,8 @@
         </div>
         <div id="user">
             <ul>
-                <li><a href="#">회원가입</a></li>
-                <li><a href="${context}/signup.do">로그인</a></li>
+                <li><a href="${context}/memberSignupTerm">회원가입</a></li>
+                <li><a href="${context}/loginpage">로그인</a></li>
             </ul>
         </div>
     </div>
@@ -39,7 +39,7 @@
             <div class="dropdown">
                 <button class="dropdown-btn"><a href="#">입양</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">입양신청</a>
+                    <a href="${context}/adoptApply">입양신청</a>
                     <a href="#">입양후기</a>
                     <a href="#">입양절차</a>
                 </div>
