@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>비밀번호 찾기</title>
 </head>
 <body>
@@ -24,30 +25,31 @@
         <div>
 
             <div class="search-content">
-                <input type="text" name="searchId" id="searchId" placeholder="아이디">
+                <input type="text" name="searchId" id="searchId" placeholder="*아이디" required>
             </div>
 
             <div class="search-content">
-                <input type="text" name="searchName" id="searchName" placeholder="이름">
-            </div>
-
-            <div class="search-content">
-                <input type="text" name="searchMail" id="searchMail1" placeholder="이메일">
-                <button onclick="sendMail();" class="authBtn">인증메일전송</button>
+                <input type="text" name="searchName" id="searchName" placeholder="*이름" required>
             </div>
         </div>
 
-        <div class="search-content">
-            <div id="auth">
-                <input type="text" id="authCode" placeholder="인증번호" class="input-form">
-                <button id="authBtn">인증하기</button>
+        <div class="email-wrap">
+            <div>
+                <label for="memberMail">이메일</label>
+                <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" required>
+                <button type="button" onclick="sendMail();" >인증번호 발송</button>
+
+                <div id="auth">
+                    <div>
+                        <input type="text" id="authCode" placeholder="인증번호" >
+                        <button type="button" class="authBtn" id="authBtn" onclick="authenticationMail()">인증하기</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="span-box">
-            <span id="timeZone"></span>
-            <span id="authMsg"></span>
-        </div>
+        <span id="timeZone"></span>
+        <span id="authMsg"></span>
 
         <div class="search-content">
             <button type="submit" class="findpwBtn">비밀번호 찾기</button>
@@ -70,19 +72,19 @@
             url: "/findPwd",
             type: "get",
             data: {
-            memberId: memberId,
-            memberName: memberName,
-            memberMail: memberMail
-        },
+                memberId: memberId,
+                memberName: memberName,
+                memberMail: memberMail
+            },
             dataType: "json",
             success: function(data) {
                 console.log(data);
                 if (data == null) {
                     result.append("회원정보가 없습니다.")
                 } else {
-                    /*result.append("비밀번호 : " + data.memberPw);*/
+                    result.append("비밀번호 : " + data.memberPw);
                 }
-                },
+            },
             error: function() {
                 console.log("서버호출실패");
             }
@@ -174,8 +176,6 @@
         console.log(inputValue);
         console.log(mailCode);
     };
-
-
 
 
 </script>
