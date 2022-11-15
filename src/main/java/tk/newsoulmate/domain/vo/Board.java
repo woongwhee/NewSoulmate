@@ -15,6 +15,11 @@ public class Board {
     private Date issueDate;
 
     private String resultStatus;
+
+    private int categoryNo;
+
+
+
     private Board(){}
     /*
         새로운 생성자가 필요할시 생성자를 호출하게 하지말고 펙토리얼메소드를 호출하도록 작성할것
@@ -89,6 +94,15 @@ public class Board {
         b.setBoardTitle(boardTitle);
         b.setCreateDate(createDate);
         b.setMemberName(memberName);
+        return b;
+    }
+
+    public static Board insertInquire(int categoryNo, String boardTitle, String boardContent, int memberNo){
+        Board b = new Board();
+        b.setCategoryNo(categoryNo);
+        b.setBoardTitle(boardTitle);
+        b.setBoardContent(boardContent);
+        b.setMemberNo(memberNo);
         return b;
     }
 
@@ -208,5 +222,12 @@ public class Board {
         this.issueDate = issueDate;
     }
 
+    public int getCategoryNo() {
+        return categoryNo;
+    }
+
+    public void setCategoryNo(int categoryNo) {
+        this.categoryNo = categoryNo;
+    }
 
 }

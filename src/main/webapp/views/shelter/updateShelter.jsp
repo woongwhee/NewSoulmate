@@ -20,10 +20,11 @@
 <html>
 <head>
     <title>보호소 정렬</title>
+    <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
-<form action="<%=request.getContextPath()%>/shelter/updateShelter" method="get">
+<form action="<%=request.getContextPath()%>/updateShelter" method="get">
     <table>
         <tr>
             <td>시도</td>
@@ -109,7 +110,7 @@
         // textnode를 가져옴
         console.log(shelterNo);
 
-        location.href = '<%=request.getContextPath()%>/Shelter/Detail?shelterNo='+shelterNo;
+        location.href = '<%=request.getContextPath()%>/Detail?shelterNo='+shelterNo;
     })
 
 </script>

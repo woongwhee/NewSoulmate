@@ -96,7 +96,7 @@
 }
 
 
-img {
+.slider img {
     max-height: 150px;
     max-width: 80px;
     height: auto;
@@ -109,6 +109,16 @@ img {
     margin: 0 auto;
     background-color: rgba(255, 99, 71, 0.708);
     border-radius: 25px;
+}
+.slider a{
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 링크의 색상 제거 */
+}
+.post{
+    width:90px;
+    height:160px;
+    border-radius: 20px;
+    background-color: aliceblue;
 }
 
 .slick-prev:before,

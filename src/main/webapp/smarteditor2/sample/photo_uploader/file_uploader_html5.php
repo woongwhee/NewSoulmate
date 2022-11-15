@@ -10,7 +10,8 @@
 	}
 
 	$filename = rawurldecode($headers['file_name']);
-	$filename_ext = strtolower(array_pop(explode('.',$filename)));
+	$filemane_ext_temp = explode('.',$filename);
+    $filename_ext = strtolower(array_pop($filemane_ext_temp));
 	$allow_file = array("jpg", "png", "bmp", "gif"); 
 
 	if(!in_array($filename_ext, $allow_file)) {
