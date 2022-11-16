@@ -30,10 +30,10 @@ public class findPwdResetController extends HttpServlet {
         Gson gson = new Gson();
         PwdReset pwdReset = gson.fromJson(reader, PwdReset.class);
         MemberService ms = new MemberService();
-
         int result = ms.updatePassword(pwdReset);
         response.getWriter().println(result);
         response.getWriter().flush();
+
 
     }
 

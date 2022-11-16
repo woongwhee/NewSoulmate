@@ -20,10 +20,15 @@ public class findPwdController extends HttpServlet {
         String memberName = request.getParameter("memberName");
         String Email = request.getParameter("Email");
         MemberService service = new MemberService();
-        Member m = service.findPwd(memberId,memberName,Email);
+        Member m = service.findPwd(memberId, memberName, Email);
 
-        /*request.setAttribute("alertMsg","비밀번호 : " + m.getMemberPwd());*/
-        request.getRequestDispatcher("views/member/findPwdResetController.jsp").forward(request, response);
+        if(m == null){
+            response.getWriter().print("0");
+        }else{
+            response.getWriter().print("1");
+        }
+
+        //request.getRequestDispatcher("views/member/findPwdReset.jsp").forward(request, response);
     }
 
     @Override
