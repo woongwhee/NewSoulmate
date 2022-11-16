@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
-<c:set var="loginUser" value="${requestScope.loginUser}"/>
+<c:set var="loginUser" value="${sessionScope.loginUser}" scope="session"/>
 <div id="header_total">
 
     <div id="teams">
-        <div><%=request.getContextPath()%>
+        <div>
             <p> </p>
         </div>
         <div class="navbar_logo">
@@ -34,7 +34,7 @@
                 <button class="dropdown-btn"><a href="">유기동물</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">동물목록</a>
-                    <a href="<%=request.getContextPath()%>/shelter/list">보호소</a>
+                    <a href="${context}/shelter/list">보호소</a>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
             </div>
 
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="${context}/Inquire">고객센터</a></button>
+                <button class="dropdown-btn"><a href="${context}/inquire">고객센터</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">자주묻는 질문</a>
                     <a href="#">문의하기</a>
@@ -73,5 +73,40 @@
         </div>
     </nav>
 </div>
+<script>
+    <%
+        HttpSession ss=request.getSession();
+        String errorMsg = (String)ss.getAttribute("errorMsg");
+        if (errorMsg != null) {
+            ss.removeAttribute("errorMsg");
+        %>
+        alert("<%=errorMsg%>")
+    <%
+        }
+        errorMsg=(String)request.getAttribute("errorMsg");
+         if (errorMsg != null) {
+            request.removeAttribute("errorMsg");
+        %>
+        alert("<%=errorMsg%>")
+    <%
+        }
+    %>
+    <%
+        String alertMsg = (String)request.getAttribute("alertMsg");
+        if (alertMsg != null) {
+            request.removeAttribute("alertMsg");
+    %>
+        alert("<%=alertMsg%>");
+    <%
+        }
+        alertMsg=(String) ss.getAttribute("alertMsg");
+        if (alertMsg != null) {
+    %>
+        alert("<%=alertMsg%>");
+    <%
+        ss.removeAttribute("alertMsg");
+        }
+    %>
+</script>
 </div>
 

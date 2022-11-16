@@ -58,7 +58,7 @@
         </tr>
 
     </table>
-
+    <a href="${context}/adoptApply?dno=${n.desertionNo}" class="btn btn-sm btn-secondary">입양신청</a>
 
 
 </main>

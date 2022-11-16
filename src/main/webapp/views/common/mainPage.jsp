@@ -103,7 +103,7 @@
     </div>
 </div>
     </main>
-    <footer><%@include file="/views/template/menubar.jsp"%></footer>
+    <footer><%@include file="/views/template/footer.jsp"%></footer>
 </body>
 
 </html>
