@@ -63,8 +63,7 @@
                 } else {
                     alert("패스워드 변경에 실패했습니다!");
                 }
-                /*location.href = "memberLoginForm.jsp";*/
-                $(location).attr("href","${context}/Login");
+                $(location).attr("href","${context}/loginpage");
             }
         });
     }
