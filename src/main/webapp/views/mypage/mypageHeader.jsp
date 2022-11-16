@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>회원정보 수정</title>
-  <link href="<%=request.getContextPath()%>/css/manager/memberHeader.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/mypage/mypageHeader.css" rel="stylesheet">
   <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
 <body>

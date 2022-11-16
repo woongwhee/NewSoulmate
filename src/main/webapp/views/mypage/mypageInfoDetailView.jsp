@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>회원정보 수정</title>
-    <link href="<%=request.getContextPath()%>/css/manager/memberInfoDetail.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/mypage/mypageInfoDetail.css" rel="stylesheet">
 </head>
 <body>
-<header><%@include file="/views/manager/memberHeader.jsp"%></header>
+<header><%@include file="/views/mypage/mypageHeader.jsp"%></header>
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
