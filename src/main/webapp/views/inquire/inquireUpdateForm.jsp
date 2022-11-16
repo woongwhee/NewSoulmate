@@ -13,7 +13,6 @@
   ArrayList<Category> list = (ArrayList<Category>) request.getAttribute("list");
   Board b = (Board) request.getAttribute("b");
   Attachment at = (Attachment) request.getAttribute("at");
-  Category ca = (Category) request.getAttribute("ca");
 %>
 <html>
 <head>
@@ -47,9 +46,9 @@
               <script>
                 $(function(){
                   $("#update-form option").each(function(){
-                    // 현재 반복 진행중인 option태그의 text값(공통,게임,낚시)과 db에서 가져온 categoryname값이
+                    // 현재 반복 진행중인 option태그의 text값과 db에서 가져온 categoryname값이
                     // 일치하는 경우 선택되도록
-                    if($(this).text() == "<%=ca.getCategoryName()%>"){
+                    if($(this).text() == "<%=b.getCategoryName()%>"){
                       // 일치하는경우에만 option태그를 선택상태로 변경
                       $(this).attr("selected", true);
                     }
@@ -91,7 +90,8 @@
         <br>
 
         <div align="center">
-          <button>수정하기</button>
+          <a href="<%=request.getContextPath()%>/inquire" class="btn btn-secondary btn-sm">취소하기</a>
+          <button type="submit" class="btn btn-secondary btn-sm">작성하기</button>
         </div>
 
       </form>

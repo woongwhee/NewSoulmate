@@ -55,7 +55,7 @@ public class InquireInsertController extends HttpServlet {
 
             int result = new InquireService().insertInquire(b, at);
 
-            if(result > 0){ // 성공시 => list.bo?currentPage=1
+            if(result > 0){ // 성공시 => inquire.bo?currentPage=1
                 request.getSession().setAttribute("alertMsg", "게시글 작성을 성공했습니다!");
                 response.sendRedirect(request.getContextPath()+"/inquire?currentPage=1");
 
