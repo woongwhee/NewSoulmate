@@ -21,7 +21,7 @@
     </div>
     <div>
         <div class="input-member-id">
-            <input type="text" id="memberId" placeholder="아이디 입력">
+            <input type="text" id="memberId" placeholder="아이디">
         </div>
         <div class="input-pw">
             <input type="text" id="password" placeholder="새로운 비밀번호 입력">
@@ -45,12 +45,13 @@
         let memberId = $("#memberId").val()
         let password = $("#password").val()
         let passwordConfirm = $("#passwordConfirm").val()
-        // 입력값 있는지 검증(Required), 패스워드랑 확인 같은지 검증(Confirm) 필요
+        // TODO : 입력값 있는지 검증(Required), 패스워드랑 확인 같은지 검증(Confirm)
 
         $.ajax({
             url: '<%=request.getContextPath()%>/pwdReset.do',
             type: 'post',
             contentType: "application/json; charset=utf-8",
+            // JSON.stringify() : JavaScript 값이나 객체를 JSON 문자열로 변환
             data: JSON.stringify({
                 'memberId': memberId,
                 'password': password,
@@ -62,7 +63,8 @@
                 } else {
                     alert("패스워드 변경에 실패했습니다!");
                 }
-                location.href = "memberLoginForm.jsp";
+                /*location.href = "memberLoginForm.jsp";*/
+                $(location).attr("href","${context}/Login");
             }
         });
     }

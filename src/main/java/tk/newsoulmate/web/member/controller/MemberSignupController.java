@@ -26,9 +26,9 @@ public class MemberSignupController extends HttpServlet {
         MemberService service = new MemberService();
         int result = service.insertMember(m);
 
-        if (result > 0) { // 성공
+        if (result > 0) {
             request.setAttribute("alertMsg", "회원가입에 성공했습니다.");
-        } else { // 실패
+        } else {
             request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
         }
         request.getRequestDispatcher("views/member/memberLoginForm.jsp").forward(request, response);

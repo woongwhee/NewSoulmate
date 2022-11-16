@@ -29,12 +29,11 @@
             <div>
 
                 <div class="search-content">
-                    <input type="text" name="searchName" id="searchName" placeholder="이름">
+                    <input type="text" name="searchName" id="searchName" placeholder="*이름">
                 </div>
 
                 <div class="email-wrap">
                     <div>
-                        <label for="memberMail">이메일</label>
                         <input type="text" name="memberMail" id="memberMail" placeholder="*이메일">
                         <button type="button" onclick="sendMail();">인증번호 발송</button>
 
@@ -52,7 +51,7 @@
                 <span id="authMsg"></span>
 
                 <div class="search-content">
-                    <button type="submit" class="searchIdBtn">아이디 찾기</button>
+                    <button type="submit" class="searchIdBtn" onclick="checkAuth">아이디 찾기</button>
                 </div>
 
             </div>
@@ -65,19 +64,10 @@
 
 
 <script>
-    $(".searchId").click();
-
-    const searchId = document.querySelector("#searchId");
-    const searchName = document.querySelector("#searchName");
-    const searchMail = document.querySelector("input[name=searchMail]");
-
 
     $(".searchIdBtn").on("click", function () {
         const memberName = $("#searchName").val();
         const Email = $("#memberMail").val();
-
-        const result = $(".result");
-        result.empty();
         $.ajax({
             url: "findId",
             type: "get",
@@ -88,9 +78,9 @@
             dataType: "json",
             success: function (data) {
                 if (data == null) {
-                    result.append("회원정보가 없습니다.")
+                    alert("일치하는 회원정보가 없습니다.");
                 } else {
-                    result.append("아이디 : " + data.memberId);
+                    alert("아이디 : " + data.memberId);
                 }
             },
             error: function () {
@@ -101,7 +91,6 @@
 
 
     // 메일 인증
-
 
     let checkMail = 0;
     let mailCode;
@@ -162,7 +151,7 @@
                 url: '<%= request.getContextPath()%>/checkAuth',
                 type: 'get',
                 data: {authCode: inputValue},
-                success: (result) => {
+                success: (result)=> {
                     if (result == 1) {
                         $("#authMsg").text("인증에 성공하셨습니다.");
                         clearInterval(intervalId);
@@ -179,7 +168,7 @@
                 }
 
             });
-        } else {
+        }else{
             $("#authMsg").text("인증시간이 만료되었습니다.");
             checkMail = 0;
         }
