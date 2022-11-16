@@ -4,7 +4,7 @@
 
     <entry key="insertMember">
         INSERT INTO MEMBER(MEMBER_NO, MEMBER_ID, MEMBER_PWD, MEMBER_NAME, NICKNAME, PHONE, EMAIL, MEMBER_GRADE)
-        VALUES(SQ_MEMBER_PK.NEXTVAL,?,?,?,?,?,?,'일반')
+        VALUES(SQ_MEMBER_PK.NEXTVAL,?,?,?,?,?,?,?)
     </entry>
 
     <entry key="idCheck">

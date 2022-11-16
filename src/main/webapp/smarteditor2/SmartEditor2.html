@@ -45,7 +45,7 @@ nhn.husky.EZCreator.createInIFrame({
 });
 
 function pasteHTML() {
-	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	var sHTML = "&lt;span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.&lt;/span>";
 	oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
 }
 
