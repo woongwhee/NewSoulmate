@@ -15,4 +15,14 @@
     ORDER BY CREATE_DATE DESC , REPLY_NO
 </entry>
 
+    <entry key="insertReply">
+        INSERT INTO REPLY
+        (REPLY_NO,
+        BOARD_NO,
+        USER_NO,
+        REPLY_CONTENT)
+        VALUES
+        (SEQ_BNO.NEXTVAL,
+        ?,?,?)
+    </entry>
 </properties>

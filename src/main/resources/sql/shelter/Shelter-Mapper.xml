@@ -14,21 +14,7 @@
         WHERE SHELTER_ADDRESS IS NOT NULL
     </entry>
 
-    <entry key="selectCityAll">
-        SELECT *
-        FROM CITY
-    </entry>
 
-    <entry key="selectVillageAll">
-        SELECT *
-        FROM VILLAGE
-    </entry>
-
-    <entry key="selectVillage">
-        SELECT *
-        FROM VILLAGE
-        WHERE CITY_NO = ?
-    </entry>
 
     <entry key="ShelterListByVillage"> <!-- 둘다 선택했을때 -->
         SELECT
@@ -77,6 +63,17 @@
                             FROM MEMBER
                             WHERE MEMBER_GRADE = 1)
         AND SHELTER_ADDRESS IS NOT NULL
+    </entry>
+
+    <entry key="shelterNoByName">
+        SELECT
+        NVL(SHELTER_NO,0) as "shelterNo"
+        FROM SHELTER
+        WHERE SHELTER_NAME = (SELECT
+        "careNm"
+        FROM ANIMAL
+        WHERE "desertionNo" = ?)
+
     </entry>
 
 

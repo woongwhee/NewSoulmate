@@ -8,24 +8,16 @@
         SELECT *
         FROM (
         SELECT ROWNUM RNUM, A.*
-        FROM(
-        SELECT BOARD_NO,
-        BOARD_TITLE,
-        MEMBER_NO,
-        READ_COUNT,
-        CREATE_DATE
+            FROM(
+                SELECT BOARD_NO,
+                BOARD_TITLE,
+                MEMBER_NO,
+                 READ_COUNT,
+                CREATE_DATE
         FROM BOARD
         WHERE BOARD_STATUS = 'Y'
         ORDER BY CREATE_DATE DESC) A )
         WHERE RNUM BETWEEN ? AND ?
-    </entry>
-
-
-    <entry key="readCount">
-        UPDATE BOARD
-        SET READ_COUNT = READ_COUNT +1
-        WHERE BOARD_NO = ?
-        AND BOARD_STATUS = 'Y'
     </entry>
 
     <entry key="selectAdoptReviewDetail">
@@ -40,15 +32,11 @@
         AND BOARD_STATUS = 'Y'
     </entry>
 
-    <entry key="insertReply">
-        INSERT INTO REPLY
-        (REPLY_NO,
-        BOARD_NO,
-        USER_NO,
-        REPLY_CONTENT)
-        VALUES
-        (SEQ_BNO.NEXTVAL,
-        ?,?,?)
+    <entry key="selectListCount">
+        SELECT COUNT(*) as cnt
+        FROM BOARD
+        WHERE TYPE_NO = ? AND
+        BOARD_STATUS='Y'
     </entry>
 
     <entry key="selectQnAListCount">
@@ -56,6 +44,7 @@
         FROM BOARD
         JOIN BOARD_TYPE USING(TYPE_NO)
         WHERE BOARD_NAME = ?
+        AND BOARD_STATUS='Y'
         AND( MEMBER_NO=? OR 2=?)
     </entry>
 

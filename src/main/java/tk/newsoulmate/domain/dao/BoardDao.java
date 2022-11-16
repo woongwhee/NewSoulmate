@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,8 +25,43 @@ public class BoardDao {
             e.printStackTrace();
         }
     }
+    public int selectQnAListCount(Connection conn, BoardType boardType, Member loginUser) {
 
-    public int adoptReviewListCount(Connection conn) {
+        int listCount = 0;
+
+        PreparedStatement psmt = null;
+
+        ResultSet rset = null;
+
+        String sql = prop.getProperty("selectQnAListCount");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, boardType.boardName);
+            psmt.setInt(2, loginUser.getMemberNo());
+            psmt.setInt(3, loginUser.getMemberGrade().gradeNumber);
+            rset = psmt.executeQuery();
+
+            if (rset.next()) {
+                listCount = rset.getInt("cnt");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return listCount;
+    }
+
+    /**
+     * 게시글 속성에 따른 게시글 개수를 반환하는 메서드
+     * @param conn
+     * @param boardType
+     * @return 정수로 반환된다.
+     */
+    public int boardListCount(Connection conn,BoardType boardType) {
 
         int listCount = 0;
         PreparedStatement psmt = null;
@@ -34,10 +70,8 @@ public class BoardDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1, "ADOPT");
-
+            psmt.setInt(1, boardType.typeNo);
             rset = psmt.executeQuery();
-
             if (rset.next()) {
                 listCount = rset.getInt("cnt");
             }
@@ -51,7 +85,6 @@ public class BoardDao {
     }
 
     public ArrayList<Board> selectAdoptReviewList(Connection conn, PageInfo pi) {
-
         ArrayList<Board> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -80,11 +113,11 @@ public class BoardDao {
         return list;
     }
 
-    public int readCount(Connection conn, int boardNo) {
+    public int increaseCount(Connection conn, int boardNo) {
 
         int result = 0;
         PreparedStatement psmt = null;
-        String sql = prop.getProperty("readCount");
+        String sql = prop.getProperty("increaseCount");
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setInt(1, boardNo);
@@ -183,71 +216,9 @@ public class BoardDao {
 
 
 
-    public ArrayList<Reply> selectReplyList(Connection conn, int boardNo) {
 
-        ArrayList<Reply> list = new ArrayList<>();
 
-        PreparedStatement psmt = null;
 
-        ResultSet rset = null;
-
-        String sql = prop.getProperty("selectReplyList");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            psmt.setInt(1, boardNo);
-
-            rset = psmt.executeQuery();
-
-            while (rset.next()) {
-
-                list.add(new Reply(
-                        rset.getInt(1),
-                        rset.getInt(2),
-                        rset.getString(3),
-                        rset.getDate(4)
-                ));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(psmt);
-        }
-        return list;
-    }
-
-    public int selectQnAListCount(Connection conn, String categoryName, Member loginUser) {
-
-        int listCount = 0;
-
-        PreparedStatement psmt = null;
-
-        ResultSet rset = null;
-
-        String sql = prop.getProperty("selectQnAListCount");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-            psmt.setString(1, categoryName);
-            psmt.setInt(2, loginUser.getMemberNo());
-            psmt.setInt(3, loginUser.getMemberGrade().gradeNumber);
-            rset = psmt.executeQuery();
-
-            if (rset.next()) {
-                listCount = rset.getInt("cnt");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(psmt);
-        }
-        return listCount;
-    }
 
     /**
      *
@@ -284,9 +255,6 @@ public class BoardDao {
 
     }
 
-
-
-
     public List<Board> selectVolunteerThumNail(Connection conn, int page) {
         List<Board> vList = new ArrayList<>();
 
@@ -294,32 +262,12 @@ public class BoardDao {
         return vList;
     }
 
-    public int increaseCount(Connection conn, int boardNo) {
-        int result = 0;
-
-        PreparedStatement psmt = null;
-        String sql = prop.getProperty("increaseCount");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-            psmt.setInt(1, boardNo);
-
-            result = psmt.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close(psmt);
-        }
-        return result;
-    }
 
     public Board selectInquireBoard(Connection conn, int boardNo, Member loginUser) {
 
         Board b = null;
         PreparedStatement psmt = null;
         ResultSet rset = null;
-
         String sql = prop.getProperty("selectInquireBoard");
 
         try {

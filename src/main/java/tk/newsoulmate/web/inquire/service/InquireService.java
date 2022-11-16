@@ -15,9 +15,8 @@ public class InquireService {
     public int selectListCount(Member loginUser){
         Connection conn = getConnection();
 
-        String categoryName = "문의";
 
-        int listCount = new BoardDao().selectQnAListCount(conn, categoryName,loginUser);
+        int listCount = new BoardDao().selectQnAListCount(conn, BoardType.QNA,loginUser);
 
         close();
 

@@ -2,16 +2,11 @@ package tk.newsoulmate.web.adopt.controller;
 
 import tk.newsoulmate.domain.vo.Subscription;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
-import tk.newsoulmate.web.shelter.service.ShelterService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @WebServlet(name = "adoptApplyInsertController", value = "/adoptApplyInsert")
 public class adoptApplyInsertController extends HttpServlet {
@@ -63,7 +58,7 @@ public class adoptApplyInsertController extends HttpServlet {
             request.getRequestDispatcher("/views/adopt/adoptApply.jsp").forward(request,response);
             return;
         }
-        int result = new AdoptService().adoptApplyInsert(sb);
+        int result = new AdoptService().insertSubscription(sb);
 
 
         if(checkAnimal > 0 && result>0){ // 입양신청 성공 -> alert띄우고 메인페이지로 이동

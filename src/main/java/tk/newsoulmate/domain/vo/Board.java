@@ -63,13 +63,13 @@ public class Board {
         return b;
     }
 
-    public static Board selectAdoptReviewList(int board_no, String board_title, String member_no, int read_count, Date create_date) {
+    public static Board selectAdoptReviewList(int boardNo, String boardTitle, String member_no, int readCount, Date createDate) {
         Board b = new Board();
-        b.setBoardNo(board_no);
-        b.setBoardTitle(board_title);
+        b.setBoardNo(boardNo);
+        b.setBoardTitle(boardTitle);
         b.setMemberNo(Integer.parseInt(member_no));
-        b.setReadCount(read_count);
-        b.setCreateDate(create_date);
+        b.setReadCount(readCount);
+        b.setCreateDate(createDate);
         return b;
     }
 

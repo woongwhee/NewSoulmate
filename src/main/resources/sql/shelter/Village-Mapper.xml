@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="selectVillageAll">
+        SELECT *
+        FROM VILLAGE
+    </entry>
+    <entry key="selectVillage">
+        SELECT *
+        FROM VILLAGE
+        WHERE CITY_NO = ?
+    </entry>
+
+
+
+
+</properties>
+
+
+
+

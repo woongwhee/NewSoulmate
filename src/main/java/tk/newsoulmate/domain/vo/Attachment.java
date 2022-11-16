@@ -143,7 +143,7 @@ public class Attachment {
 
 	@Override
 	public String toString() {
-		return "Attachment [fileNo=" + fileNo + ", refNo=" + refNo + ", originName=" + originName + ", changeName="
+		return "Attachment [fileNo=" + fileNo + ", refNo=" + boardNo + ", originName=" + originName + ", changeName="
 				+ changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", filelevel=" + filelevel
 				+ ", status=" + status + "]";
 	}

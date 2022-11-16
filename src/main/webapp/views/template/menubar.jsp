@@ -14,8 +14,14 @@
 
         <div id="user">
             <ul>
-                <li><a href="${context}/memberSignupTerm">회원가입</a></li>
-                <li><a href="${context}/loginpage">로그인</a></li>
+                <c:if test="${empty loginUser}" var="result1">
+                    <li><a href="${context}/memberSignupTerm">회원가입</a></li>
+                    <li><a href="${context}/loginpage">로그인</a></li>
+
+                </c:if>
+                <c:if test="${!empty loginUser}" var="result2">
+                    <li><a href="${context}/mypage">마이페이지</a></li>
+                </c:if>
             </ul>
         </div>
     </div>

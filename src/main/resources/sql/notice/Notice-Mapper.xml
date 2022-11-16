@@ -51,5 +51,10 @@
         ?,?,?,?,
         ?,?)
     </entry>
-
+    <entry key="checkAnimal">
+        SELECT
+        COUNT("desertionNo") as "countNo"
+        FROM ANIMAL
+        WHERE "desertionNo" = ?
+    </entry>
 </properties>
