@@ -1,7 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
-import oracle.jdbc.proxy.annotation.Pre;
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,28 +18,61 @@ import static tk.newsoulmate.web.common.JDBCTemplet.close;
 public class BoardDao {
     private Properties prop = new Properties();
 
-    public BoardDao(){
+    public BoardDao() {
         try {
             prop.loadFromXML(new FileInputStream(BoardDao.class.getResource("/sql/board/Board-Mapper.xml").getPath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public int selectQnAListCount(Connection conn, BoardType boardType, Member loginUser) {
 
-    public int adoptReviewListCount(Connection conn) {
+        int listCount = 0;
+
+        PreparedStatement psmt = null;
+
+        ResultSet rset = null;
+
+        String sql = prop.getProperty("selectQnAListCount");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, boardType.boardName);
+            psmt.setInt(2, loginUser.getMemberNo());
+            psmt.setInt(3, loginUser.getMemberGrade().gradeNumber);
+            rset = psmt.executeQuery();
+
+            if (rset.next()) {
+                listCount = rset.getInt("cnt");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return listCount;
+    }
+
+    /**
+     * 게시글 속성에 따른 게시글 개수를 반환하는 메서드
+     * @param conn
+     * @param boardType
+     * @return 정수로 반환된다.
+     */
+    public int boardListCount(Connection conn,BoardType boardType) {
 
         int listCount = 0;
         PreparedStatement psmt = null;
-        ResultSet rset =  null;
+        ResultSet rset = null;
         String sql = prop.getProperty("selectListCount");
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1,"ADOPT");
-
+            psmt.setInt(1, boardType.typeNo);
             rset = psmt.executeQuery();
-
-            if(rset.next()) {
+            if (rset.next()) {
                 listCount = rset.getInt("cnt");
             }
         } catch (SQLException e) {
@@ -51,22 +84,21 @@ public class BoardDao {
         return listCount;
     }
 
-    public ArrayList<Board> selectAdoptReviewList(Connection conn , PageInfo pi){
-
+    public ArrayList<Board> selectAdoptReviewList(Connection conn, PageInfo pi) {
         ArrayList<Board> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("adoptReviewList");
         try {
             psmt = conn.prepareStatement(sql);
-            int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
-            int endRow = startRow + pi.getBoardLimit() -1;
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
             psmt.setInt(1, startRow);
             psmt.setInt(2, endRow);
             rset = psmt.executeQuery();
 
-            while(rset.next()) {
-                list.add(Board.selectAdoptReviewList(rset.getInt("BOARD_NO") ,
+            while (rset.next()) {
+                list.add(Board.selectAdoptReviewList(rset.getInt("BOARD_NO"),
                         rset.getString("BOARD_TITLE"),
                         rset.getString("MEMBER_NO"),
                         rset.getInt("READ_COUNT"),
@@ -81,11 +113,11 @@ public class BoardDao {
         return list;
     }
 
-    public int readCount(Connection conn, int boardNo) {
+    public int increaseCount(Connection conn, int boardNo) {
 
         int result = 0;
         PreparedStatement psmt = null;
-        String sql = prop.getProperty("readCount");
+        String sql = prop.getProperty("increaseCount");
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setInt(1, boardNo);
@@ -99,8 +131,7 @@ public class BoardDao {
     }
 
 
-
-    public ArrayList<Board> selectQnAList(Connection conn, PageInfo pi) {
+    public ArrayList<Board> selectQnAList(Connection conn, PageInfo pi, Member loginUser) {
 
         ArrayList<Board> list = new ArrayList<>();
         PreparedStatement psmt = null;
@@ -110,12 +141,16 @@ public class BoardDao {
         try {
             psmt = conn.prepareStatement(sql);
 
-            if (pi.getCurrentPage() != 0 ){
-                int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-                int endRow = startRow + pi.getBoardLimit() - 1;
-                psmt.setInt(1, startRow);
-                psmt.setInt(2, endRow);
+            if (pi.getCurrentPage() == 0) {
+                return list;
             }
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
+            psmt.setInt(1, loginUser.getMemberNo());
+            psmt.setInt(2, loginUser.getMemberGrade().gradeNumber);
+
+            psmt.setInt(3, startRow);
+            psmt.setInt(4, endRow);
 
 
             rset = psmt.executeQuery();
@@ -157,8 +192,8 @@ public class BoardDao {
 
             rset = psmt.executeQuery();
 
-            if(rset.next()) {
-                b =  Board.selectAdoptReviewDetail(
+            if (rset.next()) {
+                b = Board.selectAdoptReviewDetail(
                         rset.getString("BOARD_TITLE"),
                         rset.getString("MEMBER_NO"),
                         rset.getDate("ISSUE_DATE"),
@@ -179,153 +214,87 @@ public class BoardDao {
 
     }
 
-    public int insertReply(Connection conn , Reply r) {
 
+
+
+
+
+
+    /**
+     *
+     * @param b
+     * @param conn
+     * @return
+     */
+    public synchronized int insertBoard(Board b, Connection conn) {
         int result = 0;
-
         PreparedStatement psmt = null;
+        PreparedStatement psmt2 = null;
 
-        String sql = prop.getProperty("insertReply");
+        String insert = prop.getProperty("insertBoard");
+        String selectBno = prop.getProperty("selectBoardNo");
 
         try {
-            psmt = conn.prepareStatement(sql);
+            psmt = conn.prepareStatement(insert);
 
-            psmt.setInt(1, r.getReplyNo());
-            psmt.setInt(2, r.getBoardNo());
-            psmt.setInt(3, Integer.parseInt(String.valueOf(r.getMemberNo())));
-            psmt.setString(4, r.getReplyContent());
-
+            psmt.setInt(1, b.getMemberNo());
+            psmt.setInt(2, b.getBoardType().typeNo);
+            psmt.setInt(3, b.getCategoryNo());
+            psmt.setString(4, b.getBoardTitle());
+            psmt.setString(5, b.getBoardContent());
             result = psmt.executeUpdate();
-
+            if(result>0){
+                result=psmt2.executeUpdate();
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
             close(psmt);
         }
         return result;
+
     }
 
-    public ArrayList<Reply> selectReplyList(Connection conn , int boardNo){
+    public List<Board> selectVolunteerThumNail(Connection conn, int page) {
+        List<Board> vList = new ArrayList<>();
 
-        ArrayList<Reply> list = new ArrayList<>();
 
+        return vList;
+    }
+
+
+    public Board selectInquireBoard(Connection conn, int boardNo, Member loginUser) {
+
+        Board b = null;
         PreparedStatement psmt = null;
-
         ResultSet rset = null;
-
-        String sql = prop.getProperty("selectReplyList");
+        String sql = prop.getProperty("selectInquireBoard");
 
         try {
             psmt = conn.prepareStatement(sql);
 
             psmt.setInt(1, boardNo);
-
+            psmt.setInt(2, loginUser.getMemberNo());
+            psmt.setInt(3, loginUser.getMemberGrade().gradeNumber);
             rset = psmt.executeQuery();
-
-            while(rset.next()) {
-
-                list.add(new Reply(
-                        rset.getInt(1),
-                        rset.getInt(2),
-                        rset.getString(3),
-                        rset.getDate(4)
-                ));
+            if (rset.next()) {
+                b = Board.selectInquireBoard(
+                        rset.getInt("BOARD_NO"),
+                        rset.getString("CATEGORY_NAME"),
+                        rset.getString("BOARD_TITLE"),
+                        rset.getString("BOARD_CONTENT"),
+                        rset.getString("MEMBER_ID"),
+                        rset.getDate("CREATE_DATE"));
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(psmt);
-        }
-        return list;
-    }
-    public int selectListCount(Connection conn, String categoryName){
-
-        int listCount = 0;
-
-        PreparedStatement psmt = null;
-
-        ResultSet rset = null;
-
-        String sql = prop.getProperty("selectListCount");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-            psmt.setString(1, categoryName);
-
-            rset = psmt.executeQuery();
-
-            if(rset.next()){
-                listCount = rset.getInt("cnt");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(psmt);
-        }
-        return listCount;
-    }
-
-    public int insertBoard(Board b, Connection conn){
-        int result = 0;
-        PreparedStatement psmt = null;
-
-        String sql = prop.getProperty("insertBoard");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            psmt.setInt(1, b.getCategoryNo());
-            psmt.setString(2, b.getBoardTitle());
-            psmt.setString(3, b.getBoardContent());
-            psmt.setInt(4,b.getMemberNo());
-
-            result = psmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
+            close(rset);
             close(psmt);
         }
-        return result;
-
-    }
-
-    public int insertAttachment(Attachment at, Connection conn){
-
-        int result = 0;
-        PreparedStatement psmt = null;
-
-        String sql = prop.getProperty("insertAttachment");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            psmt.setString(1, at.getOriginName());
-            psmt.setString(2, at.getChangeName());
-            psmt.setString(3, at.getFilePath());
-
-            result = psmt.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close(psmt);
-        }
-
-        return result;
-
-
+        return b;
     }
 
 
-    public List<Board> selectVolunteerThumNail(Connection conn, int page) {
-        List<Board> vList=new ArrayList<>();
-
-
-        return vList;
-    }
 }

@@ -8,24 +8,16 @@
         SELECT *
         FROM (
         SELECT ROWNUM RNUM, A.*
-        FROM(
-        SELECT BOARD_NO,
-        BOARD_TITLE,
-        MEMBER_NO,
-        READ_COUNT,
-        CREATE_DATE
+            FROM(
+                SELECT BOARD_NO,
+                BOARD_TITLE,
+                MEMBER_NO,
+                 READ_COUNT,
+                CREATE_DATE
         FROM BOARD
         WHERE BOARD_STATUS = 'Y'
         ORDER BY CREATE_DATE DESC) A )
         WHERE RNUM BETWEEN ? AND ?
-    </entry>
-
-
-    <entry key="readCount">
-        UPDATE BOARD
-        SET READ_COUNT = READ_COUNT +1
-        WHERE BOARD_NO = ?
-        AND BOARD_STATUS = 'Y'
     </entry>
 
     <entry key="selectAdoptReviewDetail">
@@ -40,65 +32,76 @@
         AND BOARD_STATUS = 'Y'
     </entry>
 
-    <entry key="insertReply">
-        INSERT INTO REPLY
-        (REPLY_NO,
-        BOARD_NO,
-        USER_NO,
-        REPLY_CONTENT)
-        VALUES
-        (SEQ_BNO.NEXTVAL,
-        ?,?,?)
-    </entry>
-
-    <entry key="selectReplyList">
-        SELECT REPLY_NO,
-        USER_NO,
-        REPLY_CONTENT,
-        TO_CHAR(REPLY_DATE , 'YY/MM/DD HH:MI:SS') REPLY_DATE
-        FROM REPLY R
-        JOIN MEMBER ON (REPLY_WRITER = USER_NO)
-        WHERE R.REPLY_STATUS = 'Y'
-        AND BOARD_NO = ?
-        ORDER BY CREATE_DATE DESC , REPLY_NO
-    </entry>
-
     <entry key="selectListCount">
+        SELECT COUNT(*) as cnt
+        FROM BOARD
+        WHERE TYPE_NO = ? AND
+        BOARD_STATUS='Y'
+    </entry>
+
+    <entry key="selectQnAListCount">
         SELECT COUNT(*) as cnt
         FROM BOARD
         JOIN BOARD_TYPE USING(TYPE_NO)
         WHERE BOARD_NAME = ?
+        AND BOARD_STATUS='Y'
+        AND( MEMBER_NO=? OR 2=?)
     </entry>
 
     <entry key="selectQnAList">
         SELECT *
-        FROM(SELECT
-        ROWNUM AS "RNUM",
-        A.*
-        FROM (SELECT
-        CASE WHEN REPLY_CONTENT IS NULL THEN 'N' ELSE 'Y' END AS "RESULTSTATUS",
-        B.BOARD_NO,
-        BOARD_TITLE,
-        MEMBER_NAME,
-        CREATE_DATE
-        FROM BOARD B
-        JOIN BOARD_TYPE USING(TYPE_NO)
-        JOIN MEMBER USING(MEMBER_NO)
-        JOIN REPLY R on B.BOARD_NO = R.BOARD_NO
-        WHERE BOARD_NAME = '문의'
-        ORDER BY CREATE_DATE DESC) A
+        FROM(
+            SELECT
+                ROWNUM AS "RNUM",
+                A.*
+            FROM (
+                SELECT
+                    CASE WHEN REPLY_CONTENT IS NULL THEN 'N' ELSE 'Y' END AS "RESULTSTATUS",
+                    B.BOARD_NO,
+                    BOARD_TITLE,
+                    MEMBER_NAME,
+                    CREATE_DATE
+                FROM BOARD B
+                JOIN BOARD_TYPE USING(TYPE_NO)
+                JOIN MEMBER M on B.MEMBER_NO=M.MEMBER_NO
+                LEFT JOIN REPLY R on B.BOARD_NO = R.BOARD_NO
+                WHERE BOARD_NAME = '문의'
+                AND(B.MEMBER_NO=? OR 2=?)
+                ORDER BY CREATE_DATE DESC
+        ) A
         )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
 
     <entry key="insertBoard">
-        INSERT INTO BOARD(BOARD_NO, TYPE_NO, CATEGORY_NO, BOARD_TITLE, BOARD_CONTENT, MEMBER_NO)
-        VALUES (SQ_BOARD_PK.NEXTVAL, 4, ?, ?, ?, ?)
+        INSERT INTO BOARD(BOARD_NO,MEMBER_NO, TYPE_NO, CATEGORY_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_STATUS)
+        VALUES (SQ_BOARD_PK.NEXTVAL, ?, ?, ?, ?, ?, ?,'Y')
+    </entry>
+    <entry key="selectBoardNo">
+        SELECT SQ_BOARD_PK.CURVAL FROM DUAL
+    </entry>
+    <entry key="increaseCount">
+        UPDATE BOARD
+        SET READ_COUNT = READ_COUNT + 1
+        WHERE BOARD_NO = ?
+        AND BOARD_STATUS = 'Y'
     </entry>
 
-    <entry key="insertAttachment">
-        INSERT INTO ATTACHMENT(FILE_NO, REPLY_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
-        VALUES (SQ_ATTACHMENT_PK.NEXTVAL, SQ_COMMENT_PK.CURRVAL, ?, ?, ?)
+    <entry key="selectInquireBoard">
+        SELECT BOARD_NO,
+            CATEGORY_NAME,
+            BOARD_TITLE,
+            BOARD_CONTENT,
+            MEMBER_ID,
+            CREATE_DATE
+        FROM BOARD B
+        LEFT JOIN CATEGORY USING(CATEGORY_NO)
+        JOIN MEMBER USING(MEMBER_NO)
+        WHERE BOARD_NO = ?
+            AND (MEMBER_NO=? or 2=?)
+            AND B.BOARD_STATUS = 'Y'
     </entry>
+
+
 
 </properties>

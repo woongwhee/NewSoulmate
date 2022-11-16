@@ -13,11 +13,6 @@
     ArrayList<Category> list = (ArrayList<Category>) request.getAttribute("list");
 %>
 
-<%
-    String alertMsg = (String)session.getAttribute("alertMsg");
-    // 서비스 요청 전 : null
-    // 서비스 요청성공 후 : alert로 띄어줄 메시지 문구.
-%>
 
 <html>
 <head>
@@ -36,11 +31,12 @@
         <form action="<%=request.getContextPath() %>/inquireInsert.bo" method="post" enctype="multipart/form-data">
             <!-- 카테고리, 제목, 내용, 첨부파일을 입력받고, 작성자의 회원번호는 hidden으로 넘기기. -->
 <%--            <input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>">--%>
+            <input type="hidden" name="memberNo" value="${loginUser.memberNo}">
             <table align="center">
                 <tr>
                     <th width="100">카테고리*</th>
                     <td width="500">
-                        <select name="category">
+                        <select name="categoryNo">
 
                             <% for(Category c : list) { %>
                             <option value="<%= c.getCategoryNo() %>"><%= c.getCategoryName() %></option>
@@ -53,14 +49,14 @@
 
                 <tr>
                     <th>제목*</th>
-                    <td><input type="text" name="title" required></td>
+                    <td><input type="text" name="boardTitle" required></td>
 
                 </tr>
 
                 <tr>
                     <th>문의내용*</th>
                     <td>
-                        <textarea name="content" id="" cols="30" rows="10" required></textarea>
+                        <textarea name="boardContent" id="" cols="30" rows="10" required></textarea>
                     </td>
                 </tr>
 
@@ -81,18 +77,6 @@
         </form>
 
     </div>
-    <script>
-        let msg = "<%= alertMsg %>"; // let msg = 성공적으로 로그인이 되었습니다.
-
-        if(msg != "null") {
-            alert(msg);
-            // 알림창을 띄워준 후 session에 담긴 해당메세지는 지워줘야함.
-            // 안그러면 menubar.jsp가 로딩될때마다 매번 alert가 계속 뜰 것.
-
-            <% session.removeAttribute("alertMsg");%>
-        }
-
-    </script>
     <%@include file="/views/template/footer.jsp"%>
 </body>
 </html>

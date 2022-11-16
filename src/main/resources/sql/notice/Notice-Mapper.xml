@@ -13,6 +13,7 @@
         "filename"
         FROM ANIMAL
         WHERE SYSDATE-2 &lt;"noticeEdt"
+        AND "processState" LIKE '보호중%'
         ORDER BY "noticeSdt")a
         )
         WHERE rnum between ? and ?
@@ -50,5 +51,10 @@
         ?,?,?,?,
         ?,?)
     </entry>
-
+    <entry key="checkAnimal">
+        SELECT
+        COUNT("desertionNo") as "countNo"
+        FROM ANIMAL
+        WHERE "desertionNo" = ?
+    </entry>
 </properties>

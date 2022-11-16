@@ -6,8 +6,8 @@ public class Subscription {
 
     private int subNo;
     private int memberNo;
-    private String shelterNo;
-    private long animalNo;
+    private long shelterNo;
+    private String animalNo;
     private String telNum;
     private String name;
     private String gender;
@@ -15,15 +15,15 @@ public class Subscription {
     private String agreement;
     private String whenSick;
     private String bigDuty;
-    private Date wishDate;
+    private String wishDate;
     private String subRead;
-    private Date subDate;
+    private String subDate;
 
     public Subscription(){
         super();
     }
 
-    public Subscription(int subNo, int memberNo, String shelterNo, long animalNo, String telNum, String name, String gender, String adoptReason, String agreement, String whenSick, String bigDuty, Date wishDate, String subRead, Date subDate) {
+    public Subscription(int subNo, int memberNo, long shelterNo, String animalNo, String telNum, String name, String gender, String adoptReason, String agreement, String whenSick, String bigDuty, String wishDate, String subRead, String subDate) {
         this.subNo = subNo;
         this.memberNo = memberNo;
         this.shelterNo = shelterNo;
@@ -48,11 +48,11 @@ public class Subscription {
         return memberNo;
     }
 
-    public String getShelterNo() {
+    public long getShelterNo() {
         return shelterNo;
     }
 
-    public long getAnimalNo() {
+    public String getAnimalNo() {
         return animalNo;
     }
 
@@ -84,7 +84,7 @@ public class Subscription {
         return bigDuty;
     }
 
-    public Date getWishDate() {
+    public String getWishDate() {
         return wishDate;
     }
 
@@ -92,7 +92,7 @@ public class Subscription {
         return subRead;
     }
 
-    public Date getSubDate() {
+    public String getSubDate() {
         return subDate;
     }
 
@@ -104,11 +104,11 @@ public class Subscription {
         this.memberNo = memberNo;
     }
 
-    public void setShelterNo(String shelterNo) {
+    public void setShelterNo(long shelterNo) {
         this.shelterNo = shelterNo;
     }
 
-    public void setAnimalNo(long animalNo) {
+    public void setAnimalNo(String animalNo) {
         this.animalNo = animalNo;
     }
 
@@ -140,7 +140,7 @@ public class Subscription {
         this.bigDuty = bigDuty;
     }
 
-    public void setWishDate(Date wishDate) {
+    public void setWishDate(String wishDate) {
         this.wishDate = wishDate;
     }
 
@@ -148,7 +148,7 @@ public class Subscription {
         this.subRead = subRead;
     }
 
-    public void setSubDate(Date subDate) {
+    public void setSubDate(String subDate) {
         this.subDate = subDate;
     }
 

@@ -36,26 +36,22 @@ public class InquireInsertController extends HttpServlet {
             // - 카테고리번호, 제목, 내용, 작성자회원번호 -> Board에 INSERT
             // - 넘어온 첨부파일이 있다면 원본명, 수정명, 폴더경로를 뽑아서 -> Attachment에 INSERT
 
-            int categoryNo = Integer.parseInt(multipartRequest.getParameter("categoryNo"));
+            String categoryNo = multipartRequest.getParameter("categoryNo");
             String boardTitle = multipartRequest.getParameter("boardTitle");
             String boardContent = multipartRequest.getParameter("boardContent");
-            int memberNo = Integer.parseInt(multipartRequest.getParameter("memberNo"));
-
+            String memberNo = multipartRequest.getParameter("memberNo");
+            System.out.println(categoryNo);
             Board b = Board.insertInquire(categoryNo,boardTitle, boardContent, memberNo);
-
             Attachment at = null;
-
             if(multipartRequest.getOriginalFileName("upfile") != null){
-
                 at = new Attachment();
                 at.setOriginName(multipartRequest.getOriginalFileName("upfile")); //원본파일명
                 at.setChangeName(multipartRequest.getFilesystemName("upfile")); //수정파일명
                 at.setFilePath("resources/board_upfiles/");
             }
-
             int result = new InquireService().insertInquire(b, at);
 
-            if(result > 0){ // 성공시 => list.bo?currentPage=1
+            if(result > 0){ // 성공시 => inquire.bo?currentPage=1
                 request.getSession().setAttribute("alertMsg", "게시글 작성을 성공했습니다!");
                 response.sendRedirect(request.getContextPath()+"/inquire?currentPage=1");
 

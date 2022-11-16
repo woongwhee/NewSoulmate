@@ -1,6 +1,8 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Notice;
+import tk.newsoulmate.web.common.JDBCTemplet;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -53,8 +55,30 @@ public class NoticeDao {
         }
     return nList;
     }
+    public int checkAnimal(Connection conn, String animalNo){
+        int checkAnimal = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("checkAnimal");
 
-    public Notice selectNotice(Connection conn, long nno){
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1,animalNo);
+            rset = psmt.executeQuery();
+            while(rset.next()) {
+                checkAnimal = rset.getInt("countNo");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return checkAnimal;
+
+    }
+
+    public Notice selectNotice(Connection conn, long dno){
         Notice n=null;
         String sql=prop.getProperty("selectNotice");
         PreparedStatement psmt=null;
@@ -62,9 +86,9 @@ public class NoticeDao {
         try {
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy년MM월dd일");
             psmt=conn.prepareStatement(sql);
-            psmt.setLong(1,nno);
+            psmt.setLong(1,dno);
             rset=psmt.executeQuery();
-            if(rset!=null){
+            if(rset.next()){
                 n=new Notice(
                         rset.getLong("desertionNo"),
                         rset.getString("filename"),
@@ -89,14 +113,13 @@ public class NoticeDao {
                         rset.getString("chargeNm"),
                        rset.getString("officetel")
                 );
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            close();
+            close(rset);
+            close(psmt);
         }
-
         return n;
     }
 

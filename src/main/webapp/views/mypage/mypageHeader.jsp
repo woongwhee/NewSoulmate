@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>회원정보 수정</title>
-  <link href="<%=request.getContextPath()%>/css/manager/memberHeader.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/mypage/mypageHeader.css" rel="stylesheet">
   <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
@@ -17,7 +17,7 @@
       <p></p>
     </div>
     <div id="user">
-      <a href="#">로그아웃</a>
+      <a href="">로그아웃</a>
     </div>
   </div>
 
@@ -34,5 +34,14 @@
   </div>
   <hr>
 </div>
+
+<script>
+
+
+
+</script>
+
+
+
 </body>
 </html>

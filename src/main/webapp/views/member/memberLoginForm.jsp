@@ -11,7 +11,8 @@
 <head>
     <title>로그인</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <%@include file="/views/template/styleTemplate.jsp"%>
+
 </head>
 
 <body>
@@ -23,7 +24,7 @@
         <h2>로그인</h2>
     </div>
     <div class="content-box">
-        <form id="loginForm" action="<%=request.getContextPath()%>/login.do" method="post">
+        <form id="loginForm" action="${context}/login.do" method="post">
             <table class="logintable">
                 <tr>
                     <th><label for="loginId">아이디</label></th>
@@ -49,25 +50,6 @@
 <%@include file="/views/template/footer.jsp"%>
 
 <script>
-    <%
-        Object errorMsgObj = request.getAttribute("errorMsg");
-		if (errorMsgObj != null) {
-			String errorMsg = (String) errorMsgObj;
-    %>
-    alert("<%=errorMsg%>");
-    <%
-        }
-    %>
-
-    <%
-        Object alertMsgObj = request.getAttribute("alertMsg");
-		if (alertMsgObj != null) {
-			String alertMsg = (String) alertMsgObj;
-    %>
-    alert("<%=alertMsg%>");
-    <%
-        }
-    %>
 
     $(function(){
         getCookie();
