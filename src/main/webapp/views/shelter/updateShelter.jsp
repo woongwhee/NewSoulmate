@@ -13,8 +13,6 @@
     ArrayList<Shelter> sList = (ArrayList<Shelter>) request.getAttribute("sList");
     ArrayList<City> cList = (ArrayList<City>)request.getAttribute("cList");
     ArrayList<Village> vList = (ArrayList<Village>)request.getAttribute("vList");
-
-
 %>
 
 <html>
