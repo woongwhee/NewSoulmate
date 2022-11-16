@@ -17,7 +17,7 @@
       <p></p>
     </div>
     <div id="user">
-      <a href="#">로그아웃</a>
+      <a href="">로그아웃</a>
     </div>
   </div>
 
@@ -34,5 +34,14 @@
   </div>
   <hr>
 </div>
+
+<script>
+
+
+
+</script>
+
+
+
 </body>
 </html>
