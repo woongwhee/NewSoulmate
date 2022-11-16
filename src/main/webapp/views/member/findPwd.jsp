@@ -25,17 +25,16 @@
         <div>
 
             <div class="search-content">
-                <input type="text" name="searchId" id="searchId" placeholder="아이디">
+                <input type="text" name="searchId" id="searchId" placeholder="*아이디">
             </div>
 
             <div class="search-content">
-                <input type="text" name="searchName" id="searchName" placeholder="이름">
+                <input type="text" name="searchName" id="searchName" placeholder="*이름">
             </div>
         </div>
 
         <div class="email-wrap">
             <div>
-                <label for="memberMail">이메일</label>
                 <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" >
                 <button type="button" onclick="sendMail();" >인증번호 발송</button>
 
@@ -52,7 +51,7 @@
         <span id="authMsg"></span>
 
         <div class="search-content">
-            <button type="submit" class="searchPwdBtn">비밀번호 찾기</button>
+            <button type="submit" class="findPwdBtn">비밀번호 찾기</button>
         </div>
     </div>
 </div>
@@ -63,7 +62,7 @@
 
 
 
-    $(".searchPwdBtn").on("click", function() {
+    $(".findPwdBtn").on("click", function() {
         const memberId = $("#memberId").val();
         const memberName = $("#memberName").val();
         const Email = $("#Email").val();
@@ -80,8 +79,9 @@
             success: function(data) {
                 console.log(data);
                 if (data == null) {
-
+                    alert("일치하는 회원정보가 없습니다.");
                 } else {
+                    alert("비밀번호 재설정으로 이동합니다.");
 
                 }
             },

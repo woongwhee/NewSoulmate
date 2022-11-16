@@ -14,7 +14,6 @@ public class MemberDao {
 
     public MemberDao() {
         String fileName = MemberDao.class.getResource("/sql/member/Member-Mapper.xml").getPath();
-
         try {
             prop.loadFromXML(new FileInputStream(fileName));
         } catch (InvalidPropertiesFormatException e) {
@@ -34,7 +33,6 @@ public class MemberDao {
         String sql = prop.getProperty("insertMember");
         try {
             psmt = conn.prepareStatement(sql);
-
             psmt.setString(1, m.getMemberId());
             psmt.setString(2, m.getMemberPwd());
             psmt.setString(3, m.getMemberName());
@@ -85,7 +83,6 @@ public class MemberDao {
         MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
-
         Member m = new Member(memberNo, memberId, memberName, nickname, phone, email, mg);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHLETER_NO");
@@ -97,7 +94,6 @@ public class MemberDao {
 
 
     public int idCheck(Connection conn, String checkId) {
-
         int count = 0;
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -120,7 +116,6 @@ public class MemberDao {
 
 
     public int nicknameCheck(Connection conn, String checkNickname) {
-
         int count = 0;
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -145,13 +140,10 @@ public class MemberDao {
 
 
     public Member findId(Connection conn, String memberName, String Email) {
-
         PreparedStatement psmt = null;
         ResultSet rset = null;
         Member m = null;
-
         String sql = prop.getProperty("findId");
-
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, memberName);
@@ -168,7 +160,34 @@ public class MemberDao {
             JDBCTemplet.close(rset);
             JDBCTemplet.close(psmt);
         }
+        return m;
+    }
 
+
+    public Member findPwd(Connection conn, String memberId, String memberName, String email) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        Member m = null;
+        String sql = prop.getProperty("findPwd");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, memberId);
+            psmt.setString(2, memberName);
+            psmt.setString(3, email);
+            rset = psmt.executeQuery();
+            /*if(rset.next()) {
+                m = this.mapToMember(rset);
+            }*/
+            if (rset.next()) {
+                m = new Member();
+                m.setMemberPwd(rset.getString("MEMBER_PWD"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
         return m;
     }
 
@@ -186,31 +205,7 @@ public class MemberDao {
     }
 
 
-    public Member findPwd(Connection conn, String memberName, String memberId, String email) {
-
-        PreparedStatement psmt = null;
-        ResultSet rset = null;
-        Member m = null;
-        String sql = prop.getProperty("searchPwd");
-        try {
-            psmt = conn.prepareStatement(sql);
-            psmt.setString(1, memberId);
-            psmt.setString(2, email);
-            rset = psmt.executeQuery();
-            if (rset.next()) {
-                m = new Member();
-                m.setMemberPwd(rset.getString("MEMBER_PWD"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
-        }
-        return m;
-    }
-
- /*   public int updatePassword(Connection conn, String memberId, String password) {
+    public int updatePassword(Connection conn, String memberId, String password) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         int result = 0;
@@ -231,80 +226,8 @@ public class MemberDao {
             JDBCTemplet.close(psmt);
         }
         return result;
-    }*/
-
-    /*public int updatePwdMember(String memberId, String memberPwd, String updatePwd, Connection conn) {
-
-        int result = 0;
-
-        PreparedStatement psmt = null;
-
-        String sql = prop.getProperty("updatePwdMember");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            psmt.setString(1, updatePwd);
-            psmt.setString(2, memberId);
-            psmt.setString(3, memberPwd);
-
-            result = psmt.executeUpdate();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCTemplet.close(psmt);
-        }
-
-        return result;
-
     }
 
 
-    public Member selectMember(String userId, Connection conn) {
-
-        Member m = null;
-
-        PreparedStatement psmt = null;
-
-        ResultSet rset = null;
-
-        String sql = prop.getProperty("selectMember");
-
-        *//*
-     * SELECT * FROM MEMBER WHERE USER_ID = ?
-     *//*
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            psmt.setString(1, userId);
-            rset = psmt.executeQuery();
-
-*//*            if(rset.next()) {
-                m = new Member(rset.getInt("MEMBER_NO"), // member 객체에 생성자 매개변수로 넘겨줌
-                        rset.getString("MEMBER_ID"),
-                        rset.getString("MEMBER_PWD"),
-                        rset.getString("MEMBER_NAME"),
-                        rset.getString("PHONE"),
-                        rset.getString("EMAIL"),
-                        rset.getString("NICKNAME"),
-                        rset.getString("MEMBER_GRADE"),
-                        rset.getString("MEMBER_STATUS")),
-                        rset.getDate("ENROLL_DATE");
-
-            }*//*
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
-        }
-
-        return m;
-
-    }*/
 
 }

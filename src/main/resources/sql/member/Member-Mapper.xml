@@ -42,7 +42,7 @@
         AND EMAIL = ?
     </entry>
 
-    <entry key="updatePwd">
+    <entry key="pwdReset">
         UPDATE MEMBER SET
         MEMBER_PWD = ?
         WHERE

@@ -22,9 +22,8 @@ public class findPwdController extends HttpServlet {
         MemberService service = new MemberService();
         Member m = service.findPwd(memberId,memberName,Email);
 
-        request.setAttribute("alertMsg","비밀번호 : " + m.getMemberPwd());
-        request.getRequestDispatcher("views/member/memberLoginForm.jsp").forward(request, response);
-
+        /*request.setAttribute("alertMsg","비밀번호 : " + m.getMemberPwd());*/
+        request.getRequestDispatcher("views/member/findPwdResetController.jsp").forward(request, response);
     }
 
     @Override

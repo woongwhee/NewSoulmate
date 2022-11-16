@@ -29,12 +29,11 @@
             <div>
 
                 <div class="search-content">
-                    <input type="text" name="searchName" id="searchName" placeholder="이름">
+                    <input type="text" name="searchName" id="searchName" placeholder="*이름">
                 </div>
 
                 <div class="email-wrap">
                     <div>
-                        <label for="memberMail">이메일</label>
                         <input type="text" name="memberMail" id="memberMail" placeholder="*이메일">
                         <button type="button" onclick="sendMail();">인증번호 발송</button>
 
@@ -92,7 +91,6 @@
 
 
     // 메일 인증
-
 
     let checkMail = 0;
     let mailCode;
