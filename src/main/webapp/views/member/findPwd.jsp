@@ -73,10 +73,9 @@
                 memberName: memberName,
                 Email: Email
             },
-            dataType: "json",
             success: function(data) {
                 console.log(data);
-                if (data == null) {
+                if (data == 1) {
                     alert("일치하는 회원정보가 없습니다.");
                 } else {
                     alert("비밀번호 재설정으로 이동합니다.");

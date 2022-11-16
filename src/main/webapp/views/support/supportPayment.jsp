@@ -43,9 +43,12 @@
                     <h4>후원 금액</h4>
                 </td>
                 <td>
-                    <input type="button" value="10,000원"> <input type="button" value="20,000원"><input type="button"
-                                                                                                      value="30,000원"><input type="button" value="50,000원"><br><input type="button"
-                                                                                                                                                                      value="100,000원">
+                    <input type="button" value="10,000원">
+                    <input type="button" value="20,000원">
+                    <input type="button" value="30,000원">
+                    <input type="button" value="50,000원">
+                    <br>
+                    <input type="button" value="100,000원">
                 </td>
             </tr>
         </table>

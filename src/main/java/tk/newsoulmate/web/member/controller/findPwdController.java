@@ -22,7 +22,13 @@ public class findPwdController extends HttpServlet {
         MemberService service = new MemberService();
         Member m = service.findPwd(memberId, memberName, Email);
 
-        request.getRequestDispatcher("views/member/findPwdResetController.jsp").forward(request, response);
+        if(m == null){
+            response.getWriter().print("0");
+        }else{
+            response.getWriter().print("1");
+        }
+
+        //request.getRequestDispatcher("views/member/findPwdReset.jsp").forward(request, response);
     }
 
     @Override
