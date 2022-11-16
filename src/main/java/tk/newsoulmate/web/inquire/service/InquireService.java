@@ -2,10 +2,7 @@ package tk.newsoulmate.web.inquire.service;
 
 import tk.newsoulmate.domain.dao.BoardDao;
 import tk.newsoulmate.domain.dao.CategoryDao;
-import tk.newsoulmate.domain.vo.Attachment;
-import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.Category;
-import tk.newsoulmate.domain.vo.PageInfo;
+import tk.newsoulmate.domain.vo.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -14,21 +11,21 @@ import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 
 public class InquireService {
-    public int selectListCount(){
+    public int selectListCount(Member loginUser){
         Connection conn = getConnection();
 
         String categoryName = "문의";
 
-        int listCount = new BoardDao().selectListCount(conn, categoryName);
+        int listCount = new BoardDao().selectQnAListCount(conn, categoryName,loginUser);
 
         close();
 
         return listCount;
     }
-    public ArrayList<Board> selectQnAList(PageInfo pi){
+    public ArrayList<Board> selectQnAList(PageInfo pi, Member loginUser){
         Connection conn = getConnection();
 
-        ArrayList<Board> list = new BoardDao().selectQnAList(conn, pi);
+        ArrayList<Board> list = new BoardDao().selectQnAList(conn, pi,loginUser);
 
         close();
 
@@ -80,10 +77,10 @@ public class InquireService {
         return result;
     }
 
-    public Board selectInquireBoard(int boardNo){
+    public Board selectInquireBoard(int boardNo,Member loginUser){
         Connection conn = getConnection();
 
-        Board b = new BoardDao().selectInquireBoard(conn, boardNo);
+        Board b = new BoardDao().selectInquireBoard(conn, boardNo,loginUser);
 
         close();
 

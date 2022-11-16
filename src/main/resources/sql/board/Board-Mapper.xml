@@ -63,11 +63,12 @@
         ORDER BY CREATE_DATE DESC , REPLY_NO
     </entry>
 
-    <entry key="selectListCount">
+    <entry key="selectQnAListCount">
         SELECT COUNT(*) as cnt
         FROM BOARD
         JOIN BOARD_TYPE USING(TYPE_NO)
         WHERE BOARD_NAME = ?
+        AND( MEMBER_NO=? OR 2=?)
     </entry>
 
     <entry key="selectQnAList">
@@ -86,14 +87,15 @@
         JOIN MEMBER USING(MEMBER_NO)
         JOIN REPLY R on B.BOARD_NO = R.BOARD_NO
         WHERE BOARD_NAME = '문의'
+        AND( MEMBER_NO=? OR 2=?)
         ORDER BY CREATE_DATE DESC) A
         )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
 
     <entry key="insertBoard">
-        INSERT INTO BOARD(BOARD_NO, TYPE_NO, CATEGORY_NO, BOARD_TITLE, BOARD_CONTENT, MEMBER_NO)
-        VALUES (SQ_BOARD_PK.NEXTVAL, 4, ?, ?, ?, ?)
+        INSERT INTO BOARD(BOARD_NO, TYPE_NO, CATEGORY_NO, BOARD_TITLE, BOARD_CONTENT, MEMBER_NO,BOARD_STATUS)
+        VALUES (SQ_BOARD_PK.NEXTVAL, 4, ?, ?, ?, ?,'Y')
     </entry>
 
     <entry key="increaseCount">
@@ -114,7 +116,9 @@
         LEFT JOIN CATEGORY USING(CATEGORY_NO)
         JOIN MEMBER USING(MEMBER_NO)
         WHERE BOARD_NO = ?
+            AND (b.MEMBER_NO=? or 2=?)
             AND B.MEMBER_STATUS = 'Y'
+
     </entry>
 
 

@@ -40,7 +40,7 @@ public class InquireInsertController extends HttpServlet {
             String boardTitle = multipartRequest.getParameter("boardTitle");
             String boardContent = multipartRequest.getParameter("boardContent");
             String memberNo = multipartRequest.getParameter("memberNo");
-
+            System.out.println(categoryNo);
             Board b = Board.insertInquire(categoryNo,boardTitle, boardContent, memberNo);
 
             Attachment at = null;

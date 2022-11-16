@@ -18,27 +18,29 @@ public class InquireDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int boardNo = Integer.parseInt(request.getParameter("bno"));
-
+        Member loginUser= (Member) request.getSession().getAttribute("loginUser");
         InquireService iService = new InquireService();
         AttachmentService atService = new AttachmentService();
 
-
         // 조회수 증가 / 게시글 조회(Inquire) / 첨부파일 조회(Attachment)
-
         int result = iService.increaseCount(boardNo);
+        if(result == 0){ // 유효한 게시글일때 => 게시글, 첨부파일 조회 => 상세조회 페이지
 
-        if(result > 0){ // 유효한 게시글일때 => 게시글, 첨부파일 조회 => 상세조회 페이지
-            Board b = iService.selectInquireBoard(boardNo);
+            request.getSession().setAttribute("errorMsg", "게시글 상세조회 실패");
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+        Board b = iService.selectInquireBoard(boardNo,loginUser);
+        if(b!=null){
             Attachment at = atService.selectInquireAttachment(boardNo);
 
             request.setAttribute("b", b);
             request.setAttribute("at",at);
-
             request.getRequestDispatcher("views/inquire/inquireDetailView.jsp").forward(request,response);
 
         } else { // 에러페이지
-            request.getSession().setAttribute("alertMsg", "게시글 상세조회 실패");
-            response.sendRedirect(request.getContextPath()+"inquireDetail.bo");
+            request.getSession().setAttribute("errorMsg", "게시글 상세조회 실패");
+            response.sendRedirect(request.getContextPath());
         }
 
 

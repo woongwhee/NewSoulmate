@@ -31,11 +31,12 @@
         <form action="<%=request.getContextPath() %>/inquireInsert.bo" method="post" enctype="multipart/form-data">
             <!-- 카테고리, 제목, 내용, 첨부파일을 입력받고, 작성자의 회원번호는 hidden으로 넘기기. -->
 <%--            <input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>">--%>
+            <input type="hidden" name="memberNo" value="${loginUser.memberNo}">
             <table align="center">
                 <tr>
                     <th width="100">카테고리*</th>
                     <td width="500">
-                        <select name="category">
+                        <select name="categoryNo">
 
                             <% for(Category c : list) { %>
                             <option value="<%= c.getCategoryNo() %>"><%= c.getCategoryName() %></option>
@@ -48,14 +49,14 @@
 
                 <tr>
                     <th>제목*</th>
-                    <td><input type="text" name="title" required></td>
+                    <td><input type="text" name="boardTitle" required></td>
 
                 </tr>
 
                 <tr>
                     <th>문의내용*</th>
                     <td>
-                        <textarea name="content" id="" cols="30" rows="10" required></textarea>
+                        <textarea name="boardContent" id="" cols="30" rows="10" required></textarea>
                     </td>
                 </tr>
 

@@ -1,6 +1,5 @@
 package tk.newsoulmate.domain.dao;
 
-import oracle.jdbc.proxy.annotation.Pre;
 import tk.newsoulmate.domain.vo.*;
 
 import java.io.FileInputStream;
@@ -18,7 +17,7 @@ import static tk.newsoulmate.web.common.JDBCTemplet.close;
 public class BoardDao {
     private Properties prop = new Properties();
 
-    public BoardDao(){
+    public BoardDao() {
         try {
             prop.loadFromXML(new FileInputStream(BoardDao.class.getResource("/sql/board/Board-Mapper.xml").getPath()));
         } catch (IOException e) {
@@ -30,16 +29,16 @@ public class BoardDao {
 
         int listCount = 0;
         PreparedStatement psmt = null;
-        ResultSet rset =  null;
+        ResultSet rset = null;
         String sql = prop.getProperty("selectListCount");
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1,"ADOPT");
+            psmt.setString(1, "ADOPT");
 
             rset = psmt.executeQuery();
 
-            if(rset.next()) {
+            if (rset.next()) {
                 listCount = rset.getInt("cnt");
             }
         } catch (SQLException e) {
@@ -51,7 +50,7 @@ public class BoardDao {
         return listCount;
     }
 
-    public ArrayList<Board> selectAdoptReviewList(Connection conn , PageInfo pi){
+    public ArrayList<Board> selectAdoptReviewList(Connection conn, PageInfo pi) {
 
         ArrayList<Board> list = new ArrayList<>();
         PreparedStatement psmt = null;
@@ -59,14 +58,14 @@ public class BoardDao {
         String sql = prop.getProperty("adoptReviewList");
         try {
             psmt = conn.prepareStatement(sql);
-            int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
-            int endRow = startRow + pi.getBoardLimit() -1;
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
             psmt.setInt(1, startRow);
             psmt.setInt(2, endRow);
             rset = psmt.executeQuery();
 
-            while(rset.next()) {
-                list.add(Board.selectAdoptReviewList(rset.getInt("BOARD_NO") ,
+            while (rset.next()) {
+                list.add(Board.selectAdoptReviewList(rset.getInt("BOARD_NO"),
                         rset.getString("BOARD_TITLE"),
                         rset.getString("MEMBER_NO"),
                         rset.getInt("READ_COUNT"),
@@ -99,8 +98,7 @@ public class BoardDao {
     }
 
 
-
-    public ArrayList<Board> selectQnAList(Connection conn, PageInfo pi) {
+    public ArrayList<Board> selectQnAList(Connection conn, PageInfo pi, Member loginUser) {
 
         ArrayList<Board> list = new ArrayList<>();
         PreparedStatement psmt = null;
@@ -110,12 +108,16 @@ public class BoardDao {
         try {
             psmt = conn.prepareStatement(sql);
 
-            if (pi.getCurrentPage() != 0 ){
-                int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-                int endRow = startRow + pi.getBoardLimit() - 1;
-                psmt.setInt(1, startRow);
-                psmt.setInt(2, endRow);
+            if (pi.getCurrentPage() == 0) {
+                return list;
             }
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
+            psmt.setInt(1, loginUser.getMemberNo());
+            psmt.setInt(2, loginUser.getMemberGrade().gradeNumber);
+
+            psmt.setInt(3, startRow);
+            psmt.setInt(4, endRow);
 
 
             rset = psmt.executeQuery();
@@ -157,8 +159,8 @@ public class BoardDao {
 
             rset = psmt.executeQuery();
 
-            if(rset.next()) {
-                b =  Board.selectAdoptReviewDetail(
+            if (rset.next()) {
+                b = Board.selectAdoptReviewDetail(
                         rset.getString("BOARD_TITLE"),
                         rset.getString("MEMBER_NO"),
                         rset.getDate("ISSUE_DATE"),
@@ -179,7 +181,7 @@ public class BoardDao {
 
     }
 
-    public int insertReply(Connection conn , Reply r) {
+    public int insertReply(Connection conn, Reply r) {
 
         int result = 0;
 
@@ -205,7 +207,7 @@ public class BoardDao {
         return result;
     }
 
-    public ArrayList<Reply> selectReplyList(Connection conn , int boardNo){
+    public ArrayList<Reply> selectReplyList(Connection conn, int boardNo) {
 
         ArrayList<Reply> list = new ArrayList<>();
 
@@ -222,7 +224,7 @@ public class BoardDao {
 
             rset = psmt.executeQuery();
 
-            while(rset.next()) {
+            while (rset.next()) {
 
                 list.add(new Reply(
                         rset.getInt(1),
@@ -240,7 +242,8 @@ public class BoardDao {
         }
         return list;
     }
-    public int selectListCount(Connection conn, String categoryName){
+
+    public int selectQnAListCount(Connection conn, String categoryName, Member loginUser) {
 
         int listCount = 0;
 
@@ -248,15 +251,16 @@ public class BoardDao {
 
         ResultSet rset = null;
 
-        String sql = prop.getProperty("selectListCount");
+        String sql = prop.getProperty("selectQnAListCount");
 
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, categoryName);
-
+            psmt.setInt(2, loginUser.getMemberNo());
+            psmt.setInt(3, loginUser.getMemberGrade().gradeNumber);
             rset = psmt.executeQuery();
 
-            if(rset.next()){
+            if (rset.next()) {
                 listCount = rset.getInt("cnt");
             }
 
@@ -269,7 +273,7 @@ public class BoardDao {
         return listCount;
     }
 
-    public int insertBoard(Board b, Connection conn){
+    public int insertBoard(Board b, Connection conn) {
         int result = 0;
         PreparedStatement psmt = null;
 
@@ -281,7 +285,7 @@ public class BoardDao {
             psmt.setInt(1, b.getCategoryNo());
             psmt.setString(2, b.getBoardTitle());
             psmt.setString(3, b.getBoardContent());
-            psmt.setInt(4,b.getMemberNo());
+            psmt.setInt(4, b.getMemberNo());
 
             result = psmt.executeUpdate();
 
@@ -294,7 +298,9 @@ public class BoardDao {
 
     }
 
-    public int insertAttachment(Attachment at, Connection conn){
+
+    //attachment dao 따로 뺴서 만들것
+    public int insertAttachment(Attachment at, Connection conn) {
 
         int result = 0;
         PreparedStatement psmt = null;
@@ -323,13 +329,13 @@ public class BoardDao {
 
 
     public List<Board> selectVolunteerThumNail(Connection conn, int page) {
-        List<Board> vList=new ArrayList<>();
+        List<Board> vList = new ArrayList<>();
 
 
         return vList;
     }
 
-    public int increaseCount(Connection conn, int boardNo){
+    public int increaseCount(Connection conn, int boardNo) {
         int result = 0;
 
         PreparedStatement psmt = null;
@@ -349,7 +355,7 @@ public class BoardDao {
         return result;
     }
 
-    public Board selectInquireBoard(Connection conn, int boardNo){
+    public Board selectInquireBoard(Connection conn, int boardNo, Member loginUser) {
 
         Board b = null;
         PreparedStatement psmt = null;
@@ -360,11 +366,11 @@ public class BoardDao {
         try {
             psmt = conn.prepareStatement(sql);
 
-            psmt.setInt(1,boardNo);
-
+            psmt.setInt(1, boardNo);
+            psmt.setInt(2, loginUser.getMemberNo());
+            psmt.setInt(3, loginUser.getMemberGrade().gradeNumber);
             rset = psmt.executeQuery();
-
-            if (rset.next()){
+            if (rset.next()) {
                 b = Board.selectInquireBoard(
                         rset.getInt("BOARD_NO"),
                         rset.getString("CATEGORY_NAME"),
@@ -383,7 +389,7 @@ public class BoardDao {
         return b;
     }
 
-    public Attachment selectInquireAttachment(Connection conn, int boardNo){
+    public Attachment selectInquireAttachment(Connection conn, int boardNo) {
 
         Attachment at = null;
         PreparedStatement psmt = null;
@@ -394,13 +400,12 @@ public class BoardDao {
         try {
             psmt = conn.prepareStatement(sql);
 
-            psmt.setInt(1,boardNo);
+            psmt.setInt(1, boardNo);
 
             rset = psmt.executeQuery();
 
-            if(rset.next()){
+            if (rset.next()) {
                 at = new Attachment();
-
                 at.setFileNo(rset.getInt("FILE_NO"));
                 at.setOriginName(rset.getString("ORIGIN_NAME"));
                 at.setChangeName(rset.getString("CHANGE_NAME"));
@@ -418,29 +423,6 @@ public class BoardDao {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
