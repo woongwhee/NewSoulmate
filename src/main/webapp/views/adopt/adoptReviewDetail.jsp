@@ -37,6 +37,7 @@
 
         byte bt[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
         while ((num = is.read(bt, 0, bt.length)) != -1) {
+            System.out.println("111");
             os.write(bt, 0, num);
         }
         if (is != null) {

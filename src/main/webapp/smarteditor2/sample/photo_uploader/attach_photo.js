@@ -406,7 +406,6 @@
     	if(aResult.length == nImageFileCount){
     		setPhotoToEditor(aResult); 
     		aResult = null;
-			return false;
     		window.close();
     	}
     }
