@@ -54,7 +54,7 @@ public class NoticeDao {
     return nList;
     }
 
-    public Notice selectNotice(Connection conn, long nno){
+    public Notice selectNotice(Connection conn, long dno){
         Notice n=null;
         String sql=prop.getProperty("selectNotice");
         PreparedStatement psmt=null;
@@ -62,9 +62,9 @@ public class NoticeDao {
         try {
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy년MM월dd일");
             psmt=conn.prepareStatement(sql);
-            psmt.setLong(1,nno);
+            psmt.setLong(1,dno);
             rset=psmt.executeQuery();
-            if(rset!=null){
+            if(rset.next()){
                 n=new Notice(
                         rset.getLong("desertionNo"),
                         rset.getString("filename"),
@@ -89,14 +89,13 @@ public class NoticeDao {
                         rset.getString("chargeNm"),
                        rset.getString("officetel")
                 );
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            close();
+            close(rset);
+            close(psmt);
         }
-
         return n;
     }
 
