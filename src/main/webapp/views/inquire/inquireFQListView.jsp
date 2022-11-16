@@ -154,7 +154,7 @@
         </div>
         <script>
             function doPageClick(currentPage){
-                location.href = "<%=request.getContextPath()%>/list.bo?currentPage="+currentPage;
+                location.href = "<%=request.getContextPath()%>/inquireInsert.bo?currentPage="+currentPage;
             }
         </script>
 

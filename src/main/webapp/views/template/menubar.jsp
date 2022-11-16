@@ -65,7 +65,7 @@
             </div>
 
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="${context}/Inquire">고객센터</a></button>
+                <button class="dropdown-btn"><a href="${context}/inquire">고객센터</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">자주묻는 질문</a>
                     <a href="#">문의하기</a>

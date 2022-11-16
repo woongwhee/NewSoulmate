@@ -74,7 +74,7 @@
         <br>
 
         <div align="center">
-            <a href="<%=request.getContextPath() %>/inquireInsert.bo?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
+            <a href="<%=request.getContextPath() %>/inquire?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
 <%--            <% if(loginUser != null && loginUser.getMemberNo().equals(b.getMemberNo())) { %>--%>
             <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. -->
             <a href="<%=request.getContextPath() %>/inquireUpdateForm.bo?bno=<%=b.getBoardNo() %>" class="btn btn-secondary btn-sm">수정</a>
