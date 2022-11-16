@@ -228,27 +228,5 @@ public class ShelterDao {
         return s;
     }
 
-    public long shelterNoByName(Connection conn,long animalNo){
-        long shelterNo;
-        PreparedStatement psmt = null;
-        ResultSet rset = null;
-        String sql = prop.getProperty("shelterNoByName");
 
-        try {
-            psmt = conn.prepareStatement(sql);
-            psmt.setLong(1,animalNo);
-            rset = psmt.executeQuery();
-            shelterNo = rset.getLong("SHELTER_NO");
-
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
-        }
-        return shelterNo;
-
-    }
 }

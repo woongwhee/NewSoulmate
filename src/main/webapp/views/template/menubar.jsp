@@ -32,7 +32,7 @@
                 <button class="dropdown-btn"><a href="">유기동물</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">동물목록</a>
-                    <a href="<%=request.getContextPath()%>/shelter/list">보호소</a>
+                    <a href="<%=request.getContextPath()%>/shelterList">보호소</a>
                 </div>
             </div>
 

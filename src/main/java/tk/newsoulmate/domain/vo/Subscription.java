@@ -7,7 +7,7 @@ public class Subscription {
     private int subNo;
     private int memberNo;
     private long shelterNo;
-    private long animalNo;
+    private String animalNo;
     private String telNum;
     private String name;
     private String gender;
@@ -23,7 +23,7 @@ public class Subscription {
         super();
     }
 
-    public Subscription(int subNo, int memberNo, long shelterNo, long animalNo, String telNum, String name, String gender, String adoptReason, String agreement, String whenSick, String bigDuty, String wishDate, String subRead, String subDate) {
+    public Subscription(int subNo, int memberNo, long shelterNo, String animalNo, String telNum, String name, String gender, String adoptReason, String agreement, String whenSick, String bigDuty, String wishDate, String subRead, String subDate) {
         this.subNo = subNo;
         this.memberNo = memberNo;
         this.shelterNo = shelterNo;
@@ -52,7 +52,7 @@ public class Subscription {
         return shelterNo;
     }
 
-    public long getAnimalNo() {
+    public String getAnimalNo() {
         return animalNo;
     }
 
@@ -108,7 +108,7 @@ public class Subscription {
         this.shelterNo = shelterNo;
     }
 
-    public void setAnimalNo(long animalNo) {
+    public void setAnimalNo(String animalNo) {
         this.animalNo = animalNo;
     }
 

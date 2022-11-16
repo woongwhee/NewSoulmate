@@ -103,6 +103,22 @@ public class AdoptService {
         return result;
     }
 
+    public int checkAnimal(String animalNo){
+        Connection conn = getConnection();
+        int checkAnimal = new AdoptDao().checkAnimal(conn,animalNo);
+
+        return checkAnimal;
+    }
+
+    public long shelterNoByName(String animalNo){
+        Connection conn = JDBCTemplet.getConnection();
+
+        long shelterNo = new AdoptDao().shelterNoByName(conn,animalNo);
+
+        JDBCTemplet.close();
+
+        return shelterNo;
+    }
 
 
 }

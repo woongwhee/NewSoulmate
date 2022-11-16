@@ -36,14 +36,19 @@
             -->
 
             <th>공고번호</th>
-            <td><% if(dno==null){%><input type="text" id="animalNo" name="animalNo"></td>
-            <td><% }else{ %> <input type="text" id="animalNo" name="animalNo" value="${dno}" disabled></td><%}%>
+            <td><% if(dno==null){%>
+                    <input type="text" id="animalNo" name="animalNo">
+                <% }else{ %>
+                    <input type="text" id="animalNo" name="animalNo" value="${dno}" disabled>
+                <%}%>
+            </td>
         </tr>
         <tr>
             <th>전화번호</th>
             <td><input type="text" name="telNum"></td>
             <th>성별</th>
-            <td><input type="radio" name="gender">남 <input type="radio" name="gender">여 </td>
+            <td><input type="radio" name="gender"value="M" id="male"><label for="male">남자</label>
+                <input type="radio" name="gender" value="F" id="female"> <label for="female">여자</label></td>
         </tr>
         <tr>
            <th colspan="4">입양을 결정하게 된 이유</th>
@@ -55,7 +60,7 @@
             <th colspan="4">가족 구성원의 반대가 없었는지?</th>
         </tr>
         <tr>
-            <td colspan="4"><input type="text" name="Agreement"></td>
+            <td colspan="4"><input type="text" name="agreement"></td>
         </tr>
         <tr>
             <th colspan="4">입양해간 아이가 많이 아프다면?</th>
@@ -70,7 +75,7 @@
             <td colspan="4"><input type="text" name="bigDuty"></td>
         </tr>
         <tr>
-            <th><div name="date"><%=today.format(date.getTime())%></div></th>
+            <th><%=today.format(date.getTime())%></th>
         </tr>
         <tr>
             <th>입양희망날짜</th>

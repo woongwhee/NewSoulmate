@@ -1,11 +1,13 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Subscription;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -17,7 +19,7 @@ public class AdoptDao {
 
     public AdoptDao(){
         try {
-            prop.loadFromXML(new FileInputStream(BoardDao.class.getResource("/sql/board/Board-Mapper.xml").getPath()));
+            prop.loadFromXML(new FileInputStream(BoardDao.class.getResource("/sql/adopt/Adopt-Mapper.xml").getPath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,7 +35,7 @@ public class AdoptDao {
 
             psmt.setInt(1,sb.getMemberNo());
             psmt.setLong(2,sb.getShelterNo());
-            psmt.setLong(3,sb.getAnimalNo());
+            psmt.setString(3,sb.getAnimalNo());
             psmt.setString(4,sb.getTelNum());
             psmt.setString(5,sb.getName());
             psmt.setString(6,sb.getGender());
@@ -43,7 +45,6 @@ public class AdoptDao {
             psmt.setString(10,sb.getBigDuty());
             psmt.setString(11,sb.getWishDate());
             psmt.setString(12,sb.getSubRead());
-            psmt.setString(13,sb.getSubDate());
 
             result = psmt.executeUpdate();
 
@@ -55,5 +56,53 @@ public class AdoptDao {
         return result;
     }
 
+    public long shelterNoByName(Connection conn,String animalNo){
+        long shelterNo=0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("shelterNoByName");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1,animalNo);
+            rset = psmt.executeQuery();
+            while(rset.next()) {
+                shelterNo = rset.getLong("shelterNo");
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return shelterNo;
+
+    }
+
+
+    public int checkAnimal(Connection conn, String animalNo){
+        int checkAnimal = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("checkAnimal");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1,animalNo);
+            rset = psmt.executeQuery();
+            while(rset.next()) {
+                checkAnimal = rset.getInt("countNo");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return checkAnimal;
+
+    }
 
 }

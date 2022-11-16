@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.shelter.service;
 
+import tk.newsoulmate.domain.dao.AdoptDao;
 import tk.newsoulmate.domain.dao.ShelterDao;
 import tk.newsoulmate.domain.vo.City;
 import tk.newsoulmate.domain.vo.Shelter;
@@ -79,13 +80,5 @@ public class ShelterService {
         return s;
     }
 
-    public long shelterNoByName(long animalNo){
-        Connection conn = JDBCTemplet.getConnection();
 
-        long shelterNo = new ShelterDao().shelterNoByName(conn,animalNo);
-
-        JDBCTemplet.close();
-
-        return shelterNo;
-    }
 }
