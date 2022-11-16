@@ -1,20 +1,11 @@
-<%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>회원정보 수정</title>
-    <link href="<%=request.getContextPath()%>/css/manager/memberInfoDetail.css" rel="stylesheet">
-    <%@ include file="/views/template/styleTemplate.jsp"%>
-    <%
-        Member loginUser = (Member)session.getAttribute("loginUser");
-        String memberId = loginUser.getMemberId();
-        String memberPwd = loginUser.getMemberPwd();
-        String memberName = loginUser.getMemberName();
-        String email = loginUser.getEmail();
-    %>
+    <link href="<%=request.getContextPath()%>/css/mypage/mypageInfoDetail.css" rel="stylesheet">
 </head>
 <body>
-<header><%@include file="/views/manager/memberHeader.jsp"%></header>
+<header><%@include file="/views/mypage/mypageHeader.jsp"%></header>
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
@@ -23,18 +14,18 @@
                 <div class="form-group">
                     <label for="">아이디</label>
                     <p>
-                       <%=memberName%>
+                        <!--아이디 가져오기 옆에 임의--> 닉네임
                     </p>
                 </div>
 
                 <div class="form-group">
                     <label for="">비밀번호</label>
-                    <input type="password" name="memberPwd" id="" placeholder="비밀번호 입력" required>
+                    <input type="password" name="" id="" placeholder="비밀번호 입력" required>
                 </div>
 
                 <div class="form-group">
                     <label for="">비밀번호 재확인</label>
-                    <input type="password" name="memberPwdCheck" id="" placeholder="비밀번호 재입력" required>
+                    <input type="password" name="" id="" placeholder="비밀번호 재입력" required>
                     <button type="button" id="" onclick="">변경</button>
                 </div>
 
