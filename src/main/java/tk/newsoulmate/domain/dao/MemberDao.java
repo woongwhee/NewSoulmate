@@ -207,22 +207,18 @@ public class MemberDao {
 
     public int updatePassword(Connection conn, String memberId, String password) {
         PreparedStatement psmt = null;
-        ResultSet rset = null;
         int result = 0;
-        String sql = prop.getProperty("updatePwd");
+        String sql = prop.getProperty("pwdReset");
 
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, password);
             psmt.setString(2, memberId);
-            rset = psmt.executeQuery();
-            if (rset.next()) {
-                result = 1;
-            }
+            result = psmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCTemplet.close(rset);
             JDBCTemplet.close(psmt);
         }
         return result;
