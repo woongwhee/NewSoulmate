@@ -19,9 +19,9 @@ public class findIdController extends HttpServlet {
         String Email = request.getParameter("memberMail");
 
         MemberService service = new MemberService();
-        Member m = service.findId(memberName,Email);
+        String memberId = service.findId(memberName,Email);
 
-        request.setAttribute("alertMsg","아이디 : " + m.getMemberId());
+        request.setAttribute("alertMsg","아이디 : " + memberId);
         request.getRequestDispatcher("views/member/memberLoginForm.jsp").forward(request, response);
     }
 
