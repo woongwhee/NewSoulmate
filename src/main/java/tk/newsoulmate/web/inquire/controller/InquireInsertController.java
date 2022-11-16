@@ -42,17 +42,13 @@ public class InquireInsertController extends HttpServlet {
             String memberNo = multipartRequest.getParameter("memberNo");
             System.out.println(categoryNo);
             Board b = Board.insertInquire(categoryNo,boardTitle, boardContent, memberNo);
-
             Attachment at = null;
-
             if(multipartRequest.getOriginalFileName("upfile") != null){
-
                 at = new Attachment();
                 at.setOriginName(multipartRequest.getOriginalFileName("upfile")); //원본파일명
                 at.setChangeName(multipartRequest.getFilesystemName("upfile")); //수정파일명
                 at.setFilePath("resources/board_upfiles/");
             }
-
             int result = new InquireService().insertInquire(b, at);
 
             if(result > 0){ // 성공시 => inquire.bo?currentPage=1

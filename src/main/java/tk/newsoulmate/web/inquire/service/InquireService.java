@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.inquire.service;
 
+import tk.newsoulmate.domain.dao.AttachmentDao;
 import tk.newsoulmate.domain.dao.BoardDao;
 import tk.newsoulmate.domain.dao.CategoryDao;
 import tk.newsoulmate.domain.vo.*;
@@ -45,21 +46,22 @@ public class InquireService {
     public int insertInquire(Board b, Attachment at){
         Connection conn = getConnection();
 
-        int result1 = new BoardDao().insertBoard(b, conn);
-
+        int boardNo = new BoardDao().insertBoard(b, conn);
         int result2 = 1;
-
+        if(boardNo>0){
+            at.setBoardNo(boardNo);
+        }
         if(at != null){
-            result2 = new BoardDao().insertAttachment(at, conn);
+            result2 = new AttachmentDao().insertAttachment(at, conn);
         }
 
-        if(result1 > 0 && result2 > 0){
+        if(boardNo > 0 && result2 > 0){
             commit();
         } else{
             rollback(conn);
         }
         close();
-        return result1*result2;
+        return boardNo*result2;
     }
 
     public int increaseCount(int boardNo) {
@@ -87,10 +89,13 @@ public class InquireService {
         return b;
     }
 
+    public Attachment selectInquireAttachment(int boardNo){
+        Connection conn = getConnection();
+        Attachment at = new AttachmentDao().selectInquireAttachment(conn, boardNo);
+        close();
 
-
-
-
+        return at;
+    }
 
 
 

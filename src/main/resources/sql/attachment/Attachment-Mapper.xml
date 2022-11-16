@@ -4,15 +4,15 @@
 <properties>
 
     <entry key="insertAttachment">
-        INSERT INTO ATTACHMENT(FILE_NO, REPLY_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
-        VALUES (SQ_ATTACHMENT_PK.NEXTVAL, SQ_COMMENT_PK.CURRVAL, ?, ?, ?)
+        INSERT INTO ATTACHMENT(FILE_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+        VALUES (SQ_ATTACHMENT_PK.NEXTVAL,?, ?, ?)
     </entry>
 
     <entry key="selectInquireAttachment">
         SELECT FILE_NO,
                 ORIGIN_NAME,
                 CHANGE_NAME,
-                FILE_PATH,
+                FILE_PATH
         FROM ATTACHMENT
         WHERE BOARD_NO = ?
         ORDER BY FILE_NO

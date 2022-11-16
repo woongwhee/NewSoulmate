@@ -1,7 +1,6 @@
 package tk.newsoulmate.web.inquire.controller;
 
 import tk.newsoulmate.domain.vo.*;
-import tk.newsoulmate.web.inquire.service.AttachmentService;
 import tk.newsoulmate.web.inquire.service.InquireService;
 
 import javax.servlet.*;
@@ -20,7 +19,6 @@ public class InquireDetailController extends HttpServlet {
         int boardNo = Integer.parseInt(request.getParameter("bno"));
         Member loginUser= (Member) request.getSession().getAttribute("loginUser");
         InquireService iService = new InquireService();
-        AttachmentService atService = new AttachmentService();
 
         // 조회수 증가 / 게시글 조회(Inquire) / 첨부파일 조회(Attachment)
         int result = iService.increaseCount(boardNo);
@@ -32,7 +30,7 @@ public class InquireDetailController extends HttpServlet {
         }
         Board b = iService.selectInquireBoard(boardNo,loginUser);
         if(b!=null){
-            Attachment at = atService.selectInquireAttachment(boardNo);
+            Attachment at = iService.selectInquireAttachment(boardNo);
 
             request.setAttribute("b", b);
             request.setAttribute("at",at);

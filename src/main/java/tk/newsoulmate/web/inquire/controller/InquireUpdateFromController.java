@@ -3,8 +3,7 @@ package tk.newsoulmate.web.inquire.controller;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Category;
-import tk.newsoulmate.web.inquire.service.AttachmentService;
-import tk.newsoulmate.web.inquire.service.CategoryService;
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.inquire.service.InquireService;
 
 import javax.servlet.*;
@@ -19,16 +18,14 @@ public class InquireUpdateFromController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         InquireService iService = new InquireService();
-        AttachmentService atService = new AttachmentService();
-        CategoryService caService = new CategoryService();
-
+        Member loginUser= (Member) request.getSession().getAttribute("loginUser");
         int boardNo = Integer.parseInt(request.getParameter("bno"));
 
-        ArrayList<Category> list = caService.selectCategoryList();
+        ArrayList<Category> list = iService.selectCategoryList();
 
-        Board b = iService.selectInquireBoard(boardNo);
+        Board b = iService.selectInquireBoard(boardNo,loginUser);
 
-        Attachment at = atService.selectInquireAttachment(boardNo);
+        Attachment at = iService.selectInquireAttachment(boardNo);
 
 
         request.setAttribute("list",list);

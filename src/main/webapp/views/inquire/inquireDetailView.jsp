@@ -7,14 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="tk.newsoulmate.domain.vo.*" %>
-
-<%
-    Board b = (Board)request.getAttribute("b");
-    // 게시글번호, 카테고리명, 제목, 내용, 작성자아이디, 작성일
-
-    Attachment at = (Attachment)request.getAttribute("at");
-    // 파일번호, 원본명, 수정명, 저장경로
-%>
+<% Attachment at= (Attachment) request.getAttribute("at");
+Board b=(Board) request.getAttribute("b");%>
 <html>
 <head>
     <title>문의내역 상세보기</title>
@@ -34,15 +28,15 @@
 
             <tr>
                 <th width="100">카테고리</th>
-                <td width="70"><%= b.getCategoryName() %></td>
+                <td width="70">${b.categoryName}</td>
                 <th width="100">제목</th>
-                <td width="350"><%= b.getBoardTitle() %></td>
+                <td width="350">${b.boardTitle}</td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td><%= b.getMemberName() %></td>
+                <td>${b.memberName}</td>
                 <th>작성일</th>
-                <td><%= b.getCreateDate() %></td>
+                <td>${b.createDate}</td>
             </tr>
             <tr>
                 <th>문의내용</th>
@@ -58,9 +52,9 @@
                     첨부파일된 파일 없음.
                     <% } else { %>
                     <!-- 첨부파일이 있는경우 -->
-                    <a href="<%=request.getContextPath() %>/<%=at.getFilePath() + at.getChangeName() %>"
-                       download=<%= at.getOriginName() %>>
-                        <%= at.getOriginName() %>
+                    <a href="${context}/${at.filePath + at.changeName}"
+                       download="${at.originName}">
+                        ${at.orginName}
                     </a>
                     <% } %>
                 </td>

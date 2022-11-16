@@ -2,6 +2,7 @@ package tk.newsoulmate.web.adopt.sevice;
 
 import tk.newsoulmate.domain.dao.AdoptDao;
 import tk.newsoulmate.domain.dao.BoardDao;
+import tk.newsoulmate.domain.dao.ReplyDao;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Reply;
@@ -70,7 +71,7 @@ public class AdoptService {
 
         Connection conn = getConnection();
 
-        int result = new BoardDao().insertReply(conn, r);
+        int result = new ReplyDao().insertReply(conn, r);
 
         if (result > 0) {
             commit();
@@ -84,7 +85,6 @@ public class AdoptService {
 
         Connection conn = getConnection();
         ArrayList<Reply> list = new BoardDao().selectReplyList(conn, boardNo);
-
         close();
 
         return list;

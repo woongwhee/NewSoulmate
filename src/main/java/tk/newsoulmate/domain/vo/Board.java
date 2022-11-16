@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Board {
     private int boardNo;
     private int memberNo;
-    private String boardType;
+    private BoardType boardType;
     private String boardTitle;
     private String boardContent;
     private int readCount;
@@ -31,16 +31,16 @@ public class Board {
      * 봉사 후기,입양 후기 글작성용 펙토리얼메소드
      * @param memberNo
      * @param issueDate
-     * @param boardType
+     * @param boardName "봉사 후기" ,"입양 후기"
      * @param boardTitle
      * @param boardContent
      * @return
      */
-    public static Board enrollBoard(int memberNo,Date issueDate,String boardType,String boardTitle,String boardContent ){
+    public static Board enrollBoard(int memberNo,Date issueDate,String boardName,String boardTitle,String boardContent ){
         Board b=new Board();
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
-        b.setBoardType(boardType);
+        b.setBoardType(boardName);
         b.setMemberNo(memberNo);
         return b;
     }
@@ -115,6 +115,7 @@ public class Board {
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
         b.setMemberNo(Integer.parseInt(memberNo));
+        b.setBoardType(BoardType.QNA);
         return b;
     }
 
@@ -203,12 +204,18 @@ public class Board {
         this.memberNo = memberNo;
     }
 
-    public String getBoardType() {
+    public BoardType getBoardType() {
         return boardType;
     }
 
-    public void setBoardType(String boardType) {
-        this.boardType = boardType;
+    public void setBoardType(String boardName) {
+        this.boardType = BoardType.valueOfName(boardName);
+    }
+    public void setBoardType(int typeNo) {
+        this.boardType = BoardType.valueOfNo(typeNo);
+    }
+    public void setBoardType(BoardType boardType) {
+        this.boardType =boardType;
     }
 
     public String getBoardTitle() {

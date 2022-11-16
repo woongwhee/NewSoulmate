@@ -181,31 +181,7 @@ public class BoardDao {
 
     }
 
-    public int insertReply(Connection conn, Reply r) {
 
-        int result = 0;
-
-        PreparedStatement psmt = null;
-
-        String sql = prop.getProperty("insertReply");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            psmt.setInt(1, r.getReplyNo());
-            psmt.setInt(2, r.getBoardNo());
-            psmt.setInt(3, Integer.parseInt(String.valueOf(r.getMemberNo())));
-            psmt.setString(4, r.getReplyContent());
-
-            result = psmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(psmt);
-        }
-        return result;
-    }
 
     public ArrayList<Reply> selectReplyList(Connection conn, int boardNo) {
 
@@ -273,22 +249,32 @@ public class BoardDao {
         return listCount;
     }
 
-    public int insertBoard(Board b, Connection conn) {
+    /**
+     *
+     * @param b
+     * @param conn
+     * @return
+     */
+    public synchronized int insertBoard(Board b, Connection conn) {
         int result = 0;
         PreparedStatement psmt = null;
+        PreparedStatement psmt2 = null;
 
-        String sql = prop.getProperty("insertBoard");
+        String insert = prop.getProperty("insertBoard");
+        String selectBno = prop.getProperty("selectBoardNo");
 
         try {
-            psmt = conn.prepareStatement(sql);
+            psmt = conn.prepareStatement(insert);
 
-            psmt.setInt(1, b.getCategoryNo());
-            psmt.setString(2, b.getBoardTitle());
-            psmt.setString(3, b.getBoardContent());
-            psmt.setInt(4, b.getMemberNo());
-
+            psmt.setInt(1, b.getMemberNo());
+            psmt.setInt(2, b.getBoardType().typeNo);
+            psmt.setInt(3, b.getCategoryNo());
+            psmt.setString(4, b.getBoardTitle());
+            psmt.setString(5, b.getBoardContent());
             result = psmt.executeUpdate();
-
+            if(result>0){
+                result=psmt2.executeUpdate();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -299,33 +285,6 @@ public class BoardDao {
     }
 
 
-    //attachment dao 따로 뺴서 만들것
-    public int insertAttachment(Attachment at, Connection conn) {
-
-        int result = 0;
-        PreparedStatement psmt = null;
-
-        String sql = prop.getProperty("insertAttachment");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            psmt.setString(1, at.getOriginName());
-            psmt.setString(2, at.getChangeName());
-            psmt.setString(3, at.getFilePath());
-
-            result = psmt.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close(psmt);
-        }
-
-        return result;
-
-
-    }
 
 
     public List<Board> selectVolunteerThumNail(Connection conn, int page) {
@@ -387,41 +346,6 @@ public class BoardDao {
             close(psmt);
         }
         return b;
-    }
-
-    public Attachment selectInquireAttachment(Connection conn, int boardNo) {
-
-        Attachment at = null;
-        PreparedStatement psmt = null;
-        ResultSet rset = null;
-
-        String sql = prop.getProperty("selectInquireAttachment");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            psmt.setInt(1, boardNo);
-
-            rset = psmt.executeQuery();
-
-            if (rset.next()) {
-                at = new Attachment();
-                at.setFileNo(rset.getInt("FILE_NO"));
-                at.setOriginName(rset.getString("ORIGIN_NAME"));
-                at.setChangeName(rset.getString("CHANGE_NAME"));
-                at.setFilePath(rset.getString("FILE_PATH"));
-
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close(rset);
-            close(psmt);
-        }
-        return at;
-
-
     }
 
 

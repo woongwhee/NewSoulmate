@@ -5,7 +5,8 @@ import java.sql.Date;
 public class Attachment {
 	
 	private int fileNo;
-	private int refNo;
+	private int boardNo;
+	private int replyNo;
 	private String originName;
 	private String changeName;
 	private String filePath;
@@ -17,34 +18,80 @@ public class Attachment {
 		super();
 	}
 
-	public Attachment(int fileNo, int refNo, String originName, String changeName, String filePath, Date uploadDate,
-			int filelevel, String status) {
-		super();
-		this.fileNo = fileNo;
-		this.refNo = refNo;
-		this.originName = originName;
-		this.changeName = changeName;
-		this.filePath = filePath;
-		this.uploadDate = uploadDate;
-		this.filelevel = filelevel;
-		this.status = status;
+	/**
+	 * 게시글용 첨부파일 팩토리얼
+	 * @param fileNo
+	 * @param boardNo
+	 * @param originName
+	 * @param changeName
+	 * @param filePath
+	 * @param uploadDate
+	 * @param filelevel
+	 * @return
+	 */
+	public static Attachment fileAttachment(int fileNo, int boardNo, String originName, String changeName, String filePath, Date uploadDate, int filelevel) {
+		Attachment at=new Attachment();
+		at.setFileNo(fileNo);
+		at.setBoardNo(boardNo);
+		at.setOriginName(originName);
+		at.setChangeName(changeName);
+		at.setFilePath(filePath);
+		at.setUploadDate(uploadDate);
+		at.setFilelevel(filelevel);
+		return at;
+	}
+
+	/**
+	 * 댓글 첨부파일용 생성 팩토리얼메서드
+	 * @param fileNo
+	 * @param replyNo
+	 * @param originName
+	 * @param changeName
+	 * @param filePath
+	 * @param uploadDate
+	 * @param filelevel
+	 * @return
+	 */
+	public static Attachment replyAttachment(int fileNo, int replyNo, String originName, String changeName, String filePath, Date uploadDate, int filelevel) {
+		Attachment at=new Attachment();
+		at.setFileNo(fileNo);
+		at.setBoardNo(replyNo);
+		at.setOriginName(originName);
+		at.setChangeName(changeName);
+		at.setFilePath(filePath);
+		at.setUploadDate(uploadDate);
+		at.setFilelevel(filelevel);
+		return at;
+	}
+
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
+	public int getReplyNo() {
+		return replyNo;
+	}
+
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
+	}
+
+	public int getFilelevel() {
+		return filelevel;
 	}
 
 	public int getFileNo() {
 		return fileNo;
 	}
-
 	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
 	}
 
-	public int getRefNo() {
-		return refNo;
-	}
-
-	public void setRefNo(int refNo) {
-		this.refNo = refNo;
-	}
 
 	public String getOriginName() {
 		return originName;
