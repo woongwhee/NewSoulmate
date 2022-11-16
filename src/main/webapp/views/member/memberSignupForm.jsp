@@ -114,7 +114,6 @@
 <script>
 
     // 메일 인증번호 - 완료
-
     let checkMail = 0;
     let mailCode;
     let intervalId;
@@ -263,7 +262,7 @@
         memberPw.addEventListener("change", function() {
 
             const inputPw = memberPw.value;
-            const pwReg = /^[a-zA-Z0-9]{8,}$/;
+            const pwReg = /^[a-zA-Z0-9]{6,}$/;
             const pwChkMsg = document.querySelector("#pwChkMsg");
 
             const inputPwRe = memberPwRe.value;
@@ -306,7 +305,6 @@
 
 
         // 닉네임 중복체크 - 완료
-
         const nickName = document.querySelector("#nickName");
         const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,}/;
 
@@ -344,7 +342,6 @@
 
     });
 
-/*
     // 필수입력사항 모두 입력돼야 회원가입 할 수 있게 - 완료
     function signupCheck(){
         if (!(checkId == 1 && checkPwd == 1 && checkPwdRe == 1 && checkNickname == 1 && checkMail ==1)) {
@@ -352,7 +349,6 @@
             return false;
         }
     };
-*/
 
 
 </script>
