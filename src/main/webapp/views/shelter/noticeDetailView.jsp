@@ -9,13 +9,19 @@
 <html>
 <head>
     <title>환승주인 - 상세보기</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="../../css/template/menubar.css" rel="stylesheet">
-    <link href="../../css/template/footer.css" rel="stylesheet">
+    <%@include file="/views/template/styleTemplate.jsp"%>
+
 
 </head>
 <body>
-  
+<header><%@include file="/views/template/menubar.jsp"%></header>
+<main>
+    <img src="${n.filename}" alt="">
+    
+
+
+
+</main>
+<footer><%@include file="/views/template/footer.jsp"%></footer>
 </body>
 </html>

@@ -1,7 +1,9 @@
 package tk.newsoulmate.web.shelter.service;
 
+import tk.newsoulmate.domain.dao.NoticeDao;
 import tk.newsoulmate.domain.dao.ShelterDao;
 import tk.newsoulmate.domain.vo.City;
+import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.domain.vo.Village;
 import tk.newsoulmate.web.common.JDBCTemplet;
@@ -9,23 +11,25 @@ import tk.newsoulmate.web.common.JDBCTemplet;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
+
 public class ShelterService {
 
     public ArrayList<Shelter> selectList(){
-        Connection conn = JDBCTemplet.getConnection();
+        Connection conn = getConnection();
 
         ArrayList<Shelter> list = new ShelterDao().selectShelterList(conn);
 
-        JDBCTemplet.close();
+        close();
 
         return list;
     }
 
     public ArrayList<City> selectCity(){
-        Connection conn = JDBCTemplet.getConnection();
+        Connection conn = getConnection();
         ArrayList<City> cList = new ShelterDao().selectCityAll(conn);
 
-        JDBCTemplet.close();
+        close();
 
         return cList;
     }
@@ -40,42 +44,49 @@ public class ShelterService {
 //    }
 
     public ArrayList<Village> selectVillage(long cityNo){
-        Connection conn = JDBCTemplet.getConnection();
+        Connection conn = getConnection();
 
         ArrayList<Village> vList2 = new ShelterDao().selectVillage(cityNo,conn);
 
-        JDBCTemplet.close();
+        close();
 
         return vList2;
     }
 
     public ArrayList<Shelter> selectShelterByVillage(int villageNo){
-        Connection conn = JDBCTemplet.getConnection();
+        Connection conn = getConnection();
 
         ArrayList<Shelter> sList = new ShelterDao().selectShelterByVillage(villageNo,conn);
 
-        JDBCTemplet.close();
+        close();
 
         return sList;
     }
     public ArrayList<Shelter> selectShelterByCity(int cityNo){
-        Connection conn = JDBCTemplet.getConnection();
+        Connection conn = getConnection();
 
         ArrayList<Shelter> sList = new ShelterDao().selectShelterByCity(cityNo,conn);
 
-        JDBCTemplet.close();
+        close();
 
         return sList;
     }
 
     public Shelter shelterListByShelterNo(long shelterNo){
 
-        Connection conn = JDBCTemplet.getConnection();
+        Connection conn = getConnection();
 
         Shelter s = new ShelterDao().shelterListByShelterNo(shelterNo,conn);
 
-        JDBCTemplet.close();
+        close();
 
         return s;
     }
+    public Notice selectNotice(long dno) {
+        Connection conn= getConnection();
+        Notice n= new NoticeDao().selectNotice(conn,dno);
+        close();
+        return n;
+    }
+
 }

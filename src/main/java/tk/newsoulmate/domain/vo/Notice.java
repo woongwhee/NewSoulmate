@@ -75,7 +75,7 @@ public class Notice{
     public Notice() {
     }
 
-    public Notice(long desertionNo, String noticeNo, String filename, String happenDt, String happenPlace, String kindCd, String colorCd, String age, String weight, String noticeSdt, String noticeEdt, String popfile, String processState, String sexCd, String neuterYn, String specialMark, String careNm, String careTel, String careAddr, String orgNm, String chargeNm, String officetel) {
+    public Notice(long desertionNo, String filename, String happenDt, String happenPlace, String kindCd, String colorCd, String age, String weight, String noticeNo, String noticeSdt, String noticeEdt, String popfile, String processState, String sexCd, String neuterYn, String specialMark, String careNm, String careTel, String careAddr, String orgNm, String chargeNm, String officetel) {
         this.desertionNo = desertionNo;
         this.noticeNo = noticeNo;
         this.filename = filename;
