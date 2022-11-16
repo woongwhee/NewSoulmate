@@ -1,9 +1,12 @@
 package tk.newsoulmate.web.adopt.sevice;
 
+import tk.newsoulmate.domain.dao.AdoptDao;
 import tk.newsoulmate.domain.dao.BoardDao;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Reply;
+import tk.newsoulmate.domain.vo.Subscription;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -86,7 +89,36 @@ public class AdoptService {
 
         return list;
     }
+    public int adoptApplyInsert(Subscription sb){
+        Connection conn = getConnection();
+        int result = new AdoptDao().adoptApplyInsert(conn,sb);
 
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+
+        return result;
+    }
+
+    public int checkAnimal(String animalNo){
+        Connection conn = getConnection();
+        int checkAnimal = new AdoptDao().checkAnimal(conn,animalNo);
+
+        return checkAnimal;
+    }
+
+    public long shelterNoByName(String animalNo){
+        Connection conn = JDBCTemplet.getConnection();
+
+        long shelterNo = new AdoptDao().shelterNoByName(conn,animalNo);
+
+        JDBCTemplet.close();
+
+        return shelterNo;
+    }
 
 
 }
