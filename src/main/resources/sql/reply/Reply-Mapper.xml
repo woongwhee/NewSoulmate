@@ -14,15 +14,29 @@
     AND BOARD_NO = ?
     ORDER BY CREATE_DATE DESC , REPLY_NO
 </entry>
-
-    <entry key="insertReply">
+    <entry key="selectReplyNo">
+        SELECT
+            SQ_COMMENT_PK.NEXTVAL
+        FROM DUAL
+    </entry>
+    <entry key="insertBoardReply">
         INSERT INTO REPLY
         (REPLY_NO,
         BOARD_NO,
         USER_NO,
         REPLY_CONTENT)
         VALUES
-        (SEQ_BNO.NEXTVAL,
+        (SQ_COMMENT_PK.NEXTVAL,
+        ?,?,?)
+    </entry>
+    <entry key="insertNoticeReply">
+        INSERT INTO REPLY
+        (REPLY_NO,
+        NOTICE_NO,
+        USER_NO,
+        REPLY_CONTENT)
+        VALUES
+        (?,
         ?,?,?)
     </entry>
 </properties>

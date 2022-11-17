@@ -8,8 +8,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "adoptApplyInsertController", value = "/adoptApplyInsert")
-public class adoptApplyInsertController extends HttpServlet {
+@WebServlet(name = "AAdoptApplyInsertController", value = "/adoptApplyInsert")
+public class AdoptApplyInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

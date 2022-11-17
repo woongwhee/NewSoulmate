@@ -72,13 +72,16 @@
         )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
-
-    <entry key="insertBoard">
-        INSERT INTO BOARD(BOARD_NO,MEMBER_NO, TYPE_NO, CATEGORY_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_STATUS)
-        VALUES (SQ_BOARD_PK.NEXTVAL, ?, ?, ?, ?, ?, ?,'Y')
+    <entry key="insertReviewBoard">
+        INSERT INTO BOARD(BOARD_NO,MEMBER_NO, TYPE_NO,  BOARD_TITLE, BOARD_CONTENT, BOARD_STATUS,FILE_COUNT,ISSUE_DATE)
+        VALUES (?, ?, ?, ?, ? ,'Y',?,?)
+    </entry>
+    <entry key="insertQnABoard">
+        INSERT INTO BOARD(BOARD_NO,MEMBER_NO, TYPE_NO,  BOARD_TITLE, BOARD_CONTENT, BOARD_STATUS,FILE_COUNT,CATEGORY_NO)
+        VALUES (?, ?, ?, ?, ? ,'Y',?,?)
     </entry>
     <entry key="selectBoardNo">
-        SELECT SQ_BOARD_PK.CURVAL FROM DUAL
+        SELECT SQ_BOARD_PK.NEXTVAL FROM DUAL
     </entry>
     <entry key="increaseCount">
         UPDATE BOARD
