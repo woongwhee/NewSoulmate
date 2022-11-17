@@ -2,9 +2,13 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
+    <!-- 1:1문의 카테고리 리스트   -->
     <entry key="selectCategoryList">
         SELECT CATEGORY_NO, CATEGORY_NAME
         FROM CATEGORY
         WHERE TYPE_NO = 4
     </entry>
+
+
+
 </properties>

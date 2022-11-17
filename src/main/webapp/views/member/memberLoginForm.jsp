@@ -60,10 +60,10 @@
         let memberId = $("input[name=memberId]").val();
         console.log(memberId);
 
-        if($("#saveId").is(":checked")){ // true 체크된 상태
-            document.cookie = "saveId="+memberId+"; path=/; max-age="+60*60*24*7; //쿠키 최대 시간 설정(7일)
-        }else{ // 체크안된상태
-            document.cookie = "saveId="+memberId+"; path=/; max-age="+0; //최대시간을 0으로 설정해서 해당쿠키를 제거
+        if($("#saveId").is(":checked")){
+            document.cookie = "saveId="+memberId+"; path=/; max-age="+60*60*24*7;
+        }else{
+            document.cookie = "saveId="+memberId+"; path=/; max-age="+0;
         }
         let form = $("#login-form");
         form.submit();

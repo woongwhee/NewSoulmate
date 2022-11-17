@@ -43,9 +43,12 @@
                     <h4>후원 금액</h4>
                 </td>
                 <td>
-                    <input type="button" value="10,000원"> <input type="button" value="20,000원"><input type="button"
-                                                                                                      value="30,000원"><input type="button" value="50,000원"><br><input type="button"
-                                                                                                                                                                      value="100,000원">
+                    <input type="button" value="10,000원">
+                    <input type="button" value="20,000원">
+                    <input type="button" value="30,000원">
+                    <input type="button" value="50,000원">
+                    <br>
+                    <input type="button" value="100,000원">
                 </td>
             </tr>
         </table>
@@ -58,10 +61,6 @@
         <p>후원 내역 확인 등 마이페이지 이용 시 꼭 필요한 정보이니, 명확하게 기입해 주세요.</p>
         <form action="" value="" method="post">
             <table id="">
-                <tr>
-                    <td><label for="">구분</label></td>
-                    <td><input type="button" value="개인"> <input type="button" value="사업자"></td>
-                </tr>
                 <tr>
                     <td><label for="">이름</label></td>
                     <td><input type="text" name="" id="" placeholder="내용을 입력해주세요" ></td>
@@ -154,6 +153,47 @@
 
 
     </script>
+
+
+
+
+   <%-- <script>
+
+        function requestPay() {
+            var IMP = window.IMP;
+            var code = "imp38841066";
+            IMP.init(code);
+
+            // 결제요청
+            IMP.request_pay({
+
+                pg : 'kakaopay',
+                pay_method : 'card', //생략 가능
+                merchant_uid: 'm' + new Date().getTime(), // 상점에서 관리하는 주문 번호
+                name : "환승주인 후원하기",
+                amount : 100,
+                buyer_email : 'newsoulmatemaster@gmail.com',
+                buyer_name : 'memberName',
+                buyer_tel : 'Phone',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '12345'
+
+            }, function(rsp) {
+                if ( rsp.success ) {
+                    var msg = "결제가 완료되었습니다.";
+                    msg += '고유ID : ' + rsp.imp_uid;
+                    msg += '상점 거래ID : ' + rsp.merchant_uid;
+                    msg += '결제 금액 : ' + rsp.paid_amount;
+                    msg += '카드 승인번호 : ' + rsp.apply_num;
+                }
+                else {
+                    var msg = '결제에 실패하였습니다. 에러내용 : ' + rsp.error_msg
+                }
+                alert(msg);
+            });
+        }
+
+    </script>--%>
 
 
 

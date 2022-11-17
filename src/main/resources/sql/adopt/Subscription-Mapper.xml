@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="insertSubscription">
+        INSERT INTO SUBSCRIPTION(SUB_NO,MEMBER_NO,SHELTER_NO,ANIMAL_ID,TEL_NUM,NAME,GENDER,ADOPT_REASON,FAMILY_AGREEMENT,WHEN_SICK,BIG_DUTY,WISH_DATE,SUB_READ,SUB_DATE)
+        VALUES(SQ_SUBSCRIPTION_PK.nextval,?,?,?,?,?,?,?,?,?,?,?,?,DEFAULT)
+    </entry>
+
+
+
+</properties>

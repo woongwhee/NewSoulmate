@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<!--API키는 이파일에서 관리할것!-->
+<properties>
+
+<entry key="selectReplyList">
+    SELECT REPLY_NO,
+    USER_NO,
+    REPLY_CONTENT,
+    TO_CHAR(REPLY_DATE , 'YY/MM/DD HH:MI:SS') REPLY_DATE
+    FROM REPLY R
+    JOIN MEMBER ON (REPLY_WRITER = USER_NO)
+    WHERE R.REPLY_STATUS = 'Y'
+    AND BOARD_NO = ?
+    ORDER BY CREATE_DATE DESC , REPLY_NO
+</entry>
+
+    <entry key="insertReply">
+        INSERT INTO REPLY
+        (REPLY_NO,
+        BOARD_NO,
+        USER_NO,
+        REPLY_CONTENT)
+        VALUES
+        (SEQ_BNO.NEXTVAL,
+        ?,?,?)
+    </entry>
+</properties>

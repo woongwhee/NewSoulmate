@@ -1,9 +1,8 @@
 package tk.newsoulmate.web.adopt.sevice;
 
-import tk.newsoulmate.domain.dao.BoardDao;
-import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.PageInfo;
-import tk.newsoulmate.domain.vo.Reply;
+import tk.newsoulmate.domain.dao.*;
+import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -23,11 +22,11 @@ public class AdoptService {
         return list;
     }
 
-    public int adoptReviewListCount() {
+    public int selectListCount() {
 
         Connection conn = getConnection();
 
-        int listCount = new BoardDao().adoptReviewListCount(conn);
+        int listCount = new BoardDao().boardListCount(conn, BoardType.ADOPT);
 
         close();
 
@@ -35,11 +34,11 @@ public class AdoptService {
 
     }
 
-    public int readCount(int boardNo) {
+    public int increaseReadCount(int boardNo) {
 
         Connection conn = getConnection();
 
-        int result = new BoardDao().readCount(conn, boardNo);
+        int result = new BoardDao().increaseCount(conn, boardNo);
 
         if(result > 0) {
             commit();
@@ -53,21 +52,16 @@ public class AdoptService {
     }
 
     public Board selectAdoptReviewDetail(int boardNo) {
-
         Connection conn = getConnection();
-
         Board b = new BoardDao().selectAdoptReviewDetail(conn, boardNo);
-
         close();
 
         return b;
     }
 
     public int insertReply(Reply r) {
-
         Connection conn = getConnection();
-
-        int result = new BoardDao().insertReply(conn, r);
+        int result = new ReplyDao().insertReply(conn, r);
 
         if (result > 0) {
             commit();
@@ -80,13 +74,45 @@ public class AdoptService {
     public ArrayList<Reply> selectReplyList(int boardNo){
 
         Connection conn = getConnection();
-        ArrayList<Reply> list = new BoardDao().selectReplyList(conn, boardNo);
-
+        ArrayList<Reply> list = new ReplyDao().selectReplyList(conn, boardNo);
         close();
 
         return list;
     }
 
+    /**
+     * 입양신청을 db에 저장하단. 전달한다.
+     * @param sb
+     * @return 결과를 0 , 1 로반환한다.
+     */
+    public int insertSubscription(Subscription sb){
+        Connection conn = getConnection();
+        int result = new SubscriptionDao().insertSubscription(conn,sb);
+
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+
+        return result;
+    }
+
+    public int checkAnimal(String animalNo){
+        Connection conn = getConnection();
+        int checkAnimal = new NoticeDao().checkAnimal(conn,animalNo);
+        close();
+        return checkAnimal;
+    }
+
+    public long shelterNoByName(String animalNo){
+        Connection conn = JDBCTemplet.getConnection();
+        long shelterNo = new ShelterDao().shelterNoByName(conn,animalNo);
+        JDBCTemplet.close();
+
+        return shelterNo;
+    }
 
 
 }

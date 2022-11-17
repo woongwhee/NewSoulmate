@@ -3,13 +3,12 @@ package tk.newsoulmate.web.inquire.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tk.newsoulmate.domain.dao.BoardDao;
-import tk.newsoulmate.domain.vo.PageInfo;
+import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.web.common.JDBCTemplet;
-import tk.newsoulmate.domain.vo.Board;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
 
 class InquireServiceTest {
 
@@ -17,7 +16,10 @@ class InquireServiceTest {
     @Test
     void selectListCount() {
         Connection conn= JDBCTemplet.getTestConnection();
-        int count= new BoardDao().selectListCount(conn,"문의");
+        Member m=new Member();
+        m.setMemberNo(1);
+        m.setMemberGrade(MemberGrade.SITE_MANAGER);
+        int count= new BoardDao().selectQnAListCount(conn, BoardType.QNA,m);
         Assertions.assertEquals(count,0);
         try {
             conn.close();
@@ -30,8 +32,10 @@ class InquireServiceTest {
     void selectQnAList() {
         Connection conn = JDBCTemplet.getTestConnection();
         PageInfo pi= new PageInfo(1,1,"문의");
-        ArrayList<Board> list = new BoardDao().selectQnAList(conn, pi);
-
+        Member m=new Member();
+        m.setMemberNo(1);
+        m.setMemberGrade(MemberGrade.SITE_MANAGER);
+        ArrayList<Board> list = new BoardDao().selectQnAList(conn, pi,m);
 
 
     }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<!--API키는 이파일에서 관리할것!-->
+<properties>
+
+    <entry key="insertAttachment">
+        INSERT INTO ATTACHMENT(FILE_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+        VALUES (SQ_ATTACHMENT_PK.NEXTVAL,?, ?, ?)
+    </entry>
+
+    <entry key="selectInquireAttachment">
+        SELECT FILE_NO,
+                ORIGIN_NAME,
+                CHANGE_NAME,
+                FILE_PATH
+        FROM ATTACHMENT
+        WHERE BOARD_NO = ?
+        ORDER BY FILE_NO
+    </entry>
+
+
+
+
+
+
+
+
+
+
+
+</properties>

@@ -1,7 +1,9 @@
 package tk.newsoulmate.web.shelter.service;
 
+import tk.newsoulmate.domain.dao.CityDao;
 import tk.newsoulmate.domain.dao.NoticeDao;
 import tk.newsoulmate.domain.dao.ShelterDao;
+import tk.newsoulmate.domain.dao.VillageDao;
 import tk.newsoulmate.domain.vo.City;
 import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.domain.vo.Shelter;
@@ -27,8 +29,7 @@ public class ShelterService {
 
     public ArrayList<City> selectCity(){
         Connection conn = getConnection();
-        ArrayList<City> cList = new ShelterDao().selectCityAll(conn);
-
+        ArrayList<City> cList = new CityDao().selectCityAll(conn);
         close();
 
         return cList;
@@ -46,7 +47,7 @@ public class ShelterService {
     public ArrayList<Village> selectVillage(long cityNo){
         Connection conn = getConnection();
 
-        ArrayList<Village> vList2 = new ShelterDao().selectVillage(cityNo,conn);
+        ArrayList<Village> vList2 = new VillageDao().selectVillage(cityNo,conn);
 
         close();
 
