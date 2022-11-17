@@ -37,21 +37,18 @@
         <script>
             $(()=>{
                 setNoticeLocation();
-
             })
             function setNoticeLocation(){
                 $("#main_top>.slider>post").click(()=>{
                     let dno=$(this).getAttribute("id");
                     location.href="<%=request.getContextPath()%>/noticeDetail?dno="+dno;
-
-
                 })
-
             }
         </script>
     </div>
     <div id="main_left">
         <div id="adopt-review">
+            <div id="comment2">입양후기+</div>
             <div class="slider">
                 <div><img src="" alt="">사진1</div>
                 <div><img src="" alt="">사진2</div>
@@ -62,7 +59,8 @@
             </div>
         </div>
         <div id="volunteer-review">
-            봉사후기
+            <div id="comment3">봉사후기+</div>
+            <div id="volunteer-review-list">
             <ul>
                 <li>1</li>
                 <li>2</li>
@@ -70,7 +68,10 @@
                 <li>4</li>
                 <li>5</li>
             </ul>
-            <button>dd</button>
+            </div>
+            <div id="btn-area">
+            <button id="shelterbtn">전국 유기동물<br>보호소 보러가기</button>
+            </div>
         </div>
         <div id="adopt-able-animal">
             <table id="box3_table">
