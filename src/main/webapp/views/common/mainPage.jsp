@@ -30,6 +30,7 @@
 <div id="container">
 
     <div id="main_top">
+        <div id="coment">지금 새로운 주인을 기다리고있어요..</div>
         <div class="slider">
             <%@include file="/views/common/noticeSlide.jsp"%>
         </div>
