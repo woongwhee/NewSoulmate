@@ -14,7 +14,7 @@ import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet(name = "InquireInsertController", value = "/inquireInsert")
+@WebServlet(name = "InquireInsertController", value = "/inquireInsert.bo")
 public class InquireInsertController extends HttpServlet {
     public InquireInsertController(){
         super();
@@ -48,6 +48,8 @@ public class InquireInsertController extends HttpServlet {
                 at.setOriginName(multipartRequest.getOriginalFileName("upfile")); //원본파일명
                 at.setChangeName(multipartRequest.getFilesystemName("upfile")); //수정파일명
                 at.setFilePath("resources/board_upfiles/");
+            }else{
+                System.out.println("저장안되는데?");
             }
             int result = new InquireService().insertInquire(b, at);
 

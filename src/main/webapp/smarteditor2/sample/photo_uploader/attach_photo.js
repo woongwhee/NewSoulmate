@@ -334,8 +334,8 @@
     function html5Upload() {	
     	var tempFile,
     		sUploadURL;
-    	
-    	sUploadURL= '/views/adopt/adoptReviewDetail.jsp'
+
+    	sUploadURL= '/NewSoulmate/saveAttach'
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -363,6 +363,7 @@
 						alert("이미지 파일(jpg,gif,png,bmp)만 업로드 하실 수 있습니다. ("+sFileName+")");
 					}else{
 						//성공 시에  responseText를 가지고 array로 만드는 부분.
+						console.log(res._response.responseText);
 						makeArrayFromString(res._response.responseText);
 					}
 				}
@@ -374,6 +375,7 @@
 		oAjax.header("file-name",encodeURIComponent(tempFile.name));
 		oAjax.header("file-size",tempFile.size);
 		oAjax.header("file-Type",tempFile.type);
+		console.log(tempFile , encodeURIComponent(tempFile.name));
 		oAjax.request(tempFile);
     }
     
@@ -479,9 +481,9 @@
  	 */
  	function callFileUploader (){
  		oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
- 			sUrl  : '/views/adopt/adoptReviewDetail.jsp',	//샘플 URL입니다.
- 	        sCallback :  '/smarteditor2/sample/photo_uploader/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
- 	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
+ 			sUrl  : '/NewSoulmate/views/adopt/adoptReviewDetail.jsp',	//샘플 URL입니다.
+ 	        sCallback :  '/NewSoulmate/smarteditor2/sample/photo_uploader/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+ 	    	sFiletype : "*",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)
  	    	sMsgNotAllowedExt : 'JPG, GIF, PNG, BMP 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
  	    	bAutoUpload : false,									 	//파일이 선택됨과 동시에 자동으로 업로드를 수행할지 여부 (upload 메소드 수행)
  	    	bAutoReset : true 											// 업로드한 직후에 파일폼을 리셋 시킬지 여부 (reset 메소드 수행)
@@ -580,6 +582,7 @@
  	function setPhotoToEditor(oFileInfo){
 		if (!!opener && !!opener.nhn && !!opener.nhn.husky && !!opener.nhn.husky.PopUpManager) {
 			//스마트 에디터 플러그인을 통해서 넣는 방법 (oFileInfo는 Array)
+			console.log(oFileInfo)
 			opener.nhn.husky.PopUpManager.setCallback(window, 'SET_PHOTO', [oFileInfo]);
 			//본문에 바로 tag를 넣는 방법 (oFileInfo는 String으로 <img src=....> )
 			//opener.nhn.husky.PopUpManager.setCallback(window, 'PASTE_HTML', [oFileInfo]);
