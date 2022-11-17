@@ -45,9 +45,7 @@
 
         <div> 어떤 동물들이 있는지 궁금합니다.</div>
         <p> 개, 고양이등 기타 동물들이 있습니다.</p>
-        loginUser.memberGrade=MemberGrade.siteManager;
-        셀렉트 *
-        아니며 member=?
+
         <script>
             $(function(){
                 $(document).on("click", "#Fcontent div" ,function(){
