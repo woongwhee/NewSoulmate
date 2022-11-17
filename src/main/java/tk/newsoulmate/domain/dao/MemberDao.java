@@ -80,10 +80,10 @@ public class MemberDao {
         String memberPwd = resultSet.getString("MEMBER_PWD");
         String memberName = resultSet.getString("MEMBER_NAME");
         String nickname = resultSet.getString("NICKNAME");
-        MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
+        MemberGrade memberGrade = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
-        Member m = new Member(memberNo, memberId, memberName, nickname, phone, email, mg);
+        Member m = new Member(memberNo, memberId, memberName, phone, email, nickname, memberGrade);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHLETER_NO");
             m.setShelterNo(shelterNo);

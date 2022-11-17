@@ -13,6 +13,13 @@ public class Support {
     private int price;
     private Date payTime;
 
+    public Support(int SupportNo, int memberNo, int price) {
+        super();
+        this.supportNo = supportNo;
+        this.memberNo = memberNo;
+        this.price = price;
+    }
+
     public int getSupportNo() {
         return supportNo;
     }

@@ -24,6 +24,8 @@
                 </c:if>
             </ul>
         </div>
+
+
     </div>
 
     <nav class="navbar">
@@ -64,7 +66,7 @@
             <div class="dropdown">
                 <button class="dropdown-btn"><a href="#">후원</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">후원하기</a>
+                    <a href="${context}/supportPayment">후원하기</a>
                     <a href="#">후원내역</a>
                 </div>
             </div>
