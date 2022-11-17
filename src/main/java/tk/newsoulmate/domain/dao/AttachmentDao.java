@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Attachment;
+import tk.newsoulmate.domain.vo.Board;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -59,12 +60,39 @@ public class AttachmentDao {
 
 
     }
-    public int insertAttachment(Attachment at, Connection conn) {
+    public int insertInquireNewAttachment(Attachment at, Connection conn){
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("insertInquireNewAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1,at.getBoardNo());
+            psmt.setString(2,at.getOriginName());
+            psmt.setString(3,at.getChangeName());
+            psmt.setString(4,at.getFilePath());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+
+
+
+
+    }
+    public int insertInquireAttachment(Attachment at, Connection conn) {
 
         int result = 0;
         PreparedStatement psmt = null;
 
-        String sql = prop.getProperty("insertAttachment");
+        String sql = prop.getProperty("insertInquireAttachment");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -82,6 +110,47 @@ public class AttachmentDao {
         }
 
         return result;
+
+    }
+
+    public int updateInquireAttachment(Attachment at, Connection conn){
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("updateInquireAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1,at.getOriginName());
+            psmt.setString(2,at.getChangeName());
+            psmt.setString(3,at.getFilePath());
+            psmt.setInt(4,at.getFileNo());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
+    public void deleteInquireAttachment(int boardNo, Connection conn){
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("deleteInquireAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, boardNo);
+
+            psmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
 
 
     }

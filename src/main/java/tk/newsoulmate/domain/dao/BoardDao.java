@@ -338,5 +338,54 @@ public class BoardDao {
         return b;
     }
 
+    /**
+     * 1:1문의 수정
+     * @param conn
+     * @param b
+     * @return
+     */
+    public int updateInquireBoard(Connection conn, Board b) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("updateInquireBoard");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1,b.getCategoryNo());
+            psmt.setString(2,b.getBoardTitle());
+            psmt.setString(3,b.getBoardContent());
+            psmt.setInt(4,b.getBoardNo());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
+    public int deleteInquireBoard(int boardNo, Connection conn){
+        int result = 0;
+
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("deleteInquireBoard");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1,boardNo);
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
 
 }

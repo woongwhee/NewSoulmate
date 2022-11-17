@@ -115,7 +115,7 @@
                     // 클릭시 해당 공지사항의 번호를 넘겨야함.
                     // 해당 tr요소의 자손중에서 첫번째 td의 영역의 내용이 필요.
                     if($(this).text()!=$("#tableEmpty").text()) { // 조회된 리스트가 없을경우 클릭방지
-                        let bno = $(this).children().eq(1).text(); // 1, 2
+                        let bno = $(this).children().eq(1).text(); // 1 => b.getBoardNo()
                         // 현재 내가클릭한 tr의 자손들중 1번째에 위치한 자식의 textnode내용을 가져온다.
 
                         // 요청할 url?키=밸류&키=밸류&키=밸류
