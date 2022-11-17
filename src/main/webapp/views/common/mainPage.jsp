@@ -30,7 +30,7 @@
 <div id="container">
 
     <div id="main_top">
-        <div id="coment">지금 새로운 주인을 기다리고있어요..</div>
+        <div id="comment">지금 새로운 주인을 기다리고있어요..</div>
         <div class="slider">
             <%@include file="/views/common/noticeSlide.jsp"%>
         </div>
@@ -51,7 +51,7 @@
         </script>
     </div>
     <div id="main_left">
-        <div class="main_left_box1">
+        <div id="adopt-review">
             <div class="slider">
                 <div><img src="" alt="">사진1</div>
                 <div><img src="" alt="">사진2</div>
@@ -61,7 +61,7 @@
                 <div><img src="image/bono.jpg" alt="">보노보노</div>
             </div>
         </div>
-        <div class="main_left_box2">
+        <div id="volunteer-review">
             봉사후기
             <ul>
                 <li>1</li>
@@ -72,7 +72,7 @@
             </ul>
             <button>dd</button>
         </div>
-        <div class="main_left_box3">
+        <div id="adopt-able-animal">
             <table id="box3_table">
                 <tr>
                     <td><input type="button" value="입양가능 동물"></td>
