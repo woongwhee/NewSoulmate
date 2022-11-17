@@ -12,12 +12,8 @@ public class Board {
     private int reportNo;
     private String memberName;
     private Date createDate;
-
-
     private String resultStatus;
-
     private int fileCount;
-
 
     private int categoryNo;
 
@@ -120,6 +116,15 @@ public class Board {
         b.setBoardContent(boardContent);
         b.setMemberNo(Integer.parseInt(memberNo));
         b.setBoardType(BoardType.QNA);
+        return b;
+    }
+
+    public static Board updateInquire(int boardNo, String categoryName, String boardTitle, String boardContent){
+        Board b = new Board();
+        b.setBoardNo(boardNo);
+        b.setCategoryName(categoryName);
+        b.setBoardTitle(boardTitle);
+        b.setBoardContent(boardContent);
         return b;
     }
 

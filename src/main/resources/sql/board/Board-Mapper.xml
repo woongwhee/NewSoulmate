@@ -105,6 +105,19 @@
             AND B.BOARD_STATUS = 'Y'
     </entry>
 
+    <entry key="updateInquireBoard">
+        UPDATE BOARD
+        SET CATEGORY_NO = ?
+        ,BOARD_TITLE = ?
+        ,BOARD_CONTENT = ?
+        WHERE BOARD_NO = ?
+    </entry>
+
+    <entry key="deleteInquireBoard">
+        UPDATE BOARD
+        SET BOARD_STATUS = 'N'
+        WHERE BOARD_NO = ?
+    </entry>
 
 
 </properties>

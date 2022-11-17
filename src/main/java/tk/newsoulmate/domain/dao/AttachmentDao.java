@@ -137,6 +137,47 @@ public class AttachmentDao {
 
         return result;
 
+    }
+
+    public int updateInquireAttachment(Attachment at, Connection conn){
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("updateInquireAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1,at.getOriginName());
+            psmt.setString(2,at.getChangeName());
+            psmt.setString(3,at.getFilePath());
+            psmt.setInt(4,at.getFileNo());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
+    public void deleteInquireAttachment(int boardNo, Connection conn){
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("deleteInquireAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, boardNo);
+
+            psmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+
 
     }
 

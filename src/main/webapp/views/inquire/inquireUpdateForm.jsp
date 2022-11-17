@@ -35,7 +35,7 @@
           <tr>
             <th width="100">카테고리</th>
             <td width="500">
-              <select name="category">
+              <select name="categoryName">
                 <% for(Category c : list) { %>
                 <option value="<%= c.getCategoryNo() %>"><%= c.getCategoryName() %></option>
 
@@ -63,13 +63,13 @@
           </tr>
           <tr>
             <th>제목</th>
-            <td><input type="text" name="title" required value="<%=b.getBoardTitle() %>"></td>
+            <td><input type="text" name="boardTitle" required value="<%=b.getBoardTitle() %>"></td>
 
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea name="content" id="" cols="30" rows="10" required ><%=b.getBoardContent()%></textarea>
+              <textarea name="boardContent" id="" cols="30" rows="10" required ><%=b.getBoardContent()%></textarea>
             </td>
           </tr>
           <tr>
