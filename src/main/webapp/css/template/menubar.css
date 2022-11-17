@@ -14,12 +14,6 @@ a {
     color: black;
 }
 
-#header_total {
-    width: 1200px;
-    height: auto;
-}
-
-
 .headcontainer {
     width: 1200px;
     height: auto;
@@ -35,13 +29,11 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 3px 90px;
+    padding: 3px 0;
 }
 
-.navbar_logo {}
-
 #user {
-    padding: 80px 12px;
+    padding: 100px 12px 0 12px;
 }
 
 #user ul {
@@ -90,6 +82,7 @@ a {
     width: 420px;
     padding: 10px;
     font-size: 18px;
+    text-align: center;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -131,4 +124,8 @@ a {
 
 .dropdown:hover .dropdown-submenu {
     display: block;
+}
+
+#user a:hover {
+    color: #f45d48;
 }
