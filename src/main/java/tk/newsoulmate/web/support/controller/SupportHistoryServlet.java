@@ -5,11 +5,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "supportPaymentPage", value = "/supportPaymentPage")
-public class SupportPaymentServlet extends HttpServlet {
+@WebServlet(name = "supportHistoryPage", value = "/supportHistoryPage")
+public class SupportHistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("views/support/supportPayment.jsp").forward(request,response);
+
+        request.getRequestDispatcher("views/support/supportHistory.jsp").forward(request,response);
 
     }
 

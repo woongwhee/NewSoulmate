@@ -156,9 +156,10 @@
     </script>
 
 
-   <%-- <script>--%>
 
-   <%--     function requestPay() {
+   <%-- <script>
+
+        function requestPay() {
 
            /* const price = Number($(".value"));*/
             var IMP = window.IMP;
