@@ -3,7 +3,6 @@
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <c:set var="loginUser" value="${sessionScope.loginUser}" scope="session"/>
 <div id="header_total">
-
     <div id="teams">
         <div>
             <p> </p>
@@ -20,7 +19,7 @@
 
                 </c:if>
                 <c:if test="${!empty loginUser}" var="result2">
-                    <li><a href="${context}/mypage">마이페이지</a></li>
+                    <li><a href="${context}/myPage">마이페이지</a></li>
                 </c:if>
             </ul>
         </div>
@@ -40,7 +39,7 @@
                 <button class="dropdown-btn"><a href="">유기동물</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">동물목록</a>
-                    <a href="${context}/shelter/list">보호소</a>
+                    <a href="${context}/shelterList">보호소</a>
                 </div>
             </div>
 

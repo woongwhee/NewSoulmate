@@ -83,7 +83,7 @@ public class MemberDao {
         MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
-        Member m = new Member(memberNo, memberId, memberName, nickname, phone, email, mg);
+        Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHLETER_NO");
             m.setShelterNo(shelterNo);
