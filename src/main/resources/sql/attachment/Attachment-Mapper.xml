@@ -42,14 +42,14 @@
         WHERE FILE_NO = ?
     </entry>
 
-    <entry key="insertInquireNewAttachment">
+    <entry key="insertInquireNewAttchment">
         INSERT INTO ATTACHMENT(FILE_NO, BOARD_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
         VALUES (SQ_ATTACHMENT_PK.NEXTVAL, ?, ?, ?, ?)
     </entry>
 
     <entry key="deleteInquireAttachment">
         UPDATE ATTACHMENT
-        SET BOARD_STATUS = 'N'
+        SET STATUS = 'N'
         WHERE BOARD_NO = ?
     </entry>
 
