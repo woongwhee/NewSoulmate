@@ -215,37 +215,81 @@ public class BoardDao {
     }
 
 
-
+    /**
+     * board의 시퀀스값을 생성시키는 메서드
+     * @return 시퀸스 생성에 실패했을시 0을반환
+     */
+    public int selectBoardNo(Connection conn){
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectBoardNo");
+        int boardNo=0;
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset=psmt.executeQuery();
+            if (rset.next()) {
+                boardNo=rset.getInt("NEXTVAL");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return boardNo;
+    }
 
 
 
 
     /**
-     *
+     * 신고접수 , QnA 게시글 삽입용메서드
      * @param b
      * @param conn
      * @return
      */
-    public synchronized int insertBoard(Board b, Connection conn) {
+    public int insertQnABoard(Board b, Connection conn) {
         int result = 0;
         PreparedStatement psmt = null;
-        PreparedStatement psmt2 = null;
-
-        String insert = prop.getProperty("insertBoard");
-        String selectBno = prop.getProperty("selectBoardNo");
-
+        String insert = prop.getProperty("insertQnABoard");
         try {
             psmt = conn.prepareStatement(insert);
-
-            psmt.setInt(1, b.getMemberNo());
-            psmt.setInt(2, b.getBoardType().typeNo);
-            psmt.setInt(3, b.getCategoryNo());
+            psmt.setInt(1, b.getBoardNo());
+            psmt.setInt(2, b.getMemberNo());
+            psmt.setInt(3, b.getBoardType().typeNo);
             psmt.setString(4, b.getBoardTitle());
             psmt.setString(5, b.getBoardContent());
+            psmt.setInt(6, b.getFileCount());
+            psmt.setInt(7, b.getCategoryNo());
             result = psmt.executeUpdate();
-            if(result>0){
-                result=psmt2.executeUpdate();
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+
+    }
+    /**
+     * 봉사후기게시판 입양후기게시판 게시글 삽입용메서드
+     * @param b
+     * @param conn
+     * @return
+     */
+    public int insertReviewBoard(Board b, Connection conn) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String insert = prop.getProperty("insertQnABoard");
+        try {
+            psmt = conn.prepareStatement(insert);
+            psmt.setInt(1, b.getBoardNo());
+            psmt.setInt(2, b.getMemberNo());
+            psmt.setInt(3, b.getBoardType().typeNo);
+            psmt.setString(4, b.getBoardTitle());
+            psmt.setString(5, b.getBoardContent());
+            psmt.setInt(6, b.getFileCount());
+            psmt.setDate(7, b.getIssueDate());
+            result = psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -257,8 +301,6 @@ public class BoardDao {
 
     public List<Board> selectVolunteerThumNail(Connection conn, int page) {
         List<Board> vList = new ArrayList<>();
-
-
         return vList;
     }
 

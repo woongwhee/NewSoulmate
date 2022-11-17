@@ -28,7 +28,8 @@ public class Member {
         this.memberGrade=MemberGrade.USER;
     }
 
-    public Member(int memberNo, String memberId, String memberName, String phone, String email, String nickName, MemberGrade memberGrade) {
+    public Member(int memberNo, String memberId, String memberName,
+                  String phone, String email, String nickName, MemberGrade memberGrade) {
         this.memberNo = memberNo;
         this.memberId = memberId;
         this.memberName = memberName;

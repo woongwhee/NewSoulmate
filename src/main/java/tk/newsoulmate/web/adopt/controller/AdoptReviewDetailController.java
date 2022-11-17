@@ -13,23 +13,28 @@ public class AdoptReviewDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//
-//        int boardNo = Integer.parseInt(request.getParameter("bno"));
-//
-//        AdoptService bService = new AdoptService();
-//
-//        int result = bService.readCount(boardNo);
-//
-//        if(result > 0) {
-//
-//            Board b = bService.selectAdoptReviewDetail(boardNo);
-//
-//            request.setAttribute("b", b);
-//
-//            request.getRequestDispatcher("views/adopt/adoptReviewDetail.jsp").forward(request, response);
-//        } else {
-//
-//        }
+
+        String boardNo_ =request.getParameter("bno");
+        if(boardNo_==null ||boardNo_.equals("")){
+            request.getSession().setAttribute("errorMsg","잘못된접근입니다.");
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+        int boardNo=Integer.parseInt(boardNo_);
+        AdoptService bService = new AdoptService();
+
+        int result = bService.increaseReadCount(boardNo);
+
+        if(result > 0) {
+
+            Board b = bService.selectAdoptReviewDetail(boardNo);
+
+            request.setAttribute("b", b);
+
+            request.getRequestDispatcher("views/adopt/adoptReviewDetail.jsp").forward(request, response);
+        } else {
+
+        }
     }
 
 
