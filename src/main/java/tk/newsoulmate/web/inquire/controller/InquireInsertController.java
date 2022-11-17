@@ -14,7 +14,7 @@ import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet(name = "InquireInsertController", value = "/inquireInsert.bo")
+@WebServlet(name = "InquireInsertController", value = "/inquireInsert")
 public class InquireInsertController extends HttpServlet {
     public InquireInsertController(){
         super();

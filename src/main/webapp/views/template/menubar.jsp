@@ -40,7 +40,7 @@
                 <button class="dropdown-btn"><a href="">유기동물</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">동물목록</a>
-                    <a href="${context}/shelter/list">보호소</a>
+                    <a href="${context}/shelterList">보호소</a>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                 <button class="dropdown-btn"><a href="#">입양</a></button>
                 <div class="dropdown-submenu">
                     <a href="${context}/adoptApply">입양신청</a>
-                    <a href="#">입양후기</a>
+                    <a href="${context}/adoptReList">입양후기</a>
                     <a href="#">입양절차</a>
                 </div>
             </div>

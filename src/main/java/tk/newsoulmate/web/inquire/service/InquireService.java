@@ -44,21 +44,27 @@ public class InquireService {
 
     public int insertInquire(Board b, Attachment at){
         Connection conn = getConnection();
-
-        int boardNo = new BoardDao().insertBoard(b, conn);
-        int result2 = 1;
-        if(boardNo>0){
-            at.setBoardNo(boardNo);
+        int boardNo = new BoardDao().selectBoardNo(conn);
+        if(boardNo==0){
+            close();
+            return boardNo;
         }
+
+        if(at!=null) b.setFileCount(1);
+        
+        b.setBoardNo(boardNo);
+        int result1 =new BoardDao().insertQnABoard(b, conn);
+        int result2 = 1;
         if(at != null){
+            at.setBoardNo(boardNo);
             result2 = new AttachmentDao().insertAttachment(at, conn);
         }
-
         if(boardNo > 0 && result2 > 0){
             commit();
         } else{
             rollback(conn);
         }
+
         close();
         return boardNo*result2;
     }

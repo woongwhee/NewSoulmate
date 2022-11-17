@@ -27,8 +27,7 @@
         <br>
         <hr>
         <br>
-
-        <form action="<%=request.getContextPath() %>/inquireInsert.bo" method="post" enctype="multipart/form-data">
+        <form action="${context}/inquireInsert" method="post" enctype="multipart/form-data">
             <!-- 카테고리, 제목, 내용, 첨부파일을 입력받고, 작성자의 회원번호는 hidden으로 넘기기. -->
 <%--            <input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>">--%>
             <input type="hidden" name="memberNo" value="${loginUser.memberNo}">
