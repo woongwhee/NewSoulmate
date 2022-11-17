@@ -38,11 +38,13 @@ public class Board {
      * @param boardContent
      * @return
      */
-    public static Board enrollBoard(int memberNo,Date issueDate,String boardName,String boardTitle,String boardContent ){
+    public static Board enrollBoard(int memberNo,int boardNo,Date issueDate,BoardType boardType,String boardTitle,String boardContent ){
         Board b=new Board();
+        b.setBoardNo(boardNo);
+        b.setIssueDate(issueDate);
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
-        b.setBoardType(boardName);
+        b.setBoardType(boardType);
         b.setMemberNo(memberNo);
         return b;
     }

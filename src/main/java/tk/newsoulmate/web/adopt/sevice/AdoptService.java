@@ -113,8 +113,26 @@ public class AdoptService {
 
         return shelterNo;
     }
+    public int selectBoardNo(){
+        Connection conn=getConnection();
+        int boardNo=new BoardDao().selectBoardNo(conn);
+        close();
+        return boardNo;
+    }
 
 
+    public int insertAttachment(Attachment at) {
+        Connection conn = getConnection();
+        int result = new AttachmentDao().insertBoardAttachment(at,conn);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+        return result;
+
+    }
 }
 
 

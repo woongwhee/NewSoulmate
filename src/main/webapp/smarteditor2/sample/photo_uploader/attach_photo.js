@@ -335,7 +335,7 @@
     	var tempFile,
     		sUploadURL;
 
-    	sUploadURL= '/NewSoulmate/views/adopt/adoptReviewDetail.jsp'
+    	sUploadURL= '/NewSoulmate/saveAttach'
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -358,7 +358,6 @@
 			onload : function(res){ // 요청이 완료되면 실행될 콜백 함수
 				var sResString = res._response.responseText;
 				if (res.readyState() == 4) {
-
 					if(sResString.indexOf("NOTALLOW_") > -1){
 						var sFileName = sResString.replace("NOTALLOW_", "");
 						alert("이미지 파일(jpg,gif,png,bmp)만 업로드 하실 수 있습니다. ("+sFileName+")");
@@ -377,7 +376,6 @@
 		oAjax.header("file-size",tempFile.size);
 		oAjax.header("file-Type",tempFile.type);
 		console.log(tempFile , encodeURIComponent(tempFile.name));
-
 		oAjax.request(tempFile);
     }
     

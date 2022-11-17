@@ -3,18 +3,33 @@
 <!--API키는 이파일에서 관리할것!-->
 <properties>
 
-    <entry key="insertAttachment">
-        INSERT INTO ATTACHMENT(FILE_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
-        VALUES (SQ_ATTACHMENT_PK.NEXTVAL,?, ?, ?)
+    <entry key="insertBoardAttachment">
+        INSERT INTO ATTACHMENT(FILE_NO,BOARD_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+        VALUES (SQ_ATTACHMENT_PK.NEXTVAL,?,?, ?, ?)
+    </entry>
+    <entry key="insertReplyAttachment">
+        INSERT INTO ATTACHMENT(FILE_NO,Reply_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+        VALUES (SQ_ATTACHMENT_PK.NEXTVAL,?,?, ?, ?)
     </entry>
 
-    <entry key="selectInquireAttachment">
+    <entry key="selectBoardAttachment">
         SELECT FILE_NO,
                 ORIGIN_NAME,
                 CHANGE_NAME,
                 FILE_PATH
         FROM ATTACHMENT
         WHERE BOARD_NO = ?
+        AND STATUS = ?
+        ORDER BY FILE_NO
+    </entry>
+    <entry key="selectReplyAttachment">
+        SELECT FILE_NO,
+                ORIGIN_NAME,
+                CHANGE_NAME,
+                FILE_PATH
+        FROM ATTACHMENT
+        WHERE REPLY_NO = ?
+        AND STATUS = ?
         ORDER BY FILE_NO
     </entry>
 

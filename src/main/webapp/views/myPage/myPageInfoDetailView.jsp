@@ -78,7 +78,6 @@
 </div>
 <script>
 
-
         //비밀번호 유효성 검사 - 완료
         const memberPw = document.querySelector("#memberPwd");
         const memberPwRe = document.querySelector("#memberPwRe");
