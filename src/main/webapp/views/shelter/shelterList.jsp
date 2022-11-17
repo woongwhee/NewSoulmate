@@ -54,9 +54,9 @@
                         <option value="0">--전체--</option>
                     </select>
                 </td>
-            </tr>
-            <tr>
+                <td>
                     <input type="submit" value="조회">
+                </td>
             </tr>
         </table>
 
