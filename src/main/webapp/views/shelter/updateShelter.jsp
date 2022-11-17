@@ -46,9 +46,6 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox">봉사가능한 보호소만 조회
-            </td>
-            <td>
                 <input type="submit" value="조회">
             </td>
         </tr>
