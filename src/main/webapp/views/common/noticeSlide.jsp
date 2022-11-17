@@ -10,5 +10,8 @@
 <%List<Notice> nlist= (List<Notice>) request.getAttribute("nList");%>
 <%for(Notice n:nlist){
 %>
-<div class="post"><a href="<%=request.getContextPath()%>/noticeDetail?dno=<%=n.getDesertionNo()%>"><img src="<%=n.getFilename()%>" id= alt=""></a></div><%
+<div class="post">
+    <img onclick="location.href = '<%=request.getContextPath()%>/noticeDetail?dno=<%=n.getDesertionNo()%>'" src="<%=n.getPopfile()%>" id="img">
+</div>
+<%
 }%>
