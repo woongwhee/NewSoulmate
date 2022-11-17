@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>비밀번호 찾기</title>
 </head>
 <body>
@@ -24,33 +25,33 @@
         <div>
 
             <div class="search-content">
-                <input type="text" name="searchId" id="searchId" placeholder="아이디">
+                <input type="text" name="searchId" id="searchId" placeholder="*아이디">
             </div>
 
             <div class="search-content">
-                <input type="text" name="searchName" id="searchName" placeholder="이름">
-            </div>
-
-            <div class="search-content">
-                <input type="text" name="searchMail" id="searchMail1" placeholder="이메일">
-                <button onclick="sendMail();" class="authBtn">인증메일전송</button>
+                <input type="text" name="searchName" id="searchName" placeholder="*이름">
             </div>
         </div>
+
+        <div class="email-wrap">
+            <div>
+                <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" >
+                <button type="button" onclick="sendMail();" >인증번호 발송</button>
+
+                <div id="auth">
+                    <div>
+                        <input type="text" id="authCode" placeholder="인증번호" >
+                        <button type="button" class="authBtn" id="authBtn" onclick="authenticationMail()">인증하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span id="timeZone"></span>
+        <span id="authMsg"></span>
 
         <div class="search-content">
-            <div id="auth">
-                <input type="text" id="authCode" placeholder="인증번호" class="input-form">
-                <button id="authBtn">인증하기</button>
-            </div>
-        </div>
-
-        <div class="span-box">
-            <span id="timeZone"></span>
-            <span id="authMsg"></span>
-        </div>
-
-        <div class="search-content">
-            <button type="submit" class="findpwBtn">비밀번호 찾기</button>
+            <button type="submit" class="findPwdBtn">비밀번호 찾기</button>
         </div>
     </div>
 </div>
@@ -59,30 +60,28 @@
 
 <script>
 
+    $(".findPwdBtn").on("click", function() {
+        const memberId = $("#memberId").val();
+        const memberName = $("#memberName").val();
+        const Email = $("#Email").val();
 
-    $(".findpwdBtn").on("click", function() {
-        const memberId = $("#findId").val();
-        const memberName = $("#findName").val();
-        const memberMail = $("#findMail2").val();
-        const result = $(".result");
-        result.empty();
         $.ajax({
-            url: "/findPwd",
+            url: "${context}/findPwd.do",
             type: "get",
             data: {
-            memberId: memberId,
-            memberName: memberName,
-            memberMail: memberMail
-        },
-            dataType: "json",
+                memberId: memberId,
+                memberName: memberName,
+                Email: Email
+            },
             success: function(data) {
                 console.log(data);
-                if (data == null) {
-                    result.append("회원정보가 없습니다.")
+                if (data == 1) {
+                    alert("일치하는 회원정보가 없습니다.");
                 } else {
-                    /*result.append("비밀번호 : " + data.memberPw);*/
+                    alert("비밀번호 재설정으로 이동합니다.");
                 }
-                },
+                $(location).attr("href","${context}/pwdResetpage");
+            },
             error: function() {
                 console.log("서버호출실패");
             }
@@ -176,11 +175,7 @@
     };
 
 
-
-
 </script>
-
-
 
 </body>
 </html>

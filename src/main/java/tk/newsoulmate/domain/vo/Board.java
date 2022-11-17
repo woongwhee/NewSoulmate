@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Board {
     private int boardNo;
     private int memberNo;
-    private String boardType;
+    private BoardType boardType;
     private String boardTitle;
     private String boardContent;
     private int readCount;
@@ -18,6 +18,9 @@ public class Board {
 
     private int categoryNo;
 
+    private String memberId;
+    private String CategoryName;
+
 
 
     private Board(){}
@@ -28,16 +31,16 @@ public class Board {
      * 봉사 후기,입양 후기 글작성용 펙토리얼메소드
      * @param memberNo
      * @param issueDate
-     * @param boardType
+     * @param boardName "봉사 후기" ,"입양 후기"
      * @param boardTitle
      * @param boardContent
      * @return
      */
-    public static Board enrollBoard(int memberNo,Date issueDate,String boardType,String boardTitle,String boardContent ){
+    public static Board enrollBoard(int memberNo,Date issueDate,String boardName,String boardTitle,String boardContent ){
         Board b=new Board();
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
-        b.setBoardType(boardType);
+        b.setBoardType(boardName);
         b.setMemberNo(memberNo);
         return b;
     }
@@ -60,15 +63,16 @@ public class Board {
         return b;
     }
 
-    public static Board selectAdoptReviewList(int board_no, String board_title, String member_no, int read_count, Date create_date) {
+    public static Board selectAdoptReviewList(int boardNo, String boardTitle, String member_no, int readCount, Date createDate) {
         Board b = new Board();
-        b.setBoardNo(board_no);
-        b.setBoardTitle(board_title);
+        b.setBoardNo(boardNo);
+        b.setBoardTitle(boardTitle);
         b.setMemberNo(Integer.parseInt(member_no));
-        b.setReadCount(read_count);
-        b.setCreateDate(create_date);
+        b.setReadCount(readCount);
+        b.setCreateDate(createDate);
         return b;
     }
+
 
     public String getResultStatus() {
         return resultStatus;
@@ -97,12 +101,21 @@ public class Board {
         return b;
     }
 
-    public static Board insertInquire(int categoryNo, String boardTitle, String boardContent, int memberNo){
+    /**
+     * 1:1문의 작성하기
+     * @param categoryNo
+     * @param boardTitle
+     * @param boardContent
+     * @param memberNo
+     * @return
+     */
+    public static Board insertInquire(String categoryNo, String boardTitle, String boardContent, String memberNo){
         Board b = new Board();
-        b.setCategoryNo(categoryNo);
+        b.setCategoryNo(Integer.parseInt(categoryNo));
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
-        b.setMemberNo(memberNo);
+        b.setMemberNo(Integer.parseInt(memberNo));
+        b.setBoardType(BoardType.QNA);
         return b;
     }
 
@@ -121,6 +134,16 @@ public class Board {
         return b;
     }
 
+    /**
+     * 리뷰 상세보기용 팩토리얼 메소드
+     * @param boardNo
+     * @param boardName
+     * @param boardTitle
+     * @param createDate
+     * @param issueDate
+     * @param readCount
+     * @return
+     */
     public static Board selectReviewDetail(int boardNo,String boardName,String boardTitle,Date createDate,Date issueDate,int readCount){
         Board b=new Board();
         b.setBoardNo(boardNo);
@@ -131,6 +154,16 @@ public class Board {
         return b;
     }
 
+    /**
+     * 입양후기 상세보기용 팩토리얼메소드
+     * @param boardTitle
+     * @param memberName
+     * @param issueDate
+     * @param createDate
+     * @param readCount
+     * @param boardContent
+     * @return
+     */
     public static Board selectAdoptReviewDetail(String boardTitle,String memberName,Date issueDate ,Date createDate,int readCount,String boardContent){
         Board b = new Board();
         b.setBoardTitle(boardTitle);
@@ -139,6 +172,19 @@ public class Board {
         b.setCreateDate(createDate);
         b.setReadCount(readCount);
         b.setBoardContent(boardContent);
+        return b;
+    }
+
+    public static Board selectInquireBoard(int boardNo, String categoryName, String boardTitle, String boardContent, String memberId, Date createDate) {
+        Board b = new Board();
+        b.setBoardNo(boardNo);
+        b.setCategoryName(categoryName);
+        b.setBoardTitle(boardTitle);
+        b.setBoardContent(boardContent);
+        b.setMemberId(memberId);
+        b.setCreateDate(createDate);
+
+
         return b;
     }
 
@@ -158,12 +204,18 @@ public class Board {
         this.memberNo = memberNo;
     }
 
-    public String getBoardType() {
+    public BoardType getBoardType() {
         return boardType;
     }
 
-    public void setBoardType(String boardType) {
-        this.boardType = boardType;
+    public void setBoardType(String boardName) {
+        this.boardType = BoardType.valueOfName(boardName);
+    }
+    public void setBoardType(int typeNo) {
+        this.boardType = BoardType.valueOfNo(typeNo);
+    }
+    public void setBoardType(BoardType boardType) {
+        this.boardType =boardType;
     }
 
     public String getBoardTitle() {
@@ -230,4 +282,19 @@ public class Board {
         this.categoryNo = categoryNo;
     }
 
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getCategoryName() {
+        return CategoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        CategoryName = categoryName;
+    }
 }

@@ -9,7 +9,6 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.getRequestDispatcher("views/member/memberLoginForm.jsp").forward(request,response);
     }
 

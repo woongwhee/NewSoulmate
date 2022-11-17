@@ -4,7 +4,7 @@
 
     <entry key="insertMember">
         INSERT INTO MEMBER(MEMBER_NO, MEMBER_ID, MEMBER_PWD, MEMBER_NAME, NICKNAME, PHONE, EMAIL, MEMBER_GRADE)
-        VALUES(SQ_MEMBER_PK.NEXTVAL,?,?,?,?,?,?,'일반')
+        VALUES(SQ_MEMBER_PK.NEXTVAL,?,?,?,?,?,?,?)
     </entry>
 
     <entry key="idCheck">
@@ -24,7 +24,7 @@
         FROM MEMBER
         WHERE MEMBER_ID = ?
         AND MEMBER_PWD = ?
-        AND STATUS = 'Y'
+        <!--AND MEMBER_STATUS = 'Y'-->
     </entry>
 
     <entry key="findId">
@@ -42,9 +42,10 @@
         AND EMAIL = ?
     </entry>
 
+    <entry key="pwdReset">
+        UPDATE MEMBER SET
+        MEMBER_PWD = ?
+        WHERE
+        MEMBER_ID = ?
+    </entry>
 </properties>
-
-
-
-
-
