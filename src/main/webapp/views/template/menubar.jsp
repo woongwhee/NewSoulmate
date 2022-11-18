@@ -1,13 +1,11 @@
-<%@ page import="java.util.concurrent.ExecutorService" %>
-<%@ page import="java.beans.beancontext.BeanContext" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <c:set var="loginUser" value="${sessionScope.loginUser}" scope="session"/>
 
-<div id="header_total">
 
-    <div id="teams">
+<div class="headcontainer">
+    <div id="header_box">
         <div>
             <p> </p>
         </div>
@@ -22,13 +20,19 @@
                     <li><a href="${context}/loginpage">로그인</a></li>
 
                 </c:if>
-                <c:if test="${!empty loginUser}" var="result2">
-                    <li><a href="${context}/mypage">마이페이지</a></li>
+
+                <c:if test= "${!empty loginUser}" var="result2">
+                    <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                    <li><a href="${context}/myPage">마이페이지</a></li>
+                    <li><a href="${context}/logout">로그아웃</a></li>
+                </c:if>
+
+                <c:if test="${!empty loginUser &&}" var="result3">
+                    <li><a href="${context}/ManageMemberPage">관리자페이지</a></li>
+                    <li><a href="${context}/logout">로그아웃</a></li>
                 </c:if>
             </ul>
         </div>
-
-
     </div>
 
     <nav class="navbar">
@@ -53,7 +57,7 @@
                 <button class="dropdown-btn"><a href="#">입양</a></button>
                 <div class="dropdown-submenu">
                     <a href="${context}/adoptApply">입양신청</a>
-                    <a href="#">입양후기</a>
+                    <a href="${context}/adoptReList">입양후기</a>
                     <a href="#">입양절차</a>
                 </div>
             </div>
@@ -76,14 +80,15 @@
 
             <div class="dropdown">
                 <button class="dropdown-btn"><a href="${context}/inquire">고객센터</a></button>
-                <div class="dropdown-submenu">
-                    <a href="#">자주묻는 질문</a>
-                    <a href="#">문의하기</a>
-                </div>
+<%--                <div class="dropdown-submenu">--%>
+<%--                    <a href="#">자주묻는 질문</a>--%>
+<%--                    <a href="#">문의하기</a>--%>
+<%--                </div>--%>
             </div>
         </div>
     </nav>
 </div>
+
 <script>
     <%
         HttpSession ss=request.getSession();

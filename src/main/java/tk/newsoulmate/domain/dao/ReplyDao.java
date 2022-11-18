@@ -50,6 +50,30 @@ public class ReplyDao {
         }
         return result;
     }
+    public int insertImgReply(Connection conn, Reply r) {
+        int result = 0;
+
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("insertReply");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1, r.getReplyNo());
+            psmt.setInt(2, r.getBoardNo());
+            psmt.setInt(3, Integer.parseInt(String.valueOf(r.getMemberNo())));
+            psmt.setString(4, r.getReplyContent());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
     public ArrayList<Reply> selectReplyList(Connection conn, int boardNo) {
 
         ArrayList<Reply> list = new ArrayList<>();

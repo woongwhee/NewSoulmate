@@ -19,38 +19,76 @@
 <head>
     <title>보호소 정렬</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/shelter/updateShelterList.css" rel="stylesheet">
+
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
-<form action="<%=request.getContextPath()%>/updateShelter" method="get">
-    <table>
-        <tr>
-            <td>시도</td>
-            <td>
-                <select name="cityNo" id="mainCategory" onchange="choice();">
-                    <option value="0">--전체--</option>
-                    <% for(City c: cList){ %>
-                    <option value="<%=c.getCityNo()%>"><%=c.getCityName()%></option>
-                    <% } %>
-                </select>
-            </td>
+<div id="content">
+    <div id="search">
+        <form action="<%=request.getContextPath()%>/updateShelter" method="get">
+            <table id="searchBox">
+                <tr>
+                    <td>시도</td>
+                    <th>
+                        <select name="cityNo" id="mainCategory" onchange="choice();">
+                            <option value="0">--전체--</option>
+                            <% for(City c: cList){ %>
+                            <option value="<%=c.getCityNo()%>">
+                                <%=c.getCityName()%>
+                            </option>
+                            <% } %>
+                        </select>
+                    </th>
 
-            <td>시군구</td>
-            <td>
-                <select name="villageNo" id="subCategory" >
-                    <option value="0">--전체--</option>
-                </select>
-            </td>
-        </tr>
+                    <td>시군구</td>
+                    <th>
+                        <select name="villageNo" id="subCategory">
+                            <option value="0">--전체--</option>
+                        </select>
+                    </th>
+                    <td>
+                        <button type="submit">조회</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <table class="list-area">
+        <thead>
         <tr>
-            <td>
-                <input type="checkbox">봉사가능한 보호소만 조회
+            <th>보호소명</th>
+            <th>보호소 주소</th>
+            <th>보호소 전화번호</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if(sList.isEmpty()) { %>
+        <tr>
+            <td id="noList" colspan="6">조회된 리스트가 없습니다.</td>
+        </tr>
+        <% }else{ %>
+        <%for(Shelter s : sList){ %>
+        <tr>
+            <td style="display:none">
+                <%= s.getShelterNo()%>
             </td>
             <td>
-                <input type="submit" value="조회">
+                <%= s.getShelterName() %>
+            </td>
+            <td>
+                <%= s.getShelterAddress() %>
+            </td>
+            <td>
+                <%= s.getShelterLandline() %>
             </td>
         </tr>
+        <% } %>
+        <% } %>
+        </tbody>
     </table>
+</div>
+
 
     <script>
 
@@ -73,33 +111,6 @@
             }
 
     </script>
-</form>
-
-<table class="list-area">
-    <thead>
-    <tr>
-        <th>보호소명</th>
-        <th>보호소 주소</th>
-        <th>보호소 전화번호</th>
-    </tr>
-    </thead>
-    <tbody>
-        <% if(sList.isEmpty()) { %>
-            <tr>
-                <td colspan="6">조회된 리스트가 없습니다.</td>
-            </tr>
-        <% }else{ %>
-            <%for(Shelter s : sList){ %>
-                <tr>
-                    <td style="display:none"><%= s.getShelterNo()%></td>
-                    <td><%= s.getShelterName() %></td>
-                    <td><%= s.getShelterAddress() %></td>
-                    <td><%= s.getShelterLandline() %></td>
-                </tr>
-            <% } %>
-        <%}%>
-    </tbody>
-</table>
 <script>
     $(".list-area>tbody>tr").click(function(){
         // 클릭시 해당 shelter_no 를 넘김

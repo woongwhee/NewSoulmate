@@ -26,80 +26,100 @@
         });
     });
 </script>
+    </script>
     <main>
 <div id="container">
 
     <div id="main_top">
+        <div id="comment">지금 새로운 주인을 기다리고있어요..</div>
         <div class="slider">
             <%@include file="/views/common/noticeSlide.jsp"%>
         </div>
         <script>
             $(()=>{
                 setNoticeLocation();
-
             })
             function setNoticeLocation(){
                 $("#main_top>.slider>post").click(()=>{
                     let dno=$(this).getAttribute("id");
                     location.href="<%=request.getContextPath()%>/noticeDetail?dno="+dno;
-
-
                 })
-
             }
         </script>
     </div>
     <div id="main_left">
-        <div class="main_left_box1">
-            <div class="slider">
-                <div><img src="" alt="">사진1</div>
-                <div><img src="" alt="">사진2</div>
-                <div><img src="image/flower3.jpg" alt="">꽃사진3</div>
-                <div><img src="image/flower4.jpg" alt="">꽃사진4</div>
-                <div><img src="image/flower5.jpg" alt="">꽃사진5</div>
-                <div><img src="image/bono.jpg" alt="">보노보노</div>
+        <div id="adopt-review">
+            <div id="comment2" onclick="">입양후기+</div>
+                <div id="adopt-review-list">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                </div>
+        </div>
+        <div id="volunteer-review">
+            <div id="comment3" onclick="">봉사후기+</div>
+            <div id="volunteer-review-list">
+                <ul>
+                    <li>봉사후기</li>
+                    <li>봉사후기</li>
+                    <li>봉사후기</li>
+                    <li>봉사후기</li>
+                    <li>봉사후기</li>
+                </ul>
+            </div>
+            <div id="btn-area">
+            <button id="shelterbtn" onclick="location.href='<%=request.getContextPath()%>/shelterList'">전국 유기동물<br>보호소 보러가기</button>
             </div>
         </div>
-        <div class="main_left_box2">
-            봉사후기
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-            </ul>
-            <button>dd</button>
-        </div>
-        <div class="main_left_box3">
-            <table id="box3_table">
-                <tr>
-                    <td><input type="button" value="입양가능 동물"></td>
-                    <td><input type="button" value="입양절차"></td>
-                </tr>
-            </table>
+        <div id="adopt-btn-box">
+            <div><button id="adopt-able-animal" onclick="">입양가능 동물</button></div>
+            <div><button id="adopt-step" onclick="">입양절차 안내</button></div>
         </div>
     </div>
 
     <div id="main_right">
         <div class="main_right_box1">
-            채팅
-            <!-- table 사용-->
+            <div class="wrap">
+                <div class="chat ch1">
+                    <div class="textbox">Q</div>
+                </div>
+                <div class="chat ch2">
+                    <div class="textbox">A</div>
+                </div>
+                <div class="chat ch1">
+                    <div class="textbox">Q</div>
+                </div>
+                <div class="chat ch2">
+                    <div class="textbox">A</div>
+                </div>
+                <div class="chat ch1">
+                    <div class="textbox">Q</div>
+                </div>
+                <div class="chat ch2">
+                    <div class="textbox">A</div>
+                </div>
+            </div>
         </div>
 
         <div class="main_right_box2">
-            <table id="box2_table">
-                <tr>
-                    <td>당신의 도움이 필요합니다</td>
-                    <td><input type="button" value="dd"></td>
-                    <!--td따로 id부여 수정 필요-->
-                </tr>
-            </table>
+            <div id="support-box">
+                <div  id="comment4">후원유도멘트</div>
+                <button id="supportBtn"  onclick="">후원하러 가기</button>
+            </div>
         </div>
     </div>
 
     <div id="main_bottom">
-        sd
+        <div id="graph_1">
+            <div class="graph_comment">축종별 유기율</div>
+            <div><img src="${context}/image/유기율.png"></div>
+        </div>
+        <div id="graph_2">
+            <div class="graph_comment">유기동물 안락사율</div>
+            <div><img src="${context}/image/안락사율.png"></div>
+        </div>
     </div>
 </div>
     </main>

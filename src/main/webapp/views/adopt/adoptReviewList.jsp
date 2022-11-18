@@ -29,7 +29,7 @@
     <h2 style="text-align: center;">입양후기게시판</h2>
     <br>
     <div align="center">
-        <a href="<%=request.getContextPath() %>/adoptReEnroll.bo" class="btn btn-secondary">글작성</a><br>
+        <a href="<%=request.getContextPath() %>/adoptReEnroll" class="btn btn-secondary">글작성</a><br>
     </div>
 
     <table align="center" class="list-area">

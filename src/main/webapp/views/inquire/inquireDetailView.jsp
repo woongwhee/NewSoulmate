@@ -59,16 +59,33 @@ Board b=(Board) request.getAttribute("b");%>
                     <% } %>
                 </td>
             </tr>
-            <tr>
-                <th>답변</th>
-                <td><%= b.getResultStatus()%></td>
-            </tr>
+            <c:choose >
+                <c:when test="${b.resultStatus eq 'Y'}">
+                </c:when>
+                <c:when test="${!empty loginUser AND loginUser.memberGreade eq MemberGreade.SITE_MANAGER}">
+                    <tr>
+                        <th>답변작성</th>
+                        <td>
+                            <textarea id="replyInquireContent" rows="3" cols="50" style="resize: none;"></textarea>
+                        </td>
+                        <td><button onclick="insertInquireReply();">답변등록</button></td>
+
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <tr>
+                        <th>답변</th>
+                        <td><%= b.getResultStatus()%></td>
+                    </tr>
+                </c:otherwise>
+            </c:choose>
+
         </table>
 
         <br>
 
         <div align="center">
-            <a href="<%=request.getContextPath() %>/inquire?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
+            <a href="<%=request.getContextPath() %>/inquire" class="btn btn-secondary btn-sm">목록</a>
 <%--            <% if(loginUser != null && loginUser.getMemberNo().equals(b.getMemberNo())) { %>--%>
             <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. -->
             <a href="<%=request.getContextPath() %>/inquireUpdateForm.bo?bno=<%=b.getBoardNo() %>" class="btn btn-secondary btn-sm">수정</a>
