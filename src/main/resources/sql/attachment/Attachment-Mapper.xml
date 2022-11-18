@@ -34,7 +34,7 @@
 
     <entry key="deleteInquireAttachment">
         UPDATE ATTACHMENT
-        SET BOARD_STATUS = 'N'
+        SET STATUS = 'N'
         WHERE BOARD_NO = ?
     </entry>
 
