@@ -12,16 +12,14 @@ public class Board {
     private int reportNo;
     private String memberName;
     private Date createDate;
-    private Date issueDate;
-
     private String resultStatus;
+    private int fileCount;
 
     private int categoryNo;
 
+    private Date issueDate;
     private String memberId;
     private String CategoryName;
-
-
 
     private Board(){}
     /*
@@ -36,11 +34,13 @@ public class Board {
      * @param boardContent
      * @return
      */
-    public static Board enrollBoard(int memberNo,Date issueDate,String boardName,String boardTitle,String boardContent ){
+    public static Board enrollBoard(int memberNo,int boardNo,Date issueDate,BoardType boardType,String boardTitle,String boardContent ){
         Board b=new Board();
+        b.setBoardNo(boardNo);
+        b.setIssueDate(issueDate);
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
-        b.setBoardType(boardName);
+        b.setBoardType(boardType);
         b.setMemberNo(memberNo);
         return b;
     }
@@ -116,6 +116,15 @@ public class Board {
         b.setBoardContent(boardContent);
         b.setMemberNo(Integer.parseInt(memberNo));
         b.setBoardType(BoardType.QNA);
+        return b;
+    }
+
+    public static Board updateInquire(int boardNo, String categoryName, String boardTitle, String boardContent){
+        Board b = new Board();
+        b.setBoardNo(boardNo);
+        b.setCategoryName(categoryName);
+        b.setBoardTitle(boardTitle);
+        b.setBoardContent(boardContent);
         return b;
     }
 
@@ -292,6 +301,13 @@ public class Board {
 
     public String getCategoryName() {
         return CategoryName;
+    }
+    public int getFileCount() {
+        return fileCount;
+    }
+
+    public void setFileCount(int fileCount) {
+        this.fileCount = fileCount;
     }
 
     public void setCategoryName(String categoryName) {
