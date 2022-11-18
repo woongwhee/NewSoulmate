@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.*;
-public class MainService {
+public class CommonService {
     public List<Notice> selectThumbNail(int page) {
         Connection conn = getConnection();
         List<Notice> nList = new NoticeDao().selectThumbNail(conn, page);

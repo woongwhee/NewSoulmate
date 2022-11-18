@@ -13,7 +13,7 @@
         JOIN MEMBER USING (MEMBER_NO)
         WHERE R.REPLY_STATUS = 'Y'
         AND BOARD_NO = ?
-        ORDER BY CREATE_DATE DESC , REPLY_NO
+        ORDER BY REPLY_DATE DESC , REPLY_NO
     </entry>
     <entry key="selectNoticeReplyList">
         SELECT
