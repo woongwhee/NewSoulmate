@@ -30,28 +30,25 @@
 <div id="container">
 
     <div id="main_top">
-        <div id="coment">지금 새로운 주인을 기다리고있어요..</div>
+        <div id="comment">지금 새로운 주인을 기다리고있어요..</div>
         <div class="slider">
             <%@include file="/views/common/noticeSlide.jsp"%>
         </div>
         <script>
             $(()=>{
                 setNoticeLocation();
-
             })
             function setNoticeLocation(){
                 $("#main_top>.slider>post").click(()=>{
                     let dno=$(this).getAttribute("id");
                     location.href="<%=request.getContextPath()%>/noticeDetail?dno="+dno;
-
-
                 })
-
             }
         </script>
     </div>
     <div id="main_left">
-        <div class="main_left_box1">
+        <div id="adopt-review">
+            <div id="comment2">입양후기+</div>
             <div class="slider">
                 <div><img src="" alt="">사진1</div>
                 <div><img src="" alt="">사진2</div>
@@ -61,8 +58,9 @@
                 <div><img src="image/bono.jpg" alt="">보노보노</div>
             </div>
         </div>
-        <div class="main_left_box2">
-            봉사후기
+        <div id="volunteer-review">
+            <div id="comment3">봉사후기+</div>
+            <div id="volunteer-review-list">
             <ul>
                 <li>1</li>
                 <li>2</li>
@@ -70,9 +68,12 @@
                 <li>4</li>
                 <li>5</li>
             </ul>
-            <button>dd</button>
+            </div>
+            <div id="btn-area">
+            <button id="shelterbtn">전국 유기동물<br>보호소 보러가기</button>
+            </div>
         </div>
-        <div class="main_left_box3">
+        <div id="adopt-able-animal">
             <table id="box3_table">
                 <tr>
                     <td><input type="button" value="입양가능 동물"></td>
