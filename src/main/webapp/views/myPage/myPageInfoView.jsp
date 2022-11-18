@@ -5,7 +5,7 @@
     <link href="<%=request.getContextPath()%>/css/mypage/mypageInfo.css" rel="stylesheet">
 </head>
 <body>
-  <header><%@include file="/views/mypage/mypageHeader.jsp"%></header>
+  <header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
   <div class="headcontainer">
     <div id="right_view">
       <div class="information">

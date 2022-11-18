@@ -57,7 +57,7 @@ public class InquireService {
         int result2 = 1;
         if(at != null){
             at.setBoardNo(boardNo);
-            result2 = new AttachmentDao().insertAttachment(at, conn);
+            result2 = new AttachmentDao().insertBoardAttachment(at, conn);
         }
         if(boardNo > 0 && result2 > 0){
             commit();
@@ -96,11 +96,55 @@ public class InquireService {
 
     public Attachment selectInquireAttachment(int boardNo){
         Connection conn = getConnection();
-        Attachment at = new AttachmentDao().selectInquireAttachment(conn, boardNo);
+        Attachment at = new AttachmentDao().selectBoardAttachment(conn, boardNo);
         close();
 
         return at;
     }
+
+    public int updateInquireBoard(Board b, Attachment at){
+        Connection conn = getConnection();
+
+        int result1 = new BoardDao().updateInquireBoard(conn, b);
+
+        int result2 = 1;
+
+        if(at != null){
+            if(at.getFileNo() != 0){
+                result2 = new AttachmentDao().updateInquireAttachment(at, conn);
+            } else {
+                result2 = new AttachmentDao().insertInquireNewAttachment(at, conn);
+            }
+        }
+
+        if(result1 > 0 && result2 > 0){
+            commit();
+        } else {
+            rollback(conn);
+        }
+        close();
+        return result1 * result2;
+
+    }
+
+    public int deleteInquireBoard(int boardNo){
+        Connection conn = getConnection();
+
+        int result = new BoardDao().deleteInquireBoard(boardNo, conn);
+
+        new AttachmentDao().deleteInquireAttachment(boardNo, conn);
+
+        if(result > 0){
+            commit();
+        } else {
+            rollback(conn);
+        }
+        close();
+
+        return result;
+
+    }
+
 
 
 
