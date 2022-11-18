@@ -61,7 +61,7 @@ public class AdoptService {
 
     public int insertReply(Reply r) {
         Connection conn = getConnection();
-        int result = new ReplyDao().insertReply(conn, r);
+        int result = new ReplyDao().insertBoardReply(conn, r);
 
         if (result > 0) {
             commit();
@@ -76,7 +76,6 @@ public class AdoptService {
         Connection conn = getConnection();
         ArrayList<Reply> list = new ReplyDao().selectReplyList(conn, boardNo);
         close();
-
         return list;
     }
 

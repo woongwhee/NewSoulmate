@@ -11,6 +11,10 @@
     <title>Title</title>
   </head>
 <body>
-    table>td>t
+<table>
+    <td>
+        <t></t>
+    </td>
+</table>
 </body>
 </html>

@@ -100,7 +100,7 @@
                         console.log(result, "어라?");
                         let str = '<option value="0">전체</option>';
                         for (let i = 0; i < result.length; i++) {
-                            str += "<option value=" + result[i].villageNo + ">" + result[i].villageName + "</option>"
+                            str += "<option value="+result[i].villageNo+ ">" + result[i].villageName + "</option>"
                         }
                         $("#subCategory").html(str);
 
@@ -119,7 +119,7 @@
         $(".list-area>tbody>tr").click(function(){
             // 클릭시 해당 shelter_no 를 넘김
             //해당 tr 요소의 자손들중 첫번째 td영역의 내용이 필요
-            let shelterNo = $(this).children().eq(0).text();
+            let shelterNo = $(this).children().eq(0).text().trim();
             // textnode를 가져옴
             console.log(shelterNo);
 

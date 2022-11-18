@@ -19,7 +19,7 @@ public class MainPageController extends HttpServlet {
 
         List<Notice> nList =new MainService().selectThumbNail(0);
         List<Board>vList =new MainService().selectVolunteerThumbNail(0);
-        System.out.println(nList);
+        List<Board>aList =new MainService().selectAdoptReview(0);
         request.setAttribute("nList",nList);
         request.getRequestDispatcher("views/common/mainPage.jsp").forward(request,response);
     }

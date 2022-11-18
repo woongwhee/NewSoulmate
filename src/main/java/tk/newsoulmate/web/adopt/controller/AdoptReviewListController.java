@@ -17,9 +17,7 @@ public class AdoptReviewListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int listCount = new AdoptService().selectListCount();
-
         int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
-
         PageInfo pi = new PageInfo(listCount,currentPage);
         ArrayList<Board> list= new AdoptService().selectAdoptReviewList(pi);
 

@@ -31,4 +31,10 @@ public class MainService {
         return vList;
     }
 
+    public List<Board> selectAdoptReview(int i) {
+        Connection conn = getConnection();
+        List<Board> vList = new BoardDao().selectVolunteerThumNail(conn, i);
+        close();
+        return vList;
+    }
 }

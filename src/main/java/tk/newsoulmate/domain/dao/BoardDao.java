@@ -90,6 +90,7 @@ public class BoardDao {
         ResultSet rset = null;
         String sql = prop.getProperty("selectList");
         try {
+            System.out.println("시작페이지:"+pi.getStartPage()+"마지막페이지"+pi.getEndPage());
             psmt = conn.prepareStatement(sql);
             int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
             int endRow = startRow + pi.getBoardLimit() - 1;
@@ -275,7 +276,7 @@ public class BoardDao {
     public int insertReviewBoard(Board b, Connection conn) {
         int result = 0;
         PreparedStatement psmt = null;
-        String insert = prop.getProperty("insertQnABoard");
+        String insert = prop.getProperty("insertReviewBoard");
         try {
             psmt = conn.prepareStatement(insert);
             psmt.setInt(1, b.getBoardNo());

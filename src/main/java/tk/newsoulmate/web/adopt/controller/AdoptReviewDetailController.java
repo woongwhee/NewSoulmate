@@ -1,12 +1,14 @@
 package tk.newsoulmate.web.adopt.controller;
 
 import tk.newsoulmate.domain.vo.Board;
+import tk.newsoulmate.domain.vo.Reply;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "AdoptReviewDetailController", value = "/adoptReDetail")
 public class AdoptReviewDetailController extends HttpServlet {
@@ -28,8 +30,9 @@ public class AdoptReviewDetailController extends HttpServlet {
         if(result > 0) {
 
             Board b = bService.selectAdoptReviewDetail(boardNo);
-
+            List<Reply> rList = bService.selectReplyList(boardNo);
             request.setAttribute("b", b);
+            request.setAttribute("rList", rList);
             request.getRequestDispatcher("views/adopt/adoptReviewDetail.jsp").forward(request, response);
         } else {
             request.getSession().setAttribute("errorMsg","잘못된접근입니다.");

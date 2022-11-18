@@ -12,7 +12,6 @@
 <%
     ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
     PageInfo pi = (PageInfo) request.getAttribute("pi");
-
     int currentPage = pi.getCurrentPage();
     int startPage = pi.getStartPage();
     int endPage = pi.getEndPage();
@@ -94,12 +93,12 @@
         $(function() {
             $(".list-area>tbody>tr").click(function(){
                 let bno = $(this).children().eq(0).text();
-                location.href = '${context}/adoptReviewDetail?bno='+bno;
+                location.href = '${context}/adoptReDetail?bno='+bno;
             });
         })
     </script>
     </div>
     </main>
-    <footer><%@include file=""%></footer>
+    <footer>    <%@ include file="/views/template/footer.jsp"%></footer>
 </body>
 </html>
