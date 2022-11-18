@@ -23,7 +23,7 @@
                 <c:if test="${!empty loginUser}" var="result2">
                     <p><b>낭낭</b>님 환영합니다!</p>
                     <li><a href="#">관리자페이지</a></li>
-                    <li><a href="${context}/mypage">마이페이지</a></li>
+                    <li><a href="${context}/myPage">마이페이지</a></li>
                     <li><a href="#">로그아웃</a></li>
 
 <%--                    <li><a href="${context}/mypage">마이페이지</a></li>--%>
