@@ -113,7 +113,7 @@ public class InquireService {
             if(at.getFileNo() != 0){
                 result2 = new AttachmentDao().updateInquireAttachment(at, conn);
             } else {
-                result2 = new AttachmentDao().insertInquireNewAttachment(at, conn);
+//                result2 = new AttachmentDao().insertInquireNewAttachment(at, conn);
             }
         }
 
