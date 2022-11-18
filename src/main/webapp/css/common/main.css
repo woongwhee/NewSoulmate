@@ -31,35 +31,40 @@
     width: 800px;
     height: 280px;
     border: 1px solid black;
-    margin-bottom: 20px;
-
 }
 
 #volunteer-review {
     width: 800px;
-    height: 250px;
+    height: 220px;
     border: 1px solid black;
     margin-bottom: 20px;
 }
 
-#adopt-able-animal {
+#adopt-btn-box {
     width: 800px;
-    height: 70px;
+    height: 90px;
     border: 1px solid black;
+    padding: 30px 0 0 170px;
 }
-
-#box3_table {
-    height: 70px;
-    margin: 0 auto;
+#adopt-able-animal , #adopt-step{
+    width: 200px;
+    height: 60px;
+    border-radius: 40px;
+    border: white solid 3px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: bolder;
 }
-
-#box3_table td {
-    width: 300px;
-    height: auto;
-    text-align: center;
-    vertical-align: middle;
+#adopt-able-animal{
+    float: left;
+    background-color: #f45d48;
 }
-
+#adopt-step{
+    margin: 0 0 0 50px;
+    display: inline-block;
+    background-color: #319493;
+}
 #main_right {
     width: 380px;
     height: auto;
@@ -78,18 +83,27 @@
 
 .main_right_box2 {
     width: 100%;
-    height: 70px;
+    height: 90px;
     border: 1px solid black;
+    text-align: center;
 }
 
-#box2_table {
-    height: 70px;
-    margin: 0 auto;
+#supportBtn{
+    height: 40px;
+    width: 200px;
+    background-color: #545d5e;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
 #main_bottom {
     width: 100%;
-    height: 300px;
+    height: 550px;
     border: 1px solid black;
     margin: 20px 0;
     clear: right;
@@ -102,7 +116,7 @@
     background-color: rgba(255, 99, 71, 0.3);
     border-radius: 25px;
 }
-#main_top .slick-track {
+#main_top .slick-track{
     display:flex;
     height:260px;
     margin-top: 25px;
@@ -123,7 +137,7 @@
 
 .slick-prev:before,
 .slick-next:before {
-    color: darkcyan;
+    color: #319493;
 }
 
 #comment{
@@ -134,39 +148,44 @@
 }
 
 
-#main_left .slider {
-    width: 750px;
-    height: 220px;
-    margin: 0 auto;
-}
-#main_left .slick-track {
-    display:flex;
+#adopt-review-list{
+    width: 800px;
     height:200px;
     margin-top: 20px;
+    display: flex;
+    padding: 10px;
 }
 
-#main_left img{
-    width: 120px;
-    height: 150px;
+#main_left Img{
+    width: 135px;
+    height: 170px;
     cursor: pointer;
-    margin: 0 0 0 15px;
+    margin: 5px 10px 0 10px;
 }
 
-#comment2 , #comment3{
+#comment2 , #comment3 {
     font-size: 20px;
     font-weight: 600;
     text-align: left;
+    padding: 5px 0 0 40px;
+    cursor: pointer;
+}
+
+#comment4{
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
 }
 
 #volunteer-review-list{
     width: 550px;
-    height: 220px;
+    height: 180px;
     float:left;
 }
 
 #btn-area{
     width: 200px;
-    height: 220px;
+    height: 180px;
     display:inline-block;
 }
 
@@ -174,7 +193,94 @@
     width: 150px;
     height: 150px;
     border-radius: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
     background-color: #f45d48;
     border: 3px white solid;
     float: right;
+    cursor: pointer;
+}
+
+#volunteer-review-list li{
+    line-height: 180%;
+    cursor: pointer;
+}
+
+.wrap {
+    height: 520px;
+    background-color: #eeeeee;
+    overflow-y: scroll;
+}
+
+.wrap .chat {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.wrap .chat .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 50px);
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+.wrap .chat .textbox::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    font-size: 1.5rem;
+}
+
+.wrap .ch2 .textbox {
+    margin-left: 10px;
+    background-color: #bbe1e0;
+    color: #3c3f45;
+    font-weight: bolder;
+}
+
+.wrap .ch2 .textbox::before {
+    left: -15px;
+    content: "◀";
+    color: #bbe1e0;
+}
+
+.wrap .ch1 {
+    flex-direction: row-reverse;
+}
+
+.wrap .ch1 .textbox {
+    margin-right: 10px;
+    background-color: #ecd5d1;
+    color: #3c3f45;
+    font-weight: bolder;
+}
+
+.wrap .ch1 .textbox::before {
+    right: -15px;
+    content: "▶";
+    color: #ecd5d1;
+}
+
+
+#main_bottom img{
+    width: 950px;
+    margin-left: 120px;
+}
+
+#main_bottom #graph_1 img{
+    height: 150px;
+}
+
+#main_bottom #graph_2 img{
+    height: 300px;
+}
+.graph_comment{
+    font-size: 15px;
+    font-weight: 500;
+    margin: 15px 0 0 150px;
+    color: #1c5454;
 }
