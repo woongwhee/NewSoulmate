@@ -38,6 +38,7 @@ public class Member {
         this.memberGrade = memberGrade;
     }
 
+
     public int getMemberNo() {
         return memberNo;
     }
@@ -116,5 +117,13 @@ public class Member {
 
     public void setResentConnection(Date resentConnection) {
         this.resentConnection = resentConnection;
+    }
+
+    public Date getEnrollDate() {
+        return enrollDate;
+    }
+
+    public void setEnrollDate(Date enrollDate) {
+        this.enrollDate = enrollDate;
     }
 }

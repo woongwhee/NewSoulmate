@@ -1,7 +1,10 @@
+<%@ page import="java.util.concurrent.ExecutorService" %>
+<%@ page import="java.beans.beancontext.BeanContext" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <c:set var="loginUser" value="${sessionScope.loginUser}" scope="session"/>
+
 <div id="header_total">
 
     <div id="teams">
@@ -42,7 +45,7 @@
                 <button class="dropdown-btn"><a href="">유기동물</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">동물목록</a>
-                    <a href="${context}/shelter/list">보호소</a>
+                    <a href="${context}/shelterList">보호소</a>
                 </div>
             </div>
 

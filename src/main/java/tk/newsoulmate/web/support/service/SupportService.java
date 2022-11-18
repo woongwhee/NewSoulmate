@@ -1,74 +1,38 @@
-/*
 package tk.newsoulmate.web.support.service;
 
+import tk.newsoulmate.client.iamport.IamportClient;
 import tk.newsoulmate.domain.dao.SupportDao;
+import tk.newsoulmate.domain.vo.Member;
+import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
+import java.time.LocalDateTime;
 
 public class SupportService {
+	public String createNumber(int loginMemberNo, long shelterNo, long amount) {
+		String number = "NEWSOULMATE_" + loginMemberNo + "_" + LocalDateTime.now();
+		Connection conn = JDBCTemplet.getConnection();
+		int result = new SupportDao().initializeSupport(conn, shelterNo, loginMemberNo, number, amount);
+		if (result <= 0) {
+			JDBCTemplet.rollback(conn);
+		}
+		JDBCTemplet.close();
+		return number;
+	}
 
-*/
-/*    public int insertPayment(int price, String supportNo, int memberNo) {
-        Connection conn = JDBCTemplet.getConnection();
-        int result = 0;
-        int supportNo = SupportDao.insertSupport(conn);
-        if(supportNo == 0) {//가져오지 못함
-            JDBCTemplet.rollback(conn);
-        }else {
-            result = SupportDao.insertSupport(conn, supportNo, price, memberNo);
-            if(result>0) {
-                JDBCTemplet.commit(conn);
-            }else {
-                JDBCTemplet.rollback(conn);
-            }
-        }
-        return result;*//*
+	public boolean verify(String impUid, String merchantUid) {
+		long amount = new IamportClient().getPaymentAmount(impUid);
+		Support support = this.find(merchantUid);
+		return support.verify(amount);
+	}
 
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
-/*    public Payment searchPayment(int reserveNo) {
-        Connection conn = JDBCTemplate.getConnection();
-        Payment p = dao.searchPayment(conn,reserveNo);
-        JDBCTemplate.close(conn);
-        return p;
-    }
-
-    public int deletePayment(int reserveNo) {
-        Connection conn = JDBCTemplate.getConnection();
-        int result = dao.deletePayment(conn,reserveNo);
-        if(result>0) {
-            JDBCTemplate.commit(conn);
-        }else {
-            JDBCTemplate.close(conn);
-        }
-        JDBCTemplate.close(conn);
-        return result;
-    }*//*
+	public Support find(String merchantUid) {
+		Connection conn = JDBCTemplet.getConnection();
+		Support support = new SupportDao().findByMerchantUid(conn, merchantUid);
+		JDBCTemplet.close();
+		return support;
+	}
 
 }
-*/
+
