@@ -30,14 +30,6 @@ public class MyPageBoardListController extends HttpServlet {
         request.setAttribute("pi",pi);
         request.getRequestDispatcher("/views/myPage/myPageBoardListView.jsp").forward(request,response);
 
-
-
-
-
-
-
-
-
     }
 
     @Override

@@ -28,8 +28,9 @@ public class Board {
     /**
      * 봉사 후기,입양 후기 글작성용 펙토리얼메소드
      * @param memberNo
+     * @param boardNo
      * @param issueDate
-     * @param BoarType "봉사 후기" ,"입양 후기"
+     * @param boardType
      * @param boardTitle
      * @param boardContent
      * @return
@@ -98,6 +99,15 @@ public class Board {
         b.setBoardTitle(boardTitle);
         b.setCreateDate(createDate);
         b.setMemberName(memberName);
+        return b;
+    }
+
+    public static Board selectMyPageBoardList(int boardNo, String boardTitle, Date createDate, int readCount){
+        Board b = new Board();
+        b.setBoardNo(boardNo);
+        b.setBoardTitle(boardTitle);
+        b.setCreateDate(createDate);
+        b.setReadCount(readCount);
         return b;
     }
 

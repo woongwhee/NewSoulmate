@@ -84,48 +84,19 @@ public class BoardDao {
         return listCount;
     }
 
-    /**
-     * 타입에 상관없이 해당 로그인유저의 게시글 개수 반환하는 메서드
-     * @param conn
-     * @param loginUser
-     * @return
-     */
-    public int selectMyPageBoardListCount(Connection conn, Member loginUser){
-        int listCount = 0;
-        PreparedStatement psmt = null;
-        ResultSet rset = null;
-        String sql = prop.getProperty("selectMyPageBoardListCount");
-
-        try {
-            psmt = conn.prepareStatement(sql);
-
-            rset = psmt.executeQuery();
-            if (rset.next()) {
-                listCount = rset.getInt("cnt");
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close(psmt);
-            close(rset);
-        }
-        return listCount;
-
-
-    }
-
-    public ArrayList<Board> selectAdoptReviewList(Connection conn, PageInfo pi) {
+    public ArrayList<Board> selectList(Connection conn,BoardType boardType, PageInfo pi) {
         ArrayList<Board> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        String sql = prop.getProperty("adoptReviewList");
+        String sql = prop.getProperty("selectList");
         try {
+            System.out.println("시작페이지:"+pi.getStartPage()+"마지막페이지"+pi.getEndPage());
             psmt = conn.prepareStatement(sql);
             int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
             int endRow = startRow + pi.getBoardLimit() - 1;
-            psmt.setInt(1, startRow);
-            psmt.setInt(2, endRow);
+            psmt.setInt(1, boardType.typeNo);
+            psmt.setInt(2, pi.getStartPage());
+            psmt.setInt(3, pi.getEndPage());
             rset = psmt.executeQuery();
 
             while (rset.next()) {
@@ -160,16 +131,7 @@ public class BoardDao {
         }
         return result;
     }
-    public ArrayList<Board> selectMyPageBoardList(Connection conn, PageInfo pi, Member loginUser) {
-        ArrayList<Board> list = new ArrayList<>();
-        PreparedStatement psmt = null;
-        ResultSet rset = null;
-        String sql = prop.getProperty("selectMyPageBoardList");
 
-        return list;
-
-
-    }
 
     public ArrayList<Board> selectQnAList(Connection conn, PageInfo pi, Member loginUser) {
 
@@ -188,13 +150,9 @@ public class BoardDao {
             int endRow = startRow + pi.getBoardLimit() - 1;
             psmt.setInt(1, loginUser.getMemberNo());
             psmt.setInt(2, loginUser.getMemberGrade().gradeNumber);
-
             psmt.setInt(3, startRow);
             psmt.setInt(4, endRow);
-
-
             rset = psmt.executeQuery();
-
             while (rset.next()) {
                 list.add(Board.selectQnAList(rset.getString("RESULTSTATUS")
                         , rset.getInt("BOARD_NO")
@@ -203,7 +161,6 @@ public class BoardDao {
                         , rset.getString("MEMBER_NAME")));
 
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -428,4 +385,45 @@ public class BoardDao {
         return result;
     }
 
+    /**
+     * 타입에 상관없이 해당 로그인유저의 게시글 개수 반환하는 메서드
+     * @param conn
+     * @param loginUser
+     * @return
+     */
+    public int selectMyPageBoardListCount(Connection conn, Member loginUser){
+        int listCount = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectMyPageBoardListCount");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                listCount = rset.getInt("cnt");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+            close(rset);
+        }
+        return listCount;
+
+
+    }
+
+    public ArrayList<Board> selectMyPageBoardList(Connection conn, PageInfo pi, Member loginUser) {
+        ArrayList<Board> list = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectMyPageBoardList");
+
+        return list;
+
+
+    }
 }
