@@ -132,4 +132,12 @@ public class Member {
     public void setResentConnection(Date resentConnection) {
         this.resentConnection = resentConnection;
     }
+
+    public Date getEnrollDate() {
+        return enrollDate;
+    }
+
+    public void setEnrollDate(Date enrollDate) {
+        this.enrollDate = enrollDate;
+    }
 }

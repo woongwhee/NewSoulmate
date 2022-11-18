@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "SupportPayment", value = "/supportpayment")
+@WebServlet(name = "SupportPayment", value = "/supportPayment")
 public class SupportPaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(true);
         Member loginUser = (Member) session.getAttribute("loginUser");
-        // 세션에 없으면 로그인 페이지로 아니면 공통으로 필터에서 걸러짐
+        // 세션에 없으면 로그인 페이지로 아니면 공통으로// 필터에서 걸러짐
 
         request.setAttribute("loginUser",loginUser);
-        request.getRequestDispatcher("/views/").forward(request,response); //todo: 결제페이지 갈떄 경로
+        request.getRequestDispatcher("/views/support/supportPayment.jsp").forward(request,response); //todo: 결제페이지 갈떄 경로
 
     }
 
