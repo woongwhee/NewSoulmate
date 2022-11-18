@@ -1,5 +1,6 @@
 package tk.newsoulmate.domain.dao;
 
+import oracle.jdbc.proxy.annotation.Pre;
 import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
@@ -84,6 +85,37 @@ public class BoardDao {
         return listCount;
     }
 
+    /**
+     * 타입에 상관없이 해당 로그인유저의 게시글 개수 반환하는 메서드
+     * @param conn
+     * @param loginUser
+     * @return
+     */
+    public int selectMyPageBoardListCount(Connection conn, Member loginUser){
+        int listCount = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectMyPageBoardListCount");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                listCount = rset.getInt("cnt");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+            close(rset);
+        }
+        return listCount;
+
+
+    }
+
     public ArrayList<Board> selectAdoptReviewList(Connection conn, PageInfo pi) {
         ArrayList<Board> list = new ArrayList<>();
         PreparedStatement psmt = null;
@@ -129,7 +161,16 @@ public class BoardDao {
         }
         return result;
     }
+    public ArrayList<Board> selectMyPageBoardList(Connection conn, PageInfo pi, Member loginUser) {
+        ArrayList<Board> list = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectMyPageBoardList");
 
+        return list;
+
+
+    }
 
     public ArrayList<Board> selectQnAList(Connection conn, PageInfo pi, Member loginUser) {
 
