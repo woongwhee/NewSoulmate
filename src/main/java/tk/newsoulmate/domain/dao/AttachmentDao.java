@@ -1,7 +1,6 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Attachment;
-import tk.newsoulmate.domain.vo.Board;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,13 +25,13 @@ public class AttachmentDao {
     }
 
 
-    public Attachment selectInquireAttachment(Connection conn, int boardNo) {
+    public Attachment selectBoardAttachment(Connection conn, int boardNo) {
 
         Attachment at = null;
         PreparedStatement psmt = null;
         ResultSet rset = null;
 
-        String sql = prop.getProperty("selectInquireAttachment");
+        String sql = prop.getProperty("selectBoardAttachment");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -60,20 +59,49 @@ public class AttachmentDao {
 
 
     }
-    public int insertInquireNewAttachment(Attachment at, Connection conn){
-        int result = 0;
+    public Attachment selectReplyAttachment(Connection conn, int replyNo) {
+        Attachment at = null;
         PreparedStatement psmt = null;
-
-        String sql = prop.getProperty("insertInquireNewAttachment");
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectReplyAttachment");
 
         try {
             psmt = conn.prepareStatement(sql);
 
-            psmt.setInt(1,at.getBoardNo());
-            psmt.setString(2,at.getOriginName());
-            psmt.setString(3,at.getChangeName());
-            psmt.setString(4,at.getFilePath());
+            psmt.setInt(1, replyNo);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                at = new Attachment();
+                at.setFileNo(rset.getInt("FILE_NO"));
+                at.setOriginName(rset.getString("ORIGIN_NAME"));
+                at.setChangeName(rset.getString("CHANGE_NAME"));
+                at.setFilePath(rset.getString("FILE_PATH"));
 
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return at;
+
+
+    }
+    public int insertBoardAttachment(Attachment at, Connection conn) {
+
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("insertBoardAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, at.getBoardNo());
+            psmt.setString(2, at.getOriginName());
+            psmt.setString(3, at.getChangeName());
+            psmt.setString(4, at.getFilePath());
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -81,26 +109,24 @@ public class AttachmentDao {
         } finally {
             close(psmt);
         }
+
         return result;
 
 
-
-
     }
-    public int insertInquireAttachment(Attachment at, Connection conn) {
+ public int insertReplyAttachment(Attachment at, Connection conn) {
 
         int result = 0;
         PreparedStatement psmt = null;
 
-        String sql = prop.getProperty("insertInquireAttachment");
+        String sql = prop.getProperty("insertReplyAttachment");
 
         try {
             psmt = conn.prepareStatement(sql);
-
-            psmt.setString(1, at.getOriginName());
-            psmt.setString(2, at.getChangeName());
-            psmt.setString(3, at.getFilePath());
-
+            psmt.setInt(1, at.getReplyNo());
+            psmt.setString(2, at.getOriginName());
+            psmt.setString(3, at.getChangeName());
+            psmt.setString(4, at.getFilePath());
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {

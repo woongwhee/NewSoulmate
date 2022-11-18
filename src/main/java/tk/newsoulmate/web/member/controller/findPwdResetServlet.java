@@ -9,7 +9,7 @@ import java.io.IOException;
 public class findPwdResetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        int a=1;
         request.getRequestDispatcher("views/member/findPwdReset.jsp").forward(request,response);
 
     }

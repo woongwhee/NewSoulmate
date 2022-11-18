@@ -57,7 +57,7 @@ public class InquireService {
         int result2 = 1;
         if(at != null){
             at.setBoardNo(boardNo);
-            result2 = new AttachmentDao().insertInquireAttachment(at, conn);
+            result2 = new AttachmentDao().insertBoardAttachment(at, conn);
         }
         if(boardNo > 0 && result2 > 0){
             commit();
@@ -96,7 +96,7 @@ public class InquireService {
 
     public Attachment selectInquireAttachment(int boardNo){
         Connection conn = getConnection();
-        Attachment at = new AttachmentDao().selectInquireAttachment(conn, boardNo);
+        Attachment at = new AttachmentDao().selectBoardAttachment(conn, boardNo);
         close();
 
         return at;
