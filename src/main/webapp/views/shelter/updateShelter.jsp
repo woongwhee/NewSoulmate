@@ -65,7 +65,7 @@
         <tbody>
         <% if(sList.isEmpty()) { %>
         <tr>
-            <td id="noList" colspan="6">조회된 리스트가 없습니다.</td>
+            <td id="noList" colspan="6" onclick="event.cancelBubble=true">조회된 리스트가 없습니다.</td>
         </tr>
         <% }else{ %>
         <%for(Shelter s : sList){ %>
