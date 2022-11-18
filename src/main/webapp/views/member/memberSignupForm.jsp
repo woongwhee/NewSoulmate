@@ -209,6 +209,16 @@
         }
     }
 
+    $( "#memberPhone" ).change(function(){
+        $("#memberPhone").val( $("#Phone").val());
+    });
+
+
+
+
+
+
+
     let checkId = 0;
     let checkPwd = 0;
     let checkPwdRe = 0;

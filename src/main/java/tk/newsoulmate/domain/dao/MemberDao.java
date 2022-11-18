@@ -18,11 +18,14 @@ public class MemberDao {
         String fileName = MemberDao.class.getResource("/sql/member/Member-Mapper.xml").getPath();
         try {
             prop.loadFromXML(new FileInputStream(fileName));
+        } catch (InvalidPropertiesFormatException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
 
     public int insertMember(Member m, Connection conn) {
@@ -99,10 +102,10 @@ public class MemberDao {
         String memberPwd = resultSet.getString("MEMBER_PWD");
         String memberName = resultSet.getString("MEMBER_NAME");
         String nickname = resultSet.getString("NICKNAME");
+        MemberGrade memberGrade = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
-        MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
-            Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
+        Member m = new Member(memberNo, memberId, memberName, phone, email, nickname, memberGrade);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHELTER_NO");
             m.setShelterNo(shelterNo);

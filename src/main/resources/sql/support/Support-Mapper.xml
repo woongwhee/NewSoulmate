@@ -6,5 +6,15 @@
         INSERT INTO SUPPORT VALUES(?,?,?)
     </entry>
 
+    <entry key="initializeSupport">
+        INSERT INTO SUPPORT(SUPPORT_NO, SHELTER_NO, MEMBER_NO, MERCHANT_UID, AMOUNT, STATUS, DP_WD, WD_STATUS)
+        VALUES(SQ_SUPPORT_PK.NEXTVAL, ?, ?, ?, ?, 'PENDING', 'DP', 'N')
+    </entry>
+
+    <entry key="findByMerchantUid">
+        SELECT * FROM SUPPORT
+        WHERE MERCHANT_UID = ?
+    </entry>
+
 </properties>
 

@@ -2,7 +2,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <title>회원정보 수정</title>
   <link href="<%=request.getContextPath()%>/css/mypage/mypageHeader.css" rel="stylesheet">
   <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
@@ -17,7 +16,7 @@
       <p></p>
     </div>
     <div id="user">
-      <a href="">로그아웃</a>
+      <a href="#">로그아웃</a>
     </div>
   </div>
 
@@ -28,11 +27,13 @@
     <li><a href="#">회원탈퇴</a></li>
   </ul>
 
-  <hr>
-  <div class="right_text">
-    <h1>회원정보 수정</h1> <!-- 각 카테고리에 따라 다르게 수정 / 임의로 넣음-->
+  <div id="right_text_fiex">
+
+    <div class="right_text">
+      <h1>회원정보 수정</h1>
+      <!--수정필요 해당 게시글명 가져오기-->
+    </div>
   </div>
-  <hr>
 </div>
 
 <script>
