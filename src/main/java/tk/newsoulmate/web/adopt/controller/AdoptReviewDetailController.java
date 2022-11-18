@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "AdoptReviewDetailController", value = "/adoptReDetail.bo")
+@WebServlet(name = "AdoptReviewDetailController", value = "/adoptReDetail")
 public class AdoptReviewDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,16 +30,16 @@ public class AdoptReviewDetailController extends HttpServlet {
             Board b = bService.selectAdoptReviewDetail(boardNo);
 
             request.setAttribute("b", b);
-
             request.getRequestDispatcher("views/adopt/adoptReviewDetail.jsp").forward(request, response);
         } else {
-
+            request.getSession().setAttribute("errorMsg","잘못된접근입니다.");
+            response.sendRedirect(request.getContextPath());
         }
     }
 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 }

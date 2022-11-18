@@ -84,17 +84,18 @@ public class BoardDao {
         return listCount;
     }
 
-    public ArrayList<Board> selectAdoptReviewList(Connection conn, PageInfo pi) {
+    public ArrayList<Board> selectList(Connection conn,BoardType boardType, PageInfo pi) {
         ArrayList<Board> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        String sql = prop.getProperty("adoptReviewList");
+        String sql = prop.getProperty("selectList");
         try {
             psmt = conn.prepareStatement(sql);
             int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
             int endRow = startRow + pi.getBoardLimit() - 1;
-            psmt.setInt(1, startRow);
-            psmt.setInt(2, endRow);
+            psmt.setInt(1, boardType.typeNo);
+            psmt.setInt(2, pi.getStartPage());
+            psmt.setInt(3, pi.getEndPage());
             rset = psmt.executeQuery();
 
             while (rset.next()) {
@@ -148,13 +149,9 @@ public class BoardDao {
             int endRow = startRow + pi.getBoardLimit() - 1;
             psmt.setInt(1, loginUser.getMemberNo());
             psmt.setInt(2, loginUser.getMemberGrade().gradeNumber);
-
             psmt.setInt(3, startRow);
             psmt.setInt(4, endRow);
-
-
             rset = psmt.executeQuery();
-
             while (rset.next()) {
                 list.add(Board.selectQnAList(rset.getString("RESULTSTATUS")
                         , rset.getInt("BOARD_NO")
@@ -163,7 +160,6 @@ public class BoardDao {
                         , rset.getString("MEMBER_NAME")));
 
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

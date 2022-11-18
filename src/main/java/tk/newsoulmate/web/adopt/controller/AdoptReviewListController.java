@@ -21,7 +21,6 @@ public class AdoptReviewListController extends HttpServlet {
         int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 
         PageInfo pi = new PageInfo(listCount,currentPage);
-
         ArrayList<Board> list= new AdoptService().selectAdoptReviewList(pi);
 
         request.setAttribute("list", list);

@@ -10,7 +10,7 @@
         FROM(
         SELECT
         "desertionNo",
-        "filename"
+        "popfile"
         FROM ANIMAL
         WHERE SYSDATE-2 &lt;"noticeEdt"
         AND "processState" LIKE '보호중%'

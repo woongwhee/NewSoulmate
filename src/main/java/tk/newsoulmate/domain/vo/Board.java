@@ -29,7 +29,7 @@ public class Board {
      * 봉사 후기,입양 후기 글작성용 펙토리얼메소드
      * @param memberNo
      * @param issueDate
-     * @param boardName "봉사 후기" ,"입양 후기"
+     * @param BoarType "봉사 후기" ,"입양 후기"
      * @param boardTitle
      * @param boardContent
      * @return

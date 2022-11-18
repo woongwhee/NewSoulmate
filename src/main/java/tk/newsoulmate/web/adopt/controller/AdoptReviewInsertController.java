@@ -37,6 +37,16 @@ public class AdoptReviewInsertController extends HttpServlet {
             session.removeAttribute("bno");
         }
         Board board=Board.enrollBoard(memberNo,bno.intValue(),adoptDate,BoardType.ADOPT,boardTitle,boardContent );
+        int result=as.insertBoard(board);
+        if(result>0){
+            session.setAttribute("alertMsg","게시글작성 성공");
+            response.sendRedirect(request.getContextPath()+"/adoptReList");
+        }else{
+
+        }
+
+
+
 
     }
 
