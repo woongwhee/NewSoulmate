@@ -15,7 +15,7 @@ public class AdoptService {
 
         Connection conn = getConnection();
 
-        ArrayList<Board> list = new BoardDao().selectAdoptReviewList(conn,pi);
+        ArrayList<Board> list = new BoardDao().selectList(conn,BoardType.ADOPT,pi);
 
         close();
 
@@ -61,7 +61,7 @@ public class AdoptService {
 
     public int insertReply(Reply r) {
         Connection conn = getConnection();
-        int result = new ReplyDao().insertReply(conn, r);
+        int result = new ReplyDao().insertBoardReply(conn, r);
 
         if (result > 0) {
             commit();
@@ -76,7 +76,6 @@ public class AdoptService {
         Connection conn = getConnection();
         ArrayList<Reply> list = new ReplyDao().selectReplyList(conn, boardNo);
         close();
-
         return list;
     }
 
@@ -124,6 +123,19 @@ public class AdoptService {
     public int insertAttachment(Attachment at) {
         Connection conn = getConnection();
         int result = new AttachmentDao().insertBoardAttachment(at,conn);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+        return result;
+
+    }
+
+    public int insertBoard(Board board) {
+        Connection conn = getConnection();
+        int result = new BoardDao().insertReviewBoard(board,conn);
         if(result>0){
             commit();
         }else{

@@ -12,7 +12,6 @@
 <%
     ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
     PageInfo pi = (PageInfo) request.getAttribute("pi");
-
     int currentPage = pi.getCurrentPage();
     int startPage = pi.getStartPage();
     int endPage = pi.getEndPage();
@@ -21,15 +20,17 @@
 <html>
 <head>
     <title>Title</title>
+    <%@include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
-
-<div class="outer">
+    <header><%@include file="/views/template/menubar.jsp"%></header>
+    <main>
+        <div class="outer">
     <br>
     <h2 style="text-align: center;">입양후기게시판</h2>
     <br>
     <div align="center">
-        <a href="<%=request.getContextPath() %>/adoptReEnroll" class="btn btn-secondary">글작성</a><br>
+        <a href="${context}/adoptReEnroll" class="btn btn-secondary">글작성</a><br>
     </div>
 
     <table align="center" class="list-area">
@@ -61,14 +62,7 @@
         </tbody>
     </table>
 
-    <script>
-        $(function() {
-            $(".list-area>tbody>tr").click(function(){
-                let bno = $(this).children().eq(0).text();
-                location.href = '/adoptReviewDetail.bo?bno='+bno;
-            });
-        })
-    </script>
+
 
     <br><br>
 
@@ -91,15 +85,20 @@
         <% } %>
 
     </div>
-
+    
     <script>
         function doPageClick(currentPage) {
-            location.href = "/adoptReList.bo?currentPage="+currentPage;
+            location.href = "${context}/adoptReList.bo?currentPage="+currentPage;
         }
+        $(function() {
+            $(".list-area>tbody>tr").click(function(){
+                let bno = $(this).children().eq(0).text();
+                location.href = '${context}/adoptReDetail?bno='+bno;
+            });
+        })
     </script>
-
-</div>
-
-
+    </div>
+    </main>
+    <footer>    <%@ include file="/views/template/footer.jsp"%></footer>
 </body>
 </html>

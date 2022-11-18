@@ -1,3 +1,4 @@
+<%@ page import="tk.newsoulmate.domain.vo.MemberGrade" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
@@ -15,19 +16,34 @@
 
         <div id="user">
             <ul>
-                <c:if test="${empty loginUser}" var="result1">
-                    <li><a href="${context}/memberSignupTerm">회원가입</a></li>
-                    <li><a href="${context}/loginpage">로그인</a></li>
+            <c:choose>
+            <c:when test="${empty loginUser}">
+                <li><a href="${context}/memberSignupTerm">회원가입</a></li>
+                <li><a href="${context}/loginpage">로그인</a></li>
+            </c:when>
+<%--                <c:otherwise>--%>
+<%--                    <c:choose>--%>
 
-                </c:if>
-                <c:if test="${!empty loginUser}" var="result2">
-                    <p><b>낭낭</b>님 환영합니다!</p>
-                    <li><a href="#">관리자페이지</a></li>
-                    <li><a href="${context}/myPage">마이페이지</a></li>
-                    <li><a href="#">로그아웃</a></li>
-
-<%--                    <li><a href="${context}/mypage">마이페이지</a></li>--%>
-                </c:if>
+            <c:when test="${loginUser.memberGrade eq MemberGrade.USER}">
+                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                <li><a href="${context}/myPage">마이페이지</a></li>
+                <li><a href="${context}/logout.do">로그아웃</a></li>
+            </c:when>
+            <c:when test="${loginUser.memberGrade eq MemberGrade.SHELTER_MANAGER}" >
+                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                <li><a href="#">보호소페이지</a></li>
+                <li><a href="${context}/myPage">마이페이지</a></li>
+                <li><a href="${context}/logout.do">로그아웃</a></li>
+                </c:when>
+                <c:when test="${loginUser.memberGrade eq MemberGrade.SITE_MANAGER}">
+                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                <li><a href="#">관리자페이지</a></li>
+                <li><a href="${context}/myPage">마이페이지</a></li>
+                <li><a href="${context}/logout.do">로그아웃</a></li>
+            </c:when>
+<%--                    </c:choose>--%>
+<%--                </c:otherwise>--%>
+            </c:choose>
             </ul>
         </div>
     </div>

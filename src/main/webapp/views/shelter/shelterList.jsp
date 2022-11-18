@@ -83,7 +83,7 @@
                         console.log(result, "어라?");
                         let str = '<option value="0">전체</option>';
                         for (let i = 0; i < result.length; i++) {
-                            str += "<option value=" + result[i].villageNo + ">" + result[i].villageName + "</option>"
+                            str += "<option value="+result[i].villageNo+ ">" + result[i].villageName + "</option>"
                         }
                         $("#subCategory").html(str);
 

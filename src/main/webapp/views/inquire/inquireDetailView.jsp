@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="tk.newsoulmate.domain.vo.*" %>
 <% Attachment at= (Attachment) request.getAttribute("at");
-Board b=(Board) request.getAttribute("b");%>
+    Board b=(Board) request.getAttribute("b");
+    Member loginUser = (Member)session.getAttribute("loginUser");
+%>
 <html>
 <head>
     <title>문의내역 상세보기</title>
@@ -61,6 +63,7 @@ Board b=(Board) request.getAttribute("b");%>
             </tr>
             <c:choose >
                 <c:when test="${b.resultStatus eq 'Y'}">
+
                 </c:when>
                 <c:when test="${!empty loginUser AND loginUser.memberGreade eq MemberGreade.SITE_MANAGER}">
                     <tr>
@@ -86,11 +89,14 @@ Board b=(Board) request.getAttribute("b");%>
 
         <div align="center">
             <a href="<%=request.getContextPath() %>/inquire" class="btn btn-secondary btn-sm">목록</a>
-<%--            <% if(loginUser != null && loginUser.getMemberNo().equals(b.getMemberNo())) { %>--%>
-            <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. -->
+
+            <% if(loginUser != null && loginUser.getMemberNo() == b.getMemberNo()) { %>
+            <%-- if문 가능한건지 체크 확인해야함 --%>
+            <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
             <a href="<%=request.getContextPath() %>/inquireUpdateForm.bo?bno=<%=b.getBoardNo() %>" class="btn btn-secondary btn-sm">수정</a>
             <a href="<%=request.getContextPath() %>/inquireDelete.bo?bno=<%=b.getBoardNo() %>" class="btn btn-danger btn-sm">삭제</a>
-<%--            <% } %>--%>
+
+            <% } %>
 
         </div>
 

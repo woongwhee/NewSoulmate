@@ -1,6 +1,7 @@
 <%@ page import="tk.newsoulmate.domain.vo.Board" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.PageInfo" %><%--
+<%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
+<%--
   Created by IntelliJ IDEA.
   User: 상엽
   Date: 2022-11-08
@@ -132,20 +133,20 @@
         <div align="center" class="paging-area">
 
             <% if(currentPage != 1) { %>
-            <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+                 <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
 
             <% } %>
 
             <% for(int i=startPage; i<=endPage; i++) { %>
-            <% if(i != currentPage) {%>
-            <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
-            <% } else { %>
-<%--            <button disabled><%=i %></button>--%>
-            <% } %>
+                    <% if(i != currentPage) {%>
+                            <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
+                    <% } else { %>
+                            <button disabled><%=i %></button>
+                    <% } %>
             <% } %>
 
             <% if(currentPage != maxPage) { %>
-            <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+                    <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
 
             <% } %>
 
@@ -153,7 +154,7 @@
         </div>
         <script>
             function doPageClick(currentPage){
-                location.href = "<%=request.getContextPath()%>/inquireInsert.bo?currentPage="+currentPage;
+                location.href = "<%=request.getContextPath()%>/inquire?currentPage="+currentPage;
             }
         </script>
 
