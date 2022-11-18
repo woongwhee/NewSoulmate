@@ -68,6 +68,7 @@ public class AdoptService {
         } else {
             rollback(conn);
         }
+        close();
         return result;
     }
 
