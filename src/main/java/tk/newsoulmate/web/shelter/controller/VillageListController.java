@@ -10,15 +10,12 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "villageList", value = "/shelter/village.ax")
+@WebServlet(name = "villageList", value = "/village.ax")
 public class VillageListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         int villageNo = Integer.parseInt(request.getParameter("village"));
-
         ArrayList<Shelter> sList2 = new ShelterService().selectShelterByVillage(villageNo);
-
         response.setContentType("application/json; charset=UTF-8");
         Gson gson = new Gson();
         gson.toJson(sList2,response.getWriter());

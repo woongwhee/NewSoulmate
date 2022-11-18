@@ -25,21 +25,20 @@ public class ReplyDao {
         }
 
     }
-    public int insertReply(Connection conn, Reply r) {
+    public int insertBoardReply(Connection conn, Reply r) {
+
 
         int result = 0;
 
         PreparedStatement psmt = null;
 
-        String sql = prop.getProperty("insertReply");
+        String sql = prop.getProperty("insertBoardReply");
 
         try {
             psmt = conn.prepareStatement(sql);
-
-            psmt.setInt(1, r.getReplyNo());
-            psmt.setInt(2, r.getBoardNo());
-            psmt.setInt(3, Integer.parseInt(String.valueOf(r.getMemberNo())));
-            psmt.setString(4, r.getReplyContent());
+            psmt.setInt(1, r.getBoardNo());
+            psmt.setInt(2, r.getMemberNo());
+            psmt.setString(3, r.getReplyContent());
 
             result = psmt.executeUpdate();
 
@@ -50,23 +49,22 @@ public class ReplyDao {
         }
         return result;
     }
-    public int insertImgReply(Connection conn, Reply r) {
+    public int insertNoticeReply(Connection conn, Reply r) {
         int result = 0;
 
         PreparedStatement psmt = null;
 
-        String sql = prop.getProperty("insertReply");
+        String sql = prop.getProperty("insertNoticeReply");
 
         try {
             psmt = conn.prepareStatement(sql);
 
             psmt.setInt(1, r.getReplyNo());
-            psmt.setInt(2, r.getBoardNo());
-            psmt.setInt(3, Integer.parseInt(String.valueOf(r.getMemberNo())));
-            psmt.setString(4, r.getReplyContent());
-
+            psmt.setInt(2, r.getNoticeNo());
+            psmt.setInt(3, r.getMemberNo());
+            psmt.setInt(4, r.getReplyType().TypeNo);
+            psmt.setString(5, r.getReplyContent());
             result = psmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -77,30 +75,17 @@ public class ReplyDao {
     public ArrayList<Reply> selectReplyList(Connection conn, int boardNo) {
 
         ArrayList<Reply> list = new ArrayList<>();
-
         PreparedStatement psmt = null;
-
         ResultSet rset = null;
-
         String sql = prop.getProperty("selectReplyList");
-
         try {
             psmt = conn.prepareStatement(sql);
-
             psmt.setInt(1, boardNo);
-
             rset = psmt.executeQuery();
-
-            while (rset.next()) {
-
-                list.add(new Reply(
-                        rset.getInt(1),
-                        rset.getInt(2),
-                        rset.getString(3),
-                        rset.getDate(4)
-                ));
+            Reply r=null;
+            while ((r=nomalReplyMapper(rset))!=null) {
+                list.add(r);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -109,4 +94,20 @@ public class ReplyDao {
         }
         return list;
     }
+
+    private Reply nomalReplyMapper(ResultSet rset) throws SQLException {
+        Reply r=null;
+        if(rset.next()){
+            r=new Reply(
+                    rset.getInt("REPLY_NO"),
+                    rset.getInt("BOARD_NO"),
+                    rset.getInt("MEMBER_NO"),
+                    rset.getString("MEMBER_NAME"),
+                    rset.getString("REPLY_CONTENT"),
+                    rset.getDate("REPLY_DATE")
+            );
+        };
+        return r;
+    }
+
 }

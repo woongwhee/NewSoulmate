@@ -5,8 +5,11 @@ import java.sql.Date;
 public class Reply {
     private int replyNo;
     private int boardNo;
+    private int noticeNo;
     private int memberNo;
+    private String replyWriter;
     private String replyContent;
+
     private ReplyType replyType;
     private Date replyDate;
 
@@ -24,7 +27,7 @@ public class Reply {
     }
 
     /**
-     * 불러오기용 생성자
+     * 사진댓글 불러오기용 생성자
      */
     public Reply(int replyNo, int boardNo, int memberNo, String replyContent, ReplyType replyType, Date replyDate) {
         this.replyNo = replyNo;
@@ -35,9 +38,14 @@ public class Reply {
         this.replyDate = replyDate;
     }
 
-    public Reply(int replyNo, int memberNo, String replyContent, Date replyDate) {
+    /**
+     * 불러오기용 생성자
+     */
+    public Reply(int replyNo, int boardNo,int memberNo, String replyWriter,String replyContent, Date replyDate) {
         this.replyNo = replyNo;
+        this.boardNo=boardNo;
         this.memberNo = memberNo;
+        this.replyWriter=replyWriter;
         this.replyContent = replyContent;
         this.replyDate = replyDate;
     }
@@ -88,5 +96,21 @@ public class Reply {
 
     public void setReplyDate(Date replyDate) {
         this.replyDate = replyDate;
+    }
+
+    public String getReplyWriter() {
+        return replyWriter;
+    }
+
+    public int getNoticeNo() {
+        return noticeNo;
+    }
+
+    public void setNoticeNo(int noticeNo) {
+        this.noticeNo = noticeNo;
+    }
+
+    public void setReplyWriter(String replyWriter) {
+        this.replyWriter = replyWriter;
     }
 }

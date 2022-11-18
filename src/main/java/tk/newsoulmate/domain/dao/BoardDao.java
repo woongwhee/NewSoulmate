@@ -1,6 +1,5 @@
 package tk.newsoulmate.domain.dao;
 
-import oracle.jdbc.proxy.annotation.Pre;
 import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
@@ -320,7 +319,7 @@ public class BoardDao {
     public int insertReviewBoard(Board b, Connection conn) {
         int result = 0;
         PreparedStatement psmt = null;
-        String insert = prop.getProperty("insertQnABoard");
+        String insert = prop.getProperty("insertReviewBoard");
         try {
             psmt = conn.prepareStatement(insert);
             psmt.setInt(1, b.getBoardNo());

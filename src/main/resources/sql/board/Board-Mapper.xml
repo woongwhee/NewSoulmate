@@ -4,7 +4,7 @@
 <properties>
 
 
-    <entry key="adoptReviewList">
+    <entry key="selectList">
         SELECT *
         FROM (
         SELECT ROWNUM RNUM, A.*
@@ -16,6 +16,7 @@
                 CREATE_DATE
         FROM BOARD
         WHERE BOARD_STATUS = 'Y'
+            AND TYPE_NO = ?
         ORDER BY CREATE_DATE DESC) A )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
@@ -112,7 +113,9 @@
         VALUES (?, ?, ?, ?, ? ,'Y',?,?)
     </entry>
     <entry key="selectBoardNo">
-        SELECT SQ_BOARD_PK.NEXTVAL FROM DUAL
+        SELECT
+            SQ_BOARD_PK.NEXTVAL
+        FROM DUAL
     </entry>
     <entry key="increaseCount">
         UPDATE BOARD
@@ -120,7 +123,6 @@
         WHERE BOARD_NO = ?
         AND BOARD_STATUS = 'Y'
     </entry>
-
     <entry key="selectInquireBoard">
         SELECT BOARD_NO,
             CATEGORY_NAME,

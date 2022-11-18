@@ -1,56 +1,108 @@
-<%--
+<%@ page import="tk.newsoulmate.domain.vo.Reply" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 2022-11-08
   Time: 오후 5:24
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <%@ include file="/views/template/styleTemplate.jsp"%>
+</head>
+<body>
+    <header><%@ include file="/views/template/menubar.jsp"%></header>
+    <main>
+        <p>${b.boardTitle}</p>
+        <p>${b.issueDate}</p>
+        <button type="button" onclick="report('board',${b.boardNo})" data-toggle="modal" data-target="#reportModal">신고</button>
+        <p>${b.boardContent} </p>
+        <table>
+            <c:forEach var="r" items="${rList}">
+                ${r.replyWriter}${r.replyWriter}${r.replycontent}
+                <button type="button" onclick="report('reply',${r.replyNo})" data-toggle="modal" data-target="#reportModal">신고</button>
+                <button onclick="deleteReply();" >X</button>
+            </c:forEach>
+        </table>
+        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="rpBoardNo" value="">
+                    <input type="hidden" name="rpReplyNo" value="">
+                    <select name="category" id="rpCategory">
+                        <option value="1">광고</option>
+                        <option value="2">도배</option>
+                        <option value="3">음란물</option>
+                        <option value="4">개인정보침해</option>
+                        <option value="5">저작권침해</option>
+                        <option value="6">기타</option>
+                    </select><br>
+                    <textarea name="content" id="reportContent" cols="30" rows="10"></textarea>
+                    <button onclick="
+                    reportSubmit()"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="resetReport()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.io.*"%>
-<%@page import="java.util.UUID"%>
-<%
-    //한글 인코딩을 위한 UTF-8 설정
-    String title = request.getParameter("adTitle");
-    String content = request.getParameter("adContent");
-%>
-<%
-    String fileInfo = "";
-    String fileName = request.getHeader("file-name");
-    String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1);
-
-        //이미지이므로 신규 파일로 디렉토리 설정 및 업로드
-        //파일 기본경로
-        String defaultPath  = request.getSession().getServletContext().getRealPath("/");
-        String filePath = defaultPath  + "/smarteditor2/upload/" + File.separator;
-
-        File file = new File(filePath);
-        if (!file.exists()) {
-            file.mkdirs();
+    <footer><%@ include file="/views/template/footer.jsp"%></footer>
+    <script>
+        /**
+         * 신고창
+         * @param type
+         * @param refNo
+         */
+        function resetReport(){
+            $("#reportContent").val("");
+            $("#rpReplyNo").val("");
+            $("#rpBoardNo").val("");
         }
-        String autoFileName = UUID.randomUUID()+ "." + fileExt;
-        String realFileName = filePath + autoFileName;
+        function report(type,refNo){
 
-        InputStream is = request.getInputStream();
-        OutputStream os = new FileOutputStream(realFileName);
-        int num;
-
-        byte bt[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-        while ((num = is.read(bt, 0, bt.length)) != -1) {
-            System.out.println("111");
-            os.write(bt, 0, num);
         }
-        if (is != null) {
-            is.close();
+
+        function reportSubmit() {
+            let reportContent = {
+                "categoryNo":$("#rpCategory").val(),
+                "boardNo":$("#rpBoardNo").val(),
+                "replyNo":$("#rpReplyNo").val(),
+                "reportContent":$("reportContent").val()
+            };
+            $.ajax({
+                url : '${context}/report',
+                type : 'post',
+                data : reportContent,
+                success:function (result){
+                    console.log("성공스")
+                },
+                error:(result)=>{
+
+
+                }
+                }
+            )
         }
-        os.flush();
-        os.close();
-
-        fileInfo += "&bNewLine=true&sFileName="+ fileName+"&sFileURL="+"/NewSoulmate/smarteditor2/upload/"+autoFileName;
-        out.println(fileInfo);
-
-%>
-
-제목  <%=title%> <br>
-내용 <br> <%=content%>
-사진 <%=fileInfo%>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+</body>
+</html>
