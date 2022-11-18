@@ -25,41 +25,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>보호소리스트</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+
     <link href="<%=request.getContextPath()%>/css/shelter/shelterList.css" rel="stylesheet">
 </head>
 <body>
-<%@include file="/views/template/menubar.jsp"%>
-
+<%@ include file="/views/template/menubar.jsp"%>
+<script>
+    $(function(){
+        $.ajax({
+            url: "ShelterSearch",
+            success: function (result) {
+                $("#shelter").html(result);
+            }
+        })
+    })
+</script>
+<div id="shelter"></div>
 <div id="content">
-    <div id="search">
-        <form action="<%=request.getContextPath()%>/updateShelter" method="get">
-        <table id="searchBox">
-            <tr>
-                <td>시도</td>
-                <th>
-                    <select name="cityNo" id="mainCategory" onchange="choice();">
-                        <option value="0">--전체--</option>
-                        <% for(City c: cList){ %>
-                        <option value="<%=c.getCityNo()%>">
-                            <%=c.getCityName()%>
-                        </option>
-                        <% } %>
-                    </select>
-                </th>
 
-                <td>시군구</td>
-                <th>
-                    <select name="villageNo" id="subCategory">
-                        <option value="0">--전체--</option>
-                    </select>
-                </th>
-                <td>
-                    <button type="submit">조회</button>
-                </td>
-            </tr>
-        </table>
-        </form>
-    </div>
     <table class="list-area">
         <thead>
         <tr>

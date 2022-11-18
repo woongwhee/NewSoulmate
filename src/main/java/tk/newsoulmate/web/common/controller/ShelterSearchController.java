@@ -1,7 +1,6 @@
-package tk.newsoulmate.web.shelter.controller;
+package tk.newsoulmate.web.common.controller;
 
 import tk.newsoulmate.domain.vo.City;
-import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.domain.vo.Village;
 import tk.newsoulmate.web.shelter.service.ShelterService;
 
@@ -11,16 +10,17 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "shelterList", value = "/shelterList")
-public class ShelterListController extends HttpServlet {
+@WebServlet(name = "ShelterSearchController", value = "/ShelterSearch")
+public class ShelterSearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ArrayList<Shelter> sList = new ShelterService().selectList();
-        request.setAttribute("sList",sList);
-        request.getRequestDispatcher("/views/shelter/shelterList.jsp").forward(request,response);
+        ArrayList<City> cList = new ShelterService().selectCity();
+        ArrayList<Village> vList = new ShelterService().selectVillage(cList.get(0).getCityNo());
+        request.setAttribute("cList",cList);
+        request.setAttribute("vList",vList);
 
-
+        request.getRequestDispatcher("/views/common/shelterSearch.jsp").forward(request,response);
     }
 
     @Override
