@@ -19,7 +19,7 @@ public class MemberSignupController extends HttpServlet {
         String memberPwd = request.getParameter("memberPwd");
         String memberName = request.getParameter("memberName");
         String nickName = request.getParameter("nickName");
-        String phone = request.getParameter("Phone");
+        String phone = request.getParameter("memberPhone")+request.getParameter("Phone");
         String email = request.getParameter("memberMail");
 
         Member m = new Member(memberId, memberPwd, memberName, nickName, phone, email);
