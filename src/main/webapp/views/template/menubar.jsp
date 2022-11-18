@@ -85,8 +85,8 @@
             <div class="dropdown">
                 <button class="dropdown-btn"><a href="#">후원</a></button>
                 <div class="dropdown-submenu">
-                    <a href="${context}/supportPaymentPage">후원하기</a>
-                    <a href="${context}/supportHistoryPage">후원내역</a>
+                    <a href="#">후원하기</a>
+                    <a href="#">후원내역</a>
                 </div>
             </div>
 
