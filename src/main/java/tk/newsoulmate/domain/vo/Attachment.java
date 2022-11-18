@@ -18,7 +18,14 @@ public class Attachment {
 		super();
 	}
 
-	/**
+    public Attachment(String originName, String changeName, String filePath) {
+		this.originName=originName;
+		this.changeName=changeName;
+		this.filePath=filePath;
+
+    }
+
+    /**
 	 * 게시글용 첨부파일 팩토리얼
 	 * @param fileNo
 	 * @param boardNo

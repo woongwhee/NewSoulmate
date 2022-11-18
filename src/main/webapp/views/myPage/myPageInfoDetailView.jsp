@@ -1,13 +1,11 @@
 <%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%
+<%
     Member loginUser = (Member)session.getAttribute("loginUser");
-    String memberId = loginUser.getMemberId();
-    String memberPwd = loginUser.getMemberPwd();
-    String memberName = loginUser.getMemberName();
-    String nickName = loginUser.getNickName();
-    String email = loginUser.getEmail();
-%>--%>
+    String[] email = loginUser.getEmail().split("@");
+    String firstEmail = email[0];
+    String secondEmail = "@"+email[1];
+%>
 <html>
 <head>
     <title>회원정보 수정</title>
@@ -15,18 +13,21 @@
     <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
-<header><%@include file="/views/mypage/mypageHeader.jsp"%></header>
+<header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
-            <b>안녕</b>님 환영합니다. <br><br>
+            <b> ${loginUser.memberName}님 환영합니다.
+                <%=firstEmail%>
+                <%=secondEmail%>
+            </b> <br><br>
 
 
             <form action=""  method="get">
                 <div class="form-group">
                     <label for="">아이디</label>
                     <p>
-
+                        ${loginUser.memberId}
                     </p>
                 </div>
 
@@ -45,15 +46,14 @@
 
                 <div class="form-group">
                     <label for="">닉네임</label>
-                    <input type="text" name="nickName" id="nickName" value="122334" placeholder="<%--<%=nickName%>--%>" required>
+                    <input type="text" name="nickName" id="nickName" value="${loginUser.nickName}" required>
                     <button type="button" id="checkNickname">중복확인</button>
                 </div>
-
                 <div class="form-group" >
                     <label for="">이메일</label>
 
-                    <input type="text" name="email_1" id="email_1" placeholder="이메일 입력">
-                    <input type="text" name="email_2" id="email_2" disabled value="">
+                    <input type="text" name="email_1" id="email_1" value="<%=firstEmail%>">
+                    <input type="text" name="email_2" id="email_2" disabled value="<%=secondEmail%>">
 
                     <select name="email_3" id="email_3">
                         <option value="1">직접입력</option>
@@ -77,7 +77,6 @@
     </div>
 </div>
 <script>
-
 
         //비밀번호 유효성 검사 - 완료
         const memberPw = document.querySelector("#memberPwd");
