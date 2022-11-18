@@ -1,0 +1,91 @@
+/*폰트 : 노토산스 */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+#container {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content_main {
+    font-size: 25px;
+    margin: 30px 0 30px 0;
+}
+
+.content_date {
+    margin: 0 auto;
+    background-color: rgb(221, 221, 221);
+    width: 900px;
+    height: 800px;
+}
+
+#supportDate {
+    padding-top: 50px;
+    font-size: 20px;
+}
+
+#supportDate span {
+    padding: 10px;
+}
+
+span input[type=date] {
+    width: 150px;
+    height: 30px;
+    border: 0px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+#supportList {
+    margin-top: 50px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+thead th,
+tbody th {
+    border: 1px solid rgb(203, 203, 203);
+    background-color: rgb(236, 236, 236);
+    padding: 10px 70px;
+    text-align: center;
+}
+
+thead th:first-child {
+    padding: 0 0px;
+}
+
+tbody td {
+    border: 1px solid rgb(203, 203, 203);
+    text-align: center;
+}
+
+#supportTotal {
+    position: absolute;
+    right: 500px;
+    font-size: 25px;
+    margin: 50px 0px;
+}
+
+
+/* 페이지네이션 */
+.pagingForm {
+    padding: 15px 0 5px 10px;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
