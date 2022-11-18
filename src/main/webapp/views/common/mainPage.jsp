@@ -26,6 +26,7 @@
         });
     });
 </script>
+    </script>
     <main>
 <div id="container">
 
@@ -48,29 +49,28 @@
     </div>
     <div id="main_left">
         <div id="adopt-review">
-            <div id="comment2">입양후기+</div>
-            <div class="slider">
-                <div><img src="" alt="">사진1</div>
-                <div><img src="" alt="">사진2</div>
-                <div><img src="image/flower3.jpg" alt="">꽃사진3</div>
-                <div><img src="image/flower4.jpg" alt="">꽃사진4</div>
-                <div><img src="image/flower5.jpg" alt="">꽃사진5</div>
-                <div><img src="image/bono.jpg" alt="">보노보노</div>
-            </div>
+            <div id="comment2" onclick="">입양후기+</div>
+                <div id="adopt-review-list">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                </div>
         </div>
         <div id="volunteer-review">
-            <div id="comment3">봉사후기+</div>
+            <div id="comment3" onclick="">봉사후기+</div>
             <div id="volunteer-review-list">
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-            </ul>
+                <ul>
+                    <li>봉사후기</li>
+                    <li>봉사후기</li>
+                    <li>봉사후기</li>
+                    <li>봉사후기</li>
+                    <li>봉사후기</li>
+                </ul>
             </div>
             <div id="btn-area">
-            <button id="shelterbtn">전국 유기동물<br>보호소 보러가기</button>
+            <button id="shelterbtn" onclick="location.href='<%=request.getContextPath()%>/shelterList'">전국 유기동물<br>보호소 보러가기</button>
             </div>
         </div>
         <div id="adopt-able-animal">

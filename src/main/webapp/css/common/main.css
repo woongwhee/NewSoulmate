@@ -31,13 +31,11 @@
     width: 800px;
     height: 280px;
     border: 1px solid black;
-    margin-bottom: 20px;
-
 }
 
 #volunteer-review {
     width: 800px;
-    height: 250px;
+    height: 220px;
     border: 1px solid black;
     margin-bottom: 20px;
 }
@@ -102,7 +100,7 @@
     background-color: rgba(255, 99, 71, 0.3);
     border-radius: 25px;
 }
-#main_top .slick-track {
+#main_top .slick-track{
     display:flex;
     height:260px;
     margin-top: 25px;
@@ -134,39 +132,37 @@
 }
 
 
-#main_left .slider {
-    width: 750px;
-    height: 220px;
-    margin: 0 auto;
-}
-#main_left .slick-track {
-    display:flex;
+#adopt-review-list{
+    width: 800px;
     height:200px;
     margin-top: 20px;
+    display: flex;
+    padding: 10px;
 }
 
-#main_left img{
-    width: 120px;
-    height: 150px;
+#main_left Img{
+    width: 135px;
+    height: 170px;
     cursor: pointer;
-    margin: 0 0 0 15px;
+    margin: 5px 10px 0 10px;
 }
 
 #comment2 , #comment3{
     font-size: 20px;
     font-weight: 600;
     text-align: left;
+    padding: 5px 0 0 40px;
 }
 
 #volunteer-review-list{
     width: 550px;
-    height: 220px;
+    height: 180px;
     float:left;
 }
 
 #btn-area{
     width: 200px;
-    height: 220px;
+    height: 180px;
     display:inline-block;
 }
 
@@ -174,7 +170,15 @@
     width: 150px;
     height: 150px;
     border-radius: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
     background-color: #f45d48;
     border: 3px white solid;
     float: right;
+    cursor: pointer;
+}
+
+#volunteer-review-list li{
+    line-height: 180%;
 }
