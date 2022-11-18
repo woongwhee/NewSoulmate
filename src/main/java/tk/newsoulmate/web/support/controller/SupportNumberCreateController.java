@@ -29,7 +29,7 @@ public class SupportNumberCreateController extends HttpServlet {
 		long amount = Long.parseLong(req.getParameter("amount"));
 		String supportNumber = new SupportService().createNumber(loginMember.getMemberNo(), shelterNo, amount);
 
-		resp.getWriter().println(supportNumber);
+		resp.getWriter().print(supportNumber);
 		resp.getWriter().flush();
 	}
 

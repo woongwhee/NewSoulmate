@@ -26,6 +26,7 @@ public class SupportVerifyController extends HttpServlet {
 
 		if (result) {
 			resp.setStatus(200);
+
 		} else {
 			resp.setStatus(400); // Bad Request
 		}

@@ -85,7 +85,7 @@ public class MemberDao {
         String phone = resultSet.getString("PHONE");
         Member m = new Member(memberNo, memberId, memberName, phone, email, nickname, memberGrade);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
-            long shelterNo = resultSet.getLong("SHLETER_NO");
+            long shelterNo = resultSet.getLong("SHELTER_NO");
             m.setShelterNo(shelterNo);
         }
         System.out.println(m);

@@ -116,14 +116,14 @@
         // 그러면 서버는 merchant_uid(후원번호) 로 DB 조회
         // 그리고 그 두개의 Price(amount) 를 비교해서 검증후 맞으면 완료 상태로 변경
 
+        let paid = 0;
         function requestPay() {
             var IMP = window.IMP;
             var code = "imp38841066";
             IMP.init(code);
-
             $.ajax({
                 url: "${context}/support/number?shelterNo=341386201800004&amount=" + $("[name=amountCheck]:checked").val(),
-                //url: "${context}/support/verify?impUid=" + rsp.imp_uid + "&merchantUid=" + rsp.merchant_uid,
+                //url: "/support/verify?impUid=" + rsp.imp_uid + "&merchantUid=" + rsp.merchant_uid,
                 type: "post",
                 success: function(data) {
                     IMP.request_pay({
@@ -137,16 +137,18 @@
                         buyer_tel : $('#phone').val(),
                         buyer_addr : '서울특별시 강남구 도곡동',
                         buyer_postcode : '06275',
-                        m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+                        m_redirect_url : '${context}/supportPaymentPage'
                     }, function(rsp) {
                         if ( rsp.success ) {
                             console.log(rsp);
-
+                            saveInfo(rsp.paid_amount);
                             $.ajax({
                                 url: "${context}/support/verify?impUid=" + rsp.imp_uid + "&merchantUid=" + rsp.merchant_uid,
+
                                 type: "get",
                                 success: function () {
-                                    alert(rsp.paid_amount + " 원 후원에 성공했습니다!")
+                                    //alert("원 후원에 성공했습니다.");
+                                    alertInfo();
                                 },
                                 error: function () {
                                     alert("후원에 실패했습니다!")
@@ -163,6 +165,13 @@
                 }
             });
         }
+function alertInfo(){
+    alert(paid+"원 후원 감사합니다.");
+}
+function saveInfo(amount){
+    paid = amount;
+}
+
     </script>
 
     <script>
@@ -173,250 +182,6 @@
             }
         });
     </script>
-
-
-
-    <%-- <script>
-
-         function requestPay() {
-
-            /* const price = Number($(".value"));*/
-             var IMP = window.IMP;
-             var code = "imp38841066";
-             IMP.init(code);
-
-             // 결제요청
-             IMP.request_pay({
-                 pg : 'html5_inicis', // pg 사 선택
-                 pay_method : 'card',
-                 merchant_uid : 'merchant_' + new Date().getTime(),
-                 name : "환승주인 후원하기",
-                 amount : $("[id=chk]:checked").val(),
-
-                 supporter_email :$('#Email').val(),
-                 supporter_name : $('#memberName').val(),
-                 supporter_phone : $('#Phone').val(),
-                 m_redirect_url : ''
-             }, function(rsp) {
-
-                 if (rsp.success ) {
-                     var msg = "결제가 완료되었습니다.";
-
-                     $.ajax({
-                         // todo : url db에 저장할 url payment 정보
-                             url: '${supportHistory}', //request에 로그인 유저가
-                             type: 'post',
-                             // TODO : db에저장할값들
-                             data: {authCode: inputValue},
-                             success: (result) => {
-                                 if (result == 1) {
-
-                                     var msg = "결제가 완료되었습니다.";
-                                     msg += '고유ID : ' + rsp.imp_uid;
-                                     msg += '상점 거래ID : ' + rsp.merchant_uid;
-                                     msg += '결제 금액 : ' + rsp.paid_amount;
-                                     msg += '카드 승인번호 : ' + rsp.apply_num;
-                                     alert("결제완료")
-                                     supporter_email: buyer_email,
-                                         supporter_name: ${loginUser.memberName},
-                                         supporter_phone: buyer_phone,
-                                     s_msg: s_msg,
-                                     o_shipno: rsp.merchant_uid,
-                                     o_paidAmount: rsp.paid_amount,
-                                     o_paytype: rsp.pay_method
-
-
-                                 } else if (result == 0) {
-                                     // TODO: 환불request api
-                                     alert("실패")
-                                 }
-                             }, error: function () {
-                             alert("서버요청실패");
-                         }
-                         })
-                 }
-                 else {
-                     var msg = '결제에 실패하였습니다. 에러내용 : ' + rsp.error_msg
-                 }
-                 alert(msg);
-             });
-         }
-
-
-     </script>
-
-
-
-     <script>
-
-         // 2번
-
-
-         $("#place-order").click(function(){
-             for(var i=0; i<document.purchaseinput.elements.length; i++)
-             {
-                 if(document.purchaseinput.elements[i].value == "")
-                 {
-                     alert("모든 값을 입력 하셔야 합니다. ");
-                     document.purchaseinput.elements[i].focus();
-                     return false;
-                 }
-             }
-             let m_email = $("#m_email").val();
-             let s_name = $("#s_name").val();
-             let s_addr = $("#roadFullAddr").val();
-             let s_phone = $("#s_phone").val();
-             let s_msg = $("#s_msg").val();
-             let s_zipNo = $("#s_zipNo").val();
-             //alert(m_email +s_name +s_addr +s_phone +s_msg +s_zipNo);
-
-             var IMP = window.IMP; // 생략가능
-             IMP.init('imp38841066');	//아임포트 관리자계정
-             //결제 시스템을 실행시키는 함수
-             IMP.request_pay({
-                 pay_method: 'card',
-                 merchant_uid: 'merchant_' + new Date().getTime(),
-                 name: '주문명 : 환승주인 후원하기',
-                 amount: 100,	//테스트 완료 후 가격정보 넣기
-                 buyer_email: m_email,
-                 buyer_name: s_name,
-                 buyer_tel: s_phone,
-                 buyer_addr: s_addr,
-                 buyer_postcode: s_zipNo
-             }, function (rsp) {
-                 console.log(rsp);
-                 if (rsp.success) {
-                     var msg = '결제가 완료되었습니다.';
-                     msg += '고유ID : ' + rsp.imp_uid;
-                     msg += '상점 거래ID : ' + rsp.merchant_uid;
-                     msg += '결제 금액 : ' + rsp.paid_amount;
-                     msg += '카드 승인번호 : ' + rsp.apply_num;
-                     let purchaseVo = {
-                         m_email: m_email,
-                         s_name: s_name,
-                         s_addr: s_addr,
-                         s_phone: s_phone,
-                         s_msg: s_msg,
-                         s_zipNo: s_zipNo,
-                         o_shipno: rsp.merchant_uid,
-                         o_paidAmount: rsp.paid_amount,
-                         o_paytype: rsp.pay_method
-                     }
-                     // 컨트롤러에 데이터를 전달하여 DB에 입력
-                     // 결제내역을 사용자에게 보여주기 위해 필요함.
-                     $.ajax({
-                         url : "supporthistory",
-                         type : "get",
-                         data : purchaseVo,
-                         dataType : "text",
-                         success : function(result){
-                             if(result == "y") {
-                                 alert(msg);
-                                 location.href = "orderComplete.do";
-                             }else{
-                                 alert("데이터베이스입력실패");
-                                 return false;
-                             }
-                         },
-                         error : function(a,b,c){}
-                     });
-                 } else {
-                     var msg = '결제에 실패하였습니다.';
-                     msg += '에러내용 : ' + rsp.error_msg;
-                 }
-                 alert(msg);
-             });
-         });
-
-
-
-     </script>--%>
-
-
-
-
-
-
-    <%--<script>
-
-        function requestPay() {
-            var IMP = window.IMP;
-            var code = "imp38841066";
-            IMP.init(code);
-
-            // 결제요청
-            IMP.request_pay({
-                pg : 'html5_inicis', // pg 사 선택
-                pay_method : 'card',
-                merchant_uid : 'merchant_' + new Date().getTime(),
-                name : "환승주인 후원하기",
-                amount : 100,
-                buyer_email : 'ahhhaaah@siot.do',
-                buyer_name : '후원자',
-                buyer_tel : '010-6510-5678',
-                buyer_addr : '서울특별시 강남구 도곡동',
-                buyer_postcode : '06275',
-                m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-            }, function(rsp) {
-                if ( rsp.success ) {
-                    var msg = "결제가 완료되었습니다.";
-                    msg += '고유ID : ' + rsp.imp_uid;
-                    msg += '상점 거래ID : ' + rsp.merchant_uid;
-                    msg += '결제 금액 : ' + rsp.paid_amount;
-                    msg += '카드 승인번호 : ' + rsp.apply_num;
-
-                    console.log(rsp);
-                }
-                else {
-                    var msg = '결제에 실패하였습니다. 에러내용 : ' + rsp.error_msg
-                }
-                alert(msg);
-            });
-        }
-
-
-    </script>--%>
-
-
-
-
-    <%--   <script>
-
-           function requestPay() {
-               var IMP = window.IMP;
-               var code = "imp38841066";
-               IMP.init(code);
-
-               // 결제요청
-               IMP.request_pay({
-
-                   pg : 'kakaopay',
-                   pay_method : 'card', //생략 가능
-                   merchant_uid: 'merchant_' + new Date().getTime(), // 상점에서 관리하는 주문 번호
-                   name : "환승주인 후원하기",
-                   amount : 100,
-                   buyer_email : 'newsoulmatemaster@gmail.com',
-                   buyer_name : 'memberName',
-                   buyer_tel : 'Phone',
-                   buyer_addr : '서울특별시 강남구 삼성동',
-                   buyer_postcode : '12345'
-
-               }, function(rsp) {
-                   if ( rsp.success ) {
-                       var msg = "결제가 완료되었습니다.";
-                       msg += '고유ID : ' + rsp.imp_uid;
-                       msg += '상점 거래ID : ' + rsp.merchant_uid;
-                       msg += '결제 금액 : ' + rsp.paid_amount;
-                       msg += '카드 승인번호 : ' + rsp.apply_num;
-                   }
-                   else {
-                       var msg = '결제에 실패하였습니다. 에러내용 : ' + rsp.error_msg
-                   }
-                   alert(msg);
-               });
-           }
-
-       </script>--%>
 
 
 

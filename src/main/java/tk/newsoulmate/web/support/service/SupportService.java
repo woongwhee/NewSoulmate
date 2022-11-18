@@ -7,11 +7,11 @@ import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class SupportService {
 	public String createNumber(int loginMemberNo, long shelterNo, long amount) {
-		String number = "NEWSOULMATE_" + loginMemberNo + "_" + LocalDateTime.now();
+		String number = "NEWSOULMATE_" + loginMemberNo + "_" + LocalTime.now();
 		Connection conn = JDBCTemplet.getConnection();
 		int result = new SupportDao().initializeSupport(conn, shelterNo, loginMemberNo, number, amount);
 		if (result <= 0) {
