@@ -24,7 +24,13 @@
         FROM MEMBER
         WHERE MEMBER_ID = ?
         AND MEMBER_PWD = ?
-        <!--AND MEMBER_STATUS = 'Y'-->
+        AND MEMBER_STATUS = 'Y'
+    </entry>
+    <entry key="loginMemberByNo">
+        SELECT *
+        FROM MEMBER
+        WHERE MEMBER_NO=?
+        AND MEMBER_STATUS = 'Y'
     </entry>
 
     <entry key="findId">
@@ -47,5 +53,15 @@
         MEMBER_PWD = ?
         WHERE
         MEMBER_ID = ?
+    </entry>
+
+    <entry key="updateMember">
+        UPDATE MEMBER
+        SET
+        PHONE = ? ,
+        EMAIL = ? ,
+        NICKNAME = ?,
+        ENROLL_DATE = SYSDATE
+        WHERE MEMBER_NO = ?
     </entry>
 </properties>

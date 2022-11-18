@@ -1,3 +1,4 @@
+<%@ page import="tk.newsoulmate.domain.vo.MemberGrade" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
@@ -15,22 +16,34 @@
 
         <div id="user">
             <ul>
-                <c:if test="${empty loginUser}" var="result1">
-                    <li><a href="${context}/memberSignupTerm">회원가입</a></li>
-                    <li><a href="${context}/loginpage">로그인</a></li>
+                <c:choose>
+                    <c:when test="${empty loginUser}">
+                        <li><a href="${context}/memberSignupTerm">회원가입</a></li>
+                        <li><a href="${context}/loginpage">로그인</a></li>
+                    </c:when>
+                    <%--                <c:otherwise>--%>
+                    <%--                    <c:choose>--%>
 
-                </c:if>
-
-                <c:if test= "${!empty loginUser}" var="result2">
-                    <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                    <li><a href="${context}/myPage">마이페이지</a></li>
-                    <li><a href="${context}/logout">로그아웃</a></li>
-                </c:if>
-
-                <c:if test="${!empty loginUser &&}" var="result3">
-                    <li><a href="${context}/ManageMemberPage">관리자페이지</a></li>
-                    <li><a href="${context}/logout">로그아웃</a></li>
-                </c:if>
+                    <c:when test="${loginUser.memberGrade eq MemberGrade.USER}">
+                        <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                        <li><a href="${context}/myPage">마이페이지</a></li>
+                        <li><a href="${context}/logout.do">로그아웃</a></li>
+                    </c:when>
+                    <c:when test="${loginUser.memberGrade eq MemberGrade.SHELTER_MANAGER}" >
+                        <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                        <li><a href="#">보호소페이지</a></li>
+                        <li><a href="${context}/myPage">마이페이지</a></li>
+                        <li><a href="${context}/logout.do">로그아웃</a></li>
+                    </c:when>
+                    <c:when test="${loginUser.memberGrade eq MemberGrade.SITE_MANAGER}">
+                        <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                        <li><a href="${context}/manageMemberPage">관리자페이지</a></li>
+                        <li><a href="${context}/myPage">마이페이지</a></li>
+                        <li><a href="${context}/logout.do">로그아웃</a></li>
+                    </c:when>
+                    <%--                    </c:choose>--%>
+                    <%--                </c:otherwise>--%>
+                </c:choose>
             </ul>
         </div>
     </div>
@@ -80,10 +93,10 @@
 
             <div class="dropdown">
                 <button class="dropdown-btn"><a href="${context}/inquire">고객센터</a></button>
-<%--                <div class="dropdown-submenu">--%>
-<%--                    <a href="#">자주묻는 질문</a>--%>
-<%--                    <a href="#">문의하기</a>--%>
-<%--                </div>--%>
+                <%--                <div class="dropdown-submenu">--%>
+                <%--                    <a href="#">자주묻는 질문</a>--%>
+                <%--                    <a href="#">문의하기</a>--%>
+                <%--                </div>--%>
             </div>
         </div>
     </nav>
@@ -96,14 +109,14 @@
         if (errorMsg != null) {
             ss.removeAttribute("errorMsg");
         %>
-        alert("<%=errorMsg%>")
+    alert("<%=errorMsg%>")
     <%
         }
         errorMsg=(String)request.getAttribute("errorMsg");
          if (errorMsg != null) {
             request.removeAttribute("errorMsg");
         %>
-        alert("<%=errorMsg%>")
+    alert("<%=errorMsg%>")
     <%
         }
     %>
@@ -112,17 +125,16 @@
         if (alertMsg != null) {
             request.removeAttribute("alertMsg");
     %>
-        alert("<%=alertMsg%>");
+    alert("<%=alertMsg%>");
     <%
         }
         alertMsg=(String) ss.getAttribute("alertMsg");
         if (alertMsg != null) {
     %>
-        alert("<%=alertMsg%>");
+    alert("<%=alertMsg%>");
     <%
         ss.removeAttribute("alertMsg");
         }
     %>
 </script>
 </div>
-
