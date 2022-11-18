@@ -24,7 +24,7 @@
             <td>공고번호</td>
             <td>${n.desertionNo}</td>
             <td>보호소전화번호</td>
-            <td>${n.officetel}</td>
+            <td>${n.officetel}</td>s
         </tr>
         <tr>
             <td>공고시작일</td>
