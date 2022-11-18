@@ -1,0 +1,96 @@
+/*폰트 : 노토산스 */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.headcontainer {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#right_view {
+    float: right;
+    padding: 20px;
+    margin: 0px;
+    width: 910px;
+    height: auto;
+}
+
+#user_information {
+    font-size: 23px;
+    padding: 15px 25px;
+}
+
+.box {
+    margin-top: 20px;
+}
+
+.box span[id=memberTotal] {
+    padding-left: 30px;
+    font-weight: bold;
+    color: #f45d48;
+}
+
+.box span[id=memberGrade] {
+    padding-left: 37px;
+}
+
+.box span[id=gray] {
+    color: #9c9c9c;
+}
+
+#memberGrade input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+
+#memberList {
+    margin-top: 30px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 860px;
+}
+
+thead th {
+    font-size: 15px;
+    border-top: 1px solid rgb(203, 203, 203);
+    background-color: rgb(236, 236, 236);
+    padding: 10px 50px;
+    text-align: center;
+}
+
+thead th:first-child {
+    padding: 0 10px;
+}
+
+tbody td {
+    border-top: 1px solid rgb(203, 203, 203);
+    text-align: center;
+    font-size: 12px;
+}
+
+td input[type=submit] {
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    width: 70px;
+    height: 30px;
+    margin: 8px;
+    background-color: #676767;
+    color: white;
+    cursor: pointer;
+
+}
+
+td input[type=submit]:hover {
+    background-color: #393939;
+    color: white;
+}
