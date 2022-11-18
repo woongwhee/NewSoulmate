@@ -1,4 +1,4 @@
-package tk.newsoulmate.web.member.controller;
+package tk.newsoulmate.web.myPage.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

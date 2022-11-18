@@ -8,6 +8,8 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
+import static tk.newsoulmate.web.common.JDBCTemplet.close;
+
 public class MemberDao {
 
     private Properties prop = new Properties();
@@ -56,6 +58,26 @@ public class MemberDao {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, memberId);
             psmt.setString(2, memberPwd);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                m = mapToLoginMember(rset);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return m;
+    }
+    public Member loginMember(int memberNo, Connection conn) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("loginMemberByNo");
+        Member m = null;
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, memberNo);
             rset = psmt.executeQuery();
             if (rset.next()) {
                 m = mapToLoginMember(rset);
@@ -217,6 +239,30 @@ public class MemberDao {
             e.printStackTrace();
         } finally {
             JDBCTemplet.close(psmt);
+        }
+        return result;
+    }
+
+    public int updateMember(Connection conn,Member m){
+        int result = 0;
+
+        PreparedStatement psmt = null;
+
+        String sql=prop.getProperty("updateMember");
+
+        try {
+            psmt=conn.prepareStatement(sql);
+            psmt.setString(1,m.getPhone());
+            psmt.setString(2,m.getEmail());
+            psmt.setString(3,m.getNickName());
+            psmt.setInt(4,m.getMemberNo());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close(psmt);
         }
         return result;
     }
