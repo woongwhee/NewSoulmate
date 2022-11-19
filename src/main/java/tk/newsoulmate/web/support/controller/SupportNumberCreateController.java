@@ -16,21 +16,21 @@ import tk.newsoulmate.web.support.service.SupportService;
 public class SupportNumberCreateController extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 받아야될 정보 : 얼마 후원인지, 누구인지(HttpSession)
-		HttpSession session = req.getSession();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//todo: 받아야될 정보 : 얼마 후원인지, 누구인지(HttpSession)
+		HttpSession session = request.getSession();
 		Object object = session.getAttribute("loginUser");
 		if (object == null) {
-			resp.sendRedirect(req.getContextPath());
+			response.sendRedirect(request.getContextPath());
 		}
 		Member loginMember = (Member) object;
 
-		long shelterNo = Long.parseLong(req.getParameter("shelterNo"));
-		long amount = Long.parseLong(req.getParameter("amount"));
+		long shelterNo = Long.parseLong(request.getParameter("shelterNo"));
+		long amount = Long.parseLong(request.getParameter("amount"));
 		String supportNumber = new SupportService().createNumber(loginMember.getMemberNo(), shelterNo, amount);
 
-		resp.getWriter().print(supportNumber);
-		resp.getWriter().flush();
+		response.getWriter().print(supportNumber);
+		response.getWriter().flush();
 	}
 
 }

@@ -39,6 +39,16 @@ public class Member {
         this.memberGrade = memberGrade;
     }
 
+    public Member(int memberNo, String memberId, String memberName,
+                  String email, MemberGrade memberGrade, Date enrollDate) {
+        this.memberNo = memberNo;
+        this.memberId = memberId;
+        this.memberName = memberName;
+        this.email = email;
+        this.memberGrade = memberGrade;
+        this.enrollDate = enrollDate;
+    }
+
     public Member(int memberNo, String phone, String email, String nickName) {
         this.memberNo = memberNo;
         this.phone = phone;

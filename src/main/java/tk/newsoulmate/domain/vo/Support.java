@@ -1,5 +1,7 @@
 package tk.newsoulmate.domain.vo;
 
+import jdk.jshell.Snippet;
+
 import java.sql.Date;
 
 public class Support {
@@ -21,6 +23,17 @@ public class Support {
         this.merchantUid = merchantUid;
         this.amount = amount;
     }
+
+    public Support(int supportNo, long shelterNo, String merchantUid, long amount, Date payTime, String status) {
+        this.supportNo = supportNo;
+        this.shelterNo = shelterNo;
+        this.merchantUid = merchantUid;
+        this.amount = amount;
+        this.payTime = payTime;
+        this.status = SupportStatus.valueOf(status);
+    }
+
+
 
     public int getSupportNo() {
         return supportNo;
@@ -56,6 +69,38 @@ public class Support {
 
     public boolean isWithdraw() {
         return isWithdraw;
+    }
+
+    public void setSupportNo(int supportNo) {
+        this.supportNo = supportNo;
+    }
+
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
+    }
+
+    public void setMerchantUid(String merchantUid) {
+        this.merchantUid = merchantUid;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public void setStatus(SupportStatus status) {
+        this.status = status;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+
+    public void setType(SupportType type) {
+        this.type = type;
+    }
+
+    public void setWithdraw(boolean withdraw) {
+        isWithdraw = withdraw;
     }
 
     @Override

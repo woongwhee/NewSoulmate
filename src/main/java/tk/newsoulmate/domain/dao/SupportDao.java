@@ -2,6 +2,7 @@ package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.MemberGrade;
+import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class SupportDao {
@@ -25,9 +27,7 @@ public class SupportDao {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 
     public int initializeSupport(Connection conn, long shelterNo, int memberNo, String number, long amount) {
         PreparedStatement psmt = null;
@@ -78,5 +78,34 @@ public class SupportDao {
 
         return new Support(supportNo, shelterNo, memberNo, merchantUid, amount);
     }
+
+    public ArrayList<Support> selectSupportList(Connection conn) {
+        ArrayList<Support> supportList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectSupportList");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            while(rset.next()) {
+                supportList.add(new Support(
+                        rset.getInt("SUPPORT_NO"),
+                        rset.getLong("SHELTER_NO"),
+                        rset.getString("MERCHANT_UID"),
+                        rset.getLong("AMOUNT"),
+                        rset.getDate("PAY_TIME"),
+                        rset.getString("STATUS")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return supportList;
+    }
+
 
 }

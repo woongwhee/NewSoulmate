@@ -16,5 +16,19 @@
         WHERE MERCHANT_UID = ?
     </entry>
 
+    <entry key="selectSupportList">
+        SELECT
+            SUPPORT_NO,
+            SHELTER_NO,
+            MERCHANT_UID,
+            AMOUNT,
+            PAY_TIME,
+            STATUS
+        FROM SUPPORT
+        <!--ORDER BY SUPPORT_NO DESC-->
+    </entry>
+
+
+
 </properties>
 

@@ -1,6 +1,18 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="tk.newsoulmate.domain.vo.Shelter" %>
 <%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    ArrayList<Shelter> sList = (ArrayList<Shelter>) request.getAttribute("sList");
+%>
+
+<%
+    Support support = (Support) request.getAttribute("support");
+    Member member = (Member) request.getAttribute("loginUser");
+%>
+
 <html>
 <head>
     <title>후원하기</title>
@@ -8,18 +20,10 @@
     <link href="<%=request.getContextPath()%>/css/support/supportPayment.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="http://service.iamport.kr/js/iamport.payment-1.1.8.js"></script>
-
-    <%
-        Support support = (Support) request.getAttribute("support");
-        Member member = (Member) request.getAttribute("loginUser");
-    %>
-
-
 </head>
+
 <body>
-
 <header><%@include file="/views/template/menubar.jsp"%></header>
-
 
 <div id="container">
 
@@ -69,6 +73,19 @@
 
     <hr>
 
+    <h1>보호소 리스트</h1>
+    <h4>후원할 보호소를 선택해 주세요</h4>
+
+    <div class="select-shelter">
+
+
+    </div>
+
+
+
+    <hr>
+
+
     <div class="">
         <h2>결제 정보</h2>
         <br>
@@ -98,7 +115,6 @@
                 <tr>
                     <td><div id="email">${loginUser.email}</div></td>
                 </tr>
-
             </table>
 
             <div class="">
@@ -111,7 +127,19 @@
     <button id="payBtn" onclick="requestPay();">결제하기</button>
 </div>
 
+
+
     <script>
+
+        //1. 서버로부터 후원번호를 받아올것 - 서버에서 하는 이유: amount에대한 기록을 검증용도로 사용 서버로부터 만들어야 중복없이 사용
+        // => url 호출부분
+        // 2. 후원번호를 만들어주기 위해서 서버에서는
+        // 2-1. DB에 새로운 row를 (memberno, shelterno, amount) + 후원번호 생성
+        // -> 정보가 누락되면 100원 결제해놓고 10000원을 후원한척 할 수 있다.
+        // 3. 후원번호를 기준으로 실제 결제를 발생 iamport 받는정보 : imp_uid(Iamport에서 관리하는 식별자), merchant_uid (내가 고유하게 넘겨준)
+        // => 이걸 아래 ajax에서 넘겨줌
+
+
         // imp_uid 로 아임포트쪽 요청에서 거래정보 조회
         // 그러면 서버는 merchant_uid(후원번호) 로 DB 조회
         // 그리고 그 두개의 Price(amount) 를 비교해서 검증후 맞으면 완료 상태로 변경
@@ -137,15 +165,18 @@
                         buyer_tel : $('#phone').val(),
                         buyer_addr : '서울특별시 강남구 도곡동',
                         buyer_postcode : '06275',
-                        m_redirect_url : '${context}/supportPaymentPage'
+                        m_redirect_url : '${context}/supportHistoryPage'
                     }, function(rsp) {
                         if ( rsp.success ) {
-                            console.log(rsp);
+                            // 결제가 성공한다면
+                            console.log(rsp); // imp_uid, merchant_uid
                             saveInfo(rsp.paid_amount);
+
+                            // 검증
                             $.ajax({
                                 url: "${context}/support/verify?impUid=" + rsp.imp_uid + "&merchantUid=" + rsp.merchant_uid,
-
                                 type: "get",
+
                                 success: function () {
                                     //alert("원 후원에 성공했습니다.");
                                     alertInfo();
@@ -182,7 +213,6 @@ function saveInfo(amount){
             }
         });
     </script>
-
 
 
 
