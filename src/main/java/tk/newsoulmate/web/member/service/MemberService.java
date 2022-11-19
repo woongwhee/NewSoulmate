@@ -73,5 +73,20 @@ public class MemberService {
         return result;
     }
 
+    public int deleteMember(String memberId, String memberPwd) {
+
+        Connection conn = JDBCTemplet.getConnection();
+        int result = new MemberDao().deleteMember(memberId, memberPwd, conn);
+        if(result > 0) {
+            JDBCTemplet.commit();
+        }else {
+            JDBCTemplet.rollback(conn);
+        }
+        JDBCTemplet.close();
+        return result;
+    }
+
+
+
 
 }

@@ -96,6 +96,29 @@
                 총 금액 :
             </div>
 
+            <script>
+                function total(){
+
+
+                }
+            </script>
+
+           <%-- function updatePrice() {
+            // 수입, 지출, 총 금액 계산하고 화면에 출력
+            const price = historyArr.map((item) => Number(item.price));
+            const totalPrice = price.reduce((acc, cur) => (acc += cur), 0);
+            const income = price
+            .filter((price) => price > 0)
+            .reduce((acc, cur) => (acc += cur), 0);
+            const expense = price
+            .filter((price) => price < 0)
+            .reduce((acc, cur) => (acc += cur), 0);
+
+            incomeText.innerText = `${income}`;
+            expenseText.innerText = `${expense}`;
+            totalPriceText.innerText = `${totalPrice}`;
+            }--%>
+
 
   <%--          <div id="pagingForm">
                 <!--페이지네이션-->

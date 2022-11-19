@@ -65,6 +65,13 @@
         WHERE MEMBER_NO = ?
     </entry>
 
+    <entry key="deleteMember">
+        UPDATE MEMBER SET STATUS = 'N',
+        MODIFY_DATE = SYSDATE
+        WHERE USER_ID = ?
+        AND USER_PWD = ?
+    </entry>
+
     <entry key="manageMember">
         SELECT
         MEMBER_NO,
@@ -75,4 +82,5 @@
         ENROLL_DATE
         FROM MEMBER
     </entry>
+
 </properties>

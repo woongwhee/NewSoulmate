@@ -25,6 +25,7 @@ public class Support {
     }
 
     public Support(int supportNo, long shelterNo, String merchantUid, long amount, Date payTime, String status) {
+        super();
         this.supportNo = supportNo;
         this.shelterNo = shelterNo;
         this.merchantUid = merchantUid;

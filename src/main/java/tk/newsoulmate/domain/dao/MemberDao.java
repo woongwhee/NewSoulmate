@@ -172,7 +172,6 @@ public class MemberDao {
             psmt.setString(2, Email);
 
             rset = psmt.executeQuery();
-
             if(rset.next()) {
                 m = this.mapToMember(rset);
             }
@@ -231,13 +230,11 @@ public class MemberDao {
         PreparedStatement psmt = null;
         int result = 0;
         String sql = prop.getProperty("pwdReset");
-
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, password);
             psmt.setString(2, memberId);
             result = psmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -270,8 +267,23 @@ public class MemberDao {
         return result;
     }
 
+    public int deleteMember(String memberId, String memberPwd, Connection conn) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("deleteMember");
 
-
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, memberId);
+            psmt.setString(2, memberPwd);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
 
 
 

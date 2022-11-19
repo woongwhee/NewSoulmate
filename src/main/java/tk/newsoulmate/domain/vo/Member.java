@@ -150,4 +150,6 @@ public class Member {
     public void setEnrollDate(Date enrollDate) {
         this.enrollDate = enrollDate;
     }
+
+
 }
