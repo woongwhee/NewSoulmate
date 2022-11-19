@@ -1,9 +1,8 @@
 package tk.newsoulmate.web.common.service;
 
-import tk.newsoulmate.domain.dao.BoardDao;
-import tk.newsoulmate.domain.dao.NoticeDao;
-import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.Notice;
+import tk.newsoulmate.domain.dao.*;
+import tk.newsoulmate.domain.vo.*;
+
 import java.sql.Connection;
 import java.util.List;
 
@@ -36,5 +35,29 @@ public class CommonService {
         List<Board> vList = new BoardDao().selectVolunteerThumNail(conn, i);
         close();
         return vList;
+    }
+
+    public int insertReport(Report r) {
+        Connection conn=getConnection();
+        int result=new ReportDao().insertReport(conn,r);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        commit();
+        return result;
+    }
+
+    public int insertBoardReply(Reply r) {
+        Connection conn=getConnection();
+        int result=new ReplyDao().insertBoardReply(conn,r);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        commit();
+        return result;
     }
 }

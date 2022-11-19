@@ -29,9 +29,7 @@ public class ReplyDao {
 
 
         int result = 0;
-
         PreparedStatement psmt = null;
-
         String sql = prop.getProperty("insertBoardReply");
 
         try {
@@ -62,7 +60,7 @@ public class ReplyDao {
             psmt.setInt(1, r.getReplyNo());
             psmt.setInt(2, r.getNoticeNo());
             psmt.setInt(3, r.getMemberNo());
-            psmt.setInt(4, r.getReplyType().TypeNo);
+            psmt.setInt(4, r.getReplyType().typeNo);
             psmt.setString(5, r.getReplyContent());
             result = psmt.executeUpdate();
         } catch (SQLException e) {

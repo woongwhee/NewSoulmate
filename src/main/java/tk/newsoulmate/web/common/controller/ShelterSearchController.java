@@ -19,8 +19,9 @@ public class ShelterSearchController extends HttpServlet {
         ArrayList<Village> vList = new ShelterService().selectVillage(cList.get(0).getCityNo());
         request.setAttribute("cList",cList);
         request.setAttribute("vList",vList);
-
         request.getRequestDispatcher("/views/common/shelterSearch.jsp").forward(request,response);
+
+
     }
 
     @Override

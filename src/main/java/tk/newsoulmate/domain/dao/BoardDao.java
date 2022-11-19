@@ -90,7 +90,6 @@ public class BoardDao {
         ResultSet rset = null;
         String sql = prop.getProperty("selectList");
         try {
-            System.out.println("시작페이지:"+pi.getStartPage()+"마지막페이지"+pi.getEndPage());
             psmt = conn.prepareStatement(sql);
             int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
             int endRow = startRow + pi.getBoardLimit() - 1;
@@ -172,7 +171,7 @@ public class BoardDao {
     }
 
 
-    public Board selectAdoptReviewDetail(Connection conn, int boardNo) {
+    public Board selectReviewDetail(Connection conn, int boardNo) {
 
         Board b = null;
 
@@ -180,7 +179,7 @@ public class BoardDao {
 
         ResultSet rset = null;
 
-        String sql = prop.getProperty("selectAdoptReviewDetail");
+        String sql = prop.getProperty("selectReviewDetail");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -190,9 +189,11 @@ public class BoardDao {
             rset = psmt.executeQuery();
 
             if (rset.next()) {
-                b = Board.selectAdoptReviewDetail(
+                b = Board.selectReviewDetail(
+                        rset.getInt("BOARD_NO"),
                         rset.getString("BOARD_TITLE"),
-                        rset.getString("MEMBER_NO"),
+                        rset.getInt("MEMBER_NO"),
+                        rset.getString("NICKNAME"),
                         rset.getDate("ISSUE_DATE"),
                         rset.getDate("CREATE_DATE"),
                         rset.getInt("READ_COUNT"),

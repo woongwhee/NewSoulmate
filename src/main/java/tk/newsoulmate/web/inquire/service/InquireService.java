@@ -35,7 +35,7 @@ public class InquireService {
     public ArrayList<Category> selectCategoryList(){
         Connection conn = getConnection();
 
-        ArrayList<Category> list = new CategoryDao().selectCategoryList(conn);
+        ArrayList<Category> list = new CategoryDao().selectCategoryList(conn,BoardType.QNA);
 
         close();
 

@@ -1,5 +1,6 @@
 package tk.newsoulmate.domain.dao;
 
+import tk.newsoulmate.domain.vo.BoardType;
 import tk.newsoulmate.domain.vo.Category;
 
 import java.io.FileInputStream;
@@ -24,7 +25,7 @@ public class CategoryDao {
         }
     }
 
-    public ArrayList<Category> selectCategoryList(Connection conn){
+    public ArrayList<Category> selectCategoryList(Connection conn, BoardType bt){
 
         ArrayList<Category> list = new ArrayList<>();
 
@@ -36,13 +37,11 @@ public class CategoryDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-
+            psmt.setInt(1,bt.typeNo);
             rset = psmt.executeQuery();
 
             while (rset.next()){
-                Category c = new Category();
-                c.setCategoryName(rset.getString("CATEGORY_NAME"));
-                c.setCategoryNo(rset.getInt("CATEGORY_NO"));
+                Category c = new Category(rset.getInt("CATEGORY_NO"),rset.getString("CATEGORY_NAME"));
                 list.add(c);
             }
 

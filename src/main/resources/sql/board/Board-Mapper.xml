@@ -21,14 +21,18 @@
         WHERE RNUM BETWEEN ? AND ?
     </entry>
 
-    <entry key="selectAdoptReviewDetail">
-        SELECT BOARD_TITLE,
+    <entry key="selectReviewDetail">
+        SELECT
+        BOARD_NO,
+        BOARD_TITLE,
         MEMBER_NO,
+        NICKNAME,
         ISSUE_DATE,
         CREATE_DATE,
         READ_COUNT,
         BOARD_CONTENT
         FROM BOARD
+        JOIN MEMBER USING (MEMBER_NO)
         WHERE BOARD_NO = ?
         AND BOARD_STATUS = 'Y'
     </entry>

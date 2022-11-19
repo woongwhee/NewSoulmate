@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,94 +16,101 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 </head>
 <body>
     <header><%@ include file="/views/template/menubar.jsp"%></header>
     <main>
-        <p>${b.boardTitle}</p>
-        <p>${b.issueDate}</p>
-        <button type="button" onclick="report('board',${b.boardNo})" data-toggle="modal" data-target="#reportModal">신고</button>
-        <p>${b.boardContent} </p>
-        <table>
+        <div class="review-content">
+        <table class="table">
+            <tr><p>${b.boardTitle}</p></tr>
+            <tr>
+                <td>입양일</td>
+                <td>
+                <fmt:formatDate value="${b.issueDate}" type="both" pattern="yyyy년 MM월dd 일"/>
+                </td>
+                <td colspan="2"><button type="button" class="bi bi-exclamation-circle-fill" data-toggle="modal" data-target="#reportModal" data-kind="board" data-ref="${b.boardNo}"></button>
+                    <c:if test="${!empty loginUser and loginUser.memberNo eq b.memberNo}"><button type="button" id="deleteBoard"  class="bi bi-x-circle-fill"></button></c:if>
+                </td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td>${b.nickName}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+            <td colspan="6">${b.boardContent} </td>
+            </tr>
             <c:forEach var="r" items="${rList}">
-                ${r.replyWriter}${r.replyWriter}${r.replycontent}
-                <button type="button" onclick="report('reply',${r.replyNo})" data-toggle="modal" data-target="#reportModal">신고</button>
-                <button onclick="deleteReply();" >X</button>
+                <tr>
+                    <td>${r.replyWriter}</td>
+                    <td>${r.replyWriter}</td>
+                    <td>${r.replycontent}</td>
+                    <td>
+                        <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
+                        <c:if test="${!empty loginUser and loginUser.memberNo eq r.memberNo}">
+                        <button class="bi bi-x-circle-fill" onclick="deleteReply(${r.replyNo});"></button>
+                        </c:if>
+                    </td>
+                    <%--댓글 작성자인경우 삭제 --%>
+
+                </tr>
             </c:forEach>
+            <c:choose>
+                <c:when test="${!empty loginUser}">
+                    <tr><td>댓글작성</td>  <td colspan="3"><input type="text" id="replyInput"></td> <td><button type="button" onclick="submitReply()" id="replySubmit">작성</button></td></tr>
+                </c:when>
+                <c:otherwise>
+                <tr>
+                    <td colspan="5">로그인한 회원만 작성할수 있습니다.</td>
+                </tr>
+                </c:otherwise>
+            </c:choose>
+
+
         </table>
-        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="rpBoardNo" value="">
-                    <input type="hidden" name="rpReplyNo" value="">
-                    <select name="category" id="rpCategory">
-                        <option value="1">광고</option>
-                        <option value="2">도배</option>
-                        <option value="3">음란물</option>
-                        <option value="4">개인정보침해</option>
-                        <option value="5">저작권침해</option>
-                        <option value="6">기타</option>
-                    </select><br>
-                    <textarea name="content" id="reportContent" cols="30" rows="10"></textarea>
-                    <button onclick="
-                    reportSubmit()"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" onclick="resetReport()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
         </div>
-    </div>
+        <%@ include file="/views/template/report.jsp"%>
     </main>
 
-    <footer><%@ include file="/views/template/footer.jsp"%></footer>
+    <footer>
+        <%@ include file="/views/template/footer.jsp"%>
+    </footer>
+    <c:if test="${!empty loginUser}">
     <script>
-        /**
-         * 신고창
-         * @param type
-         * @param refNo
-         */
-        function resetReport(){
-            $("#reportContent").val("");
-            $("#rpReplyNo").val("");
-            $("#rpBoardNo").val("");
-        }
-        function report(type,refNo){
-
-        }
-
-        function reportSubmit() {
-            let reportContent = {
-                "categoryNo":$("#rpCategory").val(),
-                "boardNo":$("#rpBoardNo").val(),
-                "replyNo":$("#rpReplyNo").val(),
-                "reportContent":$("reportContent").val()
-            };
+        function submitReply(){
+            let replyContent={memberNo:'${loginUser.memberNo}',
+                boardNo:'${b.boardNo}',
+                replyContent:$('#replyInput').val()}
+            let replyJson=JSON.stringify(replyContent);
             $.ajax({
-                url : '${context}/report',
-                type : 'post',
-                data : reportContent,
-                success:function (result){
-                    console.log("성공스")
+                url:'${context}/replyInsert',
+                type:'post',
+                data:{
+                    reply:replyJson
+                },
+                success:(result)=>{
+                    if(result>0){
+                        alert('댓글등록성공');
+                        location.reload();
+                    }else{
+                        alert('댓글등록실패',result)
+                    }
                 },
                 error:(result)=>{
-
-
+                    console.log(result)
                 }
-                }
-            )
+            });
         }
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        })
+        <c:if test="${loginUser.memberNo eq b.memberNo}">
+            $('#deleteBoard').click(()=>{
+                if(confirm('정말삭제하시겠습니까?')){
+                location.href='${context}/adoptRevDelete?bno=${b.boardNo}'
+                }
+            })
+        </c:if>
     </script>
+    </c:if>
 </body>
 </html>

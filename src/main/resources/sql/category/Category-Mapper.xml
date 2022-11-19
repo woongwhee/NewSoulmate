@@ -6,7 +6,7 @@
     <entry key="selectCategoryList">
         SELECT CATEGORY_NO, CATEGORY_NAME
         FROM CATEGORY
-        WHERE TYPE_NO = 4
+        WHERE TYPE_NO = ?
     </entry>
 
 

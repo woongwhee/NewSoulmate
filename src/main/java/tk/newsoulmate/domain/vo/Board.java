@@ -11,6 +11,7 @@ public class Board {
     private int readCount;
     private int reportNo;
     private String memberName;
+    private String nickName;
     private Date createDate;
     private String resultStatus;
     private int fileCount;
@@ -164,19 +165,14 @@ public class Board {
     }
 
     /**
-     * 입양후기 상세보기용 팩토리얼메소드
-     * @param boardTitle
-     * @param memberName
-     * @param issueDate
-     * @param createDate
-     * @param readCount
-     * @param boardContent
-     * @return
+     * 후기 상세보기용 팩토리얼메소드
      */
-    public static Board selectAdoptReviewDetail(String boardTitle,String memberName,Date issueDate ,Date createDate,int readCount,String boardContent){
+    public static Board selectReviewDetail(int boardNo, String boardTitle, int memberNo, String nickName, Date issueDate , Date createDate, int readCount, String boardContent){
         Board b = new Board();
+        b.setBoardNo(boardNo);
         b.setBoardTitle(boardTitle);
-        b.setMemberName(memberName);
+        b.setMemberNo(memberNo);
+        b.setMemberName(nickName);
         b.setIssueDate(issueDate);
         b.setCreateDate(createDate);
         b.setReadCount(readCount);
@@ -312,5 +308,13 @@ public class Board {
 
     public void setCategoryName(String categoryName) {
         CategoryName = categoryName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

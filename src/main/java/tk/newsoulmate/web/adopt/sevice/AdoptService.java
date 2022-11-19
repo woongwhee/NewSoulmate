@@ -6,6 +6,7 @@ import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
@@ -53,7 +54,7 @@ public class AdoptService {
 
     public Board selectAdoptReviewDetail(int boardNo) {
         Connection conn = getConnection();
-        Board b = new BoardDao().selectAdoptReviewDetail(conn, boardNo);
+        Board b = new BoardDao().selectReviewDetail(conn, boardNo);
         close();
 
         return b;
@@ -145,6 +146,13 @@ public class AdoptService {
         close();
         return result;
 
+    }
+
+    public List<Category> selectCategoryList(){
+        Connection conn=getConnection();
+        List<Category> cList=new CategoryDao().selectCategoryList(conn, BoardType.REPORT);
+        close();
+        return cList;
     }
 }
 

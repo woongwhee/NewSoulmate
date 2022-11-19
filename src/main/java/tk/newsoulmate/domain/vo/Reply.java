@@ -1,13 +1,19 @@
 package tk.newsoulmate.domain.vo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 public class Reply {
     private int replyNo;
+    @SerializedName("boardNo")
     private int boardNo;
+    @SerializedName("noticeNo")
     private int noticeNo;
+    @SerializedName("memberNo")
     private int memberNo;
     private String replyWriter;
+    @SerializedName("replyContent")
     private String replyContent;
 
     private ReplyType replyType;
@@ -112,5 +118,20 @@ public class Reply {
 
     public void setReplyWriter(String replyWriter) {
         this.replyWriter = replyWriter;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Reply{");
+        sb.append("replyNo=").append(replyNo);
+        sb.append(", boardNo=").append(boardNo);
+        sb.append(", noticeNo=").append(noticeNo);
+        sb.append(", memberNo=").append(memberNo);
+        sb.append(", replyWriter='").append(replyWriter).append('\'');
+        sb.append(", replyContent='").append(replyContent).append('\'');
+        sb.append(", replyType=").append(replyType);
+        sb.append(", replyDate=").append(replyDate);
+        sb.append('}');
+        return sb.toString();
     }
 }

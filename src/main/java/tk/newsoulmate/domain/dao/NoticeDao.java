@@ -44,7 +44,7 @@ public class NoticeDao {
             while(rset.next()){
                 n=new Notice();
                 n.setDesertionNo(rset.getLong("desertionNo"));
-                n.setFilename(rset.getString("popfile"));
+                n.setPopfile(rset.getString("popfile"));
                 nList.add(n);
             }
         } catch (SQLException e) {
