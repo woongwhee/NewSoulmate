@@ -21,17 +21,18 @@
 <head>
     <title>고객센터 FAQ,Q&A</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
 <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>--%>
 </head>
 <body>
     <%@ include file="/views/template/menubar.jsp"%>
     <br><br><br>
     <div id="FQ_bt">
+        <button type="button" id="qna_bt" class="btn btn-secondary btn-sm">Q&A</button>
         <button type="button" id="faq_bt" class="btn btn-secondary btn-sm">FAQ</button>
-        <button type="button" id="qna_bt" class="btn btn-secondary btn-sm">Q&A</button><br>
+        <br>
     </div>
-    <div id="Fcontent">
+    <div id="Fcontent" style="display: none">
 
         <h3>자주 묻는 질문</h3>
 
@@ -65,7 +66,7 @@
         </script>
 
     </div>
-    <div id="Qcontent" style="display: none;">
+    <div id="Qcontent">
         <h3> 1:1 문의</h3>
         <br>
 
@@ -162,6 +163,17 @@
     <script>
 
         $(function(){
+            $("#qna_bt").on("click", function(){
+                $(this).css("color", "#f8f5f2")
+                $(this).css("background-color", "#f45d48")
+                $("#faq_bt").css("color", "black")
+                $("#faq_bt").css("background-color", "lightgray")
+                $("#Fcontent").css("display", "none")
+                $("#Qcontent").css("display", "block")
+            });
+        });
+
+        $(function(){
             $("#faq_bt").on("click", function(){
                 $(this).css("color", "#f8f5f2")
                 $(this).css("background-color", "#f45d48")
@@ -172,16 +184,7 @@
             });
         });
 
-        $(function(){
-            $("#qna_bt").on("click", function(){
-                $(this).css("color", "#f8f5f2")
-                $(this).css("background-color", "#f45d48")
-                $("#faq_bt").css("color", "black")
-                $("#faq_bt").css("background-color", "lightgray")
-                $("#Fcontent").css("display", "none")
-                $("#Qcontent").css("display", "block")
-            });
-        });
+
     </script>
     <br><br>
 

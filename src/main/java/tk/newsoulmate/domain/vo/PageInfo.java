@@ -35,7 +35,7 @@ public class PageInfo {
             this.categoryName=categoryName;
             this.pageLimit=10;
             this.boardLimit=10;
-            this.maxPage=listCount/boardLimit;
+            this.maxPage=listCount/pageLimit+1;
             this.startPage=currentPage/boardLimit*boardLimit+1;
             this.endPage=(currentPage/boardLimit+1)*(boardLimit);
             if(endPage>maxPage){

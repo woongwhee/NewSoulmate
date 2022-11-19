@@ -44,6 +44,12 @@
         BOARD_STATUS='Y'
     </entry>
 
+    <entry key="selectMyPageBoardListCount">
+        SELECT COUNT(*) AS cnt
+        FROM BOARD
+        WHERE BOARD_STATUS = 'Y'
+    </entry>
+
     <entry key="selectQnAListCount">
         SELECT COUNT(*) as cnt
         FROM BOARD
@@ -51,6 +57,26 @@
         WHERE BOARD_NAME = ?
         AND BOARD_STATUS='Y'
         AND( MEMBER_NO=? OR 2=?)
+    </entry>
+    <entry key="selectMyPageBoardList">
+        SELECT *
+        FROM(
+            SELECT
+                ROWNUM AS "RNUM",
+                A.*
+            FROM(
+                SELECT
+                    B.BOARD_NO,
+                    BOARD_TITLE,
+                    CREATE_DATE,
+                    READ_COUNT
+                FROM BOARD B
+                JOIN MEMBER M ON B.MEMBER_NO = M.MEMBER_NO
+                WHERE B.MEMBER_NO = ?
+                ORDER BY CREATE_DATE DESC, READ_COUNT DESC
+                ) A
+            )
+        WHERE RNUM BETWEEN ? AND ?
     </entry>
 
     <entry key="selectQnAList">
@@ -73,10 +99,35 @@
                 WHERE BOARD_NAME = '문의'
                 AND(B.MEMBER_NO=? OR 2=?)
                 ORDER BY CREATE_DATE DESC
+                ) A
+            )
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+    <entry key="selectQnAList">
+        SELECT *
+        FROM(
+        SELECT
+        ROWNUM AS "RNUM",
+        A.*
+        FROM (
+        SELECT
+        CASE WHEN REPLY_CONTENT IS NULL THEN 'N' ELSE 'Y' END AS "RESULTSTATUS",
+        B.BOARD_NO,
+        BOARD_TITLE,
+        MEMBER_NAME,
+        CREATE_DATE
+        FROM BOARD B
+        JOIN BOARD_TYPE USING(TYPE_NO)
+        JOIN MEMBER M on B.MEMBER_NO=M.MEMBER_NO
+        LEFT JOIN REPLY R on B.BOARD_NO = R.BOARD_NO
+        WHERE BOARD_NAME = '문의'
+        AND(B.MEMBER_NO=? OR 2=?)
+        ORDER BY CREATE_DATE DESC
         ) A
         )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
+
     <entry key="insertReviewBoard">
         INSERT INTO BOARD(BOARD_NO,MEMBER_NO, TYPE_NO,  BOARD_TITLE, BOARD_CONTENT, BOARD_STATUS,FILE_COUNT,ISSUE_DATE)
         VALUES (?, ?, ?, ?, ? ,'Y',?,?)

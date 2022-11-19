@@ -27,21 +27,21 @@
     display: none;
 }
 #faq_bt{
-    background-color: #f45d48;
-    color: #f8f5f2;
-    border: 1px;
-    border-radius: 5px;
-    height: 40px;
-    width: 100px;
-}
-
-#qna_bt{
     background-color: lightgray;
     color: black;
     border: 1px;
     border-radius: 5px;
     height: 40px;
-    width: 100px;
+    width: 150px;
+}
+
+#qna_bt{
+    background-color: #f45d48;
+    color: #f8f5f2;
+    border: 1px;
+    border-radius: 5px;
+    height: 40px;
+    width: 150px;
 }
 
 
