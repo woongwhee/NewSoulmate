@@ -23,7 +23,16 @@ public class MyPageBoardListController extends HttpServlet {
         } else {
             int listCount = new MyPageService().selectMyPageBoardListCount(loginUser);
             int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
-            pi = new PageInfo(listCount, currentPage);
+//            pi = new PageInfo(listCount, currentPage);
+            int pageLimit=10;
+            int boardLimit=10;
+            int maxPage=listCount/pageLimit+1;
+            int startPage=currentPage/boardLimit*boardLimit+1;
+            int endPage=(currentPage/boardLimit+1)*(boardLimit);
+            if(endPage>maxPage){
+                endPage=maxPage;
+            }
+            pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
             ArrayList<Board> list = new MyPageService().selectMyPageBoardList(pi,loginUser);
             request.setAttribute("list", list);
         }

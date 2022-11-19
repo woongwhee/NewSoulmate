@@ -55,7 +55,7 @@
                 <tr>
                     <th>문의내용*</th>
                     <td>
-                        <textarea name="boardContent" id="" cols="30" rows="10" required></textarea>
+                        <textarea name="boardContent" id="" cols="30" rows="10" style="resize: none" required></textarea>
                     </td>
                 </tr>
 
