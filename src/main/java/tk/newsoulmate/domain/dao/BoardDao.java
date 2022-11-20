@@ -89,13 +89,13 @@ public class BoardDao {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("selectList");
+        int start=(pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+        int end=(pi.getCurrentPage())*pi.getBoardLimit();
         try {
             psmt = conn.prepareStatement(sql);
-            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-            int endRow = startRow + pi.getBoardLimit() - 1;
             psmt.setInt(1, boardType.typeNo);
-            psmt.setInt(2, pi.getStartPage());
-            psmt.setInt(3, pi.getEndPage());
+            psmt.setInt(2, start);
+            psmt.setInt(3, end);
             rset = psmt.executeQuery();
 
             while (rset.next()) {
@@ -364,12 +364,11 @@ public class BoardDao {
         }
         return result;
     }
-    public int deleteInquireBoard(int boardNo, Connection conn){
+    public int deleteBoard( Connection conn,int boardNo){
         int result = 0;
-
         PreparedStatement psmt = null;
 
-        String sql = prop.getProperty("deleteInquireBoard");
+        String sql = prop.getProperty("deleteBoard");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -427,4 +426,6 @@ public class BoardDao {
 
 
     }
+
+
 }

@@ -98,9 +98,8 @@ public class ReplyDao {
         if(rset.next()){
             r=new Reply(
                     rset.getInt("REPLY_NO"),
-                    rset.getInt("BOARD_NO"),
                     rset.getInt("MEMBER_NO"),
-                    rset.getString("MEMBER_NAME"),
+                    rset.getString("NICKNAME"),
                     rset.getString("REPLY_CONTENT"),
                     rset.getDate("REPLY_DATE")
             );

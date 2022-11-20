@@ -154,6 +154,19 @@ public class AdoptService {
         close();
         return cList;
     }
+
+    public int deleteBoard(int bno) {
+        Connection conn = getConnection();
+        int result = new BoardDao().deleteBoard(conn,bno);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+        return result;
+
+    }
 }
 
 

@@ -45,8 +45,7 @@
             <c:forEach var="r" items="${rList}">
                 <tr>
                     <td>${r.replyWriter}</td>
-                    <td>${r.replyWriter}</td>
-                    <td>${r.replycontent}</td>
+                    <td>${r.replyContent}</td>
                     <td>
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
                         <c:if test="${!empty loginUser and loginUser.memberNo eq r.memberNo}">
@@ -59,7 +58,7 @@
             </c:forEach>
             <c:choose>
                 <c:when test="${!empty loginUser}">
-                    <tr><td>댓글작성</td>  <td colspan="3"><input type="text" id="replyInput"></td> <td><button type="button" onclick="submitReply()" id="replySubmit">작성</button></td></tr>
+                    <tr><td>댓글작성</td>  <td colspan="3"><input type="text" id="replyInput"></td> <td><button type="button" id="replySubmit">작성</button></td></tr>
                 </c:when>
                 <c:otherwise>
                 <tr>
@@ -79,21 +78,20 @@
     </footer>
     <c:if test="${!empty loginUser}">
     <script>
+        $('#replySubmit').on('click',submitReply);
         function submitReply(){
-            let replyContent={memberNo:'${loginUser.memberNo}',
-                boardNo:'${b.boardNo}',
-                replyContent:$('#replyInput').val()}
-            let replyJson=JSON.stringify(replyContent);
+            let replyJson=JSON.stringify({
+                'memberNo':'${loginUser.memberNo}',
+                'boardNo':'${b.boardNo}',
+                'replyContent':$('#replyInput').val()
+            });
             $.ajax({
-                url:'${context}/replyInsert',
+                url :'${context}/replyInsert.bo',
                 type:'post',
-                data:{
-                    reply:replyJson
-                },
+                data:{"reply":replyJson},
                 success:(result)=>{
                     if(result>0){
                         alert('댓글등록성공');
-                        location.reload();
                     }else{
                         alert('댓글등록실패',result)
                     }

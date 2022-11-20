@@ -25,11 +25,8 @@ public class AdoptReviewDetailController extends HttpServlet {
         }
         int boardNo=Integer.parseInt(boardNo_);
         AdoptService bService = new AdoptService();
-
         int result = bService.increaseReadCount(boardNo);
-
         if(result > 0) {
-
             Board b = bService.selectAdoptReviewDetail(boardNo);
             List<Reply> rList = bService.selectReplyList(boardNo);
             List<Category> cList= bService.selectCategoryList();

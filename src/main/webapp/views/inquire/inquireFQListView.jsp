@@ -73,14 +73,13 @@
 <%--        <div id="box1" align="center" style="float: left; margin-left: 400px;"><input type="checkbox" id="" >나의 문의내역 보기</div> --%>
 <%--        나의 문의내역 없애기로함--%>
 
-<%--        <%if(loginUser != null) { %>--%>
+        <c:if test="${empty loginUser}">
         <div align="right" style="margin-right: 400px">
-            <a href="<%=request.getContextPath()%>/inquireEnroll.bo" class="btn btn-secondary btn-sm">글작성</a>
+            <a href="${context}/inquireEnroll.bo" class="btn btn-secondary btn-sm">글작성</a>
             <br>
             <br>
         </div>
-
-<%--        <% } %>--%>
+        </c:if>
         <table align="center" class="list-area">
             <thead>
             <tr style="text-align: center">

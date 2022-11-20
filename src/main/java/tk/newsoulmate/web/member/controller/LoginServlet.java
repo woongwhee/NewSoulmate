@@ -13,8 +13,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        System.out.println(session.getAttribute("loginUser"));
-
         if (session.getAttribute("loginUser") != null) {
             response.sendRedirect(request.getContextPath());
             request.getSession().setAttribute("errorMsg","이미 로그인한 유저 입니다.");

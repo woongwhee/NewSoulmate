@@ -130,7 +130,7 @@ public class InquireService {
     public int deleteInquireBoard(int boardNo){
         Connection conn = getConnection();
 
-        int result = new BoardDao().deleteInquireBoard(boardNo, conn);
+        int result = new BoardDao().deleteBoard(conn,boardNo);
 
         new AttachmentDao().deleteInquireAttachment(boardNo, conn);
 

@@ -47,7 +47,7 @@ public class Reply {
     /**
      * 불러오기용 생성자
      */
-    public Reply(int replyNo, int boardNo,int memberNo, String replyWriter,String replyContent, Date replyDate) {
+    public Reply(int replyNo,int memberNo, String replyWriter,String replyContent, Date replyDate) {
         this.replyNo = replyNo;
         this.boardNo=boardNo;
         this.memberNo = memberNo;
