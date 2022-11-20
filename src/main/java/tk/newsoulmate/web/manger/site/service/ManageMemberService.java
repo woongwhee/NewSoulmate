@@ -9,17 +9,16 @@ import tk.newsoulmate.web.common.JDBCTemplet;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import static tk.newsoulmate.web.common.JDBCTemplet.close;
-import static tk.newsoulmate.web.common.JDBCTemplet.getConnection;
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 public class ManageMemberService {
 
     private ManagerDao managerDao;
 
-    public ArrayList<Member> selectMember() {
-        Connection conn = JDBCTemplet.getConnection();
-        ArrayList<Member> mList = managerDao.selectMember(conn);
-        JDBCTemplet.close();
+    public ArrayList<Member> selectManageMember() {
+        Connection conn = getConnection();
+        ArrayList<Member> mList = managerDao.selectManageMember(conn);
+        close();
         return mList;
     }
 

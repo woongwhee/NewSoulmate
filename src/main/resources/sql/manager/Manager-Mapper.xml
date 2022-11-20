@@ -2,6 +2,17 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+    <entry key="manageMember">
+        SELECT
+        MEMBER_NO,
+        MEMBER_ID,
+        MEMBER_NAME,
+        EMAIL,
+        MEMBER_GRADE,
+        ENROLL_DATE
+        FROM MEMBER
+    </entry>
+
 
 
 </properties>

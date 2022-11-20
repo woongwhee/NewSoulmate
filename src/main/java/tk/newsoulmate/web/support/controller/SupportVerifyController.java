@@ -1,20 +1,17 @@
 package tk.newsoulmate.web.support.controller;
 
-import java.io.IOException;
-import java.net.http.HttpClient;
+import tk.newsoulmate.web.support.service.SupportService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import tk.newsoulmate.client.iamport.IamportClient;
-import tk.newsoulmate.domain.vo.Support;
-import tk.newsoulmate.web.support.service.SupportService;
+import java.io.IOException;
 
 @WebServlet(name = "SupportVerify", value = "/support/verify")
 public class SupportVerifyController extends HttpServlet {
+
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

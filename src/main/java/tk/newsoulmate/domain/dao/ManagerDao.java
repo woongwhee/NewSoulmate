@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import static tk.newsoulmate.web.common.JDBCTemplet.close;
+
 public class ManagerDao {
 
     private Properties prop = new Properties();
@@ -32,7 +34,7 @@ public class ManagerDao {
         }
     }
 
-    public ArrayList<Member> selectMember(Connection conn) {
+    public ArrayList<Member> selectManageMember(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         ArrayList<Member> mList = new ArrayList<Member>();
@@ -59,4 +61,6 @@ public class ManagerDao {
         }
         return mList;
     }
+
+
 }

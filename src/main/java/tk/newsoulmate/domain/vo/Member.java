@@ -63,6 +63,8 @@ public class Member {
         this.nickName = nickName;
     }
 
+
+
     public int getMemberNo() {
         return memberNo;
     }

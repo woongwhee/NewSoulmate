@@ -6,9 +6,6 @@
 
 <%
     ArrayList<Shelter> sList = (ArrayList<Shelter>) request.getAttribute("sList");
-%>
-
-<%
     Support support = (Support) request.getAttribute("support");
     Member member = (Member) request.getAttribute("loginUser");
 %>
@@ -73,10 +70,12 @@
 
     <hr>
 
-    <h1>보호소 리스트</h1>
+    <h2>보호소 리스트</h2>
     <h4>후원할 보호소를 선택해 주세요</h4>
 
     <div class="select-shelter">
+
+
 
 
     </div>
@@ -87,7 +86,7 @@
 
 
     <div class="">
-        <h2>결제 정보</h2>
+        <h2>후원자 정보</h2>
         <br>
         <form action="" value="" method="post">
             <table id="">
@@ -135,15 +134,14 @@
         // => url 호출부분
         // 2. 후원번호를 만들어주기 위해서 서버에서는
         // 2-1. DB에 새로운 row를 (memberno, shelterno, amount) + 후원번호 생성
-        // -> 정보가 누락되면 100원 결제해놓고 10000원을 후원한척 할 수 있다.
+        // (-> 정보가 누락되면 100원 결제해놓고 10000원을 후원한척 할 수 있으므로)
         // 3. 후원번호를 기준으로 실제 결제를 발생 iamport 받는정보 : imp_uid(Iamport에서 관리하는 식별자), merchant_uid (내가 고유하게 넘겨준)
-        // => 이걸 아래 ajax에서 넘겨줌
+        // -> 이걸 아래 ajax에서 넘겨줌
 
 
         // imp_uid 로 아임포트쪽 요청에서 거래정보 조회
-        // 그러면 서버는 merchant_uid(후원번호) 로 DB 조회
-        // 그리고 그 두개의 Price(amount) 를 비교해서 검증후 맞으면 완료 상태로 변경
-
+        // 서버는 merchant_uid(후원번호) 로 DB 조회
+        // 그 두개의 Price(amount) 를 비교해서 검증후 맞으면 완료 상태로 변경
         let paid = 0;
         function requestPay() {
             var IMP = window.IMP;

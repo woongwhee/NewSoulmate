@@ -26,13 +26,20 @@
 
         <div class="content_wrap">
 
-            <div id="supportDate">
-                <span>조회기간</span>
-                <span><input type="date"></span>
-                <span>~</span>
-                <span><input type="date"></span>
-                <button id="searchBtn">조회</button>
-            </div>
+            <%--<form action="<%=request.getContextPath()%>/">--%>
+
+                <div id="supportDate">
+                    <span>조회기간</span>
+                    <span><input type="date"></span>
+                    <span>~</span>
+                    <span><input type="date"></span>
+                    <button id="searchBtn">조회</button>
+                </div>
+
+
+            <%--</form>--%>
+
+
 
 
             <div id="supportList-wrap">
@@ -68,60 +75,56 @@
                         <%} %>
                     <% } %>
 
-<%--                    <!--보여질 페이지 수 지정-->
-                    <c:forEach var="board" items="${10}">
-                        <tr>
-                            <th>
-                                <!--후원번호 ${}-->
-                            </th>
-                            <td>
-                                <!--후원날짜 ${가져오기}-->
-                            </td>
-                            <td>
-                                <!--후원방법 ${가져오기}-->
-                            </td>
-                            <td>
-                                <!--후원금액 ${가져오기}-->
-                            </td>
-                        </tr>
-                    </c:forEach>--%>
-
-
                     </tbody>
                 </table>
             </div>
 
 
-            <div id="supportTotal">
-                총 금액 :
+
+
+            <div id="totalSupport">
+                총 후원 금액 :
             </div>
 
+
+
+
+
+
             <script>
+
+              /*  const arr = supportList;
+
+                const result = arr.reduce(function add(sum, currValue) {
+                    return sum + currValue;
+                }, 0);
+
+                console.log(result);*/
+
+
+
+
+
                 function total(){
 
 
                 }
             </script>
 
-           <%-- function updatePrice() {
-            // 수입, 지출, 총 금액 계산하고 화면에 출력
-            const price = historyArr.map((item) => Number(item.price));
-            const totalPrice = price.reduce((acc, cur) => (acc += cur), 0);
-            const income = price
-            .filter((price) => price > 0)
-            .reduce((acc, cur) => (acc += cur), 0);
-            const expense = price
-            .filter((price) => price < 0)
-            .reduce((acc, cur) => (acc += cur), 0);
-
-            incomeText.innerText = `${income}`;
-            expenseText.innerText = `${expense}`;
-            totalPriceText.innerText = `${totalPrice}`;
-            }--%>
 
 
-  <%--          <div id="pagingForm">
-                <!--페이지네이션-->
+<%--            <script>
+                $(function(){
+                    $(".supportList-area>tbody>tr").click(function(){
+                        if($(this).text()!=$("#tableEmpty").text()) {
+                            let bno = $(this).children().eq(1).text();
+                            location.href = "<%=request.getContextPath()%>/supportHistory?bno=" + bno;
+                        }
+                    });
+                });
+            </script>--%>
+
+<%--            <div id="pagingForm">
 
                 <div align="center" class="paging-area">
 
@@ -144,6 +147,8 @@
                     <% } %>
                 </div>
             </div>--%>
+
+
         </div>
     </div>
 

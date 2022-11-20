@@ -17,6 +17,8 @@ public class SupportHistoryController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ArrayList<Support> supportList = new SupportService().selectSupportList();
+
+        System.out.println(supportList);
         request.setAttribute("supportList", supportList);
         request.getRequestDispatcher("views/support/supportHistory.jsp").forward(request, response);
 
