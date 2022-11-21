@@ -50,22 +50,7 @@
         </tr>
         </thead>
         <tbody>
-        <%for(Shelter s : sList){ %>
-        <tr>
-            <td style="display:none">
-                <%= s.getShelterNo()%>
-            </td>
-            <td>
-                <%= s.getShelterName() %>
-            </td>
-            <td>
-                <%= s.getShelterAddress() %>
-            </td>
-            <td>
-                <%= s.getShelterLandline() %>
-            </td>
-        </tr>
-        <% } %>
+
         </tbody>
     </table>
 </div>
@@ -109,7 +94,7 @@
 
 </script>
 
-    <jsp:include page="../template/footer.jsp"/>
+    <%@ include file="/views/template/footer.jsp"%>
 
 </body>
 </html>
