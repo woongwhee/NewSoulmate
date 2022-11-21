@@ -47,38 +47,6 @@ public class MyPageService {
 
         return list;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public String checkPwd(int memberNo){
         Connection conn = getConnection();
 
