@@ -15,15 +15,15 @@ import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
 @WebServlet(name = "InquireInsertController", value = "/inquireInsert.bo")
+@MultipartConfig(
+    fileSizeThreshold = 1024*1024,
+    maxFileSize = 1024*1024*20 //20메가
+)
 public class InquireInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
-        if(ServletFileUpload.isMultipartContent(request)){
-
-            int maxSize = 1024 * 1024 * 20;
-            String categoryNo = request.getParameter("categoryNo");
+            String categoryNo_ = request.getParameter("categoryNo");
+            int categoryNo = Integer.parseInt(categoryNo_);
             String boardTitle = request.getParameter("boardTitle");
             String boardContent = request.getParameter("boardContent");
             String memberNo = request.getParameter("memberNo");
@@ -38,15 +38,12 @@ public class InquireInsertController extends HttpServlet {
             int result=new InquireService().insertInquire(b,at);
             if(result>0){
                 request.getSession().setAttribute("alertMsg","문의작성 성공");
-                response.sendRedirect(request.getContextPath()+"//inquire");
+                response.sendRedirect(request.getContextPath()+"/inquire");
 
             }else{
                 request.getSession().setAttribute("errorMsg","문의작성 실패");
                 response.sendRedirect(request.getContextPath());
             }
-        }
-
-
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

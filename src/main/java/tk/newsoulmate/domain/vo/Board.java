@@ -120,9 +120,9 @@ public class Board {
      * @param memberNo
      * @return
      */
-    public static Board insertInquire(String categoryNo, String boardTitle, String boardContent, String memberNo){
+    public static Board insertInquire(int categoryNo, String boardTitle, String boardContent, String memberNo){
         Board b = new Board();
-        b.setCategoryNo(Integer.parseInt(categoryNo));
+        b.setCategoryNo(categoryNo);
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
         b.setMemberNo(Integer.parseInt(memberNo));

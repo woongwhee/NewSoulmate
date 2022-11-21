@@ -35,14 +35,14 @@
                 <tr>
                     <th width="100">카테고리*</th>
                     <td width="500">
-                        <select name="categoryNo">
+                    <select name="categoryNo">
 
-                            <% for(Category c : list) { %>
-                            <option value="<%= c.getCategoryNo() %>"><%= c.getCategoryName() %></option>
+                        <% for(Category c : list) { %>
+                        <option value="<%=c.getCategoryNo() %>"><%= c.getCategoryName() %></option>
 
-                            <%} %>
+                        <%} %>
 
-                        </select>
+                    </select>
                     </td>
                 </tr>
 
@@ -51,14 +51,12 @@
                     <td><input type="text" name="boardTitle" required></td>
 
                 </tr>
-
                 <tr>
                     <th>문의내용*</th>
                     <td>
                         <textarea name="boardContent" id="" cols="30" rows="10" style="resize: none" required></textarea>
                     </td>
                 </tr>
-
                 <tr>
                     <th>첨부파일</th>
                     <td><input type="file" name="upfile"></td>
@@ -69,7 +67,7 @@
 
             <div align="right" style="margin-right: 200px;">
 <%--                <button type="reset" class="btn btn-secondary btn-sm">취소하기</button>--%>
-                <a href="<%=request.getContextPath()%>/inquire" class="btn btn-secondary btn-sm">취소하기</a>
+                <a href="${context}/inquire" class="btn btn-secondary btn-sm">취소하기</a>
                 <button type="submit" class="btn btn-secondary btn-sm">작성하기</button>
 
             </div>

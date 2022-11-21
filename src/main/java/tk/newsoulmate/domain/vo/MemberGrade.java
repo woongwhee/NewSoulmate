@@ -15,7 +15,17 @@ public enum MemberGrade {
         this.gradeNumber =greedNumber;
         this.gradeName =greedName;
     }
-
+    public boolean isUSER(){
+        if(this==null){return false;}
+        return this==USER;
+    }
+    public boolean isSHELTER_MANAGER(){
+        if(this==null){return false;}
+        return this==SHELTER_MANAGER;
+    }public boolean isSITE_MANAGER(){
+        if(this==null){return false;}
+        return this==SITE_MANAGER;
+    }
     public static MemberGrade valueOfNumber(int gradeNumber){
         MemberGrade memberGrades [] = MemberGrade.values();
         return Arrays.asList(memberGrades).stream().filter(e->e.gradeNumber==gradeNumber).findAny().orElse(USER);

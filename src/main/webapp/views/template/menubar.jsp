@@ -4,9 +4,9 @@
 
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <c:set var="loginUser" value="${sessionScope.loginUser}" scope="session"/>
-<c:set var="USER" value="<%=MemberGrade.USER%>"/>
-<c:set var="SHELTER_MANAGER" value="<%=MemberGrade.SHELTER_MANAGER%>"/>
-<c:set var="SITE_MANAGER" value="<%=MemberGrade.SITE_MANAGER%>"/>
+<%--<c:set var="USER" value="<%=MemberGrade.USER%>" scope="page"/>--%>
+<%--<c:set var="SHELTER_MANAGER" value="<%=MemberGrade.SHELTER_MANAGER%>" scope="page"/>--%>
+<%--<c:set var="SITE_MANAGER" value="<%=MemberGrade.SITE_MANAGER%>" scope="page"/>--%>
 
 
 <div class="headcontainer">
@@ -28,18 +28,18 @@
 <%--                <c:otherwise>--%>
 <%--                    <c:choose>--%>
 
-            <c:when test="${loginUser.memberGrade eq USER}">
+            <c:when test="${loginUser.memberGrade.USER}">
                 <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
                 <li><a href="${context}/myPage">마이페이지</a></li>
                 <li><a href="${context}/logout">로그아웃</a></li>
             </c:when>
-            <c:when test="${loginUser.memberGrade eq SHELTER_MANAGER}" >
+            <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
                 <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
                 <li><a href="#">보호소페이지</a></li>
                 <li><a href="${context}/myPage">마이페이지</a></li>
                 <li><a href="${context}/logout">로그아웃</a></li>
                 </c:when>
-                <c:when test="${loginUser.memberGrade eq SITE_MANAGER}">
+                <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
                 <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
                 <li><a href="#">관리자페이지</a></li>
                 <li><a href="${context}/myPage">마이페이지</a></li>
