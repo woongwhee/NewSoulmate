@@ -9,9 +9,11 @@
 <%@ page import="tk.newsoulmate.domain.vo.Board" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
+<%@ page import="tk.newsoulmate.domain.vo.BoardType" %>
 <%
   ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
   PageInfo pi = (PageInfo) request.getAttribute("pi");
+  BoardType bt = (BoardType) request.getAttribute("bt");
   int currentPage = pi.getCurrentPage();
   int startPage = pi.getStartPage();
   int endPage = pi.getEndPage();
@@ -33,7 +35,7 @@
 
       <table align="center" class="list-area">
         <thead>
-        <tr style="text-align: center">
+          <tr style="text-align: center">
           <th width="70">글번호</th>
           <th width="300">글제목</th>
           <th width="100">작성일시</th>
@@ -53,6 +55,7 @@
           <td><%= b.getBoardTitle() %></td>
           <td><%= b.getCreateDate() %></td>
           <td><%= b.getReadCount() %></td>
+          <input type="hidden" class="boardType" value="<%=b.getBoardType().boardName%>"/>
         </tr>
         <% } %>
         <% } %>
@@ -65,15 +68,11 @@
             // 클릭시 해당 공지사항의 번호를 넘겨야함.
             // 해당 tr요소의 자손중에서 첫번째 td의 영역의 내용이 필요.
             if($(this).text()!=$("#tableEmpty").text()) { // 조회된 리스트가 없을경우 클릭방지
-              let bno = $(this).children().eq(1).text(); // 1 => b.getBoardNo()
-              // 현재 내가클릭한 tr의 자손들중 1번째에 위치한 자식의 textnode내용을 가져온다.
-
-              // 요청할 url?키=밸류&키=밸류&키=밸류
-              // 물음표 뒤의 내용을 쿼리스트링이라고 부른다. => 직접 만들어서 넘겨야함.
-              location.href = "<%=request.getContextPath()%>/myPageBoardDetail.bo?bno=" + bno;
+                let bno = $(this).children().eq(0).text(); // 0 => b.getBoardNo()
+                let typeName = $(this).children().find('.boardType').val();
+                location.href = '${context}/' + typeName + 'Detail?bno=' + bno;
             }
           });
-
         });
       </script>
       <br><br>
