@@ -45,6 +45,7 @@ span input[type=date] {
     text-align: center;
     font-size: 15px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 #supportList {
@@ -74,8 +75,8 @@ tbody td {
 }
 
 #supportTotal {
-    position: absolute;
-    right: 500px;
+    /* position: absolute; */
+    /* right: 500px; */
     font-size: 25px;
     margin: 50px 0px;
 }
