@@ -316,13 +316,12 @@ public class MemberDao {
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setInt(1,memberNo);
-
+            rset=psmt.executeQuery();
             if(rset.next()){
                 memberPwd = rset.getString("MEMBER_PWD");
             }
 
 
-            rset = psmt.executeQuery();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally{
@@ -330,6 +329,7 @@ public class MemberDao {
             close(psmt);
 
         }
+
         return memberPwd;
     }
 
