@@ -49,7 +49,7 @@
     </div>
     <div id="main_left">
         <div id="adopt-review">
-            <div id="comment2" onclick="">입양후기+</div>
+            <div id="comment2" onclick="location.href='<%=request.getContextPath()%>/adoptReList'">입양후기+</div>
                 <div id="adopt-review-list">
                     <img src="" alt="">
                     <img src="" alt="">
@@ -59,14 +59,14 @@
                 </div>
         </div>
         <div id="volunteer-review">
-            <div id="comment3" onclick="">봉사후기+</div>
+            <div id="comment3" onclick="location.href='<%=request.getContextPath()%>/'">봉사후기+</div>
             <div id="volunteer-review-list">
                 <ul>
-                    <li>봉사후기</li>
-                    <li>봉사후기</li>
-                    <li>봉사후기</li>
-                    <li>봉사후기</li>
-                    <li>봉사후기</li>
+                    <li><a href="#">봉사후기</a></li>
+                    <li><a href="#">봉사후기</a></li>
+                    <li><a href="#">봉사후기</a></li>
+                    <li><a href="#">봉사후기</a></li>
+                    <li><a href="#">봉사후기</a></li>
                 </ul>
             </div>
             <div id="btn-area">
@@ -83,10 +83,11 @@
         <div class="main_right_box1">
             <div class="wrap">
                 <div class="chat ch1">
-                    <div class="textbox">Q</div>
+                    <div class="textbox">입양하고싶은데 절차가 어떻게 되나요?</div>
                 </div>
                 <div class="chat ch2">
-                    <div class="textbox">A</div>
+                    <div class="textbox">입양신청서 작성 > 상담 및 동물과의 만남 > 입양 순으로 이루어 집니다.
+                                         자세한 내용은 홈페이지 내 입양절차안내 페이지를 통해 확인가능합니다.</div>
                 </div>
                 <div class="chat ch1">
                     <div class="textbox">Q</div>
@@ -106,7 +107,7 @@
         <div class="main_right_box2">
             <div id="support-box">
                 <div  id="comment4">후원유도멘트</div>
-                <button id="supportBtn"  onclick="">후원하러 가기</button>
+                <button id="supportBtn"  onclick="location.href='<%=request.getContextPath()%>/supportpayment'">후원하러 가기</button>
             </div>
         </div>
     </div>
