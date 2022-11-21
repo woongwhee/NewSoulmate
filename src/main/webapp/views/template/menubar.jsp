@@ -30,7 +30,7 @@
 
             <c:when test="${loginUser.memberGrade.USER}">
                 <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="${context}/myPage">마이페이지</a></li>
+                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
                 <li><a href="${context}/logout">로그아웃</a></li>
             </c:when>
             <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
