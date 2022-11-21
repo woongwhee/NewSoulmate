@@ -18,14 +18,11 @@ public class MemberDao {
         String fileName = MemberDao.class.getResource("/sql/member/Member-Mapper.xml").getPath();
         try {
             prop.loadFromXML(new FileInputStream(fileName));
-        } catch (InvalidPropertiesFormatException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 
     public int insertMember(Member m, Connection conn) {
@@ -102,10 +99,10 @@ public class MemberDao {
         String memberPwd = resultSet.getString("MEMBER_PWD");
         String memberName = resultSet.getString("MEMBER_NAME");
         String nickname = resultSet.getString("NICKNAME");
-        MemberGrade memberGrade = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
-        Member m = new Member(memberNo, memberId, memberName, phone, email, nickname, memberGrade);
+        MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
+            Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHELTER_NO");
             m.setShelterNo(shelterNo);
@@ -172,6 +169,7 @@ public class MemberDao {
             psmt.setString(2, Email);
 
             rset = psmt.executeQuery();
+
             if(rset.next()) {
                 m = this.mapToMember(rset);
             }
@@ -230,11 +228,13 @@ public class MemberDao {
         PreparedStatement psmt = null;
         int result = 0;
         String sql = prop.getProperty("pwdReset");
+
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, password);
             psmt.setString(2, memberId);
             result = psmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -305,6 +305,32 @@ public class MemberDao {
             close(psmt);
         }
         return result;
-
     }
+    public String checkPwd(Connection conn , int memberNo) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String memberPwd = null;
+
+        String sql = prop.getProperty("checkPwd");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,memberNo);
+
+            if(rset.next()){
+                memberPwd = rset.getString("MEMBER_PWD");
+            }
+
+
+            rset = psmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally{
+            close(rset);
+            close(psmt);
+
+        }
+        return memberPwd;
+    }
+
 }

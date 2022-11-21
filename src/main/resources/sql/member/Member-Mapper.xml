@@ -77,4 +77,13 @@
         SET RESENT_CONNECTION = SYSDATE
         WHERE MEMBER_NO = ?
     </entry>
+
+
+    <entry key="checkPwd">
+        SELECT
+            MEMBER_PWD
+        FROM MEMBER
+        WHERE MEMBER_NO = ?
+    </entry>
+
 </properties>

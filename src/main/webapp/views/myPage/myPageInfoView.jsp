@@ -1,4 +1,10 @@
+<%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  Member loginUser = (Member)session.getAttribute("loginUser");
+  String memberPwd = (String)request.getAttribute("memberPwd");
+
+%>
 <html>
 <head>
     <title>회원정보 수정</title>
@@ -14,14 +20,14 @@
         </p>
 
         <!--비밀번호 잘못 입력시 뜨는 창-->
-        <p>
-          * 비밀번호를 다시 한 번 입력해주세요.
+        <p id="pwChkMsg">
+
         </p>
 
         <form id="" action="" method="post">
           <table>
             <tr>
-              <th><input type="password" name="" id="" placeholder=" 비밀번호 입력" required></th>
+              <th><input type="password" name="" id="checkPwd" placeholder=" 비밀번호 입력" required></th>
             </tr>
             <tr>
               <th><button type="button" onclick="">확인</button></th>
@@ -31,5 +37,17 @@
       </div>
     </div>
   </div>
+<script>
+  $("#checkPwd").onclick(function (){
+    const pwChkMsg = document.querySelector("#pwChkMsg");
+    if(<%=memberPwd%> = $("#checkPwd").val()){  // 비밀번호 일치시
+
+      location.href='<%=request.getContextPath()%>/myPage';
+
+    }else{ // 비밀번호 입력 잘못했을시
+      pwReChkMsg.innerText = " * 비밀번호를 다시 한 번 입력해주세요."
+    }
+  })
+</script>
 </body>
 </html>
