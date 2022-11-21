@@ -3,7 +3,14 @@
 <properties>
 
     <entry key="manageMember">
-        SELECT * FROM MEMBER
+        SELECT
+        MEMBER_NO,
+        MEMBER_ID,
+        MEMBER_NAME,
+        EMAIL,
+        MEMBER_GRADE,
+        ENROLL_DATE
+        FROM MEMBER
     </entry>
 
 

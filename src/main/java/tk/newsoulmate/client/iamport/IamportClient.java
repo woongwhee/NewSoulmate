@@ -23,6 +23,9 @@ public class IamportClient {
 	private final String apiKey = "5125134043525072";
 	private final String secretKey = "8XJp5Mj3RrDqiwfzxU1UOqCI2CBfy4tT4AdnXdYZrDHkUNHJaDZkrpOU80sbKcjGYeW0y6euJNqfyWxA";
 
+	// 로그인 할 수 있는 apikey
+	// 토큰 인증방식이어서 access token
+
 	private final HttpClient client;
 	private final Gson gson;
 
@@ -34,6 +37,7 @@ public class IamportClient {
 	}
 
 	// 인증방식 : Session(Server) 방식 vs Token(Client) 방식
+	// 인증: 특정 시스템에 접근할 수 있는 사람인지 확인받는 작업 -> 로그인
 	public String getAccessToken() {
 		Map<String, String> bodyMap = new HashMap<>();
 		bodyMap.put("imp_key", apiKey);
@@ -59,6 +63,7 @@ public class IamportClient {
 		throw new RuntimeException("Iamport AccessToken 조회에 실패했습니다.");
 	}
 
+	// 로그인 한 사람만 꺼내갈 수 있게
 	public long getPaymentAmount(String impUid) {
 		String accessToken = this.getAccessToken();
 		try {
@@ -69,6 +74,12 @@ public class IamportClient {
 					.build(),
 				HttpResponse.BodyHandlers.ofString()
 			).body();
+
+			// iamport에선 제이슨 형태로 데이터를 내려주는데
+			// 제이슨형태 문자열을 보내주는걸 객체로 변환하는 과정
+			// 데이터중에 amount 반환
+			// '{"code":123, "message":"success",...}' -> ObjectMapper or Gson 라이브러리 이용해서 객체를 만들거나
+			// 제네릭
 
 			Type type = new TypeToken<IamportResponse<PaymentDataResponse>>(){}.getType();
 			IamportResponse<PaymentDataResponse> parsedResp = gson.fromJson(resp, type);

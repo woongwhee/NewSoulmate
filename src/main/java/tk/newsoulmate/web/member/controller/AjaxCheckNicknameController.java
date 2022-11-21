@@ -16,12 +16,9 @@ public class AjaxCheckNicknameController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String nickName = request.getParameter("nickName");
-
         MemberService service = new MemberService();
         int count = service.nicknameCheck(nickName);
-
         PrintWriter pw = response.getWriter();
-
         if(count > 0) {
             pw.print(1);
             // 사용불가

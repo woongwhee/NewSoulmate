@@ -2,6 +2,8 @@ package tk.newsoulmate.domain.vo;
 
 import java.sql.Date;
 
+import tk.newsoulmate.domain.vo.type.SupportStatus;
+
 public class Support {
 
     private int supportNo;
@@ -21,6 +23,17 @@ public class Support {
         this.merchantUid = merchantUid;
         this.amount = amount;
     }
+
+    public Support(int supportNo, long shelterNo, String merchantUid, long amount, Date payTime, String status) {
+        super();
+        this.supportNo = supportNo;
+        this.shelterNo = shelterNo;
+        this.merchantUid = merchantUid;
+        this.amount = amount;
+        this.payTime = payTime;
+        this.status = SupportStatus.valueOf(status);
+    }
+
 
     public int getSupportNo() {
         return supportNo;
@@ -58,28 +71,55 @@ public class Support {
         return isWithdraw;
     }
 
+    public void setSupportNo(int supportNo) {
+        this.supportNo = supportNo;
+    }
+
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
+    }
+
+    public void setMerchantUid(String merchantUid) {
+        this.merchantUid = merchantUid;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public void setStatus(SupportStatus status) {
+        this.status = status;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+
+    public void setType(SupportType type) {
+        this.type = type;
+    }
+
+    public void setWithdraw(boolean withdraw) {
+        isWithdraw = withdraw;
+    }
+
     @Override
     public String toString() {
         return "Support{" +
-            "supportNo=" + supportNo +
-            ", shelterNo=" + shelterNo +
-            ", memberNo=" + memberNo +
-            ", merchantUid='" + merchantUid + '\'' +
-            ", amount=" + amount +
-            ", status=" + status +
-            ", payTime=" + payTime +
-            ", type=" + type +
-            ", isWithdraw=" + isWithdraw +
-            '}';
+                "supportNo=" + supportNo +
+                ", shelterNo=" + shelterNo +
+                ", memberNo=" + memberNo +
+                ", merchantUid='" + merchantUid + '\'' +
+                ", amount=" + amount +
+                ", status=" + status +
+                ", payTime=" + payTime +
+                ", type=" + type +
+                ", isWithdraw=" + isWithdraw +
+                '}';
     }
-
     public boolean verify(long amount) {
         return this.amount == amount;
     }
-}
-
-enum SupportStatus {
-    PENDING, DONE
 }
 
 enum SupportType {

@@ -14,8 +14,6 @@
         WHERE SHELTER_ADDRESS IS NOT NULL
     </entry>
 
-
-
     <entry key="ShelterListByVillage"> <!-- 둘다 선택했을때 -->
         SELECT
         SHELTER_NO,
@@ -73,8 +71,24 @@
         "careNm"
         FROM ANIMAL
         WHERE "desertionNo" = ?)
-
     </entry>
+
+
+
+        <!--    회원정보에 등록된 보호소만 후원가능하게 할경우
+    <entry key="">
+        SELECT
+        S.SHELTER_NO,
+        S.SHELTER_NAME,
+        S.SHELTER_ADDRESS,
+        S.SHELTER_LANDLINE,
+        S.CITY_NO,
+        S.VILLAGE_NO
+        FROM SHELTER S
+        INNER JOIN MEMBER M on S.SHELTER_NO = M.SHELTER_NO
+        WHERE SHELTER_ADDRESS IS NOT NULL
+    </entry>-->
+
 
 
 

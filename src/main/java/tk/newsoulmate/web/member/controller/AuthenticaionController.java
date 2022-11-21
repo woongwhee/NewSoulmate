@@ -15,7 +15,6 @@ public class AuthenticaionController extends HttpServlet {
         System.out.println(input+code);
         if(input.equals(code)){
             response.getWriter().print(1);
-
         }else{
             response.getWriter().print(0);
         }

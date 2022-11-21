@@ -5,12 +5,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "MemberInfoDetailViewController", value = "/myPage")
-public class MemberInfoDetailViewController extends HttpServlet {
+@WebServlet(name = "MemberDeleteServlet", value = "/memberDeletePage")
+public class MemberDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("views/myPage/myPageDeleteMember.jsp").forward(request,response);
 
-        request.getRequestDispatcher("/views/myPage/myPageInfoDetailView.jsp").forward(request,response);
     }
 
     @Override
