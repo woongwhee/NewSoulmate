@@ -14,7 +14,7 @@
       <form action="" id="" method="post">
         <div class="form-group">
           <label for="">보호소명</label>
-          <input type="text" name="" id="" placeholder="보호소명" required>
+          <input type="text" name="" id="shelterName" placeholder="보호소명" required>
         </div>
 
         <div class="form-group">
