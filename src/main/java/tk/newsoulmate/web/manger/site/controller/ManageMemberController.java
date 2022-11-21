@@ -17,9 +17,8 @@ public class ManageMemberController extends HttpServlet {
         ManageMemberService service= new ManageMemberService();
         ArrayList<Member> mList = service.selectManageMember();
         request.setAttribute("mList", mList);
-        RequestDispatcher view = request.getRequestDispatcher("/views/manager/memberManagement.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("/views/manager/managerMemberList.jsp");
         view.forward(request, response);
-
     }
 
     @Override

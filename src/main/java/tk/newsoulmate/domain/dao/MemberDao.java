@@ -24,7 +24,6 @@ public class MemberDao {
     }
 
 
-
     public int insertMember(Member m, Connection conn) {
 
         int result = 0;

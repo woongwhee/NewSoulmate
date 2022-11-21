@@ -10,7 +10,9 @@ public class ManagaMemberServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("views/manager/memberManagement.jsp").forward(request,response);
+        request.getRequestDispatcher("manageMember?page=1").forward(request,response);
+
+        /*request.getRequestDispatcher("views/manager/managerMemberList.jsp").forward(request,response);*/
 
     }
 

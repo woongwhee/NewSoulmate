@@ -22,13 +22,9 @@ public class ManagerDao {
     private Properties prop = new Properties();
 
     public ManagerDao() {
-        String fileName = MemberDao.class.getResource("/sql/member/Manager-Mapper.xml").getPath();
+        String fileName = MemberDao.class.getResource("/sql/manager/Manager-Mapper.xml").getPath();
         try {
             prop.loadFromXML(new FileInputStream(fileName));
-        } catch (InvalidPropertiesFormatException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,8 +45,11 @@ public class ManagerDao {
                 m.setMemberId(rset.getString("MEMBER_ID"));
                 m.setMemberName(rset.getString("MEMBER_NAME"));
                 m.setEmail(rset.getString("EMAIL"));
+                m.setNickName(rset.getString("NICKNAME"));
                 MemberGrade memberGrade = MemberGrade.valueOfNumber(rset.getInt("MEMBER_GRADE"));
+                m.setShelterNo(rset.getLong("SHELTER_NO"));
                 m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+                m.setResentConnection(rset.getDate("RESENT_CONNECTION"));
                 mList.add(m);
             }
         } catch (SQLException e) {

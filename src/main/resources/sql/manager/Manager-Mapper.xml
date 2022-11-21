@@ -7,9 +7,17 @@
         MEMBER_NO,
         MEMBER_ID,
         MEMBER_NAME,
+        NICKNAME,
         EMAIL,
         MEMBER_GRADE,
-        ENROLL_DATE
+        SHELTER_NO,
+        ENROLL_DATE,
+        RESENT_CONNECTION
+        FROM MEMBER
+    </entry>
+
+    <entry key="memberCount">
+        SELECT COUNT(*)
         FROM MEMBER
     </entry>
 
