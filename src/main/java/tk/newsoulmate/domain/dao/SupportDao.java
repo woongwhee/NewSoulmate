@@ -1,19 +1,21 @@
 package tk.newsoulmate.domain.dao;
 
-import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.MemberGrade;
-import tk.newsoulmate.domain.vo.Shelter;
-import tk.newsoulmate.domain.vo.Support;
-import tk.newsoulmate.web.common.JDBCTemplet;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import tk.newsoulmate.domain.vo.PageInfo;
+import tk.newsoulmate.domain.vo.Support;
+import tk.newsoulmate.domain.vo.SupportCompleteResponse;
+import tk.newsoulmate.domain.vo.SupportPage;
+import tk.newsoulmate.domain.vo.type.SupportStatus;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 public class SupportDao {
 
@@ -69,6 +71,24 @@ public class SupportDao {
         return result;
     }
 
+    public int updateStatus(Connection conn, String merchantUid, SupportStatus status) {
+        PreparedStatement psmt = null;
+        int result = 0;
+        String sql = prop.getProperty("updateStatus");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, status.name());
+            psmt.setString(2, merchantUid);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+        return result;
+    }
+
     public Support mapToSupport(ResultSet resultSet) throws SQLException {
         int supportNo = resultSet.getInt("SUPPORT_NO");
         long shelterNo = resultSet.getLong("SHELTER_NO");
@@ -79,23 +99,24 @@ public class SupportDao {
         return new Support(supportNo, shelterNo, memberNo, merchantUid, amount);
     }
 
-    public ArrayList<Support> selectSupportList(Connection conn) {
-        ArrayList<Support> supportList = new ArrayList<>();
+    public ArrayList<SupportCompleteResponse> findAllOnlyDone(Connection conn, int memberNo, SupportPage page) {
+        ArrayList<SupportCompleteResponse> supportList = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        String sql = prop.getProperty("selectSupportList");
+        String sql = prop.getProperty("selectAll");
 
         try {
             psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, memberNo);
+            psmt.setInt(2, page.getEndSupport());
+            psmt.setInt(3, page.getStartSupport());
             rset = psmt.executeQuery();
             while(rset.next()) {
-                supportList.add(new Support(
+                supportList.add(new SupportCompleteResponse(
                         rset.getInt("SUPPORT_NO"),
-                        rset.getLong("SHELTER_NO"),
-                        rset.getString("MERCHANT_UID"),
+                        rset.getString("SHELTER_NAME"),
                         rset.getLong("AMOUNT"),
-                        rset.getDate("PAY_TIME"),
-                        rset.getString("STATUS")
+                        rset.getDate("PAY_TIME")
                 ));
             }
         } catch (SQLException e) {
@@ -107,5 +128,81 @@ public class SupportDao {
         return supportList;
     }
 
+    public ArrayList<SupportCompleteResponse> findAllOnlyDoneByDate(Connection conn, int memberNo, LocalDate startDate, LocalDate endDate, SupportPage page) {
+        ArrayList<SupportCompleteResponse> supportList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectAllByDate");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, memberNo);
+            psmt.setString(2, startDate.toString());
+            psmt.setString(3, endDate.toString());
+            psmt.setInt(4, page.getEndSupport());
+            psmt.setInt(5, page.getStartSupport());
+            rset = psmt.executeQuery();
+            while(rset.next()) {
+                supportList.add(new SupportCompleteResponse(
+                        rset.getInt("SUPPORT_NO"),
+                        rset.getString("SHELTER_NAME"),
+                        rset.getLong("AMOUNT"),
+                        rset.getDate("PAY_TIME")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return supportList;
+    }
+
+    public int countOnlyDone(Connection conn, int memberNo) {
+        int count = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("count");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, memberNo);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                count = rset.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return count;
+    }
+
+    public int countOnlyDoneByDate(Connection conn, int memberNo, LocalDate startDate, LocalDate endDate) {
+        int count = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("countByDate");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, memberNo);
+            psmt.setString(2, startDate.toString());
+            psmt.setString(3, endDate.toString());
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                count = rset.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return count;
+    }
 
 }

@@ -1,8 +1,8 @@
 package tk.newsoulmate.domain.vo;
 
-import jdk.jshell.Snippet;
-
 import java.sql.Date;
+
+import tk.newsoulmate.domain.vo.type.SupportStatus;
 
 public class Support {
 
@@ -33,7 +33,6 @@ public class Support {
         this.payTime = payTime;
         this.status = SupportStatus.valueOf(status);
     }
-
 
 
     public int getSupportNo() {
@@ -107,25 +106,20 @@ public class Support {
     @Override
     public String toString() {
         return "Support{" +
-            "supportNo=" + supportNo +
-            ", shelterNo=" + shelterNo +
-            ", memberNo=" + memberNo +
-            ", merchantUid='" + merchantUid + '\'' +
-            ", amount=" + amount +
-            ", status=" + status +
-            ", payTime=" + payTime +
-            ", type=" + type +
-            ", isWithdraw=" + isWithdraw +
-            '}';
+                "supportNo=" + supportNo +
+                ", shelterNo=" + shelterNo +
+                ", memberNo=" + memberNo +
+                ", merchantUid='" + merchantUid + '\'' +
+                ", amount=" + amount +
+                ", status=" + status +
+                ", payTime=" + payTime +
+                ", type=" + type +
+                ", isWithdraw=" + isWithdraw +
+                '}';
     }
-
     public boolean verify(long amount) {
         return this.amount == amount;
     }
-}
-
-enum SupportStatus {
-    PENDING, DONE
 }
 
 enum SupportType {

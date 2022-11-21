@@ -17,7 +17,7 @@ public class SupportNumberCreateController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//todo: 받아야될 정보 : 얼마 후원인지, 누구인지(HttpSession)
+
 		HttpSession session = request.getSession();
 		Object object = session.getAttribute("loginUser");
 		if (object == null) {
@@ -32,5 +32,4 @@ public class SupportNumberCreateController extends HttpServlet {
 		response.getWriter().print(supportNumber);
 		response.getWriter().flush();
 	}
-
 }

@@ -16,18 +16,69 @@
         WHERE MERCHANT_UID = ?
     </entry>
 
-    <entry key="selectSupportList">
-        SELECT
-        SUPPORT_NO,
-        SHELTER_NO,
-        MERCHANT_UID,
-        AMOUNT,
-        PAY_TIME,
-        STATUS
-        FROM SUPPORT
-        <!--ORDER BY SUPPORT_NO DESC-->
+    <entry key="updateStatus">
+        UPDATE SUPPORT
+        SET STATUS = ?
+        WHERE MERCHANT_UID = ?
     </entry>
 
+    <entry key="selectAll">
+        SELECT *
+        FROM (
+        SELECT (ROWNUM) ROW_NUM, T.*
+        FROM (
+        SELECT
+        SU.SUPPORT_NO, SH.SHELTER_NAME, SU.AMOUNT, SU.PAY_TIME
+        FROM SUPPORT SU
+        INNER JOIN SHELTER SH on SH.SHELTER_NO = SU.SHELTER_NO
+        WHERE STATUS = 'DONE'
+        AND SU.MEMBER_NO = ?
+        ORDER BY PAY_TIME DESC
+        ) T
+        WHERE ROWNUM &lt;= ?
+        )
+        WHERE ROW_NUM &gt;= ?
+    </entry>
+
+    <entry key="selectAllByDate">
+        SELECT *
+        FROM (
+        SELECT (ROWNUM) ROW_NUM, T.*
+        FROM (
+        SELECT
+        SU.SUPPORT_NO, SH.SHELTER_NAME, SU.AMOUNT, SU.PAY_TIME
+        FROM SUPPORT SU
+        INNER JOIN SHELTER SH on SH.SHELTER_NO = SU.SHELTER_NO
+        WHERE STATUS = 'DONE'
+        AND SU.MEMBER_NO = ?
+        AND SU.PAY_TIME BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD')
+        ORDER BY PAY_TIME DESC
+        ) T
+        WHERE ROWNUM &lt;= ?
+        )
+        WHERE ROW_NUM &gt;= ?
+    </entry>
+
+    <entry key="count">
+        SELECT
+        COUNT(*)
+        FROM SUPPORT SU
+        INNER JOIN SHELTER SH on SH.SHELTER_NO = SU.SHELTER_NO
+        WHERE STATUS = 'DONE'
+        AND SU.MEMBER_NO = ?
+        ORDER BY PAY_TIME DESC
+    </entry>
+
+    <entry key="countByDate">
+        SELECT
+        COUNT(*)
+        FROM SUPPORT SU
+        INNER JOIN SHELTER SH on SH.SHELTER_NO = SU.SHELTER_NO
+        WHERE STATUS = 'DONE'
+        AND SU.MEMBER_NO = ?
+        AND SU.PAY_TIME BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD')
+        ORDER BY PAY_TIME DESC
+    </entry>
 
 
 </properties>
