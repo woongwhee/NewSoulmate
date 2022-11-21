@@ -70,11 +70,13 @@
                     B.BOARD_NO,
                     BOARD_TITLE,
                     CREATE_DATE,
-                    READ_COUNT
+                    READ_COUNT,
+                    BOARD_NAME
                 FROM BOARD B
                 JOIN MEMBER M ON B.MEMBER_NO = M.MEMBER_NO
+                JOIN BOARD_TYPE USING(TYPE_NO)
                 WHERE B.MEMBER_NO = ?
-                ORDER BY CREATE_DATE DESC, READ_COUNT DESC
+                ORDER BY CREATE_DATE DESC
                 ) A
             )
         WHERE RNUM BETWEEN ? AND ?

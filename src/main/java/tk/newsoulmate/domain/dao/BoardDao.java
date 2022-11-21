@@ -409,8 +409,8 @@ public class BoardDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            close(psmt);
             close(rset);
+            close(psmt);
         }
         return listCount;
 
@@ -439,7 +439,8 @@ public class BoardDao {
                 list.add(Board.selectMyPageBoardList(rset.getInt("BOARD_NO")
                         , rset.getString("BOARD_TITLE")
                         , rset.getDate("CREATE_DATE")
-                        , rset.getInt("READ_COUNT")));
+                        , rset.getInt("READ_COUNT")
+                        , rset.getString("BOARD_NAME")));
             }
 
         } catch (SQLException e) {

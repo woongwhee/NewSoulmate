@@ -20,7 +20,11 @@ public class Board {
 
     private Date issueDate;
     private String memberId;
-    private String CategoryName;
+    private String categoryName;
+
+    private String boardName;
+
+
 
     private Board(){}
     /*
@@ -103,12 +107,13 @@ public class Board {
         return b;
     }
 
-    public static Board selectMyPageBoardList(int boardNo, String boardTitle, Date createDate, int readCount){
+    public static Board selectMyPageBoardList(int boardNo, String boardTitle, Date createDate, int readCount, String boardName){
         Board b = new Board();
         b.setBoardNo(boardNo);
         b.setBoardTitle(boardTitle);
         b.setCreateDate(createDate);
         b.setReadCount(readCount);
+        b.setBoardName(boardName);
         return b;
     }
 
@@ -306,7 +311,7 @@ public class Board {
     }
 
     public String getCategoryName() {
-        return CategoryName;
+        return categoryName;
     }
     public int getFileCount() {
         return fileCount;
@@ -317,7 +322,7 @@ public class Board {
     }
 
     public void setCategoryName(String categoryName) {
-        CategoryName = categoryName;
+        this.categoryName = categoryName;
     }
 
     public String getNickName() {
@@ -326,5 +331,13 @@ public class Board {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getBoardName() {
+        return boardName;
+    }
+
+    public void setBoardName(String boardName) {
+        this.boardName = boardName;
     }
 }
