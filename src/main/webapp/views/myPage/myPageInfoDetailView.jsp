@@ -18,8 +18,6 @@
     <div id="right_view">
         <div id="user_information">
             <b> ${loginUser.memberName}님 환영합니다.
-                <%=firstEmail%>
-                <%=secondEmail%>
             </b> <br><br>
 
 
@@ -46,7 +44,7 @@
                 <div class="form-group">
                     <label for="">닉네임</label>
                     <input type="text" name="nickName" id="nickName" value="${loginUser.nickName}"  required>
-                    <button type="button" id="checkNickname" disabled>중복확인</button>
+                    <button type="button" id="checkNickname" >중복확인</button>
                 </div>
 
                 <div class="form-group" >
@@ -62,11 +60,11 @@
                         <option value="@gmail.com">@gmail.com</option>
                         <option value="@hanmail.net">@hanmail.net</option>
                     </select>
-                    <button type="button" onclick="sendMail()" id="emailCheck" disabled>인증번호 발송</button>
+                    <button type="button" onclick="sendMail()" id="emailCheck" >인증번호 발송</button>
                     <div id="auth"></div>
                     <div id="certified">
                         <input type="text" id="authCode" placeholder="인증번호">
-                        <button type="button" class="" id="" onclick="authenticationMail()">인증번호 확인</button>
+                        <button type="button" class="" id="checkAuthCode" onclick="authenticationMail()" disabled>인증번호 확인</button>
                     </div>
                 </div>
                 <span id="timeZone"></span>
@@ -78,6 +76,28 @@
     </div>
 </div>
 <script>
+
+    $(function() {
+        $("#nickName").on("keyup", function() {
+            var flag1 = true;
+            flag1 = $(this).val().length > 0 ? false : true;
+            $("#checkNickname").attr("disabled", flag1);
+        });
+
+        $("#email_1").on("keyup", function() {
+            var flag2 = true;
+            flag2 = $(this).val().length > 0 ? false : true;
+            $("#emailCheck").attr("disabled", flag2);
+        });
+
+        $("#authCode").on("keyup", function() {
+            var flag = true;
+            flag = $(this).val().length > 0 ? false : true;
+            $("#checkAuthCode").attr("disabled", flag) && $("#myPageCheck").attr("disabled", flag);
+        });
+
+    });
+
     // 변경사항이 있을경우 -> 변경된 input value를 servlet에 보내줘야함
     // 변경된 input에 대해서 무조건 유효성 검사 해야함 -> 버튼 클릭을 해야함.
     // 변경하기 클릭시
