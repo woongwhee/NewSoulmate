@@ -20,33 +20,34 @@
 
         <div id="user">
             <ul>
-            <c:choose>
-            <c:when test="${empty loginUser}">
-                <li><a href="${context}/memberSignupTerm">회원가입</a></li>
-                <li><a href="${context}/loginpage">로그인</a></li>
-            </c:when>
-<%--                <c:otherwise>--%>
-<%--                    <c:choose>--%>
+                <c:choose>
+                    <c:when test="${empty loginUser}">
+                        <li><a href="${context}/memberSignupTerm">회원가입</a></li>
+                        <li><a href="${context}/loginpage">로그인</a></li>
+                    </c:when>
+                    <%--                <c:otherwise>--%>
+                    <%--                    <c:choose>--%>
 
-            <c:when test="${loginUser.memberGrade.USER}">
-                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
-                <li><a href="${context}/logout">로그아웃</a></li>
-            </c:when>
-            <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
-                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="#">보호소페이지</a></li>
-                <li><a href="${context}/myPage">마이페이지</a></li>
-                <li><a href="${context}/logout">로그아웃</a></li>
-                </c:when>
-                <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
-                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="#">관리자페이지</a></li>
-                <li><a href="${context}/myPage">마이페이지</a></li>
-                <li><a href="${context}/logout">로그아웃</a></li>
-            </c:when>
-<%--                    </c:choose>--%>
-            </c:choose>
+                    <c:when test="${loginUser.memberGrade eq MemberGrade.USER}">
+                        <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                        <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                        <li><a href="${context}/logout">로그아웃</a></li>
+                    </c:when>
+                    <c:when test="${loginUser.memberGrade eq MemberGrade.SHELTER_MANAGER}" >
+                        <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                        <li><a href="#">보호소페이지</a></li>
+                        <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                        <li><a href="${context}/logout">로그아웃</a></li>
+                    </c:when>
+                    <c:when test="${loginUser.memberGrade eq MemberGrade.SITE_MANAGER}">
+                        <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                        <li><a href="${context}/manageMemberPage">관리자페이지</a></li>
+                        <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                        <li><a href="${context}/logout">로그아웃</a></li>
+                    </c:when>
+                    <%--                    </c:choose>--%>
+                    <%--                </c:otherwise>--%>
+                </c:choose>
             </ul>
         </div>
     </div>
@@ -89,8 +90,8 @@
             <div class="dropdown">
                 <button class="dropdown-btn"><a href="#">후원</a></button>
                 <div class="dropdown-submenu">
-                    <a href="supportPaymentPage">후원하기</a>
-                    <a href="supportHistoryPage">후원내역</a>
+                    <a href="${context}/supportPaymentPage">후원하기</a>
+                    <a href="${context}/supportHistoryPage">후원내역</a>
                 </div>
             </div>
 
