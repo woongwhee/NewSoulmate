@@ -16,7 +16,7 @@ public class MyPageBoardListController extends HttpServlet {
 
         Member loginUser = (Member) request.getSession().getAttribute("loginUser");
         PageInfo pi;
-        BoardType bt = null;
+
         if (loginUser == null){
             pi = new PageInfo(0,1);
         } else {
@@ -36,7 +36,7 @@ public class MyPageBoardListController extends HttpServlet {
             request.setAttribute("list", list);
         }
         request.setAttribute("pi",pi);
-        request.setAttribute("bt",bt);
+
         request.getRequestDispatcher("/views/myPage/myPageBoardListView.jsp").forward(request,response);
 
     }

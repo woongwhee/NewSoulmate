@@ -13,7 +13,6 @@
 <%
   ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
   PageInfo pi = (PageInfo) request.getAttribute("pi");
-  BoardType bt = (BoardType) request.getAttribute("bt");
   int currentPage = pi.getCurrentPage();
   int startPage = pi.getStartPage();
   int endPage = pi.getEndPage();
@@ -22,12 +21,12 @@
 <html>
 <head>
     <title>작성게시글 확인</title>
-    <link href="<%=request.getContextPath()%>/css/mypage/mypageBoardList.css" rel="stylesheet">
+    <link href="${context}/css/mypage/mypageBoardList.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
 
 </head>
 <body>
-    <header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
+<header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
 
     <div id="mPageList">
       <br>
