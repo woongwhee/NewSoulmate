@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.Shelter" %><%--
+<%@ page import="tk.newsoulmate.domain.vo.Shelter" %>
+<%@ page import="tk.newsoulmate.web.common.APIKeys" %><%--
   Created by IntelliJ IDEA.
   User: PC
   Date: 2022-11-11
@@ -35,8 +36,7 @@
 
 <!-- 지도를 표시할 div 입니다 -->
 <div id="map" style="width:100%;height:350px;"></div>
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25a11b9a945a1d444011113fe431e818&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${APIKeys.KakaoMapKey}&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
