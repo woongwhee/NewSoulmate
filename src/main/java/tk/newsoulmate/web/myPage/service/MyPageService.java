@@ -27,5 +27,14 @@ public class MyPageService {
         return updateMem;
     }
 
+    public String checkPwd(int memberNo){
+        Connection conn = getConnection();
+
+        String memberPwd = new MemberDao().checkPwd(conn,memberNo);
+
+        close();
+
+        return  memberPwd;
+    }
 
 }

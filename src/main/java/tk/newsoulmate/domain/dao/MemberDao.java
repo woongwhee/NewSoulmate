@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.*;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
+import static tk.newsoulmate.web.common.JDBCTemplet.getConnection;
 
 public class MemberDao {
 
@@ -243,6 +244,7 @@ public class MemberDao {
         return result;
     }
 
+
     public int updateMember(Connection conn,Member m){
         int result = 0;
 
@@ -267,6 +269,31 @@ public class MemberDao {
         return result;
     }
 
+    public String checkPwd(Connection conn , int memberNo) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String memberPwd = null;
 
+        String sql = prop.getProperty("checkPwd");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,memberNo);
+
+            if(rset.next()){
+                memberPwd = rset.getString("MEMBER_PWD");
+            }
+
+
+            rset = psmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally{
+            close(rset);
+            close(psmt);
+
+        }
+        return memberPwd;
+    }
 
 }

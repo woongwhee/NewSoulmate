@@ -26,7 +26,7 @@
 
             <c:when test="${loginUser.memberGrade eq MemberGrade.USER}">
                 <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="${context}/myPage">마이페이지</a></li>
+                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
                 <li><a href="${context}/logout.do">로그아웃</a></li>
             </c:when>
             <c:when test="${loginUser.memberGrade eq MemberGrade.SHELTER_MANAGER}" >

@@ -64,4 +64,18 @@
         ENROLL_DATE = SYSDATE
         WHERE MEMBER_NO = ?
     </entry>
+
+    <entry key="checkPwd">
+        SELECT
+            MEMBER_NO
+
+    </entry>
+
+    <entry key="checkPwd">
+        SELECT
+            MEMBER_PWD
+        FROM MEMBER
+        WHERE MEMBER_NO = ?
+    </entry>
+
 </properties>
