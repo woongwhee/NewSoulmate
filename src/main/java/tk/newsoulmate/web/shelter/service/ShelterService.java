@@ -12,6 +12,7 @@ import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
@@ -90,4 +91,11 @@ public class ShelterService {
         return n;
     }
 
+    public List<Notice> selectNoticeList() {
+        Connection conn=getConnection();
+        Notice n=new Notice();
+        List<Notice> nList=new NoticeDao().selectNoticeList(conn,n);
+
+        return nList;
+    }
 }

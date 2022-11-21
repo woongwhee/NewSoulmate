@@ -31,11 +31,9 @@ public class InquireDetailController extends HttpServlet {
         Board b = iService.selectInquireBoard(boardNo,loginUser);
         if(b!=null){
             Attachment at = iService.selectInquireAttachment(boardNo);
-
             request.setAttribute("b", b);
             request.setAttribute("at",at);
             request.getRequestDispatcher("views/inquire/inquireDetailView.jsp").forward(request,response);
-
         } else { // 에러페이지
             request.getSession().setAttribute("errorMsg", "게시글 상세조회 실패");
             response.sendRedirect(request.getContextPath());

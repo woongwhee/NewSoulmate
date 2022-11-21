@@ -16,7 +16,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 </head>
 <body>
     <header><%@ include file="/views/template/menubar.jsp"%></header>

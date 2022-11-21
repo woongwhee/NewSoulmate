@@ -19,7 +19,7 @@
 <header><%@include file="/views/template/menubar.jsp"%></header>
 <div id="content">
     <div id="animal-info">
-        <img id="animalImg_1" src="" alt="">
+        <img id="animalImg_1" src="${n.popfile}" alt="">
         <table id="infoTable">
             <tr>
                 <th>공고번호</th>
@@ -48,9 +48,9 @@
         </table>
     </div>
     <div id="animal-detail">
-        <img id="animalImg_2" src="" alt="">
+        <img id="animalImg_2" src="${n.popfile}" alt="">
         <div id="comment1">
-            울릉이는 실외배변을 하는 아이라 산책이 필수입니다..!
+            ${n.specialMark}
         </div>
     </div>
     <hr>
@@ -61,7 +61,7 @@
         </div>
         <div id="btn-area">
             <button id="adopt-step" onclick="location.href='<%=request.getContextPath()%>/'">입양절차</button>
-            <button id="adopt-apply" onclick="location.href='<%=request.getContextPath()%>/'">입양신청</button>
+            <button id="adopt-apply" onclick="location.href='${context}/adoptApply?dno=${n.desertionNo}'">입양신청</button>
         </div>
     </div>
     <hr>
