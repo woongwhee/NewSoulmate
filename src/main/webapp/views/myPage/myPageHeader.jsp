@@ -23,7 +23,7 @@
   <ul class="menu">
     <li><a href="#">회원정보 수정</a></li>
     <li><a href="#">작성게시글 확인</a></li>
-    <li><a href="#">보호소관계자<br>등록신청</a></li>
+    <li><a href="${context}/myPageShelter">보호소관계자<br>등록신청</a></li>
     <li><a href="#">회원탈퇴</a></li>
   </ul>
 
