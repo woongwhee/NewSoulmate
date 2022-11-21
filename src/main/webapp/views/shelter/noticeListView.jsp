@@ -8,7 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,6 +19,12 @@
     <title>보호소리스트</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/shelter/shelterList.css" rel="stylesheet">
+    <style>
+        .notice-photo{
+            width: 200px;
+            height: 300px;
+        }
+    </style>
 </head>
 <body>
 <%@ include file="/views/template/menubar.jsp"%>
@@ -32,25 +38,23 @@
             <input type="date" id="enddate" name="enddate">
             <p>(날짜는 접수일 기준입니다.)</p>
         </div>
-        <div id="shelter">
-            <select name="cityNo" id="cityNo" onchange="choice();">
-                <option value="0">--전체--</option>
 
-                <c:forEach items="${cList}" var="c">
-                <option value="${c.cityNo}">
-                    ${c.cityName}
-                </option>
-                </c:forEach>
-            </select>
-            <select name="villageNo" id="villageNo" onchange="choice();">
-                <option value="0">--전체--</option>
-            </select>
-            <select name="shelterNo" id="shelterNo">
-                <option value="0">--전체--</option>
-            </select>
-        </div>
-        <label for="bread">품종</label>
-        <select name="bread" id="bread">
+        <select name="cityNo" id="cityNo" onchange="choice();">
+            <option value="0">--전체--</option>
+        <c:forEach items="${cList}" var="c">
+            <option value="${c.cityNo}">${c.cityName}</option>
+        </c:forEach>
+        </select>
+        <select name="villageNo" id="villageNo" onchange="choiceShel();">
+            <option value="" selected disabled hidden></option>
+        </select>
+
+        <select name="shelterNo" id="shelterNo">
+            <option value="" selected disabled hidden></option>
+        </select>
+
+        <label for="breed">품종</label>
+        <select name="breed" id="breed">
             <option value="" selected disabled hidden></option>
             <option value="DOG">개</option>
             <option value="CAT">고양이</option>
@@ -77,21 +81,15 @@
         let request={
             bgndate:null,
             enddate:null,
-            sepcies:null,
+            species:null,
             cityNo:null,
             villageNo:null,
-            shelter:null,
+            shelterNo:null,
             state:'protect',
             pageNo:1,
             numberOfRows:40
         }
         $(()=> {
-            $.ajax({
-                url: "ShelterSearch",
-                success: function (result) {
-                    $("#shelter").html(result);
-                }
-            })
             noticeSearch();
             $('#bgndate').on('change', () => {
                 request.bgndate = $('#bgndate').val();
@@ -99,14 +97,17 @@
             $('#enddate').on('change', () => {
                 request.enddate = $('#enddate').val();
             });
-            $('#sepcies').on('change', () => {
-                request.sepcies = $('#sepcies').val();
+            $('#bread').on('change', () => {
+                request.sepcies = $('#breed').val();
             });
             $('#cityNo').on('change', () => {
                 request.cityNo = $('#cityNo').val();
+                request.villageNo = null;
+                request.shelterNo = null;
             });
             $('#villageNo').on('change', () => {
                 request.villageNo = $('#villageNo').val();
+                request.shelterNo = null;
             });
             $('#shelterNo').on('change', () => {
                 request.shelterNo = $('#shelterNo').val();
@@ -120,8 +121,9 @@
         })
 
         function noticeSearch() {
+            console.log(JSON.stringify(request))
             $.ajax({
-                url:'noticeSearch',
+                url:'${context}/noticeSearch',
                 type:'post',
                 data:{'request':JSON.stringify(request)},
                 success:(result)=>{
@@ -132,13 +134,14 @@
         function choice() {
             // 메인페이지 선택시 서브쿼리 삭제
             $("#villageNo").children().remove();
+            $("#shelterNo").children().remove();
             $.ajax({
                 url: "jqAjaxCity",
                 data: {
-                    city: $("#mainCategory").val()},
+                    city: $("#cityNo").val()},
                     success: function (result) {
                     console.log(result, "어라?");
-                    let str = '<option value="0">전체</option>';
+                    let str = '<option value="" selected disabled hidden></option>';
                     for (let i = 0; i < result.length; i++) {
                         str += "<option value="+result[i].villageNo+ ">" + result[i].villageName + "</option>"
                     }
@@ -149,17 +152,18 @@
         function choiceShel() {
             // 메인페이지 선택시 서브쿼리 삭제
             $("#shelterNo").children().remove();
+
             $.ajax({
                 url: "village.ax",
                 data: {
                     village: $("#villageNo").val()},
-                    success: function (result) {
-                        console.log(result, "어라?");
-                        let str = '<option value="0">전체</option>';
-                        for (let i = 0; i < result.length; i++) {
-                            str += "<option value="+result[i].shelter+ ">" + result[i].shelterName + "</option>"
-                        }
-                        $("#shelterNo").html(str);
+                success: function (result) {
+                    let str = '<option value="" selected disabled hidden></option>';
+                    for (let i = 0; i < result.length; i++) {
+                        str += "<option value="+result[i].shelterNo+ ">"
+                            + result[i].shelterName + "</option>"
+                    }
+                    $("#shelterNo").html(str);
                 }
             })
         }
