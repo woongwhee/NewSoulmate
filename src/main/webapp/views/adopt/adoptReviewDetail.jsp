@@ -16,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+
 </head>
 <body>
     <header><%@ include file="/views/template/menubar.jsp"%></header>
@@ -52,7 +53,6 @@
                         </c:if>
                     </td>
                     <%--댓글 작성자인경우 삭제 --%>
-
                 </tr>
             </c:forEach>
             <c:choose>
