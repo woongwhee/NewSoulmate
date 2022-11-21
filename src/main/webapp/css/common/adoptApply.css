@@ -1,0 +1,130 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+#content {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#adopt-form {
+    width: 100%;
+    height: auto;
+    padding: 20px 120px 20px 120px;
+    background-color: #eeeeee;
+}
+
+#form-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 450;
+    color: #39393a;
+    margin: 30px 0 70px 0px;
+}
+
+#user-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info-group {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #39393a;
+    text-align: left;
+    width: 200px;
+    height: 60px;
+    padding: 0 40px 0 40px;
+}
+
+#user-name,
+#animalNo,
+#user-phone,
+#wishdate {
+    width: 230px;
+    height: 40px;
+    border-radius: 5px;
+    border: lightgray solid 1px;
+    font-size: 20px;
+}
+
+#gender-btn-box {
+    width: 230px;
+}
+
+#user-genderM,
+#user-genderF {
+    width: 60px;
+    height: 30px;
+}
+
+#adopt-mind {
+    margin: 40px 40px 20px 40px;
+}
+
+#adopt-mind th {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #39393a;
+    text-align: left;
+}
+
+#adopt-mind textarea {
+    margin: 10px 0 20px 0;
+    width: 900px;
+    height: 150px;
+    border-radius: 5px;
+    border: lightgray solid 1px;
+    font-size: 18px;
+}
+
+#adopt-btn {
+    width: 400px;
+    height: 80px;
+    font-size: 25px;
+    background-color: #377477;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#btn-box3 {
+    text-align: center;
+}
+
+.label {
+    vertical-align: super;
+    font-size: 20px;
+}
+
+#apply-date {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#war-box {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: left;
+    color: #f45d48;
+    display: flex;
+    margin: 20px 0 20px 0;
+}
+
+.bi-info-circle{
+    width: 200px;
+    padding-left: 100px;
+    font-size: 50px;
+}
+
