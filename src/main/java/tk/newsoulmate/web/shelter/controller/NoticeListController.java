@@ -1,27 +1,25 @@
 package tk.newsoulmate.web.shelter.controller;
 
-import com.google.gson.Gson;
-import tk.newsoulmate.domain.vo.Village;
+import tk.newsoulmate.domain.vo.City;
+import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.web.shelter.service.ShelterService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet(name = "jqAjaxCity", value = "/jqAjaxCity")
-public class jqAjaxShelterServlet extends HttpServlet {
+@WebServlet(name = "noticeList", value = "/noticeList")
+public class NoticeListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long cityNo = Long.parseLong(request.getParameter("city"));
 
-        ArrayList<Village> vList2= new ShelterService().selectVillage(cityNo);
+        List<City> cList=new ShelterService().selectCity();
+//        List<Notice> nList=new ShelterService().selectNoticeList();
+        request.getRequestDispatcher("/views/shelter/noticeListView.jsp").forward(request,response);
 
 
-        response.setContentType("application/json; charset=UTF-8");
-        Gson gson = new Gson();
-        gson.toJson(vList2,response.getWriter());
     }
 
     @Override

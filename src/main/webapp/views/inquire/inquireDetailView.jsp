@@ -54,9 +54,10 @@
                     첨부파일된 파일 없음.
                     <% } else { %>
                     <!-- 첨부파일이 있는경우 -->
-                    <a href="${context}/${at.filePath + at.changeName}"
+                    <img src="${at.filePath}/${at.changeName}"/>
+                    <a href="${at.filePath}/${at.changeName}"
                        download="${at.originName}">
-                        ${at.orginName}
+                        ${at.originName}
                     </a>
                     <% } %>
                 </td>
@@ -65,7 +66,7 @@
                 <c:when test="${b.resultStatus eq 'Y'}">
 
                 </c:when>
-                <c:when test="${!empty loginUser AND loginUser.memberGreade eq MemberGreade.SITE_MANAGER}">
+                <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
                     <tr>
                         <th>답변작성</th>
                         <td>
