@@ -42,6 +42,8 @@ public class AdoptReviewInsertController extends HttpServlet {
             session.setAttribute("alertMsg","게시글작성 성공");
             response.sendRedirect(request.getContextPath()+"/adoptReList");
         }else{
+            session.setAttribute("erorrtMsg","게시글작성 실패");
+            response.sendRedirect(request.getContextPath()+"/adoptReList");
 
         }
 

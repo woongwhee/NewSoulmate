@@ -69,9 +69,9 @@
                     <tr>
                         <th>답변작성</th>
                         <td>
-                            <textarea id="replyInquireContent" rows="3" cols="50" style="resize: none;"></textarea>
+                            <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>
                         </td>
-                        <td><button onclick="insertInquireReply();">답변등록</button></td>
+                        <td><button id="replySubmit">답변등록</button></td>
 
                     </tr>
                 </c:when>
@@ -101,7 +101,40 @@
         </div>
 
     </div>
-
+    <c:if test="${!empty loginUser}">
+        <script>
+            $('#replySubmit').on('click',submitReply);
+            function submitReply(){
+                let replyJson=JSON.stringify({
+                    'memberNo':'${loginUser.memberNo}',
+                    'boardNo':'${b.boardNo}',
+                    'replyContent':$('#replyInput').val()
+                });
+                $.ajax({
+                    url :'${context}/replyInsert.bo',
+                    type:'post',
+                    data:{"reply":replyJson},
+                    success:(result)=>{
+                        if(result>0){
+                            alert('댓글등록성공');
+                        }else{
+                            alert('댓글등록실패',result)
+                        }
+                    },
+                    error:(result)=>{
+                        console.log(result)
+                    }
+                });
+            }
+            <c:if test="${loginUser.memberNo eq b.memberNo}">
+            $('#deleteBoard').click(()=>{
+                if(confirm('정말삭제하시겠습니까?')){
+                    location.href='${context}/adoptRevDelete?bno=${b.boardNo}'
+                }
+            })
+            </c:if>
+        </script>
+    </c:if>
     <%@include file="/views/template/footer.jsp"%>
 </body>
 </html>

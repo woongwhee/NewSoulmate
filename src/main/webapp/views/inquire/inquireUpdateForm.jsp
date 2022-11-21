@@ -90,7 +90,7 @@
         <br>
 
         <div align="center">
-          <a href="<%=request.getContextPath()%>/inquire" class="btn btn-secondary btn-sm">취소하기</a>
+          <a href="${context}/inquire" class="btn btn-secondary btn-sm">취소하기</a>
           <button type="submit" class="btn btn-secondary btn-sm">작성하기</button>
         </div>
 

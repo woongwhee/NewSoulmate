@@ -10,7 +10,7 @@
 <head>
     <title>회원가입 약관</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <%@include file="/views/template/styleTemplate.jsp"%>
     <%--<script src="/JS/member/memberSignupTerm.js"></script>--%>
 
 </head>

@@ -25,5 +25,4 @@ public enum MemberGrade {
         MemberGrade memberGrades [] = MemberGrade.values();
         return Arrays.asList(memberGrades).stream().filter(e->e.gradeName.equals(gradeName)).findAny().orElse(USER);
     }
-
 }

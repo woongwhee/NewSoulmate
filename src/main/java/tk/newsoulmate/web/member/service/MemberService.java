@@ -42,12 +42,19 @@ public class MemberService {
         Connection conn = getConnection();
         MemberDao md=new MemberDao();
         Member m= md.loginMember(memberId,memberPwd,conn);
+        if(m!=null){
+            int result=md.updateResent(m,conn);
+            if(result>0){
+                commit();
+            }else{
+                rollback();
+            }
+        }
         close();
         return m;
     }
 
     public Member findId(String memberName, String Email) {
-
         Connection conn = JDBCTemplet.getConnection();
         Member m = new MemberDao().findId(conn, memberName, Email);
         JDBCTemplet.close();
@@ -55,7 +62,6 @@ public class MemberService {
     }
 
     public Member findPwd(String memberName, String memberId, String Email) {
-
         Connection conn = getConnection();
         Member m = new MemberDao().findPwd(conn, memberName, memberId, Email);
         close();

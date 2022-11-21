@@ -64,4 +64,9 @@
         ENROLL_DATE = SYSDATE
         WHERE MEMBER_NO = ?
     </entry>
+    <entry key="updateResent">
+        UPDATE MEMBER
+        SET RESENT_CONNECTION = SYSDATE
+        WHERE MEMBER_NO = ?
+    </entry>
 </properties>

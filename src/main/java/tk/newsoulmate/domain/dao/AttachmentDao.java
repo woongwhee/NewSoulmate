@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
@@ -35,20 +37,9 @@ public class AttachmentDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-
             psmt.setInt(1, boardNo);
-
             rset = psmt.executeQuery();
-
-            if (rset.next()) {
-                at = new Attachment();
-                at.setFileNo(rset.getInt("FILE_NO"));
-                at.setOriginName(rset.getString("ORIGIN_NAME"));
-                at.setChangeName(rset.getString("CHANGE_NAME"));
-                at.setFilePath(rset.getString("FILE_PATH"));
-
-            }
-
+            at=boardAttachmentMapper(rset);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -59,8 +50,8 @@ public class AttachmentDao {
 
 
     }
-    public Attachment selectReplyAttachment(Connection conn, int replyNo) {
-        Attachment at = null;
+    public List<Attachment> selectReplyAttachment(Connection conn, int noticeNo) {
+        List<Attachment> aList=new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("selectReplyAttachment");
@@ -68,24 +59,19 @@ public class AttachmentDao {
         try {
             psmt = conn.prepareStatement(sql);
 
-            psmt.setInt(1, replyNo);
+            psmt.setInt(1, noticeNo);
             rset = psmt.executeQuery();
-            if (rset.next()) {
-                at = new Attachment();
-                at.setFileNo(rset.getInt("FILE_NO"));
-                at.setOriginName(rset.getString("ORIGIN_NAME"));
-                at.setChangeName(rset.getString("CHANGE_NAME"));
-                at.setFilePath(rset.getString("FILE_PATH"));
-
+            Attachment at=null;
+            while((at=replyAttachmentMapper(rset))!=null){
+                aList.add(at);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             close(rset);
             close(psmt);
         }
-        return at;
+        return aList;
 
 
     }
@@ -181,7 +167,31 @@ public class AttachmentDao {
 
     }
 
+    private Attachment replyAttachmentMapper(ResultSet rset) throws SQLException {
+        Attachment at=null;
+        if(rset.next()){
+           at=Attachment.replyAttachment(rset.getInt("FILE_NO"),
+                    rset.getInt("REPLY_NO"),
+                    rset.getString("ORIGIN_NAME"),
+                    rset.getString("CHANGE_NAME"),
+                    rset.getString("FILE_PATH"),
+                    rset.getDate("UPLOAD_DATE"));
 
+        }
+        return at;
+    }
+  private Attachment boardAttachmentMapper(ResultSet rset) throws SQLException {
+        Attachment at=null;
+        if(rset.next()){
+            at=Attachment.fileAttachment(rset.getInt("FILE_NO"),
+                    rset.getInt("BOARD_NO"),
+                    rset.getString("ORIGIN_NAME"),
+                    rset.getString("CHANGE_NAME"),
+                    rset.getString("FILE_PATH"),
+                    rset.getDate("UPLOAD_DATE"));
+        }
+        return at;
+    }
 
 
 

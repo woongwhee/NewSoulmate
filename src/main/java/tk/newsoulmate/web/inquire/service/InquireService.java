@@ -49,9 +49,7 @@ public class InquireService {
             close();
             return boardNo;
         }
-
         if(at!=null) b.setFileCount(1);
-        
         b.setBoardNo(boardNo);
         int result1 =new BoardDao().insertQnABoard(b, conn);
         int result2 = 1;

@@ -140,4 +140,22 @@ public class Member {
     public void setEnrollDate(Date enrollDate) {
         this.enrollDate = enrollDate;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Member{");
+        sb.append("memberNo=").append(memberNo);
+        sb.append(", memberId='").append(memberId).append('\'');
+        sb.append(", memberPwd='").append(memberPwd).append('\'');
+        sb.append(", memberName='").append(memberName).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", nickName='").append(nickName).append('\'');
+        sb.append(", memberGrade=").append(memberGrade);
+        sb.append(", shelterNo=").append(shelterNo);
+        sb.append(", resentConnection=").append(resentConnection);
+        sb.append(", enrollDate=").append(enrollDate);
+        sb.append('}');
+        return sb.toString();
+    }
 }

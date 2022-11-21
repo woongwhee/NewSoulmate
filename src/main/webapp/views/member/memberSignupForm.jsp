@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <%--<link href="css/memberSignupForm.css" rel="stylesheet">--%>
     <%--<script src="/JS/member/memberSignupForm.js"></script>--%>
-
+    <%@include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
@@ -109,8 +109,10 @@
 <%@include file="/views/template/footer.jsp"%>
 
 
-
-
+<%//todo 자바스크립트 파일 분리해줘요%>
+<script>
+    var context='${context}'
+</script>
 <script>
 
     // 메일 인증번호 - 완료
@@ -121,7 +123,7 @@
     function sendMail() {
         const memberMail2 = $("#memberMail").val();
         $.ajax({
-            url: "<%= request.getContextPath()%>/sendMail.do",
+            url:context+"/sendMail.do",
             data: { memberMail: memberMail2 },
             type: "get",
             success: function(data) {
@@ -170,7 +172,7 @@
         const inputValue = $("#authCode").val();
         if (mailCode != null) {
             $.ajax({
-                url: '<%= request.getContextPath()%>/checkAuth',
+                url: context+'/checkAuth',
                 type: 'get',
                 data: {authCode: inputValue},
                 success: (result)=> {
@@ -218,7 +220,6 @@
 
 
 
-
     let checkId = 0;
     let checkPwd = 0;
     let checkPwdRe = 0;
@@ -237,7 +238,7 @@
             let memberIds = $('#memberId').val();
             if(idReg.test(memberIds)){
                 $.ajax({
-                    url : '<%= request.getContextPath()%>/ajaxCheckId.do',
+                    url : context+'/ajaxCheckId.do',
                     type: 'get',
                     data : { memberId: memberIds },
                     dataType : 'json',

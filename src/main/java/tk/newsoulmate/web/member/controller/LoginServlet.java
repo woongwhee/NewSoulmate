@@ -12,10 +12,10 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         if (session.getAttribute("loginUser") != null) {
-            response.sendRedirect(request.getContextPath());
             request.getSession().setAttribute("errorMsg","이미 로그인한 유저 입니다.");
+            response.sendRedirect(request.getContextPath());
         } else {
             request.getRequestDispatcher("views/member/memberLoginForm.jsp").forward(request, response);
         }

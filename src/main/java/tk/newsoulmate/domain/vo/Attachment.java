@@ -8,17 +8,22 @@ public class Attachment {
 	private int boardNo;
 	private int replyNo;
 	private String originName;
+	private String boardTitle;
 	private String changeName;
 	private String filePath;
 	private Date uploadDate;
 	private int filelevel;
 	private String status;
 	
-	public Attachment() {
+	private Attachment() {
 		super();
 	}
 
-    public Attachment(String originName, String changeName, String filePath) {
+	public static Attachment getInstance(String originName, String changeName, String filePath){
+		Attachment at=new Attachment(originName,changeName,filePath);
+		return at;
+	}
+    private Attachment(String originName, String changeName, String filePath) {
 		this.originName=originName;
 		this.changeName=changeName;
 		this.filePath=filePath;
@@ -33,10 +38,9 @@ public class Attachment {
 	 * @param changeName
 	 * @param filePath
 	 * @param uploadDate
-	 * @param filelevel
 	 * @return
 	 */
-	public static Attachment fileAttachment(int fileNo, int boardNo, String originName, String changeName, String filePath, Date uploadDate, int filelevel) {
+	public static Attachment fileAttachment(int fileNo, int boardNo, String originName, String changeName, String filePath, Date uploadDate) {
 		Attachment at=new Attachment();
 		at.setFileNo(fileNo);
 		at.setBoardNo(boardNo);
@@ -44,7 +48,6 @@ public class Attachment {
 		at.setChangeName(changeName);
 		at.setFilePath(filePath);
 		at.setUploadDate(uploadDate);
-		at.setFilelevel(filelevel);
 		return at;
 	}
 
@@ -56,10 +59,9 @@ public class Attachment {
 	 * @param changeName
 	 * @param filePath
 	 * @param uploadDate
-	 * @param filelevel
 	 * @return
 	 */
-	public static Attachment replyAttachment(int fileNo, int replyNo, String originName, String changeName, String filePath, Date uploadDate, int filelevel) {
+	public static Attachment replyAttachment(int fileNo, int replyNo, String originName, String changeName, String filePath, Date uploadDate) {
 		Attachment at=new Attachment();
 		at.setFileNo(fileNo);
 		at.setBoardNo(replyNo);
@@ -67,10 +69,20 @@ public class Attachment {
 		at.setChangeName(changeName);
 		at.setFilePath(filePath);
 		at.setUploadDate(uploadDate);
-		at.setFilelevel(filelevel);
+		return at;
+	}
+	public static Attachment getThumnailInstance(int boardNo, String originName, String boardTitle, String changeName, String filePath){
+		Attachment at=new Attachment(boardNo, originName, boardTitle, changeName, filePath);
 		return at;
 	}
 
+	private Attachment(int boardNo, String originName, String boardTitle, String changeName, String filePath) {
+		this.boardNo = boardNo;
+		this.originName = originName;
+		this.boardTitle = boardTitle;
+		this.changeName = changeName;
+		this.filePath = filePath;
+	}
 
 	public int getBoardNo() {
 		return boardNo;
@@ -146,6 +158,14 @@ public class Attachment {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
 
 	@Override

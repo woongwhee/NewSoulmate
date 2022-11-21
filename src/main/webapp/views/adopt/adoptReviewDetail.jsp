@@ -104,7 +104,7 @@
         <c:if test="${loginUser.memberNo eq b.memberNo}">
             $('#deleteBoard').click(()=>{
                 if(confirm('정말삭제하시겠습니까?')){
-                location.href='${context}/adoptRevDelete?bno=${b.boardNo}'
+                    location.href='${context}/adoptRevDelete?bno=${b.boardNo}'
                 }
             })
         </c:if>

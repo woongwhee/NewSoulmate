@@ -5,6 +5,7 @@ import tk.newsoulmate.domain.vo.Request;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +46,29 @@ public class UploadUtil {
                 fos.write(buf, 0, len);
             }
             fos.flush();
-            at=new Attachment(filename,changeName,upfilesPath+folderPath);
+            at=Attachment.getInstance(filename,changeName,upfilesPath+folderPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return at;
+    }
+    public Attachment saveFiles(Part filePart, String folderPath) {
+        String realPath = this.uploadPath+ folderPath;
+        String changeName=rename(filePart.getSubmittedFileName());
+        String filePath = realPath +File.separator+ changeName;
+        Attachment at=null;
+        try(
+                InputStream fis = filePart.getInputStream();
+                OutputStream fos = new FileOutputStream(filePath);)
+        {
+            byte[] buf = new byte[1024];
+            int len = 0;
+            while((len = fis.read(buf, 0, 1024)) != -1)
+            {
+                fos.write(buf, 0, len);
+            }
+            fos.flush();
+            at=Attachment.getInstance(filePart.getSubmittedFileName(),changeName,upfilesPath+folderPath);
         } catch (IOException e) {
             e.printStackTrace();
         }

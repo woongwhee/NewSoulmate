@@ -271,5 +271,25 @@ public class MemberDao {
     }
 
 
+    public int updateResent(Member m,Connection conn) {
+        int result = 0;
 
+        PreparedStatement psmt = null;
+
+        String sql=prop.getProperty("updateResent");
+
+        try {
+            psmt=conn.prepareStatement(sql);
+            psmt.setInt(1,m.getMemberNo());
+
+            result = psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close(psmt);
+        }
+        return result;
+
+    }
 }

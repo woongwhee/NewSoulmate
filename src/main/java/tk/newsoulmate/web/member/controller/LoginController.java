@@ -19,12 +19,15 @@ public class LoginController extends HttpServlet {
 
         MemberService ms = new MemberService();
         Member loginUser = ms.loginMember(memberId, memberPwd);
+        System.out.println("왜안되?"+loginUser);
         if(loginUser == null) {
             request.getSession().setAttribute("errorMsg","로그인에 실패했습니다.");
             response.sendRedirect(request.getContextPath()+"/loginpage");
         } else {
+
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", loginUser);
+            session.setAttribute("alertMsg", "로그인성공");
             response.sendRedirect(request.getContextPath());
         }
     }
