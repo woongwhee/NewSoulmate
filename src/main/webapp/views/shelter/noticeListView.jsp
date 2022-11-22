@@ -18,62 +18,71 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>보호소리스트</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/shelter/shelterList.css" rel="stylesheet">
-    <style>
-        .notice-photo{
-            width: 200px;
-            height: 300px;
-        }
-    </style>
-</head>
+    <link href="<%=request.getContextPath()%>/css/shelter/noticeList.css" rel="stylesheet">
+</head>s
 <body>
 <%@ include file="/views/template/menubar.jsp"%>
 
 
 <div id="content">
-    <div id="search">
-        <label for="date">날짜</label>
-        <div id="date">
-            <input type="date" id="bgndate" name="bgndate">
-            <input type="date" id="enddate" name="enddate">
-            <p>(날짜는 접수일 기준입니다.)</p>
+    <div id="animal-search-box">
+        <div>
+            <table id="search-box-table">
+                <tr>
+                    <th>시도</th>
+                    <td>
+                        <select name="cityNo" id="cityNo" onchange="choice();">
+                            <option value="0">--전체--</option>
+                            <c:forEach items="${cList}" var="c">
+                                <option value="${c.cityNo}">${c.cityName}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                    <th>시군구</th>
+                    <td>
+                        <select name="villageNo" id="villageNo" onchange="choiceShel();">
+                            <option value="" selected disabled hidden>--전체--</option>
+                        </select>
+                    </td>
+                    <th>보호센터</th>
+                    <td>
+                        <select name="shelterNo" id="shelterNo">
+                            <option value="" selected disabled hidden>--전체--</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>품종</th>
+                    <td>
+                        <select name="breed" id="breed">
+                            <option value="" selected disabled hidden>--전체--</option>
+                            <option value="DOG">개</option>
+                            <option value="CAT">고양이</option>
+                            <option value="ANOTHER">기타</option>
+                        </select>
+                    </td>
+                    <th>중성화여부</th>
+                    <td>
+                        <select name="neuter" id="neuter">
+                            <option value="" selected disabled hidden>--전체--</option>
+                            <option value="Y">예</option>
+                            <option value="N">아니오</option>
+                            <option value="U">미상</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
         </div>
-
-        <select name="cityNo" id="cityNo" onchange="choice();">
-            <option value="0">--전체--</option>
-        <c:forEach items="${cList}" var="c">
-            <option value="${c.cityNo}">${c.cityName}</option>
-        </c:forEach>
-        </select>
-        <select name="villageNo" id="villageNo" onchange="choiceShel();">
-            <option value="" selected disabled hidden></option>
-        </select>
-
-        <select name="shelterNo" id="shelterNo">
-            <option value="" selected disabled hidden></option>
-        </select>
-
-        <label for="breed">품종</label>
-        <select name="breed" id="breed">
-            <option value="" selected disabled hidden></option>
-            <option value="DOG">개</option>
-            <option value="CAT">고양이</option>
-            <option value="ANOTHER">기타</option>
-        </select>
-        <label for="neuter">중성화여부</label>
-        <select name="neuter" id="neuter">
-            <option value="" selected disabled hidden></option>
-            <option value="Y">예</option>
-            <option value="N">아니오</option>
-            <option value="U">미상</option>
-        </select>
-        <button type="button" id="noticeSearch">조회</button>
+        <div id="noticeList-btn-box">
+            <button type="button" id="noticeSearch">조회</button>
+        </div>
     </div>
     <div id="notice-area">
 <%--        <c:forEach items="${nList}" var="n">--%>
-<%--        <div class="notice">--%>
-<%--            <img class="notice-photo" src="${n.popfile}" alt="" onclick="location.href='noticeDetail?dno=${n.desertionNo}'">--%>
-<%--        </div>--%>
+<%--            <div class="notice">--%>
+<%--                <img class="notice-photo" src="${n.popfile}" alt=""--%>
+<%--                     onclick="location.href='noticeDetail?dno=${n.desertionNo}'">--%>
+<%--            </div>--%>
 <%--        </c:forEach>--%>
     </div>
 </div>

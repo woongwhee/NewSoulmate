@@ -1,0 +1,82 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+select {
+    width: 160px;
+    /* 원하는 너비설정 */
+    height: 35px;
+    /* 여백으로 높이 설정 */
+    font-family: inherit;
+    /* 폰트 상속 */
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.notice-photo {
+    width: 270px;
+    height: 320px;
+}
+
+#animal-search-box {
+    height: 160px;
+    width: 1080px;
+    background-color: #f45c4828;
+    margin: auto;
+    padding: 10px 0 0 30px;
+    border-radius: 20px;
+    display: flex;
+}
+
+#search-box-table {
+    border-spacing: 0 20px;
+    padding-left: 20px;
+}
+
+#search-box-table th {
+    width: 100px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+#search-box-table td {
+    width: 100px;
+}
+
+#noticeList-btn-box {
+    width: 180px;
+    text-align: right;
+    padding-top: 20px;
+
+}
+
+#noticeSearch {
+    width: 90px;
+    height: 100px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #f45d48;
+    color: white;
+    font-size: 20px;
+}
+
+#notice-area {
+    width: 1080px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.notice {
+    margin: 40px;
+    width: 270px;
+}
