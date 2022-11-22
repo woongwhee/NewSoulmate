@@ -399,6 +399,7 @@ public class BoardDao {
 
         try {
             psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, loginUser.getMemberNo());
 
             rset = psmt.executeQuery();
             if (rset.next()) {
@@ -408,11 +409,10 @@ public class BoardDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            close(psmt);
             close(rset);
+            close(psmt);
         }
         return listCount;
-
 
     }
 
@@ -422,10 +422,37 @@ public class BoardDao {
         ResultSet rset = null;
         String sql = prop.getProperty("selectMyPageBoardList");
 
+        try {
+            psmt = conn.prepareStatement(sql);
+            if (pi.getCurrentPage() == 0) {
+                return list;
+            }
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
+
+            psmt.setInt(1,loginUser.getMemberNo());
+            psmt.setInt(2,startRow);
+            psmt.setInt(3,endRow);
+
+            rset = psmt.executeQuery();
+            while (rset.next()){
+                list.add(Board.selectMyPageBoardList(rset.getInt("BOARD_NO")
+                        , rset.getString("BOARD_TITLE")
+                        , rset.getDate("CREATE_DATE")
+                        , rset.getInt("READ_COUNT")
+                        , rset.getString("BOARD_NAME")));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+
         return list;
-
-
     }
+
 
 
 }

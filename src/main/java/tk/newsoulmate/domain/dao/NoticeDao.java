@@ -199,4 +199,8 @@ public class NoticeDao {
         }
         return result;
     }
+
+    public List<Notice> selectNoticeList(Connection conn, Notice n) {
+        return null;
+    }
 }

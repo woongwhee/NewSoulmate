@@ -8,11 +8,11 @@ DROP TABLE NewSoulmate.SUBSCRIPTION CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate."REPLY" CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate."CONFIRM" CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.SUPPORT CASCADE CONSTRAINTS PURGE ;
--- DROP TABLE NewSoulmate.TRANSFER CASCADE CONSTRAINTS PURGE ;
+/*DROP TABLE NewSoulmate.TRANSFER CASCADE CONSTRAINTS PURGE ;*/
 DROP TABLE NewSoulmate.BOARD CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.BOARD_TYPE CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.ATTACHMENT CASCADE CONSTRAINTS PURGE ;
--- DROP TABLE NewSoulmate.CARD CASCADE CONSTRAINTS PURGE ;
+/*DROP TABLE NewSoulmate.CARD CASCADE CONSTRAINTS PURGE ;*/
 DROP TABLE NewSoulmate.CITY CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.VILLAGE CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.CATEGORY CASCADE CONSTRAINTS PURGE ;
@@ -23,7 +23,15 @@ DROP SEQUENCE SQ_CARD_PK;
 DROP SEQUENCE SQ_COMMENT_PK;
 DROP SEQUENCE SQ_MEMBER_PK;
 DROP SEQUENCE SQ_VOLUNTEER_PK;
+DROP SEQUENCE SQ_SUPPORT_PK;
 DROP SEQUENCE SQ_ATTACHMENT_PK;
+<<<<<<<<< Temporary merge branch 1
+DROP SEQUENCE SQ_SUPPORT_PK;
+DROP SEQUENCE SQ_REPORT_PK;
+=========
+DROP SEQUENCE SQ_SUBSCRIPTION_PK;
+
+>>>>>>>>> Temporary merge branch 2
 
 
 create table ANIMAL
@@ -75,137 +83,137 @@ comment on column ANIMAL."orgNm" is '관할기관';
 comment on column ANIMAL."chargeNm" is '담당자';
 comment on column ANIMAL."officetel" is '담당자연락처';
 CREATE TABLE "MEMBER" (
-	"MEMBER_NO"	NUMBER
-	    CONSTRAINT PK_MEMBER PRIMARY KEY,
-	"MEMBER_ID"	VARCHAR2(30)
-        CONSTRAINT MEM_ID_NN NOT NULL
-	    CONSTRAINT MEM_ID_UQ UNIQUE,
-	"MEMBER_PWD"	VARCHAR2(30)
-        CONSTRAINT MEM_PWD_NN NOT NULL,
-	"MEMBER_NAME"	VARCHAR2(200)
-        CONSTRAINT MEM_NM_NN NOT NULL,
-	"PHONE"	VARCHAR2(20)
-        CONSTRAINT MEM_PH_NN NOT NULL,
-	"EMAIL"	VARCHAR2(30)
-        CONSTRAINT MEM_EM_NN NOT NULL,
-	"NICKNAME"	VARCHAR2(50)
-        CONSTRAINT MEM_NIK_NN NOT NULL
-	    CONSTRAINT MEM_NIK_UQ UNIQUE,
-	MEMBER_GRADE	NUMBER
-	    CONSTRAINT MEM_GRD_CK CHECK(MEMBER_GRADE in(0,1,2))
-        CONSTRAINT MEM_GRD_NN NOT NULL,
-	"MEMBER_STATUS"	VARCHAR2(1)	DEFAULT 'Y'
-        CONSTRAINT MEM_STU_CK CHECK(MEMBER_STATUS in('Y','N')),
-	"SHELTER_NO"	NUMBER	DEFAULT NULL,
-	RESENT_CONNECTION DATE DEFAULT SYSDATE,
-	ENROLL_DATE DATE DEFAULT SYSDATE
+                          "MEMBER_NO"	NUMBER
+                              CONSTRAINT PK_MEMBER PRIMARY KEY,
+                          "MEMBER_ID"	VARCHAR2(30)
+                              CONSTRAINT MEM_ID_NN NOT NULL
+                              CONSTRAINT MEM_ID_UQ UNIQUE,
+                          "MEMBER_PWD"	VARCHAR2(30)
+                              CONSTRAINT MEM_PWD_NN NOT NULL,
+                          "MEMBER_NAME"	VARCHAR2(200)
+                              CONSTRAINT MEM_NM_NN NOT NULL,
+                          "PHONE"	VARCHAR2(20)
+                              CONSTRAINT MEM_PH_NN NOT NULL,
+                          "EMAIL"	VARCHAR2(30)
+                              CONSTRAINT MEM_EM_NN NOT NULL,
+                          "NICKNAME"	VARCHAR2(50)
+                              CONSTRAINT MEM_NIK_NN NOT NULL
+                              CONSTRAINT MEM_NIK_UQ UNIQUE,
+                          MEMBER_GRADE	NUMBER
+                              CONSTRAINT MEM_GRD_CK CHECK(MEMBER_GRADE in(0,1,2))
+                              CONSTRAINT MEM_GRD_NN NOT NULL,
+                          "MEMBER_STATUS"	VARCHAR2(1)	DEFAULT 'Y'
+                              CONSTRAINT MEM_STU_CK CHECK(MEMBER_STATUS in('Y','N')),
+                          "SHELTER_NO"	NUMBER	DEFAULT NULL,
+                          RESENT_CONNECTION DATE DEFAULT SYSDATE,
+                          ENROLL_DATE DATE DEFAULT SYSDATE
 
 );
 
 CREATE TABLE "SHELTER" (
-	"SHELTER_NO"	NUMBER
-	        CONSTRAINT PK_SHELTER PRIMARY KEY,
-	"SHELTER_NAME"	VARCHAR2(50)
-	        CONSTRAINT ST_NM_NN NOT NULL ,
-	"SHELTER_EMAIL"	VARCHAR2(30),
-	"SHELTER_ADDRESS"	VARCHAR2(200),
-    "SHELTER_TEL"	VARCHAR2(20),
-	"SHELTER_LANDLINE"	VARCHAR2(20),
-	"COMPANY_NUM"	VARCHAR2(20),
-	"TRANSFER_ACCOUNT" VARCHAR2(20),
-	"CITY_NO" NUMBER,
-	"VILLAGE_NO" NUMBER
+                           "SHELTER_NO"	NUMBER
+                               CONSTRAINT PK_SHELTER PRIMARY KEY,
+                           "SHELTER_NAME"	VARCHAR2(50)
+                               CONSTRAINT ST_NM_NN NOT NULL ,
+                           "SHELTER_EMAIL"	VARCHAR2(30),
+                           "SHELTER_ADDRESS"	VARCHAR2(200),
+                           "SHELTER_TEL"	VARCHAR2(20),
+                           "SHELTER_LANDLINE"	VARCHAR2(20),
+                           "COMPANY_NUM"	VARCHAR2(20),
+                           "TRANSFER_ACCOUNT" VARCHAR2(20),
+                           "CITY_NO" NUMBER,
+                           "VILLAGE_NO" NUMBER
 );
 
 
 CREATE TABLE "CITY" (
-    "CITY_NO"	NUMBER
-        CONSTRAINT PK_CITY PRIMARY KEY ,
-    "CITY_NAME"	VARCHAR2(40)
-        CONSTRAINT CT_CN_NN NOT NULL
+                        "CITY_NO"	NUMBER
+                            CONSTRAINT PK_CITY PRIMARY KEY ,
+                        "CITY_NAME"	VARCHAR2(40)
+                            CONSTRAINT CT_CN_NN NOT NULL
 );
 
 CREATE TABLE "VILLAGE" (
-    "VILLAGE_NO"	NUMBER
-        CONSTRAINT PK_VILLAGE PRIMARY KEY ,
-    "CITY_NO"	NUMBER
-        CONSTRAINT VG_CN_NN NOT NULL,
-    "VILLAGE_NAME"	VARCHAR2(40)
-        CONSTRAINT VG_VNM_NN NOT NULL
+                           "VILLAGE_NO"	NUMBER
+                               CONSTRAINT PK_VILLAGE PRIMARY KEY ,
+                           "CITY_NO"	NUMBER
+                               CONSTRAINT VG_CN_NN NOT NULL,
+                           "VILLAGE_NAME"	VARCHAR2(40)
+                               CONSTRAINT VG_VNM_NN NOT NULL
 );
 
 
 CREATE TABLE "VOLUNTEER" (
-	"VOLUNTEER_NO"	NUMBER
-	    CONSTRAINT PK_VOLUNTEER PRIMARY KEY,
-	"SHELTER_NO"	NUMBER,
-	"MEMBER_NO"	NUMBER,
-	"START_DATE" DATE
-	    CONSTRAINT VL_SD_NN NOT NULL ,
-	"APPLY_DATE" DATE
-	    CONSTRAINT VL_AD_NN NOT NULL ,
-	"TEL_NUMBER" VARCHAR2(20)
-	    CONSTRAINT VL_TN_NN NOT NULL ,
-	"NAME"	VARCHAR2(20)
-	    CONSTRAINT VL_NM_NN NOT NULL
+                             "VOLUNTEER_NO"	NUMBER
+                                 CONSTRAINT PK_VOLUNTEER PRIMARY KEY,
+                             "SHELTER_NO"	NUMBER,
+                             "MEMBER_NO"	NUMBER,
+                             "START_DATE" DATE
+                                 CONSTRAINT VL_SD_NN NOT NULL ,
+                             "APPLY_DATE" DATE
+                                 CONSTRAINT VL_AD_NN NOT NULL ,
+                             "TEL_NUMBER" VARCHAR2(20)
+                                 CONSTRAINT VL_TN_NN NOT NULL ,
+                             "NAME"	VARCHAR2(20)
+                                 CONSTRAINT VL_NM_NN NOT NULL
 );
 
 CREATE TABLE "BREED" (
-	"BREED_NO"	NUMBER
-	    CONSTRAINT PK_BREED PRIMARY KEY ,
-	"BREED_NAME"	VARCHAR2(100),
-	"SPECIES_NO"	NUMBER
+                         "BREED_NO"	NUMBER
+                             CONSTRAINT PK_BREED PRIMARY KEY ,
+                         "BREED_NAME"	VARCHAR2(100),
+                         "SPECIES_NO"	NUMBER
 );
 
 CREATE TABLE "BOARD" (
-	"BOARD_NO"	NUMBER
-        CONSTRAINT PK_BOARD PRIMARY KEY,
-	"MEMBER_NO"	NUMBER
-	    CONSTRAINT BD_MN_NN NOT NULL,
-	"TYPE_NO"	NUMBER
-	    CONSTRAINT BD_TN_NN NOT NULL,
-	"BOARD_TITLE"	VARCHAR2(100)
-	    CONSTRAINT BD_BTT_NN NOT NULL,
-	"BOARD_CONTENT"	VARCHAR2(3000)
-	    CONSTRAINT BD_BC_NN NOT NULL,
-	"BOARD_STATUS" VARCHAR2(1) DEFAULT 'Y'
-	    CONSTRAINT BD_BS_CK CHECK (BOARD_STATUS in('Y','N'))
-	    CONSTRAINT BD_BS_NN NOT NULL,
-	"FILE_COUNT"	NUMBER DEFAULT 0,
-	"READ_COUNT"	NUMBER DEFAULT 0,
-	"CREATE_DATE"	DATE DEFAULT SYSDATE,
-	"ISSUE_DATE" DATE DEFAULT NULL,
-	"CATEGORY_NO"	NUMBER
+                         "BOARD_NO"	NUMBER
+                             CONSTRAINT PK_BOARD PRIMARY KEY,
+                         "MEMBER_NO"	NUMBER
+                             CONSTRAINT BD_MN_NN NOT NULL,
+                         "TYPE_NO"	NUMBER
+                             CONSTRAINT BD_TN_NN NOT NULL,
+                         "BOARD_TITLE"	VARCHAR2(100)
+                             CONSTRAINT BD_BTT_NN NOT NULL,
+                         "BOARD_CONTENT"	VARCHAR2(3000)
+                             CONSTRAINT BD_BC_NN NOT NULL,
+                         "BOARD_STATUS" VARCHAR2(1) DEFAULT 'Y'
+                             CONSTRAINT BD_BS_CK CHECK (BOARD_STATUS in('Y','N'))
+                             CONSTRAINT BD_BS_NN NOT NULL,
+                         "FILE_COUNT"	NUMBER DEFAULT 0,
+                         "READ_COUNT"	NUMBER DEFAULT 0,
+                         "CREATE_DATE"	DATE DEFAULT SYSDATE,
+                         "ISSUE_DATE" DATE DEFAULT NULL,
+                         "CATEGORY_NO"	NUMBER
 );
 
 CREATE TABLE "SUPPORT" (
-	"SUPPORT_NO"	NUMBER
-        CONSTRAINT PK_SUPPORT PRIMARY KEY ,
-	"SHELTER_NO"	NUMBER
-	    CONSTRAINT SP_SN_NN	NOT NULL,
-    "MEMBER_NO"	NUMBER
-        CONSTRAINT SP_MN_NN NOT NULL,
-    "MERCHANT_UID"  VARCHAR2(100)
-        CONSTRAINT SP_MU_NN NOT NULL,
-    "AMOUNT"	NUMBER
-        CONSTRAINT SP_AM_NN NOT NULL,
-    "STATUS"    VARCHAR2(20)
-        CONSTRAINT SP_ST_NN NOT NULL,
-	"PAY_TIME"	DATE DEFAULT SYSDATE,
-	"DP_WD" NUMBER CHECK(DP_WD IN('DP','WD')),
-	"WD_STATUS" VARCHAR2(1) CHECK ( WD_STATUS IN('Y','N') )
+                           "SUPPORT_NO"	NUMBER
+                               CONSTRAINT PK_SUPPORT PRIMARY KEY ,
+                           "SHELTER_NO"	NUMBER
+                               CONSTRAINT SP_SN_NN	NOT NULL,
+                           "MEMBER_NO"	NUMBER
+                               CONSTRAINT SP_MN_NN NOT NULL,
+                           "MERCHANT_UID"  VARCHAR2(100)
+                               CONSTRAINT SP_MU_NN NOT NULL,
+                           "AMOUNT"	NUMBER
+                               CONSTRAINT SP_AM_NN NOT NULL,
+                           "STATUS"    VARCHAR2(20)
+                               CONSTRAINT SP_ST_NN NOT NULL,
+                           "PAY_TIME"	DATE DEFAULT SYSDATE,
+                           "DP_WD" VARCHAR2(2) CHECK(DP_WD IN('DP','WD')),
+                           "WD_STATUS" VARCHAR2(1) CHECK ( WD_STATUS IN('Y','N') )
 );
 
 
 CREATE TABLE "TRANSFER" (
-	"TRANSFER_NO"	NUMBER
-	    CONSTRAINT PK_TRANSFER PRIMARY KEY ,
-	"BANK"	VARCHAR2(100)
-	    CONSTRAINT TS_BK_NN NOT NULL,
-	"NAME"	VARCHAR2(100)
-	    CONSTRAINT TS_NM_NN NOT NULL,
-	"ACCOUNT_NUMBER"	VARCHAR2(100)
-	    CONSTRAINT TS_AN_NN NOT NULL
+                            "TRANSFER_NO"	NUMBER
+                                CONSTRAINT PK_TRANSFER PRIMARY KEY ,
+                            "BANK"	VARCHAR2(100)
+                                CONSTRAINT TS_BK_NN NOT NULL,
+                            "NAME"	VARCHAR2(100)
+                                CONSTRAINT TS_NM_NN NOT NULL,
+                            "ACCOUNT_NUMBER"	VARCHAR2(100)
+                                CONSTRAINT TS_AN_NN NOT NULL
 );
 --
 -- CREATE TABLE "CARD" (
@@ -567,10 +575,6 @@ ALTER TABLE "GRADE_UP" ADD CONSTRAINT "FK_SHELTER_TO_GRADE_UP_1" FOREIGN KEY ( "
     REFERENCES "SHELTER" ("SHELTER_NO");
 ALTER TABLE "REPORT" ADD CONSTRAINT "RT_CN_FK" FOREIGN KEY ("CATEGORY_NO")
     REFERENCES "CATEGORY" ("CATEGORY_NO");
-ALTER TABLE "REPORT" ADD CONSTRAINT "RT_BN_FK" FOREIGN KEY ("BOARD_NO")
-    REFERENCES "BOARD" ("BOARD_NO");
-ALTER TABLE "REPORT" ADD CONSTRAINT "RT_RP_FK" FOREIGN KEY ("REPLY_NO")
-    REFERENCES "REPLY" ("REPLY_NO");
 -----TRIGGER-----------------------------
 --회원탈퇴트리거
 
@@ -671,7 +675,15 @@ CREATE SEQUENCE SQ_REPORT_PK
     NOCYCLE
     NOCACHE
     NOORDER;
-
+CREATE SEQUENCE SQ_SUBSCRIPTION_PK
+    INCREMENT BY 1
+    START WITH 10000
+    MINVALUE 1
+    MAXVALUE 99999
+    NOCYCLE
+    NOCACHE
+    NOORDER;
 COMMIT;
+
 
 

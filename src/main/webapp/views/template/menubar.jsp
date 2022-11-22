@@ -30,19 +30,19 @@
 
             <c:when test="${loginUser.memberGrade.USER}">
                 <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="${context}/myPage">마이페이지</a></li>
+                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
                 <li><a href="${context}/logout">로그아웃</a></li>
             </c:when>
             <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
                 <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
                 <li><a href="#">보호소페이지</a></li>
-                <li><a href="${context}/myPage">마이페이지</a></li>
+                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
                 <li><a href="${context}/logout">로그아웃</a></li>
                 </c:when>
                 <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
                 <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
                 <li><a href="#">관리자페이지</a></li>
-                <li><a href="${context}/myPage">마이페이지</a></li>
+                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
                 <li><a href="${context}/logout">로그아웃</a></li>
             </c:when>
 <%--                    </c:choose>--%>
@@ -73,7 +73,7 @@
                 <button class="dropdown-btn"><a href="#">입양</a></button>
                 <div class="dropdown-submenu">
                     <a href="${context}/adoptApply">입양신청</a>
-                    <a href="${context}/adoptReList">입양후기</a>
+                    <a href="${context}/adoptRevList">입양후기</a>
                     <a href="#">입양절차</a>
                 </div>
             </div>

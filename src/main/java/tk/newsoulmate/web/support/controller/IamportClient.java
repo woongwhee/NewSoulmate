@@ -1,4 +1,4 @@
-package tk.newsoulmate.client.iamport;
+package tk.newsoulmate.web.support.controller;
 
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -13,15 +13,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import tk.newsoulmate.client.dto.AccessTokenResponse;
-import tk.newsoulmate.client.dto.IamportResponse;
-import tk.newsoulmate.client.dto.PaymentDataResponse;
+import tk.newsoulmate.domain.vo.response.AccessTokenResponse;
+import tk.newsoulmate.domain.vo.response.IamportResponse;
+import tk.newsoulmate.domain.vo.response.PaymentDataResponse;
+import tk.newsoulmate.web.common.APIKeys;
 
 public class IamportClient {
 
 	private final String baseUrl = "https://api.iamport.kr";
-	private final String apiKey = "5125134043525072";
-	private final String secretKey = "8XJp5Mj3RrDqiwfzxU1UOqCI2CBfy4tT4AdnXdYZrDHkUNHJaDZkrpOU80sbKcjGYeW0y6euJNqfyWxA";
+	private final String apiKey;
+	private final String secretKey;
 
 	// 로그인 할 수 있는 apikey
 	// 토큰 인증방식이어서 access token
@@ -34,6 +35,8 @@ public class IamportClient {
 		this.gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.create();
+		this.apiKey= APIKeys.ImportApiKey;
+		this.secretKey=APIKeys.ImportSecretKey;
 	}
 
 	// 인증방식 : Session(Server) 방식 vs Token(Client) 방식

@@ -21,7 +21,7 @@
             </b> <br><br>
 
 
-            <form action="<%=request.getContextPath()%>/MyPageUpdate"  method="post" name="myPageInfo">
+            <form action="${context}/MyPageUpdate"  method="post" name="myPageInfo">
 
                 <div class="form-group">
                     <label for="">아이디</label>
@@ -260,7 +260,7 @@
         };
 
     $(".form-group>input").keyup(function () {
-        $("#myPageCheck").removeAttr("disabled");
+        //$("#myPageCheck").removeAttr("disabled");
     })
 
 

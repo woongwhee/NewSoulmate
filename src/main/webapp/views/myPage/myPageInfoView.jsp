@@ -1,14 +1,11 @@
 <%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-  Member loginUser = (Member)session.getAttribute("loginUser");
-  String memberPwd = (String)request.getAttribute("memberPwd");
 
-%>
 <html>
 <head>
     <title>회원정보 수정</title>
     <link href="<%=request.getContextPath()%>/css/mypage/mypageInfo.css" rel="stylesheet">
+  <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
   <header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
@@ -20,34 +17,42 @@
         </p>
 
         <!--비밀번호 잘못 입력시 뜨는 창-->
-        <p id="pwChkMsg">
+        <span id="pwChkMsg"></span>
 
-        </p>
-
-        <form id="" action="" method="post">
           <table>
             <tr>
-              <th><input type="password" name="" id="checkPwd" placeholder=" 비밀번호 입력" required></th>
+              <th><input type="password" name="" onkeyup="window.event.keyCode == 13 ? checkPwd() : ''" id="memberPw" placeholder=" 비밀번호 입력" required></th>
             </tr>
             <tr>
-              <th><button type="button" onclick="">확인</button></th>
+              <th><button type="button" class="asds"  onclick="checkPwd()">확인</button></th>
             </tr>
           </table>
-        </form>
       </div>
     </div>
   </div>
 <script>
-  $("#checkPwd").onclick(function (){
-    const pwChkMsg = document.querySelector("#pwChkMsg");
-    if(<%=memberPwd%> = $("#checkPwd").val()){  // 비밀번호 일치시
 
-      location.href='<%=request.getContextPath()%>/myPage';
 
-    }else{ // 비밀번호 입력 잘못했을시
-      pwReChkMsg.innerText = " * 비밀번호를 다시 한 번 입력해주세요."
+    function checkPwd() {
+      let pwChkMsg = document.querySelector("#pwChkMsg");
+      let memberPw = $("#memberPw").val();
+      $.ajax({
+        url: "${context}/ajaxCheckPwd",
+        type: "get",
+        data: {
+          memberPwd: memberPw
+        },
+        dataType: "json",
+        success: function (data) {
+          if (data == 1) {
+            location.href = '<%=request.getContextPath()%>/myPage';
+          } else {
+            pwChkMsg.innerText = " * 비밀번호를 다시 한 번 입력해주세요."
+          }
+        }
+      })
     }
-  })
+
 </script>
 </body>
 </html>

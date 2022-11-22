@@ -1,18 +1,14 @@
 package tk.newsoulmate.web.inquire.controller;
 
-import com.oreilly.servlet.MultipartRequest;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Board;
 
-import tk.newsoulmate.web.common.MyFileRenamePolicy;
 import tk.newsoulmate.web.common.UploadUtil;
 import tk.newsoulmate.web.inquire.service.InquireService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.File;
 import java.io.IOException;
 @WebServlet(name = "InquireInsertController", value = "/inquireInsert.bo")
 @MultipartConfig(
