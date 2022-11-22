@@ -81,28 +81,32 @@
 
     <entry key="checkPwd">
         SELECT
-            MEMBER_PWD
+        MEMBER_PWD
         FROM MEMBER
         WHERE MEMBER_NO = ?
     </entry>
 
-
+    <entry key="checkId">
+        SELECT
+        MEMBER_ID
+        FROM MEMBER
+        WHERE MEMBER_NO = ?
+    </entry>
 
     <entry key="manageMember">
         SELECT
         MEMBER_NO,
         MEMBER_ID,
         MEMBER_NAME,
-        NICKNAME,
         EMAIL,
         MEMBER_GRADE,
-        SHELTER_NO,
         ENROLL_DATE,
-        RESENT_CONNECTION
         FROM MEMBER
     </entry>
 
-    <entry key="manageMember2">
+
+
+    <entry key="selectMemberList">
         SELECT
         M.MEMBER_NO,
         M.MEMBER_ID,
@@ -122,8 +126,6 @@
         SELECT COUNT(*)
         FROM MEMBER
     </entry>
-
-
 
 
 

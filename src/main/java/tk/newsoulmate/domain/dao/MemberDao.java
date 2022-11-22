@@ -12,6 +12,7 @@ import java.util.*;
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
 
 public class MemberDao {
+
     private Properties prop = new Properties();
 
     public MemberDao() {
@@ -22,6 +23,7 @@ public class MemberDao {
             e.printStackTrace();
         }
     }
+
 
 
     public int insertMember(Member m, Connection conn) {
@@ -101,7 +103,7 @@ public class MemberDao {
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
         MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
-            Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
+        Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHELTER_NO");
             m.setShelterNo(shelterNo);
@@ -332,14 +334,42 @@ public class MemberDao {
         return memberPwd;
     }
 
-
-
-
     public ArrayList<Member> selectManageMember(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         ArrayList<Member> mList = new ArrayList<Member>();
-        String sql = prop.getProperty("manageMember2");
+        String sql = prop.getProperty("manageMember");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            while (rset.next()) {
+                Member m = new Member();
+                m.setMemberNo(rset.getInt("MEMBER_NO"));
+                m.setMemberId(rset.getString("MEMBER_ID"));
+                m.setMemberName(rset.getString("MEMBER_NAME"));
+                m.setEmail(rset.getString("EMAIL"));
+                MemberGrade memberGrade = MemberGrade.valueOfNumber(rset.getInt("MEMBER_GRADE"));
+                m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+                mList.add(m);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(psmt);
+            JDBCTemplet.close(rset);
+        }
+        return mList;
+    }
+
+
+
+
+    public ArrayList<Member> selectMemberList(Connection conn) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        ArrayList<Member> mList = new ArrayList<Member>();
+        String sql = prop.getProperty("selectMemberList");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -388,20 +418,6 @@ public class MemberDao {
         }
         return countMember;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

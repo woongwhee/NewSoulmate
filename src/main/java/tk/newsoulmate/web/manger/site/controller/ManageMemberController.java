@@ -15,7 +15,7 @@ public class ManageMemberController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         ManageService service= new ManageService();
-        ArrayList<Member> mList = service.selectManageMember();
+        ArrayList<Member> mList = service.selectMemberList();
         request.setAttribute("mList", mList);
         RequestDispatcher view = request.getRequestDispatcher("/views/manager/managerMemberList.jsp");
         view.forward(request, response);
