@@ -91,6 +91,7 @@
                 success:(result)=>{
                     if(result>0){
                         alert('댓글등록성공');
+                        location.reload();
                     }else{
                         alert('댓글등록실패',result)
                     }
