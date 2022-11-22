@@ -35,6 +35,12 @@
             SQ_COMMENT_PK.NEXTVAL
         FROM DUAL
     </entry>
+    <entry key="selectReplyMno">
+        SELECT
+            MEMBER_NO
+        FROM REPLY
+        WHERE REPLY_NO=?
+    </entry>
     <entry key="insertBoardReply">
         INSERT INTO REPLY
         (REPLY_NO,
@@ -55,5 +61,10 @@
         VALUES
         (?,
         ?,?,?,?)
+    </entry>
+    <entry key="deleteReply">
+        UPDATE REPLY
+            SET REPLY_STATUS ='N'
+        WHERE REPLY_NO=? AND MEMBER_NO=?
     </entry>
 </properties>

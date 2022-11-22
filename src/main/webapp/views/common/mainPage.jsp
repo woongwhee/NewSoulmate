@@ -16,15 +16,15 @@
 <body>
     <header><%@include file="/views/template/menubar.jsp"%></header>
 <script>
-    $(document).ready(function () {
-        $('.slider').slick({
-            autoplay: true,
-            autoplaySpeed: 2000,
-            slidesToShow: 5,
-            infinite: true,
-            dots: true,
-        });
-    });
+    // $(document).ready(function () {
+    //     $('.slider').slick({
+    //         autoplay: true,
+    //         autoplaySpeed: 2000,
+    //         slidesToShow: 20,
+    //         infinite: true,
+    //         dots: true,
+    //     });
+    // });
 </script>
     </script>
     <main>

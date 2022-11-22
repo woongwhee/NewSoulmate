@@ -27,38 +27,38 @@ public class SupportHistoryController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Object loginUser = req.getSession().getAttribute("loginUser");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Object loginUser = request.getSession().getAttribute("loginUser");
 
         if (loginUser == null) {
-            resp.sendRedirect(req.getContextPath());
+            response.sendRedirect(request.getContextPath());
         } else {
             Member member = (Member) loginUser;
             List<SupportCompleteResponse> supportList = new ArrayList<>();
             SupportPage pageInfo;
-            int page = Integer.parseInt(req.getParameter("page"));
+            int page = Integer.parseInt(request.getParameter("page"));
 
             try {
-                LocalDate startDate = LocalDate.parse(req.getParameter("startDate"));
-                LocalDate endDate = LocalDate.parse(req.getParameter("endDate"));
-                req.setAttribute("startDate", startDate);
-                req.setAttribute("endDate", endDate);
+                LocalDate startDate = LocalDate.parse(request.getParameter("startDate"));
+                LocalDate endDate = LocalDate.parse(request.getParameter("endDate"));
+                request.setAttribute("startDate", startDate);
+                request.setAttribute("endDate", endDate);
 
                 int totalCount = supportService.countOnlyDoneByDate(member, startDate, endDate.plusDays(1));
                 pageInfo = new SupportPage(page, totalCount);
                 supportList = supportService.findAllOnlyDoneByDate(member, startDate, endDate.plusDays(1), pageInfo);
             } catch (Exception ex) {
-                req.removeAttribute("startDate");
-                req.removeAttribute("endDate");
+                request.removeAttribute("startDate");
+                request.removeAttribute("endDate");
 
                 int totalCount = supportService.countOnlyDone(member);
                 pageInfo = new SupportPage(page, totalCount);
                 supportList = supportService.findAllOnlyDone(member, pageInfo);
             }
 
-            req.setAttribute("pageInfo", pageInfo);
-            req.setAttribute("supportList", supportList);
-            req.getRequestDispatcher("/views/support/supportHistory.jsp").forward(req, resp);
+            request.setAttribute("pageInfo", pageInfo);
+            request.setAttribute("supportList", supportList);
+            request.getRequestDispatcher("/views/support/supportHistory.jsp").forward(request, response);
         }
     }
 }

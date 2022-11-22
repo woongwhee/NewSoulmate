@@ -36,6 +36,7 @@
         ORDER BY PAY_TIME DESC
         ) T
         WHERE ROWNUM &lt;= ?
+        <!--<![CDATA[WHERE ROWNUM <= ?]]>-->
         )
         WHERE ROW_NUM &gt;= ?
     </entry>

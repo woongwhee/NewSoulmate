@@ -93,6 +93,24 @@ public class ReplyDao {
         return list;
     }
 
+    public int deleteReply(Connection conn, int rno, int memberNo) {
+        int result=0;
+        PreparedStatement psmt=null;
+        String sql= prop.getProperty("deleteReply");
+        try {
+            psmt=conn.prepareStatement(sql);
+            psmt.setInt(1,rno);
+            psmt.setInt(2,memberNo);
+            result= psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close(psmt);
+        }
+        return result;
+
+    }
+
     private Reply nomalReplyMapper(ResultSet rset) throws SQLException {
         Reply r=null;
         if(rset.next()){
@@ -106,5 +124,6 @@ public class ReplyDao {
         };
         return r;
     }
+
 
 }

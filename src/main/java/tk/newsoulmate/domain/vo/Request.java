@@ -208,5 +208,23 @@ public class Request {
         return url;
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Request{");
+        sb.append("serviceKey='").append(serviceKey).append('\'');
+        sb.append(", bgndate=").append(bgndate);
+        sb.append(", enddate=").append(enddate);
+        sb.append(", species=").append(species);
+        sb.append(", breedNo=").append(breedNo);
+        sb.append(", cityNo=").append(cityNo);
+        sb.append(", villageNo=").append(villageNo);
+        sb.append(", shelterNo=").append(shelterNo);
+        sb.append(", state='").append(state).append('\'');
+        sb.append(", neuter='").append(neuter).append('\'');
+        sb.append(", pageNo=").append(pageNo);
+        sb.append(", numberOfRows=").append(numberOfRows);
+        sb.append(", _type='").append(_type).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -48,9 +48,9 @@ body {
     background-color: #f8f5f2;
 }
 
-#adopt-btn-box {
-    width: 100%px;
-    height: 300px;
+#adopt-btn-box2 {
+    width: 100%;
+    height: 200px;
     text-align: center;
 }
 
@@ -77,15 +77,16 @@ body {
     display: inline-block;
 }
 
-#comment2 {
+#adopt_comment2 {
     padding: 10px;
     font-size: 18px;
     font-weight: 600;
     line-height: 190%;
     color: #39393a;
+    cursor: none;
 }
 
-#btn-area{
+#btn-area2{
     padding: 20px 200px 20px 200px
 }
 
@@ -105,4 +106,82 @@ body {
     font-weight: 600;
     margin-left: 100px;
     color: #39393a;
+}
+
+#reply-list{
+    width: 100%;
+    height: 600px;
+}
+
+#reply-line{
+    background-color: #bbe1e0;
+    height: 40px;
+}
+
+#replyTable{
+    width: 100%;
+    height: auto;
+    border-top: lightgray 1px solid;
+}
+
+#reply-list #replyWriter{
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 55px;
+}
+
+#reply-list td{
+    font-size: 20px;
+    padding-top: 20px;
+    padding-left: 55px;
+}
+s
+#replyWriter , #replyDate{
+    width: 450px;
+    padding-right: 50px;
+}
+
+#replyReport , #replyDelete{
+    cursor: pointer;
+    font-size: 25px;
+    width: 100px;
+}
+
+#replyReport{
+    text-align: right;
+}
+#replyDelete{
+    padding-left: 20px;
+    text-align: left;
+}
+#replyWriter {
+    text-align: left;
+}
+
+#replyDate{
+    text-align: right;
+}
+
+#replyInput{
+    padding: 10px 10px 10px 50px;
+}
+
+#replyApply{
+    width: 900px;
+    height: 70px;
+    border-radius: 5px;
+    font-size: 18px;
+    border: lightgray solid 1px;
+}
+
+#reply-btn{
+    width: 150px;
+    height: 70px;
+    background-color: #39393a;
+    color: white;
+    margin-left: 60px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
 }
