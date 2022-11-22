@@ -26,7 +26,7 @@
 
 </head>
 <body>
-<header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
+<%--<header><%@include file="/views/myPage/myPageHeader.jsp"%></header>--%>
 
     <div id="mPageList">
       <br>
@@ -35,7 +35,7 @@
       <table align="center" class="list-area">
         <thead>
           <tr style="text-align: center">
-          <th width="70">글번호</th>
+          <th width="70">NO</th>
           <th width="300">글제목</th>
           <th width="100">작성일시</th>
           <th width="100">조회수</th>
@@ -43,7 +43,7 @@
 
         </tr>
         </thead>
-        <tbody>
+        <tbody style="text-align: center">
         <% if(list==null || list.isEmpty()){ %>
         <tr id="tableEmpty">
           <td colspan="4" align="center">조회된 리스트가 없습니다</td>
@@ -74,6 +74,8 @@
                 <%--location.href = '${context}/' + typeName + 'Detail.bo?bno=' + bno;--%>
                 switch (typeName){
                     case "문의": location.href = '${context}/inquireDetail.bo?bno='+bno; break;
+                    case "입양후기": location.href = '${context}/adoptRevDetail.bo?bno='+bno; break;
+                    case "봉사후기": location.href = '${context}/......Detail.bo?bno='+bno; break;
                 }
 
             }
