@@ -76,37 +76,69 @@
 
     <hr>
 
-    <h2>보호소 리스트</h2>
-    <h4>후원할 보호소를 선택해 주세요</h4>
+
     <div class="shelter">
-        <table class="list-area">
-            <thead>
-            <tr>
-                <th>보호소명</th>
-                <th>보호소 주소</th>
-                <th>보호소 전화번호</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%for (Shelter s : sList) { %>
-            <tr>
-                <td style="display:none">
-                    <%= s.getShelterNo()%>
-                </td>
-                <td>
-                    <%= s.getShelterName() %>
-                </td>
-                <td>
-                    <%= s.getShelterAddress() %>
-                </td>
-                <td>
-                    <%= s.getShelterLandline() %>
-                </td>
-            </tr>
-            <% } %>
-            </tbody>
-        </table>
-        <br>
+
+        <h2>보호소 리스트</h2>
+        <h4>후원할 보호소를 선택해 주세요</h4>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            보호소 선택
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <table class="list-area" border="1">
+                            <thead>
+                            <tr>
+                                <th>보호소명</th>
+                                <th>보호소 주소</th>
+                                <th>보호소 전화번호</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%for (Shelter s : sList) { %>
+                            <tr>
+                                <td style="display:none">
+                                    <%= s.getShelterNo()%>
+                                </td>
+                                <td>
+                                    <%= s.getShelterName() %>
+                                </td>
+                                <td>
+                                    <%= s.getShelterAddress() %>
+                                </td>
+                                <td>
+                                    <%= s.getShelterLandline() %>
+                                </td>
+                            </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <br><br>
         <h3>선택된 보호소</h3>
         <span id="selected-shelter"></span>
     </div>
