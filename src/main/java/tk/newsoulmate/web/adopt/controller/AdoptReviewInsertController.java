@@ -40,10 +40,10 @@ public class AdoptReviewInsertController extends HttpServlet {
         int result=as.insertBoard(board);
         if(result>0){
             session.setAttribute("alertMsg","게시글작성 성공");
-            response.sendRedirect(request.getContextPath()+"/adoptReList");
+            response.sendRedirect(request.getContextPath()+"/adoptRevList");
         }else{
             session.setAttribute("erorrtMsg","게시글작성 실패");
-            response.sendRedirect(request.getContextPath()+"/adoptReList");
+            response.sendRedirect(request.getContextPath()+"/adoptRevList");
 
         }
 

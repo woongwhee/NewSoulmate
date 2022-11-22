@@ -3,7 +3,7 @@ package tk.newsoulmate.domain.vo.type;
 import java.util.Arrays;
 
 public enum BoardType {
-    VOLUNTEER(1,"volunteerRev"),ADOPT(2,"adoptRev"),REPORT(3,"report"),QNA(4,"inquier"),FaQ(5,"FaQ");
+    VOLUNTEER(1,"volunteerRev"),ADOPT(2,"adoptRev"),REPORT(3,"report"),QNA(4,"inquire"),FaQ(5,"FaQ");
     public int typeNo;
     public String boardName;
     BoardType(int typeNo,String boardName){

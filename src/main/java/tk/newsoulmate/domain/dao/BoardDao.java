@@ -38,7 +38,7 @@ public class BoardDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1, boardType.boardName);
+            psmt.setInt(1, boardType.typeNo);
             psmt.setInt(2, loginUser.getMemberNo());
             psmt.setInt(3, loginUser.getMemberGrade().gradeNumber);
             rset = psmt.executeQuery();
@@ -441,7 +441,7 @@ public class BoardDao {
                         , rset.getString("BOARD_TITLE")
                         , rset.getDate("CREATE_DATE")
                         , rset.getInt("READ_COUNT")
-                        , rset.getString("BOARD_NAME")));
+                        , rset.getInt("TYPE_NO")));
             }
 
         } catch (SQLException e) {

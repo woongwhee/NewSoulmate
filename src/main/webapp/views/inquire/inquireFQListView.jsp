@@ -91,13 +91,13 @@
 
             </tr>
             </thead>
-            <tbody>
+            <tbody align="center">
             <% if(list==null || list.isEmpty()){ %>
             <tr id="tableEmpty">
-                <td colspan="5" align="center">조회된 리스트가 없습니다</td>
+                <td colspan="5" >조회된 리스트가 없습니다</td>
             </tr>
             <% } else { %>
-            <% for(Board b : list) { %>
+                <% for(Board b : list) { %>
             <tr>
                 <td><%= b.getResultStatus() %></td>
                 <td><%= b.getBoardNo() %></td>
@@ -105,7 +105,7 @@
                 <td><%= b.getMemberName() %></td>
                 <td><%= b.getCreateDate() %></td>
             </tr>
-            <% } %>
+                <% } %>
             <% } %>
             </tbody>
 
@@ -121,7 +121,7 @@
 
                         // 요청할 url?키=밸류&키=밸류&키=밸류
                         // 물음표 뒤의 내용을 쿼리스트링이라고 부른다. => 직접 만들어서 넘겨야함.
-                        location.href = "<%=request.getContextPath()%>/inquireDetail.bo?bno=" + bno;
+                        location.href = "<%=request.getContextPath()%>/inquireDetail?bno=" + bno;
                     }
                 });
 
@@ -133,20 +133,20 @@
         <div align="center" class="paging-area">
 
             <% if(currentPage != 1) { %>
-                 <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+            <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
 
             <% } %>
 
             <% for(int i=startPage; i<=endPage; i++) { %>
-                    <% if(i != currentPage) {%>
-                            <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
-                    <% } else { %>
-                            <button disabled><%=i %></button>
-                    <% } %>
+            <% if(i != currentPage) {%>
+            <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
+            <% } else { %>
+            <button disabled><%=i %></button>
+            <% } %>
             <% } %>
 
             <% if(currentPage != maxPage) { %>
-                    <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+            <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
 
             <% } %>
 

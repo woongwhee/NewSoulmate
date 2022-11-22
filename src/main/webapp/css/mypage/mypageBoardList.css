@@ -2,6 +2,9 @@
 div{
     border: 1px solid black;
 }
-#Qcontent{
+#mPageList{
     text-align: center;
+    margin: auto;
+    margin-top: 15px;
+
 }

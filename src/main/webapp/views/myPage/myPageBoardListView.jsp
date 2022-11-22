@@ -35,7 +35,7 @@
       <table align="center" class="list-area">
         <thead>
           <tr style="text-align: center">
-          <th width="70">글번호</th>
+          <th width="70">NO</th>
           <th width="300">글제목</th>
           <th width="100">작성일시</th>
           <th width="100">조회수</th>
@@ -43,7 +43,7 @@
 
         </tr>
         </thead>
-        <tbody>
+        <tbody style="text-align: center">
         <% if(list==null || list.isEmpty()){ %>
         <tr id="tableEmpty">
           <td colspan="4" align="center">조회된 리스트가 없습니다</td>
@@ -55,8 +55,8 @@
           <td><%= b.getBoardTitle() %></td>
           <td><%= b.getCreateDate() %></td>
           <td><%= b.getReadCount() %></td>
-          <td class="bHidden"><%=b.getBoardName()%></td>
-<%--          <input type="hidden" class="boardType" value="<%=b.getBoardType().boardName%>"/> 인풋요소 사용할수 없다고함... 이것이 에러원인이였음--%>
+<%--          <td class="bHidden"><%=b.getBoardName()%></td>--%>
+          <input type="hidden" class="boardType" value="<%=b.getBoardType().boardName%>"/>
         </tr>
         <% } %>
         <% } %>
@@ -70,11 +70,8 @@
             // 해당 tr요소의 자손중에서 첫번째 td의 영역의 내용이 필요.
             if($(this).text()!=$("#tableEmpty").text()) { // 조회된 리스트가 없을경우 클릭방지
                 let bno = $(this).children().eq(0).text(); // 0 => b.getBoardNo()
-                let typeName = $(this).children().eq(4).text(); // 4 => b.getBoardType.boardName
-                <%--location.href = '${context}/' + typeName + 'Detail.bo?bno=' + bno;--%>
-                switch (typeName){
-                    case "문의": location.href = '${context}/inquireDetail.bo?bno='+bno; break;
-                }
+                let typeName = $(this).children().eq(4).val(); // 4 => b.getBoardType.boardName
+                location.href = '${context}/' + typeName + 'Detail?bno=' + bno;
 
             }
           });
