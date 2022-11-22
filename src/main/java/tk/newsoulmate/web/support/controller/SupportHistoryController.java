@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.PageInfo;
-import tk.newsoulmate.domain.vo.SupportCompleteResponse;
+import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
 import tk.newsoulmate.domain.vo.SupportPage;
 import tk.newsoulmate.web.support.service.SupportService;
 

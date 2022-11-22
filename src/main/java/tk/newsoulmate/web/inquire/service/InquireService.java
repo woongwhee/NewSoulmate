@@ -3,10 +3,13 @@ package tk.newsoulmate.web.inquire.service;
 import tk.newsoulmate.domain.dao.AttachmentDao;
 import tk.newsoulmate.domain.dao.BoardDao;
 import tk.newsoulmate.domain.dao.CategoryDao;
+import tk.newsoulmate.domain.dao.ReplyDao;
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.type.BoardType;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
@@ -143,4 +146,11 @@ public class InquireService {
 
     }
 
+
+    public List<Reply> selectReply(int boardNo) {
+        Connection conn=getConnection();
+        List<Reply> rList=new ReplyDao().selectReplyList(conn,boardNo);
+        close();
+        return rList;
+    }
 }

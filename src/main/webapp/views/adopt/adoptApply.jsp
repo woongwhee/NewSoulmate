@@ -33,17 +33,13 @@
     </div>
     <form action="<%=request.getContextPath()%>/adoptApplyInsert" method="post">
 
-        // login_no hidden으로 숨겨서 넘기기 loginUserNo -> 나중에 작업
         <input type="hidden" name="subRead" value="N">
         <div id="adopt-form">
             <div id="form-title">입양신청서</div>
             <div id="user-info">
                 <div class="info-group">이름</div>
                 <input type="text" id="user-name" name="name">
-                <!--
-            dno값이 있다면 dno를 서블릿으로 넘겨주고
-            dno값이 없다면 사용자가 입력한 animalNo를 서블릿으로 넘겨주기
-        -->
+
                 <div class="info-group">공고번호</div>
                 <% if(dno==null){%>
                 <input type="text" id="animalNo" name="animalNo">
@@ -94,12 +90,13 @@
             <div id="btn-box3">
                 <button id="adopt-btn">입양신청하기</button>
             </div>
+        </div>
     </form>
 </div>
 <script>
 
 </script>
 
-
 </body>
+    <%@include file="/views/template/footer.jsp"%>
 </html>

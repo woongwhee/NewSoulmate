@@ -7,10 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="tk.newsoulmate.domain.vo.*" %>
-<% Attachment at= (Attachment) request.getAttribute("at");
-    Board b=(Board) request.getAttribute("b");
-    Member loginUser = (Member)session.getAttribute("loginUser");
-%>
 <html>
 <head>
     <title>문의내역 상세보기</title>
@@ -43,22 +39,23 @@
             <tr>
                 <th>문의내용</th>
                 <td colspan="3">
-                    <p style="height:200px;"><%= b.getBoardContent() %></p>
+                    <p style="height:200px;">${b.boardContent}</p>
                 </td>
             </tr>
             <tr>
                 <th>첨부파일</th>
                 <td colspan="3">
-                    <% if(at == null) { %>
+                    <c:if test="${empty at}">
                     <!-- 첨부파일이 없는경우 -->
                     첨부파일된 파일 없음.
-                    <% } else { %>
+                    </c:if>
                     <!-- 첨부파일이 있는경우 -->
+                    <c:if test="${!empty at}">
                     <a href="${at.filePath}/${at.changeName}"
                        download="${at.originName}">
                         ${at.originName}
                     </a>
-                    <% } %>
+                    </c:if>
                 </td>
             </tr>
 <%--            <c:choose >--%>
@@ -72,7 +69,6 @@
 <%--                            <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>--%>
 <%--                        </td>--%>
 <%--                        <td><button id="replySubmit">답변등록</button></td>--%>
-
 <%--                    </tr>--%>
 <%--                </c:when>--%>
 <%--                <c:otherwise>--%>
@@ -83,45 +79,41 @@
 <%--                </c:otherwise>--%>
 <%--            </c:choose>--%>
 
-            <% if(b.getResultStatus().equals("Y")) {%>
 
-            <% } else if (loginUser != null && loginUser.getMemberGrade().isSITE_MANAGER()) { %>
-                    <tr>
-                        <th>답변작성</th>
-                        <td>
-                            <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>
-                        </td>
-                        <td><button id="replySubmit">답변등록</button></td>
-
-                    </tr>
-
-            <% } else { %>
-                    <tr>
-                        <th>답변</th>
-                        <td><%= b.getResultStatus()%></td>
-                    </tr>
-            <% } %>
-
+            <c:forEach var="r" items="${rList}">
+                <tr>
+                    <td>${r.replyWriter}</td>
+                    <td>${r.replyContent}</td>
+                    <td>
+                        <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
+                        <button class="bi bi-x-circle-fill" id="replyDelete"></button>
+                    </td>
+                </tr>
+            </c:forEach>
+            <c:if test="${empty rList}">
+                <tr>
+                    <th>답변작성</th>
+                    <td>
+                        <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>
+                    </td>
+                    <td><button id="replySubmit">답변등록</button></td>
+                </tr>
+            </c:if>
         </table>
 
         <br>
 
         <div align="center">
-            <a href="<%=request.getContextPath() %>/inquire" class="btn btn-secondary btn-sm">목록</a>
-
-            <% if(loginUser != null && loginUser.getMemberNo() == b.getMemberNo()) { %>
+            <a href="${context}/inquire" class="btn btn-secondary btn-sm">목록</a>
             <%-- if문 가능한건지 체크 확인해야함 --%>
             <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
-            <a href="<%=request.getContextPath() %>/inquireUpdateForm.bo?bno=<%=b.getBoardNo() %>" class="btn btn-secondary btn-sm">수정</a>
-            <a href="<%=request.getContextPath() %>/inquireDelete.bo?bno=<%=b.getBoardNo() %>" class="btn btn-danger btn-sm">삭제</a>
-
-            <% } %>
-
+            <a href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
+            <a href="${context}/inquireDelete.bo?bno=${b.boardNo}" class="btn btn-danger btn-sm">삭제</a>
         </div>
-
     </div>
-    <c:if test="${!empty loginUser}">
+
         <script>
+            <c:if test="${loginUser.memberGrade.SITE_MANAGER}">
             $('#replySubmit').on('click',submitReply);
             function submitReply(){
                 let replyJson=JSON.stringify({
@@ -135,9 +127,9 @@
                     data:{"reply":replyJson},
                     success:(result)=>{
                         if(result>0){
-                            alert('댓글등록성공');
+                            alert('답변등록성공');
                         }else{
-                            alert('댓글등록실패',result)
+                            alert('답변등록실패',result)
                         }
                     },
                     error:(result)=>{
@@ -145,15 +137,15 @@
                     }
                 });
             }
-            <c:if test="${loginUser.memberNo eq b.memberNo}">
+            </c:if>
             $('#deleteBoard').click(()=>{
                 if(confirm('정말삭제하시겠습니까?')){
                     location.href='${context}/adoptRevDelete?bno=${b.boardNo}'
                 }
             })
-            </c:if>
+
         </script>
-    </c:if>
+
     <%@include file="/views/template/footer.jsp"%>
 </body>
 </html>

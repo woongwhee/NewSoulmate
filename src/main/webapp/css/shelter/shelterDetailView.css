@@ -39,9 +39,11 @@ body {
 
 #name{
     color: #f45d48;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 600;
-    text-align: center;
+    text-align: left;
+    padding-left: 100px;
+
 }
 
 #map{
@@ -49,7 +51,7 @@ body {
     height: 500px;
 }
 
-button{
+#list-btn{
     width: 250PX;
     height: 60px;
     cursor: pointer;
