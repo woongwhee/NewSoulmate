@@ -15,26 +15,38 @@
 <head>
     <title>보호소 상세 페이지</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/shelter/shelterDetailView.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
-<h1><%=s.getShelterName()%></h1>
-<table>
-    <tr>
-        <th>보호소명</th>
-        <td><%=s.getShelterName()%></td>
-        <td>전화번호</td>
-        <td><%=s.getShelterLandline()%></td>
-    </tr>
-    <tr>
-        <th>주소</th>
-        <td colspan="3"><%=s.getShelterAddress()%></td>
-    </tr>
-</table>
 
-
-<!-- 지도를 표시할 div 입니다 -->
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="content">
+    <div id="name">
+        <%=s.getShelterName()%>
+    </div>
+    <table id="list-area">
+        <tr>
+            <th>보호소명</th>
+            <td>
+                <%=s.getShelterName()%>
+            </td>
+            <th>전화번호</th>
+            <td>
+                <%=s.getShelterLandline()%>
+            </td>
+        </tr>
+        <tr>
+            <th>주소</th>
+            <td colspan="3">
+                <%=s.getShelterAddress()%>
+            </td>
+        </tr>
+    </table>
+    <div id="map"></div>
+</div>
+<div id="listBtn">
+    <button id="list-btn" onclick="location.href='<%=request.getContextPath()%>/shelterList';">목록으로 돌아가기</button>
+</div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25a11b9a945a1d444011113fe431e818&libraries=services"></script>
 <script>

@@ -30,19 +30,9 @@
 </head>
 <body>
 <%@ include file="/views/template/menubar.jsp"%>
-<script>
-    $(function(){
-        $.ajax({
-            url: "ShelterSearch",
-            success: function (result) {
-                $("#shelter").html(result);
-            }
-        })
-    })
-</script>
-<div id="shelter"></div>
-<div id="content">
 
+<div id="content">
+    <div id="shelter"></div>
     <table class="list-area">
         <thead>
         <tr>
@@ -97,6 +87,16 @@
 
 
     </script>
+<script>
+    $(function(){
+        $.ajax({
+            url: "ShelterSearch",
+            success: function (result) {
+                $("#shelter").html(result);
+            }
+        })
+    })
+</script>
 
     <script>
         $(".list-area>tbody>tr").click(function(){
