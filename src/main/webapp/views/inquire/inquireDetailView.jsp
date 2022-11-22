@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="tk.newsoulmate.domain.vo.*" %>
+
 <html>
 <head>
     <title>문의내역 상세보기</title>
@@ -65,11 +66,12 @@
                     <td>${r.replyContent}</td>
                     <td>
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
-                        <button class="bi bi-x-circle-fill" id="replyDelete"></button>
+                        <button class="bi bi-x-circle-fill replyDelete" data-refNo="${r.replyNo}"></button>
                     </td>
                 </tr>
             </c:forEach>
-            <c:if test="${empty rList}">
+            <c:if test="${loginUser.memberGrade.SITE_MANAGER}">
+
                 <tr>
                     <th>답변작성</th>
                     <td>
@@ -77,6 +79,7 @@
                     </td>
                     <td><button id="replySubmit">답변등록</button></td>
                 </tr>
+
             </c:if>
         </table>
 
@@ -118,9 +121,27 @@
                 });
             }
             </c:if>
-            $('#replyDelete').click(()=>{
+            $('.replyDelete').click((e)=>{
+              let rno=  $(e.target).prop('data');
+                console.log(rno);
                 if(confirm('정말삭제하시겠습니까?')){
-                    location.href='${context}/replyDelete.bo?bno=${b.boardNo}'
+                    $.ajax({
+                        url:"replyDelete.bo",
+                        type:'post',
+                        data:{rno:rno},
+                        success:(result)=>{
+                            if(result>0){
+                                alert("댓 삭 성")
+                            location.reload()
+                            }else{
+                                alert("댓글삭제실패")
+                            }
+                        },
+                        error:(e)=>{console.log(e)}
+
+                    })
+
+
                 }
             })
             $('#boardDelete').click(()=>{
