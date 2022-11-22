@@ -12,7 +12,6 @@ import java.util.Properties;
 public  class APIKeys {
     public static Properties prop=new Properties();
     public static String NoticeKey;
-
     public static String ImportApiKey;
     public static String KakaoMapKey;
     public static String ImportSecretKey;
