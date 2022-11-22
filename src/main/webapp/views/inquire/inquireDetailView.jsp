@@ -18,7 +18,7 @@
 
     <div class="outer">
         <br>
-        <h2 style="text-align:center;">1:1문의</h2>
+        <h2 style="text-align:center;">Q&A</h2>
         <br>
         <hr>
         <br>
@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>${b.memberName}</td>
+                <td>${b.nickName}</td>
                 <th>작성일</th>
                 <td>${b.createDate}</td>
             </tr>
@@ -90,7 +90,7 @@
             <%-- if문 가능한건지 체크 확인해야함 --%>
             <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
             <a id=boardUpdate href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
-            <a id=boardDelete href="${context}/inquireDelete.bo?bno=${b.boardNo}" class="btn btn-danger btn-sm">삭제</a>
+            <a id=boardDelete class="btn btn-danger btn-sm">삭제</a>
         </div>
     </div>
 

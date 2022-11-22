@@ -324,7 +324,8 @@ public class BoardDao {
                         rset.getString("BOARD_TITLE"),
                         rset.getString("BOARD_CONTENT"),
                         rset.getString("MEMBER_ID"),
-                        rset.getDate("CREATE_DATE"));
+                        rset.getDate("CREATE_DATE"),
+                        rset.getString("NICKNAME"));
             }
 
         } catch (SQLException e) {

@@ -88,7 +88,7 @@
     
     <script>
         function doPageClick(currentPage) {
-            location.href = "${context}/adoptRevList.bo?currentPage="+currentPage;
+            location.href = "${context}/adoptRevList?currentPage="+currentPage;
         }
         $(function() {
             $(".list-area>tbody>tr").click(function(){

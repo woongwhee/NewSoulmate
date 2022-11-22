@@ -26,6 +26,8 @@ public class Board {
 
 
 
+
+
     private Board(){}
     /*
         새로운 생성자가 필요할시 생성자를 호출하게 하지말고 펙토리얼메소드를 호출하도록 작성할것
@@ -187,7 +189,7 @@ public class Board {
         b.setBoardNo(boardNo);
         b.setBoardTitle(boardTitle);
         b.setMemberNo(memberNo);
-        b.setMemberName(nickName);
+        b.setNickName(nickName);
         b.setIssueDate(issueDate);
         b.setCreateDate(createDate);
         b.setReadCount(readCount);
@@ -195,7 +197,7 @@ public class Board {
         return b;
     }
 
-    public static Board selectInquireBoard(int boardNo, String categoryName, String boardTitle, String boardContent, String memberId, Date createDate) {
+    public static Board selectInquireBoard(int boardNo, String categoryName, String boardTitle, String boardContent, String memberId, Date createDate, String nickName) {
         Board b = new Board();
         b.setBoardNo(boardNo);
         b.setCategoryName(categoryName);
@@ -203,7 +205,7 @@ public class Board {
         b.setBoardContent(boardContent);
         b.setMemberId(memberId);
         b.setCreateDate(createDate);
-
+        b.setNickName(nickName);
 
         return b;
     }
@@ -340,4 +342,7 @@ public class Board {
     public void setBoardName(String boardName) {
         this.boardName = boardName;
     }
+
+
+
 }

@@ -55,7 +55,6 @@
           <td><%= b.getBoardTitle() %></td>
           <td><%= b.getCreateDate() %></td>
           <td><%= b.getReadCount() %></td>
-<%--          <td class="bHidden"><%=b.getBoardName()%></td>--%>
           <input type="hidden" class="boardType" value="<%=b.getBoardType().boardName%>"/>
         </tr>
         <% } %>

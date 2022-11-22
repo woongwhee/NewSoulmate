@@ -21,32 +21,39 @@
 <body>
     <header><%@ include file="/views/template/menubar.jsp"%></header>
     <main>
-        <div class="review-content">
+        <div class="review-content" align="center">
+            <br>
+            <h2 style="text-align:center;">입양후기</h2>
+            <br>
+            <hr>
+            <br>
         <table class="table">
-            <tr><p>${b.boardTitle}</p></tr>
             <tr>
-                <td>입양일</td>
-                <td>
-                <fmt:formatDate value="${b.issueDate}" type="both" pattern="yyyy년 MM월dd 일"/>
-                </td>
-                <td colspan="2"><button type="button" class="bi bi-exclamation-circle-fill" data-toggle="modal" data-target="#reportModal" data-kind="board" data-ref="${b.boardNo}"></button>
+                <th width="300">후기제목</th>
+                <td colspan="2">${b.boardTitle}</td>
+            </tr>
+            <tr>
+                <th width="300">입양일</th>
+                <td><fmt:formatDate value="${b.issueDate}" type="both" pattern="yyyy년 MM월dd 일"/></td>
+                <td colspan="1">
+                    <button type="button" class="bi bi-exclamation-circle-fill" data-toggle="modal" data-target="#reportModal" data-kind="board" data-ref="${b.boardNo}"></button>
                     <c:if test="${!empty loginUser and loginUser.memberNo eq b.memberNo}"><button type="button" id="deleteBoard"  class="bi bi-x-circle-fill"></button></c:if>
                 </td>
             </tr>
             <tr>
-                <td>작성자</td>
-                <td>${b.nickName}</td>
-                <td></td>
-                <td></td>
+                <th width="300">작성자</th>
+                <td colspan="2">${b.nickName}</td>
+
             </tr>
             <tr>
-            <td colspan="6">${b.boardContent} </td>
+                <th width="300">후기내용</th>
+                <td colspan="2">${b.boardContent} </td>
             </tr>
             <c:forEach var="r" items="${rList}">
                 <tr>
                     <td>${r.replyWriter}</td>
                     <td>${r.replyContent}</td>
-                    <td>
+                    <td colspan="1">
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
                         <c:if test="${!empty loginUser and loginUser.memberNo eq r.memberNo}">
                         <button class="bi bi-x-circle-fill" id="replyDelete"></button>
@@ -57,11 +64,15 @@
             </c:forEach>
             <c:choose>
                 <c:when test="${!empty loginUser}">
-                    <tr><td>댓글작성</td>  <td colspan="3"><input type="text" id="replyInput"></td> <td><button type="button" id="replySubmit">작성</button></td></tr>
+                    <tr>
+                        <th width="300">댓글작성</th>
+                        <td colspan="1"><input type="text" id="replyInput"></td>
+                        <td><button type="button" id="replySubmit">작성</button></td>
+                    </tr>
                 </c:when>
                 <c:otherwise>
                 <tr>
-                    <td colspan="5">로그인한 회원만 작성할수 있습니다.</td>
+                    <td colspan="3">로그인한 회원만 작성할수 있습니다.</td>
                 </tr>
                 </c:otherwise>
             </c:choose>
