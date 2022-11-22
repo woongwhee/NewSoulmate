@@ -16,10 +16,9 @@ public class NoticeListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<City> cList=new ShelterService().selectCity();
+        request.setAttribute("cList",cList);
 //        List<Notice> nList=new ShelterService().selectNoticeList();
         request.getRequestDispatcher("/views/shelter/noticeListView.jsp").forward(request,response);
-
-
     }
 
     @Override

@@ -14,7 +14,10 @@ public class Member {
     private Long shelterNo;
     private Date resentConnection;//최근접속일
     private Date enrollDate;
+
+
     public Member() {
+        super();
     }
 
     public Member(String memberId, String memberPwd, String memberName, String nickName, String Phone, String Email) {
@@ -46,6 +49,19 @@ public class Member {
         this.memberName = memberName;
         this.email = email;
         this.memberGrade = memberGrade;
+        this.enrollDate = enrollDate;
+    }
+
+    public Member(int memberNo, String memberId, String memberName, String email, String nickName,
+                  MemberGrade memberGrade, Long shelterNo, Date resentConnection, Date enrollDate) {
+        this.memberNo = memberNo;
+        this.memberId = memberId;
+        this.memberName = memberName;
+        this.email = email;
+        this.nickName = nickName;
+        this.memberGrade = memberGrade;
+        this.shelterNo = shelterNo;
+        this.resentConnection = resentConnection;
         this.enrollDate = enrollDate;
     }
 
@@ -102,7 +118,7 @@ public class Member {
     }
 
     public void setPhone(String phone) {
-        phone = phone;
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -110,7 +126,7 @@ public class Member {
     }
 
     public void setEmail(String email) {
-        email = email;
+        this.email = email;
     }
 
     public String getNickName() {

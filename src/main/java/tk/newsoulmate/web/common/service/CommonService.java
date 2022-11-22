@@ -60,4 +60,22 @@ public class CommonService {
         commit();
         return result;
     }
+
+    /**
+     * 댓글 삭제용 메서드
+     * @param rno 댓글의 rno
+     * @param memberNo 로그인된 유저의 mno
+     * @return
+     */
+    public int deleteReply(int rno, int memberNo) {
+        Connection conn=getConnection();
+        int result=new ReplyDao().deleteReply(conn,rno,memberNo);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        commit();
+        return result;
+    }
 }

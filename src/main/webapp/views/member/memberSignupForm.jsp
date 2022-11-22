@@ -109,7 +109,7 @@
 <%@include file="/views/template/footer.jsp"%>
 
 
-<%//todo 자바스크립트 파일 분리해줘요%>
+<%//todo: 자바스크립트 파일 분리해줘요 넹%>
 <script>
     var context='${context}'
 </script>
@@ -231,7 +231,7 @@
 
         // 아이디 유효성검사 & 중복 검사 - 완료
         const memberId = document.querySelector("#memberId");
-        const idReg = /^[a-zA-Z0-9]{6,}/;
+        const idReg = /^[a-zA-Z0-9]{5,}/;
 
         $('#checkid').click(function() {
 
@@ -273,7 +273,7 @@
         memberPw.addEventListener("change", function() {
 
             const inputPw = memberPw.value;
-            const pwReg =  /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+            const pwReg = /^[a-zA-Z0-9@$!%*#?&]{6,}$/;
             const pwChkMsg = document.querySelector("#pwChkMsg");
 
             const inputPwRe = memberPwRe.value;
@@ -283,7 +283,7 @@
                 pwChkMsg.innerText = "사용 가능한 비밀번호 입니다."
                 checkPwd = 1;
             } else {
-                pwChkMsg.innerText = "8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지포함되어야합니다."
+                pwChkMsg.innerText = "사용 불가능한 비밀번호 입니다."
                 checkPwd = 0;
             }
             if(inputPwRe != ""){

@@ -16,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+
 </head>
 <body>
     <header><%@ include file="/views/template/menubar.jsp"%></header>
@@ -48,11 +49,10 @@
                     <td>
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
                         <c:if test="${!empty loginUser and loginUser.memberNo eq r.memberNo}">
-                        <button class="bi bi-x-circle-fill" onclick="deleteReply(${r.replyNo});"></button>
+                        <button class="bi bi-x-circle-fill" id="replyDelete"></button>
                         </c:if>
                     </td>
                     <%--댓글 작성자인경우 삭제 --%>
-
                 </tr>
             </c:forEach>
             <c:choose>
@@ -107,6 +107,7 @@
                 }
             })
         </c:if>
+        $('#replyDelete')
     </script>
     </c:if>
 </body>
