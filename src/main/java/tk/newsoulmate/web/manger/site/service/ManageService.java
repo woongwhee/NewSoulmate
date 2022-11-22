@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
-public class ManageMemberService {
+public class ManageService {
 
     private ManagerDao managerDao = new ManagerDao();
 

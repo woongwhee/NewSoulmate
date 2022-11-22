@@ -1,4 +1,4 @@
-package tk.newsoulmate.client.dto;
+package tk.newsoulmate.domain.vo.response;
 
 public class PaymentDataResponse {
 	private long amount;

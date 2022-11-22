@@ -1,7 +1,7 @@
 <%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.MemberGrade" %>
-<%@ page import="tk.newsoulmate.web.manger.site.service.ManageMemberService" %>
+<%@ page import="tk.newsoulmate.web.manger.site.service.ManageService" %>
 <%@ page import="tk.newsoulmate.web.member.service.MemberService" %><%--
   Created by IntelliJ IDEA.
   User: gram
@@ -13,7 +13,7 @@
 
 <%
     ArrayList<Member> mList = (ArrayList<Member>) request.getAttribute("mList");
-    ManageMemberService ms = new ManageMemberService();
+    ManageService ms = new ManageService();
 %>
 <html>
 <head>

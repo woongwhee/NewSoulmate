@@ -12,6 +12,7 @@ import java.util.Properties;
 public  class APIKeys {
     public static Properties prop=new Properties();
     public static String NoticeKey;
+
     public APIKeys(){
             String FilePath= APIKeys.class.getResource("/key/APIKey.xml").getPath();
             this.prop=new Properties();

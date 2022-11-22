@@ -3,19 +3,15 @@ package tk.newsoulmate.domain.dao;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.MemberGrade;
 import tk.newsoulmate.domain.vo.Shelter;
-import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.web.common.JDBCTemplet;
-import tk.newsoulmate.web.manger.site.service.ManageMemberService;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
