@@ -1,4 +1,4 @@
-package tk.newsoulmate.domain.vo;
+package tk.newsoulmate.domain.vo.type;
 
 public enum Species {
     DOG(417000),CAT(422400),ANOTHER(429900);

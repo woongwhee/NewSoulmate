@@ -1,6 +1,6 @@
 package tk.newsoulmate.domain.vo;
 
-import com.google.gson.annotations.SerializedName;
+import tk.newsoulmate.domain.vo.type.ReportType;
 
 public class Report {
     private int reportNo;

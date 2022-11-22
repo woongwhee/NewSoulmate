@@ -1,6 +1,6 @@
 package tk.newsoulmate.domain.dao;
 
-import tk.newsoulmate.domain.vo.BoardType;
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.domain.vo.Category;
 
 import java.io.FileInputStream;

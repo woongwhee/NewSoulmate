@@ -1,4 +1,4 @@
-<%@ page import="tk.newsoulmate.domain.vo.MemberGrade" %>
+<%@ page import="tk.newsoulmate.domain.vo.type.MemberGrade" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,11 +11,8 @@
 
 <div class="headcontainer">
     <div id="header_box">
-        <div>
-            <p> </p>
-        </div>
         <div class="navbar_logo">
-            <a href="${context}"><img src="${context}/image/logo.png"></a>
+            <a href="${context}"><img src="${context}/image/logo.png" alt="NewSoulmate환승주인"></a>
         </div>
 
         <div id="user">

@@ -5,6 +5,7 @@ import tk.newsoulmate.domain.dao.BoardDao;
 import tk.newsoulmate.domain.dao.CategoryDao;
 import tk.newsoulmate.domain.dao.ReplyDao;
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.type.BoardType;
 
 import java.sql.Connection;
 import java.util.ArrayList;

@@ -35,24 +35,24 @@
     });
 </script>
 
-<form action="${context}/volunteerRevInsert" method="post" id="adoptReview">
+<form action="${context}/adoptRevUpdateEnroll" method="post" id="adoptReview">
    <table width="100%">
        <tr>
            <td>제목</td>
-           <td><input type="text" id="boardTitle" name="boardTitle" style="width: 680px"></td>
+           <td><input type="text" id="boardTitle" name="boardTitle" style="width: 680px" value="${b.boardContent}"></td>
        </tr>
        <tr>
-           <td>봉사날짜</td>
-           <td><input type="Date" id="adoptDate" name="adoptDate" style="width: 680px"></td>
+           <td>입양날짜</td>
+           <td><input type="Date" id="adoptDate" name="adoptDate" style="width: 680px" value="${b.issueDate}"></td>
        </tr>
        <tr>
            <td>내용</td>
-           <td> <textarea name="boardContent" id="boardContent" style="width:680px; height:350px;"></textarea></td>
+           <td> <textarea name="boardContent" id="boardContent" style="width:680px; height:350px;" value="${b.boardContent}"></textarea></td>
        </tr>
        <tr>
            <td colspan="2">
-               <button type="submit" id="save">작성하기</button>
-               <button type="button" onclick="location.href = '${context}/volunteerRevList'">목록으로 돌아가기</button>
+               <button type="submit" id="save">수정하기</button>
+               <button type="button" onclick="location.href = '${context}/adoptReList.bo'">목록으로 돌아가기</button>
            </td>
        </tr>
    </table>
