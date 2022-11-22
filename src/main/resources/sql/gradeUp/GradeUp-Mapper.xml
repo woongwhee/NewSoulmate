@@ -6,4 +6,9 @@
         VALUES(SQ_GRADEUP_PK.NEXTVAL,?,?,?,?,?,?,DEFAULT,?)
     </entry>
 
+    <entry key="selectAllGrade">
+        SELECT *
+        FROM GRADE_UP
+    </entry>
+
 </properties>
