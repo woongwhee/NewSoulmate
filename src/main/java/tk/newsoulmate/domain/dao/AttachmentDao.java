@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Attachment;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -193,20 +194,50 @@ public class AttachmentDao {
         return at;
     }
 
+    public int selectFileNo(Connection conn){
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectFileNo");
+        int fileNo=0;
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset=psmt.executeQuery();
+            if (rset.next()) {
+                fileNo=rset.getInt("NEXTVAL");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return fileNo;
+    }
 
 
+    public int insertGradeAttachment(Attachment at, Connection conn) {
 
+        int result = 0;
+        PreparedStatement psmt = null;
 
+        String sql = prop.getProperty("insertGradeAttachment");
 
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,at.getFileNo());
+            psmt.setInt(2, at.getBoardNo());
+            psmt.setString(3, at.getOriginName());
+            psmt.setString(4, at.getChangeName());
+            psmt.setString(5, at.getFilePath());
+            result = psmt.executeUpdate();
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
 
+        return result;
 
-
-
-
-
-
-
-
-
+    }
 }
