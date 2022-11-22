@@ -11,7 +11,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdoptReviewDetailController", value = "/adoptReDetail")
+@WebServlet(name = "AdoptReviewDetailController", value = "/adoptRevDetail")
 public class AdoptReviewDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

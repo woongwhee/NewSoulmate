@@ -1,8 +1,6 @@
 package tk.newsoulmate.web.myPage.controller;
 
-import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.PageInfo;
+import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.web.myPage.service.MyPageService;
 
 import javax.servlet.*;
@@ -18,10 +16,12 @@ public class MyPageBoardListController extends HttpServlet {
 
         Member loginUser = (Member) request.getSession().getAttribute("loginUser");
         PageInfo pi;
+
         if (loginUser == null){
             pi = new PageInfo(0,1);
         } else {
             int listCount = new MyPageService().selectMyPageBoardListCount(loginUser);
+
             int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 //            pi = new PageInfo(listCount, currentPage);
             int pageLimit=10;
@@ -33,10 +33,12 @@ public class MyPageBoardListController extends HttpServlet {
                 endPage=maxPage;
             }
             pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
+
             ArrayList<Board> list = new MyPageService().selectMyPageBoardList(pi,loginUser);
             request.setAttribute("list", list);
         }
         request.setAttribute("pi",pi);
+
         request.getRequestDispatcher("/views/myPage/myPageBoardListView.jsp").forward(request,response);
 
     }
