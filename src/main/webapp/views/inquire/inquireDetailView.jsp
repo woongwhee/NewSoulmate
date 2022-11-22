@@ -54,18 +54,38 @@
                     첨부파일된 파일 없음.
                     <% } else { %>
                     <!-- 첨부파일이 있는경우 -->
-                    <a href="${context}/${at.filePath + at.changeName}"
+                    <a href="${at.filePath}/${at.changeName}"
                        download="${at.originName}">
-                        ${at.orginName}
+                        ${at.originName}
                     </a>
                     <% } %>
                 </td>
             </tr>
-            <c:choose >
-                <c:when test="${b.resultStatus eq 'Y'}">
+<%--            <c:choose >--%>
+<%--                <c:when test="${b.resultStatus eq 'Y'}">--%>
 
-                </c:when>
-                <c:when test="${!empty loginUser AND loginUser.memberGreade eq MemberGreade.SITE_MANAGER}">
+<%--                </c:when>--%>
+<%--                <c:when test="${!empty loginUser AND (loginUser.memberGreade eq MemberGreade.SITE_MANAGER)}">--%>
+<%--                    <tr>--%>
+<%--                        <th>답변작성</th>--%>
+<%--                        <td>--%>
+<%--                            <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>--%>
+<%--                        </td>--%>
+<%--                        <td><button id="replySubmit">답변등록</button></td>--%>
+
+<%--                    </tr>--%>
+<%--                </c:when>--%>
+<%--                <c:otherwise>--%>
+<%--                    <tr>--%>
+<%--                        <th>답변</th>--%>
+<%--                        <td><%= b.getResultStatus()%></td>--%>
+<%--                    </tr>--%>
+<%--                </c:otherwise>--%>
+<%--            </c:choose>--%>
+
+            <% if(b.getResultStatus().equals("Y")) {%>
+
+            <% } else if (loginUser != null && loginUser.getMemberGrade().isSITE_MANAGER()) { %>
                     <tr>
                         <th>답변작성</th>
                         <td>
@@ -74,14 +94,13 @@
                         <td><button id="replySubmit">답변등록</button></td>
 
                     </tr>
-                </c:when>
-                <c:otherwise>
+
+            <% } else { %>
                     <tr>
                         <th>답변</th>
                         <td><%= b.getResultStatus()%></td>
                     </tr>
-                </c:otherwise>
-            </c:choose>
+            <% } %>
 
         </table>
 

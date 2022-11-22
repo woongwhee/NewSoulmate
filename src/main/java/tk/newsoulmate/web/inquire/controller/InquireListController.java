@@ -24,6 +24,7 @@ public class InquireListController extends HttpServlet {
             pi=new PageInfo(0,1,categoryName);
         }else{
             int listCount = new InquireService().selectListCount(loginUser);
+
             int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 //            pi = new PageInfo(listCount,currentPage,categoryName);
 
@@ -36,6 +37,7 @@ public class InquireListController extends HttpServlet {
                 endPage=maxPage;
             }
             pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage,categoryName);
+
             ArrayList<Board> list = new InquireService().selectQnAList(pi,loginUser);
             request.setAttribute("list", list);
         }

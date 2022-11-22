@@ -90,7 +90,7 @@ public class ScheduleService {
         URL url = request.toUrl();
         System.out.println(url.toString());
         ResponseMapper responseMapper = null;
-        List<Notice> Nlist=new ArrayList<>();
+        List<Notice> nlist=new ArrayList<>();
         try {
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -99,15 +99,13 @@ public class ScheduleService {
             if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"), ResponseMapper.class);
-                Nlist = responseMapper.getResponse().getBody().getItems().getItem();
-                System.out.println(Nlist.get(0));
+                nlist = responseMapper.getResponse().getBody().getItems().getItem();
             }
             httpConn.disconnect();
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return Nlist;
+        return nlist;
 
     }
 }

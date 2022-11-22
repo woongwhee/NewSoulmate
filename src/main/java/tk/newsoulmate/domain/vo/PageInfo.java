@@ -41,6 +41,7 @@ public class PageInfo {
             if(endPage>maxPage){
                 endPage=maxPage;
             }
+
         }
         public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage, int endPage, String categoryName) {
             this.listCount = listCount;

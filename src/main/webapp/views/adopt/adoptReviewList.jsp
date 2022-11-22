@@ -45,7 +45,7 @@
         </thead>
         <tbody>
         <% if(list.isEmpty()){ %>
-        <tr>
+        <tr id="tableEmpty">
             <td colspan="6">조회된 게시글이 없습니다</td>
         </tr>
         <% } else { %>
@@ -92,8 +92,11 @@
         }
         $(function() {
             $(".list-area>tbody>tr").click(function(){
+                if($(this).text()!=$("#tableEmpty").text()){
+
                 let bno = $(this).children().eq(0).text();
-                location.href = '${context}/adoptReDetail?bno='+bno;
+                location.href = '${context}/adoptRevDetail?bno='+bno;
+                }
             });
         })
     </script>

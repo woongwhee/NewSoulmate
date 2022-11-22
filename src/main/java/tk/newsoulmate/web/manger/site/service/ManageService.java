@@ -1,6 +1,5 @@
 package tk.newsoulmate.web.manger.site.service;
 
-import tk.newsoulmate.domain.dao.ManagerDao;
 import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.vo.Member;
 

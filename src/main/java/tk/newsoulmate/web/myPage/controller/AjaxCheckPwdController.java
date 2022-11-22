@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "ajaxCheckPwdController", value = "/ajaxCheckPwd")
-public class ajaxCheckPwdController extends HttpServlet {
+public class AjaxCheckPwdController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");

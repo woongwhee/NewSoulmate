@@ -92,7 +92,7 @@
             </tr>
             </thead>
             <tbody>
-            <% if(list.isEmpty()){ %>
+            <% if(list==null || list.isEmpty()){ %>
             <tr id="tableEmpty">
                 <td colspan="5" align="center">조회된 리스트가 없습니다</td>
             </tr>
@@ -186,11 +186,6 @@
 
     </script>
     <br><br>
-
-
-
-
-
     <%@include file="/views/template/footer.jsp"%>
 </body>
 </html>
