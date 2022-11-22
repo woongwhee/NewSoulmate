@@ -107,13 +107,13 @@ public class Board {
         return b;
     }
 
-    public static Board selectMyPageBoardList(int boardNo, String boardTitle, Date createDate, int readCount, String boardName){
+    public static Board selectMyPageBoardList(int boardNo, String boardTitle, Date createDate, int readCount, int typeNo){
         Board b = new Board();
         b.setBoardNo(boardNo);
         b.setBoardTitle(boardTitle);
         b.setCreateDate(createDate);
         b.setReadCount(readCount);
-        b.setBoardName(boardName);
+        b.setBoardType(typeNo);
         return b;
     }
 

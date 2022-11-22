@@ -36,7 +36,7 @@ public class UploadUtil {
     public Attachment saveFiles(HttpServletRequest request, String filename, String folderPath,int fileSize){
         String realPath = this.uploadPath+folderPath;
         String changeName=rename(filename);
-        String filePath = realPath+File.separator+ changeName;
+        String filePath = realPath+"/"+ changeName;
         Attachment at=null;
         try(InputStream fis=request.getInputStream();
             OutputStream fos = new FileOutputStream(filePath)){
@@ -55,7 +55,7 @@ public class UploadUtil {
     public Attachment saveFiles(Part filePart, String folderPath) {
         String realPath = this.uploadPath+ folderPath;
         String changeName=rename(filePart.getSubmittedFileName());
-        String filePath = realPath +File.separator+ changeName;
+        String filePath = realPath +"/"+ changeName;
         Attachment at=null;
         try(
                 InputStream fis = filePart.getInputStream();
@@ -79,7 +79,7 @@ public class UploadUtil {
         LocalDateTime date = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String[] paths = formatter.format(date).split("/");
-        String result =File.separator+paths[0] + File.separator + paths[1] + File.separator + paths[2];
+        String result ="/"+paths[0] + "/" + paths[1] + "/" + paths[2];
         createFolders(result);
 
         return result;
@@ -87,7 +87,7 @@ public class UploadUtil {
     public boolean deleteFile(Attachment at){
         String FilePath=at.getFilePath();
         String fileName=at.getChangeName();
-        File file=new File(app.getRealPath(FilePath)+File.separator+fileName);
+        File file=new File(app.getRealPath(FilePath)+"/"+fileName);
         if(file.exists()){
             if(file.delete()){
                 return true;
@@ -100,7 +100,6 @@ public class UploadUtil {
 
     }
     private void createFolders(String paths) {
-
         File folders = new File(uploadPath, paths);
         if(!folders.exists())
             folders.mkdirs();
@@ -115,7 +114,7 @@ public class UploadUtil {
         //
         String ext=originName.substring(originName.indexOf("."));
         LocalDateTime date = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
         String ranNum=String.valueOf((int)((Math.random()*90000)+10000));
         return formatter.format(date)+ranNum+ext;
     }
