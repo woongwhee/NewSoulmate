@@ -2,6 +2,7 @@ package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.MemberGrade;
+import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.*;
@@ -364,11 +365,11 @@ public class MemberDao {
 
 
 
-    public ArrayList<Member> selectManageMember(Connection conn) {
+    public ArrayList<Member> selectMemberList(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         ArrayList<Member> mList = new ArrayList<Member>();
-        String sql = prop.getProperty("manageMember2");
+        String sql = prop.getProperty("selectMemberList");
 
         try {
             psmt = conn.prepareStatement(sql);

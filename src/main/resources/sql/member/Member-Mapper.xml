@@ -106,7 +106,7 @@
 
 
 
-    <entry key="manageMember2">
+    <entry key="selectMemberList">
         SELECT
         M.MEMBER_NO,
         M.MEMBER_ID,
