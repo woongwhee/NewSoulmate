@@ -1,8 +1,8 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.MemberGrade;
 import tk.newsoulmate.domain.vo.Shelter;
+import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
