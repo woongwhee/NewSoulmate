@@ -75,8 +75,7 @@ public class IamportClient {
 				HttpResponse.BodyHandlers.ofString()
 			).body();
 
-			// iamport에선 제이슨 형태로 데이터를 내려주는데
-			// 제이슨형태 문자열을 보내주는걸 객체로 변환하는 과정
+			// iamport에선 제이슨 형태로 데이터를 내려주는데 제이슨형태 문자열을 보내주는걸 객체로 변환하는 과정
 			// 데이터중에 amount 반환
 			// '{"code":123, "message":"success",...}' -> ObjectMapper or Gson 라이브러리 이용해서 객체를 만들거나
 			// 제네릭

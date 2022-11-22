@@ -14,6 +14,8 @@ public class Member {
     private Long shelterNo;
     private Date resentConnection;//최근접속일
     private Date enrollDate;
+
+
     public Member() {
         super();
     }
@@ -116,7 +118,7 @@ public class Member {
     }
 
     public void setPhone(String phone) {
-        phone = phone;
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -124,7 +126,7 @@ public class Member {
     }
 
     public void setEmail(String email) {
-        email = email;
+        this.email = email;
     }
 
     public String getNickName() {

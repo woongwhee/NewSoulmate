@@ -86,18 +86,5 @@
         WHERE MEMBER_NO = ?
     </entry>
 
-    <entry key="manageMember">
-        SELECT
-        MEMBER_NO,
-        MEMBER_ID,
-        MEMBER_NAME,
-        NICKNAME,
-        EMAIL,
-        MEMBER_GRADE,
-        SHELTER_NO,
-        ENROLL_DATE,
-        RESENT_CONNECTION
-        FROM MEMBER
-    </entry>
 
 </properties>

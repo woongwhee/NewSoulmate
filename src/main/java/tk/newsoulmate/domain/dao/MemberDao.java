@@ -11,7 +11,6 @@ import java.util.*;
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
 
 public class MemberDao {
-
     private Properties prop = new Properties();
 
     public MemberDao() {

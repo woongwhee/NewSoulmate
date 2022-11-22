@@ -20,5 +20,12 @@ public class ManageMemberService {
         return mList;
     }
 
+    public int selectCountMember() {
+        Connection conn = getConnection();
+        int countMember = managerDao.selectCountMember(conn);
+        close();
+        return countMember;
+    }
+
 
 }

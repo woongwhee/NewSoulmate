@@ -12,6 +12,7 @@
         VILLAGE_NO
         FROM SHELTER
         WHERE SHELTER_ADDRESS IS NOT NULL
+        ORDER BY SHELTER_NAME
     </entry>
 
     <entry key="ShelterListByVillage"> <!-- 둘다 선택했을때 -->
