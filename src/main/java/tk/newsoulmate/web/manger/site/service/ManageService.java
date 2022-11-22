@@ -1,6 +1,7 @@
 package tk.newsoulmate.web.manger.site.service;
 
 import tk.newsoulmate.domain.dao.ManagerDao;
+import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.vo.Member;
 
 
@@ -11,18 +12,18 @@ import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 public class ManageService {
 
-    private ManagerDao managerDao = new ManagerDao();
+    private MemberDao memberDao = new MemberDao();
 
     public ArrayList<Member> selectManageMember() {
         Connection conn = getConnection();
-        ArrayList<Member> mList = managerDao.selectManageMember(conn);
+        ArrayList<Member> mList = memberDao.selectManageMember(conn);
         close();
         return mList;
     }
 
     public int selectCountMember() {
         Connection conn = getConnection();
-        int countMember = managerDao.selectCountMember(conn);
+        int countMember = memberDao.selectCountMember(conn);
         close();
         return countMember;
     }
