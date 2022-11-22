@@ -39,13 +39,13 @@ public class AdoptReviewDeleteController extends HttpServlet {
             return;
         }
         session.setAttribute("alertMsg","게시글 삭제 성공");
-        response.sendRedirect(request.getContextPath()+"/adoptReList");
+        response.sendRedirect(request.getContextPath()+"/adoptRevList");
 
     }
 
     private static void error(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().setAttribute("errorMsg","잘못된접근입니다.");
-        response.sendRedirect(request.getContextPath()+"/adoptReList");
+        response.sendRedirect(request.getContextPath()+"/adoptRevList");
 
     }
 

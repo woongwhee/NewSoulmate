@@ -21,31 +21,27 @@
         <div id="user">
             <ul>
             <c:choose>
-            <c:when test="${empty loginUser}">
-                <li><a href="${context}/memberSignupTerm">회원가입</a></li>
-                <li><a href="${context}/loginpage">로그인</a></li>
-            </c:when>
-<%--                <c:otherwise>--%>
-<%--                    <c:choose>--%>
-
-            <c:when test="${loginUser.memberGrade.USER}">
-                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
-                <li><a href="${context}/logout">로그아웃</a></li>
-            </c:when>
-            <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
-                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="#">보호소페이지</a></li>
-                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
-                <li><a href="${context}/logout">로그아웃</a></li>
+                <c:when test="${empty loginUser}">
+                    <li><a href="${context}/memberSignupTerm">회원가입</a></li>
+                    <li><a href="${context}/loginpage">로그인</a></li>
                 </c:when>
-                <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
-                <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                <li><a href="#">관리자페이지</a></li>
-                <li><a href="${context}/MyPageInfo">마이페이지</a></li>
-                <li><a href="${context}/logout">로그아웃</a></li>
-            </c:when>
-<%--                    </c:choose>--%>
+                <c:when test="${loginUser.memberGrade.USER}">
+                    <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                    <li><a href="${context}/logout">로그아웃</a></li>
+                </c:when>
+                <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
+                    <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                    <li><a href="#">보호소페이지</a></li>
+                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                    <li><a href="${context}/logout">로그아웃</a></li>
+                    </c:when>
+                    <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
+                    <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
+                    <li><a href="#">관리자페이지</a></li>
+                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                    <li><a href="${context}/logout">로그아웃</a></li>
+                </c:when>
             </c:choose>
             </ul>
         </div>
@@ -62,9 +58,9 @@
             </div>
 
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="">유기동물</a></button>
+                <button class="dropdown-btn"><a href="${context}/noticeList">유기동물</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">동물목록</a>
+                    <a href="${context}/noticeList">동물목록</a>
                     <a href="${context}/shelterList">보호소</a>
                 </div>
             </div>
@@ -79,27 +75,23 @@
             </div>
 
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="#">봉사</a></button>
+                <button class="dropdown-btn"><a href="${context}/volunteerApply">봉사</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">봉사신청</a>
-                    <a href="#">봉사후기</a>
+                    <a href="${context}/volunteerApply">봉사신청</a>
+                    <a href="${context}/volunteerRevList">봉사후기</a>
                 </div>
             </div>
 
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="#">후원</a></button>
+                <button class="dropdown-btn"><a href="${context}/supportPaymentPage">후원</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">후원하기</a>
-                    <a href="#">후원내역</a>
+                    <a href="${context}/supportPaymentPage">후원하기</a>
+                    <a href="${context}/supportHistoryPage">후원내역</a>
                 </div>
             </div>
 
             <div class="dropdown">
                 <button class="dropdown-btn"><a href="${context}/inquire">고객센터</a></button>
-<%--                <div class="dropdown-submenu">--%>
-<%--                    <a href="#">자주묻는 질문</a>--%>
-<%--                    <a href="#">문의하기</a>--%>
-<%--                </div>--%>
             </div>
         </div>
     </nav>
