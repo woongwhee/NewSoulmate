@@ -1,9 +1,9 @@
 package tk.newsoulmate.web.myPage.service;
+import tk.newsoulmate.domain.dao.AttachmentDao;
 import tk.newsoulmate.domain.dao.BoardDao;
+import tk.newsoulmate.domain.dao.GradeUpDao;
 import tk.newsoulmate.domain.dao.MemberDao;
-import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.PageInfo;
+import tk.newsoulmate.domain.vo.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -56,5 +56,56 @@ public class MyPageService {
 
         return  memberPwd;
     }
+    public int gradeUp(GradeUp up, Attachment at){
+        Connection conn = getConnection();
+      int fileNo = new AttachmentDao().selectFileNo(conn);
+      if(fileNo == 0){
+          close();
+          return fileNo;
+      }
+      if(at!=null) up.setFileNo(fileNo);
+      int result1 = new GradeUpDao().insertGrade(up,conn);
+      int result2 = 1;
+      if(at!= null){
+          at.setFileNo(fileNo);
+          result2 = new AttachmentDao().insertGradeAttachment(at,conn);
+      }
+      if(fileNo >0 && result2 >0 && result1>0){
+          commit();
+      }else{
+          rollback();
+      }
+
+      close();
+
+      return fileNo*result1*result2;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

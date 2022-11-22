@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="insertGrade">
+        INSERT INTO GRADE_UP(GRADE_NO,MEMBER_NO,SHELTER_NO,FILE_NO,SHELTER_TEL,SHELTER_LANDLINE,SHELTER_COMP_NO,GRADE_STATUS,SHELTER_ADDRESS)
+        VALUES(SQ_GRADEUP_PK.NEXTVAL,?,?,?,?,?,?,DEFAULT,?)
+    </entry>
+
+</properties>

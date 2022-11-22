@@ -38,9 +38,42 @@
 
 <script>
 
-
-
+    <%
+      HttpSession ss=request.getSession();
+      String errorMsg = (String)ss.getAttribute("errorMsg");
+      if (errorMsg != null) {
+        ss.removeAttribute("errorMsg");
+    %>
+    alert("<%=errorMsg%>")
+    <%
+      }
+      errorMsg=(String)request.getAttribute("errorMsg");
+      if (errorMsg != null) {
+        request.removeAttribute("errorMsg");
+    %>
+    alert("<%=errorMsg%>")
+    <%
+      }
+    %>
+    <%
+      String alertMsg = (String)request.getAttribute("alertMsg");
+      if (alertMsg != null) {
+        request.removeAttribute("alertMsg");
+    %>
+    alert("<%=alertMsg%>");
+    <%
+      }
+      alertMsg=(String) ss.getAttribute("alertMsg");
+      if (alertMsg != null) {
+    %>
+    alert("<%=alertMsg%>");
+    <%
+        ss.removeAttribute("alertMsg");
+      }
+    %>
 </script>
+
+
 
 
 
