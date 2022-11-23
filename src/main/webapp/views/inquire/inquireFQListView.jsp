@@ -21,7 +21,7 @@
 <head>
     <title>고객센터 FAQ,Q&A</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css" rel="stylesheet">
 <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>--%>
 </head>
 <body>

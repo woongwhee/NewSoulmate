@@ -155,6 +155,18 @@
     cursor: pointer;
 }
 
+#memberName {
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#createDate {
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
 #titleQna {
     border-radius: 5px;
     border: none;
@@ -185,9 +197,18 @@ color: #00b0a2;
     margin-right: 10px;
 }
 
-#tableTh1, #tableTh2, #tableTh3 {
+#tableTh1, #tableTh2, #tableTh3, #tableTh4, #tableTh5 {
     padding-top: 20px;
 }
 
+/**/
+#textQnaWriting p {
+    margin-top: 20px;
+    overflow: auto;
+    border: none;
+    border-radius: 5px;
+    width: 700px;
+    height: 400px;
+}
 
 

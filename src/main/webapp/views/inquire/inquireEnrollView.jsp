@@ -18,7 +18,7 @@
 <head>
     <title>1:1 문의 등록페이지</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css" rel="stylesheet">
 
 </head>
 <body>
