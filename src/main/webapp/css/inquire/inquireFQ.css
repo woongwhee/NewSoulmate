@@ -1,47 +1,193 @@
-#Fcontent, h3, #FQ_bt, #Qcontent{
+#Fcontent, .topTextQna, #FQ_bt, #Qcontent, #topTextFna{
     text-align: center;
     margin: auto;
     margin-top: 15px;
 
 }
-#Fcontent div{
-    background-color: #f8f5f2;
-    width: 300px;
+
+#writingQna {
+    position: relative;
+    left: 390px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 80px;
     height: 30px;
-    line-height: 30px;
-    border-radius: 10px;
-    border: 1px solid darkgray;
+    background-color: #676767;
+    color: white;
     cursor: pointer;
+}
+
+#writingQna:hover {
+    background-color: #319493;
+     color: white;
+ }
+
+#tableQna {
+    border-collapse: collapse;
+    width: 860px;
+    margin: 0 auto;
+}
+
+#tableQna thead th {
+    font-size: 15px;
+    border-top: 1px solid rgb(203, 203, 203);
+    background-color: rgb(236, 236, 236);
+    padding: 10px;
     text-align: center;
+}
+
+#tableQna thead th:first-child {
+    padding: 0 10px;
+}
+
+#tableQna tbody td {
+    border-top: 1px solid rgb(203, 203, 203);
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#Fcontent div {
+    background-color: #f8f5f2;
+    width: 600px;
+    height: 40px;
+    line-height: 35px;
+    border-radius: 5px;
+    border: 1.5px solid darkgray;
+    cursor: pointer;
+    text-align: left;
     margin: auto;
     margin-top: 15px;
+    padding-left: 10px;
+    font-size: 15px;
 }
-#Fcontent p{
-    background-color: lightgray;
-    width: 300px;
+
+#Fcontent div:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+#Fcontent p {
+    background-color: rgb(236, 236, 236);
+    width: 600px;
     height: 100px;
     margin: auto;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px;
     box-sizing: border-box;
     display: none;
+    text-align: left;
+    padding: 10px;
+    font-size: 15px;
 }
-#faq_bt{
+
+#faq_bt {
     background-color: lightgray;
     color: black;
     border: 1px;
     border-radius: 5px;
-    height: 40px;
-    width: 150px;
+    height: 50px;
+    width: 190px;
+    font-size: 20px;
 }
 
-#qna_bt{
+#qna_bt {
     background-color: #f45d48;
     color: #f8f5f2;
     border: 1px;
     border-radius: 5px;
-    height: 40px;
-    width: 150px;
+    height: 50px;
+    width: 190px;
+    font-size: 20px;
 }
+
+.topTextQna, #topTextFna{
+    font-size: 25px;
+}
+
+.bi-patch-question-fill::before{
+    color: #f45d48;
+    font-size: 20px;
+}
+
+.bi-patch-exclamation-fill::before {
+    color:#319493;
+    font-size: 20px;
+}
+/*페이징바*/
+.btn-secondary {
+    background-color: #319493 ;
+    border: none;
+}
+
+/*inquireEnrollView에만 적용*/
+.outer {
+    width: 860px;
+    height: 785px;
+    margin: 0 auto;
+    background-color: #eee;
+}
+
+#textQnaWriting tr{
+    border-top: 10px;
+}
+
+#textQnaWriting span{
+    color: #f45d48;
+}
+
+#textQnaWriting textarea {
+    margin-top: 20px;
+    overflow: auto;
+    border: none;
+    border-radius: 5px;
+    width: 700px;
+    height: 400px;
+}
+
+#fileQna {
+    margin-top: 20px;
+}
+#categoryQna {
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#titleQna {
+    border-radius: 5px;
+    border: none;
+    width: 700px;
+    margin-top: 20px;
+}
+
+#contentQna {
+color: #00b0a2;
+}
+
+.outer hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1.5px solid rgba(0,0,0,.1);
+    width: 800px;
+}
+
+#buttonBoxQna {
+    position: relative;
+    right: 30px;
+}
+
+
+#cancelButton {
+    background-color: #f45d48;
+    margin-right: 10px;
+}
+
+#tableTh1, #tableTh2, #tableTh3 {
+    padding-top: 20px;
+}
+
 
 

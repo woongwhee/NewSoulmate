@@ -18,12 +18,14 @@
 <head>
     <title>1:1 문의 등록페이지</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
+
 </head>
 <body>
     <%@include file="/views/template/menubar.jsp"%>
     <div class="outer">
         <br>
-        <h2 style="text-align:center;">1:1 문의</h2>
+        <div class="topTextQna">1:1 문의</div>
         <br>
         <hr>
         <br>
@@ -31,11 +33,11 @@
             <!-- 카테고리, 제목, 내용, 첨부파일을 입력받고, 작성자의 회원번호는 hidden으로 넘기기. -->
 <%--            <input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>">--%>
             <input type="hidden" name="memberNo" value="${loginUser.memberNo}">
-            <table align="center">
+            <table align="center" id="textQnaWriting">
                 <tr>
-                    <th width="100">카테고리*</th>
+                    <th width="100">카테고리 <span>*</span></th>
                     <td width="500">
-                    <select name="categoryNo">
+                    <select name="categoryNo" id = "categoryQna">
 
                         <% for(Category c : list) { %>
                         <option value="<%=c.getCategoryNo() %>"><%= c.getCategoryName() %></option>
@@ -47,27 +49,27 @@
                 </tr>
 
                 <tr>
-                    <th>제목*</th>
-                    <td><input type="text" name="boardTitle" required></td>
+                    <th id="tableTh1">제목 <span>*</span></th>
+                    <td><input type="text" name="boardTitle" id = "titleQna" required></td>
 
                 </tr>
                 <tr>
-                    <th>문의내용*</th>
+                    <th id="tableTh2">문의내용 <span>*</span></th>
                     <td>
-                        <textarea name="boardContent" id="" cols="30" rows="10" style="resize: none" required></textarea>
+                        <textarea name="boardContent" id="" cols="30" rows="10" style="resize: none" id= "contentQna" required></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <th>첨부파일</th>
-                    <td><input type="file" name="upfile"></td>
+                    <th id="tableTh3">첨부파일</th>
+                    <td><input type="file" name="upfile" id="fileQna"></td>
                 </tr>
             </table>
 
             <br>
 
-            <div align="right" style="margin-right: 200px;">
+            <div align="right" id="buttonBoxQna">
 <%--                <button type="reset" class="btn btn-secondary btn-sm">취소하기</button>--%>
-                <a href="${context}/inquire" class="btn btn-secondary btn-sm">취소하기</a>
+                <a href="${context}/inquire" class="btn btn-secondary btn-sm" id="cancelButton">취소하기</a>
                 <button type="submit" class="btn btn-secondary btn-sm">작성하기</button>
 
             </div>
