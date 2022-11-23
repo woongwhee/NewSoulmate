@@ -22,7 +22,7 @@
 <div class="headcontainer">
   <div id="right_view">
     <div id="user_information">
-      <form action="" id="" method="post">
+      <form action="${context}/mGradeUpdate" method="post" enctype="multipart/form-data">
           <input type="hidden" name="memberNo" value="<%=memberNo%>">
         <div class="form-group">
             <h2>보호소 리스트</h2>
@@ -39,7 +39,6 @@
                             </button>
                         </div>
                         <div class="modal-body">
-
 
                             <table class="list-area" border="1">
                                 <thead>
@@ -83,7 +82,9 @@
 
         <div class="form-group">
             <h3>선택된 보호소</h3>
-            <span id="selected-shelter"></span>
+            <input id="selected-shelterNo" name="shelterNo" type="hidden">
+            <input id="selected-shelterName" readonly required>
+            <input id="selected-shelterAddress" name="shelterAddress" type="hidden">
         </div>
 
         <div class="form-group">
@@ -96,15 +97,15 @@
 
         <div class="form-group">
           <label for="">보호소 전화번호</label>
-          <input type="text" name="shelterLandLine" id="" placeholder="'-'빼고 입력">
+          <input type="text" name="shelterLandLine" id="" placeholder="'-'빼고 입력" required>
         </div>
 
         <div class="form-group">
           <label for="">보호소 관계자 전화번호</label>
-          <input type="text" name="shelterTel" id="" placeholder="'-'빼고 입력">
+          <input type="text" name="shelterTel" id="" placeholder="'-'빼고 입력" required>
         </div>
         <div class="form-file">
-          <input type="file" id="" name="첨부파일">
+          <input type="file" id="" name="upFile" required>
         </div>
         <button type="submit" onclick="" id="">변경사항 저장하기</button>
       </form>
@@ -116,7 +117,11 @@
     $(".list-area>tbody>tr").click(function () {
         let shelterNo = $(this).children().eq(0).text().trim();
         selectedShelterNo = shelterNo;
-        $("#selected-shelter").html($(this).children().eq(1).text().trim())
+        $("#selected-shelterNo").val(selectedShelterNo);
+        $("#selected-shelterName").val($(this).children().eq(1).text().trim())
+        $("#selected-shelterAddress").val($(this).children().eq(2).text().trim());
+
+        //$("#selected-shelter").html($(this).children().eq(1).text().trim())
     })
 
 

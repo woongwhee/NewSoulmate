@@ -21,23 +21,19 @@
 <body>
     <header><%@ include file="/views/template/menubar.jsp"%></header>
     <main>
-        <div class="review-content" align="center">
-            <br>
-            <h2 style="text-align:center;">입양후기</h2>
-            <br>
-            <hr>
-            <br>
+        <div class="review-content">
         <table class="table">
+            <tr><p>${b.boardTitle}</p></tr>
             <tr>
-                <th width="300">후기제목</th>
-                <td colspan="2">${b.boardTitle}</td>
-            </tr>
-            <tr>
-                <th width="300">입양일</th>
-                <td><fmt:formatDate value="${b.issueDate}" type="both" pattern="yyyy년 MM월dd 일"/></td>
-                <td colspan="1">
-                    <button type="button" class="bi bi-exclamation-circle-fill" data-toggle="modal" data-target="#reportModal" data-kind="board" data-ref="${b.boardNo}"></button>
-                    <c:if test="${!empty loginUser and loginUser.memberNo eq b.memberNo}"><button type="button" id="deleteBoard"  class="bi bi-x-circle-fill"></button></c:if>
+                <td>입양일</td>
+                <td>
+                <fmt:formatDate value="${b.issueDate}" type="both" pattern="yyyy년 MM월dd 일"/>
+                </td>
+                <td colspan="2"><button type="button" class="bi bi-exclamation-circle-fill" data-toggle="modal" data-target="#reportModal" data-kind="board" data-ref="${b.boardNo}"></button>
+                    <c:if test="${!empty loginUser and loginUser.memberNo eq b.memberNo}">
+                        <button type="button" id="deleteBoard"  class="bi bi-x-circle-fill"></button>
+                        <button type="button" id="updateBoard"  class="btn btn-sm btn-primary">수정하기</button>
+                    </c:if>
                 </td>
             </tr>
             <tr>
@@ -87,39 +83,67 @@
         <%@ include file="/views/template/footer.jsp"%>
     </footer>
     <c:if test="${!empty loginUser}">
-    <script>
-        $('#replySubmit').on('click',submitReply);
-        function submitReply(){
-            let replyJson=JSON.stringify({
-                'memberNo':'${loginUser.memberNo}',
-                'boardNo':'${b.boardNo}',
-                'replyContent':$('#replyInput').val()
-            });
-            $.ajax({
-                url :'${context}/replyInsert.bo',
-                type:'post',
-                data:{"reply":replyJson},
-                success:(result)=>{
-                    if(result>0){
-                        alert('댓글등록성공');
-                        location.reload();
-                    }else{
-                        alert('댓글등록실패',result)
+        <script>
+            $('#replySubmit').on('click',submitReply);
+            function submitReply(){
+                let replyJson=JSON.stringify({
+                    'memberNo':'${loginUser.memberNo}',
+                    'boardNo':'${b.boardNo}',
+                    'replyContent':$('#replyInput').val()
+                });
+                $.ajax({
+                    url :'${context}/replyInsert.bo',
+                    type:'post',
+                    data:{"reply":replyJson},
+                    success:(result)=>{
+                        if(result>0){
+                            alert('댓글등록성공');
+                            location.reload();
+                        }else{
+                            alert('댓글등록실패',result)
+                        }
+                    },
+                    error:(result)=>{
+                        console.log(result)
                     }
-                },
-                error:(result)=>{
-                    console.log(result)
+                });
+            }
+            $('.replyDelete').click((e)=>{
+                let rno=  $(e.target).attr('ref');
+                console.log(rno);
+                console.log(e.target);
+                console.log(e.target);
+                console.log($(e.target));
+                if(confirm('정말삭제하시겠습니까?')){
+                    $.ajax({
+                        url:"replyDelete.bo",
+                        type:'post',
+                        data:{rno:rno},
+                        success:(result)=>{
+                            if(result>0){
+                                alert("댓 삭 성")
+                                location.reload()
+                            }else{
+                                alert("댓글삭제실패")
+                            }
+                        },
+                        error:(e)=>{console.log(e)}
+
+                    })
+
+
                 }
-            });
-        }
+            })
         <c:if test="${loginUser.memberNo eq b.memberNo}">
             $('#deleteBoard').click(()=>{
                 if(confirm('정말삭제하시겠습니까?')){
-                    location.href='${context}/adoptRevDelete?bno=${b.boardNo}'
+                    location.href='${context}/adoptRevDelete?bno=${b.boardNo}';
                 }
-            })
+            });
+            $('#updateBoard').click(()=>{
+                location.href='${context}/adoptRevUpdate?bno=${b.boardNo}';
+            });
         </c:if>
-        $('#replyDelete')
     </script>
     </c:if>
 </body>

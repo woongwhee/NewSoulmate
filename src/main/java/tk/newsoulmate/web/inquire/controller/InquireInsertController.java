@@ -31,7 +31,7 @@ public class InquireInsertController extends HttpServlet {
                 UploadUtil uploadUtil = UploadUtil.create(request.getServletContext());
                 at = uploadUtil.saveFiles(p, uploadUtil.createFilePath());
             }
-            int result=new InquireService().insertInquire(b,at);
+            int result = new InquireService().insertInquire(b,at);
             if(result>0){
                 request.getSession().setAttribute("alertMsg","문의작성 성공");
                 response.sendRedirect(request.getContextPath()+"/inquire");

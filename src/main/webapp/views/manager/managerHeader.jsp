@@ -15,7 +15,7 @@
             <p></p>
         </div>
         <div id="user">
-            <a href="#">로그아웃</a>
+            <a href="#" id="logout">로그아웃</a>
             <!--로그아웃 클릭시 로그아웃처리된 상태로 메인화면ㄱㄱ-->
         </div>
     </div>
@@ -26,7 +26,7 @@
                 <button class="dropdown-btn"><a href="#">회원관리</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">회원리스트</a>
-                    <a href="#">보호소 관계자 신청</a>
+                    <a href="${context}/manageGrade">보호소 관계자 신청</a>
                 </div>
             </div>
         </li>
@@ -43,6 +43,42 @@
         </div>
     </div>
 </div>
+<script>
+    <%
+  HttpSession ss=request.getSession();
+  String errorMsg = (String)ss.getAttribute("errorMsg");
+  if (errorMsg != null) {
+    ss.removeAttribute("errorMsg");
+%>
+    alert("<%=errorMsg%>")
+    <%
+      }
+      errorMsg=(String)request.getAttribute("errorMsg");
+      if (errorMsg != null) {
+        request.removeAttribute("errorMsg");
+    %>
+    alert("<%=errorMsg%>")
+    <%
+      }
+    %>
+    <%
+      String alertMsg = (String)request.getAttribute("alertMsg");
+      if (alertMsg != null) {
+        request.removeAttribute("alertMsg");
+    %>
+    alert("<%=alertMsg%>");
+    <%
+      }
+      alertMsg=(String) ss.getAttribute("alertMsg");
+      if (alertMsg != null) {
+    %>
+    alert("<%=alertMsg%>");
+    <%
+        ss.removeAttribute("alertMsg");
+      }
+    %>
+
+</script>
 
 </body>
 </html>

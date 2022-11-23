@@ -23,7 +23,7 @@
     <title>작성게시글 확인</title>
     <link href="${context}/css/mypage/mypageBoardList.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
-
+    <link href="<%=request.getContextPath()%>/css/mypage/mypageBoardList.css" rel="stylesheet">
 </head>
 <body>
 <header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
@@ -72,45 +72,48 @@
                 let typeName = $(this).children().eq(4).val(); // 4 => b.getBoardType.boardName
                 location.href = '${context}/' + typeName + 'Detail?bno=' + bno;
 
-            }
-          });
+                            }
+                        });
 
-          $('.bHidden').attr('style', "display:none;");
+                        $('.bHidden').attr('style', "display:none;");
 
-        });
-      </script>
-      <br><br>
+                    });
+                </script>
+                <br><br>
 
-      <%-- 페이징바 처리--%>
-      <div align="center" class="paging-area">
+                <%-- 페이징바 처리--%>
+                <div align="center" class="paging-area">
 
-        <% if(currentPage != 1) { %>
-            <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+                    <% if(currentPage != 1) { %>
+                    <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
 
-        <% } %>
+                    <% } %>
 
-        <% for(int i=startPage; i<=endPage; i++) { %>
-            <% if(i != currentPage) {%>
-                <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
-            <% } else { %>
-                <button disabled><%=i %></button>
-            <% } %>
-        <% } %>
+                    <% for(int i=startPage; i<=endPage; i++) { %>
+                    <% if(i != currentPage) {%>
+                    <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
+                    <% } else { %>
+                    <button disabled><%=i %></button>
+                    <% } %>
+                    <% } %>
 
-        <% if(currentPage != maxPage) { %>
-            <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+                    <% if(currentPage != maxPage) { %>
+                    <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
 
-        <% } %>
+                    <% } %>
 
 
-      </div>
-      <script>
-        function doPageClick(currentPage){
-          location.href = "<%=request.getContextPath()%>/myPageBoardList.bo?currentPage="+currentPage;
-        }
-      </script>
-
+                </div>
+                <script>
+                    function doPageClick(currentPage){
+                        location.href = "<%=request.getContextPath()%>/myPageBoardList.bo?currentPage="+currentPage;
+                    }
+                </script>
+            </div>
+        </div>
     </div>
+</div>
+
 
 </body>
 </html>

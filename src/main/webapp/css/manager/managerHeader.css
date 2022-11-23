@@ -11,7 +11,7 @@ body {
 }
 
 .headcontainer {
-    /* width: 1200px; */
+     width: 1200px;
     height: auto;
     margin: 0 auto;
 }
@@ -58,8 +58,14 @@ li a {
     font-weight: bold;
 }
 
+#logout:hover {
+    color: #f45d48;
+    text-decoration: none;
+}
+
 li a:hover {
     color: #f45d48;
+    text-decoration: none;
 }
 
 .menu {
@@ -92,10 +98,12 @@ li a:hover {
 
 .dropdown-btn a:hover {
     color: #f45d48;
+    text-decoration: none;
 }
 
 .dropdown-submenu a:hover {
     color: #f45d48;
+    text-decoration: none;
 }
 
 .dropdown:hover .dropdown-submenu {

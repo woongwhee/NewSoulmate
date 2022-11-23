@@ -66,7 +66,7 @@
                     <td>${r.replyContent}</td>
                     <td>
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
-                        <button class="bi bi-x-circle-fill replyDelete" data-refNo="${r.replyNo}"></button>
+                        <button class="bi bi-x-circle-fill replyDelete" refNo="${r.replyNo}"></button>
                     </td>
                 </tr>
             </c:forEach>
@@ -122,7 +122,7 @@
             }
             </c:if>
             $('.replyDelete').click((e)=>{
-              let rno=  $(e.target).prop('data');
+              let rno=  $(e.target).attr('refNo');
                 console.log(rno);
                 if(confirm('정말삭제하시겠습니까?')){
                     $.ajax({

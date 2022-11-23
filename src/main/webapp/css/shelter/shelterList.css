@@ -42,9 +42,10 @@ button {
 #search {
     height: 100px;
     width: 1080px;
-    background-color: #f45c4857;
+    background-color: #f45c4828;
     margin: auto;
     padding: 20px 0 0 30px;
+    border-radius: 20px;
 }
 
 #searchBox {
