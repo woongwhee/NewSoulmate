@@ -16,20 +16,7 @@ public class GradeUp {
         super();
     }
 
-
-    public GradeUp(int gradeNo, int memberNo, long shelterNo, int fileNo, String shelterTel, String shelterLandLine, String shelterCompNo, String gradeStatus, String shelterAddress) {
-        GradeNo = gradeNo;
-        this.memberNo = memberNo;
-        this.shelterNo = shelterNo;
-        this.fileNo = fileNo;
-        this.shelterTel = shelterTel;
-        this.shelterLandLine = shelterLandLine;
-        this.shelterCompNo = shelterCompNo;
-        this.gradeStatus = gradeStatus;
-        this.shelterAddress = shelterAddress;
-    }
-
-    public GradeUp(int gradeNo, int memberNo, long shelterNo, int fileNo, String shelterTel, String shelterLandLine, String shelterCompNo, String shelterAddress) {
+    public GradeUp(int gradeNo, int memberNo, long shelterNo,int fileNo, String shelterTel, String shelterLandLine, String shelterCompNo, String shelterAddress) {
         GradeNo = gradeNo;
         this.memberNo = memberNo;
         this.shelterNo = shelterNo;

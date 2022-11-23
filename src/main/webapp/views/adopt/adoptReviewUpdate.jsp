@@ -35,7 +35,7 @@
     });
 </script>
 
-<form action="${context}/adoptRevUpdateEnroll" method="post" id="adoptReview">
+<form action="${context}/adopt/update" method="post" id="adoptReview">
    <table width="100%">
        <tr>
            <td>제목</td>

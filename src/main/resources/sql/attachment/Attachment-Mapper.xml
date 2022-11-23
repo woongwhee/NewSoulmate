@@ -7,6 +7,14 @@
         INSERT INTO ATTACHMENT(FILE_NO,BOARD_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
         VALUES (SQ_ATTACHMENT_PK.NEXTVAL,?,?, ?, ?)
     </entry>
+
+    <entry key="insertGradeAttachment">
+        INSERT INTO ATTACHMENT(FILE_NO,BOARD_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+        VALUES (?,?,?, ?, ?)
+    </entry>
+
+
+
     <entry key="insertReplyAttachment">
         INSERT INTO ATTACHMENT(FILE_NO,Reply_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
         VALUES (SQ_ATTACHMENT_PK.NEXTVAL,?,?, ?, ?)
@@ -53,6 +61,11 @@
         UPDATE ATTACHMENT
         SET STATUS = 'N'
         WHERE BOARD_NO = ?
+    </entry>
+    <entry key="selectFileNo">
+        SELECT
+        SQ_ATTACHMENT_PK.NEXTVAL
+        FROM DUAL
     </entry>
 
 

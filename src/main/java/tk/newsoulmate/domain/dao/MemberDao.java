@@ -1,8 +1,7 @@
 package tk.newsoulmate.domain.dao;
-
 import tk.newsoulmate.domain.vo.ManageMember;
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.MemberGrade;
+import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
@@ -104,7 +103,7 @@ public class MemberDao {
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
         MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
-        Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
+            Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHELTER_NO");
             m.setShelterNo(shelterNo);

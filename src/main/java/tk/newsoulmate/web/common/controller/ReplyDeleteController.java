@@ -29,12 +29,7 @@ public class ReplyDeleteController extends HttpServlet {
         Member loginUser = (Member) session.getAttribute("loginUser");
         int loginMno= loginUser.getMemberNo();
         int result=cs.deleteReply(rno,loginUser.getMemberNo());
-        if(result==0){
-            error(request,response);
-            return;
-        }
-        session.setAttribute("alertMsg","댓글 삭제 성공");
-        response.sendRedirect(request.getContextPath()+"/adoptRevList");
+        response.getWriter().print(result);
 
     }
 
