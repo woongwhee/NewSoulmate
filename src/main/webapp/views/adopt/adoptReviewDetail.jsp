@@ -30,7 +30,10 @@
                 <fmt:formatDate value="${b.issueDate}" type="both" pattern="yyyy년 MM월dd 일"/>
                 </td>
                 <td colspan="2"><button type="button" class="bi bi-exclamation-circle-fill" data-toggle="modal" data-target="#reportModal" data-kind="board" data-ref="${b.boardNo}"></button>
-                    <c:if test="${!empty loginUser and loginUser.memberNo eq b.memberNo}"><button type="button" id="deleteBoard"  class="bi bi-x-circle-fill"></button></c:if>
+                    <c:if test="${!empty loginUser and loginUser.memberNo eq b.memberNo}">
+                        <button type="button" id="deleteBoard"  class="bi bi-x-circle-fill"></button>
+                        <button type="button" id="updateBoard"  class="btn btn-sm btn-primary">수정하기</button>
+                    </c:if>
                 </td>
             </tr>
             <tr>

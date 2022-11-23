@@ -5,7 +5,6 @@ import tk.newsoulmate.domain.vo.type.MemberGrade;
 import java.sql.Date;
 
 public class ManageMember {
-
     private long shelterNo;
     private String shelterName;
     private int memberNo;
