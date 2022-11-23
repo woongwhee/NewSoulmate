@@ -4,11 +4,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
-
-import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.SupportCompleteResponse;
-import tk.newsoulmate.web.support.service.SupportService;
 
 @WebServlet(name = "SupportHistoryServlet", value = "/supportHistoryPage")
 public class SupportHistoryServlet extends HttpServlet {

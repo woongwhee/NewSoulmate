@@ -1,4 +1,4 @@
-package tk.newsoulmate.domain.vo;
+package tk.newsoulmate.domain.vo.type;
 
 import com.google.gson.annotations.SerializedName;
 
