@@ -49,7 +49,7 @@
     </div>
     <div id="main_left">
         <div id="adopt-review">
-            <div id="comment2" onclick="location.href='<%=request.getContextPath()%>/adoptReList'">입양후기+</div>
+            <div id="comment2" onclick="location.href='<%=request.getContextPath()%>/adoptRevList'">입양후기+</div>
                 <div id="adopt-review-list">
                     <img src="" alt="">
                     <img src="" alt="">

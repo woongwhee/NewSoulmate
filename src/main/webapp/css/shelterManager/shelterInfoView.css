@@ -81,6 +81,7 @@
     border-radius: 5px;
 }
 
+input[type=button],
 button {
     width: 150px;
     height: 50px;
@@ -102,11 +103,21 @@ button[type=submit] {
     background-color: #319493;
 }
 
+input[type=button] {
+    margin-top: 50px;
+    background-color: #f45d48;
+}
+
 button:hover {
     background-color: #319493;
     color: white;
 }
 
-input, select {
+input[type=button]:hover {
+    color: white;
+}
+
+input,
+select {
     font-size: 15px;
 }

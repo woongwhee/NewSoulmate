@@ -58,27 +58,6 @@
                     </c:if>
                 </td>
             </tr>
-<%--            <c:choose >--%>
-<%--                <c:when test="${b.resultStatus eq 'Y'}">--%>
-
-<%--                </c:when>--%>
-<%--                <c:when test="${!empty loginUser AND (loginUser.memberGreade eq MemberGreade.SITE_MANAGER)}">--%>
-<%--                    <tr>--%>
-<%--                        <th>답변작성</th>--%>
-<%--                        <td>--%>
-<%--                            <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>--%>
-<%--                        </td>--%>
-<%--                        <td><button id="replySubmit">답변등록</button></td>--%>
-<%--                    </tr>--%>
-<%--                </c:when>--%>
-<%--                <c:otherwise>--%>
-<%--                    <tr>--%>
-<%--                        <th>답변</th>--%>
-<%--                        <td><%= b.getResultStatus()%></td>--%>
-<%--                    </tr>--%>
-<%--                </c:otherwise>--%>
-<%--            </c:choose>--%>
-
 
             <c:forEach var="r" items="${rList}">
                 <tr>
@@ -107,8 +86,8 @@
             <a href="${context}/inquire" class="btn btn-secondary btn-sm">목록</a>
             <%-- if문 가능한건지 체크 확인해야함 --%>
             <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
-            <a href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
-            <a href="${context}/inquireDelete.bo?bno=${b.boardNo}" class="btn btn-danger btn-sm">삭제</a>
+            <a id=boardUpdate href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
+            <a id=boardDelete href="${context}/inquireDelete.bo?bno=${b.boardNo}" class="btn btn-danger btn-sm">삭제</a>
         </div>
     </div>
 
@@ -128,6 +107,7 @@
                     success:(result)=>{
                         if(result>0){
                             alert('답변등록성공');
+                            location.reload();
                         }else{
                             alert('답변등록실패',result)
                         }
@@ -138,9 +118,14 @@
                 });
             }
             </c:if>
-            $('#deleteBoard').click(()=>{
+            $('#replyDelete').click(()=>{
                 if(confirm('정말삭제하시겠습니까?')){
-                    location.href='${context}/adoptRevDelete?bno=${b.boardNo}'
+                    location.href='${context}/replyDelete.bo?bno=${b.boardNo}'
+                }
+            })
+            $('#boardDelete').click(()=>{
+                if(confirm('정말삭제하시겠습니까?')){
+                    location.href='${context}/inquireDelete.bo?bno=${b.boardNo}'
                 }
             })
 

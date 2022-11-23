@@ -1,7 +1,7 @@
 package tk.newsoulmate.web.adopt.controller;
 
 import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.vo.BoardType;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 
@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet(name = "adoptReInsert", value = "/adoptRevInsert")
+@WebServlet(name = "adoptReInsert", value = "/adoptRevInsert.bo")
 public class AdoptReviewInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,10 +40,10 @@ public class AdoptReviewInsertController extends HttpServlet {
         int result=as.insertBoard(board);
         if(result>0){
             session.setAttribute("alertMsg","게시글작성 성공");
-            response.sendRedirect(request.getContextPath()+"/adoptReList");
+            response.sendRedirect(request.getContextPath()+"/adoptRevList");
         }else{
             session.setAttribute("erorrtMsg","게시글작성 실패");
-            response.sendRedirect(request.getContextPath()+"/adoptReList");
+            response.sendRedirect(request.getContextPath()+"/adoptRevList");
 
         }
 

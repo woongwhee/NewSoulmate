@@ -28,7 +28,7 @@
       <hr>
       <br>
 
-      <form action="<%=request.getContextPath()%>/inquireUpdate.bo" id="update-form" method="post" enctype="multipart/form-data">
+      <form action="<%=request.getContextPath()%>/inquireUpdateForm.bo" id="update-form" method="post" enctype="multipart/form-data">
         <input type="hidden" name="bno" value="<%=b.getBoardNo()%>">
 
         <table align="center">

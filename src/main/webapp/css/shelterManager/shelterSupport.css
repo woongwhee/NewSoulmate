@@ -29,37 +29,6 @@
 
 
 /* -------------------------수정중----------- */
-.box {
-    text-align: center;
-}
-
-.box span {
-    padding: 10px;
-}
-
-
-span input[type=date],
-span select {
-    width: 130px;
-    height: 40px;
-    border: 0px;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-span input[type=submit] {
-    width: 70px;
-    height: 40px;
-    border: 0px;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 5px;
-    background-color: rgb(221, 221, 221);
-    cursor: pointer;
-}
-
 
 #memberList {
     margin-top: 30px;
@@ -72,7 +41,7 @@ table {
 }
 
 thead th {
-    font-size: 18px;
+    font-size: 23px;
     border-top: 1px solid rgb(203, 203, 203);
     background-color: rgb(236, 236, 236);
     padding: 10px 10px;
@@ -88,14 +57,20 @@ tbody td {
     border-top: 1px solid rgb(203, 203, 203);
     text-align: center;
     font-size: 15px;
+    padding: 10px;
 }
 
-td input[type=submit] {
+#modal_all {
+    text-align: right;
+    margin-top: 20px;
+}
+
+#modal_all input[type=submit] {
     border: none;
     border-radius: 5px;
-    font-size: 12px;
-    width: 70px;
-    height: 30px;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
     margin: 8px;
     background-color: #676767;
     color: white;
@@ -103,7 +78,8 @@ td input[type=submit] {
 
 }
 
-input[type=submit]:hover {
+
+#modal_all input[type=submit]:hover {
     background-color: #393939;
     color: white;
 }
@@ -118,10 +94,21 @@ input[type=submit]:hover {
 .modal-body {
     text-align: left;
     font-size: 20px;
+    line-height: 50px;
 }
 
 #btn-primary {
     background-color: #f45d48;
     font-size: 18px;
     border: none;
+}
+
+.modal-input {
+    border-radius: 5px;
+    float: right;
+    font-size: 15px;
+    position: absolute;
+    left: 140px;
+    width: 200px;
+    height: 40px;
 }
