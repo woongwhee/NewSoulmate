@@ -16,10 +16,11 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet(name = "AdoptReviewEnrollController", value = "/adoptRevUpdate")
+@WebServlet(name = "adoptUpdate", value = "/adopt/update")
 public class AdoptReviewUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int bno=Integer.parseInt(request.getParameter("boardNo"));
         String boardTitle=request.getParameter("boardTitle");
         String boardContent=request.getParameter("boardContent");
         String adoptDate_=request.getParameter("adoptDate");
@@ -31,31 +32,21 @@ public class AdoptReviewUpdateController extends HttpServlet {
             throw new RuntimeException(e);
         }
         HttpSession session=request.getSession();
-        Integer bno= (Integer) session.getAttribute("bno");
         int memberNo=((Member)session.getAttribute("loginUser")).getMemberNo();
-        AdoptService as=new AdoptService();
-        if(bno==null){
-            bno=as.selectBoardNo();
-        }else{
-            session.removeAttribute("bno");
-        }
-        Board board=Board.enrollBoard(memberNo,bno.intValue(),adoptDate, BoardType.ADOPT,boardTitle,boardContent );
-        int result=as.insertBoard(board);
+        Board board=Board.enrollBoard(memberNo,bno,adoptDate, BoardType.ADOPT,boardTitle,boardContent );
+        int result=new AdoptService().updateBoard(board);
         if(result>0){
-            session.setAttribute("alertMsg","게시글작성 성공");
-            response.sendRedirect(request.getContextPath()+"/adoptReList");
+            session.setAttribute("alertMsg","게시글수정 성공");
         }else{
-            session.setAttribute("erorrtMsg","게시글작성 실패");
-            response.sendRedirect(request.getContextPath()+"/adoptReList");
-
+            session.setAttribute("erorrtMsg","게시글수정 실패");
         }
-
+        response.sendRedirect(request.getContextPath()+"adoptRevDetail?bno="+bno);
 
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 }
