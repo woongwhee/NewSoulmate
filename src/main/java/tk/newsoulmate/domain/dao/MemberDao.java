@@ -334,11 +334,14 @@ public class MemberDao {
         return memberPwd;
     }
 
+
+
+
     public ArrayList<Member> selectManageMember(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         ArrayList<Member> mList = new ArrayList<Member>();
-        String sql = prop.getProperty("manageMember");
+        String sql = prop.getProperty("manageMember2");
 
         try {
             psmt = conn.prepareStatement(sql);

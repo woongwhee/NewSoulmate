@@ -16,14 +16,6 @@ public class ManageService {
 
     private MemberDao memberDao = new MemberDao();
 
-
-    public ArrayList<ManageMember> selectMemberList() {
-        Connection conn = getConnection();
-        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn);
-        close();
-        return mList;
-    }
-
     public ArrayList<Member> selectManageMember() {
         Connection conn = getConnection();
         ArrayList<Member> mList = memberDao.selectManageMember(conn);
