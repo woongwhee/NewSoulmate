@@ -133,10 +133,11 @@
             BOARD_TITLE,
             BOARD_CONTENT,
             MEMBER_ID,
-            CREATE_DATE
+            CREATE_DATE,
+            NICKNAME
         FROM BOARD B
         LEFT JOIN CATEGORY USING(CATEGORY_NO)
-        JOIN MEMBER USING(MEMBER_NO)
+        JOIN MEMBER M USING(MEMBER_NO)
         WHERE BOARD_NO = ?
             AND (MEMBER_NO=? or 2=?)
             AND B.BOARD_STATUS = 'Y'

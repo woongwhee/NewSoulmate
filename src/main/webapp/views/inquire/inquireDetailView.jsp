@@ -18,7 +18,7 @@
 
     <div class="outer">
         <br>
-        <h2 style="text-align:center;">1:1문의</h2>
+        <h2 style="text-align:center;">Q&A</h2>
         <br>
         <hr>
         <br>
@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>${b.memberName}</td>
+                <td>${b.nickName}</td>
                 <th>작성일</th>
                 <td>${b.createDate}</td>
             </tr>
