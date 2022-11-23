@@ -21,87 +21,56 @@
 <head>
     <title>Title</title>
     <%@include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/board/adoptReviewList.css" rel="stylesheet">
 </head>
 <body>
-    <header><%@include file="/views/template/menubar.jsp"%></header>
-    <main>
-        <div class="outer">
-    <br>
-    <h2 style="text-align: center;">입양후기게시판</h2>
-    <br>
-    <div align="center">
-        <a href="${context}/adoptReEnroll" class="btn btn-secondary">글작성</a><br>
+    <%@include file="/views/template/menubar.jsp"%>
+    <div id="content">
+        <div id="adopt-review-head">
+            <p>입양후기</p>
+            <button>작성하기</button>
+        </div>
+        <div id="adopt-review-area">
+            <div class="adopt-thum">
+                <img class="adopt-thumnail" src="" onclick="location.href='#'">
+                <p>입양후기제목</p>
+            </div>
+        </div>
+
+        <div class="adopt-paging-area">
+            <% if(currentPage != 1) { %>
+            <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+
+            <% } %>
+
+            <% for(int i=startPage; i<=endPage; i++) { %>
+            <% if(i != currentPage) {%>
+            <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
+            <% } else { %>
+            <button disabled><%=i %></button>
+            <% } %>
+            <% } %>
+
+            <% if(currentPage != maxPage) { %>
+            <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+
+            <% } %>
+        </div>
     </div>
-
-    <table align="center" class="list-area">
-        <thead>
-        <tr>
-            <th>글번호</th>
-            <th>글제목</th>
-            <th>작성자</th>
-            <th>조회수</th>
-            <th>작성일</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% if(list.isEmpty()){ %>
-        <tr id="tableEmpty">
-            <td colspan="6">조회된 게시글이 없습니다</td>
-        </tr>
-        <% } else { %>
-        <% for (Board b : list) { %>
-        <tr>
-            <td><%=b.getBoardNo() %></td>
-            <td><%=b.getBoardTitle() %></td>
-            <td><%=b.getMemberNo() %></td>
-            <td><%=b.getReadCount() %></td>
-            <td><%=b.getCreateDate() %></td>
-        </tr>
-        <% } %>
-        <% } %>
-        </tbody>
-    </table>
-
-
-
-    <br><br>
-
-    <div align="center" class="paging-area">
-
-        <% if(currentPage != 1) { %>
-        <button onclick="doPageClick(<%= currentPage-1 %>)">&lt;</button>
-        <% } %>
-
-        <% for(int i = startPage; i<=endPage; i++) { %>
-        <% if(i != currentPage) { %>
-        <button onclick="doPageClick(<%= i %>)"><%= i %></button>
-        <% } else { %>
-        <button disabled><%= i %></button>
-        <% } %>
-        <% } %>
-
-        <% if(currentPage != maxPage) { %>
-        <button onclick="doPageClick(<%= currentPage+1 %>)">&gt;</button>
-        <% } %>
-
-    </div>
-    
     <script>
-        function doPageClick(currentPage) {
-            location.href = "${context}/adoptRevList.bo?currentPage="+currentPage;
+        function doPageClick(currentPage){
+            location.href = "<%=request.getContextPath()%>/adoptRevList.bo?currentPage="+currentPage;
         }
         $(function() {
             $(".list-area>tbody>tr").click(function(){
                 if($(this).text()!=$("#tableEmpty").text()){
 
-                let bno = $(this).children().eq(0).text();
-                location.href = '${context}/adoptRevDetail?bno='+bno;
+                    let bno = $(this).children().eq(0).text();
+                    location.href = '${context}/adoptRevDetail?bno='+bno;
                 }
             });
         })
     </script>
-    </div>
-    </main>
-    <footer>    <%@ include file="/views/template/footer.jsp"%></footer>
+<%@ include file="/views/template/footer.jsp"%>
 </body>
 </html>

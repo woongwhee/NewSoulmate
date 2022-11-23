@@ -10,6 +10,7 @@
 <head>
     <%@include file="/views/template/styleTemplate.jsp"%>
     <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
+    <link href="<%=request.getContextPath()%>/css/board/adoptReviewEnroll.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
@@ -35,28 +36,31 @@
     });
 </script>
 
-<form action="${context}/adoptRevInsert.bo" method="post" id="adoptReview">
-   <table width="100%">
-       <tr>
-           <td>제목</td>
-           <td><input type="text" id="boardTitle" name="boardTitle" style="width: 680px"></td>
-       </tr>
-       <tr>
-           <td>입양날짜</td>
-           <td><input type="Date" id="adoptDate" name="adoptDate" style="width: 680px"></td>
-       </tr>
-       <tr>
-           <td>내용</td>
-           <td> <textarea name="boardContent" id="boardContent" style="width:680px; height:350px;"></textarea></td>
-       </tr>
-       <tr>
-           <td colspan="2">
-               <button type="submit" id="save">작성하기</button>
-               <button type="button" onclick="location.href = '${context}/adoptRevList.bo'">목록으로 돌아가기</button>
-           </td>
-       </tr>
-   </table>
-</form>
+<div id="content">
+    <div id="review-enroll-title">입양후기 작성하기</div>
+    <form action="${context}/adoptRevInsert.bo" method="post" id="adoptReview">
+        <div id="review-enroll-form">
+            <table id="review-enroll-table">
+                <tr>
+                    <th>제목</th>
+                    <td><input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력해주세요"></td>
+                </tr>
+                <tr>
+                    <th>입양날짜</th>
+                    <td><input type="Date" id="adoptDate" name="adoptDate"></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td> <textarea name="boardContent" id="boardContent" placeholder="내용을 입력해주세요"></textarea></td>
+                </tr>
+            </table>
+        </div>
+        <div id="adopt-review-btn">
+            <button id="return" type="button" onclick="location.href = '${context}/adoptRevList.bo'">목록으로 돌아가기</button>
+            <button type="submit" id="save">작성하기</button>
+        </div>
+    </form>
+</div>
 <%@include file="/views/template/footer.jsp"%>
 </body>
 </html>
