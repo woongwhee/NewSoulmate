@@ -13,7 +13,7 @@ import java.net.http.HttpRequest;
 @WebFilter(filterName = "loginFilter",
     servletNames = {
         "AdoptApplyController","InquireDetailController","MemberInfoDetailViewController",
-            "AdoptReviewEnrollController","adoptReInsert","replyInsert.ad","replyInsert","replyDelete"
+            "AdoptReviewEnrollController","adoptRevInsert","replyInsert.ad","replyInsert","replyDelete","ManageAdoptApplyListController"
     }
 )
 public class LoginFilter implements Filter {

@@ -1,7 +1,10 @@
 package tk.newsoulmate.domain.dao;
 
+import oracle.jdbc.proxy.annotation.Pre;
+import tk.newsoulmate.domain.vo.Member;
+import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
-import tk.newsoulmate.web.common.JDBCTemplet;
+
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,9 +12,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
-import static tk.newsoulmate.web.common.JDBCTemplet.close;
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
+
 
 public class SubscriptionDao {
 
@@ -35,7 +40,7 @@ public class SubscriptionDao {
 
             psmt.setInt(1,sb.getMemberNo());
             psmt.setLong(2,sb.getShelterNo());
-            psmt.setString(3,sb.getAnimalNo());
+            psmt.setLong(3,sb.getAnimalNo());
             psmt.setString(4,sb.getTelNum());
             psmt.setString(5,sb.getName());
             psmt.setString(6,sb.getGender());
@@ -55,5 +60,85 @@ public class SubscriptionDao {
         }
         return result;
     }
+    public int selectAdoptApplyListCount(Connection conn){
+        int listCount = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectAdoptApplyListCount");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            if(rset.next()){
+                listCount = rset.getInt("cnt");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return listCount;
+
+    }
+
+    public ArrayList<Subscription> selectAdoptApplyList(Connection conn, PageInfo pi){
+        ArrayList<Subscription> list = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectAdoptApplyList");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            if (pi.getCurrentPage() == 0) {
+                return list;
+            }
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
+
+            psmt.setInt(1,startRow);
+            psmt.setInt(2,endRow);
+
+            rset = psmt.executeQuery();
+
+            while (rset.next()){
+                list.add(new Subscription(
+                        rset.getInt("SUB_NO")
+                        ,rset.getLong("ANIMAL_ID")
+                        ,rset.getString("MEMBER_ID")
+                        ,rset.getString("NAME")
+                        ,rset.getString("TEL_NUM")
+                        ,rset.getDate("SUB_DATE")
+                        ,rset.getString("SUB_READ")));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return list;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

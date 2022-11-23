@@ -35,7 +35,7 @@
     });
 </script>
 
-<form action="${context}/adoptRevInsert.bo" method="post" id="adoptReview">
+<form action="${context}/adoptRevInsert" method="post" id="adoptReview">
    <table width="100%">
        <tr>
            <td>제목</td>
