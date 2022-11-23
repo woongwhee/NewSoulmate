@@ -1,4 +1,4 @@
-package tk.newsoulmate.domain.vo;
+package tk.newsoulmate.domain.vo.response;
 
 import java.sql.Date;
 

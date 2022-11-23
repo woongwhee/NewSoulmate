@@ -1,7 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.MemberGrade;
+import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.*;
@@ -11,7 +11,6 @@ import java.util.*;
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
 
 public class MemberDao {
-
     private Properties prop = new Properties();
 
     public MemberDao() {
@@ -22,7 +21,6 @@ public class MemberDao {
             e.printStackTrace();
         }
     }
-
 
 
     public int insertMember(Member m, Connection conn) {
