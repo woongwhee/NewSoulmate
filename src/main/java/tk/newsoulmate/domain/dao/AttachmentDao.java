@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Attachment;
+import tk.newsoulmate.domain.vo.GradeUp;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
@@ -101,6 +102,10 @@ public class AttachmentDao {
 
 
     }
+
+
+
+
  public int insertReplyAttachment(Attachment at, Connection conn) {
 
         int result = 0;
@@ -193,6 +198,17 @@ public class AttachmentDao {
         }
         return at;
     }
+    private Attachment groupUpAttachmentMapper(ResultSet rset) throws SQLException {
+        Attachment at=null;
+        if(rset.next()){
+            at=Attachment.groupUpAttachment(rset.getInt("FILE_NO"),
+                    rset.getString("ORIGIN_NAME"),
+                    rset.getString("CHANGE_NAME"),
+                    rset.getString("FILE_PATH"),
+                    rset.getDate("UPLOAD_DATE"));
+        }
+        return at;
+    }
 
     public int selectFileNo(Connection conn){
         PreparedStatement psmt = null;
@@ -239,5 +255,26 @@ public class AttachmentDao {
 
         return result;
 
+    }
+
+    public void selectGradeUpAttachment(Connection conn, ArrayList<GradeUp> gList) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            for (GradeUp g:gList) {
+                psmt.setInt(1, g.getFileNo());
+                rset = psmt.executeQuery();
+                Attachment at = groupUpAttachmentMapper(rset) ;
+                g.setAttachment(at);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
     }
 }

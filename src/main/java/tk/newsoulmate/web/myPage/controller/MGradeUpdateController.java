@@ -2,13 +2,16 @@ package tk.newsoulmate.web.myPage.controller;
 
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.GradeUp;
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.common.UploadUtil;
+import tk.newsoulmate.web.manger.site.service.ManageService;
 import tk.newsoulmate.web.myPage.service.MyPageService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "MGradeUpdateController", value = "/mGradeUpdate")
 @MultipartConfig(
@@ -18,8 +21,25 @@ import java.io.IOException;
 public class MGradeUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<GradeUp> gList = new ManageService().selectGradeUp();
         long shelterNo = Long.parseLong(request.getParameter("shelterNo"));
+
+        boolean isManager=((Member)request.getSession().getAttribute("loginUser")).getMemberGrade().isSHELTER_MANAGER();
+
         int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+        for(int i =0; i<gList.size();i++){
+            if(gList.get(i).getMemberNo() == memberNo && isManager ){
+                error(request, response,"이미 신청된 회원입니다.");
+                return;
+            } else if (isManager) {
+                error(request,response,"관리자는 등업 신청을 할 수 없습니다.");
+                return;
+
+            }
+        }
+
+
+
         String shelterCompNo = (String)request.getParameter("shelterCompNo");
         String shelterLandLine = (String)request.getParameter("shelterLandLine");
         String shelterTel = (String)request.getParameter("shelterTel");
@@ -43,6 +63,11 @@ public class MGradeUpdateController extends HttpServlet {
         }
 
 
+    }
+
+    private static void error(HttpServletRequest request, HttpServletResponse response, String msg) throws IOException {
+        request.getSession().setAttribute("errorMsg", msg);
+        response.sendRedirect(request.getContextPath());
     }
 
     @Override

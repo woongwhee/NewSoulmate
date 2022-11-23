@@ -353,6 +353,7 @@ public class MemberDao {
                 m.setMemberName(rset.getString("MEMBER_NAME"));
                 m.setEmail(rset.getString("EMAIL"));
                 MemberGrade memberGrade = MemberGrade.valueOfNumber(rset.getInt("MEMBER_GRADE"));
+                m.setMemberGrade(memberGrade);
                 m.setEnrollDate(rset.getDate("ENROLL_DATE"));
                 mList.add(m);
             }

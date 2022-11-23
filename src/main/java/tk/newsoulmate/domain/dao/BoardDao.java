@@ -447,7 +447,6 @@ public class BoardDao {
             throw new RuntimeException(e);
         } finally {
             close(rset);
-            close(psmt);
         }
 
         return list;
