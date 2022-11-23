@@ -155,6 +155,21 @@ public class InquireService {
     }
 
     public int updateBoard(Board b) {
-        return 0;
+        Connection conn=getConnection();
+        int result=new BoardDao().updateInquireBoard(conn,b);
+        if(result > 0){
+            commit();
+        } else {
+            rollback(conn);
+        }
+        close();
+
+        return result;
+    }
+
+    public Attachment selectAttachment(int boardNo) {
+        Connection conn=getConnection();
+        Attachment at=new AttachmentDao().selectGradeUpAttachment(conn,boardNo);
+        return at;
     }
 }

@@ -114,10 +114,10 @@ public class Board {
         return b;
     }
 
-    public static Board updateInquire(int boardNo, String categoryName, String boardTitle, String boardContent){
+    public static Board updateInquire(int boardNo, int categoryNo, String boardTitle, String boardContent){
         Board b = new Board();
         b.setBoardNo(boardNo);
-        b.setCategoryName(categoryName);
+        b.setCategoryNo(categoryNo);
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);
         return b;

@@ -351,12 +351,10 @@ public class BoardDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-
             psmt.setInt(1,b.getCategoryNo());
             psmt.setString(2,b.getBoardTitle());
             psmt.setString(3,b.getBoardContent());
             psmt.setInt(4,b.getBoardNo());
-
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {

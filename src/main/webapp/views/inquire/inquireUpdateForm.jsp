@@ -28,14 +28,15 @@
       <hr>
       <br>
 
-      <form action="<%=request.getContextPath()%>/inquireUpdateForm.bo" id="update-form" method="post" enctype="multipart/form-data">
+      <form action="${context}/inquire/update" id="update-form" method="post" enctype="multipart/form-data">
         <input type="hidden" name="bno" value="<%=b.getBoardNo()%>">
+        <input type="hidden" name="mno" value="${loginUser.memberNo}">
 
         <table align="center">
           <tr>
             <th width="100">카테고리</th>
             <td width="500">
-              <select name="categoryName">
+              <select name="categoryNo">
                 <% for(Category c : list) { %>
                 <option value="<%= c.getCategoryNo() %>"><%= c.getCategoryName() %></option>
                 <%} %>
