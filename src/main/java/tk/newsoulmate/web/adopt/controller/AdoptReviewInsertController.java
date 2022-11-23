@@ -1,7 +1,7 @@
 package tk.newsoulmate.web.adopt.controller;
 
 import tk.newsoulmate.domain.vo.Board;
-import tk.newsoulmate.domain.vo.BoardType;
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 

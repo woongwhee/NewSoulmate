@@ -2,6 +2,7 @@ package tk.newsoulmate.web.adopt.sevice;
 
 import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
@@ -16,7 +17,7 @@ public class AdoptService {
 
         Connection conn = getConnection();
 
-        ArrayList<Board> list = new BoardDao().selectList(conn,BoardType.ADOPT,pi);
+        ArrayList<Board> list = new BoardDao().selectList(conn, BoardType.ADOPT,pi);
 
         close();
 

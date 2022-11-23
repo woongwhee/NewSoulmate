@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import tk.newsoulmate.domain.dao.TransferDao;
+import tk.newsoulmate.domain.vo.ShelterSupportResponse;
+import tk.newsoulmate.domain.vo.SupportWithdrawRequest;
+import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 import tk.newsoulmate.web.support.controller.IamportClient;
 import tk.newsoulmate.domain.dao.SupportDao;
 import tk.newsoulmate.domain.vo.Member;
@@ -43,6 +47,7 @@ public class SupportService {
 	public void complete(String merchantUid) {
 		Connection conn = JDBCTemplet.getConnection();
 		new SupportDao().updateStatus(conn, merchantUid, SupportStatus.DONE);
+		new SupportDao().updateWithdrawStatus(conn, merchantUid, WithdrawStatus.PENDING);
 		JDBCTemplet.close();
 	}
 
@@ -79,5 +84,21 @@ public class SupportService {
 		JDBCTemplet.close();
 		return count;
 	}
+
+	public List<ShelterSupportResponse> findAllOnlyDoneByShelterNo(long shelterNo) {
+		Connection conn = JDBCTemplet.getConnection();
+		List<ShelterSupportResponse> supports = new SupportDao().findAllOnlyDoneByShelterNo(conn, shelterNo);
+		JDBCTemplet.close();
+		return supports;
+	}
+
+	public int withdraw(SupportWithdrawRequest request) {
+		Connection conn = JDBCTemplet.getConnection();
+		int result = new SupportDao().withdraw(conn, request.getSupportNo());
+		new TransferDao().withdraw(conn, request);
+		JDBCTemplet.close();
+		return result;
+	}
+
 }
 

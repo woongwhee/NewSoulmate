@@ -48,7 +48,7 @@
                         <th width="20px">No</th>
                         <th>보호소명</th>
                         <th>후원일시</th>
-                        <th>후원 금액(원)</th>
+                        <th>후원 금액</th>
                         <th>후원자</th>
                         <th>출금여부</th>
                         <th width="20px">출금승인</th>

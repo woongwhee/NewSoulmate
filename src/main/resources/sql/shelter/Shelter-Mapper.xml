@@ -74,7 +74,10 @@
         WHERE "desertionNo" = ?)
     </entry>
 
-
+    <entry key="selectByShelterNo">
+        SELECT * FROM SHELTER
+        WHERE SHELTER_NO = ?
+    </entry>
 
         <!--    회원정보에 등록된 보호소만 후원가능하게 할경우
     <entry key="">

@@ -8,13 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import tk.newsoulmate.domain.vo.PageInfo;
+import tk.newsoulmate.domain.vo.ShelterSupportResponse;
 import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.domain.vo.SupportCompleteResponse;
 import tk.newsoulmate.domain.vo.SupportPage;
 import tk.newsoulmate.domain.vo.type.SupportStatus;
+import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 public class SupportDao {
@@ -79,6 +82,24 @@ public class SupportDao {
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, status.name());
+            psmt.setString(2, merchantUid);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+        return result;
+    }
+
+    public int updateWithdrawStatus(Connection conn, String merchantUid, WithdrawStatus wdStatus) {
+        PreparedStatement psmt = null;
+        int result = 0;
+        String sql = prop.getProperty("updateWithdrawStatusByMerchantUid");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, wdStatus.name());
             psmt.setString(2, merchantUid);
             result = psmt.executeUpdate();
         } catch (SQLException e) {
@@ -205,4 +226,52 @@ public class SupportDao {
         return count;
     }
 
+    public List<ShelterSupportResponse> findAllOnlyDoneByShelterNo(Connection conn, long shelterNo) {
+        ArrayList<ShelterSupportResponse> supportList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectAllByShelterNo");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1, shelterNo);
+            rset = psmt.executeQuery();
+            while(rset.next()) {
+                supportList.add(new ShelterSupportResponse(
+                    rset.getInt("SUPPORT_NO"),
+                    rset.getString("MEMBER_NAME"),
+                    rset.getDate("PAY_TIME").toLocalDate(),
+                    rset.getLong("AMOUNT"),
+                    rset.getString("PHONE"),
+                    WithdrawStatus.valueOf(rset.getString("WD_STATUS"))
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return supportList;
+    }
+
+    public int withdraw(Connection conn, long supportNo) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("updateWithdrawStatusBySupportNo");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, WithdrawStatus.REQUESTED.name());
+            psmt.setLong(2, supportNo);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return result;
+    }
 }

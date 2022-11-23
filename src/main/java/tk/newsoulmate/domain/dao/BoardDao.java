@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;

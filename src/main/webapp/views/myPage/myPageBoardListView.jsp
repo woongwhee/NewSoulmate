@@ -2,7 +2,7 @@
 <%@ page import="tk.newsoulmate.domain.vo.Board" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
-<%@ page import="tk.newsoulmate.domain.vo.BoardType" %>
+<%@ page import="tk.newsoulmate.domain.vo.type.BoardType" %>
 <%
   ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
   PageInfo pi = (PageInfo) request.getAttribute("pi");

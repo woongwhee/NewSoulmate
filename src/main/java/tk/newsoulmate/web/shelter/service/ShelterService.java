@@ -127,4 +127,12 @@ public class ShelterService {
         return Nlist;
 
     }
+
+	public Shelter find(long shelterNo) {
+        Connection conn = getConnection();
+        Shelter s = new ShelterDao().findByShelterNo(shelterNo,conn);
+        close();
+        return s;
+	}
+
 }

@@ -206,6 +206,29 @@ public class ShelterDao {
 
     }
 
+	public Shelter findByShelterNo(long shelterNo, Connection conn) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectByShelterNo");
 
-
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setLong(1, shelterNo);
+			rset = psmt.executeQuery();
+			if (rset.next()) {
+				return new Shelter(rset.getLong("SHELTER_NO"),
+					rset.getString("SHELTER_NAME"),
+					rset.getString("SHELTER_ADDRESS"),
+					rset.getString("SHELTER_LANDLINE"),
+					rset.getLong("CITY_NO"),
+					rset.getLong("VILLAGE_NO"));
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}finally {
+			JDBCTemplet.close(rset);
+			JDBCTemplet.close(psmt);
+		}
+		return null;
+	}
 }

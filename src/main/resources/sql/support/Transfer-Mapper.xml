@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="create">
+        INSERT INTO TRANSFER VALUES(SQ_TRANSFER_PK.NEXTVAL, ?, ?, ?, ?, 'N')
+    </entry>
+
+</properties>
+

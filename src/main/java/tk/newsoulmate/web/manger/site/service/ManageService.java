@@ -3,6 +3,7 @@ package tk.newsoulmate.web.manger.site.service;
 import tk.newsoulmate.domain.dao.GradeUpDao;
 import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.vo.GradeUp;
+import tk.newsoulmate.domain.vo.ManageMember;
 import tk.newsoulmate.domain.vo.Member;
 
 
@@ -16,9 +17,9 @@ public class ManageService {
     private MemberDao memberDao = new MemberDao();
 
 
-    public ArrayList<Member> selectMemberList() {
+    public ArrayList<ManageMember> selectMemberList() {
         Connection conn = getConnection();
-        ArrayList<Member> mList = memberDao.selectMemberList(conn);
+        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn);
         close();
         return mList;
     }
