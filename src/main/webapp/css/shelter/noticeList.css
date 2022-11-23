@@ -81,3 +81,7 @@ select {
     margin:25px;
     width: 220px;
 }
+
+#search-box-table-div{
+    padding-top: 30px;
+}
