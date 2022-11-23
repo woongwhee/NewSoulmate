@@ -1,16 +1,14 @@
-package tk.newsoulmate.web.manger.site.controller;
+package tk.newsoulmate.web.volunteer.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "ManagaMemberPage", value = "/manageMemberPage")
-public class ManagaMemberServlet extends HttpServlet {
+@WebServlet(name = "volunteerRevList", value = "/volunteerRevList")
+public class VolunteerReviewListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        request.getRequestDispatcher("views/manager/memberManagement.jsp").forward(request,response);
 
     }
 

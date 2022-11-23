@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tk.newsoulmate.domain.dao.BoardDao;
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;

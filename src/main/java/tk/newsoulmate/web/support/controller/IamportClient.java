@@ -1,4 +1,4 @@
-package tk.newsoulmate.web.support.controller;
+package tk.newsoulmate.client.iamport;
 
 import java.lang.reflect.Type;
 import java.net.URI;

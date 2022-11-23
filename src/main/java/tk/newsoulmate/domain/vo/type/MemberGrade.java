@@ -1,7 +1,6 @@
-package tk.newsoulmate.domain.vo;
+package tk.newsoulmate.domain.vo.type;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 /**
  *
