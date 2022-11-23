@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.GradeUp;
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
@@ -56,5 +58,37 @@ public class GradeUpDao {
             JDBCTemplet.close(psmt);
         }
         return result;
+    }
+
+    public ArrayList<GradeUp> selectAllGrade(Connection conn) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        ArrayList<GradeUp> gList = new ArrayList<GradeUp>();
+        String sql = prop.getProperty("selectAllGrade");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            while (rset.next()){
+                GradeUp up = new GradeUp();
+                up.setGradeNo(rset.getInt("GRADE_NO"));
+                up.setMemberNo(rset.getInt("MEMBER_NO"));
+                up.setShelterNo(rset.getLong("SHELTER_NO"));
+                up.setFileNo(rset.getInt("FILE_NO"));
+                up.setShelterTel(rset.getString("SHELTER_TEL"));
+                up.setShelterLandLine(rset.getString("SHELTER_LANDlINE"));
+                up.setShelterCompNo(rset.getString("SHELTER_COMP_NO"));
+                up.setGradeStatus(rset.getString("GRADE_STATUS"));
+                up.setShelterAddress(rset.getString("SHELTER_ADDRESS"));
+                gList.add(up);
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCTemplet.close(psmt);
+            JDBCTemplet.close(rset);
+        }
+        return gList;
     }
 }

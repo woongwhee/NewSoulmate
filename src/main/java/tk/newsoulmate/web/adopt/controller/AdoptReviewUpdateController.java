@@ -16,7 +16,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet(name = "AdoptReviewEnrollController", value = "/adoptRevUpdate")
+@WebServlet(name = "AdoptReviewEnrollController", value = "/adopt/update")
 public class AdoptReviewUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

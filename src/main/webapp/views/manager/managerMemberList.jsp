@@ -2,7 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.MemberGrade" %>
 <%@ page import="tk.newsoulmate.web.manger.site.service.ManageService" %>
-<%@ page import="tk.newsoulmate.web.member.service.MemberService" %><%--
+<%@ page import="tk.newsoulmate.web.member.service.MemberService" %>
+<%@ page import="tk.newsoulmate.domain.vo.ManageMember" %><%--
   Created by IntelliJ IDEA.
   User: gram
   Date: 2022-11-16
@@ -12,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    ArrayList<Member> mList = (ArrayList<Member>) request.getAttribute("mList");
+    ArrayList<ManageMember> mList = (ArrayList<ManageMember>) request.getAttribute("mList");
     ManageService ms = new ManageService();
 %>
 <html>
@@ -31,7 +32,7 @@
 
             <div class="box">
                 총 회원 수
-                <span id="countMember" style="color: red"><%= ms.selectCountMember() %></span> 명
+                <span id="countMember" style="color: #f45d48;"><%= ms.selectCountMember() %></span> 명
             </div>
 
             <div class="box">
@@ -76,7 +77,7 @@
 
                     <%} else { %>
 
-                    <%for (Member m : mList) {%>
+                    <%for (ManageMember m : mList) {%>
                     <tr>
                         <td><%=m.getMemberNo() %>
                         </td>
@@ -86,7 +87,7 @@
                         </td>
                         <td><%=m.getEmail() %>
                         </td>
-                        <td><%=m.getShelterNo()%>
+                        <td><%=m.getShelterName()%>
 
                         </td>
                         <td>

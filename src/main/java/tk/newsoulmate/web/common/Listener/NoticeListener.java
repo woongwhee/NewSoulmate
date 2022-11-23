@@ -21,7 +21,7 @@ public class NoticeListener implements ServletContextListener {
         long time = task.StartTimming();
         long oneDay = 1000 * 60 * 60 * 24;
         //새벽 1시마다 데이터를 긁어오는 함수
-        m.schedule(task, time, oneDay);
+//        m.schedule(task, time, oneDay);
 
     }
 

@@ -66,7 +66,7 @@
                     <td>${r.replyContent}</td>
                     <td>
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
-                        <button class="bi bi-x-circle-fill replyDelete" data-refNo="${r.replyNo}"></button>
+                        <button class="bi bi-x-circle-fill replyDelete" refNo="${r.replyNo}"></button>
                     </td>
                 </tr>
             </c:forEach>
@@ -90,7 +90,7 @@
             <%-- if문 가능한건지 체크 확인해야함 --%>
             <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
             <a id=boardUpdate href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
-            <a id=boardDelete href="${context}/inquireDelete.bo?bno=${b.boardNo}" class="btn btn-danger btn-sm">삭제</a>
+            <a id=boardDelete class="btn btn-danger btn-sm">삭제</a>
         </div>
     </div>
 
@@ -122,7 +122,7 @@
             }
             </c:if>
             $('.replyDelete').click((e)=>{
-              let rno=  $(e.target).prop('data');
+              let rno=  $(e.target).attr('refNo');
                 console.log(rno);
                 if(confirm('정말삭제하시겠습니까?')){
                     $.ajax({

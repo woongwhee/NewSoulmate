@@ -77,7 +77,7 @@
 <%--        </c:forEach>--%>
     </div>
 </div>
-    <script src="${context}/js/shelter"></script>
+    <script src="${context}/js/shelter/noticeList.js"></script>
 
 
     <%@ include file="/views/template/footer.jsp"%>
