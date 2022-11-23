@@ -68,6 +68,17 @@
         FROM DUAL
     </entry>
 
+    <entry key="selectAttachment">
+        SELECT
+            FILE_NO,
+            ORIGIN_NAME,
+            CHANGE_NAME,
+            FILE_PATH,
+            UPLOAD_DATE
+        FROM ATTACHMENT
+        WHERE FILE_NO = ?
+    </entry>
+
 
 
 

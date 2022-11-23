@@ -82,9 +82,9 @@
 
         <div class="form-group">
             <h3>선택된 보호소</h3>
-            <input id="selected-shelterNo" name="shelterNo" type="hidden">
+            <input id="selected-shelterNo" name="shelterNo" type="hidden" required>
             <input id="selected-shelterName" readonly required>
-            <input id="selected-shelterAddress" name="shelterAddress" type="hidden">
+            <input id="selected-shelterAddress" name="shelterAddress" type="hidden" required>
         </div>
 
         <div class="form-group">
@@ -105,9 +105,9 @@
           <input type="text" name="shelterTel" id="" placeholder="'-'빼고 입력" required>
         </div>
         <div class="form-file">
-          <input type="file" id="" name="upFile" required>
+          <input type="file" id="" name="upFile" accept="application/pdf,image/*" required>
         </div>
-        <button type="submit" onclick="" id="">변경사항 저장하기</button>
+        <button type="submit" onclick="LimitAttach(this.form, this.form.uploadfile.value)" >변경사항 저장하기</button>
       </form>
     </div>
   </div>
@@ -123,6 +123,22 @@
 
         //$("#selected-shelter").html($(this).children().eq(1).text().trim())
     })
+
+    // const extArray = new Array(".gif", ".jpg", ".png"); //첨부가능한 확장자 목록
+    //
+    // function LimitAttach(form, file) {
+    //     let allowSubmit = false;
+    //     if (!file) return;
+    //     while (file.indexOf("\\") != -1)
+    //         let file = file.slice(file.indexOf("\\") + 1);
+    //         let ext = file.slice(file.indexOf(".")).toLowerCase();
+    //     for (var i = 0; i < extArray.length; i++) {
+    //         if (extArray[i] == ext) { allowSubmit = true; break; }
+    //     }
+    //     if (allowSubmit) form.submit();
+    //     else
+    //         alert("업로드 가능한 확장자는 " + (extArray.join("  ")) + "입니다.");
+    // }
 
 
 

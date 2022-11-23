@@ -2,11 +2,13 @@
 <%@ page import="tk.newsoulmate.domain.vo.GradeUp" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.Shelter" %>
+<%@ page import="tk.newsoulmate.domain.vo.Attachment" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ArrayList<Member> mList = (ArrayList<Member>)request.getAttribute("mList");
+
     ArrayList<GradeUp> gList = (ArrayList<GradeUp>)request.getAttribute("gList");
-    ArrayList<Shelter> sList = (ArrayList<Shelter>)request.getAttribute("sList");
+    //ArrayList<Shelter> sList = (ArrayList<Shelter>)request.getAttribute("sList");
+
 
 %>
 <html>
@@ -22,16 +24,16 @@
         <div id="user_information">
 
             <div class="box">
-                총 대기회원 수 <span id="memberTotal">6
-                <!--총 대기회원수 불러오기-->
+                총 대기회원 수 <span id="memberTotal">
+                <%=gList.size()%>
                     </span> 명
             </div>
 
             <div id="memberList">
-                <table>
+                <table class="grade">
                     <thead>
                     <tr>
-                        <th width="10px"><input type="checkbox" id="" /></th>
+                        <th width="10px"><input type="checkbox" id="selectAll"/></th>
                         <th width="20px">No</th>
                         <th>아이디</th>
                         <th>보호소명</th>
@@ -42,64 +44,85 @@
                     </thead>
                     <tbody>
                     <!--보여질 페이지 수 지정-->
-                    <% for(Member m : mList){%>
-                        <%for (GradeUp g : gList){%>
-                            <%for(Shelter s : sList){%>
-                            <%if(m.getMemberNo() == g.getMemberNo()){%>
-                                <%if(m.getShelterNo() == s.getShelterNo())%>
-                        <tr>
-                            <td>
-                                <input type="checkbox" id="" />
-                            </td>
-                            <td>
-                                <!--번호 ${가져오기}-->1
-                                <%=g.getGradeNo()%>
 
-                            </td>
-                            <td>
-                                <!--아이디 ${가져오기}-->ds
-                                <%=g.getMemberNo()%>
-                            </td>
-                            <td>
-                                <!--보호소명 ${가져오기}-->한국동물구조관리협회
-                                <%=s.getShelterName()%>
-                            </td>
-                            <td>
-                                <!--보호소 사업자번호 ${가져오기}-->df안녕
-                                <%=g.getShelterCompNo()%>%>
-                            </td>
-                            <td>
-                                <!--보호소 전화번호 ${가져오기}-->df
-                                <%=g.getShelterLandLine()%>
-                            </td>
-                            <td>
-                                <input type="submit" value="확인">
-                            </td>
-                        </tr>
-                                <%}%>
-                            <%}%>
-                        <%}%>
-                    <%}%>
+                        <%for (GradeUp g : gList){%>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="" name="select" value="<%=g.getMemberNo()%>"/>
+                        </td>
+                        <td>
+                            <%=g.getGradeNo()%>
+                        </td>
+                        <td>
+                            <%=g.getMemberNo()%>
+                        </td>
+                        <td>
+                            <%=g.getShelterName()%>
+                        </td>
+                        <td>
+                            <%=g.getShelterCompNo()%>
+
+                        </td>
+                        <td>
+                            <%=g.getShelterLandLine()%>
+                        </td>
+                        <td>
+                            <a href="<%=g.getAttachment().getFilePath()%>/<%=g.getAttachment().getChangeName()%>"
+                            download="<%=g.getAttachment().getOriginName()%>" >첨부파일</a>
+                        </td>
+                    </tr>
+                                    <%}%>
+
+
 
 
                     </tbody>
                 </table>
 
                 <div id="buttonBox">
-                    <input type="button" value="승인">
-                    <input type="button" value="거부">
+                    <input type="button" value="승인" id="allow">
+                    <input type="button" value="거부" id="reject">
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>
+<script>
+$("#selectAll").click(function(){
+    if($("#selectAll").is(":checked")) $("input[name=select]").prop("checked", true);
+    else $("input[name=select]").prop("checked", false);
+    });
+
+$("input[name=select]").click(function() {
+    var total = $("input[name=select]").length;
+    var checked = $("input[name=select]:checked").length;
+
+    if(total != checked) $("#selectAll").prop("checked", false);
+    else $("#selectAll").prop("checked", true);
+    });
+
+$("#allow").click(function(){
+    let checkMember = new Array();
+    $("#input[name=select]:checkbox").each(function(){
+        checkMember.push($(this).value);
+    });
+    $.ajax({
+        type:"POST",
+        data:{"checkMember":checkMember},
+        url:"/GradeAllow",
+        success:function(data){
+            alert("성공적으로 승인되었습니다.")
+        }
+
+    })
+})
 
 
 
 
+
+
+
+</script>
 </body>
-
 </html>

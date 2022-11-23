@@ -100,7 +100,7 @@
         MEMBER_NAME,
         EMAIL,
         MEMBER_GRADE,
-        ENROLL_DATE,
+        ENROLL_DATE
         FROM MEMBER
     </entry>
 

@@ -50,7 +50,24 @@ public class Attachment {
 		at.setUploadDate(uploadDate);
 		return at;
 	}
-
+	/**
+	 * 보호소 관계자 등록첨부파일용 생성 팩토리얼메서드
+	 * @param fileNo
+	 * @param originName
+	 * @param changeName
+	 * @param filePath
+	 * @param uploadDate
+	 * @return
+	 */
+	public static Attachment groupUpAttachment(int fileNo, String originName, String changeName, String filePath, Date uploadDate) {
+		Attachment at=new Attachment();
+		at.setFileNo(fileNo);
+		at.setOriginName(originName);
+		at.setChangeName(changeName);
+		at.setFilePath(filePath);
+		at.setUploadDate(uploadDate);
+		return at;
+	}
 	/**
 	 * 댓글 첨부파일용 생성 팩토리얼메서드
 	 * @param fileNo
