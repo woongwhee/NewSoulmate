@@ -22,8 +22,8 @@ select {
 }
 
 .notice-photo {
-    width: 270px;
-    height: 320px;
+    width: 220px;
+    height: 270px;
 }
 
 #animal-search-box {
@@ -74,9 +74,10 @@ select {
     margin: auto;
     display: flex;
     flex-wrap: wrap;
+    padding-top: 20px;
 }
 
 .notice {
-    margin: 40px;
-    width: 270px;
+    margin:25px;
+    width: 220px;
 }
