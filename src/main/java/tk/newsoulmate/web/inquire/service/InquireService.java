@@ -153,4 +153,8 @@ public class InquireService {
         close();
         return rList;
     }
+
+    public int updateBoard(Board b) {
+        return 0;
+    }
 }

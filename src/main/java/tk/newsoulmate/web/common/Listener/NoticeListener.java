@@ -9,25 +9,27 @@ import java.util.Timer;
 
 @WebListener
 public class NoticeListener implements ServletContextListener {
-
+    private ScrapTimmer task;
+    private Timer m;
     public NoticeListener() {
     }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         new APIKeys();
-        Timer m = new Timer();
-        ScrapTimmer task = new ScrapTimmer();
+        m = new Timer();
+        task = new ScrapTimmer();
         long time = task.StartTimming();
         long oneDay = 1000 * 60 * 60 * 24;
         //새벽 1시마다 데이터를 긁어오는 함수
-//        m.schedule(task, time, oneDay);
+        m.schedule(task, time, oneDay);
 
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        /* This method is called when the servlet Context is undeployed or Application Server shuts down. */
+        task.cancel();
+        m.cancel();
     }
 
 }

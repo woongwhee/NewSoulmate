@@ -150,6 +150,13 @@
         ,BOARD_CONTENT = ?
         WHERE BOARD_NO = ?
     </entry>
+    <entry key="updateReviewBoard">
+        UPDATE BOARD
+        SET BOARD_TITLE = ?,
+            BOARD_CONTENT = ?,
+            ISSUE_DATE = ?
+        WHERE BOARD_NO = ?
+    </entry>
 
     <entry key="deleteBoard">
         UPDATE BOARD

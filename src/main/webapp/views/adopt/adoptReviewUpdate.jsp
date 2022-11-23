@@ -28,6 +28,7 @@
                 bUseModeChanger: true,
             },
         });
+
         $("#save").click(function () {
             oEditors.getById["boardContent"].exec("UPDATE_CONTENTS_FIELD", []);
                 $("#adoptReview").submit();
@@ -36,18 +37,19 @@
 </script>
 
 <form action="${context}/adopt/update" method="post" id="adoptReview">
+    <input type="hidden" name="boardNo" value="${b.boardNo}">
    <table width="100%">
        <tr>
-           <td>제목</td>
-           <td><input type="text" id="boardTitle" name="boardTitle" style="width: 680px" value="${b.boardContent}"></td>
+           <th>제목</th>
+           <td><input type="text" id="boardTitle" name="boardTitle" style="width: 680px" value="${b.boardTitle}"></td>
        </tr>
        <tr>
-           <td>입양날짜</td>
+           <th>입양날짜</th>
            <td><input type="Date" id="adoptDate" name="adoptDate" style="width: 680px" value="${b.issueDate}"></td>
        </tr>
        <tr>
-           <td>내용</td>
-           <td> <textarea name="boardContent" id="boardContent" style="width:680px; height:350px;" value="${b.boardContent}"></textarea></td>
+           <th>내용</th>
+           <td> <textarea name="boardContent" id="boardContent" style="width:680px; height:350px;" value="">${b.boardContent}</textarea></td>
        </tr>
        <tr>
            <td colspan="2">
@@ -56,6 +58,8 @@
            </td>
        </tr>
    </table>
+    <script>
+    </script>
 </form>
 <%@include file="/views/template/footer.jsp"%>
 </body>

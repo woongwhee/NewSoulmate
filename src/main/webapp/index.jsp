@@ -12,7 +12,6 @@
 <body>
     <script>
         location.href="<%=request.getContextPath()%>/Main"
-
     </script>
 </body>
 </html>

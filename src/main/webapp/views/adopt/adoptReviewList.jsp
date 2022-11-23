@@ -30,7 +30,7 @@
     <h2 style="text-align: center;">입양후기게시판</h2>
     <br>
     <div align="center">
-        <a href="${context}/adoptReEnroll" class="btn btn-secondary">글작성</a><br>
+        <a href="${context}/adoptRevEnroll" class="btn btn-secondary">글작성</a><br>
     </div>
 
     <table align="center" class="list-area">

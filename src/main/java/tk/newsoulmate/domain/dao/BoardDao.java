@@ -456,5 +456,23 @@ public class BoardDao {
     }
 
 
+    public int updateReviewBoard(Connection conn, Board b) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("updateReviewBoard");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1,b.getBoardTitle());
+            psmt.setString(2,b.getBoardContent());
+            psmt.setDate(3,b.getIssueDate());
+            psmt.setInt(4,b.getBoardNo());
+            result = psmt.executeUpdate();
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
 }

@@ -15,7 +15,7 @@ public class Board {
     private String memberName;
     private String nickName;
     private Date createDate;
-    private String resultStatus;
+    private String resultStatus;//답변조회용
     private int fileCount;
 
     private int categoryNo;
@@ -55,24 +55,6 @@ public class Board {
         return b;
     }
 
-    /**
-     * 신고접수용 펙토리얼메소드
-     * @param memberNo
-     * @param boardType
-     * @param boardTitle
-     * @param boardContent
-     * @param reportNo 신고분류
-     * @return
-     */
-    public static Board enrollReport(int memberNo,String boardType,String boardTitle,String boardContent,int reportNo){
-        Board b=new Board();
-        b.setBoardTitle(boardTitle);
-        b.setBoardContent(boardContent);
-        b.setBoardType(boardType);
-        b.setMemberNo(memberNo);
-        return b;
-    }
-
     public static Board selectAdoptReviewList(int boardNo, String boardTitle, String member_no, int readCount, Date createDate) {
         Board b = new Board();
         b.setBoardNo(boardNo);
@@ -84,13 +66,6 @@ public class Board {
     }
 
 
-    public String getResultStatus() {
-        return resultStatus;
-    }
-
-    public void setResultStatus(String resultStatus) {
-        this.resultStatus = resultStatus;
-    }
 
     /**
      *  QnA 리스트용 펙토리얼메소드
@@ -345,6 +320,13 @@ public class Board {
         this.boardName = boardName;
     }
 
+    public String getResultStatus() {
+        return resultStatus;
+    }
+
+    public void setResultStatus(String resultStatus) {
+        this.resultStatus = resultStatus;
+    }
 
 
 }
