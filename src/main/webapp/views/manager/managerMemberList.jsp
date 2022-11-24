@@ -1,6 +1,6 @@
 <%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.MemberGrade" %>
+<%@ page import="tk.newsoulmate.domain.vo.type.MemberGrade" %>
 <%@ page import="tk.newsoulmate.web.manger.site.service.ManageService" %>
 <%@ page import="tk.newsoulmate.web.member.service.MemberService" %>
 <%@ page import="tk.newsoulmate.domain.vo.ManageMember" %><%--
@@ -38,15 +38,21 @@
             <div class="box">
                 회원등급
                 <span id="memberGrade">
-<%--                        <label><input type="checkbox" name="" value="전체"> 전체 </label>
-                        <label><input type="checkbox" name="" value="일반회원"> 일반 회원 </label>
-                        <label><input type="checkbox" name="" value="보호소관계자"> 보호소 관계자 </label>--%>
 
-                       <select name="memberPhone" id="memberPhone">
+
+                        <label><input type="checkbox" name="all" value="all"> 전체 </label>
+                        <label><input type="checkbox" name="user" value="0"> 일반 회원 </label>
+                        <label><input type="checkbox" name="shelter" value="1"> 보호소 관계자 </label>
+
+
+
+
+                        <select name="memberPhone" id="memberPhone">
                             <option value="all">전체</option>
                             <option value="0">일반회원</option>
                             <option value="1">보호소 관계자</option>
                         </select>
+
 
 
 
@@ -131,77 +137,82 @@
 
 
 
-/*    function updateMember(){
-        const memberNo = $("#memberNo").val();
-        const memberName = $("#memberName").val();
-        const memberId = $("#memberId").val();
-        const memberPw = $("#memberPw").val();
-        const memberPhone = $("#memberPhone").val();
-        const memberMail = $("#memberMail").val();
-        const memberLevel = $("#memberLevel").val();
-        $.ajax({
-            url : "/updateMember.do",
-            type : "post",
-            data : {
-                memberNo:memberNo,
-                memberName:memberName,
-                memberId:memberId,
-                memberPw:memberPw,
-                memberPhone:memberPhone,
-                memberMail:memberMail,
-                memberLevel:memberLevel
-            },
-            success : function(data){
-                if(data==1){
-                    alert("수정이 완료되었습니다.");
-                    location = "/manageMember.do"
-                }else{
-                    alert("수정 중 오류가 발생하였습니다\n아이디중복 등을 확인하세요.");
-                    location = "/manageMember.do"
-                }
-            },
-            error :function(){
-                alert("수정 중 오류가 발생하였습니다.(error)");
-                location = "/manageMember.do"
-            }
-        });
-    }
 
-    function deleteMember(){
-        const memberNo = $("#memberNo").val();
-        const memberName = $("#memberName").val();
-        const memberId = $("#memberId").val();
-        const memberMail = $("#memberMail").val();
 
-        if(confirm("정말로 탙퇴처리 하시겠습니까?")){
+
+
+
+    /*    function updateMember(){
+            const memberNo = $("#memberNo").val();
+            const memberName = $("#memberName").val();
+            const memberId = $("#memberId").val();
+            const memberPw = $("#memberPw").val();
+            const memberPhone = $("#memberPhone").val();
+            const memberMail = $("#memberMail").val();
+            const memberLevel = $("#memberLevel").val();
             $.ajax({
-                url : "/deleteMember",
-                type : "get",
-                data:{
+                url : "/updateMember.do",
+                type : "post",
+                data : {
                     memberNo:memberNo,
                     memberName:memberName,
                     memberId:memberId,
-                    memberMail:memberMail
+                    memberPw:memberPw,
+                    memberPhone:memberPhone,
+                    memberMail:memberMail,
+                    memberLevel:memberLevel
                 },
                 success : function(data){
                     if(data==1){
-                        alert("탈퇴처리가 완료되었습니다.");
+                        alert("수정이 완료되었습니다.");
                         location = "/manageMember.do"
                     }else{
-                        alert("탈퇴 처리중 오류가 발생하였습니다.");
-                        location = "/"
+                        alert("수정 중 오류가 발생하였습니다\n아이디중복 등을 확인하세요.");
+                        location = "/manageMember.do"
                     }
                 },
-                error : function(){
-                    alert("탈퇴 처리중 오류가 발생하였습니다.(error)");
-                    location = "/"
+                error :function(){
+                    alert("수정 중 오류가 발생하였습니다.(error)");
+                    location = "/manageMember.do"
                 }
-            })
-        }else{
-
+            });
         }
 
-    }*/
+        function deleteMember(){
+            const memberNo = $("#memberNo").val();
+            const memberName = $("#memberName").val();
+            const memberId = $("#memberId").val();
+            const memberMail = $("#memberMail").val();
+
+            if(confirm("정말로 탙퇴처리 하시겠습니까?")){
+                $.ajax({
+                    url : "/deleteMember",
+                    type : "get",
+                    data:{
+                        memberNo:memberNo,
+                        memberName:memberName,
+                        memberId:memberId,
+                        memberMail:memberMail
+                    },
+                    success : function(data){
+                        if(data==1){
+                            alert("탈퇴처리가 완료되었습니다.");
+                            location = "/manageMember.do"
+                        }else{
+                            alert("탈퇴 처리중 오류가 발생하였습니다.");
+                            location = "/"
+                        }
+                    },
+                    error : function(){
+                        alert("탈퇴 처리중 오류가 발생하였습니다.(error)");
+                        location = "/"
+                    }
+                })
+            }else{
+
+            }
+
+        }*/
 
 
 

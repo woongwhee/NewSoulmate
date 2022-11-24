@@ -58,7 +58,7 @@ public class ReplyDao {
             psmt = conn.prepareStatement(sql);
 
             psmt.setInt(1, r.getReplyNo());
-            psmt.setInt(2, r.getNoticeNo());
+            psmt.setLong(2, r.getNoticeNo());
             psmt.setInt(3, r.getMemberNo());
             psmt.setInt(4, r.getReplyType().typeNo);
             psmt.setString(5, r.getReplyContent());
@@ -126,4 +126,21 @@ public class ReplyDao {
     }
 
 
+    public int selectReplyNo(Connection conn) {
+        int result=0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectReplyNo");
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            result= rset.getInt("REPLY_NO");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return result;
+    }
 }

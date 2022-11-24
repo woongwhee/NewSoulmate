@@ -33,6 +33,7 @@
     </div>
     <form action="<%=request.getContextPath()%>/adoptApplyInsert" method="post">
 
+<%--     login_no hidden으로 숨겨서 넘기기 loginUserNo -> 나중에 작업--%>
         <input type="hidden" name="subRead" value="N">
         <div id="adopt-form">
             <div id="form-title">입양신청서</div>
@@ -63,25 +64,25 @@
                     <th colspan="4">입양을 결정하게 된 이유</th>
                 </tr>
                 <tr>
-                    <td colspan="4"><textarea name="adoptReason"></textarea></td>
+                    <td colspan="4"><textarea name="adoptReason" style="resize: none"></textarea></td>
                 </tr>
                 <tr>
                     <th colspan="4">가족 구성원의 반대가 없었는지?</th>
                 </tr>
                 <tr>
-                    <td colspan="4"><textarea name="agreement"></textarea></td>
+                    <td colspan="4"><textarea name="agreement" style="resize: none"></textarea></td>
                 </tr>
                 <tr>
                     <th colspan="4">입양해간 아이가 많이 아프다면?</th>
                 </tr>
                 <tr>
-                    <td colspan="4"><textarea name="whenSick"></textarea></td>
+                    <td colspan="4"><textarea name="whenSick" style="resize: none"></textarea></td>
                 </tr>
                 <tr>
                     <th colspan="4">평생 사랑으로 책일질 수 있는지?</th>
                 </tr>
                 <tr>
-                    <td colspan="4"><textarea name="bigDuty"></textarea></td>
+                    <td colspan="4"><textarea name="bigDuty" style="resize: none"></textarea></td>
                 </tr>
             </table>
             <div id="apply-date">

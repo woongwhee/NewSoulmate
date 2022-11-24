@@ -1,4 +1,4 @@
-<%@ page import="tk.newsoulmate.domain.vo.MemberGrade" %>
+<%@ page import="tk.newsoulmate.domain.vo.type.MemberGrade" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,6 +11,9 @@
 
 <div class="headcontainer">
     <div id="header_box">
+        <div>
+            <!-- div 지우면 안 됨-->
+        </div>
         <div class="navbar_logo">
             <a href="${context}"><img src="${context}/image/logo.png" alt="NewSoulmate환승주인"></a>
         </div>
@@ -24,19 +27,19 @@
                 </c:when>
                 <c:when test="${loginUser.memberGrade.USER}">
                     <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                    <li><a href="${context}/myPageInfo">마이페이지</a></li>
                     <li><a href="${context}/logout">로그아웃</a></li>
                 </c:when>
                 <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
                     <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
                     <li><a href="#">보호소페이지</a></li>
-                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                    <li><a href="${context}/myPageInfo">마이페이지</a></li>
                     <li><a href="${context}/logout">로그아웃</a></li>
                     </c:when>
                     <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
                     <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                    <li><a href="#">관리자페이지</a></li>
-                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                    <li><a href="${context}/manageMemberPage">관리자페이지</a></li>
+                    <li><a href="${context}/myPageInfo">마이페이지</a></li>
                     <li><a href="${context}/logout">로그아웃</a></li>
                 </c:when>
             </c:choose>

@@ -78,4 +78,21 @@ public class CommonService {
         commit();
         return result;
     }
+
+    public int insertNoticeReply(Reply r,Attachment at) {
+        Connection conn=getConnection();
+        ReplyDao rd=new ReplyDao();
+        int replyNo=rd.selectReplyNo(conn);
+        r.setReplyNo(replyNo);
+        at.setReplyNo(replyNo);
+        int result=rd.insertNoticeReply(conn,r);
+        result*=new AttachmentDao().insertReplyAttachment(at,conn);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        commit();
+        return result;
+    }
 }

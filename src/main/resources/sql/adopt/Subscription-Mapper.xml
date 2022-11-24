@@ -7,6 +7,32 @@
         VALUES(SQ_SUBSCRIPTION_PK.nextval,?,?,?,?,?,?,?,?,?,?,?,?,DEFAULT)
     </entry>
 
+    <entry key="selectAdoptApplyListCount">
+        SELECT COUNT(*) AS cnt
+        FROM SUBSCRIPTION
+    </entry>
 
+    <entry key="selectAdoptApplyList">
+        SELECT *
+        FROM(
+            SELECT
+                ROWNUM AS "RNUM",
+                A.*
+            FROM(
+                SELECT
+                    S.SUB_NO,
+                    S.ANIMAL_ID,
+                    M.MEMBER_ID,
+                    S.NAME,
+                    S.TEL_NUM,
+                    S.SUB_DATE,
+                    S.SUB_READ
 
+                FROM SUBSCRIPTION S
+                JOIN MEMBER M ON (S.MEMBER_NO = M.MEMBER_NO)
+                ORDER BY S.SUB_NO
+                ) A
+            )
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
 </properties>

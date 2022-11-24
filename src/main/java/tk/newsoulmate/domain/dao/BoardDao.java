@@ -325,7 +325,8 @@ public class BoardDao {
                         rset.getString("BOARD_TITLE"),
                         rset.getString("BOARD_CONTENT"),
                         rset.getString("MEMBER_ID"),
-                        rset.getDate("CREATE_DATE"));
+                        rset.getDate("CREATE_DATE"),
+                        rset.getString("NICKNAME"));
             }
 
         } catch (SQLException e) {
@@ -350,12 +351,11 @@ public class BoardDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-
             psmt.setInt(1,b.getCategoryNo());
             psmt.setString(2,b.getBoardTitle());
             psmt.setString(3,b.getBoardContent());
             psmt.setInt(4,b.getBoardNo());
-
+            psmt.setInt(5,b.getMemberNo());
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -448,12 +448,28 @@ public class BoardDao {
             throw new RuntimeException(e);
         } finally {
             close(rset);
-            close(psmt);
         }
 
         return list;
     }
 
 
-
+    public int updateReviewBoard(Connection conn, Board b) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("updateReviewBoard");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1,b.getBoardTitle());
+            psmt.setString(2,b.getBoardContent());
+            psmt.setDate(3,b.getIssueDate());
+            psmt.setInt(4,b.getBoardNo());
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
 }

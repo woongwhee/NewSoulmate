@@ -1,13 +1,13 @@
 package tk.newsoulmate.domain.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Subscription {
 
     private int subNo;
     private int memberNo;
     private long shelterNo;
-    private String animalNo;
+    private long animalNo;
     private String telNum;
     private String name;
     private String gender;
@@ -17,13 +17,25 @@ public class Subscription {
     private String bigDuty;
     private String wishDate;
     private String subRead;
-    private String subDate;
+    private Date subDate;
+
+    private String memberId;
 
     public Subscription(){
         super();
     }
 
-    public Subscription(int subNo, int memberNo, long shelterNo, String animalNo, String telNum, String name, String gender, String adoptReason, String agreement, String whenSick, String bigDuty, String wishDate, String subRead, String subDate) {
+    public Subscription(int subNo, long animalNo, String memberId, String name, String telNum, Date subDate, String subRead) {
+        this.subNo = subNo;
+        this.animalNo = animalNo;
+        this.telNum = telNum;
+        this.name = name;
+        this.subRead = subRead;
+        this.subDate = subDate;
+        this.memberId = memberId;
+    }
+
+    public Subscription(int subNo, int memberNo, long shelterNo, long animalNo, String telNum, String name, String gender, String adoptReason, String agreement, String whenSick, String bigDuty, String wishDate, String subRead, Date subDate) {
         this.subNo = subNo;
         this.memberNo = memberNo;
         this.shelterNo = shelterNo;
@@ -44,6 +56,14 @@ public class Subscription {
         return subNo;
     }
 
+    public long getAnimalNo() {
+        return animalNo;
+    }
+
+    public void setAnimalNo(long animalNo) {
+        this.animalNo = animalNo;
+    }
+
     public int getMemberNo() {
         return memberNo;
     }
@@ -52,9 +72,6 @@ public class Subscription {
         return shelterNo;
     }
 
-    public String getAnimalNo() {
-        return animalNo;
-    }
 
     public String getTelNum() {
         return telNum;
@@ -92,8 +109,10 @@ public class Subscription {
         return subRead;
     }
 
-    public String getSubDate() {
-        return subDate;
+
+
+    public String getMemberId() {
+        return memberId;
     }
 
     public void setSubNo(int subNo) {
@@ -108,9 +127,6 @@ public class Subscription {
         this.shelterNo = shelterNo;
     }
 
-    public void setAnimalNo(String animalNo) {
-        this.animalNo = animalNo;
-    }
 
     public void setTelNum(String telNum) {
         this.telNum = telNum;
@@ -148,7 +164,17 @@ public class Subscription {
         this.subRead = subRead;
     }
 
-    public void setSubDate(String subDate) {
+
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public Date getSubDate() {
+        return subDate;
+    }
+
+    public void setSubDate(Date subDate) {
         this.subDate = subDate;
     }
 

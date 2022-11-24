@@ -13,8 +13,6 @@
         VALUES (?,?,?, ?, ?)
     </entry>
 
-
-
     <entry key="insertReplyAttachment">
         INSERT INTO ATTACHMENT(FILE_NO,Reply_NO,ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
         VALUES (SQ_ATTACHMENT_PK.NEXTVAL,?,?, ?, ?)
@@ -57,15 +55,31 @@
         VALUES (SQ_ATTACHMENT_PK.NEXTVAL, ?, ?, ?, ?);
     </entry>
 
-    <entry key="deleteInquireAttachment">
+    <entry key="deleteBoardAttachment">
         UPDATE ATTACHMENT
         SET STATUS = 'N'
         WHERE BOARD_NO = ?
+    </entry>
+    <entry key="deleteAttachment">
+        UPDATE ATTACHMENT
+        SET STATUS = 'N'
+        WHERE FILE_NO = ?
     </entry>
     <entry key="selectFileNo">
         SELECT
         SQ_ATTACHMENT_PK.NEXTVAL
         FROM DUAL
+    </entry>
+
+    <entry key="selectAttachment">
+        SELECT
+            FILE_NO,
+            ORIGIN_NAME,
+            CHANGE_NAME,
+            FILE_PATH,
+            UPLOAD_DATE
+        FROM ATTACHMENT
+        WHERE FILE_NO = ?
     </entry>
 
 
