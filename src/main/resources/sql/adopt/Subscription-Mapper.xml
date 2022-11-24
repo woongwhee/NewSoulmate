@@ -35,4 +35,29 @@
             )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
+
+    <entry key="selectAdoptApplyDetail">
+        SELECT
+            *
+        FROM SUBSCRIPTION SB
+        WHERE SB.SUB_NO = ?
+    </entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </properties>

@@ -28,21 +28,25 @@
 
 <div class="headcontainer">
   <div id="right_view">
-    <div id="adopt_apply_information">
+    <div id="adopt_apply_list">
+        <br>
+        <br>
         <div class="box">
-            총 신청 수
-            <span id="countApply" style="color: #f45d48;"><%= ms.selectAdoptApplyListCount()%></span> 명
+            <b>총 내역
+            <span id="countApply" style="color: #f45d48;"><%= ms.selectAdoptApplyListCount()%></span> 개</b>
         </div>
+        <br>
+        <br>
 
         <div id="applyList">
-            <table class="list-area">
+            <table class="list-area" style="text-align: center">
                 <thead>
                 <tr>
-                    <th width="50">신청번호</th>
-                    <th width="350">공고번호</th>
+                    <th width="100">신청번호</th>
+                    <th width="250">공고번호</th>
                     <th width="100">아이디</th>
-                    <th width="100">신청자이름</th>
-                    <th width="300">전화번호</th>
+                    <th width="100">신청인</th>
+                    <th width="200">전화번호</th>
                     <th width="100">신청일자</th>
                     <th width="100">상태</th>
                 </tr>
@@ -78,6 +82,7 @@
         </div>
 
     </div>
+
   </div>
 </div>
 

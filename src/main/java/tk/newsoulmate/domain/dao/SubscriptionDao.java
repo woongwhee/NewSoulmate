@@ -1,7 +1,5 @@
 package tk.newsoulmate.domain.dao;
 
-import oracle.jdbc.proxy.annotation.Pre;
-import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
 
@@ -45,10 +43,12 @@ public class SubscriptionDao {
             psmt.setString(5,sb.getName());
             psmt.setString(6,sb.getGender());
             psmt.setString(7,sb.getAdoptReason());
-            psmt.setString(8,sb.getAgreement());
+            psmt.setString(8,sb.getFamilyAgreement(
+
+            ));
             psmt.setString(9,sb.getWhenSick());
             psmt.setString(10,sb.getBigDuty());
-            psmt.setString(11,sb.getWishDate());
+            psmt.setDate(11,sb.getWishDate());
             psmt.setString(12,sb.getSubRead());
 
             result = psmt.executeUpdate();
@@ -119,6 +119,47 @@ public class SubscriptionDao {
             close(psmt);
         }
         return list;
+    }
+    public Subscription selectAdoptApplyDetail(Connection conn , int subNo){
+
+        Subscription s = null;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectAdoptApplyDetail");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            psmt.setInt(1,subNo);
+
+            rset = psmt.executeQuery();
+
+            if(rset.next()){
+                s = new Subscription(
+                        rset.getInt("SUB_NO"),
+                        rset.getInt("MEMBER_NO"),
+                        rset.getLong("SHELTER_NO"),
+                        rset.getLong("ANIMAL_ID"),
+                        rset.getString("TEL_NUM"),
+                        rset.getString("NAME"),
+                        rset.getString("GENDER"),
+                        rset.getString("ADOPT_REASON"),
+                        rset.getString("FAMILY_AGREEMENT"),
+                        rset.getString("WHEN_SICK"),
+                        rset.getString("BIG_DUTY"),
+                        rset.getDate("WISH_DATE"),
+                        rset.getString("SUB_READ"),
+                        rset.getDate("SUB_DATE"))
+                        ;
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return s;
 
 
     }
