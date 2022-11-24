@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,11 +100,11 @@ public class ShelterService {
         return nList;
     }
 
-    public  List<Notice> getNoticeList(Request request){
+    public List<Notice> getNoticeList(Request request){
         URL url = request.toUrl();
         System.out.println(url.toString());
         ResponseMapper responseMapper = null;
-        List<Notice> Nlist=new ArrayList<>();
+        List<Notice> nlist=null;
         try {
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -114,15 +113,36 @@ public class ShelterService {
             if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"), ResponseMapper.class);
-                Nlist = responseMapper.getResponse().getBody().getItems().getItem();
+                nlist = responseMapper.getResponse().getBody().getItems().getItem();
             }
             httpConn.disconnect();
         } catch (
                 IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(Nlist);
-        return Nlist;
+        return nlist;
+
+    }public int getNoticeCount(Request request){
+        URL url = request.toUrl();
+        System.out.println(url.toString());
+        ResponseMapper responseMapper = null;
+        int count=0;
+        try {
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestMethod("GET");
+            httpConn.setRequestProperty("Content-type", "application/json");
+            System.out.println(httpConn.getResponseCode());
+            if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"), ResponseMapper.class);
+                count = responseMapper.getResponse().getBody().getTotalCount();
+            }
+            httpConn.disconnect();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
+        return count;
 
     }
 
