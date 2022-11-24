@@ -7,10 +7,10 @@
 }
 
 .headcontainer {
-        width: 1200px;
-        height: auto;
-        margin: 0 auto;
-    }
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
 
 #right_view {
     float: right;
@@ -29,6 +29,9 @@
     text-align: center;
 }
 
+.information p{
+    color: #f45d48;
+}
 input  {
     width: 550px;
     height: 60px;
@@ -38,7 +41,7 @@ input  {
     border-radius: 5px;
 }
 
-#submitButton {
+.deleteMemberBtn {
     margin-top: 50px;
     width: 550px;
     height: 60px;
@@ -50,6 +53,6 @@ input  {
     color: white;
 }
 
-#submitButton:hover {
-    background-color: #319493;
+button:hover {
+    background-color: #f45d48;
 }

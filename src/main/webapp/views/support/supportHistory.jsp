@@ -1,8 +1,9 @@
 <%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.SupportCompleteResponse" %>
+<%@ page import="tk.newsoulmate.domain.vo.*" %>
 <%@ page import="tk.newsoulmate.domain.vo.SupportPage" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="tk.newsoulmate.domain.vo.response.SupportCompleteResponse" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
@@ -21,7 +22,7 @@
 <html>
 <head>
     <title>후원내역</title>
-<%--    <%@include file="/views/template/styleTemplate.jsp" %>--%>
+    <%@include file="/views/template/styleTemplate.jsp" %>
     <link href="<%=request.getContextPath()%>/css/support/supportHistroy.css" rel="stylesheet">
 </head>
 
@@ -52,7 +53,7 @@
                 <table class="supportList-area">
                     <thead>
                     <tr>
-                        <th>후원번호</th>
+                        <th>No</th>
                         <th>후원보호소</th>
                         <th>후원금액</th>
                         <th>후원시간</th>
