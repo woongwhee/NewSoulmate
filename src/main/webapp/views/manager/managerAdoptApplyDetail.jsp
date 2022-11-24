@@ -16,6 +16,7 @@
 <html>
 <head>
     <title>입양신청서확인</title>
+    <link href="<%=request.getContextPath()%>/css/manager/managerAdoptApplyDetail.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
@@ -30,7 +31,7 @@
 
                 <tr width="150">
                     <th>공고 번호</th>
-                    <td>${n.desertion}/td>
+                    <td>${n.desertionNo}</td>
                 </tr>
 
                 <tr width="150">
@@ -40,7 +41,7 @@
 
                 <tr width="150">
                     <th>보호소 이름</th>
-                    <td>${n.carNm}</td>
+                    <td>${n.careNm}</td>
                 </tr>
                 <tr width="150">
                     <th>보호소 연락처</th>
@@ -48,41 +49,47 @@
                 </tr>
                 <tr width="150">
                     <th>입양 희망일</th>
-                    <td>${s.wishDate}/td>
+                    <td>${s.wishDate}</td>
                 </tr>
                 <tr width="150">
                     <th>신청인 전화번호</th>
-                    <td>${s.telNum}/td>
+                    <td>${s.telNum}</td>
                 </tr>
                 <tr width="150">
                     <th>신청일자</th>
-                    <td>${s.subDate}/td>
+                    <td>${s.subDate}</td>
                 </tr>
                 <tr width="150">
                     <th>성별</th>
-                    <td><c:if test="${s.gender eq 'M'}">남자</c:if><c:if test="${s.gender eq 'F'}">여자</c:if></td>
+                    <td>
+                        <c:if test="${s.gender eq 'M'}">남자</c:if>
+                        <c:if test="${s.gender eq 'F'}">여자</c:if>
+                    </td>
                 </tr>
             </table>
-            <h3>입양을 결정하게된이유</h3>
+            <br><br>
+            <h4>입양을 결정하게 된 이유</h4>
             <p>${s.adoptReason}</p>
-            <h3>가족</h3>
+            <h4>가족 구성원의 반대가 없었는지?</h4>
             <p>${s.familyAgreement}</p>
-            <h3>아픔</h3>
+            <h4>입양해 간 아이가 많이 아프다면?</h4>
             <p>${s.whenSick}</p>
-            <h3>평생사랑</h3>
+            <h4>평생 사랑으로 책임질 수있는지?</h4>
             <p>${s.bigDuty}</p>
 
 
-
-            <input type="button" id="confirm" value="확인" class="btn btn-danger btn-sm">
+            <form action="${context}/adoptApplySubRead" type="post">
+                <input type="hidden" name="subRead" value="${s.subNo}">
+                <input type="submit" id="confirm" value="확인" class="btn btn-danger btn-sm">
+            </form>
         </div>
     </div>
 </div>
-    <script>
-        $('#confirm').click(()=>{
-            location.href='${context}/adoptApplyList';
-        });
-    </script>
+<%--<script>--%>
+<%--    $('#confirm').click(()=>{--%>
+<%--        location.href='<%=request.getContextPath()%>/adoptApplyList';--%>
+<%--    });--%>
+<%--</script>--%>
 
 
 
