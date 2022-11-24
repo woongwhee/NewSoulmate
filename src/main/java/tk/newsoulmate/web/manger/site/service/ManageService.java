@@ -77,9 +77,14 @@ public class ManageService {
     public int ChangeAdoptApplySubRead(int subNo){
         Connection conn = getConnection();
 
-        int s = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
+        int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
         close();
-        return s;
+        if(result > 0){
+            commit();
+        } else{
+            rollback();
+        }
+        return result;
     }
     public int changeStatus(String[] memberNo) {
         Connection conn = getConnection();
