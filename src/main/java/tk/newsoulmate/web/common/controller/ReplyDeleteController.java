@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "replyDelete", value = "/replyDelete")
+@WebServlet(name = "replyDelete", value = "/replyDelete.bo")
 public class ReplyDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,18 +29,13 @@ public class ReplyDeleteController extends HttpServlet {
         Member loginUser = (Member) session.getAttribute("loginUser");
         int loginMno= loginUser.getMemberNo();
         int result=cs.deleteReply(rno,loginUser.getMemberNo());
-        if(result==0){
-            error(request,response);
-            return;
-        }
-        session.setAttribute("alertMsg","댓글삭 삭제 성공");
-        response.sendRedirect(request.getContextPath()+"/adoptReList");
+        response.getWriter().print(result);
 
     }
 
     private static void error(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().setAttribute("errorMsg","잘못된접근입니다.");
-        response.sendRedirect(request.getContextPath()+"/adoptReList");
+        response.sendRedirect(request.getContextPath()+"/adoptRevList");
 
     }
 

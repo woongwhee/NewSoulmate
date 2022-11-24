@@ -38,7 +38,7 @@ public class BoardDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1, boardType.boardName);
+            psmt.setInt(1, boardType.typeNo);
             psmt.setInt(2, loginUser.getMemberNo());
             psmt.setInt(3, loginUser.getMemberGrade().gradeNumber);
             rset = psmt.executeQuery();
@@ -325,7 +325,8 @@ public class BoardDao {
                         rset.getString("BOARD_TITLE"),
                         rset.getString("BOARD_CONTENT"),
                         rset.getString("MEMBER_ID"),
-                        rset.getDate("CREATE_DATE"));
+                        rset.getDate("CREATE_DATE"),
+                        rset.getString("NICKNAME"));
             }
 
         } catch (SQLException e) {
@@ -350,12 +351,11 @@ public class BoardDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-
             psmt.setInt(1,b.getCategoryNo());
             psmt.setString(2,b.getBoardTitle());
             psmt.setString(3,b.getBoardContent());
             psmt.setInt(4,b.getBoardNo());
-
+            psmt.setInt(5,b.getMemberNo());
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -441,7 +441,7 @@ public class BoardDao {
                         , rset.getString("BOARD_TITLE")
                         , rset.getDate("CREATE_DATE")
                         , rset.getInt("READ_COUNT")
-                        , rset.getString("BOARD_NAME")));
+                        , rset.getInt("TYPE_NO")));
             }
 
         } catch (SQLException e) {
@@ -454,5 +454,22 @@ public class BoardDao {
     }
 
 
-
+    public int updateReviewBoard(Connection conn, Board b) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("updateReviewBoard");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1,b.getBoardTitle());
+            psmt.setString(2,b.getBoardContent());
+            psmt.setDate(3,b.getIssueDate());
+            psmt.setInt(4,b.getBoardNo());
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
 }

@@ -67,7 +67,6 @@
 
     <entry key="deleteMember">
         UPDATE MEMBER SET STATUS = 'N',
-        MODIFY_DATE = SYSDATE
         WHERE USER_ID = ?
         AND USER_PWD = ?
     </entry>
@@ -81,7 +80,7 @@
 
     <entry key="checkPwd">
         SELECT
-            MEMBER_PWD
+        MEMBER_PWD
         FROM MEMBER
         WHERE MEMBER_NO = ?
     </entry>
@@ -92,6 +91,12 @@
         FROM MEMBER
         WHERE MEMBER_NO = ?
     </entry>
+
+
+
+
+
+    <!--Manager-->
 
     <entry key="manageMember">
         SELECT
@@ -105,7 +110,7 @@
     </entry>
 
 
-
+    <!--관리자 - 전체 회원리스트-->
     <entry key="selectMemberList">
         SELECT
         M.MEMBER_NO,
@@ -120,6 +125,7 @@
         M.RESENT_CONNECTION
         FROM MEMBER M, SHELTER S
         WHERE M.SHELTER_NO = S.SHELTER_NO(+)
+        ORDER BY MEMBER_NO
     </entry>
 
     <entry key="countMember">
@@ -132,8 +138,6 @@
         SET MEMBER_GRADE = 1
         WHERE MEMBER_NO = ?
     </entry>
-
-
 
 
 

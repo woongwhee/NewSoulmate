@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "InquireDetailController", value = "/inquireDetail.bo")
+@WebServlet(name = "InquireDetailController", value = "/inquireDetail")
 public class InquireDetailController extends HttpServlet {
     public InquireDetailController(){
         super();

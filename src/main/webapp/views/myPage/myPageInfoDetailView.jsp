@@ -9,8 +9,9 @@
 <html>
 <head>
     <title>회원정보 수정</title>
-    <link href="<%=request.getContextPath()%>/css/mypage/mypageInfoDetail.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/mypage/mypageInfoDetail.css" rel="stylesheet">
+
 </head>
 <body>
 <header><%@include file="/views/myPage/myPageHeader.jsp"%></header>

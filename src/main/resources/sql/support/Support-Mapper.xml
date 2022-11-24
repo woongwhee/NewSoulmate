@@ -8,7 +8,7 @@
 
     <entry key="initializeSupport">
         INSERT INTO SUPPORT(SUPPORT_NO, SHELTER_NO, MEMBER_NO, MERCHANT_UID, AMOUNT, STATUS, DP_WD, WD_STATUS)
-        VALUES(SQ_SUPPORT_PK.NEXTVAL, ?, ?, ?, ?, 'PENDING', 'DP', 'N')
+        VALUES(SQ_SUPPORT_PK.NEXTVAL, ?, ?, ?, ?, 'PENDING', 'DP', 'BLOCK')
     </entry>
 
     <entry key="findByMerchantUid">
@@ -20,6 +20,18 @@
         UPDATE SUPPORT
         SET STATUS = ?
         WHERE MERCHANT_UID = ?
+    </entry>
+
+    <entry key="updateWithdrawStatusByMerchantUid">
+        UPDATE SUPPORT
+        SET WD_STATUS = ?
+        WHERE MERCHANT_UID = ?
+    </entry>
+
+    <entry key="updateWithdrawStatusBySupportNo">
+        UPDATE SUPPORT
+        SET WD_STATUS = ?
+        WHERE SUPPORT_NO = ?
     </entry>
 
     <entry key="selectAll">
@@ -81,6 +93,14 @@
         ORDER BY PAY_TIME DESC
     </entry>
 
+    <entry key="selectAllByShelterNo">
+        SELECT * FROM SUPPORT SU
+        INNER JOIN MEMBER MEM ON SU.MEMBER_NO = MEM.MEMBER_NO
+        WHERE STATUS = 'DONE'
+        AND SU.SHELTER_NO = ?
+        AND SU.WD_STATUS not in 'BLOCK'
+        ORDER BY PAY_TIME DESC
+    </entry>
 
 </properties>
 

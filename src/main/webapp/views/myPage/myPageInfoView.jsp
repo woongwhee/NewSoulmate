@@ -8,8 +8,11 @@
 <html>
 <head>
     <title>회원정보 수정</title>
-    <link href="<%=request.getContextPath()%>/css/mypage/mypageInfo.css" rel="stylesheet">
+
   <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/mypage/mypageInfo.css" rel="stylesheet">
+
+
 </head>
 <body>
   <header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
@@ -28,7 +31,7 @@
               <th><input type="password" name="" onkeyup="window.event.keyCode == 13 ? checkPwd() : ''" id="memberPw" placeholder=" 비밀번호 입력" required></th>
             </tr>
             <tr>
-              <th><button type="button" class="asds"  onclick="checkPwd()">확인</button></th>
+              <th><button type="button" class="asds" id="submitButton"  onclick="checkPwd()">확인</button></th>
             </tr>
           </table>
       </div>

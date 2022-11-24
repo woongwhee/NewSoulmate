@@ -11,7 +11,7 @@ body {
 }
 
 .headcontainer {
-    /*width: 1200px; */
+    width: 1200px;
     height: auto;
     margin: 0 auto;
 }
@@ -58,12 +58,63 @@ li a {
     font-weight: bold;
 }
 
+#logout:hover {
+    color: #f45d48;
+    text-decoration: none;
+}
+
 li a:hover {
     color: #f45d48;
+    text-decoration: none;
 }
 
 .menu {
     position: absolute;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-btn {
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    background-color: #319493;
+    padding: 0;
+}
+
+.dropdown-submenu {
+    width: 270px;
+    display: none;
+}
+
+.dropdown-submenu a {
+    display: block;
+    text-align: left;
+    color: #cfcfcf;
+}
+
+.dropdown-btn a:hover {
+    color: #f45d48;
+}
+
+.dropdown-submenu a:hover {
+    color: #f45d48;
+}
+
+.dropdown:hover .dropdown-submenu {
+    display: block;
+}
+
+
+.dropdown a {
+    text-decoration: none;
+    padding: 20px;
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: #319493;
 }
 
 /*아래는 오른쪽 게시글 작성하는 란*/

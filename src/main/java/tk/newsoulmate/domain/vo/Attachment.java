@@ -3,7 +3,7 @@ package tk.newsoulmate.domain.vo;
 import java.sql.Date;
 
 public class Attachment {
-	
+
 	private int fileNo;
 	private int boardNo;
 	private int replyNo;
@@ -14,7 +14,7 @@ public class Attachment {
 	private Date uploadDate;
 	private int filelevel;
 	private String status;
-	
+
 	private Attachment() {
 		super();
 	}
@@ -23,14 +23,14 @@ public class Attachment {
 		Attachment at=new Attachment(originName,changeName,filePath);
 		return at;
 	}
-    private Attachment(String originName, String changeName, String filePath) {
+	private Attachment(String originName, String changeName, String filePath) {
 		this.originName=originName;
 		this.changeName=changeName;
 		this.filePath=filePath;
 
-    }
+	}
 
-    /**
+	/**
 	 * 게시글용 첨부파일 팩토리얼
 	 * @param fileNo
 	 * @param boardNo
@@ -191,5 +191,5 @@ public class Attachment {
 				+ changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", filelevel=" + filelevel
 				+ ", status=" + status + "]";
 	}
-	
+
 }

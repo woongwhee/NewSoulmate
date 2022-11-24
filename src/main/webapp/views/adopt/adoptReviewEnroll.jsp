@@ -35,7 +35,7 @@
     });
 </script>
 
-<form action="${context}/adoptReInsert" method="post" id="adoptReview">
+<form action="${context}/adoptRevInsert" method="post" id="adoptReview">
    <table width="100%">
        <tr>
            <td>제목</td>
@@ -52,7 +52,7 @@
        <tr>
            <td colspan="2">
                <button type="submit" id="save">작성하기</button>
-               <button type="button" onclick="location.href = '${context}/adoptReList.bo'">목록으로 돌아가기</button>
+               <button type="button" onclick="location.href = '${context}/adoptRevList'">목록으로 돌아가기</button>
            </td>
        </tr>
    </table>

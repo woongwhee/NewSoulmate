@@ -49,7 +49,7 @@
     </div>
     <div id="main_left">
         <div id="adopt-review">
-            <div id="comment2" onclick="location.href='<%=request.getContextPath()%>/adoptReList'">입양후기+</div>
+            <div id="comment2" onclick="location.href='<%=request.getContextPath()%>/adoptRevList'">입양후기+</div>
                 <div id="adopt-review-list">
                     <img src="" alt="">
                     <img src="" alt="">
@@ -107,7 +107,7 @@
         <div class="main_right_box2">
             <div id="support-box">
                 <div  id="comment4">후원유도멘트</div>
-                <button id="supportBtn"  onclick="location.href='<%=request.getContextPath()%>/supportpayment'">후원하러 가기</button>
+                <button id="supportBtn"  onclick="location.href='${context}/supportPaymentPage'">후원하러 가기</button>
             </div>
         </div>
     </div>

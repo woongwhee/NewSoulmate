@@ -67,6 +67,7 @@ a {
 .navbar_menu li:hover {
     background-color: #f45d48;
     border-radius: 4px;
+    text-decoration: none;
 }
 
 
@@ -85,7 +86,6 @@ a {
     text-align: center;
     color: #fff;
     border: none;
-    cursor: pointer;
     background-color: #f45d48;
 }
 
@@ -116,10 +116,12 @@ a {
 
 .dropdown-btn a:hover {
     color: #f45d48;
+    text-decoration: none;
 }
 
 .dropdown-submenu a:hover {
     color: #319493;
+    text-decoration: none;
 }
 
 .dropdown:hover .dropdown-submenu {
@@ -128,6 +130,7 @@ a {
 
 #user a:hover {
     color: #f45d48;
+    text-decoration: none;
 }
 
 #user p {

@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "MyPageInfoController", value = "/myPageInfo")
+@WebServlet(name = "MyPageInfoController", value = "/MyPageInfo")
 public class MyPageInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

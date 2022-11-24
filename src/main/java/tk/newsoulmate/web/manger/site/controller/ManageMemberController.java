@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.manger.site.controller;
 
+import tk.newsoulmate.domain.vo.ManageMember;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.manger.site.service.ManageService;
 
@@ -13,9 +14,8 @@ import java.util.ArrayList;
 public class ManageMemberController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
         ManageService service= new ManageService();
-        ArrayList<Member> mList = service.selectMemberList();
+        ArrayList<ManageMember> mList = service.selectMemberList();
         request.setAttribute("mList", mList);
         RequestDispatcher view = request.getRequestDispatcher("/views/manager/managerMemberList.jsp");
         view.forward(request, response);

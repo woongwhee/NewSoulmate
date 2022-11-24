@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="create">
+        INSERT INTO TRANSFER VALUES(SQ_TRANSFER_PK.NEXTVAL, ?, ?, ?, ?, 'N')
+    </entry>
+
+    <entry key="findBySupportNo">
+        SELECT *
+        FROM TRANSFER
+        WHERE SUPPORT_NO = ?
+    </entry>
+
+    <entry key="findByTransferNo">
+        SELECT *
+        FROM TRANSFER
+        WHERE TRANSFER_NO = ?
+    </entry>
+
+    <entry key="findAll">
+        SELECT *
+        FROM TRANSFER T
+        INNER JOIN SUPPORT S on T.SUPPORT_NO = S.SUPPORT_NO
+        INNER JOIN MEMBER M on S.MEMBER_NO = M.MEMBER_NO
+        INNER JOIN SHELTER SH on S.SHELTER_NO = SH.SHELTER_NO
+    </entry>
+
+</properties>
+

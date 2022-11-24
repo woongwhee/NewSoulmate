@@ -1,0 +1,88 @@
+/*폰트 : 노토산스 */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+.headcontainer {
+     width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#header_box {
+    width: 1200px;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 400px);
+    grid-template-rows: 100px;
+
+}
+
+#user {
+    padding: 50px 0 0 280px;
+    color: #319493;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+a {
+    color: #319493;
+    text-decoration: none;
+}
+
+ul {
+    display: inline-block;
+    list-style-type: none;
+    padding: 20px;
+    margin: 0px;
+    width: 300px;
+    background: #319493;
+    height: 1200px;
+    overflow: auto;
+    /* position: fixed; */
+}
+
+li a {
+    text-decoration: none;
+    padding: 20px;
+    display: block;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#logout:hover {
+    color: #f45d48;
+    text-decoration: none;
+}
+
+li a:hover {
+    color: #f45d48;
+    text-decoration: none;
+}
+
+.menu {
+    position: absolute;
+}
+
+/*아래는 오른쪽 게시글 작성하는 란*/
+
+.right_text {
+    float: right;
+    width: 910px;
+    text-align: center;
+    color: #319493;
+    border-top: 3px solid #bababa;
+    border-bottom: 3px solid #bababa;
+}
+
+#right_text_fiex {
+    width: 1200px;
+}

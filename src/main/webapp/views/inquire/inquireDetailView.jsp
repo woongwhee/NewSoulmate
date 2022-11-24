@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="tk.newsoulmate.domain.vo.*" %>
+
 <html>
 <head>
     <title>문의내역 상세보기</title>
@@ -17,7 +18,7 @@
 
     <div class="outer">
         <br>
-        <h2 style="text-align:center;">1:1문의</h2>
+        <h2 style="text-align:center;">Q&A</h2>
         <br>
         <hr>
         <br>
@@ -32,7 +33,7 @@
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>${b.memberName}</td>
+                <td>${b.nickName}</td>
                 <th>작성일</th>
                 <td>${b.createDate}</td>
             </tr>
@@ -58,27 +59,6 @@
                     </c:if>
                 </td>
             </tr>
-<%--            <c:choose >--%>
-<%--                <c:when test="${b.resultStatus eq 'Y'}">--%>
-
-<%--                </c:when>--%>
-<%--                <c:when test="${!empty loginUser AND (loginUser.memberGreade eq MemberGreade.SITE_MANAGER)}">--%>
-<%--                    <tr>--%>
-<%--                        <th>답변작성</th>--%>
-<%--                        <td>--%>
-<%--                            <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>--%>
-<%--                        </td>--%>
-<%--                        <td><button id="replySubmit">답변등록</button></td>--%>
-<%--                    </tr>--%>
-<%--                </c:when>--%>
-<%--                <c:otherwise>--%>
-<%--                    <tr>--%>
-<%--                        <th>답변</th>--%>
-<%--                        <td><%= b.getResultStatus()%></td>--%>
-<%--                    </tr>--%>
-<%--                </c:otherwise>--%>
-<%--            </c:choose>--%>
-
 
             <c:forEach var="r" items="${rList}">
                 <tr>
@@ -86,11 +66,12 @@
                     <td>${r.replyContent}</td>
                     <td>
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
-                        <button class="bi bi-x-circle-fill" id="replyDelete"></button>
+                        <button class="bi bi-x-circle-fill replyDelete" refNo="${r.replyNo}"></button>
                     </td>
                 </tr>
             </c:forEach>
-            <c:if test="${empty rList}">
+            <c:if test="${loginUser.memberGrade.SITE_MANAGER}">
+
                 <tr>
                     <th>답변작성</th>
                     <td>
@@ -98,6 +79,7 @@
                     </td>
                     <td><button id="replySubmit">답변등록</button></td>
                 </tr>
+
             </c:if>
         </table>
 
@@ -107,8 +89,8 @@
             <a href="${context}/inquire" class="btn btn-secondary btn-sm">목록</a>
             <%-- if문 가능한건지 체크 확인해야함 --%>
             <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
-            <a href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
-            <a href="${context}/inquireDelete.bo?bno=${b.boardNo}" class="btn btn-danger btn-sm">삭제</a>
+            <a id=boardUpdate href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
+            <a id=boardDelete class="btn btn-danger btn-sm">삭제</a>
         </div>
     </div>
 
@@ -128,6 +110,7 @@
                     success:(result)=>{
                         if(result>0){
                             alert('답변등록성공');
+                            location.reload();
                         }else{
                             alert('답변등록실패',result)
                         }
@@ -138,9 +121,32 @@
                 });
             }
             </c:if>
-            $('#deleteBoard').click(()=>{
+            $('.replyDelete').click((e)=>{
+              let rno=  $(e.target).attr('refNo');
+                console.log(rno);
                 if(confirm('정말삭제하시겠습니까?')){
-                    location.href='${context}/adoptRevDelete?bno=${b.boardNo}'
+                    $.ajax({
+                        url:"replyDelete.bo",
+                        type:'post',
+                        data:{rno:rno},
+                        success:(result)=>{
+                            if(result>0){
+                                alert("댓 삭 성")
+                            location.reload()
+                            }else{
+                                alert("댓글삭제실패")
+                            }
+                        },
+                        error:(e)=>{console.log(e)}
+
+                    })
+
+
+                }
+            })
+            $('#boardDelete').click(()=>{
+                if(confirm('정말삭제하시겠습니까?')){
+                    location.href='${context}/inquireDelete.bo?bno=${b.boardNo}'
                 }
             })
 

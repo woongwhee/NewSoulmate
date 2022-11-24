@@ -55,7 +55,7 @@
         SELECT COUNT(*) as cnt
         FROM BOARD
         JOIN BOARD_TYPE USING(TYPE_NO)
-        WHERE BOARD_NAME = ?
+        WHERE TYPE_NO = ?
         AND BOARD_STATUS='Y'
         AND( MEMBER_NO=? OR 2=?)
     </entry>
@@ -71,11 +71,11 @@
                     BOARD_TITLE,
                     CREATE_DATE,
                     READ_COUNT,
-                    BOARD_NAME
+                    TYPE_NO
                 FROM BOARD B
                 JOIN MEMBER M ON B.MEMBER_NO = M.MEMBER_NO
-                JOIN BOARD_TYPE USING(TYPE_NO)
                 WHERE B.MEMBER_NO = ?
+                AND BOARD_STATUS = 'Y'
                 ORDER BY CREATE_DATE DESC
                 ) A
             )
@@ -90,7 +90,7 @@
                 A.*
             FROM (
                 SELECT
-                    CASE WHEN REPLY_CONTENT IS NULL THEN 'N' ELSE 'Y' END AS "RESULTSTATUS",
+                    CASE WHEN REPLY_CONTENT IS NULL THEN '답변전' ELSE '답변완료' END AS "RESULTSTATUS",
                     B.BOARD_NO,
                     BOARD_TITLE,
                     MEMBER_NAME,
@@ -101,6 +101,7 @@
                 LEFT JOIN REPLY R on B.BOARD_NO = R.BOARD_NO
                 WHERE BOARD_NAME = '문의'
                 AND(B.MEMBER_NO=? OR 2=?)
+                AND BOARD_STATUS = 'Y'
                 ORDER BY CREATE_DATE DESC
                 ) A
             )
@@ -132,10 +133,11 @@
             BOARD_TITLE,
             BOARD_CONTENT,
             MEMBER_ID,
-            CREATE_DATE
+            CREATE_DATE,
+            NICKNAME
         FROM BOARD B
         LEFT JOIN CATEGORY USING(CATEGORY_NO)
-        JOIN MEMBER USING(MEMBER_NO)
+        JOIN MEMBER M USING(MEMBER_NO)
         WHERE BOARD_NO = ?
             AND (MEMBER_NO=? or 2=?)
             AND B.BOARD_STATUS = 'Y'
@@ -144,8 +146,17 @@
     <entry key="updateInquireBoard">
         UPDATE BOARD
         SET CATEGORY_NO = ?
-        ,BOARD_TITLE = ?
-        ,BOARD_CONTENT = ?
+            ,BOARD_TITLE = ?
+            ,BOARD_CONTENT = ?
+        WHERE BOARD_NO = ?
+        AND MEMBER_NO=?
+        AND STATUS='Y'
+    </entry>
+    <entry key="updateReviewBoard">
+        UPDATE BOARD
+        SET BOARD_TITLE = ?,
+            BOARD_CONTENT = ?,
+            ISSUE_DATE = ?
         WHERE BOARD_NO = ?
     </entry>
 

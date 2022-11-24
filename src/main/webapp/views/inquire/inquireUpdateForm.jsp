@@ -6,14 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="tk.newsoulmate.domain.vo.*" %>
-<%@ page import="java.util.ArrayList" %>
 
-<%
-  ArrayList<Category> list = (ArrayList<Category>) request.getAttribute("list");
-  Board b = (Board) request.getAttribute("b");
-  Attachment at = (Attachment) request.getAttribute("at");
-%>
 <html>
 <head>
     <title>1:1문의 수정하기</title>
@@ -28,43 +21,22 @@
       <hr>
       <br>
 
-      <form action="<%=request.getContextPath()%>/inquireUpdate.bo" id="update-form" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="bno" value="<%=b.getBoardNo()%>">
-
+      <form action="${context}/inquire/update" id="update-form" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="bno" value="${b.boardNo}">
         <table align="center">
           <tr>
             <th width="100">카테고리</th>
             <td width="500">
-              <select name="categoryName">
-                <% for(Category c : list) { %>
-                <option value="<%= c.getCategoryNo() %>"><%= c.getCategoryName() %></option>
-
-                <%} %>
-
+              <select name="categoryNo">
+                <c:forEach items="${list}" var="c">
+                <option value="${c.categoryNo}">${c.categoryName}</option>
+                </c:forEach>
               </select>
-
-              <script>
-                $(function(){
-                  $("#update-form option").each(function(){
-                    // 현재 반복 진행중인 option태그의 text값과 db에서 가져온 categoryname값이
-                    // 일치하는 경우 선택되도록
-                    if($(this).text() == "<%=b.getCategoryName()%>"){
-                      // 일치하는경우에만 option태그를 선택상태로 변경
-                      $(this).attr("selected", true);
-                    }
-
-
-
-                  });
-                });
-              </script>
-
             </td>
           </tr>
           <tr>
             <th>제목</th>
             <td><input type="text" name="boardTitle" required value="<%=b.getBoardTitle() %>"></td>
-
           </tr>
           <tr>
             <th>내용</th>
@@ -75,15 +47,21 @@
           <tr>
             <th>첨부파일</th>
             <td>
-              <% if(at != null) { %>
-              <%= at.getOriginName() %>
-              <!-- 원본파일의 파일번호, 수정명을 hidden으로 넘길것. -->
-              <input type="hidden" name="originFileNo" value="<%= at.getFileNo() %>">
-              <input type="hidden" name="originFileName" value="<%= at.getChangeName() %>">
 
-              <% } %>
-
-              <input type="file" name="upfile">
+              <c:if test="${!empty at}">
+              <div id="originFile" name="originFile">${at.originName}
+                <input type="hidden" value="none" id="deleteFile" name="deleteFile">
+                <button type="button" id="deletebtn" onclick="deleteFiles()"
+                        class="btn btn-danger btn-sm" style="border-radius:25px">X</button>
+              </div>
+              <input type="hidden" name="originFileNo" value="${at.fileNo}">
+              <input type="hidden" name="originFileName" value="${at.originfileName}">
+              <input type="file" id="upfile" name="upfile" accept=".gif, .jpg, .png" onchange="checkSize(this)" style="display: none">
+              </c:if>
+              <c:if test="${empty at}">
+              <input type="hidden" id="deleteFile" value="none">
+              <input type="file" name="upfile" accept=".gif, .jpg, .png" onchange="checkSize(this)">
+              </c:if>
             </td>
           </tr>
         </table>
@@ -98,14 +76,33 @@
     </div>
 
 
-
-
-
-
-
-
-
-
     <%@include file="/views/template/footer.jsp"%>
+    <script>
+      $(function(){
+        $("#update-form option").each(function(){
+          // 현재 반복 진행중인 option태그의 text값과 db에서 가져온 categoryname값이
+          // 일치하는 경우 선택되도록
+          if($(this).text() == "${b.categoryName}"){
+            // 일치하는경우에만 option태그를 선택상태로 변경
+            $(this).attr("selected", true);
+          }
+
+        });
+      });
+      function deleteFiles(){
+        $('#originFile').css('display',"none");
+        $('#deleteFile').val('delete');
+        // $('#originFile').css('display')
+        $("#deletebtn").css('display','none');
+        $("#upfile").css('display','block');
+      }
+      function checkSize(input) {
+        if (input.files && input.files[0].size > (20 * 1024 * 1024)) {
+          alert("파일 사이즈가 20mb 를 넘습니다.");
+          input.value = null;
+        }
+      }
+    </script>
 </body>
+
 </html>

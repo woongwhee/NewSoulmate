@@ -1,0 +1,123 @@
+/*폰트 : 노토산스 */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.headcontainer {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#right_view {
+    float: right;
+    padding: 20px;
+    margin: 0px;
+    width: 910px;
+    height: auto;
+    text-align: center;
+}
+
+#user_information {
+    font-size: 23px;
+    font-weight: bold;
+    padding: 15px 25px;
+}
+
+.form-group p {
+    color: rgb(130, 130, 130);
+    font-weight: lighter
+}
+
+.form-group {
+
+    text-align: left;
+}
+
+.form-group label {
+    margin: 40px 0 20px 0;
+    display: block;
+}
+
+.form-group input {
+    width: 500px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group input[name="email_1"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group select[name="email_2"] {
+    width: 190px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group input[name="email_1"] {
+    width: 190px;
+}
+
+.form-group input[name="email_2"] {
+    width: 170px;
+}
+
+
+.form-group select[name="email_3"] {
+    width: 130px;
+    height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type=button],
+button {
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #bababa;
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer
+}
+
+#certified {
+    margin-top: 20px;
+}
+
+button[type=submit] {
+    margin-top: 50px;
+    background-color: #319493;
+}
+
+input[type=button] {
+    margin-top: 50px;
+    background-color: #f45d48;
+}
+
+button:hover {
+    background-color: #319493;
+    color: white;
+}
+
+input[type=button]:hover {
+    color: white;
+}
+
+input,
+select {
+    font-size: 15px;
+}

@@ -30,7 +30,7 @@
 
 }
 
-input {
+input  {
     width: 550px;
     height: 60px;
     margin-top: 20px;
@@ -39,7 +39,7 @@ input {
     border-radius: 5px;
 }
 
-button {
+#submitButton {
     margin-top: 50px;
     width: 550px;
     height: 60px;

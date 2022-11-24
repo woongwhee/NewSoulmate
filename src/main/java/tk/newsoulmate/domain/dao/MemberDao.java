@@ -1,8 +1,8 @@
 package tk.newsoulmate.domain.dao;
-
+import tk.newsoulmate.domain.vo.ManageMember;
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.domain.vo.type.MemberGrade;
+import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.*;
@@ -334,6 +334,9 @@ public class MemberDao {
         return memberPwd;
     }
 
+
+
+
     public ArrayList<Member> selectManageMember(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -366,17 +369,17 @@ public class MemberDao {
 
 
 
-    public ArrayList<Member> selectMemberList(Connection conn) {
+    public ArrayList<ManageMember> selectMemberList(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        ArrayList<Member> mList = new ArrayList<Member>();
+        ArrayList<ManageMember> mList = new ArrayList<ManageMember>();
         String sql = prop.getProperty("selectMemberList");
 
         try {
             psmt = conn.prepareStatement(sql);
             rset = psmt.executeQuery();
             while (rset.next()) {
-                Member m = new Member();
+                ManageMember m = new ManageMember();
                 Shelter s = new Shelter();
                 m.setMemberNo(rset.getInt("MEMBER_NO"));
                 m.setMemberId(rset.getString("MEMBER_ID"));
@@ -386,7 +389,7 @@ public class MemberDao {
                 MemberGrade memberGrade = MemberGrade.valueOfNumber(rset.getInt("MEMBER_GRADE"));
                 m.setMemberGrade(memberGrade);
                 m.setShelterNo(rset.getLong("SHELTER_NO"));
-                s.setShelterName(rset.getString("SHELTER_NAME"));
+                m.setShelterName(rset.getString("SHELTER_NAME"));
                 m.setEnrollDate(rset.getDate("ENROLL_DATE"));
                 m.setResentConnection(rset.getDate("RESENT_CONNECTION"));
                 mList.add(m);
