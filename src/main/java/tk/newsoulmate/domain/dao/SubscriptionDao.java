@@ -168,28 +168,67 @@ public class SubscriptionDao {
     }
 
 
-    public ArrayList<Subscription> subscriptionList(Connection conn) {
-        ArrayList<Subscription> scriptList = new ArrayList<>();
-
+    public int shelterNoAdoptApplyListCount(Connection conn,long shelterNo) {
+        int listCount = 0;
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        String sql = prop.getProperty("subscriptionList");
+        String sql = prop.getProperty("shelterNoAdoptApplyListCount");
 
         try {
             psmt = conn.prepareStatement(sql);
+            psmt.setLong(1,shelterNo);
             rset = psmt.executeQuery();
-            while (rset.next()){
-                Subscription ss = new Subscription();
-                ss.setSubNo(rset.getInt("SUB_NO"));
-                ss.setAnimalNo(rset.getString("ANIMAL_ID"));
-                ss.set
-
-
+            if (rset.next()) {
+                listCount = rset.getInt("cnt");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
         }
-        return scriptList;
-
+        return listCount;
     }
+
+    public ArrayList<Subscription> shelterNoAdoptApplyList(Connection conn, PageInfo pi, long shelterNo) {
+        ArrayList<Subscription> list = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("shelterNoAdoptApplyList");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            if (pi.getCurrentPage() == 0) {
+                return list;
+            }
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
+
+            psmt.setLong(1,shelterNo);
+            psmt.setInt(2, startRow);
+            psmt.setInt(3, endRow);
+
+            rset = psmt.executeQuery();
+
+            while (rset.next()) {
+                list.add(new Subscription(
+                        rset.getInt("SUB_NO")
+                        , rset.getLong("ANIMAL_ID")
+                        , rset.getString("MEMBER_ID")
+                        , rset.getString("NAME")
+                        , rset.getString("TEL_NUM")
+                        , rset.getDate("SUB_DATE")
+                        , rset.getString("SUB_READ")));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return list;
+    }
+
 }
+

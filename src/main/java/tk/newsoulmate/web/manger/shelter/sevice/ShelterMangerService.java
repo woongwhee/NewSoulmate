@@ -1,19 +1,31 @@
 package tk.newsoulmate.web.manger.shelter.sevice;
 
 import tk.newsoulmate.domain.dao.SubscriptionDao;
+import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import static tk.newsoulmate.web.common.JDBCTemplet.close;
+import static tk.newsoulmate.web.common.JDBCTemplet.getConnection;
+
 public class ShelterMangerService {
-    public ArrayList<Subscription> subscriptionList() {
-        Connection conn = JDBCTemplet.getConnection();
-        ArrayList<Subscription> scriptList = new SubscriptionDao().subscriptionList(conn);
+    public int shelterNoAdoptApplyListCount(long shelterNo) {
+        Connection conn = getConnection();
 
-        JDBCTemplet.close();
+        int listCount = new SubscriptionDao().shelterNoAdoptApplyListCount(conn,shelterNo);
 
-        return scriptList;
+        close();
+        return listCount;
+    }
+
+    public ArrayList<Subscription> ShelterNoAdoptApplyList(PageInfo pi, long shelterNo) {
+        Connection conn = getConnection();
+
+        ArrayList<Subscription> list = new SubscriptionDao().shelterNoAdoptApplyList(conn, pi ,shelterNo);
+        close();
+        return list;
     }
 }
