@@ -21,14 +21,15 @@
 <html>
 <head>
     <title>입양신청목록</title>
+    <link href="<%=request.getContextPath()%>/css/manager/managerAdoptApplyList.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 <header><%@include file="/views/manager/managerHeader.jsp"%></header>
 
 <div class="headcontainer">
-  <div id="right_view">
-    <div id="adopt_apply_list">
+    <div id="right_view">
+        <div id="adoptApplyList">
         <br>
         <br>
         <div class="box">
@@ -80,7 +81,36 @@
                 </tbody>
             </table>
         </div>
+            <br><br>
 
+            <%-- 페이징바 처리--%>
+            <div align="center" class="paging-area">
+
+                <% if(currentPage != 1) { %>
+                <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+
+                <% } %>
+
+                <% for(int i=startPage; i<=endPage; i++) { %>
+                <% if(i != currentPage) {%>
+                <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
+                <% } else { %>
+                <button disabled><%=i %></button>
+                <% } %>
+                <% } %>
+
+                <% if(currentPage != maxPage) { %>
+                <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+
+                <% } %>
+
+
+            </div>
+            <script>
+                function doPageClick(currentPage){
+                    location.href = "<%=request.getContextPath()%>/adoptApplyList?currentPage="+currentPage;
+                }
+            </script>
     </div>
 
   </div>
@@ -104,34 +134,6 @@
         </script>
         <br><br>
 
-        <%-- 페이징바 처리--%>
-        <div align="center" class="paging-area">
-
-            <% if(currentPage != 1) { %>
-            <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
-
-            <% } %>
-
-            <% for(int i=startPage; i<=endPage; i++) { %>
-            <% if(i != currentPage) {%>
-            <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
-            <% } else { %>
-            <button disabled><%=i %></button>
-            <% } %>
-            <% } %>
-
-            <% if(currentPage != maxPage) { %>
-            <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
-
-            <% } %>
-
-
-        </div>
-        <script>
-            function doPageClick(currentPage){
-                location.href = "<%=request.getContextPath()%>/adoptApplyList?currentPage="+currentPage;
-            }
-        </script>
 
 </body>
 </html>

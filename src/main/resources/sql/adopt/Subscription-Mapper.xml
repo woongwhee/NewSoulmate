@@ -43,6 +43,12 @@
         WHERE SB.SUB_NO = ?
     </entry>
 
+    <entry key="changeAdoptApplySubRead">
+        UPDATE SUBSCRIPTION
+        SET SUB_READ = 'Y'
+        WHERE SUB_NO = ?
+    </entry>
+
 
 
 

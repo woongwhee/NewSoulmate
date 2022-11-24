@@ -120,6 +120,25 @@ public class SubscriptionDao {
         }
         return list;
     }
+    public int changeAdoptApplySubRead(Connection conn, int subNo){
+        int result = 0;
+        Subscription s = null;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("changeAdoptApplySubRead");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,subNo);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
+
+    }
     public Subscription selectAdoptApplyDetail(Connection conn , int subNo){
 
         Subscription s = null;

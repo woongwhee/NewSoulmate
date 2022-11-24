@@ -1,9 +1,6 @@
 package tk.newsoulmate.web.manger.site.service;
 
-import tk.newsoulmate.domain.dao.GradeUpDao;
-import tk.newsoulmate.domain.dao.MemberDao;
-import tk.newsoulmate.domain.dao.NoticeDao;
-import tk.newsoulmate.domain.dao.SubscriptionDao;
+import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.domain.vo.GradeUp;
 import tk.newsoulmate.domain.vo.ManageMember;
@@ -68,12 +65,20 @@ public class ManageService {
         close();
         return list;
     }
-    public Subscription selectAdoptApplyListCheck(int subNo){
+    public Subscription selectAdoptApplyDetail(int subNo){
         Connection conn = getConnection();
 
         Subscription s = new SubscriptionDao().selectAdoptApplyDetail(conn,subNo);
         close();
 
+        return s;
+    }
+
+    public int ChangeAdoptApplySubRead(int subNo){
+        Connection conn = getConnection();
+
+        int s = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
+        close();
         return s;
     }
     public int changeStatus(String[] memberNo) {

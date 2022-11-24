@@ -16,10 +16,11 @@
 <html>
 <head>
     <title>입양신청서확인</title>
+    <link href="<%=request.getContextPath()%>/css/manager/managerAdoptApplyDetail.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
-<%--<header><%@include file="/views/manager/managerHeader.jsp"%></header>--%>
+<header><%@include file="/views/manager/managerHeader.jsp"%></header>
 
 <div class="headcontainer">
     <div id="right_view">
@@ -66,6 +67,7 @@
                     </td>
                 </tr>
             </table>
+            <br><br>
             <h4>입양을 결정하게 된 이유</h4>
             <p>${s.adoptReason}</p>
             <h4>가족 구성원의 반대가 없었는지?</h4>
@@ -76,16 +78,18 @@
             <p>${s.bigDuty}</p>
 
 
-
-            <input type="button" id="confirm" value="확인" class="btn btn-danger btn-sm">
+            <form action="${context}/adoptApplySubRead" type="post">
+                <input type="hidden" name="subRead" value="${s.subNo}">
+                <input type="submit" id="confirm" value="확인" class="btn btn-danger btn-sm">
+            </form>
         </div>
     </div>
 </div>
-    <script>
-        $('#confirm').click(()=>{
-            location.href='<%=request.getContextPath()%>/adoptApplyList';
-        });
-    </script>
+<%--<script>--%>
+<%--    $('#confirm').click(()=>{--%>
+<%--        location.href='<%=request.getContextPath()%>/adoptApplyList';--%>
+<%--    });--%>
+<%--</script>--%>
 
 
 
