@@ -40,4 +40,29 @@
         SELECT *
         FROM SUBSCRIPTION
     </entry>
+
+    <entry key="selectAdoptApplyDetail">
+        SELECT
+            *
+        FROM SUBSCRIPTION SB
+        WHERE SB.SUB_NO = ?
+    </entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </properties>
