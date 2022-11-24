@@ -50,17 +50,28 @@ public class ManageService {
     }
 
 
-    public int[] changeStatus(int[] memArr) {
+    public int changeStatus(String[] memberNo) {
         Connection conn = getConnection();
-        int[] result = new GradeUpDao().changeGrade(conn,memArr);
+        int result1 = new GradeUpDao().changeGrade(conn,memberNo);
+        int result2 = new MemberDao().changeGrade(conn,memberNo);
 
-        for(int i =0; i<result.length;i++){
-            if(result[i]>0){
+            if(result1 == memberNo.length && result2 == memberNo.length){
                 commit();
             }else{
                 rollback();
             }
+        return (result1+result2)/2;
+    }
+
+    public int changeStatusReject(String[] memberNo) {
+        Connection conn = getConnection();
+        int result1 = new GradeUpDao().changeGrade(conn,memberNo);
+
+        if(result1 == memberNo.length){
+            commit();
+        }else{
+            rollback();
         }
-        return result;
+        return result1;
     }
 }

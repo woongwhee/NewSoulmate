@@ -7,22 +7,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.Array;
-import java.util.Arrays;
-import java.util.stream.Stream;
 
-@WebServlet(name = "AjaxGradeAllowController", value = "/GradeAllow")
-public class AjaxGradeAllowController extends HttpServlet {
+@WebServlet(name = "AjaxGradeRejectController", value = "/GradeReject")
+public class AjaxGradeRejectController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 회원 등급 n => y 로 바꾸기
-        // gra
-
-        String[] memberNo =request.getParameterValues("checkMember");
-        System.out.println(memberNo);
-//        Integer[] memArr = Stream.of(memberNo).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
-//        System.out.println(memArr);
-        int result = new ManageService().changeStatus(memberNo);
+        String[] memberNo =request.getParameterValues("rejectMember");
+        System.out.println(memberNo[0]);
+        int result = new ManageService().changeStatusReject(memberNo);
 
         response.setContentType("application/json; charset=UTF-8");
         Gson gson = new Gson();
