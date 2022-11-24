@@ -26,7 +26,7 @@
 
 <div id="content">
     <div id="animal-search-box">
-        <div>
+        <div id="search-box-table-div">
             <table id="search-box-table">
                 <tr>
                     <th>시도</th>

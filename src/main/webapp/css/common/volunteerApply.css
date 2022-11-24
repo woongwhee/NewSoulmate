@@ -1,0 +1,133 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+#content {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#volunteer-form {
+    width: 100%;
+    height: auto;
+    background-color: #eeeeee;
+    padding: 20px 100px 40px 100px;
+}
+
+#content #volunteer-form p {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 450;
+    color: #39393a;
+    margin: 30px 0 50px 0px;
+    width: 1200px;
+}
+
+#form-table,
+#volunteer-form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#form-table {
+    width: 850px;
+}
+
+#form-table input,
+select {
+    margin-top: 20px;
+}
+
+.info-group {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #39393a;
+    text-align: left;
+    width: 160px;
+    height: 40px;
+    padding: 0 20px 0 20px;
+    margin-top: 20px;
+}
+
+#user-name,
+#wishDate,
+#user-phone {
+    width: 220px;
+    height: 40px;
+    border-radius: 5px;
+    border: lightgray solid 1px;
+    font-size: 20px;
+}
+
+#gender-btn-box {
+    width: 230px;
+}
+
+#user-genderM,
+#user-genderF {
+    width: 60px;
+    height: 30px;
+}
+
+.label {
+    vertical-align: super;
+    font-size: 20px;
+}
+
+#volunteer-form button {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #39393a;
+    color: white;
+    width: 150px;
+    border: none;
+    border-radius: 5px;
+    height: 80px;
+    margin-top: 50px;
+}
+
+#volunteer-form select {
+    font-size: 18px;
+    border: lightgray solid 1px;
+    border-radius: 5px;
+    width: 600px;
+    height: 40px;
+}
+
+.list-area {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    border: solid 2px lightgray;
+    border-collapse: collapse;
+}
+
+.list-area th {
+    border: solid 1px lightgray;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.list-area td {
+    border: solid 1px lightgray;
+    padding: 10px;
+}
+
+thead {
+    background-color: #eeee;
+}
+
+#content p{
+    font-size: 20px;
+    font-weight: 500;
+}

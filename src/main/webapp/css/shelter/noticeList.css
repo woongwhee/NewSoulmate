@@ -9,6 +9,12 @@ body {
     background-color: #f8f5f2;
 }
 
+#content {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
 select {
     width: 160px;
     /* 원하는 너비설정 */
@@ -22,8 +28,8 @@ select {
 }
 
 .notice-photo {
-    width: 270px;
-    height: 320px;
+    width: 220px;
+    height: 270px;
 }
 
 #animal-search-box {
@@ -34,11 +40,13 @@ select {
     padding: 10px 0 0 30px;
     border-radius: 20px;
     display: flex;
+    margin-top: 40px;
 }
 
 #search-box-table {
-    border-spacing: 0 20px;
     padding-left: 20px;
+    border-collapse: separate;
+    border-spacing: 0 20px;
 }
 
 #search-box-table th {
@@ -54,8 +62,7 @@ select {
 #noticeList-btn-box {
     width: 180px;
     text-align: right;
-    padding-top: 20px;
-
+    margin-top: 20px;
 }
 
 #noticeSearch {
@@ -74,9 +81,10 @@ select {
     margin: auto;
     display: flex;
     flex-wrap: wrap;
+    padding-top: 20px;
 }
 
 .notice {
-    margin: 40px;
-    width: 270px;
+    margin:25px;
+    width: 220px;
 }

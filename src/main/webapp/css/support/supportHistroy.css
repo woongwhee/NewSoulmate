@@ -1,3 +1,4 @@
+
 /*폰트 : 노토산스 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
@@ -30,7 +31,7 @@ body {
 }
 
 #supportDate {
-    padding-top: 50px;
+    padding-bottom: 50px;
     font-size: 20px;
 }
 
@@ -66,12 +67,13 @@ tbody th {
 }
 
 thead th:first-child {
-    padding: 0 0px;
+    padding: 0 20px;
 }
 
 tbody td {
     border: 1px solid rgb(203, 203, 203);
     text-align: center;
+    padding: 5px;
 }
 
 #supportTotal {
@@ -89,4 +91,25 @@ tbody td {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+}
+
+#searchBtn {
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 70px;
+    height: 30px;
+    margin: 8px;
+    background-color: #676767;
+    color: white;
+    cursor: pointer;
+}
+
+#searchBtn:hover {
+    background-color: #319493;
+    color: white;
+}
+
+.paging-area {
+    margin-top: 50px;
 }

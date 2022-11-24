@@ -11,6 +11,9 @@
 
 <div class="headcontainer">
     <div id="header_box">
+        <div>
+            <!-- div 지우면 안 됨-->
+        </div>
         <div class="navbar_logo">
             <a href="${context}"><img src="${context}/image/logo.png" alt="NewSoulmate환승주인"></a>
         </div>
