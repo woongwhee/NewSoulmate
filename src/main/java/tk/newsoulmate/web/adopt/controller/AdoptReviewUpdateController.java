@@ -16,11 +16,10 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet(name = "adoptUpdate", value = "/adopt/update")
+@WebServlet(name = "AdoptReviewEnrollController", value = "/adopt/update")
 public class AdoptReviewUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int bno=Integer.parseInt(request.getParameter("boardNo"));
         String boardTitle=request.getParameter("boardTitle");
         String boardContent=request.getParameter("boardContent");
         String adoptDate_=request.getParameter("adoptDate");
@@ -47,6 +46,6 @@ public class AdoptReviewUpdateController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+
     }
 }

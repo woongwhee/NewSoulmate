@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet(name = "adoptReInsert", value = "/adoptRevInsert")
+@WebServlet(name = "adoptRevInsert", value = "/adoptRevInsert")
 public class AdoptReviewInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

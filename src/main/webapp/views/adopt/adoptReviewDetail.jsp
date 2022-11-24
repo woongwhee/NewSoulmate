@@ -23,9 +23,12 @@
     <main>
         <div class="review-content">
         <table class="table">
-            <tr><p>${b.boardTitle}</p></tr>
             <tr>
-                <td>입양일</td>
+                <th>후기제목</th>
+                <td colspan="3">${b.boardTitle}</td>
+            </tr>
+            <tr>
+                <th>입양일</th>
                 <td>
                 <fmt:formatDate value="${b.issueDate}" type="both" pattern="yyyy년 MM월dd 일"/>
                 </td>
@@ -38,18 +41,18 @@
             </tr>
             <tr>
                 <th width="300">작성자</th>
-                <td colspan="2">${b.nickName}</td>
+                <td colspan="3">${b.nickName}</td>
 
             </tr>
             <tr>
                 <th width="300">후기내용</th>
-                <td colspan="2">${b.boardContent} </td>
+                <td colspan="3">${b.boardContent} </td>
             </tr>
             <c:forEach var="r" items="${rList}">
                 <tr>
                     <td>${r.replyWriter}</td>
                     <td>${r.replyContent}</td>
-                    <td colspan="1">
+                    <td colspan="2">
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
                         <c:if test="${!empty loginUser and loginUser.memberNo eq r.memberNo}">
                         <button class="bi bi-x-circle-fill" id="replyDelete"></button>

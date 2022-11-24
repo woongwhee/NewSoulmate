@@ -3,9 +3,8 @@ package tk.newsoulmate.web.manger.site.service;
 import tk.newsoulmate.domain.dao.AttachmentDao;
 import tk.newsoulmate.domain.dao.GradeUpDao;
 import tk.newsoulmate.domain.dao.MemberDao;
-import tk.newsoulmate.domain.vo.GradeUp;
-import tk.newsoulmate.domain.vo.ManageMember;
-import tk.newsoulmate.domain.vo.Member;
+import tk.newsoulmate.domain.dao.SubscriptionDao;
+import tk.newsoulmate.domain.vo.*;
 
 
 import java.sql.Connection;
@@ -48,6 +47,22 @@ public class ManageService {
         return countMember;
     }
 
+    public int selectAdoptApplyListCount(){
+        Connection conn = getConnection();
+
+        int listCount = new SubscriptionDao().selectAdoptApplyListCount(conn);
+
+        close();
+        return listCount;
+    }
+
+    public ArrayList<Subscription> selectAdoptApplyList(PageInfo pi){
+        Connection conn = getConnection();
+
+        ArrayList<Subscription> list = new SubscriptionDao().selectAdoptApplyList(conn, pi);
+        close();
+        return list;
+    }
 
     public int[] changeStatus(int[] memArr) {
         Connection conn = getConnection();
