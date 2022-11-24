@@ -35,7 +35,7 @@
                     </c:when>
                     <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
                     <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                    <li><a href="${context}/manageGrade">관리자페이지</a></li>
+                    <li><a href="${context}/manageMemberPage">관리자페이지</a></li>
                     <li><a href="${context}/myPageInfo">마이페이지</a></li>
                     <li><a href="${context}/logout">로그아웃</a></li>
                 </c:when>
