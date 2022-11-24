@@ -5,11 +5,8 @@
 <%@ page import="tk.newsoulmate.domain.vo.Attachment" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-
     ArrayList<GradeUp> gList = (ArrayList<GradeUp>)request.getAttribute("gList");
     //ArrayList<Shelter> sList = (ArrayList<Shelter>)request.getAttribute("sList");
-
-
 %>
 <html>
 <head>
@@ -73,9 +70,6 @@
                     </tr>
                                     <%}%>
 
-
-
-
                     </tbody>
                 </table>
 
@@ -103,15 +97,51 @@ $("input[name=select]").click(function() {
 
 $("#allow").click(function(){
     let checkMember = new Array();
-    $("#input[name=select]:checkbox").each(function(){
-        checkMember.push($(this).value);
+    $("input[name=select]:checked").each(function(){
+        checkMember.push($(this).val());
     });
+    console.log(checkMember);
     $.ajax({
         type:"POST",
+        traditional:true,
         data:{"checkMember":checkMember},
-        url:"/GradeAllow",
+        dataType:"json",
+        url:"GradeAllow",
         success:function(data){
-            alert("성공적으로 승인되었습니다.")
+            if(data= checkMember.length){
+                alert("성공적으로 승인되었습니다.");
+                location.reload();
+            }
+            },
+        error:function(){
+            alert("서버요청실패");
+            location.reload();
+        }
+
+    })
+})
+
+$("#reject").click(function(){
+    let rejectMember = new Array();
+    $("input[name=select]:checked").each(function(){
+        rejectMember.push($(this).val());
+    });
+    console.log(rejectMember);
+    $.ajax({
+        type:"POST",
+        traditional:true,
+        data:{"rejectMember":rejectMember},
+        dataType:"json",
+        url:"GradeReject",
+        success:function(data){
+            if(data= rejectMember.length){
+                alert("승인이 거부되었습니다.");
+                location.reload();
+            }
+        },
+        error:function(){
+            alert("서버요청실패");
+            location.reload();
         }
 
     })

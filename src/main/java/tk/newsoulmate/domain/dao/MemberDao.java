@@ -341,7 +341,7 @@ public class MemberDao {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         ArrayList<Member> mList = new ArrayList<Member>();
-        String sql = prop.getProperty("manageMember2");
+        String sql = prop.getProperty("manageMember");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -424,6 +424,26 @@ public class MemberDao {
     }
 
 
+    public int changeGrade(Connection conn, String[] memberNo) {
+        int result = 0;
+        PreparedStatement psmt = null;
 
+        String sql = prop.getProperty("changeGrade");
 
-}
+        try {
+            psmt = conn.prepareStatement(sql);
+
+            for (int i = 0; i < memberNo.length; i++) {
+                psmt.setString(1, memberNo[i]);
+                result += psmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+
+        return result;
+    }
+    }

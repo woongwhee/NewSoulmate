@@ -23,9 +23,9 @@
     <ul class="menu">
         <li>
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="#">회원관리</a></button>
+                <button class="dropdown-btn"><a href="${context}/manageMemberPage">회원관리</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">회원리스트</a>
+                    <a href="${context}/manageMemberPage">회원리스트</a>
                     <a href="${context}/manageGrade">보호소 관계자 신청</a>
                 </div>
             </div>

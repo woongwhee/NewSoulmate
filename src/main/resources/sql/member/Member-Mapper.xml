@@ -128,6 +128,12 @@
         FROM MEMBER
     </entry>
 
+    <entry key="changeGrade">
+        UPDATE MEMBER
+        SET MEMBER_GRADE = 1
+        WHERE MEMBER_NO = ?
+    </entry>
+
 
 
 </properties>

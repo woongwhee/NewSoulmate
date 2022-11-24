@@ -90,8 +90,8 @@ public class GradeUpDao {
         return gList;
     }
 
-    public int[] changeGrade(Connection conn, int[] memArr) {
-        int[] result = null;
+    public int changeGrade(Connection conn, String[] memberNo) {
+        int result = 0;
         PreparedStatement psmt = null;
 
         String sql = prop.getProperty("changeGrade");
@@ -99,9 +99,9 @@ public class GradeUpDao {
         try {
             psmt = conn.prepareStatement(sql);
 
-            for (int i = 0; i < memArr.length; i++) {
-                psmt.setInt(1, memArr[i]);
-                result[i] = psmt.executeUpdate();
+            for (int i = 0; i < memberNo.length; i++) {
+                psmt.setString(1, memberNo[i]);
+                result += psmt.executeUpdate();
             }
 
         } catch (SQLException e) {
