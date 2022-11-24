@@ -1,5 +1,7 @@
 package tk.newsoulmate.domain.vo;
 
+import tk.newsoulmate.domain.vo.type.MemberGrade;
+
 import java.sql.Date;
 
 public class ManageMember {

@@ -14,6 +14,7 @@ public class ShelterSupportServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/shelter/supports?page=1").forward(request, response);
+
 	}
 
 }

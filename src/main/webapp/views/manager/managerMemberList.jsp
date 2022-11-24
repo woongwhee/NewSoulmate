@@ -1,6 +1,6 @@
 <%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.MemberGrade" %>
+<%@ page import="tk.newsoulmate.domain.vo.type.MemberGrade" %>
 <%@ page import="tk.newsoulmate.web.manger.site.service.ManageService" %>
 <%@ page import="tk.newsoulmate.web.member.service.MemberService" %>
 <%@ page import="tk.newsoulmate.domain.vo.ManageMember" %><%--
@@ -39,33 +39,15 @@
                 회원등급
                 <span id="memberGrade">
 
-<%--                    <div id="search">
-                        <form action="<%=request.getContextPath()%>/manageMemberSelect" method="get">
-                            <div id="searchBox">
-                                <select name="cityNo" id="mainCategory" onchange="choice();">
-                                    <option value="all">전체</option>
-                                    <% for(ManageMember m : mList){ %>
-                                    <option value="<%=m.getMemberGrade() == MemberGrade.valueOfNumber(0) %>">
-                                        일반회원
-                                    </option>
-                                    <option value="<%=m.getMemberGrade() == MemberGrade.valueOfNumber(1) %>">
-                                        보호소 관계자
-                                    </option>
-                                    <% } %>
-                                </select>
-                            </div>
-                        </form>
-                    </div>--%>
 
-
-                        <%--<label><input type="checkbox" name="all" value="all" > 전체 </label>
+                        <label><input type="checkbox" name="all" value="all"> 전체 </label>
                         <label><input type="checkbox" name="user" value="0"> 일반 회원 </label>
-                        <label><input type="checkbox" name="shelter" value="1"> 보호소 관계자 </label>--%>
+                        <label><input type="checkbox" name="shelter" value="1"> 보호소 관계자 </label>
 
 
 
 
-                            <select name="memberPhone" id="memberPhone">
+                        <select name="memberPhone" id="memberPhone">
                             <option value="all">전체</option>
                             <option value="0">일반회원</option>
                             <option value="1">보호소 관계자</option>

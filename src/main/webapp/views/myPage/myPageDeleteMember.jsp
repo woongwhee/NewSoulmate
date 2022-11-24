@@ -15,9 +15,7 @@
 </head>
 <body>
 
-<header>
-    <%@include file="/views/myPage/myPageHeader.jsp" %>
-</header>
+<header><%@include file="/views/myPage/myPageHeader.jsp"%></header>
 
 <div>
     <div>회원탈퇴</div>

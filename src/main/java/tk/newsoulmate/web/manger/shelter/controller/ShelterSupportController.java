@@ -12,18 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.domain.vo.ShelterSupportResponse;
+import tk.newsoulmate.domain.vo.Transfer;
 import tk.newsoulmate.web.shelter.service.ShelterService;
 import tk.newsoulmate.web.support.service.SupportService;
+import tk.newsoulmate.web.transfer.service.TransferService;
 
 @WebServlet(name = "ShelterSupportController", value = "/shelter/supports")
 public class ShelterSupportController extends HttpServlet {
 
 	private final ShelterService shelterService;
 	private final SupportService supportService;
+	private final TransferService transferService;
 
 	public ShelterSupportController() {
 		this.shelterService = new ShelterService();
 		this.supportService = new SupportService();
+		this.transferService = new TransferService();
 	}
 
 	@Override
@@ -38,7 +42,9 @@ public class ShelterSupportController extends HttpServlet {
 
 			Shelter shelter = shelterService.find(shelterNo);
 			List<ShelterSupportResponse> supports = supportService.findAllOnlyDoneByShelterNo(shelterNo);
+			Transfer transfer = transferService.find(shelter.getTransferNo());
 
+			request.setAttribute("latestTransfer", transfer);
 			request.setAttribute("shelterName", shelter.getShelterName());
 			request.setAttribute("supports", supports);
 			request.getRequestDispatcher("/views/shelterManager/shelterSupport.jsp").forward(request, response);

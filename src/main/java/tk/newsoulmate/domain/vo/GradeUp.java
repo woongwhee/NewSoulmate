@@ -3,6 +3,8 @@ package tk.newsoulmate.domain.vo;
 public class GradeUp {
 
     private int GradeNo;
+
+    private String memberName;
     private int memberNo;
     private long shelterNo;
     private int fileNo;
@@ -10,7 +12,9 @@ public class GradeUp {
     private String shelterLandLine;
     private String shelterCompNo;
     private String gradeStatus;
+    private Attachment attachment;
     private String shelterAddress;
+    private String shelterName;
 
     public GradeUp(){
         super();
@@ -57,6 +61,14 @@ public class GradeUp {
         this.shelterLandLine = shelterLandLine;
         this.shelterCompNo = shelterCompNo;
         this.shelterAddress = shelterAddress;
+    }
+
+    public Attachment getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
     }
 
     public int getGradeNo() {
@@ -131,6 +143,22 @@ public class GradeUp {
         this.shelterAddress = shelterAddress;
     }
 
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public String getShelterName() {
+        return shelterName;
+    }
+
+    public void setShelterName(String shelterName) {
+        this.shelterName = shelterName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
     @Override
     public String toString() {
         return "GradeUp{" +
@@ -143,6 +171,7 @@ public class GradeUp {
                 ", shelterCompNo='" + shelterCompNo + '\'' +
                 ", gradeStatus='" + gradeStatus + '\'' +
                 ", shelterAddress='" + shelterAddress + '\'' +
+                ", attachment=" + attachment +
                 '}';
     }
 }

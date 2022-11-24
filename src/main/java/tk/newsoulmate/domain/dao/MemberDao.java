@@ -2,7 +2,7 @@ package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.ManageMember;
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.MemberGrade;
+import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.*;
@@ -14,7 +14,6 @@ import static tk.newsoulmate.web.common.JDBCTemplet.close;
 public class MemberDao {
 
     private Properties prop = new Properties();
-
     public MemberDao() {
         String fileName = MemberDao.class.getResource("/sql/member/Member-Mapper.xml").getPath();
         try {
@@ -321,8 +320,6 @@ public class MemberDao {
             if(rset.next()){
                 memberPwd = rset.getString("MEMBER_PWD");
             }
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally{
@@ -333,6 +330,10 @@ public class MemberDao {
 
         return memberPwd;
     }
+
+
+
+    // 관리자
 
     public ArrayList<Member> selectManageMember(Connection conn) {
         PreparedStatement psmt = null;
@@ -350,6 +351,7 @@ public class MemberDao {
                 m.setMemberName(rset.getString("MEMBER_NAME"));
                 m.setEmail(rset.getString("EMAIL"));
                 MemberGrade memberGrade = MemberGrade.valueOfNumber(rset.getInt("MEMBER_GRADE"));
+                m.setMemberGrade(memberGrade);
                 m.setEnrollDate(rset.getDate("ENROLL_DATE"));
                 mList.add(m);
             }
@@ -361,6 +363,7 @@ public class MemberDao {
         }
         return mList;
     }
+
 
 
 

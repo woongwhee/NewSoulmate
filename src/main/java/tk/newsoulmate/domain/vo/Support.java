@@ -34,7 +34,6 @@ public class Support {
         this.status = SupportStatus.valueOf(status);
     }
 
-
     public int getSupportNo() {
         return supportNo;
     }

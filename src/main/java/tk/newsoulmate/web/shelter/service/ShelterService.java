@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import tk.newsoulmate.domain.dao.CityDao;
 import tk.newsoulmate.domain.dao.NoticeDao;
 import tk.newsoulmate.domain.dao.ShelterDao;
+import tk.newsoulmate.domain.dao.TransferDao;
 import tk.newsoulmate.domain.dao.VillageDao;
 import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.domain.vo.response.ResponseMapper;
@@ -128,11 +129,18 @@ public class ShelterService {
 
     }
 
-	public Shelter find(long shelterNo) {
+    public Shelter find(long shelterNo) {
         Connection conn = getConnection();
         Shelter s = new ShelterDao().findByShelterNo(shelterNo,conn);
         close();
         return s;
-	}
+    }
 
+    public void updateLatestTransfer(long shelterNo, long supportNo) {
+        Connection conn = getConnection();
+        // SupportNo 기준으로 Transfer를 가져오기
+        Transfer latestTransfer = new TransferDao().findBySupportNo(conn, supportNo);
+        new ShelterDao().updateLatestTransfer(conn, shelterNo, latestTransfer.getTransferNo());
+        close();
+    }
 }

@@ -10,26 +10,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.SupportWithdrawRequest;
+import tk.newsoulmate.web.shelter.service.ShelterService;
 import tk.newsoulmate.web.support.service.SupportService;
 
 @WebServlet(name = "SupportWithdrawController", value = "/support/withdraw")
 public class SupportWithdrawController extends HttpServlet {
 
+	private final SupportService supportService;
+	private final ShelterService shelterService;
 
+	public SupportWithdrawController() {
+		this.supportService = new SupportService();
+		this.shelterService = new ShelterService();
+	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		SupportWithdrawRequest req = new Gson().fromJson(request.getReader(), SupportWithdrawRequest.class);
-
-		int result = new SupportService().withdraw(req);
-
-		if (result > 0) {
-			response.setStatus(200);
+		Object loginUser = request.getSession(false).getAttribute("loginUser");
+		if (loginUser == null) {
+			response.sendRedirect(request.getContextPath());
 		} else {
-			response.setStatus(500);
-		}
+			Member member = (Member)loginUser;
+			long shelterNo = member.getShelterNo();
 
+			SupportWithdrawRequest req = new Gson().fromJson(request.getReader(), SupportWithdrawRequest.class);
+			int result = supportService.withdraw(req);
+
+			if (result > 0) {
+				shelterService.updateLatestTransfer(shelterNo, req.getSupportNo());
+				response.setStatus(200);
+			} else {
+				response.setStatus(500);
+			}
+		}
 	}
 
 }

@@ -5,11 +5,8 @@ import java.time.LocalDate;
 import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 
 public class ShelterSupportResponse {
-
 	private final int supportNo;
-
 	private final String supporterName;
-
 	private final LocalDate date;
 	private final long amount;
 	private final String phoneNumber;
