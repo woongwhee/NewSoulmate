@@ -124,10 +124,11 @@
 /*inquireEnrollView에만 적용*/
 .outer {
     width: 860px;
-    height: 785px;
+    height: auto;
     margin: 0 auto;
     background-color: #eee;
 }
+
 
 #textQnaWriting tr{
     border-top: 10px;
@@ -137,7 +138,7 @@
     color: #f45d48;
 }
 
-#textQnaWriting textarea {
+#textareaQna {
     margin-top: 20px;
     overflow: auto;
     border: none;
@@ -208,7 +209,44 @@ color: #00b0a2;
     border: none;
     border-radius: 5px;
     width: 700px;
-    height: 400px;
+    /*height: 400px;*/
+}
+
+.tableTdAll{
+    padding-top: 20px;
+    word-break: break-word;
+    height: auto;
+}
+
+#replyInput {
+    margin: 20px 0 20px 0;
+    overflow: auto;
+    border: none;
+    border-radius: 5px;
+    width: 700px;
+    height: 150px;
+}
+
+#replySubmit {
+    position: relative;
+    left: 720px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 80px;
+    height: 30px;
+    background-color: #676767;
+    color: white;
+    cursor: pointer;
+}
+
+#replySubmit:hover {
+    background-color: #319493;
+    color: white;
 }
 
 
+#btn1, #boardUpdate, #boardDelete {
+    width: 80px;
+    height: 30px;
+}

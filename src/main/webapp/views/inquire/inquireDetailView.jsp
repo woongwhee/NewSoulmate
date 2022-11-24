@@ -4,7 +4,7 @@
 <head>
     <title>문의내역 상세보기</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
@@ -14,34 +14,39 @@
     <br>
     <hr>
     <br>
-    <form>
         <table align="center" id="textQnaWriting">
+            <colgroup>
+                <col width="100">
+                <col width="700">
+            </colgroup>
             <tr>
-                <th width="100">카테고리</th>
-                <td width="500">${b.categoryName}</td>
+                <th>카테고리</th>
+                <td>${b.categoryName}</td>
             </tr>
             <tr>
-                <th id="tableTh1" width="100">제목</th>
-                <td id = "titleQna">${b.boardTitle}</td>
+                <th id="tableTh1">제목</th>
+                <td id = "titleQna" class="tableTdAll">${b.boardTitle}</td>
             </tr>
             <tr>
                 <th id="tableTh4">작성자</th>
-                <td>${b.nickName}</td>
+                <td class="tableTdAll">${b.nickName}</td>
             </tr>
             <tr>
                 <th id="tableTh5">작성일</th>
-                <td>${b.createDate}</td>
+                <td class="tableTdAll">${b.createDate}</td>
             </tr>
             <tr>
                 <th id="tableTh2">문의내용</th>
-                <td id= "contentQna">${b.boardContent}</td>
+                <td class="tableTdAll">
+                    <p><c:out value="${b.boardContent}" escapeXml="true"/> </p>
+                </td>
             </tr>
             <tr>
                 <th id="tableTh3">첨부파일</th>
-                <td id="fileQna">
+                <td id="fileQna" class="tableTdAll">
                     <c:if test="${empty at}">
                         <!-- 첨부파일이 없는경우 -->
-                        첨부파일된 파일 없음.
+                        첨부파일된 파일 없음
                     </c:if>
                     <!-- 첨부파일이 있는경우 -->
                     <c:if test="${!empty at}">
@@ -68,6 +73,8 @@
                     <td>
                         <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>
                     </td>
+                </tr>
+                <tr>
                     <td><button id="replySubmit">답변등록</button></td>
                 </tr>
             </c:if>
@@ -76,14 +83,12 @@
         <br>
 
         <div align="center">
-            <a href="${context}/inquire" class="btn btn-secondary btn-sm">목록</a>
+            <a href="${context}/inquire" class="btn btn-secondary btn-sm" id="btn1">목록</a>
             <%-- if문 가능한건지 체크 확인해야함 --%>
             <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
             <a id=boardUpdate href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
             <a id=boardDelete href="${context}/inquireDelete.bo?bno=${b.boardNo}" class="btn btn-danger btn-sm">삭제</a>
         </div>
-
-    </form>
 </div>
 
 <script>
