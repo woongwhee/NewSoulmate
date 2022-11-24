@@ -14,7 +14,7 @@ public class ManageAdoptApplyDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int subNo = Integer.parseInt(request.getParameter("sNo"));
+        int subNo = Integer.parseInt(request.getParameter("sno"));
         ManageService msService = new ManageService();
 
         Subscription s = msService.selectAdoptApplyListCheck(subNo);

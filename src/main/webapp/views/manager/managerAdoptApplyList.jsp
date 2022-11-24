@@ -93,9 +93,9 @@
                     // 해당 tr요소의 자손중에서 첫번째 td의 영역의 내용이 필요.
                     if($(this).text()!=$("#tableEmpty").text()) { // 조회된 리스트가 없을경우 클릭방지
 
-                        let bno = $(this).children().eq(0).text(); // 0 => s.getSubNO()
+                        let sno = $(this).children().eq(0).text(); // 0 => s.getSubNO()
                         // 현재 내가클릭한 tr의 자손들중 0번째에 위치한 자식의 textnode내용을 가져온다.
-                        location.href = "<%=request.getContextPath()%>/adoptApplyDetail?bno=" + bno;
+                        location.href = "<%=request.getContextPath()%>/adoptApplyDetail?sno=" + sno;
 
                     }
                 });
