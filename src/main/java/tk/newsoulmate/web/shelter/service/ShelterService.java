@@ -2,13 +2,10 @@ package tk.newsoulmate.web.shelter.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import tk.newsoulmate.domain.dao.CityDao;
-import tk.newsoulmate.domain.dao.NoticeDao;
-import tk.newsoulmate.domain.dao.ShelterDao;
-import tk.newsoulmate.domain.dao.TransferDao;
-import tk.newsoulmate.domain.dao.VillageDao;
+import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.domain.vo.response.ResponseMapper;
+import tk.newsoulmate.domain.vo.type.BoardType;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -136,11 +133,31 @@ public class ShelterService {
         return s;
     }
 
-    public void updateLatestTransfer(long shelterNo, long supportNo) {
+    public int updateLatestTransfer(long shelterNo, long supportNo) {
         Connection conn = getConnection();
         // SupportNo 기준으로 Transfer를 가져오기
         Transfer latestTransfer = new TransferDao().findBySupportNo(conn, supportNo);
-        new ShelterDao().updateLatestTransfer(conn, shelterNo, latestTransfer.getTransferNo());
+        int result=new ShelterDao().updateLatestTransfer(conn, shelterNo, latestTransfer.getTransferNo());
+        if(result>0){
+            commit();}else{
+            rollback();
+        }
         close();
+        return result;
+    }
+
+    public List<Reply> selectNoticeReply(long dno) {
+        Connection conn = getConnection();
+        List<Reply> rList = new ReplyDao().selectNoticeReply(conn,dno);
+        new AttachmentDao().selectReplyAttachment(conn,rList);
+        close();
+        return rList;
+    }
+
+    public List<Category> selectCategoryList() {
+        Connection conn = getConnection();
+        List<Category> cList = new CategoryDao().selectCategoryList(conn, BoardType.REPORT);
+        close();
+        return cList;
     }
 }

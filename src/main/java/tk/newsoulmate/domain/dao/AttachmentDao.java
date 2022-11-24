@@ -2,6 +2,8 @@ package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.GradeUp;
+import tk.newsoulmate.domain.vo.Reply;
+import tk.newsoulmate.domain.vo.type.ReplyType;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
@@ -52,7 +54,7 @@ public class AttachmentDao {
 
 
     }
-    public List<Attachment> selectReplyAttachment(Connection conn, int noticeNo) {
+    public List<Attachment> selectReplyAttachment(Connection conn, List<Reply> rList) {
         List<Attachment> aList=new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -60,12 +62,12 @@ public class AttachmentDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-
-            psmt.setInt(1, noticeNo);
-            rset = psmt.executeQuery();
-            Attachment at=null;
-            while((at=replyAttachmentMapper(rset))!=null){
-                aList.add(at);
+            for (Reply r: rList) {
+                if(r.getReplyType()== ReplyType.PICTURE){
+                    psmt.setLong(1, r.getReplyNo());
+                    rset = psmt.executeQuery();
+                    r.setAt(replyAttachmentMapper(rset));
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

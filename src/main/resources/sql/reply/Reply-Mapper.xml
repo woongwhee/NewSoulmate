@@ -15,24 +15,23 @@
         AND BOARD_NO = ?
         ORDER BY REPLY_DATE
     </entry>
-    <entry key="selectNoticeReplyList">
+    <entry key="selectNoticeReply">
         SELECT
             REPLY_NO,
             MEMBER_NO,
-            MEMBER_NAME,
-            BOARD_NO,
+            NICKNAME,
             REPLY_CONTENT,
             REPLY_TYPE,
             REPLY_DATE
         FROM REPLY R
         JOIN MEMBER USING (MEMBER_NO)
         WHERE R.REPLY_STATUS = 'Y'
-        AND BOARD_NO = ?
-        ORDER BY REPLY_NO
+        AND NOTICE_NO = ?
+        ORDER BY REPLY_TYPE,REPLY_NO
     </entry>
     <entry key="selectReplyNo">
         SELECT
-            SQ_COMMENT_PK.NEXTVAL as REPLY_NO
+            SQ_COMMENT_PK.NEXTVAL
         FROM DUAL
     </entry>
     <entry key="selectReplyMno">

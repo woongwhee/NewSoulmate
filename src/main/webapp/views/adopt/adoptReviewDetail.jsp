@@ -53,7 +53,7 @@
                     <td>${r.replyWriter}</td>
                     <td>${r.replyContent}</td>
                     <td colspan="2">
-                        <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
+                        <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-kind="reply" data-ref="${r.replyNo}"></button>
                         <c:if test="${!empty loginUser and loginUser.memberNo eq r.memberNo}">
                         <button class="bi bi-x-circle-fill" id="replyDelete"></button>
                         </c:if>

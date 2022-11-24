@@ -126,7 +126,7 @@
                 console.log(rno);
                 if(confirm('정말삭제하시겠습니까?')){
                     $.ajax({
-                        url:"replyDelete.bo",
+                        url:"replyDelete",
                         type:'post',
                         data:{rno:rno},
                         success:(result)=>{

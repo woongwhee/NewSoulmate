@@ -1,10 +1,10 @@
 package tk.newsoulmate.web.manger.site.service;
 
+import tk.newsoulmate.domain.dao.AttachmentDao;
 import tk.newsoulmate.domain.dao.GradeUpDao;
 import tk.newsoulmate.domain.dao.MemberDao;
-import tk.newsoulmate.domain.vo.GradeUp;
-import tk.newsoulmate.domain.vo.ManageMember;
-import tk.newsoulmate.domain.vo.Member;
+import tk.newsoulmate.domain.dao.SubscriptionDao;
+import tk.newsoulmate.domain.vo.*;
 
 
 import java.sql.Connection;

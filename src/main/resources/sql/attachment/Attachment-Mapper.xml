@@ -31,13 +31,16 @@
         ORDER BY FILE_NO
     </entry>
     <entry key="selectReplyAttachment">
-        SELECT FILE_NO,
+        SELECT
+                FILE_NO,
+                REPLY_NO,
                 ORIGIN_NAME,
                 CHANGE_NAME,
-                FILE_PATH
+                FILE_PATH,
+                UPLOAD_DATE
         FROM ATTACHMENT
         WHERE REPLY_NO = ?
-        AND STATUS = ?
+        AND STATUS = 'Y'
         ORDER BY FILE_NO
     </entry>
 
