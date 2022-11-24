@@ -7,7 +7,7 @@ public class Subscription {
     private int subNo;
     private int memberNo;
     private long shelterNo;
-    private long animalNo;
+    private Long animalNo;
     private String telNum;
     private String name;
     private String gender;
@@ -25,7 +25,7 @@ public class Subscription {
         super();
     }
 
-    public Subscription(int subNo, long animalNo, String memberId, String name, String telNum, Date subDate, String subRead) {
+    public Subscription(int subNo, Long animalNo, String memberId, String name, String telNum, Date subDate, String subRead) {
         this.subNo = subNo;
         this.animalNo = animalNo;
         this.telNum = telNum;

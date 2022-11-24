@@ -35,4 +35,9 @@
             )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
+
+    <entry key="subscriptionList">
+        SELECT *
+        FROM SUBSCRIPTION
+    </entry>
 </properties>

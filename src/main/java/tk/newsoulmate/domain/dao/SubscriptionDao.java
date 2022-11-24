@@ -22,7 +22,7 @@ public class SubscriptionDao {
 
     private Properties prop = new Properties();
 
-    public SubscriptionDao(){
+    public SubscriptionDao() {
         try {
             prop.loadFromXML(new FileInputStream(BoardDao.class.getResource("/sql/adopt/Subscription-Mapper.xml").getPath()));
         } catch (IOException e) {
@@ -30,7 +30,7 @@ public class SubscriptionDao {
         }
     }
 
-    public int insertSubscription(Connection conn, Subscription sb){
+    public int insertSubscription(Connection conn, Subscription sb) {
         int result = 0;
         PreparedStatement psmt = null;
         String sql = prop.getProperty("adoptApplyInsert");
@@ -38,29 +38,30 @@ public class SubscriptionDao {
         try {
             psmt = conn.prepareStatement(sql);
 
-            psmt.setInt(1,sb.getMemberNo());
-            psmt.setLong(2,sb.getShelterNo());
-            psmt.setLong(3,sb.getAnimalNo());
-            psmt.setString(4,sb.getTelNum());
-            psmt.setString(5,sb.getName());
-            psmt.setString(6,sb.getGender());
-            psmt.setString(7,sb.getAdoptReason());
-            psmt.setString(8,sb.getAgreement());
-            psmt.setString(9,sb.getWhenSick());
-            psmt.setString(10,sb.getBigDuty());
-            psmt.setString(11,sb.getWishDate());
-            psmt.setString(12,sb.getSubRead());
+            psmt.setInt(1, sb.getMemberNo());
+            psmt.setLong(2, sb.getShelterNo());
+            psmt.setLong(3, sb.getAnimalNo());
+            psmt.setString(4, sb.getTelNum());
+            psmt.setString(5, sb.getName());
+            psmt.setString(6, sb.getGender());
+            psmt.setString(7, sb.getAdoptReason());
+            psmt.setString(8, sb.getAgreement());
+            psmt.setString(9, sb.getWhenSick());
+            psmt.setString(10, sb.getBigDuty());
+            psmt.setString(11, sb.getWishDate());
+            psmt.setString(12, sb.getSubRead());
 
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             close(psmt);
         }
         return result;
     }
-    public int selectAdoptApplyListCount(Connection conn){
+
+    public int selectAdoptApplyListCount(Connection conn) {
         int listCount = 0;
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -69,7 +70,7 @@ public class SubscriptionDao {
         try {
             psmt = conn.prepareStatement(sql);
             rset = psmt.executeQuery();
-            if(rset.next()){
+            if (rset.next()) {
                 listCount = rset.getInt("cnt");
             }
         } catch (SQLException e) {
@@ -82,7 +83,7 @@ public class SubscriptionDao {
 
     }
 
-    public ArrayList<Subscription> selectAdoptApplyList(Connection conn, PageInfo pi){
+    public ArrayList<Subscription> selectAdoptApplyList(Connection conn, PageInfo pi) {
         ArrayList<Subscription> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -96,20 +97,20 @@ public class SubscriptionDao {
             int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
             int endRow = startRow + pi.getBoardLimit() - 1;
 
-            psmt.setInt(1,startRow);
-            psmt.setInt(2,endRow);
+            psmt.setInt(1, startRow);
+            psmt.setInt(2, endRow);
 
             rset = psmt.executeQuery();
 
-            while (rset.next()){
+            while (rset.next()) {
                 list.add(new Subscription(
                         rset.getInt("SUB_NO")
-                        ,rset.getLong("ANIMAL_ID")
-                        ,rset.getString("MEMBER_ID")
-                        ,rset.getString("NAME")
-                        ,rset.getString("TEL_NUM")
-                        ,rset.getDate("SUB_DATE")
-                        ,rset.getString("SUB_READ")));
+                        , rset.getLong("ANIMAL_ID")
+                        , rset.getString("MEMBER_ID")
+                        , rset.getString("NAME")
+                        , rset.getString("TEL_NUM")
+                        , rset.getDate("SUB_DATE")
+                        , rset.getString("SUB_READ")));
             }
 
         } catch (SQLException e) {
@@ -124,21 +125,28 @@ public class SubscriptionDao {
     }
 
 
+    public ArrayList<Subscription> subscriptionList(Connection conn) {
+        ArrayList<Subscription> scriptList = new ArrayList<>();
+
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("subscriptionList");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            while (rset.next()){
+                Subscription ss = new Subscription();
+                ss.setSubNo(rset.getInt("SUB_NO"));
+                ss.setAnimalNo(rset.getString("ANIMAL_ID"));
+                ss.set
 
 
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return scriptList;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 }
