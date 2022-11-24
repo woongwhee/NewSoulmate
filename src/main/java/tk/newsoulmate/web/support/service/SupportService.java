@@ -13,7 +13,7 @@ import tk.newsoulmate.web.support.controller.IamportClient;
 import tk.newsoulmate.domain.dao.SupportDao;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.Support;
-import tk.newsoulmate.domain.vo.SupportCompleteResponse;
+import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
 import tk.newsoulmate.domain.vo.SupportPage;
 import tk.newsoulmate.domain.vo.type.SupportStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;

@@ -31,7 +31,7 @@
                     <thead>
                     <tr>
                         <th width="10px"><input type="checkbox" id="selectAll"/></th>
-                        <th width="20px">No</th>
+                        <th width="20px">이름</th>
                         <th>아이디</th>
                         <th>보호소명</th>
                         <th>보호소 사업자번호</th>
@@ -48,10 +48,10 @@
                             <input type="checkbox" id="" name="select" value="<%=g.getMemberNo()%>"/>
                         </td>
                         <td>
-                            <%=g.getGradeNo()%>
+                            <%=g.getMemberName()%>
                         </td>
                         <td>
-                            <%=g.getMemberNo()%>
+                            <%=g.getMemberId()%>
                         </td>
                         <td>
                             <%=g.getShelterName()%>
