@@ -35,4 +35,35 @@
             )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
+
+    <entry key="selectAdoptApplyDetail">
+        SELECT
+            *
+        FROM SUBSCRIPTION SB
+        WHERE SB.SUB_NO = ?
+    </entry>
+
+    <entry key="changeAdoptApplySubRead">
+        UPDATE SUBSCRIPTION
+        SET SUB_READ = 'Y'
+        WHERE SUB_NO = ?
+    </entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </properties>

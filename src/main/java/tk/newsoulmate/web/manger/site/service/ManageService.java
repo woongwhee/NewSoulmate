@@ -1,10 +1,7 @@
 package tk.newsoulmate.web.manger.site.service;
 
-import tk.newsoulmate.domain.dao.AttachmentDao;
-import tk.newsoulmate.domain.dao.GradeUpDao;
-import tk.newsoulmate.domain.dao.MemberDao;
-import tk.newsoulmate.domain.dao.SubscriptionDao;
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.dao.*;
 
 
 import java.sql.Connection;
@@ -65,7 +62,27 @@ public class ManageService {
         close();
         return list;
     }
+    public Subscription selectAdoptApplyDetail(int subNo){
+        Connection conn = getConnection();
 
+        Subscription s = new SubscriptionDao().selectAdoptApplyDetail(conn,subNo);
+        close();
+
+        return s;
+    }
+
+    public int ChangeAdoptApplySubRead(int subNo){
+        Connection conn = getConnection();
+
+        int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
+        close();
+        if(result > 0){
+            commit();
+        } else{
+            rollback();
+        }
+        return result;
+    }
     public int changeStatus(String[] memberNo) {
         Connection conn = getConnection();
         int result1 = new GradeUpDao().changeGrade(conn,memberNo);
@@ -89,5 +106,15 @@ public class ManageService {
             rollback();
         }
         return result1;
+    }
+
+
+
+    public Notice selectNotice(long animalNo) {
+        Connection conn=getConnection();
+        Notice n=new NoticeDao().selectNotice(conn,animalNo);
+        close();
+        return n;
+
     }
 }
