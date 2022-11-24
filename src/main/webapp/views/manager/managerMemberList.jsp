@@ -38,25 +38,12 @@
             <div class="box">
                 회원등급
                 <span id="memberGrade">
-
-
-                        <label><input type="checkbox" name="all" value="all"> 전체 </label>
-                        <label><input type="checkbox" name="user" value="0"> 일반 회원 </label>
-                        <label><input type="checkbox" name="shelter" value="1"> 보호소 관계자 </label>
-
-
-
-
-                        <select name="memberPhone" id="memberPhone">
+                        <select name="selectMemberGrade" id="selectMemberGrade">
                             <option value="all">전체</option>
                             <option value="0">일반회원</option>
                             <option value="1">보호소 관계자</option>
                         </select>
-
-
-
-
-                    </span>
+                </span>
                 <span id="gray">(선택된 회원만 조회됩니다)</span>
             </div>
 

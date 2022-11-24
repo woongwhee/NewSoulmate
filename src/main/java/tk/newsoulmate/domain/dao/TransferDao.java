@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import tk.newsoulmate.domain.vo.ManageSupportResponse;
+import tk.newsoulmate.domain.vo.response.ManageSupportResponse;
 import tk.newsoulmate.domain.vo.SupportWithdrawRequest;
 import tk.newsoulmate.domain.vo.Transfer;
 import tk.newsoulmate.domain.vo.type.WithdrawStatus;

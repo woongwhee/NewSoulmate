@@ -1,4 +1,4 @@
-<%@ page import="tk.newsoulmate.domain.vo.ShelterSupportResponse" %>
+<%@ page import="tk.newsoulmate.domain.vo.response.ShelterSupportResponse" %>
 <%@ page import="java.util.List" %>
 <%@ page import="tk.newsoulmate.domain.vo.type.WithdrawStatus" %>
 <%@ page import="tk.newsoulmate.domain.vo.Transfer" %>
@@ -113,13 +113,13 @@
                         <div class="modal-body">
                             보호소명 : <%=shelterName%><br>
                             <% if (latestTransfer == null) { %>
-                            은행 <input type="text" class="modal-input" id="bank" placeholder="내용을 입력해주세요"><br>
-                            계좌번호 <input type="text" class="modal-input" id="accountNumber" placeholder="내용을 입력해주세요"><br>
-                            예금주 <input type="text" class="modal-input" id="accountName" placeholder="내용을 입력해주세요"><br>
+                            은행 <input type="text" class="modal-input" id="bank" placeholder="은행을 입력해주세요"><br>
+                            계좌번호 <input type="text" class="modal-input" id="accountNumber" placeholder="계좌번호를 입력해주세요"><br>
+                            예금주 <input type="text" class="modal-input" id="accountName" placeholder="예금주를 입력해주세요"><br>
                             <% } else { %>
-                            은행 <input type="text" class="modal-input" id="bank" placeholder="내용을 입력해주세요" value="<%=latestTransfer.getBank()%>"><br>
-                            계좌번호 <input type="text" class="modal-input" id="accountNumber" placeholder="내용을 입력해주세요" value="<%=latestTransfer.getAccountNumber()%>"><br>
-                            예금주 <input type="text" class="modal-input" id="accountName" placeholder="내용을 입력해주세요" value="<%=latestTransfer.getName()%>"><br>
+                            은행 <input type="text" class="modal-input" id="bank" placeholder="은행을 입력해주세요" value="<%=latestTransfer.getBank()%>"><br>
+                            계좌번호 <input type="text" class="modal-input" id="accountNumber" placeholder="계좌번호를 입력해주세요" value="<%=latestTransfer.getAccountNumber()%>"><br>
+                            예금주 <input type="text" class="modal-input" id="accountName" placeholder="예금주를 입력해주세요" value="<%=latestTransfer.getName()%>"><br>
                             <% } %>
                             출금신청금액 : <span id="withdraw-amount"></span> 원<br>
                         </div>

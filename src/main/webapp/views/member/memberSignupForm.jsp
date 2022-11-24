@@ -27,6 +27,7 @@
                 <div class="input-id-wrap">
                     <div>
                         <label for="memberId">아이디 <span id="ajaxCheckId"></span></label>
+                        <br>
                         <input type="text" name="memberId" id="memberId" placeholder="*아이디" >
                         <button type="button" id="checkid">중복확인</button>
                     </div>
@@ -35,7 +36,9 @@
                 <div class="input-pw-wrap">
                     <div>
                         <label for="memberPw">비밀번호</label>
+                        <br>
                         <input type="password" name="memberPwd" id="memberPw" placeholder="*비밀번호" >
+                        <br>
                         <span id="pwChkMsg"></span>
                     </div>
                 </div>
@@ -43,7 +46,9 @@
                 <div class="input-pwre-wrap">
                     <div>
                         <label for="memberPw">비밀번호 확인</label>
+                        <br>
                         <input type="password" name="memberPwRe" id="memberPwRe" placeholder="*비밀번호 재입력" >
+                        <br>
                         <span id="pwReChkMsg"></span>
                     </div>
                 </div>
@@ -51,6 +56,7 @@
                 <div class="input-name-wrap">
                     <div>
                         <label for="memberName">이름</label>
+                        <br>
                         <input type="text" name="memberName" id="memberName" placeholder="*이름" >
                     </div>
                 </div>
@@ -58,6 +64,7 @@
                 <div class="input-nickname-wrap">
                     <div>
                         <label for="nickname">닉네임</label>
+                        <br>
                         <input type="text" name="nickName" id="nickName" placeholder="*닉네임" >
                         <button type="button" id="checkNickname" onclick="nicknameCheck();">중복확인</button>
                     </div>
@@ -66,6 +73,7 @@
                 <div class="phone-wrap">
                     <div>
                         <label for="memberPhone">전화번호</label>
+                        <br>
                         <select name="memberPhone" id="memberPhone">
                             <option value="010">010</option>
                             <option value="011">011</option>
@@ -80,6 +88,7 @@
                 <div class="email-wrap">
                     <div>
                         <label for="memberMail">이메일</label>
+                        <br>
                         <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" >
                         <button type="button" onclick="sendMail();" >인증번호 발송</button>
 
