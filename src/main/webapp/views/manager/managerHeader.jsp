@@ -15,24 +15,23 @@
             <p></p>
         </div>
         <div id="user">
-            <a href="#" id="logout">로그아웃</a>
-            <!--로그아웃 클릭시 로그아웃처리된 상태로 메인화면ㄱㄱ-->
+            <a href="${context}/logout" id="logout">로그아웃</a>
         </div>
     </div>
 
     <ul class="menu">
         <li>
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="#">회원관리</a></button>
+                <button class="dropdown-btn"><a href="${context}/manageMemberPage">회원관리</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">회원리스트</a>
+                    <a href="${context}/manageMemberPage">회원리스트</a>
                     <a href="${context}/manageGrade">보호소 관계자 신청</a>
                 </div>
             </div>
         </li>
         <li><a href="#">보호소 관리</a></li>
         <li><a href="${context}/adoptApplyList">입양관리</a></li>
-        <li><a href="#">후원관리</a></li>
+        <li><a href="${context}/manageSupportPage">후원관리</a></li>
         <li><a href="#">신고접수</a></li>
     </ul>
 

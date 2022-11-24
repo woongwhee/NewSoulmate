@@ -20,4 +20,10 @@ public class ScrapTimmer extends TimerTask {
         long time = next.getTimeInMillis() - now.getTimeInMillis();
         return time;
     }
+
+    @Override
+    public boolean cancel() {
+        return super.cancel();
+
+    }
 }

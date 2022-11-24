@@ -19,7 +19,6 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -77,11 +76,11 @@
 			<version>9.0.67</version>
 		</dependency>
 		<!--https://docs.solapi.com/sdk-list/Java/send-message-->
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>jstl</groupId>-->
+<!--			<artifactId>jstl</artifactId>-->
+<!--			<version>1.2</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.taglibs</groupId>
 			<artifactId>taglibs-standard-impl</artifactId>

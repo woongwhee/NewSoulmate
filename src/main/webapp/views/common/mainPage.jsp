@@ -107,7 +107,7 @@
         <div class="main_right_box2">
             <div id="support-box">
                 <div  id="comment4">후원유도멘트</div>
-                <button id="supportBtn"  onclick="location.href='<%=request.getContextPath()%>/supportpayment'">후원하러 가기</button>
+                <button id="supportBtn"  onclick="location.href='${context}/supportPaymentPage'">후원하러 가기</button>
             </div>
         </div>
     </div>

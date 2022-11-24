@@ -5,15 +5,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-
+import tk.newsoulmate.domain.dao.TransferDao;
+import tk.newsoulmate.domain.vo.ShelterSupportResponse;
+import tk.newsoulmate.domain.vo.SupportWithdrawRequest;
+import tk.newsoulmate.domain.vo.type.WithdrawStatus;
+import tk.newsoulmate.web.support.controller.IamportClient;
 import tk.newsoulmate.domain.dao.SupportDao;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.Support;
-import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
+import tk.newsoulmate.domain.vo.SupportCompleteResponse;
 import tk.newsoulmate.domain.vo.SupportPage;
 import tk.newsoulmate.domain.vo.type.SupportStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
-import tk.newsoulmate.web.support.controller.IamportClient;
 
 public class SupportService {
 	public String createNumber(int loginMemberNo, long shelterNo, long amount) {
@@ -44,6 +47,7 @@ public class SupportService {
 	public void complete(String merchantUid) {
 		Connection conn = JDBCTemplet.getConnection();
 		new SupportDao().updateStatus(conn, merchantUid, SupportStatus.DONE);
+		new SupportDao().updateWithdrawStatus(conn, merchantUid, WithdrawStatus.PENDING);
 		JDBCTemplet.close();
 	}
 
@@ -80,5 +84,21 @@ public class SupportService {
 		JDBCTemplet.close();
 		return count;
 	}
+
+	public List<ShelterSupportResponse> findAllOnlyDoneByShelterNo(long shelterNo) {
+		Connection conn = JDBCTemplet.getConnection();
+		List<ShelterSupportResponse> supports = new SupportDao().findAllOnlyDoneByShelterNo(conn, shelterNo);
+		JDBCTemplet.close();
+		return supports;
+	}
+
+	public int withdraw(SupportWithdrawRequest request) {
+		Connection conn = JDBCTemplet.getConnection();
+		int result = new SupportDao().withdraw(conn, request.getSupportNo());
+		new TransferDao().withdraw(conn, request);
+		JDBCTemplet.close();
+		return result;
+	}
+
 }
 

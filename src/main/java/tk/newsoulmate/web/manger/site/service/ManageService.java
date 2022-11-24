@@ -5,6 +5,9 @@ import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.dao.NoticeDao;
 import tk.newsoulmate.domain.dao.SubscriptionDao;
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.GradeUp;
+import tk.newsoulmate.domain.vo.ManageMember;
+import tk.newsoulmate.domain.vo.Member;
 
 
 import java.sql.Connection;
@@ -16,12 +19,14 @@ public class ManageService {
 
     private MemberDao memberDao = new MemberDao();
 
+
     public ArrayList<ManageMember> selectMemberList() {
         Connection conn = getConnection();
         ArrayList<ManageMember> mList = memberDao.selectMemberList(conn);
         close();
         return mList;
     }
+
     public ArrayList<Member> selectManageMember() {
         Connection conn = getConnection();
         ArrayList<Member> mList = memberDao.selectManageMember(conn);
@@ -32,6 +37,10 @@ public class ManageService {
     public ArrayList<GradeUp> selectGradeUp() {
         Connection conn = getConnection();
         ArrayList<GradeUp> gList = new GradeUpDao().selectAllGrade(conn);
+
+        AttachmentDao at = new AttachmentDao();
+        //new AttachmentDao().selectGradeUpAttachment(conn,gList);
+        at.selectGradeUpAttachment(conn,gList);
         close();
         return gList;
     }
@@ -63,11 +72,35 @@ public class ManageService {
         Connection conn = getConnection();
 
         Subscription s = new SubscriptionDao().selectAdoptApplyDetail(conn,subNo);
-
         close();
 
         return s;
     }
+    public int changeStatus(String[] memberNo) {
+        Connection conn = getConnection();
+        int result1 = new GradeUpDao().changeGrade(conn,memberNo);
+        int result2 = new MemberDao().changeGrade(conn,memberNo);
+
+            if(result1 == memberNo.length && result2 == memberNo.length){
+                commit();
+            }else{
+                rollback();
+            }
+        return (result1+result2)/2;
+    }
+
+    public int changeStatusReject(String[] memberNo) {
+        Connection conn = getConnection();
+        int result1 = new GradeUpDao().changeGrade(conn,memberNo);
+
+        if(result1 == memberNo.length){
+            commit();
+        }else{
+            rollback();
+        }
+        return result1;
+    }
+
 
 
     public Notice selectNotice(long animalNo) {

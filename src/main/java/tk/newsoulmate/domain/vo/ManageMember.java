@@ -15,7 +15,8 @@ public class ManageMember {
     private MemberGrade memberGrade;
     private Date resentConnection;
     private Date enrollDate;
-    public ManageMember() {
+
+    public ManageMember () {
         super();
     }
 
@@ -31,6 +32,8 @@ public class ManageMember {
         this.resentConnection = resentConnection;
         this.enrollDate = enrollDate;
     }
+
+
 
     public long getShelterNo() {
         return shelterNo;

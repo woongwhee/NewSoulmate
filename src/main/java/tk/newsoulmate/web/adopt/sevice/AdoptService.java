@@ -168,6 +168,19 @@ public class AdoptService {
         return result;
 
     }
+
+    public int updateBoard(Board board) {
+        Connection conn= getConnection();
+        int result=new BoardDao().updateReviewBoard(conn,board);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+
+        return result;
+    }
 }
 
 
