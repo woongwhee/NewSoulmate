@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.Shelter;
-import tk.newsoulmate.domain.vo.ShelterSupportResponse;
+import tk.newsoulmate.domain.vo.response.ShelterSupportResponse;
 import tk.newsoulmate.domain.vo.Transfer;
 import tk.newsoulmate.web.shelter.service.ShelterService;
 import tk.newsoulmate.web.support.service.SupportService;
