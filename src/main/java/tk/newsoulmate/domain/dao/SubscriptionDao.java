@@ -1,5 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
+import oracle.jdbc.proxy.annotation.Pre;
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
 
@@ -20,7 +22,7 @@ public class SubscriptionDao {
 
     private Properties prop = new Properties();
 
-    public SubscriptionDao(){
+    public SubscriptionDao() {
         try {
             prop.loadFromXML(new FileInputStream(BoardDao.class.getResource("/sql/adopt/Subscription-Mapper.xml").getPath()));
         } catch (IOException e) {
@@ -28,7 +30,7 @@ public class SubscriptionDao {
         }
     }
 
-    public int insertSubscription(Connection conn, Subscription sb){
+    public int insertSubscription(Connection conn, Subscription sb) {
         int result = 0;
         PreparedStatement psmt = null;
         String sql = prop.getProperty("adoptApplyInsert");
@@ -60,7 +62,8 @@ public class SubscriptionDao {
         }
         return result;
     }
-    public int selectAdoptApplyListCount(Connection conn){
+
+    public int selectAdoptApplyListCount(Connection conn) {
         int listCount = 0;
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -69,7 +72,7 @@ public class SubscriptionDao {
         try {
             psmt = conn.prepareStatement(sql);
             rset = psmt.executeQuery();
-            if(rset.next()){
+            if (rset.next()) {
                 listCount = rset.getInt("cnt");
             }
         } catch (SQLException e) {
@@ -82,7 +85,7 @@ public class SubscriptionDao {
 
     }
 
-    public ArrayList<Subscription> selectAdoptApplyList(Connection conn, PageInfo pi){
+    public ArrayList<Subscription> selectAdoptApplyList(Connection conn, PageInfo pi) {
         ArrayList<Subscription> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -96,20 +99,20 @@ public class SubscriptionDao {
             int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
             int endRow = startRow + pi.getBoardLimit() - 1;
 
-            psmt.setInt(1,startRow);
-            psmt.setInt(2,endRow);
+            psmt.setInt(1, startRow);
+            psmt.setInt(2, endRow);
 
             rset = psmt.executeQuery();
 
-            while (rset.next()){
+            while (rset.next()) {
                 list.add(new Subscription(
                         rset.getInt("SUB_NO")
-                        ,rset.getLong("ANIMAL_ID")
-                        ,rset.getString("MEMBER_ID")
-                        ,rset.getString("NAME")
-                        ,rset.getString("TEL_NUM")
-                        ,rset.getDate("SUB_DATE")
-                        ,rset.getString("SUB_READ")));
+                        , rset.getLong("ANIMAL_ID")
+                        , rset.getString("MEMBER_ID")
+                        , rset.getString("NAME")
+                        , rset.getString("TEL_NUM")
+                        , rset.getDate("SUB_DATE")
+                        , rset.getString("SUB_READ")));
             }
 
         } catch (SQLException e) {
@@ -184,21 +187,67 @@ public class SubscriptionDao {
     }
 
 
+    public int shelterNoAdoptApplyListCount(Connection conn,long shelterNo) {
+        int listCount = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("shelterNoAdoptApplyListCount");
 
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1,shelterNo);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                listCount = rset.getInt("cnt");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return listCount;
+    }
 
+    public ArrayList<Subscription> shelterNoAdoptApplyList(Connection conn, PageInfo pi, long shelterNo) {
+        ArrayList<Subscription> list = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("shelterNoAdoptApplyList");
 
+        try {
+            psmt = conn.prepareStatement(sql);
+            if (pi.getCurrentPage() == 0) {
+                return list;
+            }
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
 
+            psmt.setLong(1,shelterNo);
+            psmt.setInt(2, startRow);
+            psmt.setInt(3, endRow);
 
+            rset = psmt.executeQuery();
 
+            while (rset.next()) {
+                list.add(new Subscription(
+                        rset.getInt("SUB_NO")
+                        , rset.getLong("ANIMAL_ID")
+                        , rset.getString("MEMBER_ID")
+                        , rset.getString("NAME")
+                        , rset.getString("TEL_NUM")
+                        , rset.getDate("SUB_DATE")
+                        , rset.getString("SUB_READ")));
+            }
 
-
-
-
-
-
-
-
-
-
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return list;
+    }
 
 }
+

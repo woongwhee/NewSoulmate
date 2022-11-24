@@ -35,6 +35,36 @@
             )
         WHERE RNUM BETWEEN ? AND ?
     </entry>
+    <entry key="shelterNoAdoptApplyList">
+        SELECT *
+        FROM(
+        SELECT
+        ROWNUM AS "RNUM",
+        A.*
+        FROM(
+        SELECT
+        S.SUB_NO,
+        S.ANIMAL_ID,
+        M.MEMBER_ID,
+        S.NAME,
+        S.TEL_NUM,
+        S.SUB_DATE,
+        S.SUB_READ
+
+        FROM SUBSCRIPTION S
+        JOIN MEMBER M ON (S.MEMBER_NO = M.MEMBER_NO)
+        WHERE SHELTER_NO = ?
+        ORDER BY S.SUB_NO
+        ) A
+        )
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="shelterNoAdoptApplyListCount">
+        SELECT COUNT(*) AS cnt
+        FROM SUBSCRIPTION
+        WHERE SHELTER_NO = ?
+    </entry>
 
     <entry key="selectAdoptApplyDetail">
         SELECT

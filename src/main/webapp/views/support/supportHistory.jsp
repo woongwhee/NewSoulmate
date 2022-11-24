@@ -1,6 +1,5 @@
-<%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.*" %>
+<%@ page import="tk.newsoulmate.domain.vo.response.SupportCompleteResponse" %>
 <%@ page import="tk.newsoulmate.domain.vo.SupportPage" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="tk.newsoulmate.domain.vo.response.SupportCompleteResponse" %>
@@ -53,7 +52,7 @@
                 <table class="supportList-area">
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>후원번호</th>
                         <th>후원보호소</th>
                         <th>후원금액</th>
                         <th>후원시간</th>
