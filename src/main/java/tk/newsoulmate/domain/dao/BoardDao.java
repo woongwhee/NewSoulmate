@@ -355,6 +355,7 @@ public class BoardDao {
             psmt.setString(2,b.getBoardTitle());
             psmt.setString(3,b.getBoardContent());
             psmt.setInt(4,b.getBoardNo());
+            psmt.setInt(5,b.getMemberNo());
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -464,7 +465,6 @@ public class BoardDao {
             psmt.setDate(3,b.getIssueDate());
             psmt.setInt(4,b.getBoardNo());
             result = psmt.executeUpdate();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

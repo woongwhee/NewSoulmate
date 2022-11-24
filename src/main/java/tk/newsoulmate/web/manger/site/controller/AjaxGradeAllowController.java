@@ -20,11 +20,9 @@ public class AjaxGradeAllowController extends HttpServlet {
 
         String[] memberNo =(request.getParameterValues("checkMember"));
         int[] memArr = Stream.of(memberNo).mapToInt(Integer::parseInt).toArray();
-
-
         int[] result = new ManageService().changeStatus(memArr);
         for(int i = 0; i<result.length;i++){
-            if(result[i] <0)
+//            if(result[i] <0)
         }
     }
 

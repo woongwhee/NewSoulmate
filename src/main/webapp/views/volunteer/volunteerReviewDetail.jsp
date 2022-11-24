@@ -81,7 +81,7 @@
         function submitReply(){
             let replyJson=JSON.stringify({
                 'memberNo':'${loginUser.memberNo}',
-                'boardNo':'${b.boardNo}',
+                'boardNo':'${b.noticeNo}',
                 'replyContent':$('#replyInput').val()
             });
             $.ajax({

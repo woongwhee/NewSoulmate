@@ -153,23 +153,38 @@ public class AttachmentDao {
         }
         return result;
     }
-    public void deleteInquireAttachment(int boardNo, Connection conn){
+    public int deleteAttachment(int fileNo, Connection conn){
         PreparedStatement psmt = null;
 
-        String sql = prop.getProperty("deleteInquireAttachment");
-
+        String sql = prop.getProperty("deleteAttachment");
+        int result=0;
         try {
             psmt = conn.prepareStatement(sql);
-
-            psmt.setInt(1, boardNo);
-
-            psmt.executeQuery();
+            psmt.setInt(1, fileNo);
+            result=psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             close(psmt);
         }
+        return result;
 
+    }
+    public int deleteBoardAttachment(int boardNo, Connection conn){
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("deleteBoardAttachment");
+        int result=0;
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, boardNo);
+            result=psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
 
     }
 
@@ -252,7 +267,6 @@ public class AttachmentDao {
         } finally {
             close(psmt);
         }
-
         return result;
 
     }
@@ -277,4 +291,7 @@ public class AttachmentDao {
             close(psmt);
         }
     }
+
+
+
 }

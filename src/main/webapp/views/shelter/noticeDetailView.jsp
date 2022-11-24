@@ -81,11 +81,50 @@
             </table>
             <div id="replyInput">
                 <input type="text" id="replyApply" placeholder="댓글을 입력해주세요">
-                <button id="reply-btn" onclick="">댓글작성</button>
+                <input type="file" id="replyFile" placeholder="댓글을 입력해주세요">
+                <button id="reply-btn">댓글작성</button>
             </div>
         </div>
     </div>
 </div>
 <footer><%@include file="/views/template/footer.jsp"%></footer>
+
+<script>
+
+    $('#reply-btn').on('click',submitReply);
+    function submitReply(){
+        let form = new FormData();
+
+        $.each($("#replyFile")[0].files,function (i,file){
+            console.log(i,file);
+            form.append("upfile"+i,file);
+        })
+
+        let reply=JSON.stringify({
+            'memberNo':'${loginUser.memberNo}',
+            'noticeNo':'${n.desertionNo}',
+            'replyContent':$('#replyApply').val()
+        })
+
+        form.append("reply",reply);
+        $.ajax({
+            url :'${context}/replyInsert.no',
+            type:'post',
+            processData: false,
+            contentType:false,
+            data:form,
+            success:(result)=>{
+                if(result>0){
+                    alert('댓글등록성공');
+                }else{
+                    alert('댓글등록실패',result)
+                }
+            },
+            error:(result)=>{
+                console.log(result)
+            }
+        });
+    }
+</script>
 </body>
 </html>
