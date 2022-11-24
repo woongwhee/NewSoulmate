@@ -49,6 +49,7 @@
         <p> <i class="bi bi-patch-exclamation-fill"></i> 개, 고양이등 기타 동물들이 있습니다.</p>
 
         <script>
+        <%--    FnQ     --%>
             $(function(){
                 $(document).on("click", "#Fcontent div" ,function(){
                     let $p = $(this).next();
@@ -159,7 +160,7 @@
 
     </div>
     <script>
-
+        <%--   FnQ, QnA 변환   --%>
         $(function(){
             $("#qna_bt").on("click", function(){
                 $(this).css("color", "#f8f5f2")

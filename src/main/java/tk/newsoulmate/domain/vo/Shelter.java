@@ -8,13 +8,13 @@ public class Shelter {
     private String shelterAddress;
     private String shelterLandline;
     private String companyNum;
-    private String transferAccount;
+    private long transferNo;
     private long cityNo;
     private long villageNo;
     public Shelter(){
         super();
     }
-    public Shelter(long shelterNo, String shelterName, String shelterTel, String shelterEmail, String shelterAddress, String shelterLandline, String companyNum, String transferAccount, long cityNo, long villageNo) {
+    public Shelter(long shelterNo, String shelterName, String shelterTel, String shelterEmail, String shelterAddress, String shelterLandline, String companyNum, long transferNo, long cityNo, long villageNo) {
         super();
         this.shelterNo = shelterNo;
         this.shelterName = shelterName;
@@ -23,11 +23,21 @@ public class Shelter {
         this.shelterAddress = shelterAddress;
         this.shelterLandline = shelterLandline;
         this.companyNum = companyNum;
-        this.transferAccount = transferAccount;
+        this.transferNo = transferNo;
         this.cityNo = cityNo;
         this.villageNo = villageNo;
     }
 
+    public Shelter(long shelterNo, String shelterName, String shelterAddress, String shelterLandline, long cityNo, long villageNo, long transferNo) {
+        super();
+        this.shelterNo = shelterNo;
+        this.shelterName = shelterName;
+        this.shelterAddress = shelterAddress;
+        this.shelterLandline = shelterLandline;
+        this.cityNo = cityNo;
+        this.villageNo = villageNo;
+        this.transferNo = transferNo;
+    }
     public Shelter(long shelterNo, String shelterName, String shelterAddress, String shelterLandline, long cityNo, long villageNo) {
         super();
         this.shelterNo = shelterNo;
@@ -112,12 +122,12 @@ public class Shelter {
         this.companyNum = companyNum;
     }
 
-    public String getTransferAccount() {
-        return transferAccount;
+    public long getTransferNo() {
+        return transferNo;
     }
 
-    public void setTransferAccount(String transferAccount) {
-        this.transferAccount = transferAccount;
+    public void setTransferAccount(long transferNo) {
+        this.transferNo = transferNo;
     }
 
     public long getCityNo() {
@@ -146,7 +156,7 @@ public class Shelter {
                 ", shelterAddress:'" + shelterAddress + '\'' +
                 ", shelterLandline:'" + shelterLandline + '\'' +
                 ", companyNum:'" + companyNum + '\'' +
-                ", transferAccount:'" + transferAccount + '\'' +
+                ", transferAccount:'" + transferNo + '\'' +
                 ", cityNo:" + cityNo +
                 ", villageNo:" + villageNo +
                 '}';

@@ -1,21 +1,23 @@
 package tk.newsoulmate.domain.vo;
 
 import com.google.gson.annotations.SerializedName;
+import tk.newsoulmate.domain.vo.type.ReplyType;
 
 import java.sql.Date;
 
 public class Reply {
+    @SerializedName("boardNo")
     private int replyNo;
     @SerializedName("boardNo")
-    private int boardNo;
+    private Integer boardNo;
     @SerializedName("noticeNo")
-    private int noticeNo;
+    private Long noticeNo;
     @SerializedName("memberNo")
     private int memberNo;
     private String replyWriter;
     @SerializedName("replyContent")
     private String replyContent;
-
+    private Attachment at;
     private ReplyType replyType;
     private Date replyDate;
 
@@ -108,16 +110,27 @@ public class Reply {
         return replyWriter;
     }
 
-    public int getNoticeNo() {
+    public Long getNoticeNo() {
         return noticeNo;
     }
+    public void setReplyWriter(String replyWriter) {
+        this.replyWriter = replyWriter;
+    }
 
-    public void setNoticeNo(int noticeNo) {
+    public void setBoardNo(Integer boardNo) {
+        this.boardNo = boardNo;
+    }
+
+    public void setNoticeNo(Long noticeNo) {
         this.noticeNo = noticeNo;
     }
 
-    public void setReplyWriter(String replyWriter) {
-        this.replyWriter = replyWriter;
+    public Attachment getAt() {
+        return at;
+    }
+
+    public void setAt(Attachment at) {
+        this.at = at;
     }
 
     @Override

@@ -133,7 +133,7 @@ public class InquireService {
 
         int result = new BoardDao().deleteBoard(conn,boardNo);
 
-        new AttachmentDao().deleteInquireAttachment(boardNo, conn);
+        new AttachmentDao().deleteBoardAttachment(boardNo, conn);
 
         if(result > 0){
             commit();
@@ -155,6 +155,49 @@ public class InquireService {
     }
 
     public int updateBoard(Board b) {
-        return 0;
+        Connection conn=getConnection();
+        int result=new BoardDao().updateInquireBoard(conn,b);
+        if(result > 0){
+            commit();
+        } else {
+            rollback(conn);
+        }
+        close();
+
+        return result;
+    }
+
+    public Attachment selectAttachment(int boardNo) {
+        Connection conn=getConnection();
+        Attachment at=new AttachmentDao().selectBoardAttachment(conn,boardNo);
+        return at;
+    }
+
+    public int deleteAttachment(int fileNo) {
+        Connection conn = getConnection();
+        int result=new AttachmentDao().deleteAttachment(fileNo, conn);
+
+        if(result > 0){
+            commit();
+        } else {
+            rollback();
+        }
+        close();
+
+        return result;
+    }
+
+    public int insertNewAttachment(Attachment at) {
+
+        Connection conn= getConnection();
+        int result=new AttachmentDao().insertBoardAttachment(at,conn);
+        if(result > 0){
+            commit();
+        } else {
+            rollback();
+        }
+        close();
+
+        return result;
     }
 }

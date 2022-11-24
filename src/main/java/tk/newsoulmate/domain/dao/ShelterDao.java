@@ -109,11 +109,11 @@ public class ShelterDao {
             rset = psmt.executeQuery();
             while(rset.next()) {
                 sList.add(new Shelter(rset.getLong("SHELTER_NO"),
-                                      rset.getString("SHELTER_NAME"),
-                                      rset.getString("SHELTER_ADDRESS"),
-                                      rset.getString("SHELTER_LANDLINE"),
-                                      rset.getLong("CITY_NO"),
-                                      rset.getLong("VILLAGE_NO")));
+                        rset.getString("SHELTER_NAME"),
+                        rset.getString("SHELTER_ADDRESS"),
+                        rset.getString("SHELTER_LANDLINE"),
+                        rset.getLong("CITY_NO"),
+                        rset.getLong("VILLAGE_NO")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -163,7 +163,7 @@ public class ShelterDao {
             psmt.setLong(1, shelterNo);
             rset = psmt.executeQuery();
 
-                while (rset.next()) {
+            while (rset.next()) {
                 s=(new Shelter(rset.getLong("SHELTER_NO"),
                         rset.getString("SHELTER_NAME"),
                         rset.getString("SHELTER_ADDRESS"),
@@ -206,6 +206,50 @@ public class ShelterDao {
 
     }
 
+    public Shelter findByShelterNo(long shelterNo, Connection conn) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectByShelterNo");
 
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1, shelterNo);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                return new Shelter(rset.getLong("SHELTER_NO"),
+                        rset.getString("SHELTER_NAME"),
+                        rset.getString("SHELTER_ADDRESS"),
+                        rset.getString("SHELTER_LANDLINE"),
+                        rset.getLong("CITY_NO"),
+                        rset.getLong("VILLAGE_NO"),
+                        rset.getLong("TRANSFER_NO"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return null;
+    }
 
+    public int updateLatestTransfer(Connection conn, long shelterNo, long transferNo) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("updateLatestTransfer");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1, transferNo);
+            psmt.setLong(2, shelterNo);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return result;
+    }
 }

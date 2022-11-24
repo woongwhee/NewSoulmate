@@ -16,17 +16,18 @@ import java.util.ArrayList;
 public class ManageGradeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Member> mList = new ManageService().selectManageMember();
+        //ArrayList<Member> mList = new ManageService().selectManageMember();
         ArrayList<GradeUp> gList = new ManageService().selectGradeUp();
-        ArrayList<Shelter> sList = new ShelterService().selectList();
-        request.setAttribute("mList",mList);
+        //ArrayList<Shelter> sList = new ShelterService().selectList();
+
+        //request.setAttribute("mList",mList);
         request.setAttribute("gList",gList);
-        request.setAttribute("sList",sList);
-        request.getRequestDispatcher("/views/manager/managerMemberShelter.jsp");
+        //request.setAttribute("sList",sList);
+        request.getRequestDispatcher("/views/manager/managerMemberShelter.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 }

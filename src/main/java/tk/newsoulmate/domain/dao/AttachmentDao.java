@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.Attachment;
+import tk.newsoulmate.domain.vo.GradeUp;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
@@ -148,30 +149,45 @@ public class AttachmentDao {
         }
         return result;
     }
-    public void deleteInquireAttachment(int boardNo, Connection conn){
+    public int deleteAttachment(int fileNo, Connection conn){
         PreparedStatement psmt = null;
 
-        String sql = prop.getProperty("deleteInquireAttachment");
-
+        String sql = prop.getProperty("deleteAttachment");
+        int result=0;
         try {
             psmt = conn.prepareStatement(sql);
-
-            psmt.setInt(1, boardNo);
-
-            psmt.executeQuery();
+            psmt.setInt(1, fileNo);
+            result=psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             close(psmt);
         }
+        return result;
 
+    }
+    public int deleteBoardAttachment(int boardNo, Connection conn){
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("deleteBoardAttachment");
+        int result=0;
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, boardNo);
+            result=psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
 
     }
 
     private Attachment replyAttachmentMapper(ResultSet rset) throws SQLException {
         Attachment at=null;
         if(rset.next()){
-           at=Attachment.replyAttachment(rset.getInt("FILE_NO"),
+            at=Attachment.replyAttachment(rset.getInt("FILE_NO"),
                     rset.getInt("REPLY_NO"),
                     rset.getString("ORIGIN_NAME"),
                     rset.getString("CHANGE_NAME"),
@@ -181,11 +197,22 @@ public class AttachmentDao {
         }
         return at;
     }
-  private Attachment boardAttachmentMapper(ResultSet rset) throws SQLException {
+    private Attachment boardAttachmentMapper(ResultSet rset) throws SQLException {
         Attachment at=null;
         if(rset.next()){
             at=Attachment.fileAttachment(rset.getInt("FILE_NO"),
                     rset.getInt("BOARD_NO"),
+                    rset.getString("ORIGIN_NAME"),
+                    rset.getString("CHANGE_NAME"),
+                    rset.getString("FILE_PATH"),
+                    rset.getDate("UPLOAD_DATE"));
+        }
+        return at;
+    }
+    private Attachment groupUpAttachmentMapper(ResultSet rset) throws SQLException {
+        Attachment at=null;
+        if(rset.next()){
+            at=Attachment.groupUpAttachment(rset.getInt("FILE_NO"),
                     rset.getString("ORIGIN_NAME"),
                     rset.getString("CHANGE_NAME"),
                     rset.getString("FILE_PATH"),
@@ -214,7 +241,6 @@ public class AttachmentDao {
         return fileNo;
     }
 
-
     public int insertGradeAttachment(Attachment at, Connection conn) {
 
         int result = 0;
@@ -224,7 +250,7 @@ public class AttachmentDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setInt(1,at.getFileNo());
+            psmt.setInt(1, at.getFileNo());
             psmt.setInt(2, at.getBoardNo());
             psmt.setString(3, at.getOriginName());
             psmt.setString(4, at.getChangeName());
@@ -236,8 +262,30 @@ public class AttachmentDao {
         } finally {
             close(psmt);
         }
-
         return result;
 
     }
+    public void selectGradeUpAttachment(Connection conn, ArrayList<GradeUp> gList) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectAttachment");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            for (GradeUp g:gList) {
+                psmt.setInt(1, g.getFileNo());
+                rset = psmt.executeQuery();
+                Attachment at = groupUpAttachmentMapper(rset) ;
+                g.setAttachment(at);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+    }
+
+
+
 }

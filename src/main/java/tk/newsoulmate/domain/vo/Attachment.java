@@ -3,7 +3,7 @@ package tk.newsoulmate.domain.vo;
 import java.sql.Date;
 
 public class Attachment {
-	
+
 	private int fileNo;
 	private int boardNo;
 	private int replyNo;
@@ -14,7 +14,7 @@ public class Attachment {
 	private Date uploadDate;
 	private int filelevel;
 	private String status;
-	
+
 	private Attachment() {
 		super();
 	}
@@ -23,14 +23,14 @@ public class Attachment {
 		Attachment at=new Attachment(originName,changeName,filePath);
 		return at;
 	}
-    private Attachment(String originName, String changeName, String filePath) {
+	private Attachment(String originName, String changeName, String filePath) {
 		this.originName=originName;
 		this.changeName=changeName;
 		this.filePath=filePath;
 
-    }
+	}
 
-    /**
+	/**
 	 * 게시글용 첨부파일 팩토리얼
 	 * @param fileNo
 	 * @param boardNo
@@ -50,7 +50,24 @@ public class Attachment {
 		at.setUploadDate(uploadDate);
 		return at;
 	}
-
+	/**
+	 * 보호소 관계자 등록첨부파일용 생성 팩토리얼메서드
+	 * @param fileNo
+	 * @param originName
+	 * @param changeName
+	 * @param filePath
+	 * @param uploadDate
+	 * @return
+	 */
+	public static Attachment groupUpAttachment(int fileNo, String originName, String changeName, String filePath, Date uploadDate) {
+		Attachment at=new Attachment();
+		at.setFileNo(fileNo);
+		at.setOriginName(originName);
+		at.setChangeName(changeName);
+		at.setFilePath(filePath);
+		at.setUploadDate(uploadDate);
+		return at;
+	}
 	/**
 	 * 댓글 첨부파일용 생성 팩토리얼메서드
 	 * @param fileNo
@@ -174,5 +191,5 @@ public class Attachment {
 				+ changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", filelevel=" + filelevel
 				+ ", status=" + status + "]";
 	}
-	
+
 }

@@ -1,7 +1,6 @@
 <%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.response.SupportCompleteResponse" %>
-<%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
+<%@ page import="tk.newsoulmate.domain.vo.SupportCompleteResponse" %>
 <%@ page import="tk.newsoulmate.domain.vo.SupportPage" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -31,6 +30,8 @@
     <%@include file="/views/template/menubar.jsp" %>
 </header>
 <main>
+
+
     <div id="container">
 
         <div class="content_main">

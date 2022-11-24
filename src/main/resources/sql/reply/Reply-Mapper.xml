@@ -32,7 +32,7 @@
     </entry>
     <entry key="selectReplyNo">
         SELECT
-            SQ_COMMENT_PK.NEXTVAL
+            SQ_COMMENT_PK.NEXTVAL as REPLY_NO
         FROM DUAL
     </entry>
     <entry key="selectReplyMno">

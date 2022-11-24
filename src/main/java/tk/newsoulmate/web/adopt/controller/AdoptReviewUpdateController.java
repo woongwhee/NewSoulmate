@@ -16,11 +16,11 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet(name = "adoptUpdate", value = "/adopt/update")
+@WebServlet(name = "AdoptReviewEnrollController", value = "/adopt/update")
 public class AdoptReviewUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int bno=Integer.parseInt(request.getParameter("boardNo"));
+        Integer boardNo= Integer.valueOf(request.getParameter("boardNo"));
         String boardTitle=request.getParameter("boardTitle");
         String boardContent=request.getParameter("boardContent");
         String adoptDate_=request.getParameter("adoptDate");
@@ -33,20 +33,20 @@ public class AdoptReviewUpdateController extends HttpServlet {
         }
         HttpSession session=request.getSession();
         int memberNo=((Member)session.getAttribute("loginUser")).getMemberNo();
-        Board board=Board.enrollBoard(memberNo,bno,adoptDate, BoardType.ADOPT,boardTitle,boardContent );
+        Board board=Board.enrollBoard(memberNo,boardNo.intValue(),adoptDate, BoardType.ADOPT,boardTitle,boardContent );
         int result=new AdoptService().updateBoard(board);
         if(result>0){
             session.setAttribute("alertMsg","게시글수정 성공");
         }else{
             session.setAttribute("erorrtMsg","게시글수정 실패");
         }
-        response.sendRedirect(request.getContextPath()+"adoptRevDetail?bno="+bno);
+        response.sendRedirect(request.getContextPath()+"adoptRevDetail?bno="+boardNo);
 
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+
     }
 }
