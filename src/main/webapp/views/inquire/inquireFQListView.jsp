@@ -21,7 +21,7 @@
 <head>
     <title>고객센터 FAQ,Q&A</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css" rel="stylesheet">
 <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>--%>
 </head>
 <body>
@@ -34,19 +34,19 @@
     </div>
     <div id="Fcontent" style="display: none">
 
-        <h3>자주 묻는 질문</h3>
+        <span id="topTextFna"> 자주 묻는 질문 </span>
 
-        <div> 유기동물을 발견했어요</div>
-        <p> 유기동물을 발견하셨다면 120번 또는 해당 구청 담당부서로 연락주세요!</p>
+        <div> <i class="bi bi-patch-question-fill"></i> 유기동물을 발견했어요</div>
+        <p> <i class="bi bi-patch-exclamation-fill"></i> 유기동물을 발견하셨다면 120번 또는 해당 구청 담당부서로 연락주세요!</p>
 
-        <div> 자원봉사는 어떻게 신청하나요?</div>
-        <p> 상단바에 봉사페이지를 이용해주세요</p>
+        <div> <i class="bi bi-patch-question-fill"></i> 자원봉사는 어떻게 신청하나요?</div>
+        <p> <i class="bi bi-patch-exclamation-fill"></i> 상단바에 봉사페이지를 이용해주세요</p>
 
-        <div> 후원금은 어떻게 사용되나요?</div>
-        <p> 잘 이용됩니다.</p>
+        <div> <i class="bi bi-patch-question-fill"></i> 후원금은 어떻게 사용되나요?</div>
+        <p> <i class="bi bi-patch-exclamation-fill"></i> 잘 이용됩니다.</p>
 
-        <div> 어떤 동물들이 있는지 궁금합니다.</div>
-        <p> 개, 고양이등 기타 동물들이 있습니다.</p>
+        <div> <i class="bi bi-patch-question-fill"></i> 어떤 동물들이 있는지 궁금합니다.</div>
+        <p> <i class="bi bi-patch-exclamation-fill"></i> 개, 고양이등 기타 동물들이 있습니다.</p>
 
         <script>
         <%--    FnQ     --%>
@@ -68,20 +68,19 @@
 
     </div>
     <div id="Qcontent">
-        <h3> 1:1 문의</h3>
+        <div class="topTextQna">1:1 문의</div>
         <br>
 
 <%--        <div id="box1" align="center" style="float: left; margin-left: 400px;"><input type="checkbox" id="" >나의 문의내역 보기</div> --%>
 <%--        나의 문의내역 없애기로함--%>
 
         <c:if test="${!empty loginUser}">
-        <div align="right" style="margin-right: 400px">
-            <a href="${context}/inquireEnroll.bo" class="btn btn-secondary btn-sm">글작성</a>
+            <input type="button" name="" value="글쓰기" id="writingQna" onclick="location.href='${context}/inquireEnroll.bo';">
+<%--            <a href="${context}/inquireEnroll.bo" class="btn btn-secondary btn-sm">글작성</a>--%>
             <br>
             <br>
-        </div>
         </c:if>
-        <table align="center" class="list-area">
+        <table align="center" id="tableQna" class="list-area">
             <thead>
             <tr style="text-align: center">
                 <th width="100">답변상태</th>
@@ -113,7 +112,7 @@
         </table>
         <script>
             $(function(){
-                $(".list-area>tbody>tr").click(function(){
+                $("#tableQna>tbody>tr").click(function(){
                     // 클릭시 해당 공지사항의 번호를 넘겨야함.
                     // 해당 tr요소의 자손중에서 첫번째 td의 영역의 내용이 필요.
                     if($(this).text()!=$("#tableEmpty").text()) { // 조회된 리스트가 없을경우 클릭방지

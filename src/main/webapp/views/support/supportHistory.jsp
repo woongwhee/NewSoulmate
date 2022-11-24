@@ -21,7 +21,7 @@
 <html>
 <head>
     <title>후원내역</title>
-    <%@include file="/views/template/styleTemplate.jsp" %>
+<%--    <%@include file="/views/template/styleTemplate.jsp" %>--%>
     <link href="<%=request.getContextPath()%>/css/support/supportHistroy.css" rel="stylesheet">
 </head>
 
