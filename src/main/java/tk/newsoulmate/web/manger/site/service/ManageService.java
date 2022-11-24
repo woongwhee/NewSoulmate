@@ -1,10 +1,10 @@
 package tk.newsoulmate.web.manger.site.service;
 
-import tk.newsoulmate.domain.dao.AttachmentDao;
 import tk.newsoulmate.domain.dao.GradeUpDao;
 import tk.newsoulmate.domain.dao.MemberDao;
-import tk.newsoulmate.domain.dao.SubscriptionDao;
-import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.GradeUp;
+import tk.newsoulmate.domain.vo.ManageMember;
+import tk.newsoulmate.domain.vo.Member;
 
 
 import java.sql.Connection;
@@ -16,12 +16,14 @@ public class ManageService {
 
     private MemberDao memberDao = new MemberDao();
 
+
     public ArrayList<ManageMember> selectMemberList() {
         Connection conn = getConnection();
         ArrayList<ManageMember> mList = memberDao.selectMemberList(conn);
         close();
         return mList;
     }
+
     public ArrayList<Member> selectManageMember() {
         Connection conn = getConnection();
         ArrayList<Member> mList = memberDao.selectManageMember(conn);
