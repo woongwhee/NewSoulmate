@@ -11,8 +11,8 @@
 <html>
 <head>
     <title>회원관리-보호소 관계자 신청</title>
-    <link href="<%=request.getContextPath()%>/css/manager/managerMemberShelter.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/manager/managerMemberShelter.css" rel="stylesheet">
 </head>
 <body>
 <header><%@include file="/views/manager/managerHeader.jsp"%></header>

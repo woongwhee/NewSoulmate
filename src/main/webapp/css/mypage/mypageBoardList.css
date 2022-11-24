@@ -58,6 +58,7 @@ tbody td {
     text-align: center;
     font-size: 15px;
     padding: 10px;
+    cursor: pointer;
 }
 
 /*페이징바*/

@@ -36,7 +36,7 @@
                 <button class="dropdown-btn"><a href="#">후원관리</a></button>
                 <div class="dropdown-submenu">
                     <a href="#">전체 후원내역</a>
-                    <a href="#">보호소별 후원내역</a>
+                    <a href="${context}/manageSupportPage">보호소별 출금신청내역</a>
                 </div>
             </div>
         </li>

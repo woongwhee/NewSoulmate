@@ -22,9 +22,6 @@
             <form action="<%=request.getContextPath()%>/memberDelete" method="post" name="myPageDeleteMember">
                 <table>
                     <tr>
-                        <td>${loginUser.memberName}</td>
-                    </tr>
-                    <tr>
                         <td><input type="password" name="memberPwd" placeholder="비밀번호 입력" required></td>
                     </tr>
                     <tr>
