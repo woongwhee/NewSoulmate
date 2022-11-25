@@ -95,7 +95,8 @@
 
 
     <entry key="updateLatestTransfer">
-        UPDATE SHELTER SET TRANSFER_NO = ?
+        UPDATE SHELTER
+        SET TRANSFER_NO = ?
         WHERE SHELTER_NO = ?
     </entry>
 

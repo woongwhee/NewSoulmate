@@ -132,6 +132,7 @@
 
                 </table>
             </div>
+            <br><br>
 
             <%-- 페이징바 처리--%>
             <div align="center" class="paging-area">
