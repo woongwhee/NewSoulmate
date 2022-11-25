@@ -36,12 +36,12 @@
           </tr>
           <tr>
             <th>제목</th>
-            <td><input type="text" name="boardTitle" required value="<%=b.getBoardTitle() %>"></td>
+            <td><input type="text" name="boardTitle" required value="${b.boardTitle}"></td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea name="boardContent" id="" cols="30" rows="10" required ><%=b.getBoardContent()%></textarea>
+              <textarea name="boardContent" id="" cols="30" rows="10" required >${b.boardContent}</textarea>
             </td>
           </tr>
           <tr>

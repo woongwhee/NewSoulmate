@@ -74,7 +74,7 @@
 <%--        <div id="box1" align="center" style="float: left; margin-left: 400px;"><input type="checkbox" id="" >나의 문의내역 보기</div> --%>
 <%--        나의 문의내역 없애기로함--%>
 
-        <c:if test="${!empty loginUser}">
+        <c:if test="${!empty loginUser and !loginUser.memberGrade.SITE_MANAGER}">
             <input type="button" name="" value="글쓰기" id="writingQna" onclick="location.href='${context}/inquireEnroll.bo';">
 <%--            <a href="${context}/inquireEnroll.bo" class="btn btn-secondary btn-sm">글작성</a>--%>
             <br>

@@ -67,7 +67,7 @@
                     </td>
                 </tr>
             </c:forEach>
-            <c:if test="${empty rList}">
+            <c:if test="${empty rList and loginUser.memberGrade.SITE_MANAGER}">
                 <tr>
                     <th>답변작성</th>
                     <td>

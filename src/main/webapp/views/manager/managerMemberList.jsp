@@ -3,7 +3,9 @@
 <%@ page import="tk.newsoulmate.domain.vo.type.MemberGrade" %>
 <%@ page import="tk.newsoulmate.web.manger.site.service.ManageService" %>
 <%@ page import="tk.newsoulmate.web.member.service.MemberService" %>
-<%@ page import="tk.newsoulmate.domain.vo.ManageMember" %><%--
+<%@ page import="tk.newsoulmate.domain.vo.ManageMember" %>
+<%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
+<%--
   Created by IntelliJ IDEA.
   User: gram
   Date: 2022-11-16
@@ -15,6 +17,11 @@
 <%
     ArrayList<ManageMember> mList = (ArrayList<ManageMember>) request.getAttribute("mList");
     ManageService ms = new ManageService();
+    PageInfo pi = (PageInfo) request.getAttribute("pi");
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
 %>
 <html>
 <head>
@@ -29,7 +36,6 @@
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
-
             <div class="box">
                 총 회원 수
                 <span id="countMember" style="color: #f45d48;"><%= ms.selectCountMember() %></span> 명
@@ -127,8 +133,34 @@
                 </table>
             </div>
 
+            <%-- 페이징바 처리--%>
+            <div align="center" class="paging-area">
 
+                <% if(currentPage != 1) { %>
+                <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
 
+                <% } %>
+
+                <% for(int i=startPage; i<=endPage; i++) { %>
+                <% if(i != currentPage) {%>
+                <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
+                <% } else { %>
+                <button disabled><%=i %></button>
+                <% } %>
+                <% } %>
+
+                <% if(currentPage != maxPage) { %>
+                <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+
+                <% } %>
+
+            </div>
+
+            <script>
+                function doPageClick(currentPage){
+                    location.href = "${context}/manageMemberPage?currentPage="+currentPage;
+                }
+            </script>
         </div>
     </div>
 </div>
