@@ -16,6 +16,10 @@ public class Support {
     private SupportType type;
     private boolean isWithdraw;
 
+    public Support(){
+        super();
+    }
+
     public Support(int supportNo, long shelterNo, int memberNo, String merchantUid, long amount) {
         this.supportNo = supportNo;
         this.shelterNo = shelterNo;

@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import tk.newsoulmate.domain.dao.TransferDao;
-import tk.newsoulmate.domain.vo.ManageSupportResponse;
+import tk.newsoulmate.domain.vo.response.ManageSupportResponse;
 import tk.newsoulmate.domain.vo.Transfer;
 
 public class TransferService {
