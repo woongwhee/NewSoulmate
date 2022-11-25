@@ -96,7 +96,7 @@ public class ShelterService {
         Connection conn=getConnection();
         Notice n=new Notice();
         List<Notice> nList=new NoticeDao().selectNoticeList(conn,n);
-
+        close();
         return nList;
     }
 

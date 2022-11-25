@@ -45,6 +45,16 @@
                 <th>중성화여부</th>
                 <td>${n.sexCd}</td>
             </tr>
+            <tr>
+                <th>보호소 이름</th>
+                <td>${n.careNm}</td>
+                <th>보호소 전화번호</th>
+                <td>${n.careTel}</td>
+            </tr>
+            <tr>
+                <th>보호소 주소</th>
+                <td colspan="3">${n.careAddr}</td>
+            </tr>
         </table>
     </div>
     <div id="animal-detail">
@@ -102,31 +112,6 @@
 </div>
 <%@include file="/views/template/report.jsp"%>
 <footer><%@include file="/views/template/footer.jsp"%></footer>
-
-<script>
-    $('.replyDelete').click((e)=>{
-        let rno=  $(e.target).attr('ref');
-        console.log(rno);
-        console.log(e.target);
-        console.log(e.target);
-        console.log($(e.target));
-        if(confirm('정말삭제하시겠습니까?')){
-            $.ajax({
-                url:"replyDelete",
-                type:'post',
-                data:{rno:rno},
-                success:(result)=>{
-                    if(result>0){
-                        alert("댓글삭제성공")
-                        location.reload()
-                    }else{
-                        alert("댓글삭제실패")
-                    }
-                },
-                error:(e)=>{console.log(e)}
-            })
-        }
-    })
-</script>
+<script src="${context}/js/shelter/noticeDetail.js"></script>
 </body>
 </html>
