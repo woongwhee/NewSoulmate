@@ -1,0 +1,81 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+.content-wrap {
+    width: 1080px;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
+.title-wrap {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    color: #319493;
+}
+
+.logintable th {
+    font-size: 20px;
+    font-weight: 400;
+    width: 100px;
+    height: 50px;
+    text-align: left;
+}
+
+.logintable input {
+    font-size: 16px;
+    font-weight: 400;
+    width: 220px;
+    height: 35px;
+    border-radius: 5px ;
+    border: 1px lightgray solid;
+}
+
+#save-id-box{
+    width: 320px;
+    text-align: left;
+}
+
+#saveId{
+    zoom: 1.55;
+    cursor: pointer;
+    margin-right: 2px;
+}
+
+.save-label{
+    font-size: 18px;
+    vertical-align: super;
+}
+
+#login-btn-box{
+    padding-top: 25px;
+}
+
+.loginBtn {
+    width: 320px;
+    height: 45px;
+    background-color: #319493;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+#find-box{
+    padding-top: 25px;
+}
+
+#find-box a{
+    text-decoration: none;
+    margin: 0 15px 0 15px;
+}
