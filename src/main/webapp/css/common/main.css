@@ -41,7 +41,7 @@
     height: 90px;
     padding: 30px 0 0 170px;
 }
-#adopt-able-animal , #adopt-step{
+#adopt-able-animal , #adopt-step {
     width: 180px;
     height: 60px;
     border-radius: 40px;
@@ -79,19 +79,19 @@
     width: 100%;
     height: 90px;
     text-align: center;
+    padding-top: 10px;
 }
 
 #supportBtn{
-    height: 40px;
-    width: 200px;
     background-color: #39393a;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-    border-radius: 5px;
-    border: none;
-    margin-top: 10px;
+    width: 300px;
+    height: 60px;
+    border-radius: 40px;
+    border: white solid 3px;
     cursor: pointer;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
 }
 
 #main_bottom {
