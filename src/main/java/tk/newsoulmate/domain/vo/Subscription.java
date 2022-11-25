@@ -90,6 +90,9 @@ public class Subscription {
         return adoptReason;
     }
 
+    public String getFamilyAgreement() {
+        return familyAgreement;
+    }
 
     public String getWhenSick() {
         return whenSick;
@@ -142,6 +145,9 @@ public class Subscription {
         this.adoptReason = adoptReason;
     }
 
+    public void setFamilyAgreement(String familyAgreement) {
+        this.familyAgreement = familyAgreement;
+    }
 
     public void setWhenSick(String whenSick) {
         this.whenSick = whenSick;
@@ -171,14 +177,6 @@ public class Subscription {
 
     public void setSubDate(Date subDate) {
         this.subDate = subDate;
-    }
-
-    public String getFamilyAgreement() {
-        return familyAgreement;
-    }
-
-    public void setFamilyAgreement(String familyAgreement) {
-        this.familyAgreement = familyAgreement;
     }
 
     @Override

@@ -24,12 +24,6 @@ public class ScheduleService {
         int result=0;
         System.out.println(new Date()+"공고문업데이트 시작");
         Request request = new Request();
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -14);
-        Calendar cal2 = Calendar.getInstance();
-        cal2.add(Calendar.DATE, 0);
-        request.setBgndate(cal.getTime());
-        request.setEnddate(cal2.getTime());
         request.setPageNo(1);
         request.setNumberOfRows(1);
         int count=getTotalCount(request);

@@ -27,7 +27,6 @@
     font-weight: bold;
     display: inline-block;
     text-align: center;
-
 }
 
 input  {
@@ -47,10 +46,10 @@ input  {
     font-weight: bold;
     border: none;
     border-radius: 5px;
-    background-color: #319493;
+    background-color: #676767;
     color: white;
 }
 
-button:hover {
-    background-color: #236b6a;
+#submitButton:hover {
+    background-color: #319493;
 }

@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.close;
@@ -124,7 +125,21 @@ public class ReplyDao {
         };
         return r;
     }
+    private Reply noticeReplyMapper(ResultSet rset) throws SQLException {
+        Reply r=null;
+        if(rset.next()){
+            r=new Reply(
+                    rset.getInt("REPLY_NO"),
+                    rset.getInt("MEMBER_NO"),
+                    rset.getString("NICKNAME"),
+                    rset.getString("REPLY_CONTENT"),
+                    rset.getInt("REPLY_TYPE"),
+                    rset.getDate("REPLY_DATE")
 
+            );
+        };
+        return r;
+    }
 
     public int selectReplyNo(Connection conn) {
         int result=0;
@@ -134,7 +149,9 @@ public class ReplyDao {
         try {
             psmt = conn.prepareStatement(sql);
             rset = psmt.executeQuery();
-            result= rset.getInt("REPLY_NO");
+            if(rset.next()){
+            result=rset.getInt("NEXTVAL");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -142,5 +159,27 @@ public class ReplyDao {
             close(psmt);
         }
         return result;
+    }
+
+    public List<Reply> selectNoticeReply(Connection conn, long dno) {
+        ArrayList<Reply> list = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectNoticeReply");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1, dno);
+            rset = psmt.executeQuery();
+            Reply r=null;
+            while ((r=noticeReplyMapper(rset))!=null) {
+                list.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return list;
     }
 }

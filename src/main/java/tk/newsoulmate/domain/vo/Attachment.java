@@ -12,7 +12,6 @@ public class Attachment {
 	private String changeName;
 	private String filePath;
 	private Date uploadDate;
-	private int filelevel;
 	private String status;
 
 	private Attachment() {
@@ -88,7 +87,17 @@ public class Attachment {
 		at.setUploadDate(uploadDate);
 		return at;
 	}
-	public static Attachment getThumnailInstance(int boardNo, String originName, String boardTitle, String changeName, String filePath){
+
+	/**
+	 * 섬네일용 게시판
+	 * @param boardNo
+	 * @param originName
+	 * @param boardTitle
+	 * @param changeName
+	 * @param filePath
+	 * @return
+	 */
+	public static Attachment getThumbnailInstance(int boardNo, String originName, String boardTitle, String changeName, String filePath){
 		Attachment at=new Attachment(boardNo, originName, boardTitle, changeName, filePath);
 		return at;
 	}
@@ -117,9 +126,6 @@ public class Attachment {
 		this.replyNo = replyNo;
 	}
 
-	public int getFilelevel() {
-		return filelevel;
-	}
 
 	public int getFileNo() {
 		return fileNo;
@@ -161,13 +167,6 @@ public class Attachment {
 		this.uploadDate = uploadDate;
 	}
 
-	public int getFileLevel() {
-		return filelevel;
-	}
-
-	public void setFilelevel(int filelevel) {
-		this.filelevel = filelevel;
-	}
 
 	public String getStatus() {
 		return status;
@@ -188,8 +187,7 @@ public class Attachment {
 	@Override
 	public String toString() {
 		return "Attachment [fileNo=" + fileNo + ", refNo=" + boardNo + ", originName=" + originName + ", changeName="
-				+ changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", filelevel=" + filelevel
-				+ ", status=" + status + "]";
+				+ changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + "status=" + status + "]";
 	}
 
 }
