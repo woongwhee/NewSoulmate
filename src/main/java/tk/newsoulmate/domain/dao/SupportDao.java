@@ -11,13 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import tk.newsoulmate.domain.vo.ManageMember;
-import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.domain.vo.response.ShelterSupportResponse;
 import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
 import tk.newsoulmate.domain.vo.SupportPage;
-import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.domain.vo.type.SupportStatus;
 import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
@@ -76,7 +73,7 @@ public class SupportDao {
         return result;
     }
 
-    public int updateStatus(Connection conn, String merchantUid, SupportStatus status) {
+    public int updateWithdrawStatus(Connection conn, String merchantUid, SupportStatus status) {
         PreparedStatement psmt = null;
         int result = 0;
         String sql = prop.getProperty("updateStatus");
@@ -257,7 +254,7 @@ public class SupportDao {
         return supportList;
     }
 
-    public int withdraw(Connection conn, long supportNo) {
+    public int updateWithdrawStatus(Connection conn, long supportNo, WithdrawStatus status) {
         int result = 0;
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -265,7 +262,7 @@ public class SupportDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1, WithdrawStatus.REQUESTED.name());
+            psmt.setString(1, status.name());
             psmt.setLong(2, supportNo);
             result = psmt.executeUpdate();
         } catch (SQLException e) {
@@ -304,8 +301,5 @@ public class SupportDao {
         }
         return allList;
     }
-
-
-
 
 }

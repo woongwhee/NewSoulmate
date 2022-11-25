@@ -3,6 +3,7 @@ package tk.newsoulmate.web.member.service;
 import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PwdReset;
+import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
@@ -92,7 +93,28 @@ public class MemberService {
         return result;
     }
 
+    public int deleteMember(long memberNo) {
 
+        Connection conn = JDBCTemplet.getConnection();
+        int result = new MemberDao().deleteMember(memberNo, conn);
+        if(result > 0) {
+            JDBCTemplet.commit();
+        }else {
+            JDBCTemplet.rollback(conn);
+        }
+        JDBCTemplet.close();
+        return result;
+    }
 
-
+	public int updateGrade(ManageMemberUpdateGradeRequest updateGradeReq) {
+        Connection conn = JDBCTemplet.getConnection();
+        int result = new MemberDao().updateGrade(updateGradeReq, conn);
+        if(result > 0) {
+            JDBCTemplet.commit();
+        }else {
+            JDBCTemplet.rollback(conn);
+        }
+        JDBCTemplet.close();
+        return result;
+	}
 }

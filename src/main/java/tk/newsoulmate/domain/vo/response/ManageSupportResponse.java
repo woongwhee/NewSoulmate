@@ -6,6 +6,8 @@ import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 
 public class ManageSupportResponse {
 
+    private final long supportNo;
+
     private final String merchantUid;
     private final String shelterName;
     private final LocalDate payTime;
@@ -15,9 +17,9 @@ public class ManageSupportResponse {
     private final String withdrawBank;
     private final String withdrawAccountNumber;
     private final String withdrawAccountName;
-
-    public ManageSupportResponse(String merchantUid, String shelterName, LocalDate payTime, long amount, String supporterName,
+    public ManageSupportResponse(long supportNo, String merchantUid, String shelterName, LocalDate payTime, long amount, String supporterName,
                                  WithdrawStatus status, String withdrawBank, String withdrawAccountNumber, String withdrawAccountName) {
+        this.supportNo = supportNo;
         this.merchantUid = merchantUid;
         this.shelterName = shelterName;
         this.payTime = payTime;
@@ -27,6 +29,10 @@ public class ManageSupportResponse {
         this.withdrawBank = withdrawBank;
         this.withdrawAccountNumber = withdrawAccountNumber;
         this.withdrawAccountName = withdrawAccountName;
+    }
+
+    public long getSupportNo() {
+        return supportNo;
     }
 
     public String getMerchantUid(){

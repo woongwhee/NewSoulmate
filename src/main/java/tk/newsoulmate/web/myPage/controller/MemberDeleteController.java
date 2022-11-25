@@ -20,14 +20,15 @@ public class MemberDeleteController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
-        String memberPwd = request.getParameter("MemberPwd");
+        String memberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+        String memberPwd = request.getParameter("memberPwd");
         int result = new MemberService().deleteMember(memberId, memberPwd);
 
         if(result > 0) {
+            request.getSession().invalidate();
+            request.getSession(true);
 
-            session.setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다.");
-            session.removeAttribute("loginUser");
+            request.setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다.");
             response.sendRedirect(request.getContextPath());
 
         }else {
