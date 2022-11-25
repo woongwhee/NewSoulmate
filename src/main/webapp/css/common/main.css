@@ -19,30 +19,30 @@
 }
 
 #main_left {
-    width: 800px;
+    width: 730px;
     height: auto;
     float: left;
     margin: 10px 10px 10px 0;
 }
 
 #adopt-review {
-    width: 800px;
+    width: 730px;
     height: 280px;
 }
 
 #volunteer-review {
-    width: 800px;
+    width: 730px;
     height: 220px;
     margin-bottom: 20px;
 }
 
 #adopt-btn-box {
-    width: 800px;
+    width: 730px;
     height: 90px;
     padding: 30px 0 0 170px;
 }
 #adopt-able-animal , #adopt-step{
-    width: 200px;
+    width: 180px;
     height: 60px;
     border-radius: 40px;
     border: white solid 3px;
@@ -62,7 +62,7 @@
     background-color: #319493;
 }
 #main_right {
-    width: 380px;
+    width: 440px;
     height: auto;
     float: right;
     margin: 10px 0 20px 10px;
@@ -141,18 +141,18 @@
 
 
 #adopt-review-list{
-    width: 800px;
+    width: 730px;
     height:200px;
     margin-top: 20px;
     display: flex;
     padding: 10px;
 }
 
-#main_left Img{
-    width: 135px;
+#main_left img{
+    width: 140px;
     height: 170px;
     cursor: pointer;
-    margin: 5px 10px 0 10px;
+    margin: 5px 15px 0 20px;
 }
 
 #comment2 , #comment3 {
@@ -163,12 +163,6 @@
     cursor: pointer;
 }
 
-#comment4{
-    font-size: 18px;
-    font-weight: 400;
-    text-align: center;
-}
-
 #volunteer-review-list{
     width: 550px;
     height: 180px;
@@ -176,14 +170,14 @@
 }
 
 #btn-area{
-    width: 200px;
+    width: 150px;
     height: 180px;
     display:inline-block;
 }
 
 #shelterbtn{
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 130px;
     border-radius: 20px;
     font-weight: 600;
     font-size: 18px;
@@ -215,8 +209,8 @@
     position: relative;
     display: inline-block;
     max-width: calc(100% - 50px);
-    padding: 10px;
-    font-size: 13px;
+    padding: 8px;
+    font-size: 15px;
     border-radius: 5px;
 }
 

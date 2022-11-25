@@ -1,13 +1,16 @@
 package tk.newsoulmate.web.adopt.controller;
 
+import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
+import tk.newsoulmate.web.common.UploadUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "adoptRevDelete", value = "/adoptRevDelete")
 public class AdoptReviewDeleteController extends HttpServlet {
@@ -33,6 +36,15 @@ public class AdoptReviewDeleteController extends HttpServlet {
             error(request, response);
             return;
         };
+        List<Attachment> aList=as.selectAttachmentList(bno);
+        if(!aList.isEmpty()){
+            UploadUtil uu=UploadUtil.create(request.getServletContext());
+            for (Attachment at:aList) {
+                uu.deleteFile(at);
+                as.deleteAttachment(at.getFileNo());
+            }
+        }
+
         int result=as.deleteBoard(bno);
         if(result==0){
             error(request,response);

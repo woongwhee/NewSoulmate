@@ -129,5 +129,10 @@ public class PageInfo {
             this.endPage = endPage;
         }
 
-
+        public static int StartNum(int page,int pageLimit){
+            return pageLimit*page+1;
+        }
+        public static int EndNum(int page,int pageLimit){
+            return pageLimit*page+pageLimit;
+        }
 }

@@ -6,7 +6,6 @@ import tk.newsoulmate.domain.vo.type.ReplyType;
 import java.sql.Date;
 
 public class Reply {
-    @SerializedName("boardNo")
     private int replyNo;
     @SerializedName("boardNo")
     private Integer boardNo;
@@ -56,6 +55,24 @@ public class Reply {
         this.replyWriter=replyWriter;
         this.replyContent = replyContent;
         this.replyDate = replyDate;
+    }
+    /**
+     * 사진댓글불러오기
+     */
+    public Reply(int replyNo,int memberNo, String replyWriter,String replyContent,int typeNo,Date replyDate) {
+        this.replyNo = replyNo;
+        this.boardNo=boardNo;
+        this.memberNo = memberNo;
+        this.replyWriter=replyWriter;
+        this.replyContent = replyContent;
+        this.replyType=ReplyType.valueOfNo(typeNo);
+        this.replyDate = replyDate;
+    }
+
+    public Reply(int memberNo, long noticeNo, String replyContent) {
+        this.memberNo=memberNo;
+        this.noticeNo=noticeNo;
+        this.replyContent=replyContent;
     }
 
     public int getReplyNo() {

@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Request {
@@ -145,6 +146,19 @@ public class Request {
         return urlDate;
     }
 
+    /**
+     * 유효한 유기동물리스트를 위한 세팅
+     * @param request
+     */
+    public static void setValid(Request request){
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -14);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.add(Calendar.DATE, -1);
+        request.setBgndate(cal.getTime());
+        request.setEnddate(cal2.getTime());
+        request.setState("protect");
+    }
     public static void setUrlDate(SimpleDateFormat urlDate) {
         Request.urlDate = urlDate;
     }
@@ -165,7 +179,7 @@ public class Request {
             }
             if (species != null) {
                 urlBuilder.append("&" + URLEncoder.encode("upkind", "UTF-8") + "=" +
-                        URLEncoder.encode(String.valueOf(species.getSpeciesNo()), "UTF-8"));
+                        URLEncoder.encode(String.valueOf(species.speciesNo), "UTF-8"));
             }
             if (breedNo != null) {
                 urlBuilder.append("&" + URLEncoder.encode("kind", "UTF-8") + "=" +

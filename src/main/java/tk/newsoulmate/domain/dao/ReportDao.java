@@ -22,6 +22,7 @@ public class ReportDao {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
         public int insertReport(Connection conn, Report report){
         int result=0;

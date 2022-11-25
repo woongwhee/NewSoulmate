@@ -68,7 +68,6 @@ nhn.husky.EZCreator = new (function(){
 //			window.STime = new Date();
 			
 			try{
-			
 				nEditorWidth = elIFrame.contentWindow.document.body.scrollWidth || "500px";
 				nEditorHeight = elIFrame.contentWindow.document.body.scrollHeight + 12;
 				elIFrame.style.width =  "100%";

@@ -31,35 +31,25 @@
         ORDER BY FILE_NO
     </entry>
     <entry key="selectReplyAttachment">
-        SELECT FILE_NO,
+        SELECT
+                FILE_NO,
+                REPLY_NO,
                 ORIGIN_NAME,
                 CHANGE_NAME,
-                FILE_PATH
+                FILE_PATH,
+                UPLOAD_DATE
         FROM ATTACHMENT
         WHERE REPLY_NO = ?
-        AND STATUS = ?
+        AND STATUS = 'Y'
         ORDER BY FILE_NO
     </entry>
 
-    <entry key="updateInquireAttachment">
-        UPDATE ATTACHMENT
-        SET ORIGIN_NAME = ?
-        ,CHANGE_NAME = ?
-        ,FILE_PATH = ?
-        ,UPLOAD_DATE = SYSDATE
-        WHERE FILE_NO = ?
-    </entry>
 
     <entry key="insertInquireNewAttachment">
         INSERT INTO ATTACHMENT(FILE_NO, BOARD_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
         VALUES (SQ_ATTACHMENT_PK.NEXTVAL, ?, ?, ?, ?);
     </entry>
 
-    <entry key="deleteBoardAttachment">
-        UPDATE ATTACHMENT
-        SET STATUS = 'N'
-        WHERE BOARD_NO = ?
-    </entry>
     <entry key="deleteAttachment">
         UPDATE ATTACHMENT
         SET STATUS = 'N'
@@ -81,7 +71,31 @@
         FROM ATTACHMENT
         WHERE FILE_NO = ?
     </entry>
+    <entry key="selectThumbnailList">
 
+
+        SELECT
+            *
+        FROM(
+            SELECT
+                ROWNUM as rnum,
+                A.*
+            FROM(
+                SELECT
+                    BOARD_NO,
+                    ORIGIN_NAME,
+                    BOARD_TITLE,
+                    CHANGE_NAME,
+                    FILE_PATH
+                FROM ATTACHMENT
+                JOIN BOARD USING (BOARD_NO)
+                WHERE TYPE_NO=?
+                AND BOARD_STATUS='Y'
+                ORDER BY CREATE_DATE
+            )A
+        )
+        WHERE rnum between ? AND ?
+    </entry>
 
 
 

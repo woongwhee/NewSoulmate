@@ -111,7 +111,6 @@
 
 </script>
 
-    <jsp:include page="../template/footer.jsp"/>
-
+<%@include file="/views/template/footer.jsp"%>
 </body>
 </html>

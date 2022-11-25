@@ -1,5 +1,6 @@
 package tk.newsoulmate.domain.vo;
 
+import com.google.gson.annotations.SerializedName;
 import tk.newsoulmate.domain.vo.type.BoardType;
 
 import java.sql.Date;
@@ -7,8 +8,11 @@ import java.sql.Date;
 public class Board {
     private int boardNo;
     private int memberNo;
+    @SerializedName("boardType")
     private BoardType boardType;
+    @SerializedName("boardTitle")
     private String boardTitle;
+    @SerializedName("boardContent")
     private String boardContent;
     private int readCount;
     private int reportNo;
@@ -17,17 +21,13 @@ public class Board {
     private Date createDate;
     private String resultStatus;//답변조회용
     private int fileCount;
-
+    @SerializedName("categoryNo")
     private int categoryNo;
-
+    @SerializedName("issueDate")
     private Date issueDate;
     private String memberId;
     private String categoryName;
-
     private String boardName;
-
-
-
 
 
     private Board(){}

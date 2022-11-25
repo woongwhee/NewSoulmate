@@ -38,7 +38,7 @@ public class SupportWithdrawController extends HttpServlet {
 			int result = supportService.withdraw(req);
 
 			if (result > 0) {
-				shelterService.updateLatestTransfer(shelterNo, req.getSupportNo());
+				result = shelterService.updateLatestTransfer(shelterNo, req.getSupportNo());
 				response.setStatus(200);
 			} else {
 				response.setStatus(500);

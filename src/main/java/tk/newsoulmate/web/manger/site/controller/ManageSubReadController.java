@@ -13,14 +13,14 @@ public class ManageSubReadController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int subNo = Integer.parseInt(request.getParameter("sno"));
+        int subNo = Integer.parseInt(request.getParameter("subRead"));
         ManageService msService = new ManageService();
 
         int s = msService.ChangeAdoptApplySubRead(subNo);
 
         if(s!=0){
             request.setAttribute("s",s);
-            request.getRequestDispatcher("views/manager/adoptApplyList.jsp").forward(request,response);
+            request.getRequestDispatcher("/views/manager/managerAdoptApplyList.jsp").forward(request,response);
         } else {
             request.getSession().setAttribute("errorMsg", "확인 실패");
             response.sendRedirect(request.getContextPath());
