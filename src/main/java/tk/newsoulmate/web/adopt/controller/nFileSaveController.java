@@ -56,6 +56,11 @@ public class nFileSaveController extends HttpServlet {
                     session.setAttribute("bno",bno);
                     at.setBoardNo(bno);
                     int result=as.insertAttachment(at);
+                    if(result>0){
+                        Integer fileCount =(Integer)session.getAttribute("fileCount");
+                        fileCount=fileCount==null?1:fileCount+1;
+                        session.setAttribute("fileCount",fileCount);
+                    }
                 }
                 // 정보 출력
                 System.out.println(at.getFilePath());

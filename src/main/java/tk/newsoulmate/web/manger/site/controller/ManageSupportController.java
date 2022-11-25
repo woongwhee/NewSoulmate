@@ -6,8 +6,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-import tk.newsoulmate.domain.vo.ManageSupportResponse;
-import tk.newsoulmate.domain.vo.Transfer;
+import tk.newsoulmate.domain.vo.response.ManageSupportResponse;
 import tk.newsoulmate.web.transfer.service.TransferService;
 
 @WebServlet(name = "ManageSupport", value = "/manageSupport")

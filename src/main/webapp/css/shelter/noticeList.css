@@ -75,7 +75,12 @@ select {
     color: white;
     font-size: 20px;
 }
+#count-area{
+    width:200px;
+    margin: auto;
+    display: flex;
 
+}
 #notice-area {
     width: 1080px;
     margin: auto;

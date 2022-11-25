@@ -71,6 +71,7 @@ public class GradeUpDao {
                 up.setGradeNo(rset.getInt("GRADE_NO"));
                 up.setMemberNo(rset.getInt("MEMBER_NO"));
                 up.setMemberName(rset.getString("MEMBER_NAME"));
+                up.setMemberId(rset.getString("MEMBER_ID"));
                 up.setShelterNo(rset.getLong("SHELTER_NO"));
                 up.setFileNo(rset.getInt("FILE_NO"));
                 up.setShelterTel(rset.getString("SHELTER_TEL"));

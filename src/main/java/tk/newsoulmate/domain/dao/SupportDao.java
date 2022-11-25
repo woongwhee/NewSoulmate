@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import tk.newsoulmate.domain.vo.PageInfo;
-import tk.newsoulmate.domain.vo.ShelterSupportResponse;
 import tk.newsoulmate.domain.vo.Support;
-import tk.newsoulmate.domain.vo.SupportCompleteResponse;
+import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
 import tk.newsoulmate.domain.vo.SupportPage;
 import tk.newsoulmate.domain.vo.type.SupportStatus;
 import tk.newsoulmate.domain.vo.type.WithdrawStatus;
@@ -274,4 +272,36 @@ public class SupportDao {
         }
         return result;
     }
+
+    public ArrayList<Support> manageSupportAllHistory(Connection conn) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        ArrayList<Support> allList = new ArrayList<Support>();
+        String sql = prop.getProperty("manageSupportAllHistory");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            while (rset.next()) {
+                Support su = new Support();
+                su.setSupportNo(rset.getInt("SUPPORT_NO"));
+                su.setMerchantUid(rset.getString("MERCHANT_UID"));
+                su.setAmount(rset.getLong("AMOUNT"));
+                su.setMemberNo(rset.getInt("MEMBER_NO"));
+                su.setPayTime(rset.getDate("PAY_TIME"));
+                WithdrawStatus.valueOf(rset.getString("WD_STATUS"));
+                allList.add(su);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(psmt);
+            JDBCTemplet.close(rset);
+        }
+        return allList;
+    }
+
+
+
+
 }

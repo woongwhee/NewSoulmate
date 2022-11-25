@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import tk.newsoulmate.domain.dao.TransferDao;
-import tk.newsoulmate.domain.vo.ManageSupportResponse;
+import tk.newsoulmate.domain.vo.response.ManageSupportResponse;
 import tk.newsoulmate.domain.vo.Transfer;
 
 public class TransferService {
@@ -31,3 +31,4 @@ public class TransferService {
         return transfers;
     }
 }
+//todo: 이거 왜 따로 분리한거지?????????????????????????

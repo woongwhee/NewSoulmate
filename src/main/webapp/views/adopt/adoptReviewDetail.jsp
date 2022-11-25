@@ -16,7 +16,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/board/adoptReviewDetail.css" rel="stylesheet">
 
 </head>
 <body>
@@ -60,7 +59,7 @@
                         <th>${r.replyWriter}</th>
                         <td>
                             <button type="button" class="bi bi-exclamation-triangle" data-toggle="modal"
-                                    data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
+                                    data-target="#reportModal" data-kind="reply" data-ref="${r.replyNo}"></button>
                             <c:if test="${!empty loginUser and loginUser.memberNo eq r.memberNo}">
                                 <button class="bi bi-trash" ref="${r.replyNo}" id="replyDelete"></button>
                             </c:if>

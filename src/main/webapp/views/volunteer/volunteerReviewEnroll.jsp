@@ -46,7 +46,7 @@
                 </tr>
                 <tr>
                     <th>봉사날짜</th>
-                    <td><input type="Date" id="adoptDate" name="adoptDate"></td>
+                    <td><input type="Date" id="volunteerDate" name="volunteerDate"></td>
                 </tr>
                 <tr>
                     <th>내용</th>

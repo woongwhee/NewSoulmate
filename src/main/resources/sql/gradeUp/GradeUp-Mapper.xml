@@ -10,6 +10,7 @@
         SELECT
             G.*,
             MEMBER_NAME,
+            MEMBER_ID,
             SHELTER_NAME
         FROM GRADE_UP G
         JOIN MEMBER M ON(M.MEMBER_NO = G.MEMBER_NO)

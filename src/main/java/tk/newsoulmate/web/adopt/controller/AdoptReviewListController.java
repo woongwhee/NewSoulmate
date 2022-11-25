@@ -1,6 +1,6 @@
 package tk.newsoulmate.web.adopt.controller;
 
-import tk.newsoulmate.domain.vo.Board;
+import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 
@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+
+import java.util.List;
 
 @WebServlet(name = "AdoptReviewListController", value = "/adoptRevList")
 public class AdoptReviewListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int listCount = new AdoptService().selectListCount();
-        int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
-        PageInfo pi = new PageInfo(listCount,currentPage);
-        ArrayList<Board> list= new AdoptService().selectAdoptReviewList(pi);
 
-        request.setAttribute("list", list);
-        request.setAttribute("pi", pi);
+        AdoptService as=new AdoptService();
+        int listCount =as.selectListCount();
+        int page=0;
+        List<Attachment> tList= as.selectAdoptReviewList(page,10);
+        request.setAttribute("tList",tList);
+        request.setAttribute("listCount",listCount);
         request.getRequestDispatcher("views/adopt/adoptReviewList.jsp").forward(request, response);
-
     }
 
     @Override

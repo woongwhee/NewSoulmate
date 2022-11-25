@@ -15,13 +15,13 @@
       <p></p>
     </div>
     <div id="user">
-      <a href="#" id="logout">로그아웃</a>
+      <a href="${context}/logout" id="logout">로그아웃</a>
       <!--로그아웃 클릭시 로그아웃처리된 상태로 메인화면ㄱㄱ-->
     </div>
   </div>
 
   <ul class="menu">
-    <li><a href="#">메세지함</a></li>
+    <li><a href="${context}/ShelterMessage">메세지함</a></li>
     <li><a href="#">보호소 정보수정</a></li>
     <li><a href=${context}/shelterSupport>받은 후원함</a></li>
   </ul>

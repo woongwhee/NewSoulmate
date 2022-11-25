@@ -54,7 +54,7 @@
                 <tr>
                     <th>품종</th>
                     <td>
-                        <select name="breed" id="breed">
+                        <select name="species" id="species">
                             <option value="" selected disabled hidden>--전체--</option>
                             <option value="DOG">개</option>
                             <option value="CAT">고양이</option>
@@ -77,19 +77,14 @@
             <button type="button" id="noticeSearch">조회</button>
         </div>
     </div>
+    <div id="count-area">총 조회 수 : </div>
     <div id="notice-area">
-<%--        <c:forEach items="${nList}" var="n">--%>
-<%--            <div class="notice">--%>
-<%--                <img class="notice-photo" src="${n.popfile}" alt=""--%>
-<%--                     onclick="location.href='noticeDetail?dno=${n.desertionNo}'">--%>
-<%--            </div>--%>
-<%--        </c:forEach>--%>
+
     </div>
 </div>
     <script src="${context}/js/shelter/noticeList.js"></script>
 
-
-    <%@ include file="/views/template/footer.jsp"%>
+    <footer><%@ include file="/views/template/footer.jsp"%></footer>
 
 </body>
 </html>
