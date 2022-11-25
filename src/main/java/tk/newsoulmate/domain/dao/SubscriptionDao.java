@@ -107,7 +107,7 @@ public class SubscriptionDao {
             while (rset.next()) {
                 list.add(new Subscription(
                         rset.getInt("SUB_NO")
-                        , rset.getLong("ANIMAL_ID")
+                        , rset.getLong("ANIMAL_NO")
                         , rset.getString("MEMBER_ID")
                         , rset.getString("NAME")
                         , rset.getString("TEL_NUM")
@@ -142,7 +142,7 @@ public class SubscriptionDao {
                         rset.getInt("SUB_NO"),
                         rset.getInt("MEMBER_NO"),
                         rset.getLong("SHELTER_NO"),
-                        rset.getLong("ANIMAL_ID"),
+                        rset.getLong("ANIMAL_NO"),
                         rset.getString("TEL_NUM"),
                         rset.getString("NAME"),
                         rset.getString("GENDER"),
@@ -213,8 +213,8 @@ public class SubscriptionDao {
             while (rset.next()) {
                 list.add(new Subscription(
                         rset.getInt("SUB_NO")
-                        , rset.getLong("ANIMAL_ID")
-                        , rset.getString("MEMBER_ID")
+                        , rset.getLong("ANIMAL_NO")
+                        , rset.getString("MEMBER_NO")
                         , rset.getString("NAME")
                         , rset.getString("TEL_NUM")
                         , rset.getDate("SUB_DATE")
