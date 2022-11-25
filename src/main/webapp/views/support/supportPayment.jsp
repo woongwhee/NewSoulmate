@@ -5,10 +5,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    ArrayList<Shelter> sList = (ArrayList<Shelter>)request.getAttribute("sList");
+    ArrayList<Shelter> sList = (ArrayList<Shelter>) request.getAttribute("sList");
 
-    Support support = (Support)request.getAttribute("support");
-    Member member = (Member)request.getAttribute("loginUser");
+    Support support = (Support) request.getAttribute("support");
+    Member member = (Member) request.getAttribute("loginUser");
 %>
 
 <html>
@@ -29,7 +29,7 @@
 
     <div class="support_notice">
         <div id="notice_left_box">
-            <h1>후원하기</h1>
+            <p>후 원 하 기</p>
         </div>
         <div id="notice_right_box">
             <p>"모든 생명은 보호받고 존중받을 권리가 있습니다"<br>
@@ -44,29 +44,40 @@
     </div>
 
     <div class="support-wrap">
-        <h2>후원 정보</h2>
+        <p>후원 정보</p>
         <table id="support-amount">
             <tr>
                 <td>
-                    <h4>후원 항목</h4>
+                    <div class="support_list">후원 항목</div>
                 </td>
-                <td>일반후원</td>
+                <td>
+                    <div class="support_answer"> 일반후원</div>
+                </td>
             </tr>
             <tr>
                 <td>
-                    <h4>후원 금액</h4>
+                    <div class="support_list">후원 금액</div>
                 </td>
                 <td>
-                    <div>
-                        <input name="amountCheck" type="radio" value="10000">10,000원
-                        <input name="amountCheck" type="radio" value="20000">20,000원
-                        <input name="amountCheck" type="radio" value="30000">30,000원
-                        <br>
-                        <input name="amountCheck" type="radio" value="50000">50,000원
-                        <input name="amountCheck" type="radio" value="100000">100,000원
-                        <input name="amountCheck" type="radio" value="100">100원
-                        <%--<input name="amountCheck" type="number" id="inputAmount">--%>
-                        <%--input text 값 value로 가져오기?--%>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-danger">
+                            <input type="radio" name="amountCheck" value="10000"> 10,000원
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="amountCheck" value="20000"> 20,000원
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="amountCheck" value="30000"> 30,000원
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="amountCheck" value="50000"> 50,000원
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="amountCheck" value="100000"> 100,000원
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="amountCheck" value="100"> 100원
+                        </label>
                     </div>
                 </td>
             </tr>
@@ -79,110 +90,107 @@
 
     <div class="shelter">
 
-        <h2>보호소 리스트</h2>
-        <h4>후원할 보호소를 선택해 주세요</h4>
+        <p>보호소 리스트</p>
+        <table>
+            <tr>
+                <td> <div class="support_list">후원할 보호소를 선택해 주세요</div></td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        보호소 선택
+                    </button>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            보호소 선택
-        </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">보호소 선택</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="list-area" border="1">
+                                        <thead>
+                                        <tr>
+                                            <th>보호소명</th>
+                                            <th>보호소 주소</th>
+                                            <th>보호소 전화번호</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <%for (Shelter s : sList) { %>
+                                        <tr>
+                                            <td style="display:none">
+                                                <%= s.getShelterNo()%>
+                                            </td>
+                                            <td>
+                                                <%= s.getShelterName() %>
+                                            </td>
+                                            <td>
+                                                <%= s.getShelterAddress() %>
+                                            </td>
+                                            <td>
+                                                <%= s.getShelterLandline() %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        </tbody>
+                                    </table>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-
-
-                        <table class="list-area" border="1">
-                            <thead>
-                            <tr>
-                                <th>보호소명</th>
-                                <th>보호소 주소</th>
-                                <th>보호소 전화번호</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <%for (Shelter s : sList) { %>
-                            <tr>
-                                <td style="display:none">
-                                    <%= s.getShelterNo()%>
-                                </td>
-                                <td>
-                                    <%= s.getShelterName() %>
-                                </td>
-                                <td>
-                                    <%= s.getShelterAddress() %>
-                                </td>
-                                <td>
-                                    <%= s.getShelterLandline() %>
-                                </td>
-                            </tr>
-                            <% } %>
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <br><br>
-        <h3>선택된 보호소</h3>
-        <span id="selected-shelter"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="support_list">선택된 보호소</div>
+                </td>
+                <td>
+                    <span class="support_answer" id="selected-shelter"></span>
+                </td>
+            </tr>
+        </table>
     </div>
+
+
     <hr>
-    <div class="">
-        <h2>결제 정보</h2>
-        <br>
+    <div class="payment">
+        <p>결제 정보</p>
         <form action="" value="" method="post">
             <table id="">
                 <tr>
-                    <td><label for="">아이디</label></td>
-                </tr>
-                <tr>
+                    <td><label for="" class="support_list">아이디</label></td>
                     <td>
-                        <div id="memberId">${loginUser.memberId}</div>
+                        <div id="memberId" class="support_answer">${loginUser.memberId}</div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="">이름</label></td>
-                </tr>
-                <tr>
+                    <td><label for="" class="support_list">이름</label></td>
                     <td>
-                        <div id="memberName">${loginUser.memberName}</div>
+                        <div id="memberName" class="support_answer">${loginUser.memberName}</div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="">휴대전화</label></td>
-                </tr>
-                <tr>
+                    <td><label for="" class="support_list">휴대전화</label></td>
                     <td>
-                        <div id="phone">${loginUser.phone}</div>
+                        <div id="phone" class="support_answer"> ${loginUser.phone}</div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="">이메일</label></td>
-                </tr>
-                <tr>
+                    <td><label for="" class="support_list">이메일</label></td>
                     <td>
-                        <div id="email">${loginUser.email}</div>
+                        <div id="email" class="support_answer">${loginUser.email}</div>
                     </td>
                 </tr>
             </table>
 
-            <div class="">
+            <div id="required_checkedBox">
                 <label><input type="checkbox" name="" class="required_checked">개인정보 처리방침 및 이용약관 동의</label>
             </div>
         </form>
@@ -198,7 +206,8 @@
     $(".list-area>tbody>tr").click(function () {
         let shelterNo = $(this).children().eq(0).text().trim();
         selectedShelterNo = shelterNo;
-        $("#selected-shelter").html($(this).children().eq(1).text().trim())
+        $("#selected-shelter").html($(this).children().eq(1).text().trim());
+        $(".modal-footer>button").click();
 
     })
 
@@ -216,7 +225,7 @@
 
     function requestPay() {
         if (selectedShelterNo == 0) {
-            alert("후원할 보호소를 선택해주세요!");
+            alert("후원할 보호소를 선택해주세요.");
             return;
         }
 
@@ -282,11 +291,22 @@
     $("#payBtn").click(function () {
         if ($('.required_checked:checked').length != $('.required_checked').length) {
             alert("개인정보항목에 동의해주세요.");
-            return;
         }
     });
+
+
+    $("#payBtn").click(function () {
+        if ($("[name=amountCheck]:checked").val() == null){
+            alert("후원 금액을 선택해주세요.");
+        }
+    });
+
+
 </script>
 
+<footer>
+    <%@include file="/views/template/footer.jsp" %>
+</footer>
 
 </body>
 </html>
