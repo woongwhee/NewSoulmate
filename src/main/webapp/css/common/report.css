@@ -1,0 +1,68 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.modal-content{
+    width: auto;
+    height: auto;
+    padding: 30px 60px 0 60px;
+}
+
+.modal-header{
+    width: auto;
+    height: auto;
+    display: flex;
+}
+
+.modal-title{
+    width: 360px;
+    text-align: center;
+    font-size: 25px;
+    color: #f45d48;
+    font-weight: 600;
+    padding-left: 30px;
+}
+
+.modal-body{
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+
+.modal-body select{
+    width: 350px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.modal-body textarea{
+    width: 350px;
+    height: 100px;
+}
+
+.modal-footer{
+    width: auto;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.modal-footer button{
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    width: 80px;
+    height: 30px;
+    margin-left: 20px;
+}
+
+#closeModal{
+    background-color: lightgray;
+}
+
+#submitModal{
+    background-color: #f45d48;
+    color: white;
+}

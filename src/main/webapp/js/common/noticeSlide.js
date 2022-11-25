@@ -12,7 +12,7 @@
         autoplaySpeed: 2000,
         slidesToShow : 5,
         slideToggle:5,
-        infinite : true,
+        infinite : false,
         dots : true
         });
     });

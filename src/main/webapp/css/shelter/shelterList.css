@@ -37,13 +37,10 @@ button {
     height: auto;
     margin: 0 auto;
 }
-
-
 #search {
     height: 100px;
     width: 1080px;
     background-color: #f45c4828;
-    margin: auto;
     padding: 20px 0 0 30px;
     border-radius: 20px;
 }
@@ -87,5 +84,6 @@ thead {
     background-color: #eeee;
 }
 #shelter{
-    width: 1080px;
+    width: 100%;
+    margin-left: 60px;
 }

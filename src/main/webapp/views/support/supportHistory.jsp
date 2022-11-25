@@ -1,3 +1,4 @@
+<%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.response.SupportCompleteResponse" %>
 <%@ page import="tk.newsoulmate.domain.vo.SupportPage" %>
