@@ -3,6 +3,8 @@ package tk.newsoulmate.domain.dao;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.GradeUp;
 import tk.newsoulmate.domain.vo.Reply;
+import tk.newsoulmate.domain.vo.Request;
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.domain.vo.type.ReplyType;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
@@ -51,6 +53,29 @@ public class AttachmentDao {
             close(psmt);
         }
         return at;
+
+
+    }
+    public List<Attachment> selectAttachmentList(Connection conn, int boardNo) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        List<Attachment> aList=new ArrayList<>();
+        String sql = prop.getProperty("selectAttachmentList");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, boardNo);
+            rset = psmt.executeQuery();
+            Attachment at = null;
+            while((at=boardAttachmentMapper(rset))!=null){
+                aList.add(at);
+            };
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return aList;
 
 
     }
@@ -222,6 +247,18 @@ public class AttachmentDao {
         }
         return at;
     }
+    private Attachment thumbNailMapper(ResultSet rset)throws SQLException {
+        Attachment at=null;
+        if(rset.next()){
+            at=Attachment.getThumbnailInstance(
+                    rset.getInt("BOARD_NO"),
+                    rset.getString("ORIGIN_NAME"),
+                    rset.getString("BOARD_TITLE"),
+                    rset.getString("CHANGE_NAME"),
+                    rset.getString("FILE_PATH"));
+        }
+        return at;
+    }
 
     public int selectFileNo(Connection conn){
         PreparedStatement psmt = null;
@@ -289,5 +326,28 @@ public class AttachmentDao {
     }
 
 
+    public List<Attachment> selectThumbNailList(Connection conn, BoardType boardType, int startNum,int endNum) {
+        List<Attachment> tList=new ArrayList<>();
+        PreparedStatement psmt=null;
+        ResultSet rset=null;
+        String sql=prop.getProperty("selectThumbnailList");
+        try {
+            psmt=conn.prepareStatement(sql);
+            psmt.setInt(1,boardType.typeNo);
+            psmt.setInt(2,startNum);
+            psmt.setInt(3,endNum);
+            rset=psmt.executeQuery();
+            Attachment at=null;
+            while((at=thumbNailMapper(rset))!=null){
+                tList.add(at);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close(rset);
+            close(psmt);
+        }
 
+        return tList;
+    }
 }

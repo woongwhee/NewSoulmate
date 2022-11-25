@@ -133,7 +133,7 @@ public class InquireService {
 
         int result = new BoardDao().deleteBoard(conn,boardNo);
 
-        new AttachmentDao().deleteBoardAttachment(boardNo, conn);
+        new AttachmentDao().deleteAttachment(boardNo, conn);
 
         if(result > 0){
             commit();
