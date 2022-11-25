@@ -1,4 +1,4 @@
-package tk.newsoulmate.domain.vo;
+package tk.newsoulmate.domain.vo.request;
 
 public class SupportWithdrawRequest {
 

@@ -1,5 +1,6 @@
 package tk.newsoulmate.domain.dao;
-import tk.newsoulmate.domain.vo.ManageMember;
+import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
+import tk.newsoulmate.domain.vo.response.ManageMemberResponse;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.domain.vo.Shelter;
@@ -103,7 +104,7 @@ public class MemberDao {
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
         MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
-            Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
+        Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHELTER_NO");
             m.setShelterNo(shelterNo);
@@ -268,10 +269,27 @@ public class MemberDao {
         return result;
     }
 
+    public int deleteMember(long memberNo, Connection conn) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("deleteByMemberNo");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1, memberNo);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(psmt);
+        }
+        return result;
+    }
+
     public int deleteMember(String memberId, String memberPwd, Connection conn) {
         int result = 0;
         PreparedStatement psmt = null;
-        String sql = prop.getProperty("deleteMember");
+        String sql = prop.getProperty("deleteByIdAndPwd");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -285,7 +303,6 @@ public class MemberDao {
         }
         return result;
     }
-
 
     public int updateResent(Member m,Connection conn) {
         int result = 0;
@@ -307,6 +324,7 @@ public class MemberDao {
         }
         return result;
     }
+
     public String checkPwd(Connection conn , int memberNo) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -369,17 +387,17 @@ public class MemberDao {
 
 
 
-    public ArrayList<ManageMember> selectMemberList(Connection conn) {
+    public ArrayList<ManageMemberResponse> selectMemberList(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        ArrayList<ManageMember> mList = new ArrayList<ManageMember>();
+        ArrayList<ManageMemberResponse> mList = new ArrayList<ManageMemberResponse>();
         String sql = prop.getProperty("selectMemberList");
 
         try {
             psmt = conn.prepareStatement(sql);
             rset = psmt.executeQuery();
             while (rset.next()) {
-                ManageMember m = new ManageMember();
+                ManageMemberResponse m = new ManageMemberResponse();
                 Shelter s = new Shelter();
                 m.setMemberNo(rset.getInt("MEMBER_NO"));
                 m.setMemberId(rset.getString("MEMBER_ID"));
@@ -424,6 +442,26 @@ public class MemberDao {
     }
 
 
+    public int updateGrade(ManageMemberUpdateGradeRequest req, Connection conn) {
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("updateGrade");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1, req.getMemberGrade().gradeNumber);
+            psmt.setLong(2, req.getMemberNo());
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+
+        return result;
+    }
+
     public int changeGrade(Connection conn, String[] memberNo) {
         int result = 0;
         PreparedStatement psmt = null;
@@ -446,4 +484,4 @@ public class MemberDao {
 
         return result;
     }
-    }
+}

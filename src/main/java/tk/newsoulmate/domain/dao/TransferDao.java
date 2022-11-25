@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import tk.newsoulmate.domain.vo.response.ManageSupportResponse;
-import tk.newsoulmate.domain.vo.SupportWithdrawRequest;
+import tk.newsoulmate.domain.vo.request.SupportWithdrawRequest;
 import tk.newsoulmate.domain.vo.Transfer;
 import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
@@ -104,7 +104,7 @@ public class TransferDao {
 			rset = psmt.executeQuery();
 			while (rset.next()) {
 				transfers.add(new ManageSupportResponse(
-
+						rset.getLong("SUPPORT_NO"),
 						rset.getString("MERCHANT_UID"),
 						rset.getString("SHELTER_NAME"),
 						rset.getDate("PAY_TIME").toLocalDate(),

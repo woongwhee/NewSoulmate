@@ -65,10 +65,14 @@
         WHERE MEMBER_NO = ?
     </entry>
 
-    <entry key="deleteMember">
-        UPDATE MEMBER SET STATUS = 'N',
-        WHERE USER_ID = ?
-        AND USER_PWD = ?
+    <entry key="deleteByMemberNo">
+        UPDATE MEMBER SET MEMBER_STATUS = 'N'
+        WHERE MEMBER_NO = ?
+    </entry>
+    <entry key="deleteByIdAndPwd">
+        UPDATE MEMBER SET MEMBER_STATUS = 'N'
+        WHERE MEMBER_ID = ?
+        AND MEMBER_PWD = ?
     </entry>
 
     <entry key="updateResent">
@@ -76,7 +80,6 @@
         SET RESENT_CONNECTION = SYSDATE
         WHERE MEMBER_NO = ?
     </entry>
-
 
     <entry key="checkPwd">
         SELECT
@@ -92,7 +95,11 @@
         WHERE MEMBER_NO = ?
     </entry>
 
-
+    <entry key="updateGrade">
+        UPDATE MEMBER
+        SET MEMBER_GRADE = ?
+        WHERE MEMBER_NO = ?
+    </entry>
 
 
 

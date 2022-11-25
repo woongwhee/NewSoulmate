@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.SupportWithdrawRequest;
+import tk.newsoulmate.domain.vo.request.SupportWithdrawRequest;
 import tk.newsoulmate.web.shelter.service.ShelterService;
 import tk.newsoulmate.web.support.service.SupportService;
 
@@ -22,7 +22,7 @@ public class SupportWithdrawController extends HttpServlet {
 	private final ShelterService shelterService;
 
 	public SupportWithdrawController() {
-		this.supportService = new SupportService();
+		this.supportService = new SupportService(); // 객체 생성 -> 곧 메모리 -> Singleton
 		this.shelterService = new ShelterService();
 	}
 	@Override
