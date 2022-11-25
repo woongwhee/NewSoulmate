@@ -15,8 +15,7 @@ body {
     margin: 0 auto;
 }
 
-.review-content,
-#reply-area {
+.review-content, #reply-area {
     width: 100%;
     height: auto;
     background-color: #eee;

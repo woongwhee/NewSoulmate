@@ -116,6 +116,7 @@ public class AdoptService {
 
         return shelterNo;
     }
+
     public int selectBoardNo(){
         Connection conn=getConnection();
         int boardNo=new BoardDao().selectBoardNo(conn);

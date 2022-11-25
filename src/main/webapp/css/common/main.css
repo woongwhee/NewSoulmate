@@ -120,9 +120,9 @@
     margin: 0 5px 0 5px;
 }
 
-#main_top #img{
+#main_top .notice-img{
     width: 180px;
-    height: 200px;
+    max-height: 200px;
     cursor: pointer;
     margin: 20px 0 0 20px;
 }

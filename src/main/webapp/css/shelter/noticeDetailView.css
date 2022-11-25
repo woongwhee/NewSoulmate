@@ -17,7 +17,6 @@ body {
 
 #animalImg_1 {
     width: 260px;
-    height: 200px;
 }
 
 #animal-info {
@@ -92,7 +91,7 @@ body {
 
 #animalImg_2{
     width: 600px;
-    height: 400px;
+    max-height: 800px;
     margin: 50px 0 50px 300px;
 }
 

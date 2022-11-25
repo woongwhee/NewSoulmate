@@ -103,6 +103,7 @@ public class ManageService {
             }else{
                 rollback();
             }
+            close();
         return (result1+result2)/2;
     }
 
@@ -115,6 +116,7 @@ public class ManageService {
         }else{
             rollback();
         }
+        close();
         return result1;
     }
 

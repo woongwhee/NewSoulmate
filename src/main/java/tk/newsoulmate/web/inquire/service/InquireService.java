@@ -143,7 +143,6 @@ public class InquireService {
         close();
 
         return result;
-
     }
 
 
