@@ -7,7 +7,6 @@ import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 public class ManageSupportResponse {
 
     private final long supportNo;
-
     private final String merchantUid;
     private final String shelterName;
     private final LocalDate payTime;

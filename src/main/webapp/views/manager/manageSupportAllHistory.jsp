@@ -55,16 +55,17 @@
     </div>
 
     <div id="user_information">
-        <%--            <div class="box">--%>
-        <%--                <span>보호소명</span>--%>
-        <%--                <div id="supportDate">--%>
-        <%--                    <span>조회기간</span>--%>
-        <%--                    <span><input type="date" id="startDate" value="<%=startDate%>"></span>--%>
-        <%--                    <span>~</span>--%>
-        <%--                    <span><input type="date" id="endDate" value="<%=endDate%>"></span>--%>
-        <%--                    <button id="searchBtn" onclick="searchByDate()">조회</button>--%>
-        <%--                </div>--%>
-        <%--            </div>--%>
+<%--
+                    <div class="box">
+                       <div id="supportDate">
+                            <span>조회기간</span>
+                            <span><input type="date" id="startDate" value="<%=startDate%>"></span>
+                            <span>~</span>
+                            <span><input type="date" id="endDate" value="<%=endDate%>"></span>
+                            <button id="searchBtn" onclick="searchByDate()">조회</button>
+                        </div>
+                    </div>
+--%>
 
         <div id="supportSupportAllHistory">
 

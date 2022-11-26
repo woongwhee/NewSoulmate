@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
+import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
-import tk.newsoulmate.domain.vo.response.ManageMemberResponse;
+import tk.newsoulmate.domain.vo.ManageMember;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.domain.vo.Shelter;
@@ -387,17 +388,17 @@ public class MemberDao {
 
 
 
-    public ArrayList<ManageMemberResponse> selectMemberList(Connection conn) {
+    public ArrayList<ManageMember> selectMemberList(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        ArrayList<ManageMemberResponse> mList = new ArrayList<ManageMemberResponse>();
+        ArrayList<ManageMember> mList = new ArrayList<ManageMember>();
         String sql = prop.getProperty("selectMemberList");
 
         try {
             psmt = conn.prepareStatement(sql);
             rset = psmt.executeQuery();
             while (rset.next()) {
-                ManageMemberResponse m = new ManageMemberResponse();
+                ManageMember m = new ManageMember();
                 Shelter s = new Shelter();
                 m.setMemberNo(rset.getInt("MEMBER_NO"));
                 m.setMemberId(rset.getString("MEMBER_ID"));
@@ -421,7 +422,8 @@ public class MemberDao {
         return mList;
     }
 
-    public int selectCountMember(Connection conn) {
+
+/*    public int selectCountMember(Connection conn) {
         int countMember = 0;
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -439,7 +441,7 @@ public class MemberDao {
             close(psmt);
         }
         return countMember;
-    }
+    }*/
 
 
     public int updateGrade(ManageMemberUpdateGradeRequest req, Connection conn) {
@@ -484,4 +486,21 @@ public class MemberDao {
 
         return result;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

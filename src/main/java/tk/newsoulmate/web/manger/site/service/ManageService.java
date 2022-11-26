@@ -5,7 +5,7 @@ import tk.newsoulmate.domain.dao.GradeUpDao;
 import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.dao.SubscriptionDao;
 import tk.newsoulmate.domain.vo.*;
-import tk.newsoulmate.domain.vo.response.ManageMemberResponse;
+import tk.newsoulmate.domain.vo.ManageMember;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ public class ManageService {
     private MemberDao memberDao = new MemberDao();
 
 
-    public ArrayList<ManageMemberResponse> selectMemberList() {
+    public ArrayList<ManageMember> selectMemberList() {
         Connection conn = getConnection();
-        ArrayList<ManageMemberResponse> mList = memberDao.selectMemberList(conn);
+        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn);
         close();
         return mList;
     }

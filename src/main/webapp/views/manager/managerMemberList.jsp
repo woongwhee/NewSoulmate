@@ -3,7 +3,7 @@
 <%@ page import="tk.newsoulmate.domain.vo.type.MemberGrade" %>
 <%@ page import="tk.newsoulmate.web.manger.site.service.ManageService" %>
 <%@ page import="tk.newsoulmate.web.member.service.MemberService" %>
-<%@ page import="tk.newsoulmate.domain.vo.response.ManageMemberResponse" %>
+<%@ page import="tk.newsoulmate.domain.vo.ManageMember" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.stream.Collectors" %><%--
@@ -16,8 +16,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    ArrayList<ManageMemberResponse> mList = (ArrayList<ManageMemberResponse>)request.getAttribute("mList");
-	List<ManageMemberResponse> filteredList = new ArrayList<>(mList);
+    ArrayList<ManageMember> mList = (ArrayList<ManageMember>)request.getAttribute("mList");
+	List<ManageMember> filteredList = new ArrayList<>(mList);
     ManageService ms = new ManageService();
 %>
 <html>
@@ -38,7 +38,7 @@
 
             <div class="box">
                 총 회원 수
-                <span id="countMember" style="color: #f45d48;"><%= ms.selectCountMember() %></span> 명
+                <span id="countMember" style="color: #f45d48;"><%= mList.size() %></span> 명
             </div>
 
             <div class="box">
@@ -76,7 +76,7 @@
 
                     <%} else { %>
 
-                    <%for (ManageMemberResponse m : filteredList) {%>
+                    <%for (ManageMember m : filteredList) {%>
                     <tr>
                         <td><%=m.getMemberNo() %>
                         </td>
@@ -121,6 +121,7 @@
 </div>
 
 <script>
+
     window.onload = () => {
         $("#selectMemberGrade").val('<%=request.getParameter("filter")%>').prop("selected", true);
     }
