@@ -28,7 +28,7 @@ public class MemberDeleteController extends HttpServlet {
             request.getSession().invalidate();
             request.getSession(true);
 
-            request.setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다.");
+            request.getSession().setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다.");
             response.sendRedirect(request.getContextPath());
 
         }else {

@@ -92,9 +92,9 @@
 
                         </td>
                         <td>
-                            <%if (m.getMemberGrade() == MemberGrade.valueOfNumber(2)) { %>
+                            <%if (m.getMemberGrade() == MemberGrade.SITE_MANAGER) { %>
                             관리자
-                            <%} else if (m.getMemberGrade() == MemberGrade.valueOfNumber(1)) { %>
+                            <% }else if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) { %>
                             보호소관계자
                             <%} else { %>
                             일반회원
@@ -106,9 +106,11 @@
                         </td>
                         <td>
                             <div>
+                                <%if (m.getMemberGrade()==MemberGrade.SHELTER_MANAGER){%>
                                 <button onclick="updateGradeMember(<%=m.getMemberNo()%>, '<%=m.getMemberGrade().name()%>')">
                                     등급변경
                                 </button>
+                                <%}%>
                                 <button onclick="deleteMember(<%=m.getMemberNo()%>)">탈퇴</button>
                             </div>
                         </td>
