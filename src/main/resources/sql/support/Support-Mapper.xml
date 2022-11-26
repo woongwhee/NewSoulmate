@@ -72,6 +72,23 @@
         WHERE ROW_NUM &gt;= ?
     </entry>
 
+    <entry key="selectAllByFilter">
+        SELECT *
+        FROM (
+        SELECT (ROWNUM) ROW_NUM, T.*
+        FROM (
+        SELECT *
+        FROM SUPPORT SU
+        INNER JOIN SHELTER SH on SH.SHELTER_NO = SU.SHELTER_NO
+        INNER JOIN MEMBER ME on ME.MEMBER_NO = SU.MEMBER_NO
+        AND SH.SHELTER_NAME like '%'||?||'%'
+        ORDER BY PAY_TIME DESC
+        ) T
+        WHERE ROWNUM &lt;= ?
+        )
+        WHERE ROW_NUM &gt;= ?
+    </entry>
+
     <entry key="count">
         SELECT
         COUNT(*)
@@ -93,6 +110,15 @@
         ORDER BY PAY_TIME DESC
     </entry>
 
+    <entry key="countByFilter">
+        SELECT
+        COUNT(*)
+        FROM SUPPORT SU
+        INNER JOIN SHELTER SH on SH.SHELTER_NO = SU.SHELTER_NO
+        AND SHELTER_NAME like '%'||?||'%'
+        ORDER BY PAY_TIME DESC
+    </entry>
+
     <entry key="selectAllByShelterNo">
         SELECT * FROM SUPPORT SU
         INNER JOIN MEMBER MEM ON SU.MEMBER_NO = MEM.MEMBER_NO
@@ -100,10 +126,6 @@
         AND SU.SHELTER_NO = ?
         AND SU.WD_STATUS not in 'BLOCK'
         ORDER BY PAY_TIME DESC
-    </entry>
-
-    <entry key="manageSupportAllHistory">
-        SELECT * FROM SUPPORT
     </entry>
 
 </properties>

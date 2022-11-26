@@ -835,6 +835,12 @@ INSERT INTO NEWSOULMATE.SHELTER (SHELTER_NO, SHELTER_NAME, SHELTER_EMAIL, SHELTE
 INSERT INTO NEWSOULMATE.SHELTER (SHELTER_NO, SHELTER_NAME, SHELTER_EMAIL, SHELTER_ADDRESS, SHELTER_TEL, SHELTER_LANDLINE, COMPANY_NUM, TRANSFER_NO, CITY_NO, VILLAGE_NO) VALUES (350651202200002, '남문동물병원', null, null, null, null, null, null, 6500000, 6510000);
 INSERT INTO NEWSOULMATE.SHELTER (SHELTER_NO, SHELTER_NAME, SHELTER_EMAIL, SHELTER_ADDRESS, SHELTER_TEL, SHELTER_LANDLINE, COMPANY_NUM, TRANSFER_NO, CITY_NO, VILLAGE_NO) VALUES (350651202200003, '제주온동물병원', null, null, null, null, null, null, 6500000, 6510000);
 INSERT INTO NEWSOULMATE.SHELTER (SHELTER_NO, SHELTER_NAME, SHELTER_EMAIL, SHELTER_ADDRESS, SHELTER_TEL, SHELTER_LANDLINE, COMPANY_NUM, TRANSFER_NO, CITY_NO, VILLAGE_NO) VALUES (350651202200004, '한림동물병원', null, null, null, null, null, null, 6500000, 6510000);
+
+INSERT INTO NEWSOULMATE.SHELTER (SHELTER_NO, SHELTER_NAME, SHELTER_EMAIL, SHELTER_ADDRESS, SHELTER_TEL, SHELTER_LANDLINE, COMPANY_NUM,  CITY_NO, VILLAGE_NO)
+VALUES (444444444444444, 'KH동물병원', 'newsoulmatemaster@gmail.com', '서울특별시 강남구 테헤란로14길 6 남도빌딩', '010-3388-6526', '010-3388-6526', '293-2838-4828',6110000, 3220000);
+
+
+
 INSERT INTO NEWSOULMATE.ANIMAL ("desertionNo", "filename", "happenDt", "happenPlace", "kindCd", "colorCd", "age", "weight", "noticeNo", "noticeSdt", "noticeEdt", "popfile", "processState", "sexCd", "neuterYn", "specialMark", "careNm", "careTel", "careAddr", "orgNm", "chargeNm", "officetel") VALUES ('441382202200974', 'http://www.animal.go.kr/files/shelter/2022/11/202211101311522_s.jpg', TO_DATE('2022-11-09', 'YYYY-MM-DD HH24:MI:SS'), '녹양동 108-1 정화사 일대', '[개] 믹스견', null, '2022(년생)', '2.5(Kg)', '경기-의정부-2022-00305', TO_DATE('2022-11-10', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2022-11-21', 'YYYY-MM-DD HH24:MI:SS'), 'http://www.animal.go.kr/files/shelter/2022/11/202211101311522.jpg', '보호중', 'M', 'N', '남색+빨간시보리 옷. 귀반쯤 접힘. 코검정. 얌전/사람잘따름. 꼬리단미안됨/위로 말림. 털상태 양호.', '한국동물구조관리협회', '031-867-9119', '경기도 양주시 남면 감악산로 63-37 (남면) ', '경기도 의정부시', '이인애', '031-828-4083');
 INSERT INTO NEWSOULMATE.ANIMAL ("desertionNo", "filename", "happenDt", "happenPlace", "kindCd", "colorCd", "age", "weight", "noticeNo", "noticeSdt", "noticeEdt", "popfile", "processState", "sexCd", "neuterYn", "specialMark", "careNm", "careTel", "careAddr", "orgNm", "chargeNm", "officetel") VALUES ('430367202200614', 'http://www.animal.go.kr/files/shelter/2022/11/202211100911154_s.jpg', TO_DATE('2022-11-09', 'YYYY-MM-DD HH24:MI:SS'), '유성구 탑립동 876번지 현대자동차 주변', '[고양이] 한국 고양이', null, '2022(60일미만)(년생)', '0.45(Kg)', '대전-유성-2022-00316', TO_DATE('2022-11-10', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2022-11-21', 'YYYY-MM-DD HH24:MI:SS'), 'http://www.animal.go.kr/files/shelter/2022/11/202211100911154.jpg', '보호중', 'F', 'U', '교통사고(새끼)', '대전동물보호센터', '042-825-1118', '대전광역시 유성구 금남구즉로 1234 (금고동) 대전광역시 동물보호센터', '대전광역시 유성구', '박대호', '042-611-2785');
 INSERT INTO NEWSOULMATE.ANIMAL ("desertionNo", "filename", "happenDt", "happenPlace", "kindCd", "colorCd", "age", "weight", "noticeNo", "noticeSdt", "noticeEdt", "popfile", "processState", "sexCd", "neuterYn", "specialMark", "careNm", "careTel", "careAddr", "orgNm", "chargeNm", "officetel") VALUES ('430366202200369', 'http://www.animal.go.kr/files/shelter/2022/11/202211100911696_s.jpg', TO_DATE('2022-11-09', 'YYYY-MM-DD HH24:MI:SS'), '내동32-23부근', '[개] 믹스견', null, '2016(년생)', '5(Kg)', '대전-서구-2022-00361', TO_DATE('2022-11-10', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2022-11-21', 'YYYY-MM-DD HH24:MI:SS'), 'http://www.animal.go.kr/files/shelter/2022/11/202211100911696.png', '종료(반환)', 'M', 'U', '없음', '대전동물보호센터', '042-825-1118', '대전광역시 유성구 금남구즉로 1234 (금고동) 대전광역시 동물보호센터', '대전광역시 서구', '서구', '042-288-2485');
@@ -938,8 +944,6 @@ INSERT INTO NEWSOULMATE.ANIMAL ("desertionNo", "filename", "happenDt", "happenPl
 
 
 
-INSERT INTO NEWSOULMATE.SHELTER (SHELTER_NO, SHELTER_NAME, SHELTER_EMAIL, SHELTER_ADDRESS, SHELTER_TEL, SHELTER_LANDLINE, COMPANY_NUM,  CITY_NO, VILLAGE_NO)
-VALUES (444444444444444, 'KH동물병원', 'newsoulmatemaster@gmail.com', '서울특별시 강남구 테헤란로14길 6 남도빌딩', '010-3388-6526', '010-3388-6526', '293-2838-4828',6110000, 3220000);
 
 Insert into NEWSOULMATE.MEMBER (MEMBER_NO,MEMBER_ID,MEMBER_PWD,MEMBER_NAME,PHONE,EMAIL,NICKNAME,MEMBER_GRADE,MEMBER_STATUS,SHELTER_NO,RESENT_CONNECTION,ENROLL_DATE) values (1,'admin','admin!','관리자','01033886526','newsoulmatemaster@google.com','관리자',2,'Y',null,to_date('22/11/22','RR/MM/DD'),to_date('22/11/15','RR/MM/DD'));
 Insert into NEWSOULMATE.MEMBER (MEMBER_NO,MEMBER_ID,MEMBER_PWD,MEMBER_NAME,PHONE,EMAIL,NICKNAME,MEMBER_GRADE,MEMBER_STATUS,SHELTER_NO,RESENT_CONNECTION,ENROLL_DATE) values (2,'shelter01','shelter01!','진웅휘','01033886526','dndgnlwls@gmail.com','kh보호소',1,'Y',444444444444444,to_date('22/11/21','RR/MM/DD'),to_date('22/11/21','RR/MM/DD'));
@@ -985,7 +989,7 @@ Insert into NEWSOULMATE.SUPPORT (SUPPORT_NO,SHELTER_NO,MEMBER_NO,MERCHANT_UID,AM
 
 
 INSERT ALL
-    INTO NEWSOULMATE.CATEGORY VALUES (1,'광고',3)
+INTO NEWSOULMATE.CATEGORY VALUES (1,'광고',3)
 INTO NEWSOULMATE.CATEGORY VALUES(2,'도배',3)
 INTO NEWSOULMATE.CATEGORY VALUES(3,'음란물',3)
 INTO NEWSOULMATE.CATEGORY VALUES(4,'욕설',3)
@@ -1000,7 +1004,7 @@ INTO NEWSOULMATE.CATEGORY VALUES(12,'기타문의',4)
 SELECT * FROM DUAL;
 
 INSERT ALL
-    INTO NEWSOULMATE.BOARD_TYPE VALUES(1,'봉사후기')
+INTO NEWSOULMATE.BOARD_TYPE VALUES(1,'봉사후기')
 INTO NEWSOULMATE.BOARD_TYPE VALUES(2,'입양후기')
 INTO NEWSOULMATE.BOARD_TYPE VALUES(3,'신고')
 INTO NEWSOULMATE.BOARD_TYPE VALUES(4,'문의')

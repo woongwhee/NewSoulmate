@@ -5,12 +5,11 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "ManageSupportAllHistory", value = "/manageSupportAllHistoryPage")
+@WebServlet(name = "ManageSupportAllHistoryPage", value = "/manageSupportAllHistoryPage")
 public class ManageSupportAllHistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        request.getRequestDispatcher("ManageSupportAllHistory?page=1").forward(request, response);
+        request.getRequestDispatcher("/manageSupportAllHistory?page=1").forward(request, response);
     }
 
     @Override

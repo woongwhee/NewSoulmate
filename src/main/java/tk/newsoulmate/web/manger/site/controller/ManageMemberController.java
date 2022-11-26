@@ -1,48 +1,40 @@
 package tk.newsoulmate.web.manger.site.controller;
 
-import tk.newsoulmate.domain.vo.ManageMember;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.web.manger.site.service.ManageService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.IOException;
-import java.util.ArrayList;
-
 @WebServlet(name = "ManageMember", value = "/manageMember")
 public class ManageMemberController extends HttpServlet {
+
+    private final ManageService manageService = new ManageService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-        PageInfo pi;
+        String filter = request.getParameter("filter");
+        int currentPage = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 
-        if (loginUser == null) {
-            pi = new PageInfo(0,1);
-        } else {
-            int listCount = new ManageService().selectMemberListCount();
+        int totalCount = manageService.countMember(filter);
+        PageInfo pageInfo = new PageInfo(totalCount, currentPage);
+        request.setAttribute("pageInfo", pageInfo);
 
-            int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
-            int pageLimit=10;
-            int boardLimit=10;
-            int maxPage=listCount/pageLimit+1;
-            int startPage=currentPage/boardLimit*boardLimit+1;
-            int endPage=(currentPage/boardLimit+1)*(boardLimit);
-            if(endPage>maxPage){
-                endPage=maxPage;
-            }
-            pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
+        ArrayList<Member> mList = manageService.selectMemberList(pageInfo, filter);
+        request.setAttribute("mList", mList);
 
-            ArrayList<ManageMember> mList = new ManageService().selectMemberList(pi);
-            request.setAttribute("mList", mList);
-        }
-
-        request.setAttribute("pi",pi);
         RequestDispatcher view = request.getRequestDispatcher("/views/manager/managerMemberList.jsp");
         view.forward(request, response);
-
-
     }
 
     @Override
