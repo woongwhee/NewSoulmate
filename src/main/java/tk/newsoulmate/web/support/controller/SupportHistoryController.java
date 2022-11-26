@@ -3,7 +3,9 @@ package tk.newsoulmate.web.support.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
+import tk.newsoulmate.domain.vo.Shelter;
+import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.domain.vo.SupportPage;
+import tk.newsoulmate.web.shelter.service.ShelterService;
 import tk.newsoulmate.web.support.service.SupportService;
 
 @WebServlet(name = "SupportHistory", value = "/supports")
 public class SupportHistoryController extends HttpServlet {
 
     private final SupportService supportService;
+    private final ShelterService shelterService;
 
     public SupportHistoryController() {
+        this.shelterService = new ShelterService();
         this.supportService = new SupportService();
     }
 
@@ -33,7 +39,7 @@ public class SupportHistoryController extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         } else {
             Member member = (Member) loginUser;
-            List<SupportCompleteResponse> supportList = new ArrayList<>();
+            List<Support> supportList;
             SupportPage pageInfo;
             int page = Integer.parseInt(request.getParameter("page"));
 
@@ -54,6 +60,7 @@ public class SupportHistoryController extends HttpServlet {
                 pageInfo = new SupportPage(page, totalCount);
                 supportList = supportService.findAllOnlyDone(member, pageInfo);
             }
+
 
             request.setAttribute("pageInfo", pageInfo);
             request.setAttribute("supportList", supportList);

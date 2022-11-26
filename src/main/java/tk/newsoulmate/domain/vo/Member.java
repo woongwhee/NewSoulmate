@@ -14,9 +14,9 @@ public class Member {
     private String nickName;//닉네임
     private MemberGrade memberGrade;//유저등급
     private Long shelterNo;
+    private String shelterName;
     private Date resentConnection;//최근접속일
     private Date enrollDate;
-
 
     public Member() {
         super();
@@ -151,6 +151,14 @@ public class Member {
         return shelterNo;
     }
 
+    public void setShelterName(String shelterName) {
+        this.shelterName = shelterName;
+    }
+
+    public String getShelterName() {
+        return shelterName;
+    }
+
     public void setShelterNo(Long shelterNo) {
         this.shelterNo = shelterNo;
     }
@@ -188,6 +196,4 @@ public class Member {
         sb.append('}');
         return sb.toString();
     }
-
-
 }

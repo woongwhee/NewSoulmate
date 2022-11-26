@@ -129,7 +129,19 @@ public class PageInfo {
             this.endPage = endPage;
         }
 
-        public static int StartNum(int page,int pageLimit){
+
+    public int getStart() {
+        return (this.boardLimit * (this.currentPage - 1)) + 1;
+    }
+    public int getEnd() {
+        int end = this.currentPage * this.boardLimit;
+        if (end > this.listCount) {
+            end = this.listCount;
+        }
+        return end;
+    }
+
+    public static int StartNum(int page,int pageLimit){
             return pageLimit*page+1;
         }
         public static int EndNum(int page,int pageLimit){

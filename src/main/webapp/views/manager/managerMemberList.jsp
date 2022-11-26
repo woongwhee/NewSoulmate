@@ -1,12 +1,8 @@
-<%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.type.MemberGrade" %>
-<%@ page import="tk.newsoulmate.web.manger.site.service.ManageService" %>
-<%@ page import="tk.newsoulmate.web.member.service.MemberService" %>
-<%@ page import="tk.newsoulmate.domain.vo.ManageMember" %>
-<%@ page import="java.util.Collections" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.stream.Collectors" %><%--
+<%@ page import="tk.newsoulmate.domain.vo.Member" %>
+<%@ page import="tk.newsoulmate.domain.vo.PageInfo" %><%--
   Created by IntelliJ IDEA.
   User: gram
   Date: 2022-11-16
@@ -16,9 +12,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    ArrayList<ManageMember> mList = (ArrayList<ManageMember>)request.getAttribute("mList");
-	List<ManageMember> filteredList = new ArrayList<>(mList);
-    ManageService ms = new ManageService();
+    ArrayList<Member> mList = (ArrayList<Member>)request.getAttribute("mList");
+    List<Member> filteredList = new ArrayList<>(mList);
+
+    PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
+
+    int currentPage = pageInfo.getCurrentPage();
+    int startPage = pageInfo.getStartPage();
+    int endPage = pageInfo.getEndPage();
+    int maxPage = pageInfo.getMaxPage();
 %>
 <html>
 <head>
@@ -38,7 +40,7 @@
 
             <div class="box">
                 총 회원 수
-                <span id="countMember" style="color: #f45d48;"><%= mList.size() %></span> 명
+                <span id="countMember" style="color: #f45d48;"><%= pageInfo.getListCount() %></span> 명
             </div>
 
             <div class="box">
@@ -76,7 +78,7 @@
 
                     <%} else { %>
 
-                    <%for (ManageMember m : filteredList) {%>
+                    <%for (Member m : filteredList) {%>
                     <tr>
                         <td><%=m.getMemberNo() %>
                         </td>
@@ -116,6 +118,23 @@
                     </tbody>
                 </table>
             </div>
+            <div align="center" class="paging-area"> <!--페이징바-->
+                <% if(currentPage != 1) { %>
+                <button onclick="doPageClick(<%=currentPage - 1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+                <% } %>
+
+                <% for(int i = startPage; i <= endPage; i++) { %>
+                <% if(i != currentPage) {%>
+                <button onclick="doPageClick(<%= i %>)" class="btn btn-secondary btn-sm"><%= i %></button>
+                <% } else { %>
+                <button disabled><%=i %></button>
+                <% } %>
+                <% } %>
+
+                <% if(currentPage != maxPage) { %>
+                <button onclick="doPageClick(<%=currentPage + 1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+                <% } %>
+            </div>
         </div>
     </div>
 </div>
@@ -125,16 +144,18 @@
     window.onload = () => {
         $("#selectMemberGrade").val('<%=request.getParameter("filter")%>').prop("selected", true);
     }
-
+    function doPageClick(currentPage) {
+        location.href = "${context}/manageMember?page=" + currentPage + "&filter=" + $("#selectMemberGrade option:selected").val();
+    }
     function changeSelect(selected) {
         location.href = "${context}/manageMember?page=1&filter=" + selected
     }
 
-    function updateGradeMember(memberNo, _memberGrade) {
-        let memberGrade;
-        if (_memberGrade === 'USER') {
-            memberGrade = 'SHELTER_MANAGER';
-        } else if (_memberGrade === 'SHELTER_MANAGER') {
+    function updateGradeMember(memberNo, memberGrade) {
+        if (memberGrade === 'USER' || memberGrade === 'ADMIN') {
+            alert("등급을 변경할 수 없는 회원입니다.");
+            return;
+        } else if (memberGrade === 'SHELTER_MANAGER') {
             memberGrade = 'USER';
         }
         $.ajax({

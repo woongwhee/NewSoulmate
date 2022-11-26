@@ -106,9 +106,14 @@ public class MemberService {
         return result;
     }
 
-	public int updateGrade(ManageMemberUpdateGradeRequest updateGradeReq) {
+    public int updateGrade(ManageMemberUpdateGradeRequest updateGradeReq) {
         Connection conn = JDBCTemplet.getConnection();
+
         int result = new MemberDao().updateGrade(updateGradeReq, conn);
+        if (updateGradeReq.isToUser()) {
+            new MemberDao().deleteShelterInfo(updateGradeReq.getMemberNo(), conn);
+        }
+
         if(result > 0) {
             JDBCTemplet.commit();
         }else {
@@ -116,5 +121,5 @@ public class MemberService {
         }
         JDBCTemplet.close();
         return result;
-	}
+    }
 }

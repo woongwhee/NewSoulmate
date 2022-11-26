@@ -1,17 +1,21 @@
 package tk.newsoulmate.domain.dao;
+
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
+
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
-import tk.newsoulmate.domain.vo.ManageMember;
-import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.type.MemberGrade;
-import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.web.common.JDBCTemplet;
-
-import java.io.*;
-import java.sql.*;
-import java.util.*;
-
-import static tk.newsoulmate.web.common.JDBCTemplet.close;
 
 public class MemberDao {
 
@@ -105,7 +109,7 @@ public class MemberDao {
         String email = resultSet.getString("EMAIL");
         String phone = resultSet.getString("PHONE");
         MemberGrade mg = MemberGrade.valueOfNumber(resultSet.getInt("MEMBER_GRADE"));
-            Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
+        Member m = new Member(memberNo, memberId, memberName, phone, email,nickname, mg);
         if (m.getMemberGrade() == MemberGrade.SHELTER_MANAGER) {
             long shelterNo = resultSet.getLong("SHELTER_NO");
             m.setShelterNo(shelterNo);
@@ -356,6 +360,8 @@ public class MemberDao {
 
 
 
+    // Manager
+
     public ArrayList<Member> selectManageMember(Connection conn) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -388,18 +394,55 @@ public class MemberDao {
 
 
 
-    public ArrayList<ManageMember> selectMemberList(Connection conn) {
+    public ArrayList<Member> selectMemberList(Connection conn, PageInfo pageInfo) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        ArrayList<ManageMember> mList = new ArrayList<ManageMember>();
+        ArrayList<Member> mList = new ArrayList<>();
         String sql = prop.getProperty("selectMemberList");
 
         try {
             psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, pageInfo.getStart());
+            psmt.setInt(2, pageInfo.getEnd());
             rset = psmt.executeQuery();
             while (rset.next()) {
-                ManageMember m = new ManageMember();
-                Shelter s = new Shelter();
+                Member m = new Member();
+                m.setMemberNo(rset.getInt("MEMBER_NO"));
+                m.setMemberId(rset.getString("MEMBER_ID"));
+                m.setMemberName(rset.getString("MEMBER_NAME"));
+                m.setEmail(rset.getString("EMAIL"));
+                m.setNickName(rset.getString("NICKNAME"));
+                MemberGrade memberGrade = MemberGrade.valueOfNumber(rset.getInt("MEMBER_GRADE"));
+                m.setMemberGrade(memberGrade);
+                m.setShelterNo(rset.getLong("SHELTER_NO"));
+                m.setShelterName(rset.getString("SHELTER_NAME"));
+                m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+                m.setResentConnection(rset.getDate("RESENT_CONNECTION"));
+                mList.add(m);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(psmt);
+            JDBCTemplet.close(rset);
+        }
+        return mList;
+    }
+
+    public ArrayList<Member> selectMemberListByFilter(Connection conn, PageInfo pageInfo, MemberGrade filter) {
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        ArrayList<Member> mList = new ArrayList<>();
+        String sql = prop.getProperty("selectMemberListByFilter");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, filter.gradeNumber);
+            psmt.setInt(2, pageInfo.getStart());
+            psmt.setInt(3, pageInfo.getEnd());
+            rset = psmt.executeQuery();
+            while (rset.next()) {
+                Member m = new Member();
                 m.setMemberNo(rset.getInt("MEMBER_NO"));
                 m.setMemberId(rset.getString("MEMBER_ID"));
                 m.setMemberName(rset.getString("MEMBER_NAME"));
@@ -423,6 +466,90 @@ public class MemberDao {
     }
 
 
+
+
+
+
+
+
+
+/* manageMemberList 페이징바 처리 관련 - 사용못함 - 삭제필요
+
+        public ArrayList<ManageMember> selectMemberList(Connection conn, PageInfo pi) {
+        ArrayList<ManageMember> list = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        ArrayList<ManageMember> mList = new ArrayList<ManageMember>();
+        String sql = prop.getProperty("selectMemberList");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            if (pi.getCurrentPage() == 0) {
+                return list;
+            }
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
+
+            psmt.setInt(1, startRow);
+            psmt.setInt(2, endRow);
+
+            rset = psmt.executeQuery();
+            while (rset.next()) {
+                ManageMember m = new ManageMember();
+                Shelter s = new Shelter();
+                m.setMemberNo(rset.getInt("MEMBER_NO"));
+                m.setMemberId(rset.getString("MEMBER_ID"));
+                m.setMemberName(rset.getString("MEMBER_NAME"));
+                m.setEmail(rset.getString("EMAIL"));
+                m.setNickName(rset.getString("NICKNAME"));
+                MemberGrade memberGrade = MemberGrade.valueOfNumber(rset.getInt("MEMBER_GRADE"));
+                m.setMemberGrade(memberGrade);
+                m.setShelterNo(rset.getLong("SHELTER_NO"));
+                m.setShelterName(rset.getString("SHELTER_NAME"));
+                m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+                m.setResentConnection(rset.getDate("RESENT_CONNECTION"));
+                mList.add(m);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return mList;
+    }*/
+
+
+
+
+
+/*    manageMemberList 페이징바 처리 관련 - 사용못함 - 삭제필요
+
+        public int selectMemberListCount(Connection conn){
+        int listCount = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("countMember");
+
+        try {
+            psmt  = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            if(rset.next()){
+                listCount = rset.getInt("COUNT(*)");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return listCount;
+
+    }*/
+
+
+/*  사용안함 삭제필요
     public int selectCountMember(Connection conn) {
         int countMember = 0;
         PreparedStatement psmt = null;
@@ -441,7 +568,8 @@ public class MemberDao {
             close(psmt);
         }
         return countMember;
-    }
+    }*/
+
 
 
     public int updateGrade(ManageMemberUpdateGradeRequest req, Connection conn) {
@@ -487,20 +615,60 @@ public class MemberDao {
         return result;
     }
 
+    public int deleteShelterInfo(long memberNo, Connection conn) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("deleteShelterInfo");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1, memberNo);
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+
+        return result;
+    }
 
 
+    public int count(Connection conn) {
+        int count = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("count");
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                count = rset.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+        return count;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public int countByFilter(Connection conn, MemberGrade filter) {
+        int count = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("countByFilter");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, filter.gradeNumber);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                count = rset.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+        return count;
+    }
 }

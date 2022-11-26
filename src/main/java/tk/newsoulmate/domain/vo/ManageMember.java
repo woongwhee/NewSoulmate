@@ -1,7 +1,5 @@
 package tk.newsoulmate.domain.vo;
 
-import tk.newsoulmate.domain.vo.Member;
-
 public class ManageMember extends Member {
     private String shelterName;
 

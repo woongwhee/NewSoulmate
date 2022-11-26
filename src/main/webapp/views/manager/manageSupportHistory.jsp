@@ -1,20 +1,11 @@
-<%@ page import="tk.newsoulmate.domain.vo.response.ShelterSupportResponse" %>
 <%@ page import="java.util.List" %>
 <%@ page import="tk.newsoulmate.domain.vo.type.WithdrawStatus" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="tk.newsoulmate.domain.vo.SupportPage" %>
-<%@ page import="tk.newsoulmate.domain.vo.response.ManageSupportResponse" %>
+<%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    List<ManageSupportResponse> transfers = (List<ManageSupportResponse>)request.getAttribute("transfers");
+    List<Support> transfers = (List<Support>)request.getAttribute("transfers");
 
-    // SupportPage pageInfo = (SupportPage) request.getAttribute("pageInfo");
-    //
-    // int currentPage = pageInfo.getPage();
-    // int startPage = pageInfo.getStartPage();
-    // int endPage = pageInfo.getEndPage();
-    // int maxPage = pageInfo.getMaxPage();
 %>
 <html>
 
@@ -40,16 +31,6 @@
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
-            <%--            <div class="box">--%>
-            <%--                <span>보호소명</span>--%>
-            <%--                <div id="supportDate">--%>
-            <%--                    <span>조회기간</span>--%>
-            <%--                    <span><input type="date" id="startDate" value="<%=startDate%>"></span>--%>
-            <%--                    <span>~</span>--%>
-            <%--                    <span><input type="date" id="endDate" value="<%=endDate%>"></span>--%>
-            <%--                    <button id="searchBtn" onclick="searchByDate()">조회</button>--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
             <div id="supportShelterList">
                 <table>
                     <thead>
@@ -70,7 +51,7 @@
                     <%} else { %>
                     <%
                         for (int i = 0; i < transfers.size(); ++i) {
-                            ManageSupportResponse transfer = transfers.get(i);
+                            Support transfer = transfers.get(i);
                     %>
                     <tr>
                         <td><%=transfer.getMerchantUid()%>
@@ -81,22 +62,22 @@
                         </td>
                         <td><%=transfer.getAmount() %>
                         </td>
-                        <td><%=transfer.getSupporterName() %>
+                        <td><%=transfer.getMemberName() %>
                         </td>
                         <td>
                             <%
-                                if (transfer.getStatus().equals(WithdrawStatus.DONE)) {
+                                if (transfer.getWithdrawStatus().equals(WithdrawStatus.DONE)) {
                             %>
                             승인완료
-                            <% } else if (transfer.getStatus().equals(WithdrawStatus.REQUESTED)) { %>
+                            <% } else if (transfer.getWithdrawStatus().equals(WithdrawStatus.REQUESTED)) { %>
                             <input type="submit" class="btn btn-primary" data-bs-toggle="modal"
                                    data-bs-target="#staticBackdrop" value="승인"
                                    onclick="setWithdrawInfo(
                                        <%=transfer.getSupportNo()%>,
-                                       '<%=transfer.getShelterName()%>',
-                                       '<%=transfer.getWithdrawBank()%>',
-                                       '<%=transfer.getWithdrawAccountNumber()%>',
-                                       '<%=transfer.getWithdrawAccountName()%>',
+                                           '<%=transfer.getShelterName()%>',
+                                           '<%=transfer.getWithdrawBank()%>',
+                                           '<%=transfer.getWithdrawAccountNumber()%>',
+                                           '<%=transfer.getWithdrawAccountName()%>',
                                        <%=transfer.getAmount()%>)">
                             <% } %>
                         </td>

@@ -1,12 +1,11 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.response.SupportCompleteResponse" %>
 <%@ page import="tk.newsoulmate.domain.vo.SupportPage" %>
 <%@ page import="java.time.LocalDate" %>
-<%@ page import="tk.newsoulmate.domain.vo.response.SupportCompleteResponse" %>
+<%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    ArrayList<SupportCompleteResponse> supportList = (ArrayList<SupportCompleteResponse>) request.getAttribute("supportList");
+    ArrayList<Support> supportList = (ArrayList<Support>) request.getAttribute("supportList");
     SupportPage pageInfo = (SupportPage) request.getAttribute("pageInfo");
 
     int currentPage = pageInfo.getPage();
@@ -66,10 +65,10 @@
                     </tr>
 
                     <%} else { %>
-                    <%for(SupportCompleteResponse s : supportList) { %>
+                    <%for(Support s : supportList) { %>
                     <tr>
                         <td><%=s.getSupportNo()%></td>
-                        <td><%=s.getShelterName() %></td>
+                        <td><%=s.getShelterName()%></td>
                         <td><%=s.getAmount() %></td>
                         <td><%=s.getPayTime() %></td>
                     </tr>
@@ -100,7 +99,7 @@
 
             <div id="supportTotal">
                 총 금액 : <%= supportList != null ?
-                    supportList.stream().mapToLong(SupportCompleteResponse::getAmount).sum() : 0 %>
+                    supportList.stream().mapToLong(Support::getAmount).sum() : 0 %>
             </div>
 
         </div>

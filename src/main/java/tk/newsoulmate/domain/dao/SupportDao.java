@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import tk.newsoulmate.domain.vo.response.ShelterSupportResponse;
+import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Support;
-import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
 import tk.newsoulmate.domain.vo.SupportPage;
 import tk.newsoulmate.domain.vo.type.SupportStatus;
 import tk.newsoulmate.domain.vo.type.WithdrawStatus;
@@ -119,8 +118,8 @@ public class SupportDao {
         return new Support(supportNo, shelterNo, memberNo, merchantUid, amount);
     }
 
-    public ArrayList<SupportCompleteResponse> findAllOnlyDone(Connection conn, int memberNo, SupportPage page) {
-        ArrayList<SupportCompleteResponse> supportList = new ArrayList<>();
+    public ArrayList<Support> findAllOnlyDone(Connection conn, int memberNo, SupportPage page) {
+        ArrayList<Support> supportList = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("selectAll");
@@ -132,7 +131,7 @@ public class SupportDao {
             psmt.setInt(3, page.getStartSupport());
             rset = psmt.executeQuery();
             while(rset.next()) {
-                supportList.add(new SupportCompleteResponse(
+                supportList.add(new Support(
                         rset.getInt("SUPPORT_NO"),
                         rset.getString("SHELTER_NAME"),
                         rset.getLong("AMOUNT"),
@@ -148,8 +147,8 @@ public class SupportDao {
         return supportList;
     }
 
-    public ArrayList<SupportCompleteResponse> findAllOnlyDoneByDate(Connection conn, int memberNo, LocalDate startDate, LocalDate endDate, SupportPage page) {
-        ArrayList<SupportCompleteResponse> supportList = new ArrayList<>();
+    public ArrayList<Support> findAllOnlyDoneByDate(Connection conn, int memberNo, LocalDate startDate, LocalDate endDate, SupportPage page) {
+        ArrayList<Support> supportList = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("selectAllByDate");
@@ -163,7 +162,7 @@ public class SupportDao {
             psmt.setInt(5, page.getStartSupport());
             rset = psmt.executeQuery();
             while(rset.next()) {
-                supportList.add(new SupportCompleteResponse(
+                supportList.add(new Support(
                         rset.getInt("SUPPORT_NO"),
                         rset.getString("SHELTER_NAME"),
                         rset.getLong("AMOUNT"),
@@ -225,8 +224,31 @@ public class SupportDao {
         return count;
     }
 
-    public List<ShelterSupportResponse> findAllOnlyDoneByShelterNo(Connection conn, long shelterNo) {
-        ArrayList<ShelterSupportResponse> supportList = new ArrayList<>();
+    public int countByFilter(Connection conn, String filter) {
+        int count = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("countByFilter");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, filter);
+            rset = psmt.executeQuery();
+            if (rset.next()) {
+                count = rset.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return count;
+    }
+
+
+    public List<Support> findAllOnlyDoneByShelterNo(Connection conn, long shelterNo) {
+        ArrayList<Support> supportList = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("selectAllByShelterNo");
@@ -236,10 +258,10 @@ public class SupportDao {
             psmt.setLong(1, shelterNo);
             rset = psmt.executeQuery();
             while(rset.next()) {
-                supportList.add(new ShelterSupportResponse(
+                supportList.add(new Support(
                         rset.getInt("SUPPORT_NO"),
                         rset.getString("MEMBER_NAME"),
-                        rset.getDate("PAY_TIME").toLocalDate(),
+                        rset.getDate("PAY_TIME"),
                         rset.getLong("AMOUNT"),
                         rset.getString("PHONE"),
                         WithdrawStatus.valueOf(rset.getString("WD_STATUS"))
@@ -274,23 +296,29 @@ public class SupportDao {
         return result;
     }
 
-    public ArrayList<Support> manageSupportAllHistory(Connection conn) {
+    public List<Support> findAllByFilter(Connection conn, PageInfo page, String filter) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
         ArrayList<Support> allList = new ArrayList<Support>();
-        String sql = prop.getProperty("manageSupportAllHistory");
+        String sql = prop.getProperty("selectAllByFilter");
 
         try {
             psmt = conn.prepareStatement(sql);
+            psmt.setString(1, filter);
+            psmt.setInt(2, page.getEnd());
+            psmt.setInt(3, page.getStart());
             rset = psmt.executeQuery();
             while (rset.next()) {
-                Support su = new Support();
-                su.setSupportNo(rset.getInt("SUPPORT_NO"));
-                su.setMerchantUid(rset.getString("MERCHANT_UID"));
-                su.setAmount(rset.getLong("AMOUNT"));
-                su.setMemberNo(rset.getInt("MEMBER_NO"));
-                su.setPayTime(rset.getDate("PAY_TIME"));
-                WithdrawStatus.valueOf(rset.getString("WD_STATUS"));
+                Support su = new Support(
+                        rset.getInt("SUPPORT_NO"),
+                        rset.getString("SHELTER_NAME"),
+                        rset.getString("MEMBER_NAME"),
+                        rset.getString("MERCHANT_UID"),
+                        rset.getLong("AMOUNT"),
+                        rset.getDate("PAY_TIME"),
+                        SupportStatus.valueOf(rset.getString("STATUS")),
+                        WithdrawStatus.valueOf(rset.getString("WD_STATUS"))
+                );
                 allList.add(su);
             }
         } catch (SQLException e) {
@@ -301,5 +329,36 @@ public class SupportDao {
         }
         return allList;
     }
+
+/*     사용안함 삭제필요
+        public ArrayList<Support> manageSupportAllHistory(Connection conn) {
+         PreparedStatement psmt = null;
+         ResultSet rset = null;
+         ArrayList<Support> allList = new ArrayList<Support>();
+         String sql = prop.getProperty("manageSupportAllHistory");
+
+         try {
+             psmt = conn.prepareStatement(sql);
+             rset = psmt.executeQuery();
+             while (rset.next()) {
+                 Support su = new Support(rset.getInt("SUPPORT_NO"),
+                     rset.getString("SHELTER_NAME"),
+                     rset.getLong("AMOUNT"), rset.getDate("PAY_TIME"));
+                 su.setSupportNo(rset.getInt("SUPPORT_NO"));
+                 su.setMerchantUid(rset.getString("MERCHANT_UID"));
+                 su.setAmount(rset.getLong("AMOUNT"));
+                 su.setMemberNo(rset.getInt("MEMBER_NO"));
+                 su.setPayTime(rset.getDate("PAY_TIME"));
+                 WithdrawStatus.valueOf(rset.getString("WD_STATUS"));
+                 allList.add(su);
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         } finally {
+             JDBCTemplet.close(psmt);
+             JDBCTemplet.close(rset);
+         }
+         return allList;
+     }*/
 
 }

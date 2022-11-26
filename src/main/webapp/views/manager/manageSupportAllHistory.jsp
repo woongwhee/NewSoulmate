@@ -5,25 +5,21 @@
   Time: 오후 7:41
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="tk.newsoulmate.domain.vo.response.ShelterSupportResponse" %>
-<%@ page import="java.util.List" %>
-<%@ page import="tk.newsoulmate.domain.vo.type.WithdrawStatus" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="tk.newsoulmate.domain.vo.SupportPage" %>
-<%@ page import="tk.newsoulmate.domain.vo.response.ManageSupportResponse" %>
 <%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    ArrayList<Support> allList = (ArrayList<Support>) request.getAttribute("allList");
+    List<Support> allList = (List<Support>)request.getAttribute("mList");
 
-    // SupportPage pageInfo = (SupportPage) request.getAttribute("pageInfo");
-    //
-    // int currentPage = pageInfo.getPage();
-    // int startPage = pageInfo.getStartPage();
-    // int endPage = pageInfo.getEndPage();
-    // int maxPage = pageInfo.getMaxPage();
+    PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+
+    int currentPage = pageInfo.getCurrentPage();
+    int startPage = pageInfo.getStartPage();
+    int endPage = pageInfo.getEndPage();
+    int maxPage = pageInfo.getMaxPage();
 %>
 
 <html>
@@ -49,17 +45,16 @@
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
-            <%--
-                                <div class="box">
-                                   <div id="supportDate">
-                                        <span>조회기간</span>
-                                        <span><input type="date" id="startDate" value="<%=startDate%>"></span>
-                                        <span>~</span>
-                                        <span><input type="date" id="endDate" value="<%=endDate%>"></span>
-                                        <button id="searchBtn" onclick="searchByDate()">조회</button>
-                                    </div>
-                                </div>
-            --%>
+
+            <div class="box">
+                <div id="supportDate">
+                    <span>보호소 검색</span>
+                    <span><input type="text" id="shelterName"
+                                 value="<%=request.getParameter("filter") == null ? "" : request.getParameter("filter")%>">
+                    </span>
+                    <button id="searchBtn" onclick="searchByFilter()">조회</button>
+                </div>
+            </div>
 
             <div id="supportSupportAllHistory">
 
@@ -89,29 +84,50 @@
                     <%} else { %>
                     <%for (Support su : allList) {%>
                     <tr>
-                        <td><%=su.getSupportNo()%>
-                        </td>
-                        <td><%=su.getMerchantUid()%>
-                        </td>
-                        <td><%=su.getShelterNo() %>
-                        </td>
-                        <td><%=su.getPayTime() %>
-                        </td>
-                        <td><%=su.getStatus()%>
-                        </td>
-                        <td><%=su.getMemberNo()%>
-                        </td>
+                        <td><%=su.getSupportNo()%></td>
+                        <td><%=su.getShelterName() %></td>
+                        <td><%=su.getPayTime() %></td>
+                        <td><%=su.getAmount()%> 원</td>
+                        <td><%=su.getMemberName()%></td>
+                        <td><%=su.getStatus()%></td>
+                        <td><%=su.getWithdrawStatus()%></td>
                     </tr>
                     <% } %>
                     <% } %>
                     <tbody>
                 </table>
             </div>
+            <div align="center" class="paging-area"> <!--페이징바-->
+                <% if (currentPage != 1) { %>
+                <button onclick="doPageClick(<%=currentPage - 1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+                <% } %>
+
+                <% for (int i = startPage; i <= endPage; i++) { %>
+                <% if (i != currentPage) {%>
+                <button onclick="doPageClick(<%= i %>)" class="btn btn-secondary btn-sm"><%= i %>
+                </button>
+                <% } else { %>
+                <button disabled><%=i %>
+                </button>
+                <% } %>
+                <% } %>
+
+                <% if (currentPage != maxPage) { %>
+                <button onclick="doPageClick(<%=currentPage + 1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+                <% } %>
+            </div>
         </div>
     </div>
 </div>
 
-
+<script>
+    function doPageClick(currentPage) {
+        location.href = "${context}/manageSupportAllHistory?page=" + currentPage + "&filter=" + $("#shelterName").val();
+    }
+    function searchByFilter() {
+        location.href = "${context}/manageSupportAllHistory?page=1&filter=" + $("#shelterName").val();
+    }
+</script>
 
 </body>
 
