@@ -3,6 +3,7 @@ package tk.newsoulmate.domain.dao;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
 import tk.newsoulmate.domain.vo.Volunteer;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -83,6 +84,7 @@ public class VolunteerDao {
                 vo.setMemberId(rset.getString("MEMBER_ID"));
                 vo.setShelterName(rset.getString("SHELTER_NAME"));
                 vo.setVolRead(rset.getString("VOL_READ"));
+
             }
 
         } catch (SQLException e) {
@@ -94,4 +96,30 @@ public class VolunteerDao {
         return list;
         }
 
+    public int volApplyInsert(Connection conn, Volunteer vol) {
+
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("volApplyInsert");
+
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setLong(1,vol.getShelterNo());
+            psmt.setInt(2,vol.getMemberNo());
+            psmt.setDate(3,vol.getStartDate());
+            psmt.setString(4,vol.getTelNumber());
+            psmt.setString(5,vol.getName());
+            psmt.setString(6, vol.getGender());
+
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCTemplet.close(psmt);
+        }
+
+        return result;
     }
+}

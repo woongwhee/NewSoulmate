@@ -99,6 +99,18 @@
         WHERE SHELTER_NO = ?
     </entry>
 
+    <entry key="volAbleShelter">
+        SELECT
+        *
+        FROM SHELTER
+        WHERE SHELTER_NO IN(SELECT
+        SHELTER_NO
+        FROM MEMBER
+        WHERE MEMBER_GRADE=1)
+        AND SHELTER_ADDRESS IS NOT NULL
+    </entry>
+
+
 
 </properties>
 

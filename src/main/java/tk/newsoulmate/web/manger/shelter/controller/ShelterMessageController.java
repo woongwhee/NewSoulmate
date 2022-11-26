@@ -5,8 +5,9 @@ import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
 import tk.newsoulmate.domain.vo.Volunteer;
+
 import tk.newsoulmate.web.manger.shelter.sevice.ShelterMangerService;
-import tk.newsoulmate.web.manger.site.service.ManageService;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;

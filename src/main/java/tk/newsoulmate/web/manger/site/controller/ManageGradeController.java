@@ -1,10 +1,9 @@
 package tk.newsoulmate.web.manger.site.controller;
 
 import tk.newsoulmate.domain.vo.GradeUp;
-import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.web.manger.site.service.ManageService;
-import tk.newsoulmate.web.shelter.service.ShelterService;
+
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;

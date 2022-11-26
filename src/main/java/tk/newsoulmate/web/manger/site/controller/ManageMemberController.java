@@ -1,8 +1,8 @@
 package tk.newsoulmate.web.manger.site.controller;
 
 import tk.newsoulmate.domain.vo.ManageMember;
-import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.manger.site.service.ManageService;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;

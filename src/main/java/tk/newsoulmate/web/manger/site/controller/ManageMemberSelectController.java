@@ -4,7 +4,7 @@ import tk.newsoulmate.domain.vo.City;
 import tk.newsoulmate.domain.vo.ManageMember;
 import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.domain.vo.Village;
-import tk.newsoulmate.web.manger.site.service.ManageService;
+
 import tk.newsoulmate.web.shelter.service.ShelterService;
 
 import javax.servlet.*;

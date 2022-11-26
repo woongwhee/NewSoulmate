@@ -1,11 +1,12 @@
 package tk.newsoulmate.web.manger.site.controller;
 
-import tk.newsoulmate.domain.vo.Board;
+
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
-import tk.newsoulmate.web.inquire.service.InquireService;
 import tk.newsoulmate.web.manger.site.service.ManageService;
+
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;

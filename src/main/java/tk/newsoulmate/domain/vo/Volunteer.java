@@ -1,16 +1,19 @@
 package tk.newsoulmate.domain.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Volunteer {
 
 
+    private  String gender;
     private  String volRead;
     private  String shelterName;
     private String memberId;
     private int volunteerNo;
-    private int shelterNo;
+    private long shelterNo;
     private int memberNo;
+
     private Date startDate;
     private Date applyDate;
     private String name;
@@ -20,7 +23,7 @@ public class Volunteer {
         super();
     }
 
-    public Volunteer(int shelterNo, int memberNo, Date startDate, String name, String telNumber) {
+    public Volunteer(long shelterNo, int memberNo, Date startDate, String name, String telNumber) {
         this.shelterNo = shelterNo;
         this.memberNo = memberNo;
         this.startDate = startDate;
@@ -28,7 +31,7 @@ public class Volunteer {
         this.telNumber = telNumber;
     }
 
-    public Volunteer(int volunteerNo, int shelterNo, int memberNo, Date startDate, Date applyDate, String name, String telNumber) {
+    public Volunteer(int volunteerNo, long shelterNo, int memberNo, Date startDate, Date applyDate, String name, String telNumber) {
         this.volunteerNo = volunteerNo;
         this.shelterNo = shelterNo;
         this.memberNo = memberNo;
@@ -36,6 +39,15 @@ public class Volunteer {
         this.applyDate = applyDate;
         this.name = name;
         this.telNumber = telNumber;
+    }
+
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public int getVolunteerNo() {
@@ -70,11 +82,11 @@ public class Volunteer {
         this.volunteerNo = volunteerNo;
     }
 
-    public int getShelterNo() {
+    public long getShelterNo() {
         return shelterNo;
     }
 
-    public void setShelterNo(int shelterNo) {
+    public void setShelterNo(long shelterNo) {
         this.shelterNo = shelterNo;
     }
 
@@ -117,4 +129,6 @@ public class Volunteer {
     public void setTelNumber(String telNumber) {
         this.telNumber = telNumber;
     }
+
+
 }

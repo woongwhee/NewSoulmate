@@ -252,4 +252,32 @@ public class ShelterDao {
         }
         return result;
     }
+
+    public ArrayList<Shelter> volAbleShelter(Connection conn) {
+        ArrayList<Shelter> sList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("volAbleShelter");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            while (rset.next()){
+                Shelter s = new Shelter();
+                s.setShelterNo(rset.getLong("SHELTER_NO"));
+                s.setShelterName(rset.getString("SHELTER_NAME"));
+                s.setShelterAddress(rset.getString("SHELTER_ADDRESS"));
+                s.setShelterLandline(rset.getString("SHELTER_LANDLINE"));
+
+                sList.add(s);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
+        }
+        return sList;
+    }
 }
