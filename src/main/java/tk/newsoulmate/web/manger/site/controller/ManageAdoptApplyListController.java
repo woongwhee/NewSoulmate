@@ -22,6 +22,7 @@ public class ManageAdoptApplyListController extends HttpServlet {
 
         if(loginUser==null){
             pi=new PageInfo(0,1);
+
         }else {
             int listCount = new ManageService().selectAdoptApplyListCount();
 
@@ -42,6 +43,9 @@ public class ManageAdoptApplyListController extends HttpServlet {
         }
         request.setAttribute("pi", pi);
         request.getRequestDispatcher("/views/manager/managerAdoptApplyList.jsp").forward(request, response);
+
+
+
 
 
     }
