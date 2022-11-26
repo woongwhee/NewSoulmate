@@ -23,7 +23,7 @@
         <p>회원가입</p>
     </div>
     <div class="agree">
-        <input type="checkbox" name="agreeCheckBox" class="required_checked"><label>이용약관에 동의합니다. (필수)</label>
+        <input type="checkbox" name="agreeCheckBox" id="agree-check1" class="required_checked"><label for="agree-check1">이용약관에 동의합니다. (필수)</label>
         <div>
                 <textarea readonly class="textarea-form">제1조 목적
 본 이용약관은 "환승주인"의 서비스의 이용조건과 운영에 관한 제반사항 규정을 목적으로 합니다.
@@ -149,7 +149,7 @@
         </div>
     </div>
     <div class="agree">
-        <input type="checkbox" name="agreeCheckBox" class="required_checked"><label>개인정보 수집약관의 내용에
+        <input type="checkbox" name="agreeCheckBox" id="agree-check2" class="required_checked"><label for="agree-check2">개인정보 수집약관의 내용에
         동의합니다. (필수)</label>
         <div>
                     <textarea readonly class="textarea-form">1. 개인정보 수집목적 및 이용목적
@@ -187,7 +187,7 @@ o 로그 기록
         </div>
     </div>
     <div class="agree">
-        <input type="checkbox" name="agreeCheckBox" class="allcheck"><label>이용약관의 내용에 모두 동의합니다.</label>
+        <input type="checkbox" name="agreeCheckBox" id="agree-check3" class="allcheck"><label for="agree-check3">이용약관의 내용에 모두 동의합니다.</label>
     </div>
     <div id="agree-btn-box">
         <button id="cancelBtn" onclick=""><a href="index.jsp">취소</a></button>
