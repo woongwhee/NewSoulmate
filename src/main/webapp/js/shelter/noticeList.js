@@ -32,8 +32,7 @@ $(()=> {
         $('#notice-area').html("");
         noticeSearch();
         getTotalCount();
-    })
-
+    });
     $(window).scroll(function() {
         if($(window).scrollTop() + $(window).height() >= $(document).height()) {
             request.pageNo++;

@@ -10,14 +10,15 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>비밀번호 재설정</title>
+    <link href="<%=request.getContextPath()%>/css/member/pwdReset.css" rel="stylesheet">
+    <%@include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 
 <%@include file="/views/template/menubar.jsp"%>
-
-<div class="pwReset-wrap" align="center">
-    <div>
-        <h1>비밀번호 재설정</h1>
+<div class="content-wrap" align="center">
+    <div class="title-wrap">
+        <p>비밀번호 재설정</p>
     </div>
     <div>
         <div class="input-member-id">
@@ -25,14 +26,14 @@
         </div>
         <div class="input-pw">
             <input type="password" name="password" id="password" placeholder="새로운 비밀번호 입력" required>
-            <span id="pwChkMsg"></span>
+            <div><span id="pwChkMsg"></span></div>
         </div>
         <div class="input-pwre">
             <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="비밀번호 재입력" required>
-            <span id="pwReChkMsg"></span>
+            <div><span id="pwReChkMsg"></span></div>
         </div>
-        <div>
-            <button onclick="changePassword()">비밀번호 변경</button>
+        <div class="reset-btn-box">
+            <button onclick="changePassword()" id="resetBtn">비밀번호 변경</button>
         </div>
     </div>
 </div>

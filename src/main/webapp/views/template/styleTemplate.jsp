@@ -13,5 +13,4 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <link href="<%=request.getContextPath()%>/css/template/menubar.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/template/footer.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/common/main.css" rel="stylesheet">
 

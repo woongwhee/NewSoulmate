@@ -8,52 +8,40 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>아이디 찾기</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <%--<script src="/JS/searchMemberId.js"></script>--%>
-
+    <%@include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/member/findId.css" rel="stylesheet">
 </head>
 <body>
-
 <%@include file="/views/template/menubar.jsp" %>
-
 <div class="content-wrap" align="center">
-
     <div class="title-wrap">
-        <h2>아이디 찾기</h2>
+        <p>아이디 찾기</p>
     </div>
-
     <form action="<%=request.getContextPath()%>/findId.do" id="myForm" method="get">
         <div class="searchid-wrap">
-            <div>
+            <div class="search-content">
+                <input type="text" name="searchName" id="searchName" placeholder="*이름">
+            </div>
+            <div class="email-wrap">
+                <div>
+                    <input type="text" name="memberMail" id="memberMail" placeholder="*이메일">
+                    <button type="button" onclick="sendMail();">인증번호 발송</button>
 
-                <div class="search-content">
-                    <input type="text" name="searchName" id="searchName" placeholder="*이름">
-                </div>
-
-                <div class="email-wrap">
-                    <div>
-                        <input type="text" name="memberMail" id="memberMail" placeholder="*이메일">
-                        <button type="button" onclick="sendMail();">인증번호 발송</button>
-
-                        <div id="auth">
-                            <div>
-                                <input type="text" id="authCode" placeholder="인증번호">
-                                <button type="button" class="authBtn" id="authBtn" onclick="authenticationMail()">인증하기
-                                </button>
-                            </div>
+                    <div id="auth">
+                        <div>
+                            <input type="text" id="authCode" placeholder="인증번호">
+                            <button type="button" class="authBtn" id="authBtn" onclick="authenticationMail()">인증하기
+                            </button>
                         </div>
                     </div>
                 </div>
-
-                <span id="timeZone"></span>
-                <span id="authMsg"></span>
-
-                <div class="search-content">
-                    <button type="submit" class="searchIdBtn" onclick="checkAuth">아이디 찾기</button>
-                </div>
-
+            </div>
+            <span id="timeZone"></span>
+            <span id="authMsg"></span>
+            <div class="search-btn-box">
+                <button type="submit" class="searchIdBtn" onclick="checkAuth">아이디 찾기</button>
             </div>
         </div>
     </form>
@@ -62,6 +50,7 @@
 
 <%@include file="/views/template/footer.jsp" %>
 
+<%--<script src="${context}/js/member/findId.js"></script>--%>
 
 <script>
 

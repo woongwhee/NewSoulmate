@@ -77,3 +77,8 @@ body {
 .adopt-paging-area{
     text-align: center;
 }
+#loadingImg{
+    display: none;
+    width: 100px;
+    margin:0 auto;
+}

@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -23,6 +24,14 @@ public class ShelterDao {
             throw new RuntimeException(e);
         }
     }
+    /**
+     *
+     * @param cityNo 도시번호
+     * @param conn
+     * @return 도시번호에 해당하는 마을번호 리스트
+     */
+
+
     public ArrayList<Shelter> selectShelterList(Connection conn){
 
         // select 문 resultSet
@@ -55,41 +64,31 @@ public class ShelterDao {
     }
 
 
+    //    public ArrayList<Village> selectVillageAll(Connection conn){
+    //        ArrayList<Village> vList = new ArrayList<>();
+    //        PreparedStatement psmt = null;
+    //        ResultSet rset = null;
+    //        String sql = prop.getProperty("selectVillageAll");
+    //
+    //        try {
+    //            psmt = conn.prepareStatement(sql);
+    //
+    //            rset = psmt.executeQuery();
+    //            while(rset.next()){
+    //                vList.add(new Village(rset.getLong("VILLAGE_NO"),
+    //                        rset.getLong("CITY_NO"),
+    //                        rset.getString("VILLAGE_NAME")));
+    //            }
+    //
+    //        } catch (SQLException e) {
+    //            throw new RuntimeException(e);
+    //        }finally {
+    //            JDBCTemplet.close(rset);
+    //            JDBCTemplet.close(psmt);
+    //        }
 
-//    public ArrayList<Village> selectVillageAll(Connection conn){
-//        ArrayList<Village> vList = new ArrayList<>();
-//        PreparedStatement psmt = null;
-//        ResultSet rset = null;
-//        String sql = prop.getProperty("selectVillageAll");
-//
-//        try {
-//            psmt = conn.prepareStatement(sql);
-//
-//            rset = psmt.executeQuery();
-//            while(rset.next()){
-//                vList.add(new Village(rset.getLong("VILLAGE_NO"),
-//                        rset.getLong("CITY_NO"),
-//                        rset.getString("VILLAGE_NAME")));
-//            }
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }finally {
-//            JDBCTemplet.close(rset);
-//            JDBCTemplet.close(psmt);
-//        }
 //        return vList;
-//    }
-
-    /**
-     *
-     * @param cityNo 도시번호
-     * @param conn
-     * @return 도시번호에 해당하는 마을번호 리스트
-     */
-
-
-
+    //    }
     /**
      * 시군구번호로 보호소 리스트를 조회하는 용도
      * @param villageNo
@@ -123,6 +122,7 @@ public class ShelterDao {
         }
         return sList;
     }
+
     public ArrayList<Shelter> selectShelterByCity(int cityNo, Connection conn) {
         ArrayList<Shelter> sList = new ArrayList<>();
         PreparedStatement psmt = null;

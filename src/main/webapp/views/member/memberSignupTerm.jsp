@@ -10,11 +10,14 @@
 <head>
     <title>회원가입 약관</title>
 
+
     <%@include file="/views/template/styleTemplate.jsp"%>
-    <%--<script src="/JS/member/memberSignupTerm.js"></script>--%>
+
 
 </head>
 <body>
+
+
 
 <%@include file="/views/template/menubar.jsp"%>
 
@@ -61,7 +64,11 @@
     </div>
 </div>
 
+<%--<script src="${context}/js/member/memberSignupTerm.js"></script>--%>
+
 <%@include file="/views/template/footer.jsp"%>
+
+
 
 <script>
     // 전체선택, 전체해제

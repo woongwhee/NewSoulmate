@@ -2,57 +2,57 @@ package tk.newsoulmate.domain.vo;
 
 public class PageInfo {
 
-        private int listCount;// 현재 총 게시글 갯수
-        private int currentPage;// 현재 페이지(즉, 사용자가 요청한 페이지)
-        private int pageLimit;//페이지 하단에 보여질 페이징바의 페이지 최대 갯수
-        private int boardLimit;//한페이지에 보여질 게시글의 최대 갯수(몇개단위씩)
-        private int maxPage;//가장 마지막 페이지가 몇번 페이지 인지 (총 페이지 수)
-        private int startPage;//페이지 하단에 보여질 첫페이지
-        private int endPage;//페이지 하단에 보여질 마지막 페이지
-        private String categoryName;
+    private int listCount;// 현재 총 게시글 갯수
+    private int currentPage;// 현재 페이지(즉, 사용자가 요청한 페이지)
+    private int pageLimit;//페이지 하단에 보여질 페이징바의 페이지 최대 갯수
+    private int boardLimit;//한페이지에 보여질 게시글의 최대 갯수(몇개단위씩)
+    private int maxPage;//가장 마지막 페이지가 몇번 페이지 인지 (총 페이지 수)
+    private int startPage;//페이지 하단에 보여질 첫페이지
+    private int endPage;//페이지 하단에 보여질 마지막 페이지
+    private String categoryName;
 
 
 
-        public PageInfo() {
+    public PageInfo() {
 
-            super();
+        super();
+    }
+    public PageInfo(int listCount,int currentPage){
+        this.listCount=listCount;
+        this.currentPage=currentPage;
+        this.pageLimit=10;
+        this.boardLimit=10;
+        this.maxPage=listCount/pageLimit+1;
+        this.startPage=currentPage/boardLimit*boardLimit+1;
+        this.endPage=(currentPage/boardLimit+1)*(boardLimit);
+        if(endPage>maxPage){
+            endPage=maxPage;
         }
-        public PageInfo(int listCount,int currentPage){
-            this.listCount=listCount;
-            this.currentPage=currentPage;
-            this.pageLimit=10;
-            this.boardLimit=10;
-            this.maxPage=listCount/pageLimit+1;
-            this.startPage=currentPage/boardLimit*boardLimit+1;
-            this.endPage=(currentPage/boardLimit+1)*(boardLimit);
-            if(endPage>maxPage){
-                endPage=maxPage;
-            }
+    }
+    public PageInfo(int listCount,int currentPage,String categoryName){
+        this.listCount=listCount;
+        this.currentPage=currentPage;
+        this.categoryName=categoryName;
+        this.pageLimit=10;
+        this.boardLimit=10;
+        this.maxPage=listCount/pageLimit+1;
+        this.startPage=currentPage/boardLimit*boardLimit+1;
+        this.endPage=(currentPage/boardLimit+1)*(boardLimit);
+        if(endPage>maxPage){
+            endPage=maxPage;
         }
-        public PageInfo(int listCount,int currentPage,String categoryName){
-            this.listCount=listCount;
-            this.currentPage=currentPage;
-            this.categoryName=categoryName;
-            this.pageLimit=10;
-            this.boardLimit=10;
-            this.maxPage=listCount/pageLimit+1;
-            this.startPage=currentPage/boardLimit*boardLimit+1;
-            this.endPage=(currentPage/boardLimit+1)*(boardLimit);
-            if(endPage>maxPage){
-                endPage=maxPage;
-            }
 
-        }
-        public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage, int endPage, String categoryName) {
-            this.listCount = listCount;
-            this.currentPage = currentPage;
-            this.pageLimit = pageLimit;
-            this.boardLimit = boardLimit;
-            this.maxPage = maxPage;
-            this.startPage = startPage;
-            this.endPage = endPage;
-            this.categoryName = categoryName;
-        }
+    }
+    public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage, int endPage, String categoryName) {
+        this.listCount = listCount;
+        this.currentPage = currentPage;
+        this.pageLimit = pageLimit;
+        this.boardLimit = boardLimit;
+        this.maxPage = maxPage;
+        this.startPage = startPage;
+        this.endPage = endPage;
+        this.categoryName = categoryName;
+    }
 
     public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage, int endPage) {
         this.listCount = listCount;
@@ -129,7 +129,19 @@ public class PageInfo {
             this.endPage = endPage;
         }
 
-        public static int StartNum(int page,int pageLimit){
+
+    public int getStart() {
+        return (this.boardLimit * (this.currentPage - 1)) + 1;
+    }
+    public int getEnd() {
+        int end = this.currentPage * this.boardLimit;
+        if (end > this.listCount) {
+            end = this.listCount;
+        }
+        return end;
+    }
+
+    public static int StartNum(int page,int pageLimit){
             return pageLimit*page+1;
         }
         public static int EndNum(int page,int pageLimit){

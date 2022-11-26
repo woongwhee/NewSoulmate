@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="volunteerApplyListCount">
+        SELECT COUNT(*) AS cnt
+        FROM VOLUNTEER
+        WHERE SHELTER_NO = ?
+    </entry>
+
+    <entry key="volunteerApplyList">
+        SELECT *
+        FROM(
+        SELECT
+        ROWNUM AS "RNUM",
+        A.*
+        FROM(
+        SELECT
+        V.VOLUNTEER_NO,
+        V.SHELTER_NO,
+        V.MEMBER_NO,
+        V.START_DATE,
+        V.TEL_NUMBER,
+        V.NAME,
+        M.MEMBER_ID,
+        S.SHELTER_NAME,
+        v.VOL_READ
+        FROM VOLUNTEER V
+        JOIN MEMBER M ON (V.MEMBER_NO = M.MEMBER_NO)
+        JOIN SHELTER S ON (V.SHELTER_NO = S.SHELTER_NO)
+        WHERE V.SHELTER_NO = ?
+        ORDER BY V.VOLUNTEER_NO
+        ) A
+        )
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+</properties>

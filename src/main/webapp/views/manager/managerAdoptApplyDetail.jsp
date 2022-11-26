@@ -79,19 +79,13 @@
 
 
             <form action="${context}/adoptApplySubRead" type="post">
-                <input type="hidden" name="subRead" value="${s.subNo}">
+                <input type="hidden" name="sno" value="${s.subNo}">
+                <input type="hidden" name="subRead" value="${s.subRead}">
                 <input type="submit" id="confirm" value="확인" class="btn btn-danger btn-sm">
             </form>
         </div>
     </div>
 </div>
-<%--<script>--%>
-<%--    $('#confirm').click(()=>{--%>
-<%--        location.href='<%=request.getContextPath()%>/adoptApplyList';--%>
-<%--    });--%>
-<%--</script>--%>
-
-
 
 
 </body>

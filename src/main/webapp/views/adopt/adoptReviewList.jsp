@@ -27,34 +27,12 @@
             </div>
             </c:forEach>
         </div>
+        <div><img src="${context}/image/loading.gif"alt="로딩중" id="loadingImg"></div>
     </div>
 <%@ include file="/views/template/footer.jsp"%>
     <script>
-        let listCount=${listCount};
-        let page=1;
-        $(window).scroll(()=>{
-            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                if(listCount>((page-1)*20)){
-                    nextPage();
-                }
-            }
-        });
-        function nextPage(){
-            $.ajax({
-                url:'adoptRevNext',
-                data:{'page':page},
-                type:'post',
-                success:(result)=>{
-                    $("#adopt-review-area").append(result);
-                    ++page;
-                },
-                error:(result)=>{
-                    console.log(result)
-                }
-            })
-        }
-
-
+        const listCount=${listCount};
     </script>
+    <script src="${context}/js/adopt/adoptList.js"></script>
 </body>
 </html>
