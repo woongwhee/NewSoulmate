@@ -13,7 +13,6 @@
     SimpleDateFormat today = new SimpleDateFormat("yyy년 MM월 dd일");
     String dno= (String)request.getAttribute("dno");
 %>
-
 <!doctype html>
 <html lang="en">
     <title>입양 신청하기</title>
