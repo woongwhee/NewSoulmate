@@ -237,12 +237,12 @@ public class SupportDao {
             rset = psmt.executeQuery();
             while(rset.next()) {
                 supportList.add(new ShelterSupportResponse(
-                    rset.getInt("SUPPORT_NO"),
-                    rset.getString("MEMBER_NAME"),
-                    rset.getDate("PAY_TIME").toLocalDate(),
-                    rset.getLong("AMOUNT"),
-                    rset.getString("PHONE"),
-                    WithdrawStatus.valueOf(rset.getString("WD_STATUS"))
+                        rset.getInt("SUPPORT_NO"),
+                        rset.getString("MEMBER_NAME"),
+                        rset.getDate("PAY_TIME").toLocalDate(),
+                        rset.getLong("AMOUNT"),
+                        rset.getString("PHONE"),
+                        WithdrawStatus.valueOf(rset.getString("WD_STATUS"))
                 ));
             }
         } catch (SQLException e) {
