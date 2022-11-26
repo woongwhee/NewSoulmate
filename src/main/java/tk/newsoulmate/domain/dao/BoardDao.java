@@ -348,6 +348,7 @@ public class BoardDao {
         int result = 0;
         PreparedStatement psmt = null;
         String sql = prop.getProperty("updateInquireBoard");
+        System.out.println("업데이트도착"+b);
 
         try {
             psmt = conn.prepareStatement(sql);

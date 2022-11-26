@@ -51,10 +51,9 @@
         <div id="adopt-review">
             <div id="comment2" onclick="location.href='<%=request.getContextPath()%>/adoptRevList'">입양후기+</div>
                 <div id="adopt-review-list">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
+                    <c:forEach items="${tList}" var="t">
+                            <img class="adopt-thumnail" src="${t.filePath}/${t.changeName}" onclick="location.href='${context}/adoptRevDetail?bno=${t.boardNo}'">
+                    </c:forEach>
                 </div>
         </div>
         <div id="volunteer-review">

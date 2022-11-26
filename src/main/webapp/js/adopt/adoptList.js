@@ -5,7 +5,9 @@ window.addEventListener('scroll', () => {
     let val = window.innerHeight + window.scrollY;
     if(val >= document.body.offsetHeight&& !wait){
         page++;
-        setTimeout(nextPage,2000);
+        $loadingImg.css('display','block');
+
+        setTimeout(nextPage,1000);
     }
 });
 function nextPage(){
@@ -22,8 +24,8 @@ function nextPage(){
             console.log(result)
         },
         complete:()=>{
-            $loadingImg.css('display','block');
             wait=false;
+            $loadingImg.css('display','none');
         }
     })
 

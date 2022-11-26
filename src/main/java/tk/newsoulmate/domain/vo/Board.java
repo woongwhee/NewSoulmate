@@ -329,5 +329,27 @@ public class Board{
         this.resultStatus = resultStatus;
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Board{");
+        sb.append("boardNo=").append(boardNo);
+        sb.append(", memberNo=").append(memberNo);
+        sb.append(", boardType=").append(boardType);
+        sb.append(", boardTitle='").append(boardTitle).append('\'');
+        sb.append(", boardContent='").append(boardContent).append('\'');
+        sb.append(", readCount=").append(readCount);
+        sb.append(", reportNo=").append(reportNo);
+        sb.append(", memberName='").append(memberName).append('\'');
+        sb.append(", nickName='").append(nickName).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", resultStatus='").append(resultStatus).append('\'');
+        sb.append(", fileCount=").append(fileCount);
+        sb.append(", categoryNo=").append(categoryNo);
+        sb.append(", issueDate=").append(issueDate);
+        sb.append(", memberId='").append(memberId).append('\'');
+        sb.append(", categoryName='").append(categoryName).append('\'');
+        sb.append(", boardName='").append(boardName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -22,7 +22,7 @@
       <br>
 
       <form action="${context}/inquire/update" id="update-form" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="bno" value="${b.boardNo}">
+        <input type="hidden" name="boardNo" value="${b.boardNo}">
         <table align="center">
           <tr>
             <th width="100">카테고리</th>
@@ -55,7 +55,7 @@
                         class="btn btn-danger btn-sm" style="border-radius:25px">X</button>
               </div>
               <input type="hidden" name="originFileNo" value="${at.fileNo}">
-              <input type="hidden" name="originFileName" value="${at.originfileName}">
+              <input type="hidden" name="originFileName" value="${at.originName}">
               <input type="file" id="upfile" name="upfile" accept=".gif, .jpg, .png" onchange="checkSize(this)" style="display: none">
               </c:if>
               <c:if test="${empty at}">

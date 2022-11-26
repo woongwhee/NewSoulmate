@@ -87,7 +87,7 @@ public class UploadUtil {
     public boolean deleteFile(Attachment at){
         String FilePath=at.getFilePath();
         String fileName=at.getChangeName();
-        File file=new File(app.getRealPath(FilePath)+"/"+fileName);
+        File file=new File(System.getProperty("catalina.home")+webapps+"/"+upfilesPath+"/"+fileName);
         if(file.exists()){
             if(file.delete()){
                 return true;

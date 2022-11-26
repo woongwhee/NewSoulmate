@@ -72,8 +72,6 @@
         WHERE FILE_NO = ?
     </entry>
     <entry key="selectThumbnailList">
-
-
         SELECT
             *
         FROM(
@@ -91,7 +89,7 @@
                 JOIN BOARD USING (BOARD_NO)
                 WHERE TYPE_NO=?
                 AND BOARD_STATUS='Y'
-                ORDER BY CREATE_DATE
+                ORDER BY CREATE_DATE DESC
             )A
         )
         WHERE rnum between ? AND ?

@@ -145,12 +145,12 @@
 
     <entry key="updateInquireBoard">
         UPDATE BOARD
-        SET CATEGORY_NO = ?
-            ,BOARD_TITLE = ?
-            ,BOARD_CONTENT = ?
+            SET CATEGORY_NO = ?
+                ,BOARD_TITLE = ?
+                ,BOARD_CONTENT = ?
         WHERE BOARD_NO = ?
         AND MEMBER_NO=?
-        AND STATUS='Y'
+        AND BOARD_STATUS='Y'
     </entry>
     <entry key="updateReviewBoard">
         UPDATE BOARD

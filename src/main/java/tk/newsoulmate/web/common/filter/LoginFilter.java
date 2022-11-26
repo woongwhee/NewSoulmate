@@ -14,7 +14,8 @@ import java.net.http.HttpRequest;
     servletNames = {
         "saveAttach","AdoptApplyController","InquireDetailController","MemberInfoDetailViewController",
             "adoptRevEnroll","adoptRevInsert","adoptUpdate","replyInsert.ad","replyInsert","replyDelete",
-            "ManageAdoptApplyListController","NoticeReplyInsertController"
+            "ManageAdoptApplyListController","NoticeReplyInsertController","InquireEnrollController","InquireUpdateController",
+            "InquireUpdateFromController"
     }
 )
 public class LoginFilter implements Filter {

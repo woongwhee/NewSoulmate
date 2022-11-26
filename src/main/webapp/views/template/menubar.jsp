@@ -24,12 +24,12 @@
                 </c:when>
                 <c:otherwise>
                     <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                    <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
+                    <c:if test="${loginUser.memberGrade.SHELTER_MANAGER}" >
                         <li><a href="${context}/ShelterMessage">보호소페이지</a></li>
-                    </c:when>
-                    <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
+                    </c:if>
+                    <c:if test="${loginUser.memberGrade.SITE_MANAGER}">
                         <li><a href="${context}/manageMemberPage">관리자페이지</a></li>
-                    </c:when>
+                    </c:if>
                     <li><a href="${context}/myPageInfo">마이페이지</a></li>
                     <li><a href="${context}/logout">로그아웃</a></li>
                 </c:otherwise>

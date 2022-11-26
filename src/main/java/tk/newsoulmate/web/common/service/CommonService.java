@@ -2,6 +2,7 @@ package tk.newsoulmate.web.common.service;
 
 import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.type.BoardType;
 
 import java.sql.Connection;
 import java.util.List;
@@ -100,4 +101,15 @@ public class CommonService {
         close();
         return replyNo;
     }
+
+    public List<Attachment> selectAdoptReviewList(int page,int pageLimit){
+        Connection conn = getConnection();
+        int start=PageInfo.StartNum(page,pageLimit);
+        int end=PageInfo.EndNum(page,pageLimit);
+        List<Attachment> list = new AttachmentDao().selectThumbNailList(conn, BoardType.ADOPT,start,end);
+        close();
+        return list;
+    }
+
+
 }
