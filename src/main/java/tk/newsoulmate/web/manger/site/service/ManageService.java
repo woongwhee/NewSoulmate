@@ -45,12 +45,12 @@ public class ManageService {
         return gList;
     }
 
-    public int selectCountMember() {
+/*    public int selectCountMember() {
         Connection conn = getConnection();
         int countMember = memberDao.selectCountMember(conn);
         close();
         return countMember;
-    }
+    }*/
 
     public int selectAdoptApplyListCount(){
         Connection conn = getConnection();

@@ -38,13 +38,6 @@
 
 
 <div class="headcontainer">
-
-    <div id="right_text_fiex">
-        <div class="right_text">
-            <h1>보호소별 출금신청내역</h1>
-        </div>
-    </div>
-
     <div id="right_view">
         <div id="user_information">
             <%--            <div class="box">--%>
@@ -137,7 +130,6 @@
                             <button type="button" class="btn btn-primary"
                                     id="btn-primary" onclick="withdrawApprove()">출금 승인하기
                             </button>
-
                         </div>
                     </div>
                 </div>
@@ -146,6 +138,7 @@
     </div>
 </div>
 </body>
+
 
 <script>
     let supportNo;
@@ -172,7 +165,7 @@
             }
         });
     }
-
 </script>
+
 
 </html>
