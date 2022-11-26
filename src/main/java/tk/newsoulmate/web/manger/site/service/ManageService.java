@@ -20,9 +20,9 @@ public class ManageService {
     private MemberDao memberDao = new MemberDao();
 
 
-    public ArrayList<ManageMember> selectMemberList(PageInfo pi) {
+    public ArrayList<ManageMember> selectMemberList() {
         Connection conn = getConnection();
-        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn,pi);
+        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn);
         close();
         return mList;
     }
@@ -45,12 +45,12 @@ public class ManageService {
         return gList;
     }
 
-/*    public int selectCountMember() {
+    public int selectCountMember() {
         Connection conn = getConnection();
         int countMember = memberDao.selectCountMember(conn);
         close();
         return countMember;
-    }*/
+    }
 
     public int selectAdoptApplyListCount(){
         Connection conn = getConnection();
@@ -81,13 +81,12 @@ public class ManageService {
         Connection conn = getConnection();
 
         int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
-
+        close();
         if(result > 0){
             commit();
         } else{
             rollback();
         }
-        close();
         return result;
     }
     public Subscription selectAdoptApplyListCheck(int subNo){
@@ -105,12 +104,12 @@ public class ManageService {
         int result1 = new GradeUpDao().changeGrade(conn,memberNo);
         int result2 = new MemberDao().changeGrade(conn,memberNo);
 
-            if(result1 == memberNo.length && result2 == memberNo.length){
-                commit();
-            }else{
-                rollback();
-            }
-            close();
+        if(result1 == memberNo.length && result2 == memberNo.length){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
         return (result1+result2)/2;
     }
 
@@ -133,14 +132,5 @@ public class ManageService {
         Notice n=new NoticeDao().selectNotice(conn,animalNo);
         close();
         return n;
-    }
-
-    public int selectMemberListCount(){
-        Connection conn = getConnection();
-
-        int listCount = new MemberDao().selectMemberListCount(conn);
-
-        close();
-        return listCount;
     }
 }

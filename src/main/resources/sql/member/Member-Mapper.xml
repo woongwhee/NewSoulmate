@@ -156,6 +156,7 @@
         M.RESENT_CONNECTION
         FROM MEMBER M, SHELTER S
         WHERE M.SHELTER_NO = S.SHELTER_NO(+)
+        AND MEMBER_STATUS = 'Y'
         ORDER BY MEMBER_NO
         ) A
         )
@@ -163,10 +164,12 @@
 
     </entry>-->
 
-<!--    <entry key="countMember">
+<!--
+    <entry key="countMember">
         SELECT COUNT(*)
         FROM MEMBER
-    </entry>-->
+    </entry>
+-->
 
     <entry key="changeGrade">
         UPDATE MEMBER

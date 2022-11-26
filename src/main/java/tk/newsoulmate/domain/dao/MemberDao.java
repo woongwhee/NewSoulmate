@@ -423,7 +423,7 @@ public class MemberDao {
     }
 
 
-/*    public int selectCountMember(Connection conn) {
+    public int selectCountMember(Connection conn) {
         int countMember = 0;
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -441,7 +441,7 @@ public class MemberDao {
             close(psmt);
         }
         return countMember;
-    }*/
+    }
 
 
     public int updateGrade(ManageMemberUpdateGradeRequest req, Connection conn) {
