@@ -1,8 +1,6 @@
 package tk.newsoulmate.domain.dao;
-import tk.newsoulmate.domain.vo.ManageMember;
-import tk.newsoulmate.domain.vo.Member;
+import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.domain.vo.type.MemberGrade;
-import tk.newsoulmate.domain.vo.Shelter;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.*;
@@ -369,7 +367,8 @@ public class MemberDao {
 
 
 
-    public ArrayList<ManageMember> selectMemberList(Connection conn) {
+    public ArrayList<ManageMember> selectMemberList(Connection conn, PageInfo pi) {
+        ArrayList<ManageMember> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
         ArrayList<ManageMember> mList = new ArrayList<ManageMember>();
@@ -377,6 +376,15 @@ public class MemberDao {
 
         try {
             psmt = conn.prepareStatement(sql);
+            if (pi.getCurrentPage() == 0) {
+                return list;
+            }
+            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+            int endRow = startRow + pi.getBoardLimit() - 1;
+
+            psmt.setInt(1, startRow);
+            psmt.setInt(2, endRow);
+
             rset = psmt.executeQuery();
             while (rset.next()) {
                 ManageMember m = new ManageMember();
@@ -397,8 +405,8 @@ public class MemberDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCTemplet.close(psmt);
             JDBCTemplet.close(rset);
+            JDBCTemplet.close(psmt);
         }
         return mList;
     }
@@ -446,4 +454,43 @@ public class MemberDao {
 
         return result;
     }
+    public int selectMemberListCount(Connection conn){
+        int listCount = 0;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("countMember");
+
+        try {
+            psmt  = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            if(rset.next()){
+                listCount = rset.getInt("COUNT(*)");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return listCount;
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
