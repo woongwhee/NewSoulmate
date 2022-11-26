@@ -20,9 +20,9 @@ public class ManageService {
     private MemberDao memberDao = new MemberDao();
 
 
-    public ArrayList<ManageMember> selectMemberList() {
+    public ArrayList<ManageMember> selectMemberList(PageInfo pi) {
         Connection conn = getConnection();
-        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn);
+        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn,pi);
         close();
         return mList;
     }
@@ -81,12 +81,13 @@ public class ManageService {
         Connection conn = getConnection();
 
         int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
-        close();
+
         if(result > 0){
             commit();
         } else{
             rollback();
         }
+        close();
         return result;
     }
     public Subscription selectAdoptApplyListCheck(int subNo){
@@ -132,5 +133,14 @@ public class ManageService {
         Notice n=new NoticeDao().selectNotice(conn,animalNo);
         close();
         return n;
+    }
+
+    public int selectMemberListCount(){
+        Connection conn = getConnection();
+
+        int listCount = new MemberDao().selectMemberListCount(conn);
+
+        close();
+        return listCount;
     }
 }

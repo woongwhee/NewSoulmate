@@ -105,7 +105,7 @@
                     </div>
                     <script>
                         function doPageClick(currentPage){
-                            location.href = "<%=request.getContextPath()%>/myPageBoardList.bo?currentPage="+currentPage;
+                            location.href = "${context}/myPageBoardList.bo?currentPage="+currentPage;
                         }
                     </script>
                 </div>
