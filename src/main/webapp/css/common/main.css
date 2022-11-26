@@ -122,7 +122,7 @@
 
 #main_top .notice-img{
     width: 180px;
-    max-height: 200px;
+    height: 200px;
     cursor: pointer;
     margin: 20px 0 0 20px;
 }
