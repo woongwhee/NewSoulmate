@@ -122,6 +122,7 @@
         $("#selected-shelterNo").val(selectedShelterNo);
         $("#selected-shelterName").val($(this).children().eq(1).text().trim())
         $("#selected-shelterAddress").val($(this).children().eq(2).text().trim());
+        $(".modal-footer>button").click();
 
         //$("#selected-shelter").html($(this).children().eq(1).text().trim())
     })

@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import tk.newsoulmate.domain.vo.PageInfo;
-import tk.newsoulmate.domain.vo.ShelterSupportResponse;
+import tk.newsoulmate.domain.vo.ManageMember;
+import tk.newsoulmate.domain.vo.Shelter;
+import tk.newsoulmate.domain.vo.response.ShelterSupportResponse;
 import tk.newsoulmate.domain.vo.Support;
+import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
 import tk.newsoulmate.domain.vo.SupportPage;
 import tk.newsoulmate.domain.vo.response.SupportCompleteResponse;
+import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.domain.vo.type.SupportStatus;
 import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
