@@ -21,9 +21,8 @@
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
             crossorigin="anonymous"></script>
 
-    <link href="<%=request.getContextPath()%>/css/shelterManager/shelterSupport.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/shelterManager/shelterSupport.css" rel="stylesheet">
 </head>
 
 
@@ -34,7 +33,7 @@
     <div id="right_view">
         <div id="user_information">
 
-            <span style="color: #f45d48"><%=shelterName%></span>님의 후원내역
+            <span id="shelterName"><%=shelterName%></span>님의 후원내역
 
             <div id="memberList">
                 <table>
