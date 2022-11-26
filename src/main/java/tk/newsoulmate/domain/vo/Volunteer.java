@@ -3,6 +3,11 @@ package tk.newsoulmate.domain.vo;
 import java.sql.Date;
 
 public class Volunteer {
+
+
+    private  String volRead;
+    private  String shelterName;
+    private String memberId;
     private int volunteerNo;
     private int shelterNo;
     private int memberNo;
@@ -35,6 +40,30 @@ public class Volunteer {
 
     public int getVolunteerNo() {
         return volunteerNo;
+    }
+
+    public String getVolRead() {
+        return volRead;
+    }
+
+    public void setVolRead(String volRead) {
+        this.volRead = volRead;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public String getShelterName() {
+        return shelterName;
+    }
+
+    public void setShelterName(String shelterName) {
+        this.shelterName = shelterName;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
     public void setVolunteerNo(int volunteerNo) {
