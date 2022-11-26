@@ -1,0 +1,73 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+.content-wrap {
+    width: 1080px;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
+.title-wrap {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    color: #319493;
+}
+
+.searchid-wrap input {
+    font-size: 16px;
+    font-weight: 400;
+    width: 250px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px lightgray solid;
+    margin: 0 10px 20px 0;
+}
+
+.searchid-wrap {
+    width: 400px;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.email-wrap button {
+    width: 105px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.searchid-wrap span{
+    font-size: 20px;
+    margin: 3px;
+    font-weight: 500;
+}
+#authMsg{
+    color: #f45d48;
+}
+
+.search-btn-box{
+    padding-top: 20px;
+}
+
+.searchIdBtn{
+    width: 370px;
+    height: 45px;
+    background-color: #319493;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}

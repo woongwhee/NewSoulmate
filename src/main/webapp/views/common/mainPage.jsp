@@ -103,9 +103,7 @@
             </div>
         </div>
         <div class="main_right_box2">
-            <div id="support-box">
-                <button id="supportBtn" onclick="location.href='${context}/supportPaymentPage'">후원하러 가기</button>
-            </div>
+            <button id="supportBtn" onclick="location.href='${context}/supportPaymentPage'">후원하러 가기</button>
         </div>
     </div>
 

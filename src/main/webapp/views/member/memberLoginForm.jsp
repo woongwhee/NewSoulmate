@@ -12,37 +12,41 @@
     <title>로그인</title>
 
     <%@include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/member/memberLoginForm.css" rel="stylesheet">
 
 </head>
 
 <body>
 
 <%@include file="/views/template/menubar.jsp"%>
-
 <div class="content-wrap" align="center">
     <div class="title-wrap">
-        <h2>로그인</h2>
+        <p>로그인</p>
     </div>
     <div class="content-box">
         <form id="loginForm" action="${context}/login.do" method="post">
             <table class="logintable">
                 <tr>
                     <th><label for="loginId">아이디</label></th>
-                    <td><input class="input-form" type="text" name="memberId" id="loginId" placeholder="아이디"></td>
+                    <td><input class="input-form" type="text" name="memberId" id="loginId" >
+                    </td>
                 </tr>
                 <tr>
                     <th><label for="loginPw">비밀번호</label></th>
-                    <td> <input class="input-form" type="password" name="memberPwd" id="loginPw"placeholder="비밀번호"></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" id="saveId"><label for="saveId">아이디 저장</label></td>
-                    <td><button onclick="submitLogin()" class="loginBtn">로그인하기</button></td>
-                </tr>
-                <tr>
-                    <td><a href="views/member/findId.jsp">아이디찾기</a>/<a href="views/member/findPwd.jsp">비밀번호 찾기</a></td>
-                    <th><a href="views/member/memberSignupTerm.jsp">신규 회원가입</a></th>
+                    <td> <input class="input-form" type="password" name="memberPwd" id="loginPw"></td>
                 </tr>
             </table>
+            <div id="save-id-box">
+                <input type="checkbox" id="saveId"><label for="saveId" class="save-label">아이디 저장</label>
+            </div>
+            <div id="login-btn-box">
+                <button onclick="submitLogin()" class="loginBtn">로그인하기</button>
+            </div>
+            <div id="find-box">
+                <a href="views/member/findId.jsp">아이디찾기</a>
+                <a href="views/member/findPwd.jsp">비밀번호찾기</a>
+                <a href="views/member/memberSignupTerm.jsp">회원가입</a>
+            </div>
         </form>
     </div>
 </div>

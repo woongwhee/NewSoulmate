@@ -10,48 +10,40 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>비밀번호 찾기</title>
+    <link href="<%=request.getContextPath()%>/css/member/findPwd.css" rel="stylesheet">
+    <%@include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 
 <%@include file="/views/template/menubar.jsp"%>
 
 <div class="content-wrap" align="center">
-
     <div class="title-wrap">
-        <h2>비밀번호 찾기</h2>
+        <p>비밀번호 찾기</p>
     </div>
-
     <div class="content-box">
-        <div>
-
-            <div class="search-content">
-                <input type="text" name="searchId" id="searchId" placeholder="*아이디">
-            </div>
-
-            <div class="search-content">
-                <input type="text" name="searchName" id="searchName" placeholder="*이름">
-            </div>
+        <div class="search-content">
+            <input type="text" name="searchId" id="searchId" placeholder="*아이디">
         </div>
-
+        <div class="search-content">
+            <input type="text" name="searchName" id="searchName" placeholder="*이름">
+        </div>
         <div class="email-wrap">
             <div>
-                <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" >
-                <button type="button" onclick="sendMail();" >인증번호 발송</button>
-
+                <input type="text" name="memberMail" id="memberMail" placeholder="*이메일">
+                <button type="button" onclick="sendMail();">인증번호 발송</button>
                 <div id="auth">
                     <div>
-                        <input type="text" id="authCode" placeholder="인증번호" >
+                        <input type="text" id="authCode" placeholder="인증번호">
                         <button type="button" class="authBtn" id="authBtn" onclick="authenticationMail()">인증하기</button>
                     </div>
                 </div>
             </div>
         </div>
-
         <span id="timeZone"></span>
         <span id="authMsg"></span>
-
-        <div class="search-content">
-            <button type="submit" class="findPwdBtn">비밀번호 찾기</button>
+        <div class="search-btn-box">
+            <button type="submit" class="findPwdBtn">비밀번호 재설정</button>
         </div>
     </div>
 </div>
