@@ -45,14 +45,14 @@ public class SupportService {
 
 	public void complete(String merchantUid) {
 		Connection conn = JDBCTemplet.getConnection();
-		new SupportDao().updateWithdrawStatus(conn, merchantUid, SupportStatus.DONE);
+		new SupportDao().updateSupportStatus(conn, merchantUid, SupportStatus.DONE);
 		new SupportDao().updateWithdrawStatus(conn, merchantUid, WithdrawStatus.PENDING);
 		JDBCTemplet.close();
 	}
 
 	public void failed(String merchantUid) {
 		Connection conn = JDBCTemplet.getConnection();
-		new SupportDao().updateWithdrawStatus(conn, merchantUid, SupportStatus.FAILED);
+		new SupportDao().updateSupportStatus(conn, merchantUid, SupportStatus.FAILED);
 		JDBCTemplet.close();
 	}
 

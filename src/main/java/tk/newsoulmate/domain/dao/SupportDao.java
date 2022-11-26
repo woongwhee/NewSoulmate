@@ -73,7 +73,7 @@ public class SupportDao {
         return result;
     }
 
-    public int updateStatus(Connection conn, String merchantUid, SupportStatus status) {
+    public int updateSupportStatus(Connection conn, String merchantUid, SupportStatus status) {
         PreparedStatement psmt = null;
         int result = 0;
         String sql = prop.getProperty("updateStatus");

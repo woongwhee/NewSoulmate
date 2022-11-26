@@ -98,17 +98,6 @@ public class ManageService {
     }
 
 
-
-
-
-/*  사용안함 삭제필요
-    public int selectCountMember() {
-        Connection conn = getConnection();
-        int countMember = memberDao.selectCountMember(conn);
-        close();
-        return countMember;
-    }*/
-
     public int selectAdoptApplyListCount(){
         Connection conn = getConnection();
 
@@ -190,12 +179,4 @@ public class ManageService {
         return n;
     }
 
-    public int selectMemberListCount(){
-        Connection conn = getConnection();
-
-        int listCount = new MemberDao().selectMemberListCount(conn);
-
-        close();
-        return listCount;
-    }
 }
