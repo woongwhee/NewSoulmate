@@ -22,23 +22,17 @@
                     <li><a href="${context}/memberSignupTerm">회원가입</a></li>
                     <li><a href="${context}/loginpage">로그인</a></li>
                 </c:when>
-                <c:when test="${loginUser.memberGrade.USER}">
+                <c:otherwise>
                     <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
-                    <li><a href="${context}/logout">로그아웃</a></li>
-                </c:when>
-                <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
-                    <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                    <li><a href="${context}/ShelterMessage">보호소페이지</a></li>
-                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
-                    <li><a href="${context}/logout">로그아웃</a></li>
+                    <c:when test="${loginUser.memberGrade.SHELTER_MANAGER}" >
+                        <li><a href="${context}/ShelterMessage">보호소페이지</a></li>
                     </c:when>
                     <c:when test="${loginUser.memberGrade.SITE_MANAGER}">
-                    <p><b>${loginUser.memberName}</b>님 환영합니다!</p>
-                    <li><a href="${context}/manageMemberPage">관리자페이지</a></li>
-                    <li><a href="${context}/MyPageInfo">마이페이지</a></li>
+                        <li><a href="${context}/manageMemberPage">관리자페이지</a></li>
+                    </c:when>
+                    <li><a href="${context}/myPageInfo">마이페이지</a></li>
                     <li><a href="${context}/logout">로그아웃</a></li>
-                </c:when>
+                </c:otherwise>
             </c:choose>
             </ul>
         </div>
