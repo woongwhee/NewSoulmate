@@ -26,6 +26,7 @@ public class ScheduleService {
         Request request = new Request();
         request.setPageNo(1);
         request.setNumberOfRows(1);
+        request.setValid();
         int count=getTotalCount(request);
         request.setNumberOfRows(200);
         Connection conn=JDBCTemplet.getConnection();

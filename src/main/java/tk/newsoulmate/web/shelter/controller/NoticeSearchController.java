@@ -22,7 +22,7 @@ public class NoticeSearchController extends HttpServlet {
         Gson gson=new Gson();
         System.out.println(request.getParameter("request"));
         Request rq=gson.fromJson(request.getParameter("request"), Request.class);
-        Request.setValid(rq);
+        rq.setValid();
         List<Notice> nList =new ShelterService().getNoticeList(rq);
         request.setAttribute("nList",nList);
         request.getRequestDispatcher("views/shelter/noticeListArea.jsp").forward(request,response);

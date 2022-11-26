@@ -98,58 +98,14 @@
         <%@ include file="/views/template/footer.jsp"%>
     </footer>
     <c:if test="${!empty loginUser}">
+
         <script>
-            $('#replySubmit').on('click',submitReply);
-            function submitReply(){
-                let replyJson=JSON.stringify({
-                    'memberNo':'${loginUser.memberNo}',
-                    'boardNo':'${b.boardNo}',
-                    'replyContent':$('#replyInput').val()
-                });
-                $.ajax({
-                    url :'${context}/replyInsert.bo',
-                    type:'post',
-                    data:{"reply":replyJson},
-                    success:(result)=>{
-                        if(result>0){
-                            alert('댓글등록성공');
-                            location.reload();
-                        }else{
-                            alert('댓글등록실패',result)
-                        }
-                    },
-                    error:(result)=>{
-                        console.log(result)
-                    }
-                });
+            let reply={
+                'memberNo':'${loginUser.memberNo}',
+                'boardNo':'${b.boardNo}',
+                'replyContent':null
             }
-            $('.replyDelete').click((e)=>{
-                let rno=  $(e.target).attr('ref');
-                console.log(rno);
-                console.log(e.target);
-                console.log(e.target);
-                console.log($(e.target));
-                if(confirm('정말삭제하시겠습니까?')){
-                    $.ajax({
-                        url:"replyDelete.bo",
-                        type:'post',
-                        data:{rno:rno},
-                        success:(result)=>{
-                            if(result>0){
-                                alert("댓 삭 성")
-                                location.reload()
-                            }else{
-                                alert("댓글삭제실패")
-                            }
-                        },
-                        error:(e)=>{console.log(e)}
-
-                    })
-
-
-                }
-            })
-        <c:if test="${loginUser.memberNo eq b.memberNo}">
+            <c:if test="${loginUser.memberNo eq b.memberNo}">
             $('#deleteBoard').click(()=>{
                 if(confirm('정말삭제하시겠습니까?')){
                     location.href='${context}/adoptRevDelete?bno=${b.boardNo}';
@@ -158,8 +114,9 @@
             $('#updateBoard').click(()=>{
                 location.href='${context}/adoptRevUpdate?bno=${b.boardNo}';
             });
-        </c:if>
-    </script>
+            </c:if>
+        </script>
+        <script src="${context}/js/adopt/adoptRevDetail.js"></script>
     </c:if>
 </body>
 </html>

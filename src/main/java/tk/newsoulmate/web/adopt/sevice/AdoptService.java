@@ -184,17 +184,37 @@ public class AdoptService {
 
         return result;
     }
-
     public List<Attachment> selectAttachmentList(int bno) {
         Connection conn=getConnection();
-        List<Attachment> aList=new AttachmentDao().selectAttachmentList(conn,bno);
+        List<Attachment> aList=new AttachmentDao().selectBoardAttachment(conn,bno);
         close();
         return aList;
-
-
     }
 
-    public void deleteAttachment(int fileNo) {
+    public int deleteAttachment(int fileNo) {
+        Connection conn=getConnection();
+        int result= new AttachmentDao().deleteAttachment(fileNo,conn);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+        return result;
+    }
+
+    public int deleteAttachmentList(List<Attachment> dList) {
+        Connection conn=getConnection();
+        int result= new AttachmentDao().deleteAttachmentList(dList,conn);
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+        return result;
+
+
     }
 }
 

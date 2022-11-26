@@ -99,6 +99,7 @@
                 </tr>
                 </c:forEach>
             </table>
+            <c:if test="${!empty loginUser}">
             <form action="replyInsert.no" enctype="multipart/form-data" method="post">
             <div id="replyInput">
                 <input type="hidden" name="noticeNo" value="${n.desertionNo}">
@@ -107,6 +108,7 @@
                 <button type="submit" id="reply-btn">댓글작성</button>
             </div>
             </form>
+            </c:if>
         </div>
     </div>
 </div>

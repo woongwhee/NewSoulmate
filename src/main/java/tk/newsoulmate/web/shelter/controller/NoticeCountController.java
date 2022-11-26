@@ -24,8 +24,7 @@ public class NoticeCountController extends HttpServlet {
         Gson gson=new Gson();
         System.out.println(request.getParameter("request"));
         Request rq=gson.fromJson(request.getParameter("request"), Request.class);
-        rq.setNumberOfRows(1);
-        Request.setValid(rq);
+        rq.setValid();
         rq.setBgndate(Calendar.getInstance().getTime());
         int totalCount=new ShelterService().getNoticeCount(rq);
         JsonObject json =new JsonObject();

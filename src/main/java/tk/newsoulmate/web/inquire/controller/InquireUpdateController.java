@@ -15,6 +15,7 @@ import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 @WebServlet(name = "InquireUpdateController", value = "/inquire/update")
 public class InquireUpdateController extends HttpServlet {
@@ -48,12 +49,13 @@ public class InquireUpdateController extends HttpServlet {
         UploadUtil uplodUtil=UploadUtil.create(request.getServletContext());
         if (delete.equals("delete")) {//삭제된 파일이 있는경우
             int originFileNo =Integer.parseInt(request.getParameter("originFileNo"));
-            Attachment at = is.selectAttachment(boardNo);
+            List<Attachment> aList = is.selectAttachment(boardNo);
+            for (Attachment at: aList) {
             if (at.getFileNo()==originFileNo){
                 if(uplodUtil.deleteFile(at)){
-                    System.out.println("삭제됨");
                     is.deleteAttachment(originFileNo);
                 }
+            }
             }
         }
         Attachment at = uplodUtil.saveFiles(p,uplodUtil.createFilePath());

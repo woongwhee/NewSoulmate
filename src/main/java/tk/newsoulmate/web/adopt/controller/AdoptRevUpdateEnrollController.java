@@ -22,6 +22,7 @@ public class AdoptRevUpdateEnrollController extends HttpServlet {
         int loginMno=((Member)session.getAttribute("loginUser")).getMemberNo();
         Board b=new AdoptService().selectAdoptReviewDetail(bno);
         if(b!=null &&b.getMemberNo()==loginMno){
+            session.setAttribute("bno",b.getBoardNo());
             request.setAttribute("b",b);
             request.getRequestDispatcher("views/adopt/adoptReviewUpdate.jsp").forward(request,response);
         }else{

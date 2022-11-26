@@ -5,7 +5,8 @@ import tk.newsoulmate.domain.vo.type.BoardType;
 
 import java.sql.Date;
 
-public class Board {
+public class Board{
+    @SerializedName("boardNo")
     private int boardNo;
     private int memberNo;
     @SerializedName("boardType")

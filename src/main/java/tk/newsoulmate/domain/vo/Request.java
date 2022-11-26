@@ -25,12 +25,7 @@ public class Request {
     private Integer pageNo;/*페이지 번호 (기본값 : 1)*/
     private Integer numberOfRows;/*페이지당 보여줄 개수 (1,000 이하), 기본값 : 10*/
     private String _type;
-    private static SimpleDateFormat urlDate;
-
-    {
-        urlDate = new SimpleDateFormat("yyyyMMdd");
-    }
-
+    private static SimpleDateFormat urlDate=new SimpleDateFormat("yyyyMMdd");
     public Request() {
         this.serviceKey= APIKeys.NoticeKey;
         this._type = "JSON";
@@ -150,14 +145,11 @@ public class Request {
      * 유효한 유기동물리스트를 위한 세팅
      * @param request
      */
-    public static void setValid(Request request){
+    public void setValid(){
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -14);
-        Calendar cal2 = Calendar.getInstance();
-        cal2.add(Calendar.DATE, -1);
-        request.setBgndate(cal.getTime());
-        request.setEnddate(cal2.getTime());
-        request.setState("protect");
+        cal.add(Calendar.DATE, -13);
+        this.setBgndate(cal.getTime());
+        this.setState("protect");
     }
     public static void setUrlDate(SimpleDateFormat urlDate) {
         Request.urlDate = urlDate;
