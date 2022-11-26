@@ -85,7 +85,7 @@
                     <th class="replyWriter">${r.replyWriter}</th>
                     <th class="replyDate">${r.replyDate}</th>
                 <c:if test="${!empty loginUser}">
-                    <th class="replyReport bi bi-exclamation-triangle" data-toggle="modal" data-target="#reportModal" data-kind="reply" data-ref="${r.replyNo}"></th>
+                    <th class="replyReport bi bi-exclamation-triangle" data-toggle="modal" data-target="#reportModal" data-kind="notice" data-ref="${r.replyNo}"></th>
                     <c:if test="${r.memberNo} eq ${loginUser.memberNo}">
                     <th class="replyDelete bi bi-trash"></th>
                     </c:if>
