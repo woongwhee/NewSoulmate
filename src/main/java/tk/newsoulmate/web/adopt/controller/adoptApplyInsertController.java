@@ -16,13 +16,9 @@ import java.text.SimpleDateFormat;
 public class adoptApplyInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
-
         // 신청서 번호는 넥스트바로 가능.
         int memberNo = 1;
         String name = request.getParameter("name");
-
         // 유효한 animalNo인지 확인해서
         // 만약에 잘못되었다면 alert창 띄어주기
         // 잘 썻다면 입양 신청 db에 저장 -> 입양신청이 성공적으로 되었습니다. 페이지 만들까??

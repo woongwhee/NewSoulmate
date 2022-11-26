@@ -55,6 +55,11 @@
         SET STATUS = 'N'
         WHERE FILE_NO = ?
     </entry>
+    <entry key="deleteBoardAttachment">
+        UPDATE ATTACHMENT
+        SET STATUS = 'N'
+        WHERE BOARD_NO = ?
+    </entry>
     <entry key="selectFileNo">
         SELECT
         SQ_ATTACHMENT_PK.NEXTVAL
