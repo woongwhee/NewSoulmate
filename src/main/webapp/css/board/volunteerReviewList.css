@@ -1,0 +1,74 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+#content {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#volunteer-review-head {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    height: 120px;
+    margin-top: 20px;
+}
+
+#volunteer-review-head p {
+    width: 930px;
+    font-size: 25px;
+    font-weight: 500;
+    padding-left: 250px;
+}
+
+#volunteer-review-head button {
+    width: 140px;
+    height: 50px;
+    margin-top: 30px;
+    background-color: #39393a;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+}
+
+#volunteer-review-area{
+    width: 1080px;
+    padding: 40px 20px 20px 23px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.volunteer-thum{
+    width: 265px;
+    height: 350px;
+    background-color: white;
+    text-align: center;
+    border-radius: 20px;
+    padding-top: 20px;
+    cursor: pointer;
+    margin: 40px;
+}
+
+.volunteer-thum .volunteer-thumnail {
+    width: 220px;
+    height: 270px;
+}
+.volunteer-thum p{
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.btn-secondary{
+    background-color: #f45d48;
+}

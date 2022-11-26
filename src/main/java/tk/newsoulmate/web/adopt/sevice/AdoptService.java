@@ -13,11 +13,12 @@ import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 public class AdoptService {
 
-    public ArrayList<Board> selectAdoptReviewList(PageInfo pi){
+    public List<Attachment> selectAdoptReviewList(int page,int pageLimit){
 
         Connection conn = getConnection();
-
-        ArrayList<Board> list = new BoardDao().selectList(conn, BoardType.ADOPT,pi);
+        int start=PageInfo.StartNum(page,pageLimit);
+        int end=PageInfo.EndNum(page,pageLimit);
+        List<Attachment> list = new AttachmentDao().selectThumbNailList(conn, BoardType.ADOPT,start,end);
 
         close();
 
@@ -115,6 +116,7 @@ public class AdoptService {
 
         return shelterNo;
     }
+
     public int selectBoardNo(){
         Connection conn=getConnection();
         int boardNo=new BoardDao().selectBoardNo(conn);
@@ -158,7 +160,8 @@ public class AdoptService {
 
     public int deleteBoard(int bno) {
         Connection conn = getConnection();
-        int result = new BoardDao().deleteBoard(conn,bno);
+        int result=new AttachmentDao().deleteBoardAttachment(bno,conn);
+        result *= new BoardDao().deleteBoard(conn,bno);
         if(result>0){
             commit();
         }else{
@@ -180,6 +183,18 @@ public class AdoptService {
         close();
 
         return result;
+    }
+
+    public List<Attachment> selectAttachmentList(int bno) {
+        Connection conn=getConnection();
+        List<Attachment> aList=new AttachmentDao().selectAttachmentList(conn,bno);
+        close();
+        return aList;
+
+
+    }
+
+    public void deleteAttachment(int fileNo) {
     }
 }
 

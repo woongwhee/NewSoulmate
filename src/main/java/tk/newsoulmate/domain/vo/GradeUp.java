@@ -5,6 +5,7 @@ public class GradeUp {
     private int GradeNo;
 
     private String memberName;
+    private String memberId;
     private int memberNo;
     private long shelterNo;
     private int fileNo;
@@ -61,6 +62,14 @@ public class GradeUp {
         this.shelterLandLine = shelterLandLine;
         this.shelterCompNo = shelterCompNo;
         this.shelterAddress = shelterAddress;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
     public Attachment getAttachment() {

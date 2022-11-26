@@ -16,8 +16,7 @@ public class ReplyInsertController extends HttpServlet {
         Gson gson = new Gson();
         System.out.println("뭐지" + request.getParameter("reply"));
         Reply r = gson.fromJson(request.getParameter("reply"), Reply.class);
-        int result = 0;
-            result = new CommonService().insertBoardReply(r);
+        int result = new CommonService().insertBoardReply(r);
 
         response.getWriter().print(result);
     }

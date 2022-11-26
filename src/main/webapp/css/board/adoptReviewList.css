@@ -1,0 +1,84 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+#content {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#adopt-review-head {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    height: 120px;
+    margin-top: 20px;
+}
+
+#adopt-review-head p {
+    width: 930px;
+    font-size: 25px;
+    font-weight: 500;
+    padding-left: 250px;
+}
+
+#adopt-review-head button {
+    width: 140px;
+    height: 50px;
+    margin-top: 30px;
+    background-color: #39393a;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+}
+
+#adopt-review-area{
+    width: 1080px;
+    padding: 40px 20px 20px 23px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.adopt-thum{
+    width: 265px;
+    height: 350px;
+    background-color: white;
+    text-align: center;
+    border-radius: 20px;
+    padding-top: 20px;
+    cursor: pointer;
+    margin: 40px;
+}
+
+.adopt-thum .adopt-thumnail {
+    width: 220px;
+    height: 270px;
+}
+.adopt-thum p{
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.btn-secondary{
+    background-color: #f45d48;
+}
+
+.adopt-paging-area{
+    text-align: center;
+}
+#loadingImg{
+    display: none;
+    width: 100px;
+    margin:0 auto;
+}

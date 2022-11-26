@@ -12,10 +12,10 @@ public class Subscription {
     private String name;
     private String gender;
     private String adoptReason;
-    private String agreement;
+    private String familyAgreement;
     private String whenSick;
     private String bigDuty;
-    private String wishDate;
+    private Date wishDate;
     private String subRead;
     private Date subDate;
 
@@ -24,6 +24,7 @@ public class Subscription {
     public Subscription(){
         super();
     }
+
 
     public Subscription(int subNo, long animalNo, String memberId, String name, String telNum, Date subDate, String subRead) {
         this.subNo = subNo;
@@ -35,7 +36,7 @@ public class Subscription {
         this.memberId = memberId;
     }
 
-    public Subscription(int subNo, int memberNo, long shelterNo, long animalNo, String telNum, String name, String gender, String adoptReason, String agreement, String whenSick, String bigDuty, String wishDate, String subRead, Date subDate) {
+    public Subscription(int subNo, int memberNo, long shelterNo, long animalNo, String telNum, String name, String gender, String adoptReason, String familyAgreement, String whenSick, String bigDuty, Date wishDate, String subRead, Date subDate) {
         this.subNo = subNo;
         this.memberNo = memberNo;
         this.shelterNo = shelterNo;
@@ -44,7 +45,7 @@ public class Subscription {
         this.name = name;
         this.gender = gender;
         this.adoptReason = adoptReason;
-        this.agreement = agreement;
+        this.familyAgreement = familyAgreement;
         this.whenSick = whenSick;
         this.bigDuty = bigDuty;
         this.wishDate = wishDate;
@@ -89,8 +90,8 @@ public class Subscription {
         return adoptReason;
     }
 
-    public String getAgreement() {
-        return agreement;
+    public String getFamilyAgreement() {
+        return familyAgreement;
     }
 
     public String getWhenSick() {
@@ -101,7 +102,7 @@ public class Subscription {
         return bigDuty;
     }
 
-    public String getWishDate() {
+    public Date getWishDate() {
         return wishDate;
     }
 
@@ -144,8 +145,8 @@ public class Subscription {
         this.adoptReason = adoptReason;
     }
 
-    public void setAgreement(String agreement) {
-        this.agreement = agreement;
+    public void setFamilyAgreement(String familyAgreement) {
+        this.familyAgreement = familyAgreement;
     }
 
     public void setWhenSick(String whenSick) {
@@ -156,7 +157,7 @@ public class Subscription {
         this.bigDuty = bigDuty;
     }
 
-    public void setWishDate(String wishDate) {
+    public void setWishDate(Date wishDate) {
         this.wishDate = wishDate;
     }
 
@@ -190,7 +191,7 @@ public class Subscription {
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
                 ", adoptReason='" + adoptReason + '\'' +
-                ", Agreement='" + agreement + '\'' +
+                ", familyAgreement='" + familyAgreement + '\'' +
                 ", whenSick='" + whenSick + '\'' +
                 ", bigDuty='" + bigDuty + '\'' +
                 ", wishDate=" + wishDate +

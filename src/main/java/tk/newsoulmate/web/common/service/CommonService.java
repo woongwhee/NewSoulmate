@@ -83,16 +83,21 @@ public class CommonService {
         Connection conn=getConnection();
         ReplyDao rd=new ReplyDao();
         int replyNo=rd.selectReplyNo(conn);
+
         r.setReplyNo(replyNo);
-        at.setReplyNo(replyNo);
-        int result=rd.insertNoticeReply(conn,r);
-        result*=new AttachmentDao().insertReplyAttachment(at,conn);
-        if(result>0){
-            commit();
-        }else{
-            rollback();
+
+        if(at!=null){
+            at.setReplyNo(replyNo);
+            replyNo*=new AttachmentDao().insertReplyAttachment(at,conn);
         }
-        commit();
-        return result;
+        replyNo*=rd.insertNoticeReply(conn,r);
+
+            if(replyNo>0){
+                commit();
+            }else{
+                rollback();
+            }
+        close();
+        return replyNo;
     }
 }

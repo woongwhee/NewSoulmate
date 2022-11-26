@@ -17,7 +17,6 @@ body {
 
 #animalImg_1 {
     width: 260px;
-    height: 200px;
 }
 
 #animal-info {
@@ -92,7 +91,7 @@ body {
 
 #animalImg_2{
     width: 600px;
-    height: 400px;
+    max-height: 800px;
     margin: 50px 0 50px 300px;
 }
 
@@ -124,7 +123,7 @@ body {
     border-top: lightgray 1px solid;
 }
 
-#reply-list #replyWriter{
+#reply-list .replyWriter{
     font-size: 20px;
     font-weight: 500;
     padding-left: 55px;
@@ -136,29 +135,29 @@ body {
     padding-left: 55px;
 }
 s
-#replyWriter , #replyDate{
+.replyWriter , .replyDate{
     width: 450px;
     padding-right: 50px;
 }
 
-#replyReport , #replyDelete{
+.replyReport , .replyDelete{
     cursor: pointer;
     font-size: 25px;
     width: 100px;
 }
 
-#replyReport{
+.replyReport{
     text-align: right;
 }
-#replyDelete{
+.replyDelete{
     padding-left: 20px;
     text-align: left;
 }
-#replyWriter {
+.replyWriter {
     text-align: left;
 }
 
-#replyDate{
+.replyDate{
     text-align: right;
 }
 

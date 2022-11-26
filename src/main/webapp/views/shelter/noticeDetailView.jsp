@@ -45,6 +45,16 @@
                 <th>중성화여부</th>
                 <td>${n.sexCd}</td>
             </tr>
+            <tr>
+                <th>보호소 이름</th>
+                <td>${n.careNm}</td>
+                <th>보호소 전화번호</th>
+                <td>${n.careTel}</td>
+            </tr>
+            <tr>
+                <th>보호소 주소</th>
+                <td colspan="3">${n.careAddr}</td>
+            </tr>
         </table>
     </div>
     <div id="animal-detail">
@@ -69,62 +79,39 @@
         <div id="reply-line"></div>
         <div id="reply-list">
             <table id="replyTable">
+                <c:forEach items="${rList}" var="r">
                 <tr>
-                    <th id="replyWriter">작성자</th>
-                    <th id="replyDate">작성일</th>
-                    <th id="replyReport" class="bi bi-exclamation-triangle"onclick=""></th>
-                    <th id="replyDelete" class="bi bi-trash" onclick=""></th>
+                <%--//todo: id 에서 class로 바뀜 반복문을 돌아서--%>
+                    <th class="replyWriter">${r.replyWriter}</th>
+                    <th class="replyDate">${r.replyDate}</th>
+                <c:if test="${!empty loginUser}">
+                    <th class="replyReport bi bi-exclamation-triangle" data-toggle="modal" data-target="#reportModal" data-kind="reply" data-ref="${r.replyNo}"></th>
+                    <c:if test="${r.memberNo} eq ${loginUser.memberNo}">
+                    <th class="replyDelete bi bi-trash"></th>
+                    </c:if>
+                </c:if>
                 </tr>
                 <tr>
-                    <td colspan="4"> 댓글내용</th>
+                    <c:if test="${!empty r.at}">
+                    <td><img class="replyImg" src="${r.at.filePath}/${r.at.changeName}" alt="${r.at.originName}"></td>
+                    </c:if>
+                    <td class="replyContent" colspan="4"> ${r.replyContent}</td>
                 </tr>
+                </c:forEach>
             </table>
+            <form action="replyInsert.no" enctype="multipart/form-data" method="post">
             <div id="replyInput">
-                <input type="text" id="replyApply" placeholder="댓글을 입력해주세요">
-                <input type="file" id="replyFile" placeholder="댓글을 입력해주세요">
-                <button id="reply-btn">댓글작성</button>
+                <input type="hidden" name="noticeNo" value="${n.desertionNo}">
+                <input type="text" name="replyContent"id="replyApply" placeholder="댓글을 입력해주세요">
+                <input type="file" id="replyFile" name="upfile" placeholder="댓글을 입력해주세요">
+                <button type="submit" id="reply-btn">댓글작성</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
+<%@include file="/views/template/report.jsp"%>
 <footer><%@include file="/views/template/footer.jsp"%></footer>
-
-<script>
-
-    $('#reply-btn').on('click',submitReply);
-    function submitReply(){
-        let form = new FormData();
-
-        $.each($("#replyFile")[0].files,function (i,file){
-            console.log(i,file);
-            form.append("upfile"+i,file);
-        })
-
-        let reply=JSON.stringify({
-            'memberNo':'${loginUser.memberNo}',
-            'noticeNo':'${n.desertionNo}',
-            'replyContent':$('#replyApply').val()
-        })
-
-        form.append("reply",reply);
-        $.ajax({
-            url :'${context}/replyInsert.no',
-            type:'post',
-            processData: false,
-            contentType:false,
-            data:form,
-            success:(result)=>{
-                if(result>0){
-                    alert('댓글등록성공');
-                }else{
-                    alert('댓글등록실패',result)
-                }
-            },
-            error:(result)=>{
-                console.log(result)
-            }
-        });
-    }
-</script>
+<script src="${context}/js/shelter/noticeDetail.js"></script>
 </body>
 </html>

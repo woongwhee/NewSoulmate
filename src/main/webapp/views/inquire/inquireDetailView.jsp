@@ -1,82 +1,80 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 상엽
-  Date: 2022-11-11
-  Time: 오전 2:10
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="tk.newsoulmate.domain.vo.*" %>
-
 <html>
 <head>
     <title>문의내역 상세보기</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
 </head>
 <body>
-    <%@include file="/views/template/menubar.jsp"%>
-
-    <div class="outer">
-        <br>
-        <h2 style="text-align:center;">Q&A</h2>
-        <br>
-        <hr>
-        <br>
-
-        <table id="detail-area" align="center" style="border: 1px solid black;">
-
+<%@include file="/views/template/menubar.jsp"%>
+<div class="outer">
+    <br>
+    <div class="topTextQna">1:1 문의</div>
+    <br>
+    <hr>
+    <br>
+        <table align="center" id="textQnaWriting">
+            <colgroup>
+                <col width="100">
+                <col width="700">
+            </colgroup>
             <tr>
-                <th width="100">카테고리</th>
-                <td width="70">${b.categoryName}</td>
-                <th width="100">제목</th>
-                <td width="350">${b.boardTitle}</td>
+                <th>카테고리</th>
+                <td>${b.categoryName}</td>
             </tr>
             <tr>
-                <th>작성자</th>
-                <td>${b.nickName}</td>
-                <th>작성일</th>
-                <td>${b.createDate}</td>
+                <th id="tableTh1">제목</th>
+                <td id = "titleQna" class="tableTdAll">${b.boardTitle}</td>
             </tr>
             <tr>
-                <th>문의내용</th>
-                <td colspan="3">
-                    <p style="height:200px;">${b.boardContent}</p>
+                <th id="tableTh4">작성자</th>
+                <td class="tableTdAll">${b.nickName}</td>
+            </tr>
+            <tr>
+                <th id="tableTh5">작성일</th>
+                <td class="tableTdAll">${b.createDate}</td>
+            </tr>
+            <tr>
+                <th id="tableTh2">문의내용</th>
+                <td class="tableTdAll">
+                    <p><c:out value="${b.boardContent}" escapeXml="true"/> </p>
                 </td>
             </tr>
             <tr>
-                <th>첨부파일</th>
-                <td colspan="3">
+                <th id="tableTh3">첨부파일</th>
+                <td id="fileQna" class="tableTdAll">
                     <c:if test="${empty at}">
-                    <!-- 첨부파일이 없는경우 -->
-                    첨부파일된 파일 없음.
+                        <!-- 첨부파일이 없는경우 -->
+                        첨부파일된 파일 없음
                     </c:if>
                     <!-- 첨부파일이 있는경우 -->
                     <c:if test="${!empty at}">
-                    <a href="${at.filePath}/${at.changeName}"
-                       download="${at.originName}">
-                        ${at.originName}
-                    </a>
+                        <a href="${at.filePath}/${at.changeName}"
+                           download="${at.originName}">
+                                ${at.originName}
+                        </a>
                     </c:if>
                 </td>
             </tr>
-
             <c:forEach var="r" items="${rList}">
                 <tr>
                     <td>${r.replyWriter}</td>
                     <td>${r.replyContent}</td>
                     <td>
                         <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
-                        <button class="bi bi-x-circle-fill replyDelete" refNo="${r.replyNo}"></button>
+                        <button class="bi bi-x-circle-fill" id="replyDelete"></button>
                     </td>
                 </tr>
             </c:forEach>
-            <c:if test="${loginUser.memberGrade.SITE_MANAGER}">
-
+            <c:if test="${empty rList}">
                 <tr>
                     <th>답변작성</th>
                     <td>
                         <textarea id="replyInput" rows="3" cols="50" style="resize: none;"></textarea>
                     </td>
+                </tr>
+                <tr>
                     <td><button id="replySubmit">답변등록</button></td>
                 </tr>
 
@@ -126,7 +124,7 @@
                 console.log(rno);
                 if(confirm('정말삭제하시겠습니까?')){
                     $.ajax({
-                        url:"replyDelete.bo",
+                        url:"replyDelete",
                         type:'post',
                         data:{rno:rno},
                         success:(result)=>{
@@ -150,8 +148,8 @@
                 }
             })
 
-        </script>
+</script>
 
-    <%@include file="/views/template/footer.jsp"%>
+<%@include file="/views/template/footer.jsp"%>
 </body>
 </html>

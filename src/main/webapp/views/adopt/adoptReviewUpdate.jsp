@@ -9,12 +9,12 @@
 <html>
 <head>
     <%@include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/board/adoptReviewUpdate.css" rel="stylesheet">
     <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
 <script>
-
     let oEditors = [];
     $(document).ready(function () {
         nhn.husky.EZCreator.createInIFrame({
@@ -28,7 +28,6 @@
                 bUseModeChanger: true,
             },
         });
-
         $("#save").click(function () {
             oEditors.getById["boardContent"].exec("UPDATE_CONTENTS_FIELD", []);
                 $("#adoptReview").submit();
@@ -36,31 +35,31 @@
     });
 </script>
 
-<form action="${context}/adopt/update" method="post" id="adoptReview">
-    <input type="hidden" name="boardNo" value="${b.boardNo}">
-   <table width="100%">
-       <tr>
-           <th>제목</th>
-           <td><input type="text" id="boardTitle" name="boardTitle" style="width: 680px" value="${b.boardTitle}"></td>
-       </tr>
-       <tr>
-           <th>입양날짜</th>
-           <td><input type="Date" id="adoptDate" name="adoptDate" style="width: 680px" value="${b.issueDate}"></td>
-       </tr>
-       <tr>
-           <th>내용</th>
-           <td> <textarea name="boardContent" id="boardContent" style="width:680px; height:350px;" value="">${b.boardContent}</textarea></td>
-       </tr>
-       <tr>
-           <td colspan="2">
-               <button type="submit" id="save">수정하기</button>
-               <button type="button" onclick="location.href = '${context}/adoptRevList.bo'">목록으로 돌아가기</button>
-           </td>
-       </tr>
-   </table>
-    <script>
-    </script>
-</form>
+<div id="content">
+    <div id="review-update-title">입양후기 수정하기</div>
+    <form action="${context}/adopt/update" method="post" id="adoptReview">
+        <div id="review-update-form">
+            <table id="review-update-table">
+                <tr>
+                    <th>제목</th>
+                    <td><input type="text" id="boardTitle" name="boardTitle" value="${b.boardContent}"></td>
+                </tr>
+                <tr>
+                    <th>입양날짜</th>
+                    <td><input type="Date" id="adoptDate" name="adoptDate" value="${b.issueDate}"></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td> <textarea name="boardContent" id="boardContent" value="${b.boardContent}"></textarea></td>
+                </tr>
+            </table>
+        </div>
+        <div id="adopt-update-btn">
+            <button type="button" id="return" onclick="location.href = '${context}/adoptRevList.bo'">목록으로 돌아가기</button>
+            <button type="submit" id="save">수정하기</button>
+        </div>
+    </form>
+</div>
 <%@include file="/views/template/footer.jsp"%>
 </body>
 </html>

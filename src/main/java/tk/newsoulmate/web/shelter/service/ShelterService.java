@@ -2,19 +2,15 @@ package tk.newsoulmate.web.shelter.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import tk.newsoulmate.domain.dao.CityDao;
-import tk.newsoulmate.domain.dao.NoticeDao;
-import tk.newsoulmate.domain.dao.ShelterDao;
-import tk.newsoulmate.domain.dao.TransferDao;
-import tk.newsoulmate.domain.dao.VillageDao;
+import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.domain.vo.response.ResponseMapper;
+import tk.newsoulmate.domain.vo.type.BoardType;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,15 +96,15 @@ public class ShelterService {
         Connection conn=getConnection();
         Notice n=new Notice();
         List<Notice> nList=new NoticeDao().selectNoticeList(conn,n);
-
+        close();
         return nList;
     }
 
-    public  List<Notice> getNoticeList(Request request){
+    public List<Notice> getNoticeList(Request request){
         URL url = request.toUrl();
         System.out.println(url.toString());
         ResponseMapper responseMapper = null;
-        List<Notice> Nlist=new ArrayList<>();
+        List<Notice> nlist=null;
         try {
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -117,15 +113,36 @@ public class ShelterService {
             if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"), ResponseMapper.class);
-                Nlist = responseMapper.getResponse().getBody().getItems().getItem();
+                nlist = responseMapper.getResponse().getBody().getItems().getItem();
             }
             httpConn.disconnect();
         } catch (
                 IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(Nlist);
-        return Nlist;
+        return nlist;
+
+    }public int getNoticeCount(Request request){
+        URL url = request.toUrl();
+        System.out.println(url.toString());
+        ResponseMapper responseMapper = null;
+        int count=0;
+        try {
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestMethod("GET");
+            httpConn.setRequestProperty("Content-type", "application/json");
+            System.out.println(httpConn.getResponseCode());
+            if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"), ResponseMapper.class);
+                count = responseMapper.getResponse().getBody().getTotalCount();
+            }
+            httpConn.disconnect();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
+        return count;
 
     }
 
@@ -136,11 +153,31 @@ public class ShelterService {
         return s;
     }
 
-    public void updateLatestTransfer(long shelterNo, long supportNo) {
+    public int updateLatestTransfer(long shelterNo, long supportNo) {
         Connection conn = getConnection();
         // SupportNo 기준으로 Transfer를 가져오기
         Transfer latestTransfer = new TransferDao().findBySupportNo(conn, supportNo);
-        new ShelterDao().updateLatestTransfer(conn, shelterNo, latestTransfer.getTransferNo());
+        int result=new ShelterDao().updateLatestTransfer(conn, shelterNo, latestTransfer.getTransferNo());
+        if(result>0){
+            commit();}else{
+            rollback();
+        }
         close();
+        return result;
+    }
+
+    public List<Reply> selectNoticeReply(long dno) {
+        Connection conn = getConnection();
+        List<Reply> rList = new ReplyDao().selectNoticeReply(conn,dno);
+        new AttachmentDao().selectReplyAttachment(conn,rList);
+        close();
+        return rList;
+    }
+
+    public List<Category> selectCategoryList() {
+        Connection conn = getConnection();
+        List<Category> cList = new CategoryDao().selectCategoryList(conn, BoardType.REPORT);
+        close();
+        return cList;
     }
 }
