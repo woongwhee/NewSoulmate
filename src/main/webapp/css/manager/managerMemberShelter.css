@@ -111,3 +111,13 @@ td input[type=submit]:hover {
     background-color: #f45d48;
     color: white;
 }
+
+.fileBtn {
+    background-color: #bababa;
+    border: none;
+}
+
+.fileBtn:hover{
+    background-color: #319493;
+    color: white;
+}
