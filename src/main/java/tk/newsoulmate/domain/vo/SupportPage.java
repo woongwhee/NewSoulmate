@@ -10,7 +10,7 @@ public class SupportPage {
 
     public SupportPage(int page, int totalCount) {
         int pageCount = 10;
-        int defaultSize = 10; // 한 페이지에 나오는 게시물 수
+        int defaultSize = 15; // 한 페이지에 나오는 게시물 수
 
         this.page = page;
         this.startSupport = (defaultSize * (page - 1)) + 1;

@@ -49,4 +49,9 @@ public class ShelterMangerService {
         close();
         return list;
     }
+
+
+
+
+
 }

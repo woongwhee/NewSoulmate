@@ -22,7 +22,7 @@
 
   <ul class="menu">
     <li><a href="${context}/ShelterMessage">메세지함</a></li>
-    <li><a href="#">보호소 정보수정</a></li>
+    <li><a href="${context}/UpdateShelterInfo">보호소 정보수정</a></li>
     <li><a href=${context}/shelterSupport>받은 후원함</a></li>
   </ul>
 

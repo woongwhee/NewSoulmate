@@ -9,6 +9,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
 <%@ page import="java.util.List" %>
+<%@ page import="tk.newsoulmate.domain.vo.type.SupportStatus" %>
+<%@ page import="tk.newsoulmate.domain.vo.type.WithdrawStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
@@ -67,6 +69,7 @@
                 <table>
                     <thead>
                     <tr>
+                        <th>후원번호</th>
                         <th>결제번호</th>
                         <th>후원보호소명</th>
                         <th>후원일시</th>
@@ -78,19 +81,38 @@
                     </thead>
                     <%if (allList == null || allList.isEmpty()) {%>
                     <tr>
-                        <td colspan="6">존재하는 후원내역이 없습니다.</td>
+                        <td colspan="8">존재하는 후원내역이 없습니다.</td>
                     </tr>
 
                     <%} else { %>
                     <%for (Support su : allList) {%>
                     <tr>
                         <td><%=su.getSupportNo()%></td>
+                        <td><%=su.getMerchantUid()%></td>
                         <td><%=su.getShelterName() %></td>
                         <td><%=su.getPayTime() %></td>
                         <td><%=su.getAmount()%> 원</td>
                         <td><%=su.getMemberName()%></td>
-                        <td><%=su.getStatus()%></td>
-                        <td><%=su.getWithdrawStatus()%></td>
+                        <td>
+                            <%if (su.getStatus() == SupportStatus.DONE) { %>
+                            결제완료
+                            <%}else if (su.getStatus() == SupportStatus.PENDING) { %>
+                            취소
+                            <%} else { %>
+                            결제실패
+                            <%} %>
+                        </td>
+                        <td>
+                            <%if (su.getWithdrawStatus() == WithdrawStatus.DONE) { %>
+                            출금승인
+                            <%}else if (su.getWithdrawStatus() == WithdrawStatus.PENDING) { %>
+                            출금신청전
+                            <%}else if (su.getWithdrawStatus() == WithdrawStatus.REQUESTED) { %>
+                            출금신청중
+                            <%}else {%>
+                            취소
+                            <%} %>
+                        </td>
                     </tr>
                     <% } %>
                     <% } %>

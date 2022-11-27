@@ -256,7 +256,7 @@ CREATE TABLE "SUBSCRIPTION" (
                                 "MEMBER_NO"   NUMBER
                                     CONSTRAINT SUB_MN_NN NOT NULL ,
                                 "SHELTER_NO" NUMBER,
-                                "ANIMAL_ID"   VARCHAR2(100),
+                                "ANIMAL_NO"   VARCHAR2(100),
                                 "TEL_NUM"   VARCHAR2(15)
                                     CONSTRAINT SUB_TN_NN NOT NULL,
                                 "NAME"   VARCHAR2(15)
@@ -374,7 +374,7 @@ COMMENT ON COLUMN CATEGORY.TYPE_NO IS '게시판속성';
 COMMENT ON COLUMN "SUBSCRIPTION"."SUB_NO" IS '신청서번호';
 COMMENT ON COLUMN "SUBSCRIPTION"."MEMBER_NO" IS '회원번호';
 COMMENT ON COLUMN "SUBSCRIPTION"."SHELTER_NO" IS '보호소 ID';
-COMMENT ON COLUMN "SUBSCRIPTION"."ANIMAL_ID" IS '공고번호';
+COMMENT ON COLUMN "SUBSCRIPTION"."ANIMAL_NO" IS '공고번호';
 COMMENT ON COLUMN "SUBSCRIPTION"."TEL_NUM" IS '전화번호';
 COMMENT ON COLUMN "SUBSCRIPTION"."NAME" IS '이름';
 COMMENT ON COLUMN "SUBSCRIPTION"."GENDER" IS '성별';
