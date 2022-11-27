@@ -4,7 +4,7 @@
 <head>
     <title>문의내역 상세보기</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
@@ -85,7 +85,7 @@
 
         <div align="center">
 
-            <a href="inquire" class="btn btn-secondary btn-sm">목록</a>
+            <a id="boardList" href="inquire" class="btn btn-secondary btn-sm">목록</a>
         <c:if test="${b.memberNo eq loginUser.memberNo}">
             <a href="inquireUpdateForm?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
             <a id=boardDelete class="btn btn-danger btn-sm">삭제</a>

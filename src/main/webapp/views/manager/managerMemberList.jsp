@@ -25,8 +25,8 @@
 <html>
 <head>
     <title>회원관리-회원리스트</title>
-    <link href="<%=request.getContextPath()%>/css/manager/managerMemberList.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp" %>
+    <link href="<%=request.getContextPath()%>/css/manager/managerMemberList.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -107,11 +107,11 @@
                         <td>
                             <div>
                                 <%if (m.getMemberGrade()==MemberGrade.SHELTER_MANAGER){%>
-                                <button onclick="updateGradeMember(<%=m.getMemberNo()%>, '<%=m.getMemberGrade().name()%>')">
+                                <button id="updateGradeMemberBtn" onclick="updateGradeMember(<%=m.getMemberNo()%>, '<%=m.getMemberGrade().name()%>')">
                                     등급변경
                                 </button>
                                 <%}%>
-                                <button onclick="deleteMember(<%=m.getMemberNo()%>)">탈퇴</button>
+                                <button id="deleteMemberBtn" onclick="deleteMember(<%=m.getMemberNo()%>)">탈퇴</button>
                             </div>
                         </td>
                     </tr>
