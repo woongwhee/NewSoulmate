@@ -1,16 +1,17 @@
 package tk.newsoulmate.domain.dao;
 
-import tk.newsoulmate.domain.vo.City;
-import tk.newsoulmate.domain.vo.Shelter;
-import tk.newsoulmate.domain.vo.Village;
-import tk.newsoulmate.web.common.JDBCTemplet;
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
+
+import tk.newsoulmate.domain.vo.Shelter;
 
 
 public class ShelterDao {
@@ -57,8 +58,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return list;
     }
@@ -117,8 +118,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return sList;
     }
@@ -145,8 +146,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return sList;
 
@@ -174,8 +175,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return s;
     }
@@ -199,8 +200,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return shelterNo;
 
@@ -220,6 +221,8 @@ public class ShelterDao {
                         rset.getString("SHELTER_NAME"),
                         rset.getString("SHELTER_ADDRESS"),
                         rset.getString("SHELTER_LANDLINE"),
+                        rset.getString("SHELTER_TEL"),
+                        rset.getString("SHELTER_EMAIL"),
                         rset.getLong("CITY_NO"),
                         rset.getLong("VILLAGE_NO"),
                         rset.getLong("TRANSFER_NO"));
@@ -227,8 +230,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return null;
     }
@@ -247,8 +250,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return result;
     }
@@ -275,9 +278,30 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return sList;
+    }
+
+    public int update(Connection conn, Shelter updateReq) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("update");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, updateReq.getShelterLandline());
+            psmt.setString(2, updateReq.getShelterTel());
+            psmt.setString(3, updateReq.getShelterAddress());
+            psmt.setString(4, updateReq.getShelterEmail());
+            psmt.setLong(5, updateReq.getShelterNo());
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
+        }
+        return result;
     }
 }

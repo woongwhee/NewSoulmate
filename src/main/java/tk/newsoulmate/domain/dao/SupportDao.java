@@ -331,6 +331,7 @@ public class SupportDao {
         return allList;
     }
 
+
 /*     사용안함 삭제필요
         public ArrayList<Support> manageSupportAllHistory(Connection conn) {
          PreparedStatement psmt = null;

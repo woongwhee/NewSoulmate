@@ -96,22 +96,14 @@
         AND SHELTER_ADDRESS IS NOT NULL
     </entry>
 
-
-
-
-
-<!--    <entry key="updateShelterInfo">
-        UPDATE SHELTER
+    <entry key="update">
+        UPDATE SHELTER SET
         SHELTER_LANDLINE = ?,
-        SHELTER_TEL = ? ,
-        SHELTER_ADDRESS = ?
+        SHELTER_TEL = ?,
+        SHELTER_ADDRESS = ?,
+        SHELTER_EMAIL = ?
         WHERE SHELTER_NO = ?
-    </entry>-->
-
-
-
-
-
+    </entry>
 
 </properties>
 

@@ -25,8 +25,8 @@
 <html>
 <head>
     <title>회원관리-회원리스트</title>
-    <link href="<%=request.getContextPath()%>/css/manager/managerMemberList.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp" %>
+    <link href="<%=request.getContextPath()%>/css/manager/managerMemberList.css" rel="stylesheet">
 </head>
 <body>
 <header>

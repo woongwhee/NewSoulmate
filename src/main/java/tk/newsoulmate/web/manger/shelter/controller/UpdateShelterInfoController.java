@@ -1,21 +1,38 @@
 package tk.newsoulmate.web.manger.shelter.controller;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "UpdateShelterInfo", value = "/UpdateShelterInfo")
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import tk.newsoulmate.domain.vo.Shelter;
+import tk.newsoulmate.web.shelter.service.ShelterService;
+
+@WebServlet(name = "UpdateShelterInfoController", value = "/shelter/update")
 public class UpdateShelterInfoController extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("/views/shelterManager/shelterInfoView.jsp").forward(request, response);
+    private final ShelterService shelterService;
 
+    public UpdateShelterInfoController() {
+        this.shelterService = new ShelterService();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Shelter updateReq = new Gson().fromJson(request.getReader(), Shelter.class);
 
+        int result = shelterService.updateShelter(updateReq);
+
+        if (result > 0) {
+            response.setStatus(200);
+        } else {
+            response.setStatus(500);
+        }
     }
+
 }

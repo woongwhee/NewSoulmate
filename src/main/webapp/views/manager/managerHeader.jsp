@@ -29,7 +29,6 @@
                 </div>
             </div>
         </li>
-        <li><a href="#">보호소 관리</a></li>
         <li><a href="${context}/adoptApplyList">입양관리</a></li>
         <li>
             <div class="dropdown">

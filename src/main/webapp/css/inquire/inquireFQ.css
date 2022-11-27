@@ -246,7 +246,7 @@ color: #00b0a2;
 }
 
 
-#btn1, #boardUpdate, #boardDelete {
+#boardList, #boardUpdate, #boardDelete {
     width: 80px;
     height: 30px;
 }

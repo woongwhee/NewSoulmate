@@ -38,7 +38,7 @@ public class EmailVerificationService {
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.starttls.enable", true);
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.port", 25); // 앱코드 비밀번호를 사용하기 때문에 port번호 모바일로 해야 작동함
+        prop.put("mail.smtp.port", 25); // 앱코드 비밀번호를 사용하기 때문에 port번호를 모바일로 해야 작동함
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
 
