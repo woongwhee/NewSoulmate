@@ -11,7 +11,7 @@
 <%for(Notice n:nlist){
 %>
 <div class="post">
-    <img onclick="location.href = '<%=request.getContextPath()%>/noticeDetail?dno=<%=n.getDesertionNo()%>'" src="<%=n.getPopfile()%>" class="notice-img">
+    <img id="<%=n.getDesertionNo()%>" src="<%=n.getPopfile()%>" class="notice-img">
 </div>
 <%
 }%>

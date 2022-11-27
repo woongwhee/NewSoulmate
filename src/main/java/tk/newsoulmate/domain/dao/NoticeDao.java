@@ -192,6 +192,7 @@ public class NoticeDao {
         try {
             psmt=conn.prepareStatement(sql);
             result=psmt.execute();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {

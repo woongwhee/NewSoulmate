@@ -26,14 +26,11 @@ public class ScheduleService {
         Request request = new Request();
         request.setPageNo(1);
         request.setNumberOfRows(1);
-        request.setValid();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -14);
+        request.setBgndate(cal.getTime());
         int count=getTotalCount(request);
-        request.setNumberOfRows(200);
-        Connection conn=JDBCTemplet.getConnection();
-        Boolean tresult=new NoticeDao().trunkNotice(conn);
-        JDBCTemplet.commit();
-        JDBCTemplet.close();
-
+        request.setNumberOfRows(300);
         for (int i = 1; i <= count/300+1; i++) {
             request.setPageNo(i);
             List<Notice> list=getNoticeList(request);
@@ -56,7 +53,7 @@ public class ScheduleService {
         return  result;
     }
 
-    private int getTotalCount(Request request) {
+    public int getTotalCount(Request request) {
         URL url = request.toUrl();
         ResponseMapper responseMapper = null;
         List<Notice> Nlist = new ArrayList<>();
