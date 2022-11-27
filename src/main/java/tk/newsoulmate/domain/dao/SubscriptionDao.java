@@ -85,6 +85,7 @@ public class SubscriptionDao {
 
     }
 
+
     public ArrayList<Subscription> selectAdoptApplyList(Connection conn, PageInfo pi) {
         ArrayList<Subscription> list = new ArrayList<>();
         PreparedStatement psmt = null;

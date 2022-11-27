@@ -1,5 +1,6 @@
 package tk.newsoulmate.domain.vo;
 
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.domain.vo.type.ReportType;
 
 public class Report {
@@ -9,11 +10,38 @@ public class Report {
     private int refNo;
     private String reportContent;
     private transient String status;
+    private String boardTitle;
+    private BoardType boardType;
+
+    public Report(){
+        super();
+    }
     public Report(int reportNo, int categoryNo,String reportType, String reportContent) {
         this.reportNo = reportNo;
         this.categoryNo = categoryNo;
         this.refType=ReportType.valueOfName(reportType);
         this.reportContent = reportContent;
+    }
+
+    public Report(int reportNo, int categoryNo, int refType, int refNo, String boardTitle, String reportContent, String status) {
+        this.reportNo = reportNo;
+        this.categoryNo = categoryNo;
+        this.refType = ReportType.valueOfNo(refType);
+        this.refNo = refNo;
+        this.reportContent = reportContent;
+        this.status = status;
+        this.boardTitle = boardTitle;
+
+    }
+    public Report(int reportNo, int categoryNo, int refType, int refNo, String boardTitle, String reportContent, String status, String boardType) {
+        this.reportNo = reportNo;
+        this.categoryNo = categoryNo;
+        this.refType = ReportType.valueOfNo(refType);
+        this.refNo = refNo;
+        this.reportContent = reportContent;
+        this.status = status;
+        this.boardTitle = boardTitle;
+        this.boardType = BoardType.valueOf(boardType);
     }
 
     public int getReportNo() {
@@ -62,6 +90,22 @@ public class Report {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getBoardTitle() {
+        return boardTitle;
+    }
+
+    public void setBoardTitle(String boardTitle) {
+        this.boardTitle = boardTitle;
+    }
+
+    public BoardType getBoardType() {
+        return boardType;
+    }
+
+    public void setBoardType(BoardType boardType) {
+        this.boardType = boardType;
     }
 
     @Override
