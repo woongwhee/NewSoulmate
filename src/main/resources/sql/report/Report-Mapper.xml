@@ -5,9 +5,53 @@
         INSERT INTO REPORT (REPORT_NO, CATEGORY_NO, REPORT_CONTENT, REF_TYPE,REF_NO)
         VALUES (SQ_REPORT_PK.nextval,?,?,?,?)
     </entry>
+
     <entry key="selectReport">
         SELECT
             *
         FROM REPORT;
+    </entry>
+
+    <entry key="selectReportListCount">
+        SELECT COUNT(*) AS cnt
+        FROM REPORT
+    </entry>
+
+    <entry key="selectReportList">
+        SELECT *
+        FROM(
+            SELECT
+                ROWNUM AS "RNUM",
+                A.*
+            FROM(
+                SELECT
+                    R.REPORT_NO,
+                    R.CATEGORY_NO,
+                    R.REF_TYPE,
+                    R.REF_NO,
+                    B.BOARD_TITLE,
+                    R.REPORT_CONTENT,
+                    R.STATUS
+
+                FROM REPORT R
+                JOIN BOARD B ON (R.CATEGORY_NO = B.CATEGORY_NO)
+                ORDER BY R.REPORT_NO DESC
+                ) A
+            )
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="selectReportDetail">
+        SELECT
+        *
+        FROM REPORT R
+        JOIN BOARD B ON (R.CATEGORY_NO = B.CATEGORY_NO)
+        WHERE REPORT_NO = ?
+    </entry>
+
+    <entry key="changeReportStatus">
+        UPDATE REPORT R
+        SET STATUS = 'N'
+        WHERE REPORT_NO = ?
     </entry>
 </properties>
