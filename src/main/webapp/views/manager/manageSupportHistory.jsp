@@ -35,7 +35,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>결제번호</th>
+                        <th>후원번호</th>
                         <th>후원보호소명</th>
                         <th>후원일시</th>
                         <th>후원 금액(원)</th>
@@ -54,7 +54,7 @@
                             Support transfer = transfers.get(i);
                     %>
                     <tr>
-                        <td><%=transfer.getMerchantUid()%>
+                        <td><%=transfer.getSupportNo()%>
                         </td>
                         <td><%=transfer.getShelterName()%>
                         </td>

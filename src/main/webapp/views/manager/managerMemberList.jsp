@@ -25,8 +25,8 @@
 <html>
 <head>
     <title>회원관리-회원리스트</title>
-    <link href="<%=request.getContextPath()%>/css/manager/managerMemberList.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp" %>
+    <link href="<%=request.getContextPath()%>/css/manager/managerMemberList.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -59,7 +59,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>회원번호</th>
+                        <th>No</th>
                         <th>이름</th>
                         <th>아이디</th>
                         <th>이메일</th>
@@ -106,10 +106,10 @@
                         </td>
                         <td>
                             <div>
-                                <button onclick="updateGradeMember(<%=m.getMemberNo()%>, '<%=m.getMemberGrade().name()%>')">
+                                <button id="updateGradeMemberBtn" onclick="updateGradeMember(<%=m.getMemberNo()%>, '<%=m.getMemberGrade().name()%>')">
                                     등급변경
                                 </button>
-                                <button onclick="deleteMember(<%=m.getMemberNo()%>)">탈퇴</button>
+                                <button id="deleteMemberBtn" onclick="deleteMember(<%=m.getMemberNo()%>)">탈퇴</button>
                             </div>
                         </td>
                     </tr>

@@ -4,7 +4,7 @@
 <head>
     <title>문의내역 상세보기</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css?ver=1" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
@@ -84,7 +84,7 @@
         <br>
 
         <div align="center">
-            <a href="${context}/inquire" class="btn btn-secondary btn-sm">목록</a>
+            <a id="boardList" href="${context}/inquire" class="btn btn-secondary btn-sm">목록</a>
             <%-- if문 가능한건지 체크 확인해야함 --%>
             <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
             <a id=boardUpdate href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>

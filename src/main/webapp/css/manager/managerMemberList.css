@@ -112,3 +112,33 @@ td input[type=submit]:hover {
     border: none;
     font-size: 20px;
 }
+
+#updateGradeMemberBtn {
+    border: none;
+    background-color: rgb(236, 236, 236);
+}
+
+#updateGradeMemberBtn:hover {
+    background-color: #676767;
+    color: white;
+}
+
+
+#deleteMemberBtn {
+    border: none;
+    background-color: #f45d48;
+}
+
+#deleteMemberBtn:hover {
+    background-color: #e14330;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #319493;
+    border: none;
+}
+
+.paging-area {
+    margin-top: 20px;
+}

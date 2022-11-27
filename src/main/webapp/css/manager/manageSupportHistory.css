@@ -23,7 +23,7 @@
 
 #user_information {
     font-size: 23px;
-    /* padding: 15px 25px; */
+    padding: 15px 20px;
 }
 
 
@@ -72,10 +72,10 @@ table {
 }
 
 thead th {
-    font-size: 18px;
+    font-size: 15px;
     border-top: 1px solid rgb(203, 203, 203);
     background-color: rgb(236, 236, 236);
-    padding: 10px 10px;
+    padding: 10px 0px;
     text-align: center;
 }
 
@@ -87,7 +87,7 @@ thead th:first-child {
 tbody td {
     border-top: 1px solid rgb(203, 203, 203);
     text-align: center;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 td input[type=submit] {
@@ -124,4 +124,40 @@ input[type=submit]:hover {
     background-color: #f45d48;
     font-size: 18px;
     border: none;
+}
+
+/**/
+#supportDate {
+    margin-bottom: 20px;
+}
+
+#shelterName {
+    border: none;
+    border-radius: 5px;
+}
+
+#searchBtn {
+    border: none;
+    border-radius: 5px;
+    font-size: 19px;
+    width: 80px;
+    height: 35px;
+    margin: 8px;
+    background-color: #676767;
+    color: white;
+    cursor: pointer;
+}
+
+#searchBtn:hover {
+    background-color: #319493;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #319493;
+    border: none;
+}
+
+.paging-area {
+    margin-top: 20px;
 }
