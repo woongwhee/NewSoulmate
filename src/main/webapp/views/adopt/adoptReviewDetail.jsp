@@ -41,7 +41,9 @@
                     </tr>
                 </table>
                 <div id="board-content">
-                    <td colspan="6">${b.boardContent}</td>
+                    <td colspan="6">
+                        <c:out value="${b.boardContent}" escapeXml="false"/>
+                    </td>
                 </div>
             </div>
             <div id="board-btn-box">

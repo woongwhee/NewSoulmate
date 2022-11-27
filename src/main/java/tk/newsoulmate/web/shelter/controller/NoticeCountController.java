@@ -22,14 +22,12 @@ public class NoticeCountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Gson gson=new Gson();
-        System.out.println(request.getParameter("request"));
         Request rq=gson.fromJson(request.getParameter("request"), Request.class);
         rq.setValid();
         rq.setBgndate(Calendar.getInstance().getTime());
         int totalCount=new ShelterService().getNoticeCount(rq);
         JsonObject json =new JsonObject();
         json.addProperty("totalCount",totalCount);
-        System.out.println(totalCount);
         response.setContentType("application/json; charset=UTF-8");//gson으로 보낼꺼면 이렇게!
         gson.toJson(json,response.getWriter());
     }

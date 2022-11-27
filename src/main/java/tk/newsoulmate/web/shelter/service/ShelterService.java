@@ -127,7 +127,6 @@ public class ShelterService {
             HttpURLConnection httpConn = (HttpURLConnection)url.openConnection();
             httpConn.setRequestMethod("GET");
             httpConn.setRequestProperty("Content-type", "application/json");
-            System.out.println(httpConn.getResponseCode());
             if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"),
@@ -144,14 +143,12 @@ public class ShelterService {
 
     public int getNoticeCount(Request request) {
         URL url = request.toUrl();
-        System.out.println(url.toString());
         ResponseMapper responseMapper = null;
         int count = 0;
         try {
             HttpURLConnection httpConn = (HttpURLConnection)url.openConnection();
             httpConn.setRequestMethod("GET");
             httpConn.setRequestProperty("Content-type", "application/json");
-            System.out.println(httpConn.getResponseCode());
             if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"),

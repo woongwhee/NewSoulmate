@@ -84,10 +84,12 @@
         <br>
 
         <div align="center">
-            <a href="${context}/inquire" class="btn btn-secondary btn-sm">목록</a>
-            <%-- if문 가능한건지 체크 확인해야함 --%>
-            <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
+
+            <a href="inquire" class="btn btn-secondary btn-sm">목록</a>
+        <c:if test="${b.memberNo eq loginUser.memberNo}">
+            <a href="inquireUpdateForm?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
             <a id=boardDelete class="btn btn-danger btn-sm">삭제</a>
+        </c:if>
         </div>
     </div>
 

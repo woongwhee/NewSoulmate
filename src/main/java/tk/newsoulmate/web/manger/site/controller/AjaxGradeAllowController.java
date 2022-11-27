@@ -21,9 +21,7 @@ public class AjaxGradeAllowController extends HttpServlet {
         // gra
 
         String[] memberNo =request.getParameterValues("checkMember");
-        System.out.println(memberNo);
 //        Integer[] memArr = Stream.of(memberNo).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
-//        System.out.println(memArr);
         int result = new ManageService().changeStatus(memberNo);
 
         response.setContentType("application/json; charset=UTF-8");

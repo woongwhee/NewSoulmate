@@ -45,7 +45,6 @@ public class UpdateShelterServlet extends HttpServlet {
         request.setAttribute("sList",sList);
         request.setAttribute("cList",cList);
         request.setAttribute("vList",vList);
-        System.out.println(villageNo);
         request.getRequestDispatcher("/views/shelter/updateShelter.jsp").forward(request, response);
     }
 

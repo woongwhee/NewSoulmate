@@ -114,7 +114,7 @@ public class MemberDao {
             long shelterNo = resultSet.getLong("SHELTER_NO");
             m.setShelterNo(shelterNo);
         }
-        System.out.println(m);
+
         return m;
     }
 

@@ -29,7 +29,6 @@ public class NoticeReplyInsertController extends HttpServlet {
         Part p=request.getPart("upfile");
         Attachment at=null;
         int result=0;
-        System.out.println(p);
         if(p!=null||!p.getSubmittedFileName().equals("")){
             UploadUtil uu=UploadUtil.create(request.getServletContext());
             at=uu.saveFiles(p,uu.createFilePath());

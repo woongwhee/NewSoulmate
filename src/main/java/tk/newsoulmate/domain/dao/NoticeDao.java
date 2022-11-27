@@ -166,7 +166,7 @@ public class NoticeDao {
                     psmt.setString(21,n.getChargeNm());
                     psmt.setString(22,n.getOfficetel());
                     result+=psmt.executeUpdate();
-                    System.out.println(result);
+
                 }
 
         } catch (SQLException e) {

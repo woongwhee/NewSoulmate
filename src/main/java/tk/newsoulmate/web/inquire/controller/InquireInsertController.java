@@ -23,7 +23,6 @@ public class InquireInsertController extends HttpServlet {
             String boardTitle = request.getParameter("boardTitle");
             String boardContent = request.getParameter("boardContent");
             String memberNo = request.getParameter("memberNo");
-            System.out.println(categoryNo);
             Board b = Board.insertInquire(categoryNo,boardTitle, boardContent, memberNo);
             Attachment at = null;
             Part p=request.getPart("upfile");

@@ -15,8 +15,6 @@ import java.util.List;
 public class AdoptReviewDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         String boardNo_ =request.getParameter("bno");
         if(boardNo_==null ||boardNo_.equals("")){
             request.getSession().setAttribute("errorMsg","잘못된접근입니다.");

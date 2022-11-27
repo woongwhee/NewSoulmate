@@ -15,18 +15,6 @@
 </head>
 <body>
     <header><%@include file="/views/template/menubar.jsp"%></header>
-<script>
-    // $(document).ready(function () {
-    //     $('.slider').slick({
-    //         autoplay: true,
-    //         autoplaySpeed: 2000,
-    //         slidesToShow: 20,
-    //         infinite: true,
-    //         dots: true,
-    //     });
-    // });
-</script>
-    </script>
     <main>
 <div id="container">
 
@@ -35,17 +23,7 @@
         <div class="slider">
             <%@include file="/views/common/noticeSlide.jsp"%>
         </div>
-        <script>
-            $(()=>{
-                setNoticeLocation();
-            })
-            function setNoticeLocation(){
-                $("#main_top>.slider>post").click(()=>{
-                    let dno=$(this).getAttribute("id");
-                    location.href="<%=request.getContextPath()%>/noticeDetail?dno="+dno;
-                })
-            }
-        </script>
+
     </div>
     <div id="main_left">
         <div id="adopt-review">
@@ -60,11 +38,9 @@
             <div id="comment3" onclick="location.href='<%=request.getContextPath()%>/'">봉사후기+</div>
             <div id="volunteer-review-list">
                 <ul>
-                    <li><a href="#">봉사후기</a></li>
-                    <li><a href="#">봉사후기</a></li>
-                    <li><a href="#">봉사후기</a></li>
-                    <li><a href="#">봉사후기</a></li>
-                    <li><a href="#">봉사후기</a></li>
+                    <c:forEach items="${vList}" var="v">
+                    <li><a href="volunteerRevDetail?bno=${v.boardNo}">${v.boardTitle}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
             <div id="btn-area">
@@ -119,6 +95,17 @@
 </div>
     </main>
     <footer><%@include file="/views/template/footer.jsp"%></footer>
+    <script>
+        $(()=>{
+            setNoticeLocation();
+        })
+        function setNoticeLocation(){
+            $("#main_top>.slider>post").click(()=>{
+                let dno=$(this).getAttribute("id");
+                location.href="<%=request.getContextPath()%>/noticeDetail?dno="+dno;
+            })
+        }
+    </script>
 </body>
 
 </html>

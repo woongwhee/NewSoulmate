@@ -32,7 +32,6 @@ public class ScheduleService {
         Connection conn=JDBCTemplet.getConnection();
         Boolean tresult=new NoticeDao().trunkNotice(conn);
         JDBCTemplet.commit();
-        System.out.println(tresult);
         JDBCTemplet.close();
 
         for (int i = 1; i <= count/300+1; i++) {
@@ -59,7 +58,6 @@ public class ScheduleService {
 
     private int getTotalCount(Request request) {
         URL url = request.toUrl();
-        System.out.println(url.toString());
         ResponseMapper responseMapper = null;
         List<Notice> Nlist = new ArrayList<>();
         int totalCount = 0;
@@ -83,14 +81,12 @@ public class ScheduleService {
     }
     private  List<Notice> getNoticeList(Request request){
         URL url = request.toUrl();
-        System.out.println(url.toString());
         ResponseMapper responseMapper = null;
         List<Notice> nlist=new ArrayList<>();
         try {
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
             httpConn.setRequestProperty("Content-type", "application/json");
-            System.out.println(httpConn.getResponseCode());
             if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"), ResponseMapper.class);
