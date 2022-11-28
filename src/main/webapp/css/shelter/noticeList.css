@@ -30,6 +30,7 @@ select {
 .notice-photo {
     width: 220px;
     height: 270px;
+    cursor: pointer;
 }
 
 #animal-search-box {

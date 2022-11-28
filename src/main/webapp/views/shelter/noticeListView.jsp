@@ -19,7 +19,7 @@
     <title>보호소리스트</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/shelter/noticeList.css" rel="stylesheet">
-</head>s
+</head>
 <body>
 <%@ include file="/views/template/menubar.jsp"%>
 

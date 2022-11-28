@@ -28,12 +28,14 @@
 #adopt-review {
     width: 730px;
     height: 280px;
+    background-color: #eeeeee;
+    margin-bottom: 20px;
 }
 
 #volunteer-review {
     width: 730px;
     height: 220px;
-    margin-bottom: 20px;
+    background-color: #eeeeee;
 }
 
 #adopt-btn-box {
@@ -102,7 +104,7 @@
 }
 
 #main_top .slider {
-    width: 1150px;
+    width: 100%;
     height: 320px;
     margin: 0 auto;
     background-color: rgba(255, 99, 71, 0.3);
@@ -121,10 +123,10 @@
 }
 
 #main_top .notice-img{
-    width: 180px;
+    width: 190px;
     height: 200px;
     cursor: pointer;
-    margin: 20px 0 0 20px;
+    margin: 20px;
 }
 
 .slick-prev:before,
@@ -173,6 +175,7 @@
     width: 150px;
     height: 180px;
     display:inline-block;
+    margin-top:10px;
 }
 
 #shelterbtn{
@@ -251,22 +254,13 @@
     color: #ecd5d1;
 }
 
-
-#main_bottom img{
-    width: 950px;
-    margin-left: 120px;
-}
-
 #main_bottom #graph_1 img{
-    height: 150px;
-}
-
-#main_bottom #graph_2 img{
-    height: 300px;
+    width: 100%;
+    height: 500px;
 }
 .graph_comment{
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
-    margin: 15px 0 0 150px;
-    color: #1c5454;
+    margin: 20px;
+    color: #39393a;
 }
