@@ -6,6 +6,7 @@
         driverClassName="oracle.jdbc.OracleDriver"
         type="javax.sql.DataSource"
         url="jdbc:oracle:thin:@localhost:1521:xe"
+        removeAbandoned="true"
         username="NEWSOULMATE"
         password="NEWSOULMATE"
         maxTotal = "20" maxIdle = "10" maxWaitMillis = "-1"/>

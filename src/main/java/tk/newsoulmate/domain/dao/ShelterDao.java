@@ -1,15 +1,17 @@
 package tk.newsoulmate.domain.dao;
 
-import tk.newsoulmate.domain.vo.City;
-import tk.newsoulmate.domain.vo.Shelter;
-import tk.newsoulmate.domain.vo.Village;
-import tk.newsoulmate.web.common.JDBCTemplet;
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import tk.newsoulmate.domain.vo.Shelter;
 
 
 public class ShelterDao {
@@ -23,6 +25,14 @@ public class ShelterDao {
             throw new RuntimeException(e);
         }
     }
+    /**
+     *
+     * @param cityNo 도시번호
+     * @param conn
+     * @return 도시번호에 해당하는 마을번호 리스트
+     */
+
+
     public ArrayList<Shelter> selectShelterList(Connection conn){
 
         // select 문 resultSet
@@ -48,48 +58,38 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return list;
     }
 
 
+    //    public ArrayList<Village> selectVillageAll(Connection conn){
+    //        ArrayList<Village> vList = new ArrayList<>();
+    //        PreparedStatement psmt = null;
+    //        ResultSet rset = null;
+    //        String sql = prop.getProperty("selectVillageAll");
+    //
+    //        try {
+    //            psmt = conn.prepareStatement(sql);
+    //
+    //            rset = psmt.executeQuery();
+    //            while(rset.next()){
+    //                vList.add(new Village(rset.getLong("VILLAGE_NO"),
+    //                        rset.getLong("CITY_NO"),
+    //                        rset.getString("VILLAGE_NAME")));
+    //            }
+    //
+    //        } catch (SQLException e) {
+    //            throw new RuntimeException(e);
+    //        }finally {
+    //            JDBCTemplet.close(rset);
+    //            JDBCTemplet.close(psmt);
+    //        }
 
-//    public ArrayList<Village> selectVillageAll(Connection conn){
-//        ArrayList<Village> vList = new ArrayList<>();
-//        PreparedStatement psmt = null;
-//        ResultSet rset = null;
-//        String sql = prop.getProperty("selectVillageAll");
-//
-//        try {
-//            psmt = conn.prepareStatement(sql);
-//
-//            rset = psmt.executeQuery();
-//            while(rset.next()){
-//                vList.add(new Village(rset.getLong("VILLAGE_NO"),
-//                        rset.getLong("CITY_NO"),
-//                        rset.getString("VILLAGE_NAME")));
-//            }
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }finally {
-//            JDBCTemplet.close(rset);
-//            JDBCTemplet.close(psmt);
-//        }
 //        return vList;
-//    }
-
-    /**
-     *
-     * @param cityNo 도시번호
-     * @param conn
-     * @return 도시번호에 해당하는 마을번호 리스트
-     */
-
-
-
+    //    }
     /**
      * 시군구번호로 보호소 리스트를 조회하는 용도
      * @param villageNo
@@ -118,11 +118,12 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return sList;
     }
+
     public ArrayList<Shelter> selectShelterByCity(int cityNo, Connection conn) {
         ArrayList<Shelter> sList = new ArrayList<>();
         PreparedStatement psmt = null;
@@ -145,8 +146,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return sList;
 
@@ -174,8 +175,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return s;
     }
@@ -191,16 +192,16 @@ public class ShelterDao {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1,animalNo);
             rset = psmt.executeQuery();
-            while(rset.next()) {
-                shelterNo = rset.getLong("shelterNo");
+            if(rset.next()) {
+                shelterNo = rset.getLong("SHELTER_NO");
             }
 
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return shelterNo;
 
@@ -220,6 +221,8 @@ public class ShelterDao {
                         rset.getString("SHELTER_NAME"),
                         rset.getString("SHELTER_ADDRESS"),
                         rset.getString("SHELTER_LANDLINE"),
+                        rset.getString("SHELTER_TEL"),
+                        rset.getString("SHELTER_EMAIL"),
                         rset.getLong("CITY_NO"),
                         rset.getLong("VILLAGE_NO"),
                         rset.getLong("TRANSFER_NO"));
@@ -227,8 +230,8 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
         }
         return null;
     }
@@ -247,8 +250,57 @@ public class ShelterDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(rset);
-            JDBCTemplet.close(psmt);
+            close(rset);
+            close(psmt);
+        }
+        return result;
+    }
+
+    public ArrayList<Shelter> volAbleShelter(Connection conn) {
+        ArrayList<Shelter> sList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("volAbleShelter");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rset = psmt.executeQuery();
+            while (rset.next()){
+                Shelter s = new Shelter();
+                s.setShelterNo(rset.getLong("SHELTER_NO"));
+                s.setShelterName(rset.getString("SHELTER_NAME"));
+                s.setShelterAddress(rset.getString("SHELTER_ADDRESS"));
+                s.setShelterLandline(rset.getString("SHELTER_LANDLINE"));
+
+                sList.add(s);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close(rset);
+            close(psmt);
+        }
+        return sList;
+    }
+
+    public int update(Connection conn, Shelter updateReq) {
+        int result = 0;
+        PreparedStatement psmt = null;
+        String sql = prop.getProperty("update");
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setString(1, updateReq.getShelterLandline());
+            psmt.setString(2, updateReq.getShelterTel());
+            psmt.setString(3, updateReq.getShelterAddress());
+            psmt.setString(4, updateReq.getShelterEmail());
+            psmt.setLong(5, updateReq.getShelterNo());
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(psmt);
         }
         return result;
     }

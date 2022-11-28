@@ -1,7 +1,9 @@
 package tk.newsoulmate.web.common.controller;
 
+import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Notice;
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.web.common.service.CommonService;
 
 import javax.servlet.ServletException;
@@ -17,10 +19,12 @@ public class MainPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Notice> nList =new CommonService().selectThumbNail(0);
-        List<Board>vList =new CommonService().selectVolunteerThumbNail(0);
-        List<Board>aList =new CommonService().selectAdoptReview(0);
+        List<Notice> nList =new CommonService().selectNoticeThumbNail(0);
+        List<Board>vList =new CommonService().selectReviewList(0, BoardType.VOLUNTEER);
+        List<Attachment> tList= new CommonService().selectBoardThumbNail(0,4,BoardType.ADOPT);
         request.setAttribute("nList",nList);
+        request.setAttribute("vList",vList);
+        request.setAttribute("tList",tList);
         request.getRequestDispatcher("views/common/mainPage.jsp").forward(request,response);
     }
 

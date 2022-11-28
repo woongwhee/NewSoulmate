@@ -85,35 +85,7 @@ public class BoardDao {
         return listCount;
     }
 
-    public ArrayList<Board> selectList(Connection conn,BoardType boardType, PageInfo pi) {
-        ArrayList<Board> list = new ArrayList<>();
-        PreparedStatement psmt = null;
-        ResultSet rset = null;
-        String sql = prop.getProperty("selectList");
-        int start=(pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
-        int end=(pi.getCurrentPage())*pi.getBoardLimit();
-        try {
-            psmt = conn.prepareStatement(sql);
-            psmt.setInt(1, boardType.typeNo);
-            psmt.setInt(2, start);
-            psmt.setInt(3, end);
-            rset = psmt.executeQuery();
 
-            while (rset.next()) {
-                list.add(Board.selectAdoptReviewList(rset.getInt("BOARD_NO"),
-                        rset.getString("BOARD_TITLE"),
-                        rset.getString("MEMBER_NO"),
-                        rset.getInt("READ_COUNT"),
-                        rset.getDate("CREATE_DATE")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(psmt);
-        }
-        return list;
-    }
 
     public int increaseCount(Connection conn, int boardNo) {
 
@@ -298,9 +270,28 @@ public class BoardDao {
 
     }
 
-    public List<Board> selectVolunteerThumNail(Connection conn, int page) {
+    public List<Board> selectReviewList(Connection conn,int page,BoardType boardType) {
         List<Board> vList = new ArrayList<>();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectReviewList");
+        try {
+            psmt=conn.prepareStatement(sql);
+            psmt.setInt(1,boardType.typeNo);
+            rset=psmt.executeQuery();
+            while (rset.next()){
+                vList.add(Board.selectReviewList(rset.getInt("BOARD_NO")
+                        , rset.getString("BOARD_TITLE")));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+        }
+
         return vList;
+
     }
 
 
@@ -321,6 +312,7 @@ public class BoardDao {
             if (rset.next()) {
                 b = Board.selectInquireBoard(
                         rset.getInt("BOARD_NO"),
+                        rset.getInt("MEMBER_NO"),
                         rset.getString("CATEGORY_NAME"),
                         rset.getString("BOARD_TITLE"),
                         rset.getString("BOARD_CONTENT"),
@@ -348,6 +340,7 @@ public class BoardDao {
         int result = 0;
         PreparedStatement psmt = null;
         String sql = prop.getProperty("updateInquireBoard");
+
 
         try {
             psmt = conn.prepareStatement(sql);

@@ -1,7 +1,9 @@
 package tk.newsoulmate.web.manger.site.controller;
 
 import com.google.gson.Gson;
+
 import tk.newsoulmate.web.manger.site.service.ManageService;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -19,9 +21,7 @@ public class AjaxGradeAllowController extends HttpServlet {
         // gra
 
         String[] memberNo =request.getParameterValues("checkMember");
-        System.out.println(memberNo);
 //        Integer[] memArr = Stream.of(memberNo).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
-//        System.out.println(memArr);
         int result = new ManageService().changeStatus(memberNo);
 
         response.setContentType("application/json; charset=UTF-8");

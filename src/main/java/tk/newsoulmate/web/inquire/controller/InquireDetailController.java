@@ -31,7 +31,8 @@ public class InquireDetailController extends HttpServlet {
         }
         Board b = iService.selectInquireBoard(boardNo,loginUser);
         if(b!=null){
-            Attachment at = iService.selectInquireAttachment(boardNo);
+            List<Attachment> aList  = iService.selectInquireAttachment(boardNo);
+            Attachment at=aList.isEmpty()?null:aList.get(0);
             List<Reply> rList=iService.selectReply(boardNo);
             request.setAttribute("b", b);
             request.setAttribute("at",at);

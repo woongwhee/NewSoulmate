@@ -2,10 +2,10 @@ package tk.newsoulmate.domain.vo.response;
 
 public class IamportResponse <T> {
 
-	private long code;
-	private String message;
+	private final long code;
+	private final String message;
 
-	private T response;
+	private final T response;
 
 	public IamportResponse(long code, String message, T response) {
 		this.code = code;

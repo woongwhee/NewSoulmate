@@ -1,11 +1,12 @@
 package tk.newsoulmate.web.manger.site.controller;
 
-import tk.newsoulmate.domain.vo.Board;
+
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
-import tk.newsoulmate.web.inquire.service.InquireService;
 import tk.newsoulmate.web.manger.site.service.ManageService;
+
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -22,6 +23,7 @@ public class ManageAdoptApplyListController extends HttpServlet {
 
         if(loginUser==null){
             pi=new PageInfo(0,1);
+
         }else {
             int listCount = new ManageService().selectAdoptApplyListCount();
 
@@ -42,6 +44,9 @@ public class ManageAdoptApplyListController extends HttpServlet {
         }
         request.setAttribute("pi", pi);
         request.getRequestDispatcher("/views/manager/managerAdoptApplyList.jsp").forward(request, response);
+
+
+
 
 
     }

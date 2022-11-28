@@ -95,12 +95,11 @@ public class InquireService {
         return b;
     }
 
-    public Attachment selectInquireAttachment(int boardNo){
+    public List<Attachment> selectInquireAttachment(int boardNo){
         Connection conn = getConnection();
-        Attachment at = new AttachmentDao().selectBoardAttachment(conn, boardNo);
+        List<Attachment> aList = new AttachmentDao().selectBoardAttachment(conn, boardNo);
         close();
-
-        return at;
+        return aList;
     }
 
     public int updateInquireBoard(Board b, Attachment at){
@@ -166,10 +165,11 @@ public class InquireService {
         return result;
     }
 
-    public Attachment selectAttachment(int boardNo) {
+    public List<Attachment> selectAttachment(int boardNo) {
         Connection conn=getConnection();
-        Attachment at=new AttachmentDao().selectBoardAttachment(conn,boardNo);
-        return at;
+        List<Attachment> aList=new AttachmentDao().selectBoardAttachment(conn,boardNo);
+
+        return aList;
     }
 
     public int deleteAttachment(int fileNo) {

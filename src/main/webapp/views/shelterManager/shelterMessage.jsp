@@ -2,9 +2,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.web.manger.site.service.ManageService" %>
 <%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
+<%@ page import="tk.newsoulmate.domain.vo.Volunteer" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ArrayList<Subscription> list = (ArrayList<Subscription>) request.getAttribute("list");
+    ArrayList<Subscription> sList = (ArrayList<Subscription>) request.getAttribute("sList");
+    ArrayList<Volunteer> vList = (ArrayList<Volunteer>)request.getAttribute("vList");
+
     ManageService ms = new ManageService();
     PageInfo pi = (PageInfo) request.getAttribute("pi");
     int currentPage = pi.getCurrentPage();
@@ -44,12 +47,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% if(list == null || list.isEmpty()) {%>
+                    <% if(sList == null || sList.isEmpty()) {%>
                     <tr id="tableEmpty">
                         <td colspan = "7">존재하는 신청내역이 없습니다.</td>
                     </tr>
                     <% } else {%>
-                    <% for (Subscription s : list) {%>
+                    <% for (Subscription s : sList) {%>
                             <tr>
                                 <td><%=s.getSubNo()%></td>
                                 <td><%=s.getAnimalNo()%></td>
@@ -68,7 +71,7 @@
                                 </c:choose>
 
                                 <td>
-                                    <input type="button" id="delete" class="btn btn-primary" data-bs-toggle="modal"
+                                    <input type="button" class="delete" class="btn btn-primary" data-bs-toggle="modal"
                                            data-bs-target="#staticBackdrop" value="삭제">
                                 </td>
                             </tr>
@@ -78,13 +81,37 @@
                     </tbody>
                 </table>
 
-                <div id="pagingForm">
-                    <!--페이지네이션-->
+                <div id="pagingForm1" align="center">
+                    <% if(currentPage != 1) { %>
+                    <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+
+                    <% } %>
+
+                    <% for(int i=startPage; i<=endPage; i++) { %>
+                    <% if(i != currentPage) {%>
+                    <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
+                    <% } else { %>
+                    <button disabled><%=i %></button>
+                    <% } %>
+                    <% } %>
+
+                    <% if(currentPage != maxPage) { %>
+                    <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+
+                    <% } %>
                 </div>
 
             </div>
+            <script>
+                $(".delete").on("click",function(){
 
-            <!-- ------------------------------------------------------------------------>
+                    let thisRow = $(this).closest("tr");
+                    let addr = thisRow.find("td:eq(0)").val();
+                    console.log(addr);
+                })
+            </script>
+
+
 
 
             <div class="box2">
@@ -95,47 +122,69 @@
                 <table>
                     <thead>
                     <tr>
-                        <th width="20px">No</th>
-                        <th>봉사 희망 시간</th>
-                        <th>보낸 시간</th>
-                        <th>보낸 사람</th>
+                        <th width="20px">아이디</th>
+                        <th>신청인</th>
+                        <th>보호소명</th>
+                        <th>봉사 희망 날짜</th>
+                        <th>전화번호</th>
                         <th>상태</th>
                         <th width="20px">관리</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <!--보여질 페이지 수 지정-->
-                    <c:forEach var="board" items="${}">
-                        <tr>
-                            <td>
-                                <!--번호 ${가져오기}-->1
-                            </td>
-                            <td>
-                                <!--봉사희망시간 ${가져오기}-->ds한국동물구조관리협회
-                            </td>
-                            <td>
-                                <!--보낸시간 ${가져오기}-->2022-10-22 10:22
-                            </td>
-                            <td>
-                                <!--보낸사람-->20,000
-                            </td>
-                            <td>
-                                <!--상태-->df
-                            </td>
-                            <td>
-                                <!--관리-->
-                                <input type="submit" class="btn btn-primary" data-bs-toggle="modal"
-                                       data-bs-target="#staticBackdrop" value="삭제">
+                    <% if(vList == null || vList.isEmpty()) {%>
+                    <tr id="tableEmpty2">
+                        <td colspan = "7">존재하는 신청내역이 없습니다.</td>
+                    </tr>
+                    <% } else {%>
+                    <% for (Volunteer v : vList) {%>
+                    <tr>
+                        <td><%=v.getMemberId()%></td>
+                        <td><%=v.getName()%></td>
+                        <td><%=v.getShelterName()%></td>
+                        <td><%=v.getStartDate()%></td>
+                        <td><%=v.getTelNumber()%></td>
 
-                            </td>
-                        </tr>
+                        <c:set var = "volRead" value="<%=v.getVolRead()%>"/>
+                        <c:choose>
+                            <c:when test="${volRead eq 'N'}">
+                                <td>미확인</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>확인</td>
+                            </c:otherwise>
+                        </c:choose>
 
-                    </c:forEach>
+                        <td>
+                            <!--관리-->
+                            <input type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                   data-bs-target="#staticBackdrop" value="삭제">
+                        </td>
+                    </tr>
+                    <% }%>
+                    <% } %>
+
                     </tbody>
                 </table>
 
-                <div id="pagingForm">
-                    <!--페이지네이션-->
+                <div id="pagingForm2" align="center">
+                    <% if(currentPage != 1) { %>
+                    <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+
+                    <% } %>
+
+                    <% for(int i=startPage; i<=endPage; i++) { %>
+                    <% if(i != currentPage) {%>
+                    <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
+                    <% } else { %>
+                    <button disabled><%=i %></button>
+                    <% } %>
+                    <% } %>
+
+                    <% if(currentPage != maxPage) { %>
+                    <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+
+                    <% } %>
                 </div>
             </div>
         </div>

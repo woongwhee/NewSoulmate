@@ -11,7 +11,6 @@ import java.util.Random;
 public class EmailVerificationService {
 
     public static String sendMail(String email) {
-        System.out.println(email);
         boolean result = false;
 
         Random rcode = new Random();
@@ -19,7 +18,6 @@ public class EmailVerificationService {
         for (int i = 0; i < 6; i++) {
 
             int rcd = rcode.nextInt(3);
-            System.out.println(rcd);
             if (rcd == 0) {
                 int randomNum = rcode.nextInt(10);
                 sb.append(randomNum);
@@ -38,7 +36,7 @@ public class EmailVerificationService {
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.starttls.enable", true);
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.port", 25);
+        prop.put("mail.smtp.port", 25); // 앱코드 비밀번호를 사용하기 때문에 port번호를 모바일로 해야 작동함
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
 

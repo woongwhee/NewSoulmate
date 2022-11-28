@@ -49,7 +49,7 @@
                 입양을 원하는 동물의 상세정보를 꼼꼼하게 읽고 확인해주세요.
             </div>
             <div class="btn-box">
-                <button class="btn" onclick="">입양가능동물 보러가기</button>
+                <button class="btn" onclick="location.href='noticeList'">입양가능동물 보러가기</button>
             </div>
         </div>
         <div class="caret">
@@ -63,7 +63,7 @@
                 신청서에 기입하신 번호로 3일이내 안내문자를 보내드립니다.
             </div>
             <div class="btn-box">
-                <button class="btn" onclick="">입양신청서 작성하기</button>
+                <button class="btn" onclick='location.href="adoptApply"'>입양신청서 작성하기</button>
             </div>
         </div>
         <div class="caret">
@@ -88,7 +88,7 @@
                 입양 대기중인 아이들의 입양과 입양인식 개선에 많은 도움이 됩니다.
             </div>
             <div class="btn-box">
-                <button class="btn" onclick="">입양후기 작성하기</button>
+                <button class="btn" onclick="location.href='adoptRevEnroll'">입양후기 작성하기</button>
             </div>
         </div>
     </div>

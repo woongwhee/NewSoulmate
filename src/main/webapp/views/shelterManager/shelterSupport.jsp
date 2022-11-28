@@ -1,11 +1,11 @@
-<%@ page import="tk.newsoulmate.domain.vo.response.ShelterSupportResponse" %>
 <%@ page import="java.util.List" %>
-<%@ page import="tk.newsoulmate.domain.vo.type.WithdrawStatus" %>
 <%@ page import="tk.newsoulmate.domain.vo.Transfer" %>
+<%@ page import="tk.newsoulmate.domain.vo.Support" %>
+<%@ page import="static tk.newsoulmate.domain.vo.type.WithdrawStatus.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    List<ShelterSupportResponse> supports = (List<ShelterSupportResponse>) request.getAttribute("supports");
+    List<Support> supports = (List<Support>) request.getAttribute("supports");
     String shelterName = (String) request.getAttribute("shelterName");
     Transfer latestTransfer = request.getAttribute("latestTransfer") != null
             ? (Transfer) request.getAttribute("latestTransfer") : null;
@@ -21,9 +21,8 @@
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
             crossorigin="anonymous"></script>
 
-    <link href="<%=request.getContextPath()%>/css/shelterManager/shelterSupport.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+    <link href="<%=request.getContextPath()%>/css/shelterManager/shelterSupport.css" rel="stylesheet">
 </head>
 
 
@@ -34,7 +33,7 @@
     <div id="right_view">
         <div id="user_information">
 
-            <span style="color: #f45d48"><%=shelterName%></span>님의 후원내역
+            <span id="shelterName"><%=shelterName%></span>님의 후원내역
 
             <div id="memberList">
                 <table>
@@ -60,13 +59,13 @@
                     <%for(int i = 0; i < supports.size(); ++i) { %>
                     <tr>
                         <td><%=supports.get(i).getSupportNo()%></td>
-                        <td><%=supports.get(i).getSupporterName()%></td>
-                        <td><%=supports.get(i).getDate() %></td>
+                        <td><%=supports.get(i).getMemberName()%></td>
+                        <td><%=supports.get(i).getPayTime() %></td>
                         <td><%=supports.get(i).getAmount() %></td>
                         <td><%=supports.get(i).getPhoneNumber() %></td>
                         <td>
                             <%
-                                switch (supports.get(i).getWithDrawStatus()) {
+                                switch (supports.get(i).getWithdrawStatus()) {
                                     case PENDING:
                             %>
                             출금가능
@@ -83,7 +82,7 @@
                             <% } %>
                         </td>
                         <td>
-                            <% if (supports.get(i).getWithDrawStatus().equals(WithdrawStatus.PENDING)) { %>
+                            <% if (supports.get(i).getWithdrawStatus().equals(PENDING)) { %>
                             <input type="submit" class="btn btn-primary" data-bs-toggle="modal"
                                    data-bs-target="#staticBackdrop" value="출금 신청"
                                    onclick="setWithdrawInfo(<%=supports.get(i).getSupportNo()%>, <%=supports.get(i).getAmount()%>)">
@@ -174,14 +173,6 @@
             }
         });
     }
-
-
-
-
-
-
-
-
 
 
 

@@ -44,7 +44,7 @@
         FROM(
         SELECT
         S.SUB_NO,
-        S.ANIMAL_ID,
+        S.ANIMAL_NO,
         M.MEMBER_ID,
         S.NAME,
         S.TEL_NUM,
@@ -53,7 +53,7 @@
 
         FROM SUBSCRIPTION S
         JOIN MEMBER M ON (S.MEMBER_NO = M.MEMBER_NO)
-        WHERE SHELTER_NO = ?
+        WHERE S.SHELTER_NO = ?
         ORDER BY S.SUB_NO
         ) A
         )
@@ -78,22 +78,5 @@
         SET SUB_READ = 'Y'
         WHERE SUB_NO = ?
     </entry>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </properties>

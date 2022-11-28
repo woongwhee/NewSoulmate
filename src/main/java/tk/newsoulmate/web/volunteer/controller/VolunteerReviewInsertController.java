@@ -1,8 +1,11 @@
 package tk.newsoulmate.web.volunteer.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.vo.response.GsonDateFormate;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 import tk.newsoulmate.web.volunteer.service.VolunteerService;
 
@@ -11,48 +14,54 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
-@WebServlet(name = "VolunteerReviewInsertController", value = "/volunteerRevInsert")
+@WebServlet(name = "volunteerRevInsert", value = "/volunteerRevInsert")
 public class VolunteerReviewInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String boardTitle=request.getParameter("boardTitle");
-        String boardContent=request.getParameter("boardContent");
-        String volunteerDate_=request.getParameter("volunteerDate");
-        Date volunteerDate=null;
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            volunteerDate= new Date (sdf.parse(volunteerDate_).getTime());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        HttpSession session=request.getSession();
-        Integer bno= (Integer) session.getAttribute("bno");
-        int memberNo=((Member)session.getAttribute("loginUser")).getMemberNo();
-        VolunteerService vs=new VolunteerService();
-        if(bno==null){
-            bno=vs.selectBoardNo();
+        HttpSession session = request.getSession();
+        Gson gson = new GsonBuilder().
+                registerTypeAdapter(Date.class, new GsonDateFormate()).
+                create();
+        JsonObject jobj = new JsonObject();
+        response.setContentType("application/json; charset=UTF-8");
+        Integer fileCount = (Integer) session.getAttribute("fileCount");
+        if (fileCount == null) {
+            jobj.addProperty("result", 0);
+            jobj.addProperty("msg", "첨부파일이 1개 이상 필요합니다.");
+            gson.toJson(jobj, response.getWriter());
+            return;
         }else{
+            session.removeAttribute("fileCount");
+        }
+
+        VolunteerService vs = new VolunteerService();
+        Board b = gson.fromJson(request.getParameter("board"), Board.class);
+        int memberNo = ((Member) session.getAttribute("loginUser")).getMemberNo();
+        b.setMemberNo(memberNo);
+        b.setFileCount(fileCount);
+        Integer bno = (Integer) session.getAttribute("bno");
+        if (bno == null) {
+            bno = vs.selectBoardNo();
+        } else {
             session.removeAttribute("bno");
         }
-        Board board=Board.enrollBoard(memberNo,bno.intValue(),volunteerDate, BoardType.VOLUNTEER,boardTitle,boardContent );
-        int result=vs.insertBoard(board);
-        if(result>0){
-            session.setAttribute("alertMsg","게시글작성 성공");
-        }else{
-            session.setAttribute("erorrtMsg","게시글작성 실패");
+        b.setBoardNo(bno);
+        int result = vs.insertBoard(b);
+        jobj.addProperty("bno", bno);
+        jobj.addProperty("result", result);
+        if (result > 0)
+            jobj.addProperty("msg", "게시글작성성공.");
+        else {
+            jobj.addProperty("msg", "게시글작성실패.");
         }
-        response.sendRedirect(request.getContextPath()+"/adoptRevList");
 
-
-
+        gson.toJson(jobj, response.getWriter());
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 }

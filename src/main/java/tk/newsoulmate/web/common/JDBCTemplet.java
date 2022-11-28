@@ -10,9 +10,7 @@ public class JDBCTemplet{
     private static Connection conn=null;
     private JDBCTemplet(){
     }
-    //1. Connection 객체 생성(DB접속)한 후 해당 Connection을 반환하는 메소드
     public static Connection getConnection(){
-        //getResource메소드의 맨처음 /는 classes폴더를 의미한다.
 
         try {
             Context initCtx=new InitialContext();

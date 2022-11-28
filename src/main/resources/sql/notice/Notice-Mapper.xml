@@ -28,7 +28,7 @@
 
     </entry>
     <entry key="truncNotice">
-        TRUNCATE TABLE ANIMAL
+        DELETE TABLE ANIMAL
     </entry>
     <entry key="insertNotice">
         INSERT INTO ANIMAL (

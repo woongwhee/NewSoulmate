@@ -85,7 +85,7 @@
                     <th class="replyWriter">${r.replyWriter}</th>
                     <th class="replyDate">${r.replyDate}</th>
                 <c:if test="${!empty loginUser}">
-                    <th class="replyReport bi bi-exclamation-triangle" data-toggle="modal" data-target="#reportModal" data-kind="reply" data-ref="${r.replyNo}"></th>
+                    <th class="replyReport bi bi-exclamation-triangle" data-toggle="modal" data-target="#reportModal" data-kind="notice" data-ref="${r.replyNo}"></th>
                     <c:if test="${r.memberNo} eq ${loginUser.memberNo}">
                     <th class="replyDelete bi bi-trash"></th>
                     </c:if>
@@ -99,6 +99,7 @@
                 </tr>
                 </c:forEach>
             </table>
+            <c:if test="${!empty loginUser}">
             <form action="replyInsert.no" enctype="multipart/form-data" method="post">
             <div id="replyInput">
                 <input type="hidden" name="noticeNo" value="${n.desertionNo}">
@@ -107,6 +108,7 @@
                 <input type="file" id="replyFile" name="upfile" placeholder="댓글을 입력해주세요">
             </div>
             </form>
+            </c:if>
         </div>
     </div>
 </div>

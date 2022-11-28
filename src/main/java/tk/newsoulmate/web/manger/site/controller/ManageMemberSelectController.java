@@ -1,17 +1,9 @@
 package tk.newsoulmate.web.manger.site.controller;
 
-import tk.newsoulmate.domain.vo.City;
-import tk.newsoulmate.domain.vo.ManageMember;
-import tk.newsoulmate.domain.vo.Shelter;
-import tk.newsoulmate.domain.vo.Village;
-import tk.newsoulmate.web.manger.site.service.ManageService;
-import tk.newsoulmate.web.shelter.service.ShelterService;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "ManageMemberSelect", value = "/manageMemberSelect")
 public class ManageMemberSelectController extends HttpServlet {

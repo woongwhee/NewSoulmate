@@ -128,7 +128,9 @@
         AND BOARD_STATUS = 'Y'
     </entry>
     <entry key="selectInquireBoard">
-        SELECT BOARD_NO,
+        SELECT
+            BOARD_NO,
+            MEMBER_NO,
             CATEGORY_NAME,
             BOARD_TITLE,
             BOARD_CONTENT,
@@ -145,12 +147,12 @@
 
     <entry key="updateInquireBoard">
         UPDATE BOARD
-        SET CATEGORY_NO = ?
-            ,BOARD_TITLE = ?
-            ,BOARD_CONTENT = ?
+            SET CATEGORY_NO = ?
+                ,BOARD_TITLE = ?
+                ,BOARD_CONTENT = ?
         WHERE BOARD_NO = ?
         AND MEMBER_NO=?
-        AND STATUS='Y'
+        AND BOARD_STATUS='Y'
     </entry>
     <entry key="updateReviewBoard">
         UPDATE BOARD
@@ -166,5 +168,16 @@
         WHERE BOARD_NO = ?
     </entry>
 
-
+    <entry key="selectReviewList">
+        SELECT *
+        FROM(
+        SELECT BOARD_NO,
+            BOARD_TITLE
+            FROM BOARD
+            WHERE BOARD_STATUS = 'Y'
+            AND TYPE_NO = ?
+        ORDER BY CREATE_DATE DESC
+        )
+        WHERE ROWNUM &lt;= 5
+    </entry>
 </properties>

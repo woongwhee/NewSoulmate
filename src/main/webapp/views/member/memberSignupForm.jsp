@@ -11,7 +11,7 @@
     <title>회원가입</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <%--<link href="css/memberSignupForm.css" rel="stylesheet">--%>
-    <%--<script src="/JS/member/memberSignupForm.js"></script>--%>
+
     <%@include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
@@ -89,7 +89,7 @@
                     <div>
                         <label for="memberMail">이메일</label>
                         <br>
-                        <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" >
+                        <input type="email" name="memberMail" id="memberMail" placeholder="*이메일" >
                         <button type="button" onclick="sendMail();" >인증번호 발송</button>
 
                         <div id="auth">
@@ -372,6 +372,8 @@
 
 
 </script>
+
+<%--<script src="${context}/jS/member/memberSignupForm.js"></script>--%>
 
 </body>
 </html>

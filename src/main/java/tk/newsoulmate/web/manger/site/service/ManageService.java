@@ -1,25 +1,75 @@
 package tk.newsoulmate.web.manger.site.service;
 
-import tk.newsoulmate.domain.vo.*;
-import tk.newsoulmate.domain.dao.*;
-
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import static tk.newsoulmate.web.common.JDBCTemplet.*;
+import tk.newsoulmate.domain.dao.*;
+import tk.newsoulmate.domain.vo.*;
+import tk.newsoulmate.domain.vo.type.MemberGrade;
 
 public class ManageService {
 
     private MemberDao memberDao = new MemberDao();
 
 
-    public ArrayList<ManageMember> selectMemberList() {
+    public ArrayList<Member> selectMemberList(PageInfo pageInfo, String filter) {
         Connection conn = getConnection();
-        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn);
+        ArrayList<Member> mList;
+        if (filter.equals("ALL")) {
+            mList = memberDao.selectMemberList(conn, pageInfo);
+        } else {
+            mList = memberDao.selectMemberListByFilter(conn, pageInfo, MemberGrade.valueOf(filter));
+        }
         close();
         return mList;
     }
+
+    public int countMember(String filter) {
+        Connection conn = getConnection();
+        int count = 0;
+        if (filter.equals("ALL")) {
+            count = memberDao.count(conn);
+        } else {
+            count = memberDao.countByFilter(conn, MemberGrade.valueOf(filter));
+        }
+        close();
+        return count;
+    }
+
+
+
+
+/*    manageMemberList 페이징바 처리 관련
+
+        public int selectMemberListCount(){
+        Connection conn = getConnection();
+
+        int listCount = new MemberDao().selectMemberListCount(conn);
+
+        close();
+        return listCount;
+    }
+
+
+    public ArrayList<ManageMember> selectMemberList(PageInfo pi) {
+        Connection conn = getConnection();
+        ArrayList<ManageMember> mList = memberDao.selectMemberList(conn,pi);
+        close();
+        return mList;
+    }
+    */
+
+
+
+
+
+
+
+
+
+
 
     public ArrayList<Member> selectManageMember() {
         Connection conn = getConnection();
@@ -39,12 +89,6 @@ public class ManageService {
         return gList;
     }
 
-    public int selectCountMember() {
-        Connection conn = getConnection();
-        int countMember = memberDao.selectCountMember(conn);
-        close();
-        return countMember;
-    }
 
     public int selectAdoptApplyListCount(){
         Connection conn = getConnection();
@@ -55,6 +99,14 @@ public class ManageService {
         return listCount;
     }
 
+    public int selectReportListCount(){
+        Connection conn = getConnection();
+
+        int listCount = new ReportDao().selectReportListCount(conn);
+
+        close();
+        return listCount;
+    }
     public ArrayList<Subscription> selectAdoptApplyList(PageInfo pi){
         Connection conn = getConnection();
 
@@ -62,6 +114,13 @@ public class ManageService {
         close();
         return list;
     }
+    public ArrayList<Report> selectReportList(){
+        Connection conn = getConnection();
+        ArrayList<Report> rList = new ReportDao().selectReportList(conn);
+        close();
+        return rList;
+    }
+
     public Subscription selectAdoptApplyDetail(int subNo){
         Connection conn = getConnection();
 
@@ -71,18 +130,37 @@ public class ManageService {
         return s;
     }
 
-    public int ChangeAdoptApplySubRead(int subNo){
+    public Report selectReportDetail(int refNo){
         Connection conn = getConnection();
-
-        int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
+        Report r = new ReportDao().selectReportDetail(conn,refNo);
         close();
+        return r;
+    }
+
+    public int changeAdoptApplySubRead(int subNo){
+        Connection conn = getConnection();
+        int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
         if(result > 0){
             commit();
         } else{
             rollback();
         }
+        close();
         return result;
     }
+
+    public int changeReportStatus(int reportNo){
+        Connection conn = getConnection();
+        int result = new ReportDao().changeReportStatus(conn, reportNo);
+        if(result >0){
+            commit();
+        } else{
+            rollback();
+        }
+        close();
+        return result;
+    }
+
     public Subscription selectAdoptApplyListCheck(int subNo){
         Connection conn = getConnection();
 
@@ -98,12 +176,12 @@ public class ManageService {
         int result1 = new GradeUpDao().changeGrade(conn,memberNo);
         int result2 = new MemberDao().changeGrade(conn,memberNo);
 
-            if(result1 == memberNo.length && result2 == memberNo.length){
-                commit();
-            }else{
-                rollback();
-            }
-            close();
+        if(result1 == memberNo.length && result2 == memberNo.length){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
         return (result1+result2)/2;
     }
 
@@ -127,4 +205,5 @@ public class ManageService {
         close();
         return n;
     }
+
 }

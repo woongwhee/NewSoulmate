@@ -26,14 +26,11 @@ public class ScheduleService {
         Request request = new Request();
         request.setPageNo(1);
         request.setNumberOfRows(1);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -14);
+        request.setBgndate(cal.getTime());
         int count=getTotalCount(request);
-        request.setNumberOfRows(200);
-        Connection conn=JDBCTemplet.getConnection();
-        Boolean tresult=new NoticeDao().trunkNotice(conn);
-        JDBCTemplet.commit();
-        System.out.println(tresult);
-        JDBCTemplet.close();
-
+        request.setNumberOfRows(300);
         for (int i = 1; i <= count/300+1; i++) {
             request.setPageNo(i);
             List<Notice> list=getNoticeList(request);
@@ -56,9 +53,8 @@ public class ScheduleService {
         return  result;
     }
 
-    private int getTotalCount(Request request) {
+    public int getTotalCount(Request request) {
         URL url = request.toUrl();
-        System.out.println(url.toString());
         ResponseMapper responseMapper = null;
         List<Notice> Nlist = new ArrayList<>();
         int totalCount = 0;
@@ -82,14 +78,12 @@ public class ScheduleService {
     }
     private  List<Notice> getNoticeList(Request request){
         URL url = request.toUrl();
-        System.out.println(url.toString());
         ResponseMapper responseMapper = null;
         List<Notice> nlist=new ArrayList<>();
         try {
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
             httpConn.setRequestProperty("Content-type", "application/json");
-            System.out.println(httpConn.getResponseCode());
             if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"), ResponseMapper.class);

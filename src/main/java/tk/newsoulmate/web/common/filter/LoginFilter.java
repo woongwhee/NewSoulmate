@@ -12,8 +12,13 @@ import java.net.http.HttpRequest;
 
 @WebFilter(filterName = "loginFilter",
     servletNames = {
-        "saveAttach","AdoptApplyController","InquireDetailController","MemberInfoDetailViewController",
-            "adoptRevEnroll","adoptRevInsert","adoptUpdate","replyInsert.ad","replyInsert","replyDelete","ManageAdoptApplyListController"
+            "saveAttach","AdoptApplyController","InquireDetailController",
+            "MemberInfoDetailViewController", "adoptRevEnroll","adoptRevInsert",
+            "adoptUpdate","boardReplyInsert","replyInsert",
+            "replyDelete", "ManageAdoptApplyListController","NoticeReplyInsertController",
+            "InquireEnrollController","inquireUpdate", "InquireUpdateFromController",
+            "SupportHistoryServlet","SupportHistory","SupportNumberCreate",
+            "supportPaymentPage", "SupportVerify"
     }
 )
 public class LoginFilter implements Filter {
@@ -27,7 +32,6 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpSession session=((HttpServletRequest)request).getSession();
         Member loginUser = (Member) session.getAttribute("loginUser");
-        System.out.println(loginUser);
         if(loginUser==null){
             session.setAttribute("errorMsg","로그인 후 접근 할 수 있는 페이지입니다.");
             ((HttpServletResponse)response).sendRedirect(((HttpServletRequest) request).getContextPath()+"/loginpage");

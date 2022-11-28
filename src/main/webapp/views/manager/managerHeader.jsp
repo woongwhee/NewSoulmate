@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <link href="<%=request.getContextPath()%>/image/titlelogo.png" rel="shortcut icon" type="image/x-icon">
     <link href="<%=request.getContextPath()%>/css/manager/managerHeader.css" rel="stylesheet">
     <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
@@ -29,11 +30,10 @@
                 </div>
             </div>
         </li>
-        <li><a href="#">보호소 관리</a></li>
         <li><a href="${context}/adoptApplyList">입양관리</a></li>
         <li>
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="#">후원관리</a></button>
+                <button class="dropdown-btn"><a href="${context}/manageSupportAllHistoryPage">후원관리</a></button>
                 <div class="dropdown-submenu">
                     <a href="${context}/manageSupportAllHistoryPage">전체 후원내역</a>
                     <a href="${context}/manageSupportPage">보호소별 출금신청내역</a>
@@ -42,7 +42,7 @@
         </li>
 
 
-        <li><a href="#">신고접수</a></li>
+        <li><a href="${context}/reportList">신고접수</a></li>
     </ul>
 
     <div id="right_text_fiex">

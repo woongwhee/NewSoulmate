@@ -1,5 +1,6 @@
 package tk.newsoulmate.domain.dao;
 
+import oracle.jdbc.proxy.annotation.Pre;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.GradeUp;
 import tk.newsoulmate.domain.vo.Reply;
@@ -33,41 +34,20 @@ public class AttachmentDao {
     }
 
 
-    public Attachment selectBoardAttachment(Connection conn, int boardNo) {
-
-        Attachment at = null;
+    public List<Attachment> selectBoardAttachment(Connection conn, int boardNo) {
+        List<Attachment> aList =new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
-
         String sql = prop.getProperty("selectBoardAttachment");
 
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setInt(1, boardNo);
             rset = psmt.executeQuery();
-            at=boardAttachmentMapper(rset);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close(rset);
-            close(psmt);
-        }
-        return at;
-
-
-    }
-    public List<Attachment> selectAttachmentList(Connection conn, int boardNo) {
-        PreparedStatement psmt = null;
-        ResultSet rset = null;
-        List<Attachment> aList=new ArrayList<>();
-        String sql = prop.getProperty("selectAttachmentList");
-        try {
-            psmt = conn.prepareStatement(sql);
-            psmt.setInt(1, boardNo);
-            rset = psmt.executeQuery();
-            Attachment at = null;
+            Attachment at=null;
             while((at=boardAttachmentMapper(rset))!=null){
                 aList.add(at);
+
             };
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -195,7 +175,6 @@ public class AttachmentDao {
     }
     public int deleteBoardAttachment(int boardNo, Connection conn){
         PreparedStatement psmt = null;
-
         String sql = prop.getProperty("deleteBoardAttachment");
         int result=0;
         try {
@@ -349,5 +328,23 @@ public class AttachmentDao {
         }
 
         return tList;
+    }
+
+    public int deleteAttachmentList(List<Attachment> dList, Connection conn) {
+        PreparedStatement psmt=null;
+        int result=0;
+        String sql=prop.getProperty("deleteAttachment");
+        try {
+            psmt=conn.prepareStatement(sql);
+            for (Attachment at:dList) {
+                psmt.setInt(1,at.getFileNo());
+                result=psmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close(psmt);
+        }
+        return result;
     }
 }

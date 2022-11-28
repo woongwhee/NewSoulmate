@@ -65,10 +65,14 @@
         WHERE MEMBER_NO = ?
     </entry>
 
-    <entry key="deleteMember">
-        UPDATE MEMBER SET STATUS = 'N',
-        WHERE USER_ID = ?
-        AND USER_PWD = ?
+    <entry key="deleteByMemberNo">
+        UPDATE MEMBER SET MEMBER_STATUS = 'N'
+        WHERE MEMBER_NO = ?
+    </entry>
+    <entry key="deleteByIdAndPwd">
+        UPDATE MEMBER SET MEMBER_STATUS = 'N'
+        WHERE MEMBER_ID = ?
+        AND MEMBER_PWD = ?
     </entry>
 
     <entry key="updateResent">
@@ -76,7 +80,6 @@
         SET RESENT_CONNECTION = SYSDATE
         WHERE MEMBER_NO = ?
     </entry>
-
 
     <entry key="checkPwd">
         SELECT
@@ -89,6 +92,12 @@
         SELECT
         MEMBER_ID
         FROM MEMBER
+        WHERE MEMBER_NO = ?
+    </entry>
+
+    <entry key="updateGrade">
+        UPDATE MEMBER
+        SET MEMBER_GRADE = ?
         WHERE MEMBER_NO = ?
     </entry>
 
@@ -110,8 +119,34 @@
     </entry>
 
 
-    <!--관리자 - 전체 회원리스트-->
+<!--    사용안함 삭제필요
+        <entry key="selectMemberList">
+            SELECT
+                M.MEMBER_NO,
+                M.MEMBER_ID,
+                M.MEMBER_NAME,
+                M.NICKNAME,
+                M.EMAIL,
+                M.MEMBER_GRADE,
+                M.SHELTER_NO,
+                NVL(S.SHELTER_NAME,'해당없음') AS SHELTER_NAME,
+                M.ENROLL_DATE,
+                M.RESENT_CONNECTION
+            FROM MEMBER M, SHELTER S
+            WHERE M.SHELTER_NO = S.SHELTER_NO(+)
+                AND MEMBER_STATUS = 'Y'
+            ORDER BY MEMBER_NO
+        </entry>-->
+
+
+
+
+
     <entry key="selectMemberList">
+        SELECT *
+        FROM(
+        SELECT ROWNUM AS "RNUM", A.*
+        FROM(
         SELECT
         M.MEMBER_NO,
         M.MEMBER_ID,
@@ -125,17 +160,63 @@
         M.RESENT_CONNECTION
         FROM MEMBER M, SHELTER S
         WHERE M.SHELTER_NO = S.SHELTER_NO(+)
+        AND MEMBER_STATUS = 'Y'
         ORDER BY MEMBER_NO
+        ) A
+        )
+        WHERE RNUM BETWEEN ? AND ?
     </entry>
 
-    <entry key="countMember">
+
+    <entry key="selectMemberListByFilter">
+        SELECT *
+        FROM(
+        SELECT ROWNUM AS "RNUM", A.*
+        FROM(
+        SELECT
+        M.MEMBER_NO,
+        M.MEMBER_ID,
+        M.MEMBER_NAME,
+        M.NICKNAME,
+        M.EMAIL,
+        M.MEMBER_GRADE,
+        M.SHELTER_NO,
+        NVL(S.SHELTER_NAME,'해당없음') AS SHELTER_NAME,
+        M.ENROLL_DATE,
+        M.RESENT_CONNECTION
+        FROM MEMBER M, SHELTER S
+        WHERE M.SHELTER_NO = S.SHELTER_NO(+)
+        AND MEMBER_STATUS = 'Y'
+        AND MEMBER_GRADE = ?
+        ORDER BY MEMBER_NO
+        ) A
+        )
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+
+    <entry key="count">
         SELECT COUNT(*)
         FROM MEMBER
+        WHERE MEMBER_STATUS = 'Y'
+    </entry>
+
+    <entry key="countByFilter">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE MEMBER_STATUS = 'Y'
+        AND MEMBER_GRADE = ?
     </entry>
 
     <entry key="changeGrade">
         UPDATE MEMBER
         SET MEMBER_GRADE = 1
+        WHERE MEMBER_NO = ?
+    </entry>
+
+    <entry key="deleteShelterInfo">
+        UPDATE MEMBER
+        SET SHELTER_NO = null
         WHERE MEMBER_NO = ?
     </entry>
 

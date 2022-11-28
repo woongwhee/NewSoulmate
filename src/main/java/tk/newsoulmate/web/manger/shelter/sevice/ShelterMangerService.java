@@ -1,8 +1,10 @@
 package tk.newsoulmate.web.manger.shelter.sevice;
 
 import tk.newsoulmate.domain.dao.SubscriptionDao;
+import tk.newsoulmate.domain.dao.VolunteerDao;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
+import tk.newsoulmate.domain.vo.Volunteer;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
@@ -21,11 +23,55 @@ public class ShelterMangerService {
         return listCount;
     }
 
-    public ArrayList<Subscription> ShelterNoAdoptApplyList(PageInfo pi, long shelterNo) {
+    public ArrayList<Subscription> shelterNoAdoptApplyList(PageInfo pi, long shelterNo) {
         Connection conn = getConnection();
 
         ArrayList<Subscription> list = new SubscriptionDao().shelterNoAdoptApplyList(conn, pi ,shelterNo);
         close();
         return list;
     }
+
+    public int volunteerApplyListCount(long shelterNo) {
+        Connection conn = getConnection();
+
+        int listCount = new VolunteerDao().volunteerApplyListCount(conn,shelterNo);
+
+        close();
+        return listCount;
+
+
+    }
+
+    public ArrayList<Volunteer> volunteerApplyList(PageInfo pi, long shelterNo) {
+        Connection conn = getConnection();
+
+        ArrayList<Volunteer> list = new VolunteerDao().volunteerApplyList(conn, pi ,shelterNo);
+        close();
+        return list;
+    }
+
+
+
+
+/*    // 갱신된 정보 다시 조회
+    public Shelter updateShelterInfo(Shelter s) {
+        Connection conn = getConnection();
+        int result = new ShelterDao().updateShelterInfo(conn, s);
+        Shelter updateShelter = null;
+
+        if(result > 0) {
+            commit();
+            updateShelter = new ShelterDao().updateShelterInfo(s.setShelterNo(), conn);
+        }else{
+            rollback();
+        }
+        close();
+        return updateShelter;
+    }*/
+
+
+
+
+
+
 }

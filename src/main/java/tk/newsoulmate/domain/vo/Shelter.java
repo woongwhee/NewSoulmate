@@ -28,12 +28,14 @@ public class Shelter {
         this.villageNo = villageNo;
     }
 
-    public Shelter(long shelterNo, String shelterName, String shelterAddress, String shelterLandline, long cityNo, long villageNo, long transferNo) {
+    public Shelter(long shelterNo, String shelterName, String shelterAddress, String shelterLandline, String shelterTel, String shelterEmail, long cityNo, long villageNo, long transferNo) {
         super();
         this.shelterNo = shelterNo;
         this.shelterName = shelterName;
         this.shelterAddress = shelterAddress;
         this.shelterLandline = shelterLandline;
+        this.shelterTel = shelterTel;
+        this.shelterEmail = shelterEmail;
         this.cityNo = cityNo;
         this.villageNo = villageNo;
         this.transferNo = transferNo;
@@ -64,6 +66,15 @@ public class Shelter {
     public Shelter(long shelterNo, String shelterName) {
         this.shelterNo = shelterNo;
         this.shelterName = shelterName;
+    }
+
+    public Shelter(long shelterNo, String shelterName, String shelterTel, String shelterEmail, String shelterAddress, String shelterLandline) {
+        this.shelterNo = shelterNo;
+        this.shelterName = shelterName;
+        this.shelterTel = shelterTel;
+        this.shelterEmail = shelterEmail;
+        this.shelterAddress = shelterAddress;
+        this.shelterLandline = shelterLandline;
     }
 
     public long getShelterNo() {

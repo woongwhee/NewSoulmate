@@ -11,22 +11,9 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <link href="<%=request.getContextPath()%>/css/common/main.css" rel="stylesheet">
-    <script src="<%=request.getContextPath()%>/js/common/noticeSlide.js"></script>
 </head>
 <body>
     <header><%@include file="/views/template/menubar.jsp"%></header>
-<script>
-    // $(document).ready(function () {
-    //     $('.slider').slick({
-    //         autoplay: true,
-    //         autoplaySpeed: 2000,
-    //         slidesToShow: 20,
-    //         infinite: true,
-    //         dots: true,
-    //     });
-    // });
-</script>
-    </script>
     <main>
 <div id="container">
 
@@ -35,37 +22,22 @@
         <div class="slider">
             <%@include file="/views/common/noticeSlide.jsp"%>
         </div>
-        <script>
-            $(()=>{
-                setNoticeLocation();
-            })
-            function setNoticeLocation(){
-                $("#main_top>.slider>post").click(()=>{
-                    let dno=$(this).getAttribute("id");
-                    location.href="<%=request.getContextPath()%>/noticeDetail?dno="+dno;
-                })
-            }
-        </script>
+
     </div>
     <div id="main_left">
         <div id="adopt-review">
-            <div id="comment2" onclick="location.href='<%=request.getContextPath()%>/adoptRevList'">입양후기+</div>
-                <div id="adopt-review-list">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
+            <div id="comment2"><a href="adoptRevList">입양후기+</a></div>
+                <div id="adopt-review-list"><c:forEach items="${tList}" var="t">
+                    <img class="adopt-thumnail" src="${t.filePath}/${t.changeName}" data-bno="${t.boardNo}"></c:forEach>
                 </div>
         </div>
         <div id="volunteer-review">
-            <div id="comment3" onclick="location.href='<%=request.getContextPath()%>/'">봉사후기+</div>
+            <div id="comment3"><a href="volunteerRevList">봉사후기+</a></div>
             <div id="volunteer-review-list">
                 <ul>
-                    <li><a href="#">봉사후기</a></li>
-                    <li><a href="#">봉사후기</a></li>
-                    <li><a href="#">봉사후기</a></li>
-                    <li><a href="#">봉사후기</a></li>
-                    <li><a href="#">봉사후기</a></li>
+                    <c:forEach items="${vList}" var="v">
+                    <li><a href="volunteerRevDetail?bno=${v.boardNo}">${v.boardTitle}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
             <div id="btn-area">
@@ -73,8 +45,8 @@
             </div>
         </div>
         <div id="adopt-btn-box">
-            <div><button id="adopt-able-animal" onclick="">입양가능 동물</button></div>
-            <div><button id="adopt-step" onclick="">입양절차 안내</button></div>
+            <div><button id="adopt-able-animal">입양가능 동물</button></div>
+            <div><button id="adopt-step">입양절차 안내</button></div>
         </div>
     </div>
 
@@ -120,6 +92,11 @@
 </div>
     </main>
     <footer><%@include file="/views/template/footer.jsp"%></footer>
+    <script>
+
+    </script>
+    <script src="<%=request.getContextPath()%>/js/common/noticeSlide.js"></script>
+
 </body>
 
 </html>

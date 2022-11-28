@@ -1,10 +1,13 @@
 package tk.newsoulmate.web.manger.shelter.controller;
 
+import tk.newsoulmate.domain.dao.VolunteerDao;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
+import tk.newsoulmate.domain.vo.Volunteer;
+
 import tk.newsoulmate.web.manger.shelter.sevice.ShelterMangerService;
-import tk.newsoulmate.web.manger.site.service.ManageService;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -23,6 +26,7 @@ public class ShelterMessageController extends HttpServlet {
             pi=new PageInfo(0,1);
         }else {
             int listCount = new ShelterMangerService().shelterNoAdoptApplyListCount(shelterNo);
+            int listCount2 = new ShelterMangerService().volunteerApplyListCount(shelterNo);
 
             int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 
@@ -36,8 +40,10 @@ public class ShelterMessageController extends HttpServlet {
             }
             pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
 
-            ArrayList<Subscription> list = new ShelterMangerService().ShelterNoAdoptApplyList(pi,shelterNo);
-            request.setAttribute("list", list);
+            ArrayList<Subscription> sList = new ShelterMangerService().shelterNoAdoptApplyList(pi,shelterNo);
+            ArrayList<Volunteer> vList = new ShelterMangerService().volunteerApplyList(pi,shelterNo);
+            request.setAttribute("sList", sList);
+            request.setAttribute("vList",vList);
         }
         request.setAttribute("pi", pi);
         request.getRequestDispatcher("/views/shelterManager/shelterMessage.jsp").forward(request, response);

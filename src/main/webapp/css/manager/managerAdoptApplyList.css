@@ -20,7 +20,78 @@
     height: auto;
 }
 
-#adoptApplyList {
+#user_information {
     font-size: 23px;
     padding: 15px 25px;
+}
+
+.box {
+    margin-top: 20px;
+}
+
+.box span[id=countApply] {
+    padding-left: 30px;
+    font-weight: bold;
+    color: #f45d48;
+}
+
+#applyList {
+    margin-top: 30px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 860px;
+    border: 1px solid rgb(203, 203, 203);
+}
+
+thead th {
+    font-size: 15px;
+    border: 1px solid rgb(203, 203, 203);
+    background-color: rgb(236, 236, 236);
+    padding: 10px 10px;
+    text-align: center;
+}
+
+thead th:first-child {
+    padding: 0 10px;
+}
+
+tbody td {
+    border: 1px solid rgb(203, 203, 203);
+    text-align: center;
+    font-size: 12px;
+}
+
+td input[type=submit] {
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    width: 60px;
+    height: 30px;
+    margin: 8px;
+    background-color: #676767;
+    color: white;
+    cursor: pointer;
+}
+
+#buttonBox {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#buttonBox input[type=button] {
+    margin: 10px;
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(236, 236, 236);
+    cursor: pointer;
+}
+
+td input[type=submit]:hover {
+    background-color: #393939;
+    color: white;
 }

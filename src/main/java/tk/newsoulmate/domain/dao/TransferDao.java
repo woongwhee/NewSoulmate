@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import tk.newsoulmate.domain.vo.response.ManageSupportResponse;
-import tk.newsoulmate.domain.vo.SupportWithdrawRequest;
+import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.domain.vo.Transfer;
+import tk.newsoulmate.domain.vo.request.SupportWithdrawRequest;
 import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
@@ -93,8 +93,8 @@ public class TransferDao {
 		return null;
 	}
 
-	public List<ManageSupportResponse> findAll(Connection conn) {
-		List<ManageSupportResponse> transfers = new ArrayList<>();
+	public List<Support> findAll(Connection conn) {
+		List<Support> transfers = new ArrayList<>();
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("findAll");
@@ -103,11 +103,11 @@ public class TransferDao {
 			psmt = conn.prepareStatement(sql);
 			rset = psmt.executeQuery();
 			while (rset.next()) {
-				transfers.add(new ManageSupportResponse(
-
+				transfers.add(new Support(
+						rset.getInt("SUPPORT_NO"),
 						rset.getString("MERCHANT_UID"),
 						rset.getString("SHELTER_NAME"),
-						rset.getDate("PAY_TIME").toLocalDate(),
+						rset.getDate("PAY_TIME"),
 						rset.getLong("AMOUNT"),
 						rset.getString("MEMBER_NAME"),
 						WithdrawStatus.valueOf(rset.getString("WD_STATUS")),

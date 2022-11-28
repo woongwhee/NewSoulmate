@@ -29,7 +29,7 @@
         </div>
         <div><img src="${context}/image/loading.gif"alt="로딩중" id="loadingImg"></div>
     </div>
-<%@ include file="/views/template/footer.jsp"%>
+    <%@ include file="/views/template/footer.jsp"%>
     <script>
         const listCount=${listCount};
     </script>

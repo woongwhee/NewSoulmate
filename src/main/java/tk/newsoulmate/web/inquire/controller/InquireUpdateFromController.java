@@ -11,8 +11,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet(name = "InquireUpdateFromController", value = "/inquireUpdateForm.bo")
+@WebServlet(name = "InquireUpdateFromController", value = "/inquireUpdateForm")
 public class InquireUpdateFromController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,7 +22,8 @@ public class InquireUpdateFromController extends HttpServlet {
         int boardNo = Integer.parseInt(request.getParameter("bno"));
         ArrayList<Category> list = iService.selectCategoryList();
         Board b = iService.selectInquireBoard(boardNo,loginUser);
-        Attachment at = iService.selectInquireAttachment(boardNo);
+        List<Attachment> aList = iService.selectInquireAttachment(boardNo);
+        Attachment at=aList.isEmpty()?null:aList.get(0);
         request.setAttribute("list",list);
         request.setAttribute("b",b);
         request.setAttribute("at",at);

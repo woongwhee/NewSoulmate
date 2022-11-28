@@ -20,9 +20,8 @@ public class NoticeSearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Gson gson=new Gson();
-        System.out.println(request.getParameter("request"));
         Request rq=gson.fromJson(request.getParameter("request"), Request.class);
-        Request.setValid(rq);
+        rq.setValid();
         List<Notice> nList =new ShelterService().getNoticeList(rq);
         request.setAttribute("nList",nList);
         request.getRequestDispatcher("views/shelter/noticeListArea.jsp").forward(request,response);

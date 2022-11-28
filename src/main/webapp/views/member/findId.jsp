@@ -10,7 +10,6 @@
 <head>
     <title>아이디 찾기</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <%--<script src="/JS/searchMemberId.js"></script>--%>
     <%@include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/member/findId.css" rel="stylesheet">
 </head>
@@ -51,6 +50,7 @@
 
 <%@include file="/views/template/footer.jsp" %>
 
+<%--<script src="${context}/js/member/findId.js"></script>--%>
 
 <script>
 

@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <link href="<%=request.getContextPath()%>/image/titlelogo.png" rel="shortcut icon" type="image/x-icon">
     <link href="<%=request.getContextPath()%>/css/mypage/mypageHeader.css" rel="stylesheet">
     <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
@@ -16,17 +17,17 @@
             <p></p>
         </div>
         <div id="user">
-            <a href="#" id="logout">로그아웃</a>
+            <a href="${context}/logout" id="logout">로그아웃</a>
         </div>
     </div>
 
     <ul class="menu">
         <li>
             <div class="dropdown">
-                <button class="dropdown-btn"><a href="#">회원정보</a></button>
+                <button class="dropdown-btn"><a href="${context}/myPageInfo">회원정보</a></button>
                 <div class="dropdown-submenu">
-                    <a href="#">회원정보 수정</a>
-                    <a href="#">비밀번호 변경</a>
+                    <a href="${context}/myPageInfo">회원정보 수정</a>
+                    <a href="${context}/mypagePwResetPage">비밀번호 변경</a>
                 </div>
             </div>
         </li>

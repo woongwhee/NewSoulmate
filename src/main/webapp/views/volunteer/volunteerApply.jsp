@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.Shelter" %>
+<%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%--
   Created by IntelliJ IDEA.
   User: jinunghwi
@@ -8,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
+
     ArrayList<Shelter> sList = (ArrayList<Shelter>) request.getAttribute("sList");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -25,29 +27,41 @@
 <body>
 <%@include file="/views/template/menubar.jsp"%>
 <div id="content">
-    <div id="volunteer-form">
-        <p>봉사신청서</p>
-        <div id="form-table">
-            <div class="info-group">이름</div>
-            <input type="text" id="user-name" name="name">
-            <div class="info-group"> 봉사희망날짜</div>
-            <input type="date" id="wishDate" name="wishDate">
-            <div class="info-group">전화번호</div>
-            <input type="text" id="user-phone" name="telNum">
-            <div class="info-group">성별</div>
-            <div id="gender-btn-box">
-                <input type="radio" id="user-genderM" name="gender" value="M" id="male">
-                <label for="user-genderM" class="label">남자</label>
-                <input type="radio" id="user-genderF" name="gender" value="F" id="female">
-                <label for="user-genderF" class="label">여자</label>
+    <form action="<%=request.getContextPath()%>/volunteerApplyEnroll" method="post">
+        <div id="volunteer-form">
+            <p>봉사신청서</p>
+            <div id="form-table">
+                <div class="info-group">이름</div>
+                <input type="text" id="user-name" name="name" required>
+
+                <div class="info-group"> 봉사희망날짜</div>
+                <input type="date" id="wishDate" name="wishDate" required>
+
+                <div class="info-group">전화번호</div>
+                <input type="text" id="user-phone" name="telNum" required>
+
+                <div class="info-group">성별</div>
+                <div id="gender-btn-box" aria-required="true">
+                    <input type="radio"  name="gender" value="M" id="male">
+                    <label for="male" class="label">남자</label>
+                    <input type="radio"  name="gender" value="F" id="female">
+                    <label for="female" class="label">여자</label>
+                </div>
+
+                <div class="info-group">보호소</div>
+                <select id="selectShelter" name="shelterNo" required>
+                    <option value="0">보호소를 선택해주세요.</option>
+                    <%for(Shelter s : sList){%>
+                        <option  value="<%=s.getShelterNo()%>">
+                            <%=s.getShelterName()%>
+                        </option>
+                    <%}%>
+                </select>
             </div>
-            <div class="info-group">보호소</div>
-            <select>
-                <option>봉사신청할 보호소를 선택해주세요</option>
-            </select>
+            <button>봉사신청하기</button>
         </div>
-        <button>봉사신청하기</button>
-    </div>
+    </form>
+
     <p>봉사신청 가능한 보호소</p>
     <table class="list-area">
         <thead>
@@ -77,6 +91,15 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    $(".list-area>tbody>tr").click(function () {
+        let shelterNo = $(this).children().eq(0).text().trim();
+        $("#selectShelter").val(shelterNo);
+        console.log(shelterNo);
+        console.log($("#wishDate").val())
+    })
+</script>
 <%@include file="/views/template/footer.jsp"%>
 </body>
 </html>
