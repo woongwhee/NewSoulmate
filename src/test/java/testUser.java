@@ -1,3 +1,4 @@
+/*
 
 
 import net.nurigo.sdk.NurigoApp;
@@ -25,3 +26,4 @@ class testUser {
 	}
 
 }
+*/
