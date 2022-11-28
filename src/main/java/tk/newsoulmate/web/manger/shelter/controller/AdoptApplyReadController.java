@@ -18,9 +18,7 @@ public class AdoptApplyReadController extends HttpServlet {
             request.getRequestDispatcher("ShelterMessage?page=1").forward(request, response);
         }else{
             ManageService msService = new ManageService();
-
-            int s = msService.ChangeAdoptApplySubRead(subNo);
-
+            int s = msService.changeAdoptApplySubRead(subNo);
 
             if(s>0){
                 response.sendRedirect("ShelterMessage?page=1");

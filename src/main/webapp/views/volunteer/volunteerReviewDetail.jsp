@@ -90,7 +90,7 @@
             </table>
         </div>
         <div id="boardList-btn-box">
-            <button id="boardList-btn">목록으로 돌아가기</button>
+            <button id="boardList-btn" onclick="location.href='${context}/volunteerRevList'">목록으로 돌아가기</button>
         </div>
     </div>
     <%@ include file="/views/template/report.jsp"%>
@@ -99,6 +99,7 @@
 <footer>
     <%@ include file="/views/template/footer.jsp"%>
 </footer>
+
 <c:if test="${!empty loginUser}">
 
     <script>
