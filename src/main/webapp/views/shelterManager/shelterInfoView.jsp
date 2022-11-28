@@ -114,7 +114,7 @@
                 'shelterEmail': email
             }),
             success: function () {
-                alert("보호소 정보 변경 성공!");
+                alert("보호소 정보 변경 완료");
                 location.reload();
             },
             error: function () {
