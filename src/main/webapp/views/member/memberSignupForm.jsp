@@ -118,7 +118,7 @@
 <%@include file="/views/template/footer.jsp"%>
 
 
-<%//todo: 자바스크립트 파일 분리해줘요 넹 시러용%>
+<%//todo: 자바스크립트 파일 분리해줘요 분리하면 코드가 안먹혀요 선언을해줘야한다는데,,%>
 <script>
     var context='${context}'
 </script>

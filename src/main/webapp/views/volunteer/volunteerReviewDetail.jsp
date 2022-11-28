@@ -14,7 +14,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>봉사후기-환승주인</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/board/volunteerReviewDetail.css" rel="stylesheet">
 </head>
@@ -62,7 +62,7 @@
                     <td>
                         <button type="button" class="bi bi-exclamation-triangle" data-toggle="modal"
                                 data-target="#reportModal" data-kind="reply" data-ref="${r.replyNo}"></button>
-                        <c:if test="${(!empty loginUser and (loginUser.memberNo eq r.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
+                        <c:if test="${!empty loginUser and (loginUser.memberNo eq r.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
                             <button class="bi bi-trash" ref="${r.replyNo}" id="replyDelete"></button>
                         </c:if>
                     </td>
@@ -90,7 +90,7 @@
             </table>
         </div>
         <div id="boardList-btn-box">
-            <button id="boardList-btn">목록으로 돌아가기</button>
+            <button id="boardList-btn" onclick="location.href='${context}/volunteerRevList'">목록으로 돌아가기</button>
         </div>
     </div>
     <%@ include file="/views/template/report.jsp"%>
@@ -99,6 +99,7 @@
 <footer>
     <%@ include file="/views/template/footer.jsp"%>
 </footer>
+
 <c:if test="${!empty loginUser}">
 
     <script>

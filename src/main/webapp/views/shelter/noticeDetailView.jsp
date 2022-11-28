@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>환승주인 - 상세보기</title>
+    <title>상세보기 - 환승주인</title>
     <%@include file="/views/template/styleTemplate.jsp"%>
 <%
     Notice n=(Notice)request.getAttribute("n");
