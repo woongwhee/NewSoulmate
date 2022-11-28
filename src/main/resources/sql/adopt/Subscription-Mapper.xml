@@ -21,7 +21,7 @@
             FROM(
                 SELECT
                     S.SUB_NO,
-                    S.ANIMAL_ID,
+                    S.ANIMAL_NO,
                     M.MEMBER_ID,
                     S.NAME,
                     S.TEL_NUM,
@@ -45,6 +45,7 @@
         SELECT
         S.SUB_NO,
         S.ANIMAL_NO,
+        M.MEMBER_NO,
         M.MEMBER_ID,
         S.NAME,
         S.TEL_NUM,
@@ -76,6 +77,11 @@
     <entry key="changeAdoptApplySubRead">
         UPDATE SUBSCRIPTION
         SET SUB_READ = 'Y'
+        WHERE SUB_NO = ?
+    </entry>
+
+    <entry key="deleteSubscription">
+        DELETE FROM SUBSCRIPTION
         WHERE SUB_NO = ?
     </entry>
 

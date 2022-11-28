@@ -13,23 +13,8 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import tk.newsoulmate.domain.dao.AttachmentDao;
-import tk.newsoulmate.domain.dao.CategoryDao;
-import tk.newsoulmate.domain.dao.CityDao;
-import tk.newsoulmate.domain.dao.NoticeDao;
-import tk.newsoulmate.domain.dao.ReplyDao;
-import tk.newsoulmate.domain.dao.ShelterDao;
-import tk.newsoulmate.domain.dao.TransferDao;
-import tk.newsoulmate.domain.dao.VillageDao;
-import tk.newsoulmate.domain.vo.Category;
-import tk.newsoulmate.domain.vo.City;
-import tk.newsoulmate.domain.vo.Notice;
-import tk.newsoulmate.domain.vo.Reply;
-import tk.newsoulmate.domain.vo.Request;
-import tk.newsoulmate.domain.vo.Shelter;
-import tk.newsoulmate.domain.vo.Support;
-import tk.newsoulmate.domain.vo.Transfer;
-import tk.newsoulmate.domain.vo.Village;
+import tk.newsoulmate.domain.dao.*;
+import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.domain.vo.response.ResponseMapper;
 import tk.newsoulmate.domain.vo.type.BoardType;
 
@@ -217,13 +202,6 @@ public class ShelterService {
         close();
         return transfers;
     }
-
-
-
-
-
-
-
 
 
 

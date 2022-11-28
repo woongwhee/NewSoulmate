@@ -14,10 +14,12 @@ public class Volunteer {
     private long shelterNo;
     private int memberNo;
 
+    private String memberName;
     private Date startDate;
     private Date applyDate;
     private String name;
     private String telNumber;
+
 
     public Volunteer() {
         super();
@@ -41,6 +43,13 @@ public class Volunteer {
         this.telNumber = telNumber;
     }
 
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
 
     public String getGender() {
         return gender;

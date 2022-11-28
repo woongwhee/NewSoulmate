@@ -261,7 +261,7 @@
         };
 
     $(".form-group>input").keyup(function () {
-        //$("#myPageCheck").removeAttr("disabled");
+        $("#myPageCheck").removeAttr("disabled");
     })
 
 
