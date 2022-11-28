@@ -198,7 +198,6 @@ public class AdoptService {
         Connection conn = JDBCTemplet.getConnection();
         long shelterNo = new ShelterDao().shelterNoByName(conn,animalNo);
         JDBCTemplet.close();
-
         return shelterNo;
     }
     public int checkAnimal(String animalNo){

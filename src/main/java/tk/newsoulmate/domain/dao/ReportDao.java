@@ -38,7 +38,7 @@ public class ReportDao {
             psmt.setInt(1,report.getCategoryNo());
             psmt.setString(2,report.getReportContent());
             psmt.setInt(3,report.getRefType().typeNo);
-            psmt.setInt(4,report.getRefNo());
+            psmt.setLong(4,report.getRefNo());
             result= psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -68,34 +68,21 @@ public class ReportDao {
         return listCount;
 
     }
-    public ArrayList<Report> selectReportList(Connection conn, PageInfo pi){
+    public ArrayList<Report> selectReportList(Connection conn){
         ArrayList<Report> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("selectReportList");
-
         try {
             psmt = conn.prepareStatement(sql);
-            if (pi.getCurrentPage() == 0) {
-                return list;
-            }
-            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-            int endRow = startRow + pi.getBoardLimit() - 1;
-
-            psmt.setInt(1, startRow);
-            psmt.setInt(2, endRow);
-
             rset = psmt.executeQuery();
-
             while (rset.next()){
                 list.add(new Report(
                         rset.getInt("REPORT_NO"),
-                        rset.getInt("CATEGORY_NO"),
+                        rset.getString("CATEGORY_NAME"),
                         rset.getInt("REF_TYPE"),
                         rset.getInt("REF_NO"),
-                        rset.getString("BOARD_TITLE"),
-                        rset.getString("REPORT_CONTENT"),
-                        rset.getString("STATUS")));
+                        rset.getString("REPORT_CONTENT")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -106,7 +93,7 @@ public class ReportDao {
         return list;
 
     }
-    public Report selectReportDetail(Connection conn,int refNo){
+    public Report selectReportDetail(Connection conn,int reportNo){
         Report r = null;
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -114,20 +101,16 @@ public class ReportDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setInt(1,refNo);
-
+            psmt.setInt(1,reportNo);
+            psmt.setInt(2,reportNo);
+            psmt.setInt(3,reportNo);
             rset = psmt.executeQuery();
-
             if(rset.next()){
                 r = new Report(
                         rset.getInt("REPORT_NO"),
-                        rset.getInt("CATEGORY_NO"),
-                        rset.getInt("REF_TYPE"),
-                        rset.getInt("REF_NO"),
-                        rset.getString("BOARD_TITLE"),
-                        rset.getString("REPORT_CONTENT"),
-                        rset.getString("STATUS"),
-                        rset.getString("BOARD_TYPE"));
+                        rset.getLong("REF_NO"),
+                        rset.getInt("TYPE_NO")
+                );
             }
 
         } catch (SQLException e) {
@@ -138,7 +121,7 @@ public class ReportDao {
         }
         return r;
     }
-    public int changeReportStatus(Connection conn, int refNo){
+    public int changeReportStatus(Connection conn, int reportNo){
         int result = 0;
         Report r = null;
         PreparedStatement psmt = null;
@@ -147,7 +130,7 @@ public class ReportDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setInt(1,refNo);
+            psmt.setInt(1,reportNo);
             result = psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

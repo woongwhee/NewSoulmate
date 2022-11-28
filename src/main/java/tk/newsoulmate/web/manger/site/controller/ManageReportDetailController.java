@@ -3,6 +3,7 @@ package tk.newsoulmate.web.manger.site.controller;
 import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.domain.vo.Report;
 import tk.newsoulmate.domain.vo.Subscription;
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.web.manger.site.service.ManageService;
 
 import javax.servlet.*;
@@ -14,18 +15,23 @@ import java.io.IOException;
 public class ManageReportDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int refNo = Integer.parseInt(request.getParameter("bno"));
+        int reportNo = Integer.parseInt(request.getParameter("rno"));
         ManageService msService = new ManageService();
-
-        Report r = msService.selectReportDetail(refNo);
-        if(r!=null){
-
-            request.setAttribute("r",r);
-            request.getRequestDispatcher("views/manager/managerReportDetail.jsp").forward(request,response);
-        } else {
-            request.getSession().setAttribute("errorMsg", "신고내용확인 실패");
-            response.sendRedirect(request.getContextPath());
+        Report r=msService.selectReportDetail(reportNo);
+        String path=request.getContextPath();
+        if(r==null){
+            response.sendRedirect(request.getContextPath()+"/reportList");
+            return;
         }
+        if(r.getBoardType()== BoardType.NOTICE){
+            path+="/noticeDetail?dno"+r.getRefNo();
+        }else{
+            path+="/"+r.getBoardType().boardName+"Detail?bno="+r.getRefNo();
+        }
+        System.out.println(path);
+        response.sendRedirect(path);
+
+
     }
 
     @Override

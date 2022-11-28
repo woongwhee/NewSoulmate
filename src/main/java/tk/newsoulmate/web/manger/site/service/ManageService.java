@@ -114,11 +114,11 @@ public class ManageService {
         close();
         return list;
     }
-    public ArrayList<Report> selectReportList(PageInfo pi){
+    public ArrayList<Report> selectReportList(){
         Connection conn = getConnection();
-        ArrayList<Report> list = new ReportDao().selectReportList(conn, pi);
+        ArrayList<Report> rList = new ReportDao().selectReportList(conn);
         close();
-        return list;
+        return rList;
     }
 
     public Subscription selectAdoptApplyDetail(int subNo){
@@ -149,9 +149,9 @@ public class ManageService {
         return result;
     }
 
-    public int changeReportStatus(int refNo){
+    public int changeReportStatus(int reportNo){
         Connection conn = getConnection();
-        int result = new ReportDao().changeReportStatus(conn, refNo);
+        int result = new ReportDao().changeReportStatus(conn, reportNo);
         if(result >0){
             commit();
         } else{

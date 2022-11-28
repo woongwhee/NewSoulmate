@@ -62,7 +62,7 @@
                     <td>
                         <button type="button" class="bi bi-exclamation-triangle" data-toggle="modal"
                                 data-target="#reportModal" data-kind="reply" data-ref="${r.replyNo}"></button>
-                        <c:if test="${!empty loginUser and loginUser.memberNo eq r.memberNo}">
+                        <c:if test="${(!empty loginUser and (loginUser.memberNo eq r.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
                             <button class="bi bi-trash" ref="${r.replyNo}" id="replyDelete"></button>
                         </c:if>
                     </td>
@@ -107,7 +107,7 @@
             'boardNo':'${b.boardNo}',
             'replyContent':null
         }
-        <c:if test="${loginUser.memberNo eq b.memberNo}">
+        <c:if test="${loginUser.memberNo eq b.memberNo or loginUser.memberGrade.SITE_MANAGER}">
         $('#deleteBoard').click(()=>{
             if(confirm('정말삭제하시겠습니까?')){
                 location.href='${context}/volunteerRevDelete?bno=${b.boardNo}';

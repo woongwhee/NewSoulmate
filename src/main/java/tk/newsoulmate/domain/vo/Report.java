@@ -6,13 +6,12 @@ import tk.newsoulmate.domain.vo.type.ReportType;
 public class Report {
     private int reportNo;
     private int categoryNo;
+    private String categoryName;
     private ReportType refType;
-    private int refNo;
+    private long refNo;
     private String reportContent;
-    private transient String status;
-    private String boardTitle;
+    private String status;
     private BoardType boardType;
-
     public Report(){
         super();
     }
@@ -23,25 +22,27 @@ public class Report {
         this.reportContent = reportContent;
     }
 
-    public Report(int reportNo, int categoryNo, int refType, int refNo, String boardTitle, String reportContent, String status) {
+    public Report(int reportNo,String categoryName, int refType, long refNo,  String reportContent) {
         this.reportNo = reportNo;
-        this.categoryNo = categoryNo;
+        this.categoryName = categoryName;
         this.refType = ReportType.valueOfNo(refType);
         this.refNo = refNo;
         this.reportContent = reportContent;
-        this.status = status;
-        this.boardTitle = boardTitle;
-
     }
-    public Report(int reportNo, int categoryNo, int refType, int refNo, String boardTitle, String reportContent, String status, String boardType) {
+
+    public Report(int reportNo, long refNo, int typeNo) {
+        this.reportNo = reportNo;
+        this.refNo = refNo;
+        this.boardType = BoardType.valueOfNo(typeNo);
+    }
+
+    public Report(int reportNo, int categoryNo, int refType, long refNo, String boardTitle, String reportContent, String status, String boardType) {
         this.reportNo = reportNo;
         this.categoryNo = categoryNo;
         this.refType = ReportType.valueOfNo(refType);
         this.refNo = refNo;
         this.reportContent = reportContent;
         this.status = status;
-        this.boardTitle = boardTitle;
-        this.boardType = BoardType.valueOf(boardType);
     }
 
     public int getReportNo() {
@@ -68,11 +69,11 @@ public class Report {
         this.refType = refType;
     }
 
-    public int getRefNo() {
+    public long getRefNo() {
         return refNo;
     }
 
-    public void setRefNo(int refNo) {
+    public void setRefNo(long refNo) {
         this.refNo = refNo;
     }
 
@@ -92,12 +93,13 @@ public class Report {
         this.status = status;
     }
 
-    public String getBoardTitle() {
-        return boardTitle;
+
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setBoardTitle(String boardTitle) {
-        this.boardTitle = boardTitle;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public BoardType getBoardType() {

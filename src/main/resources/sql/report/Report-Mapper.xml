@@ -18,35 +18,44 @@
     </entry>
 
     <entry key="selectReportList">
-        SELECT *
-        FROM(
-            SELECT
-                ROWNUM AS "RNUM",
-                A.*
-            FROM(
-                SELECT
-                    R.REPORT_NO,
-                    R.CATEGORY_NO,
-                    R.REF_TYPE,
-                    R.REF_NO,
-                    B.BOARD_TITLE,
-                    R.REPORT_CONTENT,
-                    R.STATUS
-
-                FROM REPORT R
-                JOIN BOARD B ON (R.CATEGORY_NO = B.CATEGORY_NO)
-                ORDER BY R.REPORT_NO DESC
-                ) A
-            )
-        WHERE RNUM BETWEEN ? AND ?
+        SELECT
+            REPORT_NO,
+            CATEGORY_NAME,
+            REF_TYPE,
+            REF_NO,
+            REPORT_CONTENT
+        FROM REPORT R
+        JOIN CATEGORY USING (CATEGORY_NO)
+        WHERE STATUS='Y'
+        ORDER BY REPORT_NO
     </entry>
 
     <entry key="selectReportDetail">
         SELECT
-        *
+        REPORT_NO,
+        REF_NO ,
+        TYPE_NO as"TYPE_NO"
         FROM REPORT R
-        JOIN BOARD B ON (R.CATEGORY_NO = B.CATEGORY_NO)
-        WHERE REPORT_NO = ?
+        LEFT JOIN BOARD b ON  b.BOARD_NO=R.REF_NO
+        WHERE REPORT_NO = ? AND REF_TYPE=0
+        UNION
+        SELECT
+        REPORT_NO,
+        RL.BOARD_NO as "REF_NO",
+        b.TYPE_NO as"TYPE_NO"
+        FROM REPORT RP
+        LEFT JOIN REPLY RL ON RL.REPLY_NO=RP.REF_NO
+        LEFT JOIN BOARD b ON  b.BOARD_NO=RL.BOARD_NO
+        WHERE REPORT_NO = ? AND REF_TYPE=1
+        UNION
+        SELECT
+        REPORT_NO,
+        NOTICE_NO as"REF_NO",
+        6 as"TYPE_NO"
+        FROM REPORT RP
+        LEFT JOIN REPLY RL ON RL.REPLY_NO=RP.REF_NO
+        LEFT JOIN ANIMAL A ON  A."desertionNo"=RL.NOTICE_NO
+        WHERE REPORT_NO = ? AND REF_TYPE=2
     </entry>
 
     <entry key="changeReportStatus">
