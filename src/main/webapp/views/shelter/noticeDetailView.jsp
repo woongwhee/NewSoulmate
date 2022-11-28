@@ -95,6 +95,8 @@
                     <c:if test="${!empty r.at}">
                     <td><img class="replyImg" src="${r.at.filePath}/${r.at.changeName}" alt="${r.at.originName}"></td>
                     </c:if>
+                </tr>
+                <tr>
                     <td class="replyContent" colspan="4"> ${r.replyContent}</td>
                 </tr>
                 </c:forEach>

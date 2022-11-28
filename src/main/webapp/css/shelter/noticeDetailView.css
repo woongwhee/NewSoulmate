@@ -17,6 +17,7 @@ body {
 
 #animalImg_1 {
     width: 260px;
+    height: 200px;
 }
 
 #animal-info {
@@ -160,6 +161,11 @@ body {
 
 .replyDate{
     text-align: right;
+}
+
+.replyImg{
+    width: 400px;
+    height: 290px;
 }
 
 #replyInput{

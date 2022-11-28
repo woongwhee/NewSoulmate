@@ -19,7 +19,7 @@ body {
     margin: auto;
     width: 90%;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
     border: solid 2px lightgray;
     border-collapse: collapse;
 }
@@ -43,7 +43,7 @@ body {
     font-weight: 600;
     text-align: left;
     padding-left: 100px;
-
+    margin-top: 30px;
 }
 
 #map{
@@ -51,16 +51,17 @@ body {
     height: 500px;
 }
 
-#list-btn{
+#listBtn{
+    text-align: center;
+    margin : 40px 60px 0 60px;
+}
+#listBtn button{
     width: 250PX;
     height: 60px;
     cursor: pointer;
     font-size: 20px;
-    color: #f8f5f2;
+    color: white;
     border: none;
-    border-radius: 3px;
-    background-color: #484952;
-    position:absolute;
-    left:50%;
-    margin-left:-150px;
+    border-radius: 5px;
+    background-color: #39393a;
 }
