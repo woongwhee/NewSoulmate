@@ -62,7 +62,7 @@ public class EmailVerificationService {
             /*InternetAddress to = new InternetAddress(email,userName);*/
             msg.setRecipient(Message.RecipientType.TO, to);
 
-            msg.setSubject("환승주인 회원가입 인증번호 안내 입니다.","UTF-8");
+            msg.setSubject("환승주인 인증번호 안내 입니다.","UTF-8");
 
             msg.setContent(
                     "<h1>인증번호는 " + sb.toString() + " 입니다.</h1>","text/html;charset=utf-8");
