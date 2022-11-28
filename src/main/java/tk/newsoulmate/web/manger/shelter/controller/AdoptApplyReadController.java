@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.manger.shelter.controller;
 
+import tk.newsoulmate.web.manger.shelter.sevice.ShelterMangerService;
 import tk.newsoulmate.web.manger.site.service.ManageService;
 
 import javax.servlet.*;
@@ -17,9 +18,8 @@ public class AdoptApplyReadController extends HttpServlet {
         if(subRead.equals("Y")){
             request.getRequestDispatcher("ShelterMessage?page=1").forward(request, response);
         }else{
-            ManageService msService = new ManageService();
 
-            int s = msService.ChangeAdoptApplySubRead(subNo);
+            int s = new ShelterMangerService().changeAdoptApplySubRead(subNo);
 
 
             if(s>0){

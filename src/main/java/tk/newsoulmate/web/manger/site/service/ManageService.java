@@ -122,17 +122,7 @@ public class ManageService {
 
         return s;
     }
-    public int ChangeAdoptApplySubRead(int subNo){
-        Connection conn = getConnection();
-        int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
-        if(result > 0){
-            commit();
-        } else{
-            rollback();
-        }
-        close();
-        return result;
-    }
+
 
     public Subscription selectAdoptApplyListCheck(int subNo){
         Connection conn = getConnection();
@@ -177,6 +167,17 @@ public class ManageService {
         Notice n=new NoticeDao().selectNotice(conn,animalNo);
         close();
         return n;
+    }
+    public int changeAdoptApplySubRead(int subNo){
+        Connection conn = getConnection();
+        int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
+        if(result > 0){
+            commit();
+        } else{
+            rollback();
+        }
+        close();
+        return result;
     }
 
 }

@@ -102,4 +102,15 @@ public class ShelterMangerService {
         close();
         return result;
     }
+    public int changeAdoptApplySubRead(int subNo){
+        Connection conn = getConnection();
+        int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
+        if(result > 0){
+            commit();
+        } else{
+            rollback();
+        }
+        close();
+        return result;
+    }
 }

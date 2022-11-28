@@ -66,12 +66,14 @@
 
     <entry key="shelterNoByName">
         SELECT
+        ROWNUM,
         NVL(SHELTER_NO,0) as "shelterNo"
         FROM SHELTER
         WHERE SHELTER_NAME = (SELECT
         "careNm"
         FROM ANIMAL
         WHERE "desertionNo" = ?)
+        AND ROWNUM = 1
     </entry>
 
     <entry key="selectByShelterNo">

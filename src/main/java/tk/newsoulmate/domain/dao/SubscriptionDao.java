@@ -34,7 +34,7 @@ public class SubscriptionDao {
     public int insertSubscription(Connection conn, Subscription sb) {
         int result = 0;
         PreparedStatement psmt = null;
-        String sql = prop.getProperty("adoptApplyInsert");
+        String sql = prop.getProperty("insertSubscription");
 
         try {
             psmt = conn.prepareStatement(sql);

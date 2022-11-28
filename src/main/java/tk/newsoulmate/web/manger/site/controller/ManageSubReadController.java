@@ -22,7 +22,7 @@ public class ManageSubReadController extends HttpServlet {
         }else{
             ManageService msService = new ManageService();
 
-            int s = msService.ChangeAdoptApplySubRead(subNo);
+            int s = msService.changeAdoptApplySubRead(subNo);
 
 
             if(s!=0){
