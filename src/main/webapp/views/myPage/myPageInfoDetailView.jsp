@@ -99,7 +99,7 @@
 
     });
 
-    $('#email_3').keyup(function(){
+    $('#email_3').change(function(){
         $("#email_3 option:selected").each(function () {
 
             if($(this).val()== '1'){ //직접입력일 경우

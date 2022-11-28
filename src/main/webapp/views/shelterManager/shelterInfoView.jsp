@@ -9,7 +9,8 @@
 
     String email = shelter.getShelterEmail();
     String firstEmail = email == null ? "" : email.split("@")[0];
-    String secondEmail = email == null ? "" : email.split("@")[1];;
+    String secondEmail = email == null ? "" : email.split("@")[1];
+
 %>
 
 <html>
@@ -57,9 +58,29 @@
             <div class="form-group">
                 <label>이메일</label>
 
+<%--                <input type="text" name="email_1" id="email_1" value="<%=firstEmail%>">
+                @
+                <input type="text" name="email_2" id="email_2" value="<%=secondEmail%>">--%>
+
+
+
                 <input type="text" name="email_1" id="email_1" value="<%=firstEmail%>">
                 @
                 <input type="text" name="email_2" id="email_2" value="<%=secondEmail%>">
+
+                <select name="email_3" id="email_3">
+                    <option value="1">직접입력</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="nate.com">nate.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="hanmail.net">hanmail.net</option>
+                </select>
+
+
+
+
+
+
                 <button type="button" onclick="sendMail()" id="emailCheck">인증번호 발송</button>
                 <div id="auth"></div>
                 <div id="certified">
@@ -145,6 +166,29 @@
             $("#checkShelterAddress").attr("disabled", flag1);
         });
     });
+
+
+
+
+
+    $('#email_3').change(function(){
+        $("#email_3 option:selected").each(function () {
+
+            if($(this).val()== '1'){ //직접입력일 경우
+                $("#email_2").val('');                        //값 초기화
+                $("#email_2").attr("disabled",false); //활성화
+            }else{ //직접입력이 아닐경우
+                $("#email_2").val($(this).text());      //선택값 입력
+                $("#email_2").attr("disabled",true); //비활성화
+            }
+        });
+    });
+    let inputEmail = 0;
+    $("#email_1,#email_3").keyup(function () {
+        inputEmail = 1;
+        $("#emailCheck").removeAttr("disabled");
+    })
+
 
     let checkMail = 0;
     let mailCode;
