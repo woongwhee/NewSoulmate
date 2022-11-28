@@ -115,11 +115,12 @@ td input[type=submit]:hover {
 
 #updateGradeMemberBtn {
     border: none;
-    background-color: rgb(236, 236, 236);
+    background-color: #319493;
+    color: white;
 }
 
 #updateGradeMemberBtn:hover {
-    background-color: #676767;
+    background-color: #177372;
     color: white;
 }
 
@@ -127,11 +128,21 @@ td input[type=submit]:hover {
 #deleteMemberBtn {
     border: none;
     background-color: #f45d48;
+    color: white;
+    margin: 5px 0;
 }
 
-#deleteMemberBtn:hover {
+#deleteMemberBtn:hover, #deleteMemberBtn2:hover {
     background-color: #e14330;
     color: white;
+}
+
+#deleteMemberBtn2 {
+    border: none;
+    background-color: #f45d48;
+    width: 95px;
+    color: white;
+    margin: 5px;
 }
 
 .btn-secondary {

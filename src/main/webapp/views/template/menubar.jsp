@@ -43,8 +43,7 @@
 
             <div class="dropdown">
                 <div class="saveanimal">
-                    오늘 구조된 동물수: 20 &nbsp; <!-- 통계표시 숫자 가져오기 임의로 숫자 넣어둠-->
-                    오늘 안락사된 동물수: 10
+                    지금 새로운 주인을 기다리고있어요..
                 </div>
             </div>
 
