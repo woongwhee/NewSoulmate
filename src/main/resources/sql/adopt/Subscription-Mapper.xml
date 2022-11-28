@@ -12,7 +12,7 @@
         FROM SUBSCRIPTION
     </entry>
 
-    <entry key="selectAdoptApplyList">F
+    <entry key="selectAdoptApplyList">
         SELECT *
         FROM(
             SELECT
@@ -78,22 +78,5 @@
         SET SUB_READ = 'Y'
         WHERE SUB_NO = ?
     </entry>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </properties>
