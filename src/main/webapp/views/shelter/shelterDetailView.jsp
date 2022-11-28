@@ -15,7 +15,7 @@
 <head>
     <title>보호소 상세 페이지</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link rel="stylesheet" href="${context}/css/shelter/shelterDetailView.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shelter/shelterDetailView.css">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
