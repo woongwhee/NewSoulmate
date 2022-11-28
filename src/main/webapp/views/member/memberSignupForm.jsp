@@ -10,110 +10,91 @@
 <head>
     <title>회원가입</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <%--<link href="css/memberSignupForm.css" rel="stylesheet">--%>
+    <link href="<%=request.getContextPath()%>/css/member/memberSignupForm.css" rel="stylesheet">
 
     <%@include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
+<div class="content-wrap" align="center">
+    <div class="title-wrap">
+        <p>회원가입</p>
+    </div>
+    <div class="userInfo-wrap">
+        <form action="<%=request.getContextPath()%>/signupForm.do" id="myForm" method="get">
+            <div class="input-id-wrap">
+                <label for="memberId">아이디 <span id="ajaxCheckId"></span></label>
+                <br>
+                <input type="text" name="memberId" id="memberId" placeholder="*아이디">
+                <button type="button" id="checkid">중복확인</button>
+            </div>
 
-<div class="signupForm-wrapper" align="center">
-    <div>
-        <div>
-            <h1>회원가입</h1>
-        </div>
-        <div>
-            <form action="<%=request.getContextPath()%>/signupForm.do" id="myForm" method="get">
-                <div class="input-id-wrap">
-                    <div>
-                        <label for="memberId">아이디 <span id="ajaxCheckId"></span></label>
-                        <br>
-                        <input type="text" name="memberId" id="memberId" placeholder="*아이디" >
-                        <button type="button" id="checkid">중복확인</button>
-                    </div>
-                </div>
+            <div class="input-pw-wrap">
+                <label for="memberPw">비밀번호</label>
+                <br>
+                <input type="password" name="memberPwd" id="memberPw" placeholder="*비밀번호">
+                <span id="pwChkMsg"></span>
+            </div>
 
-                <div class="input-pw-wrap">
-                    <div>
-                        <label for="memberPw">비밀번호</label>
-                        <br>
-                        <input type="password" name="memberPwd" id="memberPw" placeholder="*비밀번호" >
-                        <br>
-                        <span id="pwChkMsg"></span>
-                    </div>
-                </div>
+            <div class="input-pwre-wrap">
+                <label for="memberPw">비밀번호 확인</label>
+                <br>
+                <input type="password" name="memberPwRe" id="memberPwRe" placeholder="*비밀번호 확인">
+                <span id="pwReChkMsg"></span>
+            </div>
 
-                <div class="input-pwre-wrap">
-                    <div>
-                        <label for="memberPw">비밀번호 확인</label>
-                        <br>
-                        <input type="password" name="memberPwRe" id="memberPwRe" placeholder="*비밀번호 재입력" >
-                        <br>
-                        <span id="pwReChkMsg"></span>
-                    </div>
-                </div>
+            <div class="input-name-wrap">
+                <label for="memberName">이름</label>
+                <br>
+                <input type="text" name="memberName" id="memberName" placeholder="*이름">
+            </div>
 
-                <div class="input-name-wrap">
-                    <div>
-                        <label for="memberName">이름</label>
-                        <br>
-                        <input type="text" name="memberName" id="memberName" placeholder="*이름" >
-                    </div>
-                </div>
+            <div class="input-nickname-wrap">
+                <label for="nickname">닉네임</label>
+                <br>
+                <input type="text" name="nickName" id="nickName" placeholder="*닉네임">
+                <button type="button" id="checkNickname" onclick="nicknameCheck();">중복확인</button>
+            </div>
 
-                <div class="input-nickname-wrap">
-                    <div>
-                        <label for="nickname">닉네임</label>
-                        <br>
-                        <input type="text" name="nickName" id="nickName" placeholder="*닉네임" >
-                        <button type="button" id="checkNickname" onclick="nicknameCheck();">중복확인</button>
-                    </div>
-                </div>
+            <div class="phone-wrap">
+                <label for="memberPhone">전화번호</label>
+                <br>
+                <select name="memberPhone" id="memberPhone">
+                    <option value="010">010</option>
+                    <option value="011">011</option>
+                    <option value="016">016</option>
+                    <option value="017">017</option>
+                    <option value="019">019</option>
+                </select>
+                <input type="number" name="Phone" id="Phone" placeholder="-빼고 입력" maxlength="8"
+                       oninput="maxLengthChk(this)" required>
+            </div>
 
-                <div class="phone-wrap">
-                    <div>
-                        <label for="memberPhone">전화번호</label>
-                        <br>
-                        <select name="memberPhone" id="memberPhone">
-                            <option value="010">010</option>
-                            <option value="011">011</option>
-                            <option value="016">016</option>
-                            <option value="017">017</option>
-                            <option value="019">019</option>
-                        </select>
-                        <input type="number" name="Phone" id="Phone" placeholder="-빼고 입력" maxlength="8" oninput="maxLengthChk(this)" required>
-                    </div>
-                </div>
-
-                <div class="email-wrap">
-                    <div>
-                        <label for="memberMail">이메일</label>
-                        <br>
-                        <input type="email" name="memberMail" id="memberMail" placeholder="*이메일" >
-                        <button type="button" onclick="sendMail();" >인증번호 발송</button>
-
-                        <div id="auth">
-                            <div>
-                                <input type="text" id="authCode" placeholder="인증번호" >
-                                <button type="button" class="authBtn" id="authBtn" onclick="authenticationMail()">인증하기</button>
-                            </div>
+            <div class="email-wrap">
+                <div>
+                    <label for="memberMail">이메일</label>
+                    <br>
+                    <input type="text" name="memberMail" id="memberMail" placeholder="*이메일">
+                    <button type="button" onclick="sendMail();">인증번호 발송</button>
+                    <div id="auth">
+                        <div>
+                            <input type="text" id="authCode" placeholder="인증번호">
+                            <button type="button" class="authBtn" id="authBtn"
+                                    onclick="authenticationMail()">인증하기</button>
                         </div>
                     </div>
                 </div>
+            </div>
+            <span id="timeZone"></span>
+            <span id="authMsg"></span>
 
-                <span id="timeZone"></span>
-                <span id="authMsg"></span>
-
-                <div>
-                    <button class="cancelBtn">취소</button>
-                    <button type="submit" onclick="return signupCheck();" id="signupBtn">회원가입</button>
-                </div>
-            </form>
-
-        </div>
+            <div id="signup-btn-box">
+                <button class="cancelBtn">취소</button>
+                <button type="submit" onclick="return signupCheck();" id="signupBtn">회원가입</button>
+            </div>
+        </form>
     </div>
 </div>
-
 
 <%@include file="/views/template/footer.jsp"%>
 
