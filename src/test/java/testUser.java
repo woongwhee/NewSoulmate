@@ -13,15 +13,15 @@ class testUser {
 
 	@Test
 	void 이름테스트() {
-		Message message = new Message();
-		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-		message.setFrom("");
-		message.setTo("");
-		message.setText("테스트용메세지입니다.");
-		message.getFrom();
-		MessageService messageService= NurigoApp.INSTANCE.initialize(APIKeys.SolapiKey, APIKeys.SolapiSecretKey, "https://api.solapi.com");
-		SingleMessageSentResponse response = ((DefaultMessageService) messageService).sendOne(new SingleMessageSendingRequest(message));
-		System.out.println(response);
+//		Message message = new Message();
+//		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+//		message.setFrom("");
+//		message.setTo("");
+//		message.setText("테스트용메세지입니다.");
+//		message.getFrom();
+//		MessageService messageService= NurigoApp.INSTANCE.initialize(APIKeys.SolapiKey, APIKeys.SolapiSecretKey, "https://api.solapi.com");
+//		SingleMessageSentResponse response = ((DefaultMessageService) messageService).sendOne(new SingleMessageSendingRequest(message));
+//		System.out.println(response);
 	}
 
 }

@@ -256,7 +256,7 @@ CREATE TABLE "SUBSCRIPTION" (
                                 "MEMBER_NO"   NUMBER
                                     CONSTRAINT SUB_MN_NN NOT NULL ,
                                 "SHELTER_NO" NUMBER,
-                                "ANIMAL_NO"   VARCHAR2(100),
+                                "ANIMAL_NO"   NUMBER,
                                 "TEL_NUM"   VARCHAR2(15)
                                     CONSTRAINT SUB_TN_NN NOT NULL,
                                 "NAME"   VARCHAR2(15)
@@ -270,8 +270,8 @@ CREATE TABLE "SUBSCRIPTION" (
                                 "WISH_DATE"   DATE  CONSTRAINT SUB_WD_NN NOT NULL,
                                 "SUB_READ"   VARCHAR2(1)
                                     CONSTRAINT SUB_RD_CK CHECK ( SUB_READ in ('Y','N')),
-                                "SUB_DATE"   DATE
-                                    DEFAULT SYSDATE
+
+                                "SUB_DATE"   DATE DEFAULT SYSDATE
 );
 --첨부파일--
 CREATE TABLE "ATTACHMENT" (
