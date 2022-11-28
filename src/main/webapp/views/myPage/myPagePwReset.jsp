@@ -17,7 +17,7 @@
     <title>마이페이지 - 비밀번호 변경</title>
 
     <%@ include file="/views/template/styleTemplate.jsp" %>
-    <link href="<%=request.getContextPath()%>/css/mypage/mypageInfo.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/mypage/mtPagePwReset.css" rel="stylesheet">
 
 
 </head>
