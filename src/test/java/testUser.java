@@ -1,11 +1,11 @@
 
 
-import net.nurigo.sdk.NurigoApp;
-import net.nurigo.sdk.message.model.Message;
-import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
-import net.nurigo.sdk.message.response.SingleMessageSentResponse;
-import net.nurigo.sdk.message.service.DefaultMessageService;
-import net.nurigo.sdk.message.service.MessageService;
+//import net.nurigo.sdk.NurigoApp;
+//import net.nurigo.sdk.message.model.Message;
+//import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+//import net.nurigo.sdk.message.response.SingleMessageSentResponse;
+//import net.nurigo.sdk.message.service.DefaultMessageService;
+//import net.nurigo.sdk.message.service.MessageService;
 import org.junit.jupiter.api.Test;
 import tk.newsoulmate.web.common.APIKeys;
 
