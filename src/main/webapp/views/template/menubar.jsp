@@ -61,7 +61,7 @@
                 <div class="dropdown-submenu">
                     <a href="${context}/adoptApply">입양신청</a>
                     <a href="${context}/adoptRevList">입양후기</a>
-                    <a href="#">입양절차</a>
+                    <a href="${context}/adoptStep">입양절차</a>
                 </div>
             </div>
 

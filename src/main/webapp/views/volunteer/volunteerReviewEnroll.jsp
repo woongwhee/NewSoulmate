@@ -8,7 +8,7 @@
 <body>
 <%@include file="/views/template/menubar.jsp"%>
 <div id="content">
-    <div id="review-enroll-title">입양후기 작성하기</div>
+    <div id="review-enroll-title">봉사후기 작성하기</div>
         <div id="review-enroll-form">
             <table id="review-enroll-table">
                 <tr>
