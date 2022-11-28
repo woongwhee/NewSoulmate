@@ -251,27 +251,27 @@ CREATE TABLE "CONFIRM" (
 
 --입양신청서---
 CREATE TABLE "SUBSCRIPTION" (
-                                "SUB_NO" NUMBER
-                                    CONSTRAINT PK_SUBSCRIPTION PRIMARY KEY,
-                                "MEMBER_NO"   NUMBER
-                                    CONSTRAINT SUB_MN_NN NOT NULL ,
-                                "SHELTER_NO" NUMBER,
-                                "ANIMAL_NO"   VARCHAR2(100),
-                                "TEL_NUM"   VARCHAR2(15)
-                                    CONSTRAINT SUB_TN_NN NOT NULL,
-                                "NAME"   VARCHAR2(15)
-                                    CONSTRAINT SUB_NM_NN   NOT NULL,
-                                "GENDER" CHAR(1)
-                                    CONSTRAINT SUB_GD_CK CHECK ( GENDER in ('F','M')),
-                                "ADOPT_REASON"   VARCHAR2(1000),
-                                "FAMILY_AGREEMENT"   VARCHAR2(1000),
-                                "WHEN_SICK"   VARCHAR2(1000),
-                                "BIG_DUTY"   VARCHAR2(1000),
-                                "WISH_DATE"   DATE  CONSTRAINT SUB_WD_NN NOT NULL,
-                                "SUB_READ"   VARCHAR2(1)
-                                    CONSTRAINT SUB_RD_CK CHECK ( SUB_READ in ('Y','N')),
-                                "SUB_DATE"   DATE
-                                    DEFAULT SYSDATE
+    "SUB_NO" NUMBER
+        CONSTRAINT PK_SUBSCRIPTION PRIMARY KEY,
+    "MEMBER_NO"   NUMBER
+        CONSTRAINT SUB_MN_NN NOT NULL ,
+    "SHELTER_NO" NUMBER,
+    "ANIMAL_NO"   NUMBER,
+    "TEL_NUM"   VARCHAR2(15)
+        CONSTRAINT SUB_TN_NN NOT NULL,
+    "NAME"   VARCHAR2(15)
+        CONSTRAINT SUB_NM_NN   NOT NULL,
+    "GENDER" CHAR(1)
+        CONSTRAINT SUB_GD_CK CHECK ( GENDER in ('F','M')),
+    "ADOPT_REASON"   VARCHAR2(1000),
+    "FAMILY_AGREEMENT"   VARCHAR2(1000),
+    "WHEN_SICK"   VARCHAR2(1000),
+    "BIG_DUTY"   VARCHAR2(1000),
+    "WISH_DATE"   DATE  CONSTRAINT SUB_WD_NN NOT NULL,
+    "SUB_READ"   VARCHAR2(1)
+        CONSTRAINT SUB_RD_CK CHECK ( SUB_READ in ('Y','N')),
+    "SUB_DATE"   DATE
+        DEFAULT SYSDATE
 );
 --첨부파일--
 CREATE TABLE "ATTACHMENT" (
@@ -336,15 +336,15 @@ CREATE TABLE "REPORT" (
 );
 
 CREATE TABLE "GRADE_UP" (
-                            "GRADE_NO"   NUMBER CONSTRAINT "PK_GRADE_UP" PRIMARY KEY   ,
-                            "MEMBER_NO"   NUMBER   CONSTRAINT "GU_MN_NN" NOT NULL,
-                            "SHELTER_NO"   NUMBER      CONSTRAINT "GU_SN_NN" NOT NULL,
-                            "FILE_PATH"   VARCHAR(200)   CONSTRAINT "GU_FP_NN"   NOT NULL,
-                            "SHELTER_TEL"   VARCHAR2(20) CONSTRAINT "GU_ST_NN"   NOT NULL,
-                            "SHELTER_LANDLINE"   VARCHAR2(20) CONSTRAINT "GU_SL_NN" NOT   NULL,
-                            "SHELTER_COMP_NO"   VARCHAR2(30)  CONSTRAINT "GU_SCN_NN"    NOT   NULL,
-                            "GRADE_STATUS"   VARCHAR2(1)       CONSTRAINT "GU_GS_NN" NOT NULL,
-                            "SHELTER_ADDRESS"   VARCHAR2(100)   CONSTRAINT "GU_SA_NN"   NULL
+    "GRADE_NO"   NUMBER CONSTRAINT "PK_GRADE_UP" PRIMARY KEY   ,
+    "MEMBER_NO"   NUMBER   CONSTRAINT "GU_MN_NN" NOT NULL,
+    "SHELTER_NO"   NUMBER      CONSTRAINT "GU_SN_NN" NOT NULL,
+    "FILE_NO"   NUMBER   CONSTRAINT "GU_FN_NN"   NOT NULL,
+    "SHELTER_TEL"   VARCHAR2(20) CONSTRAINT "GU_ST_NN"   NOT NULL,
+    "SHELTER_LANDLINE"   VARCHAR2(20) CONSTRAINT "GU_SL_NN" NOT   NULL,
+    "SHELTER_COMP_NO"   VARCHAR2(30)  CONSTRAINT "GU_SCN_NN"    NOT   NULL,
+    "GRADE_STATUS"   VARCHAR2(1)   DEFAULT 'N'    CONSTRAINT "GU_GS_NN" NOT NULL,
+    "SHELTER_ADDRESS"   VARCHAR2(100)   CONSTRAINT "GU_SA_NN"   NULL
 );
 
 
@@ -495,7 +495,7 @@ comment on column ANIMAL."officetel" is '담당자연락처';
 COMMENT ON COLUMN "GRADE_UP"."GRADE_NO" IS '신청번호';
 COMMENT ON COLUMN "GRADE_UP"."MEMBER_NO" IS '회원번호';
 COMMENT ON COLUMN "GRADE_UP"."SHELTER_NO" IS '보호소 번호';
-COMMENT ON COLUMN "GRADE_UP"."FILE_PATH" IS '첨부파일경로';
+COMMENT ON COLUMN "GRADE_UP"."FILE_NO" IS '파일번호';
 COMMENT ON COLUMN "GRADE_UP"."SHELTER_TEL" IS '보호소 무선번호';
 COMMENT ON COLUMN "GRADE_UP"."SHELTER_LANDLINE" IS '보호소 유선번호';
 COMMENT ON COLUMN "GRADE_UP"."SHELTER_COMP_NO" IS '보호소 사업자 번호';
