@@ -27,7 +27,7 @@ a {
 
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 3px 0;
 }
@@ -80,7 +80,7 @@ a {
 }
 
 .saveanimal {
-    width: 420px;
+    width: 300px;
     padding: 10px;
     font-size: 18px;
     text-align: center;

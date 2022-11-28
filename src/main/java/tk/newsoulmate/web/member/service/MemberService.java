@@ -44,12 +44,12 @@ public class MemberService {
         MemberDao md=new MemberDao();
         Member m= md.loginMember(memberId,memberPwd,conn);
         if(m!=null){
-            int result=md.updateResent(m,conn);
-            if(result>0){
-                commit();
-            }else{
-                rollback();
-            }
+//            int result=md.updateResent(m,conn);
+//            if(result>0){
+//                commit();
+//            }else{
+//                rollback();
+//            }
         }
         close();
         return m;
