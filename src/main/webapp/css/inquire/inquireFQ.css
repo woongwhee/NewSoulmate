@@ -245,8 +245,22 @@ color: #00b0a2;
     color: white;
 }
 
-
 #boardList, #boardUpdate, #boardDelete {
     width: 80px;
     height: 30px;
+}
+
+#replyWriterQna {
+    color: #f45d48;
+    font-weight: bold;
+    padding: 20px 0 20px 0;
+}
+
+#replyContentQna {
+    background-color: rgba( 255, 255, 255, 0.5 );
+    border-radius: 5px;
+}
+
+#replyDelete {
+    border: none;
 }
