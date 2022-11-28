@@ -10,7 +10,6 @@
     String email = shelter.getShelterEmail();
     String firstEmail = email == null ? "" : email.split("@")[0];
     String secondEmail = email == null ? "" : email.split("@")[1];
-
 %>
 
 <html>
@@ -58,12 +57,6 @@
             <div class="form-group">
                 <label>이메일</label>
 
-<%--                <input type="text" name="email_1" id="email_1" value="<%=firstEmail%>">
-                @
-                <input type="text" name="email_2" id="email_2" value="<%=secondEmail%>">--%>
-
-
-
                 <input type="text" name="email_1" id="email_1" value="<%=firstEmail%>">
                 @
                 <input type="text" name="email_2" id="email_2" value="<%=secondEmail%>">
@@ -75,11 +68,6 @@
                     <option value="gmail.com">gmail.com</option>
                     <option value="hanmail.net">hanmail.net</option>
                 </select>
-
-
-
-
-
 
                 <button type="button" onclick="sendMail()" id="emailCheck">인증번호 발송</button>
                 <div id="auth"></div>

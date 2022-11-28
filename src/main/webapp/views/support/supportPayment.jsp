@@ -76,7 +76,7 @@
                             <input type="radio" name="amountCheck" value="100000"> 100,000원
                         </label>
                         <label class="btn btn-danger">
-                            <input type="radio" name="amountCheck" value="100"> 100원
+                            <input type="radio" name="amountCheck" value="5000"> 5000원
                         </label>
                     </div>
                 </td>

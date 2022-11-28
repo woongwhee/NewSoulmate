@@ -56,7 +56,7 @@ public class adoptApplyInsertController extends HttpServlet {
 
         int checkAnimal = new AdoptService().checkAnimal(animalNo);
         if(checkAnimal==0){
-            request.getSession().setAttribute("alertMsg","입양신청에 실패하였습니다.");
+            request.getSession().setAttribute("alertMsg","입력하신 공고번호는 존재하지 않는 번호입니다.");
             request.getRequestDispatcher("/views/adopt/adoptApply.jsp").forward(request,response);
             return;
         }

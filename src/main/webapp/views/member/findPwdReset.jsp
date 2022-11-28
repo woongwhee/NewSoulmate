@@ -79,7 +79,7 @@
     password.addEventListener("change", function() {
 
         const inputPw = password.value;
-        const pwReg = /^[a-zA-Z0-9]{6,}$/;
+        const pwReg = /^[a-zA-Z0-9@$!%*#?&]{6,}$/;
         const pwChkMsg = document.querySelector("#pwChkMsg");
 
         const inputPwRe = passwordConfirm.value;

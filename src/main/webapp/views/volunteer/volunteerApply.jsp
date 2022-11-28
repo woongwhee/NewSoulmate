@@ -9,7 +9,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
-
     ArrayList<Shelter> sList = (ArrayList<Shelter>) request.getAttribute("sList");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -41,8 +40,8 @@
                 <input type="text" id="user-phone" name="telNum" required>
 
                 <div class="info-group">성별</div>
-                <div id="gender-btn-box" aria-required="true">
-                    <input type="radio"  name="gender" value="M" id="male">
+                <div id="gender-btn-box">
+                    <input type="radio"  name="gender" value="M" id="male" required>
                     <label for="male" class="label">남자</label>
                     <input type="radio"  name="gender" value="F" id="female">
                     <label for="female" class="label">여자</label>

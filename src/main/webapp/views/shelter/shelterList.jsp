@@ -106,7 +106,7 @@
             // textnode를 가져옴
             console.log(shelterNo);
 
-            location.href = '<%=request.getContextPath()%>/Detail?shelterNo='+shelterNo;
+            location.href = '<%=request.getContextPath()%>/ShelterDetail?shelterNo='+shelterNo;
         })
 
 </script>

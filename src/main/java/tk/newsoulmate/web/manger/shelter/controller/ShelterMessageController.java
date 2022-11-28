@@ -22,6 +22,7 @@ public class ShelterMessageController extends HttpServlet {
         Member loginUser=(Member)request.getSession().getAttribute("loginUser");
         PageInfo pi;
         long shelterNo = loginUser.getShelterNo();
+        System.out.println(shelterNo);
         if(loginUser==null){
             pi=new PageInfo(0,1);
         }else {
@@ -42,6 +43,7 @@ public class ShelterMessageController extends HttpServlet {
 
             ArrayList<Subscription> sList = new ShelterMangerService().shelterNoAdoptApplyList(pi,shelterNo);
             ArrayList<Volunteer> vList = new ShelterMangerService().volunteerApplyList(pi,shelterNo);
+            System.out.println(vList);
             request.setAttribute("sList", sList);
             request.setAttribute("vList",vList);
         }
