@@ -89,7 +89,7 @@
                     <div>
                         <label for="memberMail">이메일</label>
                         <br>
-                        <input type="text" name="memberMail" id="memberMail" placeholder="*이메일" >
+                        <input type="email" name="memberMail" id="memberMail" placeholder="*이메일" >
                         <button type="button" onclick="sendMail();" >인증번호 발송</button>
 
                         <div id="auth">

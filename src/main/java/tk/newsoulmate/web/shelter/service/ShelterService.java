@@ -171,6 +171,13 @@ public class ShelterService {
         return s;
     }
 
+    public int updateShelter(Shelter updateReq) {
+        Connection conn = getConnection();
+        int result = new ShelterDao().update(conn, updateReq);
+        close();
+        return result;
+    }
+
     public int updateLatestTransfer(long shelterNo, long supportNo) {
         Connection conn = getConnection();
         // SupportNo 기준으로 Transfer를 가져오기
@@ -217,14 +224,5 @@ public class ShelterService {
         close();
         return transfers;
     }
-
-
-
-
-
-
-
-
-
 
 }

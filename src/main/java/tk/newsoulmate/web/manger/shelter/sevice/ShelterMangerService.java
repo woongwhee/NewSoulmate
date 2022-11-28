@@ -49,4 +49,29 @@ public class ShelterMangerService {
         close();
         return list;
     }
+
+
+
+
+/*    // 갱신된 정보 다시 조회
+    public Shelter updateShelterInfo(Shelter s) {
+        Connection conn = getConnection();
+        int result = new ShelterDao().updateShelterInfo(conn, s);
+        Shelter updateShelter = null;
+
+        if(result > 0) {
+            commit();
+            updateShelter = new ShelterDao().updateShelterInfo(s.setShelterNo(), conn);
+        }else{
+            rollback();
+        }
+        close();
+        return updateShelter;
+    }*/
+
+
+
+
+
+
 }

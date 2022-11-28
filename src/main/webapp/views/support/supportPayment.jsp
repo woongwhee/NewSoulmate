@@ -208,7 +208,6 @@
         selectedShelterNo = shelterNo;
         $("#selected-shelter").html($(this).children().eq(1).text().trim());
         $(".modal-footer>button").click();
-
     })
 
     // 1. 서버로부터 후원번호를 받아와야함 (서버에서 하는 이유: amount에대한 기록을 검증용도로 사용 서버로부터 만들어야 중복없이 사용) => url 호출부분

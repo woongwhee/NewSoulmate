@@ -99,6 +99,27 @@
 
     });
 
+    $('#email_3').change(function(){
+        $("#email_3 option:selected").each(function () {
+
+            if($(this).val()== '1'){ //직접입력일 경우
+                $("#email_2").val('');                        //값 초기화
+                $("#email_2").attr("disabled",false); //활성화
+            }else{ //직접입력이 아닐경우
+                $("#email_2").val($(this).text());      //선택값 입력
+                $("#email_2").attr("disabled",true); //비활성화
+            }
+        });
+    });
+    let inputEmail = 0;
+    $("#email_1,#email_3").keyup(function () {
+        inputEmail = 1;
+        $("#emailCheck").removeAttr("disabled");
+    })
+
+
+
+
     // 변경사항이 있을경우 -> 변경된 input value를 servlet에 보내줘야함
     // 변경된 input에 대해서 무조건 유효성 검사 해야함 -> 버튼 클릭을 해야함.
     // 변경하기 클릭시
@@ -158,110 +179,112 @@
     });
 
 
-        $('#email_3').keyup(function(){
-            $("#email_3 option:selected").each(function () {
+/*
+    $('#email_3').keyup(function(){
+        $("#email_3 option:selected").each(function () {
 
-                if($(this).val()== '1'){ //직접입력일 경우
-                    $("#email_2").val('');                        //값 초기화
-                    $("#email_2").attr("disabled",false); //활성화
-                }else{ //직접입력이 아닐경우
-                    $("#email_2").val($(this).text());      //선택값 입력
-                    $("#email_2").attr("disabled",true); //비활성화
-                }
-            });
+            if($(this).val()== '1'){ //직접입력일 경우
+                $("#email_2").val('');                        //값 초기화
+                $("#email_2").attr("disabled",false); //활성화
+            }else{ //직접입력이 아닐경우
+                $("#email_2").val($(this).text());      //선택값 입력
+                $("#email_2").attr("disabled",true); //비활성화
+            }
         });
+    });
     let inputEmail = 0;
     $("#email_1,#email_3").keyup(function () {
         inputEmail = 1;
         $("#emailCheck").removeAttr("disabled");
     })
+*/
 
-        function sendMail() {
-            const memberMail2 = $("#email_1").val() + $("#email_2").val()
-            console.log(memberMail2);
+    function sendMail() {
+        const memberMail2 = $("#email_1").val() + $("#email_2").val()
+        console.log(memberMail2);
 
-            $.ajax({
-                url: "<%= request.getContextPath()%>/sendMail.do",
-                data: {memberMail: memberMail2},
-                type: "get",
-                success: function (data) {
-                    if (data != null) {
-                        mailCode = "notNull";
-                        $("#auth").css("display", "flex");
-                        authTime();
-                    }
-                }
-            });
-        }
-
-
-        // 입력시간 출력
-        function authTime() {
-            $("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
-            intervalId = window.setInterval(function () {
-                timeCount();
-            }, 1000);
-        }
-
-        function timeCount() {
-
-            const min = Number($("#min").text());
-
-            const sec = $("#sec").text();
-            if (sec == "00") {
-                if (min == 0) {
-                    mailCode = null;
-                    clearInterval(intervalId);
-                } else {
-                    $("#min").text(min - 1);
-                    $("#sec").text(59);
-
-                }
-            } else {
-                const Sec2 = Number(sec) - 1;
-                if (Sec2 < 10) {
-                    $("#sec").text("0" + Sec2);
-                } else {
-                    $("#sec").text(Sec2);
+        $.ajax({
+            url: "<%= request.getContextPath()%>/sendMail.do",
+            data: {memberMail: memberMail2},
+            type: "get",
+            success: function (data) {
+                if (data != null) {
+                    mailCode = "notNull";
+                    $("#auth").css("display", "flex");
+                    authTime();
                 }
             }
-        }
+        });
+    }
 
-        function authenticationMail() {
-            inputEmail = 0;
-            const inputValue = $("#authCode").val();
-            if (mailCode != null) {
-                $.ajax({
-                    url: '<%= request.getContextPath()%>/checkAuth',
-                    type: 'get',
-                    data: {authCode: inputValue},
-                    success: (result) => {
-                        if (result == 1) {
-                            $("#authMsg").text("인증에 성공하셨습니다.");
-                            clearInterval(intervalId);
-                            $("#timeZone").hide();
-                            checkMail = 1;
-                        } else if (result == 0) {
-                            $("#authMsg").text("인증번호가 일치하지 않습니다.");
-                            checkMail = 0;
-                        }
-                    },
-                    error: function () {
-                        alert("서버요청실패");
+
+    // 입력시간 출력
+    function authTime() {
+        $("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
+        intervalId = window.setInterval(function () {
+            timeCount();
+        }, 1000);
+    }
+
+    function timeCount() {
+
+        const min = Number($("#min").text());
+
+        const sec = $("#sec").text();
+        if (sec == "00") {
+            if (min == 0) {
+                mailCode = null;
+                clearInterval(intervalId);
+            } else {
+                $("#min").text(min - 1);
+                $("#sec").text(59);
+
+            }
+        } else {
+            const Sec2 = Number(sec) - 1;
+            if (Sec2 < 10) {
+                $("#sec").text("0" + Sec2);
+            } else {
+                $("#sec").text(Sec2);
+            }
+        }
+    }
+
+    function authenticationMail() {
+        inputEmail = 0;
+        const inputValue = $("#authCode").val();
+        if (mailCode != null) {
+            $.ajax({
+                url: '<%= request.getContextPath()%>/checkAuth',
+                type: 'get',
+                data: {authCode: inputValue},
+                success: (result) => {
+                    if (result == 1) {
+                        $("#authMsg").text("인증에 성공하셨습니다.");
+                        clearInterval(intervalId);
+                        $("#timeZone").hide();
+                        checkMail = 1;
+                    } else if (result == 0) {
+                        $("#authMsg").text("인증번호가 일치하지 않습니다.");
                         checkMail = 0;
                     }
+                },
+                error: function () {
+                    alert("서버요청실패");
+                    checkMail = 0;
+                }
 
-                });
-            } else {
-                $("#authMsg").text("인증시간이 만료되었습니다.");
-                checkMail = 0;
-            }
-            console.log(inputValue);
-            console.log(mailCode);
-        };
+            });
+        } else {
+            $("#authMsg").text("인증시간이 만료되었습니다.");
+            checkMail = 0;
+        }
+        console.log(inputValue);
+        console.log(mailCode);
+    };
 
     $(".form-group>input").keyup(function () {
-        //$("#myPageCheck").removeAttr("disabled");
+        $("#myPageCheck").removeAttr("disabled");
     })
 
 

@@ -12,7 +12,7 @@
         FROM SUBSCRIPTION
     </entry>
 
-    <entry key="selectAdoptApplyList">
+    <entry key="selectAdoptApplyList">F
         SELECT *
         FROM(
             SELECT

@@ -19,6 +19,7 @@ public class LoginController extends HttpServlet {
 
         MemberService ms = new MemberService();
         Member loginUser = ms.loginMember(memberId, memberPwd);
+
         if(loginUser == null) {
             request.getSession().setAttribute("errorMsg","로그인에 실패했습니다.");
             response.sendRedirect(request.getContextPath()+"/loginpage");

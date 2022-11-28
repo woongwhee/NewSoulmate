@@ -79,21 +79,6 @@
         WHERE SHELTER_NO = ?
     </entry>
 
-    <!--    회원정보에 등록된 보호소만 후원가능하게 할경우
-<entry key="">
-    SELECT
-    S.SHELTER_NO,
-    S.SHELTER_NAME,
-    S.SHELTER_ADDRESS,
-    S.SHELTER_LANDLINE,
-    S.CITY_NO,
-    S.VILLAGE_NO
-    FROM SHELTER S
-    INNER JOIN MEMBER M on S.SHELTER_NO = M.SHELTER_NO
-    WHERE SHELTER_ADDRESS IS NOT NULL
-</entry>-->
-
-
     <entry key="updateLatestTransfer">
         UPDATE SHELTER
         SET TRANSFER_NO = ?
@@ -111,7 +96,14 @@
         AND SHELTER_ADDRESS IS NOT NULL
     </entry>
 
-
+    <entry key="update">
+        UPDATE SHELTER SET
+        SHELTER_LANDLINE = ?,
+        SHELTER_TEL = ?,
+        SHELTER_ADDRESS = ?,
+        SHELTER_EMAIL = ?
+        WHERE SHELTER_NO = ?
+    </entry>
 
 </properties>
 

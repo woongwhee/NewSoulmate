@@ -1,16 +1,16 @@
-package tk.newsoulmate.web.manger.shelter.controller;
+package tk.newsoulmate.web.myPage.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "shelterInfoServlet", value = "/shelterInfo")
-public class ShelterInfoServlet extends HttpServlet {
+@WebServlet(name = "MypagePwResetServlet", value = "/mypagePwResetPage")
+public class MypagePwResetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("views/shelterManager/shelterInfoView.jsp").forward(request,response);
+        request.getRequestDispatcher("views/myPage/myPagePwReset.jsp").forward(request,response);
 
     }
 
