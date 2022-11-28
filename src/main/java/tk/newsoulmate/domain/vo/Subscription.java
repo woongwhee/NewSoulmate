@@ -19,6 +19,7 @@ public class Subscription {
     private String subRead;
     private Date subDate;
 
+
     private String memberId;
 
     public Subscription(){

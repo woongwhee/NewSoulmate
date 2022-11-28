@@ -15,6 +15,8 @@ public  class APIKeys {
     public static String ImportApiKey;
     public static String KakaoMapKey;
     public static String ImportSecretKey;
+    public static String SolapiKey;
+    public static String SolapiSecretKey;
     public APIKeys(){
             String FilePath= APIKeys.class.getResource("/key/APIKey.xml").getPath();
             this.prop=new Properties();
@@ -24,6 +26,8 @@ public  class APIKeys {
                 this.ImportApiKey=prop.getProperty("ImportApiKey");
                 this.KakaoMapKey=prop.getProperty("KakaoMapKey");
                 this.ImportSecretKey=prop.getProperty("ImportSecretKey");
+                this.SolapiKey=prop.getProperty("SolapiKey");
+                this.SolapiSecretKey=prop.getProperty("SolapiSecretKey");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

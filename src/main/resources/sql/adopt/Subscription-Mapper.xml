@@ -79,21 +79,8 @@
         WHERE SUB_NO = ?
     </entry>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <entry key="deleteSubscription">
+        DELETE FROM SUBSCRIPTION
+        WHERE SUB_NO = ?
+    </entry>
 </properties>

@@ -32,7 +32,12 @@ $(function(){
             alert("동의 항목을 모두 선택해주세요.");
             return;
         }
-        $(location).attr("href","${context}/MemberSignup");
+        $(location).attr("href", getContextPath()+"/MemberSignup");
     });
 
+    function getContextPath(){
+        let hostIndex = location.href.indexOf( location.host ) + location.host.length;
+        let contextPath = location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+        return contextPath;
+    }
 });

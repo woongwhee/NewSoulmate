@@ -76,7 +76,7 @@
     function getCookie() {
         let value = "";
         if(document.cookie.length > 0) {
-            let index = documnet.cookie.indexOf("saveId="); // saveId = admin; path =/; max-age = 5660;
+            let index = document.cookie.indexOf("saveId="); // saveId = admin; path =/; max-age = 5660;
             if(index != -1) { // 쿠키값이 있다면
                 index += "saveId=".length;
                 let end = document.cookie.indexOf(";", index);
