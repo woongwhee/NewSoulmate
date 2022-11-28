@@ -5,16 +5,8 @@ import static tk.newsoulmate.web.common.JDBCTemplet.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import tk.newsoulmate.domain.dao.AttachmentDao;
-import tk.newsoulmate.domain.dao.GradeUpDao;
-import tk.newsoulmate.domain.dao.MemberDao;
-import tk.newsoulmate.domain.dao.NoticeDao;
-import tk.newsoulmate.domain.dao.SubscriptionDao;
-import tk.newsoulmate.domain.vo.GradeUp;
-import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.Notice;
-import tk.newsoulmate.domain.vo.PageInfo;
-import tk.newsoulmate.domain.vo.Subscription;
+import tk.newsoulmate.domain.dao.*;
+import tk.newsoulmate.domain.vo.*;
 import tk.newsoulmate.domain.vo.type.MemberGrade;
 
 public class ManageService {
@@ -106,12 +98,27 @@ public class ManageService {
         close();
         return listCount;
     }
+
+    public int selectReportListCount(){
+        Connection conn = getConnection();
+
+        int listCount = new ReportDao().selectReportListCount(conn);
+
+        close();
+        return listCount;
+    }
     public ArrayList<Subscription> selectAdoptApplyList(PageInfo pi){
         Connection conn = getConnection();
 
         ArrayList<Subscription> list = new SubscriptionDao().selectAdoptApplyList(conn, pi);
         close();
         return list;
+    }
+    public ArrayList<Report> selectReportList(){
+        Connection conn = getConnection();
+        ArrayList<Report> rList = new ReportDao().selectReportList(conn);
+        close();
+        return rList;
     }
 
     public Subscription selectAdoptApplyDetail(int subNo){
@@ -122,10 +129,30 @@ public class ManageService {
 
         return s;
     }
-    public int ChangeAdoptApplySubRead(int subNo){
+
+    public Report selectReportDetail(int refNo){
+        Connection conn = getConnection();
+        Report r = new ReportDao().selectReportDetail(conn,refNo);
+        close();
+        return r;
+    }
+
+    public int changeAdoptApplySubRead(int subNo){
         Connection conn = getConnection();
         int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
         if(result > 0){
+            commit();
+        } else{
+            rollback();
+        }
+        close();
+        return result;
+    }
+
+    public int changeReportStatus(int reportNo){
+        Connection conn = getConnection();
+        int result = new ReportDao().changeReportStatus(conn, reportNo);
+        if(result >0){
             commit();
         } else{
             rollback();

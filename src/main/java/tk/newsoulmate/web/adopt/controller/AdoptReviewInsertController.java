@@ -21,7 +21,6 @@ public class AdoptReviewInsertController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Gson gson = new GsonBuilder().
-                disableHtmlEscaping().
                 registerTypeAdapter(Date.class, new GsonDateFormate()).
                 create();
         JsonObject jobj = new JsonObject();
@@ -48,6 +47,7 @@ public class AdoptReviewInsertController extends HttpServlet {
             session.removeAttribute("bno");
         }
         b.setBoardNo(bno);
+
         int result = as.insertBoard(b);
         jobj.addProperty("bno", bno);
         jobj.addProperty("result", result);

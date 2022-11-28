@@ -11,6 +11,8 @@
 <head>
     <title>1:1문의 수정하기</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
+  <link href="<%=request.getContextPath()%>/css/inquire/inquireFQ.css" rel="stylesheet">
+
 </head>
 <body>
     <%@include file="/views/template/menubar.jsp"%>
@@ -23,11 +25,11 @@
 
       <form action="${context}/inquire/update" id="update-form" method="post" enctype="multipart/form-data">
         <input type="hidden" name="boardNo" value="${b.boardNo}">
-        <table align="center">
+        <table align="center"  id="textQnaWriting">
           <tr>
-            <th width="100">카테고리</th>
+            <th width="100">카테고리 <span>*</span></th>
             <td width="500">
-              <select name="categoryNo">
+              <select name="categoryNo" id = "categoryQna">
                 <c:forEach items="${list}" var="c">
                 <option value="${c.categoryNo}">${c.categoryName}</option>
                 </c:forEach>
@@ -36,12 +38,12 @@
           </tr>
           <tr>
             <th>제목</th>
-            <td><input type="text" name="boardTitle" required value="${b.boardTitle}"></td>
+            <td><input type="text" name="boardTitle"  id = "titleQna" required value="${b.boardTitle}"></td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea name="boardContent" id="" cols="30" rows="10" required >${b.boardContent}</textarea>
+              <textarea name="boardContent"  id="textareaQna"  cols="30" rows="10" required >${b.boardContent}</textarea>
             </td>
           </tr>
           <tr>
@@ -56,11 +58,11 @@
               </div>
               <input type="hidden" name="originFileNo" value="${at.fileNo}">
               <input type="hidden" name="originFileName" value="${at.originName}">
-              <input type="file" id="upfile" name="upfile" accept=".gif, .jpg, .png" onchange="checkSize(this)" style="display: none">
+              <input type="file" id="fileQna" name="upfile" accept=".gif, .jpg, .png" onchange="checkSize(this)" style="display: none">
               </c:if>
               <c:if test="${empty at}">
-              <input type="hidden" id="deleteFile" value="none">
-              <input type="file" name="upfile" accept=".gif, .jpg, .png" onchange="checkSize(this)">
+              <input type="hidden" name="deleteFile" id="deleteFile" value="none">
+              <input type="file" id="fileQna" name="upfile" accept=".gif, .jpg, .png" onchange="checkSize(this)">
               </c:if>
             </td>
           </tr>
@@ -92,9 +94,8 @@
       function deleteFiles(){
         $('#originFile').css('display',"none");
         $('#deleteFile').val('delete');
-        // $('#originFile').css('display')
         $("#deletebtn").css('display','none');
-        $("#upfile").css('display','block');
+        $("#fileQna").css('display','block');
       }
       function checkSize(input) {
         if (input.files && input.files[0].size > (20 * 1024 * 1024)) {

@@ -41,11 +41,13 @@
                     </tr>
                 </table>
                 <div id="board-content">
-                    <td colspan="6">${b.boardContent}</td>
+                    <td colspan="6">
+                        <c:out value="${b.boardContent}" escapeXml="false"/>
+                    </td>
                 </div>
             </div>
             <div id="board-btn-box">
-                <c:if test="${!empty loginUser and loginUser.memberNo eq b.memberNo}">
+                <c:if test="${!empty loginUser and (loginUser.memberNo eq b.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
                     <button type="button" id="deleteBoard">삭제하기</button>
                     <button type="button" id="updateBoard">수정하기</button>
                 </c:if>
@@ -105,8 +107,8 @@
                 'memberNo':'${loginUser.memberNo}',
                 'boardNo':'${b.boardNo}',
                 'replyContent':null
-            }
-            <c:if test="${loginUser.memberNo eq b.memberNo}">
+            }완
+            <c:if test="${loginUser.memberNo eq (b.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
             $('#deleteBoard').click(()=>{
                 if(confirm('정말삭제하시겠습니까?')){
                     location.href='${context}/adoptRevDelete?bno=${b.boardNo}';

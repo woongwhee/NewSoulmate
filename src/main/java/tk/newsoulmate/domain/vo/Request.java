@@ -147,14 +147,10 @@ public class Request {
      */
     public void setValid(){
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -13);
+        cal.add(Calendar.DATE, -14);
         this.setBgndate(cal.getTime());
         this.setState("protect");
     }
-    public static void setUrlDate(SimpleDateFormat urlDate) {
-        Request.urlDate = urlDate;
-    }
-
     public URL toUrl() {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
         URL url;

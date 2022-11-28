@@ -149,13 +149,10 @@ public class Board{
      * @param readCount
      * @return
      */
-    public static Board selectReviewDetail(int boardNo,String boardName,String boardTitle,Date createDate,Date issueDate,int readCount){
+    public static Board selectReviewList(int boardNo,String boardTitle){
         Board b=new Board();
         b.setBoardNo(boardNo);
         b.setBoardTitle(boardTitle);
-        b.setCreateDate(createDate);
-        b.setReadCount(readCount);
-        b.setIssueDate(issueDate);
         return b;
     }
 
@@ -175,9 +172,10 @@ public class Board{
         return b;
     }
 
-    public static Board selectInquireBoard(int boardNo, String categoryName, String boardTitle, String boardContent, String memberId, Date createDate, String nickName) {
+    public static Board selectInquireBoard(int boardNo, int memberNo,String categoryName, String boardTitle, String boardContent, String memberId, Date createDate, String nickName) {
         Board b = new Board();
         b.setBoardNo(boardNo);
+        b.setMemberNo(memberNo);
         b.setCategoryName(categoryName);
         b.setBoardTitle(boardTitle);
         b.setBoardContent(boardContent);

@@ -6,7 +6,6 @@ import tk.newsoulmate.web.member.service.MemberService;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.swing.*;
 import java.io.IOException;
 
 @WebServlet(name = "Login", value = "/login.do")
@@ -20,12 +19,6 @@ public class LoginController extends HttpServlet {
 
         MemberService ms = new MemberService();
         Member loginUser = ms.loginMember(memberId, memberPwd);
-        System.out.println("왜 안돼?"+loginUser);
-
-
-
-
-
 
         if(loginUser == null) {
             request.getSession().setAttribute("errorMsg","로그인에 실패했습니다.");

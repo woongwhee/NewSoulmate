@@ -9,19 +9,19 @@
 <head>
     <title>Title</title>
     <%@include file="/views/template/styleTemplate.jsp"%>
-    <link href="<%=request.getContextPath()%>/css/board/adoptReviewList.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/board/volunteerReviewList.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
 <div id="content">
-    <div id="adopt-review-head">
-        <p>입양후기</p>
-        <button onclick="location.href='adoptRevEnroll'">작성하기</button>
+    <div id="volunteer-review-head">
+        <p>봉사후기</p>
+        <button onclick="location.href='volunteerRevEnroll'">작성하기</button>
     </div>
-    <div id="adopt-review-area">
+    <div id="volunteer-review-area">
         <c:forEach items="${tList}" var="t">
-            <div class="adopt-thum">
-                <img class="adopt-thumnail" src="${t.filePath}/${t.changeName}" onclick="location.href='${context}/adoptRevDetail?bno=${t.boardNo}'">
+            <div class="volunteer-thum">
+                <img class="volunteer-thumnail" src="${t.filePath}/${t.changeName}" onclick="location.href='${context}/volunteerRevDetail?bno=${t.boardNo}'">
                 <p>${t.boardTitle}</p>
             </div>
         </c:forEach>
@@ -32,6 +32,6 @@
 <script>
     const listCount=${listCount};
 </script>
-<script src="${context}/js/adopt/adoptList.js"></script>
+<script src="${context}/js/volunteer/volunteerList.js"></script>
 </body>
 </html>

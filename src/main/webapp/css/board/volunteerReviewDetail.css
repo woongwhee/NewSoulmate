@@ -1,0 +1,159 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+#content {
+    width: 1080px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.review-content, #reply-area {
+    width: 100%;
+    height: auto;
+    background-color: #eee;
+}
+
+#review-info-table {
+    border-bottom: lightgray 1px solid;
+    padding: 10px 50px 10px 50px;
+    width: 100%;
+    font-size: 20px;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+
+#reply-area {
+    margin-top: 20px;
+}
+
+#content button {
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#review-info-table th {
+    width: 120px;
+    text-align: right;
+    padding-right: 25px;
+}
+
+.board-title {
+    font-size: 30px;
+    text-align: center;
+}
+
+#board-content {
+    padding: 40px 60px 40px 60px;
+    width: 100%;
+    height: auto;
+    font-size: 18px;
+    line-height: 170%
+}
+
+#content p {
+    padding-left: 50px;
+}
+
+#board-btn-box {
+    width: 400px;
+    margin: 0 0 0 700px;
+
+}
+
+#board-btn-box button {
+    width: 100px;
+    height: 40px;
+    margin: 14px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+#board-btn-box #deleteBoard {
+    background-color: #319493;
+    color: white;
+}
+
+#board-btn-box #updateBoard {
+    background-color: lightgray;
+}
+
+#board-btn-box #reportBoard {
+    background-color: #f45d48;
+    color: white;
+}
+
+#reply-list-table{
+    border-bottom: lightgray 1px solid;
+    padding: 10px 50px 10px 50px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+#reply-list-table th{
+    font-size: 15px;
+    text-align: left;
+    width: 880px;
+}
+
+#reply-list-table button{
+    width: 30px;
+    font-size: 20px;
+    background-color: #eee;
+    margin-left: 5px;
+}
+
+#reply-write-table{
+    padding: 10px 50px 10px 50px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+#reply-write-table input{
+    width: 820px;
+    height: 50px;
+    font-size: 16px;
+}
+
+#reply-write-table #replySubmit{
+    width: 100px;
+    height: 48px;
+    background-color: #39393a;
+    font-size: 16px;
+    color: white;
+}
+
+
+#only-user{
+    font-size: 20px;
+    text-align: center;
+    color: #f45d48;
+}
+
+#boardList-btn-box{
+    margin-top: 20px;
+    text-align: center;
+}
+
+#boardList-btn{
+    width: 160px;
+    height: 50px;
+    background-color: lightgray;
+    font-size: 16px;
+    color: #39393a;
+}
+
+.board-info{
+    width: 220px;
+}

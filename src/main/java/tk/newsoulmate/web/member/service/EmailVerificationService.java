@@ -11,7 +11,6 @@ import java.util.Random;
 public class EmailVerificationService {
 
     public static String sendMail(String email) {
-        System.out.println(email);
         boolean result = false;
 
         Random rcode = new Random();
@@ -19,7 +18,6 @@ public class EmailVerificationService {
         for (int i = 0; i < 6; i++) {
 
             int rcd = rcode.nextInt(3);
-            System.out.println(rcd);
             if (rcd == 0) {
                 int randomNum = rcode.nextInt(10);
                 sb.append(randomNum);

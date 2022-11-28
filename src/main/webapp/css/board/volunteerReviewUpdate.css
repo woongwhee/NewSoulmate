@@ -1,0 +1,92 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+#content {
+    width: 1080px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#review-update-title{
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 40px;
+}
+
+#review-update-form {
+    margin-top: 20px;
+    padding: 40px 100px 40px 100px;
+    width: 100%;
+    height: auto;
+    background-color: #eee;
+}
+
+#review-update-table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+
+#review-update-form th{
+    width: 110px;
+    text-align: left;
+    letter-spacing: 2px;
+}
+
+#review-update-form input , textarea{
+    border-radius: 5px;
+    border: lightgray 1px solid;
+    font-size: 16px;
+}
+
+#review-update-form #boardTitle{
+    width: 750px;
+    height: 40px;
+}
+
+#review-update-form #adoptDate{
+    width: 250px;
+    height: 35px;
+}
+
+#review-update-form #boardContent{
+    width: 750px;
+    height: 350px;
+}
+
+#volunteer-update-btn{
+    height: 100px;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#volunteer-update-btn #return , #save{
+    width: 200px;
+    height: 50px;
+    margin: 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#volunteer-update-btn #return{
+    background-color: lightgray;
+}
+
+#volunteer-update-btn #save{
+    background-color: #f45d48 ;
+    color: white;
+}

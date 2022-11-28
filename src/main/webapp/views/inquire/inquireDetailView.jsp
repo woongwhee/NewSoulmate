@@ -59,11 +59,11 @@
         </tr>
         <c:forEach var="r" items="${rList}">
             <tr>
-                <td>${r.replyWriter}</td>
-                <td>${r.replyContent}</td>
+                <td id="replyWriterQna">${r.replyWriter}</td>
+                <td id="replyContentQna">${r.replyContent}</td>
                 <td>
-                    <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>
-                    <button class="bi bi-x-circle-fill" id="replyDelete"></button>
+                        <%--                        <button type="button" class="bi bi-exclamation-diamond" data-toggle="modal" data-target="#reportModal" data-type="reply" data-refNo="${r.replyNo}"></button>--%>
+                    <button type="button" class="bi bi-trash" ref="${r.replyNo}" id="replyDelete"></button>
                 </td>
             </tr>
         </c:forEach>
@@ -83,12 +83,13 @@
 
     <br>
 
-    <div align="center">
-        <a id="boardList" href="${context}/inquire" class="btn btn-secondary btn-sm">목록</a>
-        <%-- if문 가능한건지 체크 확인해야함 --%>
-        <%-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. --%>
-        <a id=boardUpdate href="${context}/inquireUpdateForm.bo?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
-        <a id=boardDelete class="btn btn-danger btn-sm">삭제</a>
+        <div align="center">
+
+            <a id="boardList" href="inquire" class="btn btn-secondary btn-sm">목록</a>
+        <c:if test="${b.memberNo eq loginUser.memberNo}">
+        <a id=boardUpdate  href="inquireUpdateForm?bno=${b.boardNo}" class="btn btn-secondary btn-sm">수정</a>
+            <a id=boardDelete class="btn btn-danger btn-sm">삭제</a>
+        </c:if>
     </div>
 </div>
 
@@ -119,7 +120,7 @@
         });
     }
     </c:if>
-    $('.replyDelete').click((e)=>{
+    $('#replyDelete').click((e)=>{
         let rno=  $(e.target).attr('refNo');
         console.log(rno);
         if(confirm('정말삭제하시겠습니까?')){
@@ -129,10 +130,10 @@
                 data:{rno:rno},
                 success:(result)=>{
                     if(result>0){
-                        alert("댓 삭 성")
+                        alert("댓글 삭제 성공")
                         location.reload()
                     }else{
-                        alert("댓글삭제실패")
+                        alert("댓글 삭제 실패")
                     }
                 },
                 error:(e)=>{console.log(e)}

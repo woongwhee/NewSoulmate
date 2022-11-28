@@ -5,7 +5,7 @@
   Time: 오후 4:09
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  %>
 <html>
 <head>
     <%@include file="/views/template/styleTemplate.jsp"%>
@@ -17,10 +17,9 @@
 
 <div id="content">
     <div id="review-update-title">입양후기 수정하기</div>
-    <form action="${context}/adopt/update" method="post" id="adoptReview">
         <div id="review-update-form">
             <table id="review-update-table">
-                <input type="hidden" name="boardNo" value="${b.boardNo}">
+                <input type="hidden" id="boardNo" name="boardNo" value="${b.boardNo}">
                 <tr>
                     <th>제목</th>
                     <td><input type="text" id="boardTitle" name="boardTitle" value="${b.boardTitle}"></td>
@@ -31,15 +30,14 @@
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td> <textarea name="boardContent" id="boardContent">${b.boardContent}</textarea></td>
+                    <td> <textarea name="boardContent" id="boardContent" >${b.boardContent}</textarea></td>
                 </tr>
             </table>
         </div>
         <div id="adopt-update-btn">
             <button type="button" id="return" onclick="location.href = '${context}/adoptRevList.bo'">목록으로 돌아가기</button>
-            <button type="submit" id="save">수정하기</button>
+            <button type="button" id="save">수정하기</button>
         </div>
-    </form>
 </div>
 <%@include file="/views/template/footer.jsp"%>
 <script>
@@ -58,6 +56,7 @@
         });
         $("#save").click(function () {
             oEditors.getById["boardContent"].exec("UPDATE_CONTENTS_FIELD", []);
+            submitBoard();
 
             });
     });

@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <link href="<%=request.getContextPath()%>/image/titlelogo.png" rel="shortcut icon" type="image/x-icon">
     <link href="<%=request.getContextPath()%>/css/mypage/mypageHeader.css" rel="stylesheet">
     <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>

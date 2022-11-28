@@ -1,43 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2022-11-09
-  Time: 오후 4:09
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <%@include file="/views/template/styleTemplate.jsp"%>
     <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
-    <link href="<%=request.getContextPath()%>/css/board/adoptReviewEnroll.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/board/volunteerReviewEnroll.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
-<script>
-
-    let oEditors = [];
-    $(document).ready(function () {
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: oEditors,
-            elPlaceHolder: "boardContent",
-            sSkinURI: "${context}/smarteditor2/SmartEditor2Skin.html",
-            fCreator: "createSEditor2",
-            htParams: {
-                bUseToolbar: true,
-                bUseVerticalResizer: true,
-                bUseModeChanger: true,
-            },
-        });
-        $("#save").click(function () {
-            oEditors.getById["boardContent"].exec("UPDATE_CONTENTS_FIELD", []);
-                $("#adoptReview").submit();
-        });
-    });
-</script>
 <div id="content">
-    <div id="review-enroll-title">봉사후기 작성하기</div>
-    <form action="${context}/volunteerRevInsert" method="post" id="adoptReview">
+    <div id="review-enroll-title">입양후기 작성하기</div>
         <div id="review-enroll-form">
             <table id="review-enroll-table">
                 <tr>
@@ -54,12 +25,72 @@
                 </tr>
             </table>
         </div>
-        <div id="adopt-review-btn">
-            <button id="return" type="button" onclick="location.href = '${context}/adoptRevList.bo'">목록으로 돌아가기</button>
-            <button type="submit" id="save">작성하기</button>
+        <div id="volunteer-review-btn">
+            <button id="return" type="button" onclick="location.href = '${context}/adoptRevList';">목록으로 돌아가기</button>
+            <button type="button" id="save">작성하기</button>
         </div>
-    </form>
+
 </div>
-<%@include file="/views/template/footer.jsp"%>
+<script>
+    let oEditors = [];
+    $(document).ready(function () {
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "boardContent",
+            sSkinURI:"${context}/smarteditor2/SmartEditor2Skin.html",
+            fCreator: "createSEditor2",
+            htParams: {
+                bUseToolbar: true,
+                bUseVerticalResizer: true,
+                bUseModeChanger: true,
+            },
+        });
+        $("#save").click(function () {
+            oEditors.getById["boardContent"].exec("UPDATE_CONTENTS_FIELD", []);
+            submitBoard();
+        })
+        function vaildate(board){
+            let msg='Y';
+            if(board.boardTitle.length==0||board.boardContent.length==0||board.issueDate==0){
+                return '모든 내용을 기입해주세요';
+            }
+            let toDay=new Date().getTime();
+            let dateArr=board.issueDate.split('-');
+            let inputDay=new Date(dateArr[0],parseInt(dateArr[1])-1,dateArr[2]).getTime();
+            if(toDay<inputDay){
+                return '유효한 날짜를 입력해주세요';
+            }
+            return msg;
+        }
+        function submitBoard(){
+            let board={
+                boardTitle:$('#boardTitle').val(),
+                boardContent:$('#boardContent').val(),
+                issueDate:$('#volunteerDate').val(),
+                boardType:'VOLUNTEER'
+            };
+            let msg=vaildate(board);
+            if(msg==='Y'){
+                $.ajax({
+                    url: 'volunteerRevInsert',
+                    type: 'post',
+                    data: {board:JSON.stringify(board)},
+                    success:(result)=>{
+                        alert(result.msg)
+                        if(result.result==1) {
+                            location.href='volunteerRevDetail?bno='+result.bno;
+                        }
+                    },
+                    error:(error)=>{
+                        console.log(error);
+                    }
+                })
+            }else{
+                alert(msg)
+            }
+        }
+
+    });
+</script>
 </body>
 </html>

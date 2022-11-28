@@ -1,19 +1,48 @@
 package tk.newsoulmate.domain.vo;
 
+import tk.newsoulmate.domain.vo.type.BoardType;
 import tk.newsoulmate.domain.vo.type.ReportType;
 
 public class Report {
     private int reportNo;
     private int categoryNo;
+    private String categoryName;
     private ReportType refType;
-    private int refNo;
+    private long refNo;
     private String reportContent;
-    private transient String status;
+    private String status;
+    private BoardType boardType;
+    public Report(){
+        super();
+    }
     public Report(int reportNo, int categoryNo,String reportType, String reportContent) {
         this.reportNo = reportNo;
         this.categoryNo = categoryNo;
         this.refType=ReportType.valueOfName(reportType);
         this.reportContent = reportContent;
+    }
+
+    public Report(int reportNo,String categoryName, int refType, long refNo,  String reportContent) {
+        this.reportNo = reportNo;
+        this.categoryName = categoryName;
+        this.refType = ReportType.valueOfNo(refType);
+        this.refNo = refNo;
+        this.reportContent = reportContent;
+    }
+
+    public Report(int reportNo, long refNo, int typeNo) {
+        this.reportNo = reportNo;
+        this.refNo = refNo;
+        this.boardType = BoardType.valueOfNo(typeNo);
+    }
+
+    public Report(int reportNo, int categoryNo, int refType, long refNo, String boardTitle, String reportContent, String status, String boardType) {
+        this.reportNo = reportNo;
+        this.categoryNo = categoryNo;
+        this.refType = ReportType.valueOfNo(refType);
+        this.refNo = refNo;
+        this.reportContent = reportContent;
+        this.status = status;
     }
 
     public int getReportNo() {
@@ -40,11 +69,11 @@ public class Report {
         this.refType = refType;
     }
 
-    public int getRefNo() {
+    public long getRefNo() {
         return refNo;
     }
 
-    public void setRefNo(int refNo) {
+    public void setRefNo(long refNo) {
         this.refNo = refNo;
     }
 
@@ -62,6 +91,23 @@ public class Report {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public BoardType getBoardType() {
+        return boardType;
+    }
+
+    public void setBoardType(BoardType boardType) {
+        this.boardType = boardType;
     }
 
     @Override

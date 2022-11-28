@@ -12,7 +12,6 @@ public class AuthenticaionController extends HttpServlet {
 
         String input =request.getParameter("authCode");
         String code= (String) request.getSession().getAttribute("emailCode");
-        /*System.out.println(input + code);*/
         if(input.equals(code)){
             response.getWriter().print(1);
         }else{

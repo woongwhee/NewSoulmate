@@ -192,8 +192,8 @@ public class ShelterDao {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1,animalNo);
             rset = psmt.executeQuery();
-            while(rset.next()) {
-                shelterNo = rset.getLong("shelterNo");
+            if(rset.next()) {
+                shelterNo = rset.getLong("SHELTER_NO");
             }
 
 

@@ -9,31 +9,17 @@ import java.util.List;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.*;
 public class CommonService {
-    public List<Notice> selectThumbNail(int page) {
+    public List<Notice> selectNoticeThumbNail(int page) {
         Connection conn = getConnection();
         List<Notice> nList = new NoticeDao().selectThumbNail(conn, page);
         close();
         return nList;
     }
 
-    public Notice selectDetail(long dno) {
-        Connection conn = getConnection();
-        Notice n = new NoticeDao().selectNotice(conn, dno);
-        close();
-        return n;
-    }
 
-
-    public List<Board> selectVolunteerThumbNail(int page) {
+    public List<Board> selectReviewList(int page,BoardType bt) {
         Connection conn = getConnection();
-        List<Board> vList = new BoardDao().selectVolunteerThumNail(conn, page);
-        close();
-        return vList;
-    }
-
-    public List<Board> selectAdoptReview(int i) {
-        Connection conn = getConnection();
-        List<Board> vList = new BoardDao().selectVolunteerThumNail(conn, i);
+        List<Board> vList = new BoardDao().selectReviewList(conn, page,bt);
         close();
         return vList;
     }
@@ -102,11 +88,11 @@ public class CommonService {
         return replyNo;
     }
 
-    public List<Attachment> selectAdoptReviewList(int page,int pageLimit){
+    public List<Attachment> selectBoardThumbNail(int page,int pageLimit,BoardType boardType){
         Connection conn = getConnection();
         int start=PageInfo.StartNum(page,pageLimit);
         int end=PageInfo.EndNum(page,pageLimit);
-        List<Attachment> list = new AttachmentDao().selectThumbNailList(conn, BoardType.ADOPT,start,end);
+        List<Attachment> list = new AttachmentDao().selectThumbNailList(conn, boardType,start,end);
         close();
         return list;
     }

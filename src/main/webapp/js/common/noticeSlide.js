@@ -16,3 +16,25 @@
         dots : true
         });
     });
+    $('.slider').on('edge',getNoticeNext);
+    let noticePage=1;
+    function getNoticeNext(){
+        $.ajax({
+                url: 'noticeNext',
+                type:'post',
+                date: {page:noticePage++},
+                success:(result)=>$('.slice').slick('slickAdd',result)
+            }
+        )
+
+    }
+
+    $(()=>{
+        setNoticeLocation();
+    })
+    function setNoticeLocation(){
+        $(".notice-img").click(e=>location.href="noticeDetail?dno="+$(e.target).prop('id'));
+    }
+    $('.adopt-thumnail').click(e=>location.href='adoptRevDetail?bno='+$(e.target).data('bno'));
+    $('#adopt-able-animal').click(()=>$(location).attr('href','noticeList'));
+    $('#adopt-step').click(()=>$(location).attr('href','adoptStep'));

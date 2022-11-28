@@ -78,23 +78,27 @@
     </entry>
     <entry key="selectThumbnailList">
         SELECT
-            *
+        *
         FROM(
             SELECT
-                ROWNUM as rnum,
-                A.*
+            ROWNUM as rnum,
+            A.*
             FROM(
-                SELECT
-                    BOARD_NO,
-                    ORIGIN_NAME,
-                    BOARD_TITLE,
-                    CHANGE_NAME,
-                    FILE_PATH
-                FROM ATTACHMENT
-                JOIN BOARD USING (BOARD_NO)
-                WHERE TYPE_NO=?
-                AND BOARD_STATUS='Y'
-                ORDER BY CREATE_DATE DESC
+            SELECT
+            BOARD_NO,
+            BOARD_TITLE,
+            ORIGIN_NAME,
+            CHANGE_NAME,
+            FILE_PATH
+            FROM BOARD
+            JOIN (
+            SELECT *
+            FROM ATTACHMENT
+            WHERE ROWID IN ( SELECT MAX(ROWID) FROM ATTACHMENT GROUP BY BOARD_NO)
+                AND STATUS='Y'
+            ) using(BOARD_NO)
+            WHERE BOARD_STATUS='Y' AND TYPE_NO=?
+            ORDER BY CREATE_DATE DESC
             )A
         )
         WHERE rnum between ? AND ?

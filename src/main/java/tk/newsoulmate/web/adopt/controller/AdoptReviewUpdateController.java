@@ -12,6 +12,7 @@ import tk.newsoulmate.web.adopt.sevice.AdoptService;
 import tk.newsoulmate.web.common.UploadUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,28 +32,31 @@ public class AdoptReviewUpdateController extends HttpServlet {
         HttpSession session = request.getSession();
         response.setContentType("application/json; charset=UTF-8");
         Gson gson = new GsonBuilder().
-                disableHtmlEscaping().
                 registerTypeAdapter(Date.class, new GsonDateFormate()).
                 create();
-        Board b = gson.fromJson(request.getParameter("board"), Board.class);
+           Board b = gson.fromJson(request.getParameter("board"), Board.class);
+
         JsonObject jobj = new JsonObject();
         int memberNo=((Member)session.getAttribute("loginUser")).getMemberNo();
         b.setMemberNo(memberNo);
         AdoptService as=new AdoptService();
-        List<Attachment>dList=checkDelete(b,as.selectAttachmentList(b.getBoardNo()));
+        List<Attachment>aList=as.selectAttachmentList(b.getBoardNo());
+        List<Attachment>dList=checkDelete(b,aList);;
+        if(aList.size()==dList.size()){
+            jobj.addProperty("msg","첨부파일이 1개 이상 필요합니다.");
+            jobj.addProperty("result",0);
+            return;
+        }
         UploadUtil uu=UploadUtil.create(request.getServletContext());
         for (Attachment at:dList) {
-            ;
-            System.out.println(at.getOriginName()+uu.deleteFile(at));
+            uu.deleteFile(at);
         }
         as.deleteAttachmentList(dList);
         int result=new AdoptService().updateBoard(b);
+        String msg=result==0?"게시글수정실패":"게시글수정성공";
         jobj.addProperty("result",result);
-        if(result>0){
-            jobj.addProperty("msg","게시글수정성공");
-        }else{
-            jobj.addProperty("msg","게시글수정실패");
-        }
+        jobj.addProperty("msg",msg);
+        jobj.addProperty("bno",b.getBoardNo());
         gson.toJson(jobj, response.getWriter());
     }
     private List<Attachment> checkDelete(Board b,List<Attachment> aList){

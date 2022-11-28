@@ -1,0 +1,93 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+#content {
+    width: 1080px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#review-enroll-title{
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 40px;
+}
+
+#review-enroll-form {
+    margin-top: 20px;
+    padding: 40px 100px 40px 100px;
+    width: 100%;
+    height: auto;
+    background-color: #eee;
+}
+
+#review-enroll-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+
+#review-enroll-form th{
+    width: 110px;
+    text-align: left;
+    letter-spacing: 2px;
+}
+
+#review-enroll-form input , textarea{
+    border-radius: 5px;
+    border: lightgray 1px solid;
+    font-size: 16px;
+}
+
+#review-enroll-form #boardTitle{
+    width: 750px;
+    height: 40px;
+}
+
+#review-enroll-form #adoptDate{
+    width: 250px;
+    height: 35px;
+}
+
+#review-enroll-form #boardContent{
+    width: 750px;
+    height: 350px;
+    background-color: white;
+}
+
+#volunteer-review-btn{
+    height: 100px;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#volunteer-review-btn #return , #save{
+    width: 200px;
+    height: 50px;
+    margin: 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#volunteer-review-btn #return{
+    background-color: lightgray;
+}
+
+#adopt-review-btn #save{
+    background-color: #f45d48 ;
+    color: white;
+}

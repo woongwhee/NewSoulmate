@@ -256,7 +256,7 @@ CREATE TABLE "SUBSCRIPTION" (
                                 "MEMBER_NO"   NUMBER
                                     CONSTRAINT SUB_MN_NN NOT NULL ,
                                 "SHELTER_NO" NUMBER,
-                                "ANIMAL_NO"   VARCHAR2(100),
+                                "ANIMAL_NO"   NUMBER,
                                 "TEL_NUM"   VARCHAR2(15)
                                     CONSTRAINT SUB_TN_NN NOT NULL,
                                 "NAME"   VARCHAR2(15)
@@ -270,8 +270,8 @@ CREATE TABLE "SUBSCRIPTION" (
                                 "WISH_DATE"   DATE  CONSTRAINT SUB_WD_NN NOT NULL,
                                 "SUB_READ"   VARCHAR2(1)
                                     CONSTRAINT SUB_RD_CK CHECK ( SUB_READ in ('Y','N')),
-                                "SUB_DATE"   DATE
-                                    DEFAULT SYSDATE
+
+                                "SUB_DATE"   DATE DEFAULT SYSDATE
 );
 --첨부파일--
 CREATE TABLE "ATTACHMENT" (
@@ -326,17 +326,14 @@ CREATE TABLE CATEGORY(
 );
 
 CREATE TABLE "REPORT" (
-                          REPORT_NO   NUMBER   CONSTRAINT PK_REPORT   PRIMARY KEY,
-                          CATEGORY_NO NUMBER CONSTRAINT RT_CN_NN NOT NULL,
-                          REF_TYPE NUMBER CONSTRAINT RT_RT_NN NOT NULL
-                              CONSTRAINT RT_RT_CK CHECK ( REF_TYPE IN (0,1,2) ),
-                          REF_NO NUMBER  CONSTRAINT RT_RN_NN NOT NULL,
-                          REPORT_CONTENT   VARCHAR2(200),
-                          STATUS    VARCHAR2(1) default 'Y' check(STATUS in ('Y','N'))
+  REPORT_NO   NUMBER   CONSTRAINT PK_REPORT   PRIMARY KEY,
+  CATEGORY_NO NUMBER CONSTRAINT RT_CN_NN NOT NULL,
+  REF_TYPE NUMBER CONSTRAINT RT_RT_NN NOT NULL
+      CONSTRAINT RT_RT_CK CHECK ( REF_TYPE IN (0,1,2)),
+  REF_NO NUMBER  CONSTRAINT RT_RN_NN NOT NULL,
+  REPORT_CONTENT   VARCHAR2(200),
+  STATUS    VARCHAR2(1) default 'Y' check(STATUS in ('Y','N'))
 );
-
-
-
 
 CREATE TABLE "GRADE_UP" (
                             "GRADE_NO"   NUMBER CONSTRAINT "PK_GRADE_UP" PRIMARY KEY   ,
