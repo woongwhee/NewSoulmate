@@ -28,7 +28,6 @@ public class ManageReportDetailController extends HttpServlet {
         }else{
             path+="/"+r.getBoardType().boardName+"Detail?bno="+r.getRefNo();
         }
-        System.out.println(path);
         response.sendRedirect(path);
 
 

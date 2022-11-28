@@ -191,7 +191,7 @@ public class VolunteerDao {
         } finally {
             JDBCTemplet.close(psmt);
         }
-        System.out.println(result);
+
         return result;
     }
 }

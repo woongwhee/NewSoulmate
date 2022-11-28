@@ -55,7 +55,7 @@ public class EmailVerificationService {
 
             msg.setSentDate(new Date());
             msg.setFrom(new InternetAddress("newsoulmatemaster@gmail.com", "newsoulmatemaster"));
-            System.out.print(email);
+
             InternetAddress to = new InternetAddress(email,"");
             /*InternetAddress to = new InternetAddress(email,userName);*/
             msg.setRecipient(Message.RecipientType.TO, to);

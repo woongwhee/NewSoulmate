@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "saveAttach", value = "/saveAttach")
+@WebServlet(name = "aveAttach", value = "/saveAttach")
 public class NaverFileSaveController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
