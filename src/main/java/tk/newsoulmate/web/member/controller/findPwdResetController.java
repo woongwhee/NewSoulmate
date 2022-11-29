@@ -48,5 +48,4 @@ public class findPwdResetController extends HttpServlet {
         response.getWriter().println(result);
         response.getWriter().flush();
     }
-
 }

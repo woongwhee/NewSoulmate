@@ -8,12 +8,17 @@
     ArrayList<Subscription> sList = (ArrayList<Subscription>) request.getAttribute("sList");
     ArrayList<Volunteer> vList = (ArrayList<Volunteer>)request.getAttribute("vList");
 
-    ManageService ms = new ManageService();
     PageInfo pi = (PageInfo) request.getAttribute("pi");
     int currentPage = pi.getCurrentPage();
     int startPage = pi.getStartPage();
     int endPage = pi.getEndPage();
     int maxPage = pi.getMaxPage();
+
+    PageInfo pi2 = (PageInfo) request.getAttribute("pi");
+    int currentPage2 = pi.getCurrentPage();
+    int startPage2 = pi.getStartPage();
+    int endPage2 = pi.getEndPage();
+    int maxPage2 = pi.getMaxPage();
 %>
 <html>
 <head>
