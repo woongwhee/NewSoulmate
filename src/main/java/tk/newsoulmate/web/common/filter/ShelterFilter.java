@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebFilter(filterName = "shelterFilter",
     servletNames = {
             "shelterInfoServlet","ShelterSupportController","ShelterMessageController",
-            "ShelterSupportServlet","SupportWithdrawController"
+            "ShelterSupportServlet","SupportWithdrawController","sendMessagest"
     }
 )
 /**

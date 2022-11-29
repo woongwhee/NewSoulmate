@@ -1,7 +1,9 @@
 package tk.newsoulmate.web.manger.shelter.sevice;
 
+import tk.newsoulmate.domain.dao.MessageDao;
 import tk.newsoulmate.domain.dao.SubscriptionDao;
 import tk.newsoulmate.domain.dao.VolunteerDao;
+import tk.newsoulmate.domain.vo.ExtMessage;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
 import tk.newsoulmate.domain.vo.Volunteer;
@@ -108,6 +110,18 @@ public class ShelterMangerService {
         if(result > 0){
             commit();
         } else{
+            rollback();
+        }
+        close();
+        return result;
+    }
+
+    public int insertMessage(ExtMessage msg) {
+        Connection conn=getConnection();
+        int result= new MessageDao().insertMessage(conn,msg);
+        if(result>0){
+            commit();
+        }else{
             rollback();
         }
         close();
