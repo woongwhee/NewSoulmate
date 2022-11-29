@@ -31,9 +31,10 @@
                 </div>
             </div>
         </li>
-
-        <li><a href="${context}/myPageBoardList.bo">작성게시글 확인</a></li>
+            <li><a href="${context}/myPageBoardList.bo">작성게시글 확인</a></li>
+        <c:if test="${loginUser.memberGrade.USER}">
         <li><a href="${context}/myPageShelter">보호소관계자<br>등록신청</a></li>
+        </c:if>
         <li><a href="${context}/memberDeletePage">회원탈퇴</a></li>
     </ul>
 
