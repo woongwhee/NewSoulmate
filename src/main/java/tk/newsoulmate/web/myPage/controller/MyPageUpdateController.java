@@ -16,13 +16,12 @@ public class MyPageUpdateController extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-
         int memberNo = ((Member)session.getAttribute("loginUser")).getMemberNo();
         String phone = request.getParameter("phone");
         String nickName = request.getParameter("nickName");
         String email_1 = request.getParameter("email_1");
         String email_2 = request.getParameter("email_2");
-        String email = email_1+"@"+email_2;
+        String email = email_1 + "@" +email_2;
 
         Member m = new Member(memberNo,phone,email,nickName);
 

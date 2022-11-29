@@ -23,6 +23,7 @@ public class ShelterMessageController extends HttpServlet {
         PageInfo pi;
         PageInfo pi2;
         long shelterNo = loginUser.getShelterNo();
+        System.out.println(shelterNo);
         if(loginUser==null){
             pi=new PageInfo(0,1);
             pi2=new PageInfo(0,1);
@@ -44,12 +45,13 @@ public class ShelterMessageController extends HttpServlet {
             pi2 = new PageInfo(listCount2,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
 
             ArrayList<Subscription> sList = new ShelterMangerService().shelterNoAdoptApplyList(pi,shelterNo);
-            ArrayList<Volunteer> vList = new ShelterMangerService().volunteerApplyList(pi,shelterNo);
+            ArrayList<Volunteer> vList = new ShelterMangerService().volunteerApplyList(pi2,shelterNo);
+            System.out.println(vList);
             request.setAttribute("sList", sList);
             request.setAttribute("vList",vList);
         }
+        request.setAttribute("pi2",pi2);
         request.setAttribute("pi", pi);
-        request.setAttribute("pi2", pi2);
         request.getRequestDispatcher("/views/shelterManager/shelterMessage.jsp").forward(request, response);
 
     }

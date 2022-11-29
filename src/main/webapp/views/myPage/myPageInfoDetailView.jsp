@@ -4,7 +4,9 @@
     Member loginUser = (Member)session.getAttribute("loginUser");
     String[] email = loginUser.getEmail().split("@");
     String firstEmail = email[0];
-    String secondEmail = "@"+email[1];
+    String secondEmail = email[1];
+
+
 %>
 <html>
 <head>
@@ -45,7 +47,7 @@
                 <div class="form-group">
                     <label for="">닉네임</label>
                     <input type="text" name="nickName" id="nickName" value="${loginUser.nickName}"  required>
-                    <button type="button" id="checkNickname" >중복확인</button>
+                    <button type="button" id="checkNickname" disabled>중복확인</button>
                 </div>
 
                 <div class="form-group" >
@@ -56,16 +58,16 @@
 
                     <select name="email_3" id="email_3">
                         <option value="1">직접입력</option>
-                        <option value="@naver.com">@naver.com</option>
-                        <option value="@nate.com">@nate.com</option>
-                        <option value="@gmail.com">@gmail.com</option>
-                        <option value="@hanmail.net">@hanmail.net</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
                     </select>
-                    <button type="button" onclick="sendMail()" id="emailCheck" >인증번호 발송</button>
+                    <button type="button" onclick="sendMail()" id="emailCheck" disabled>인증번호 발송</button>
                     <div id="auth"></div>
-                    <div id="certified">
-                        <input type="text" id="authCode" placeholder="인증번호">
-                        <button type="button" class="" id="checkAuthCode" onclick="authenticationMail()" disabled>인증번호 확인</button>
+                    <div id="certified" style="display: none">
+                        <input type="text" id="authCode" placeholder="인증번호" disable>
+                        <button type="button" class="" id="checkAuthCode" onclick="authenticationMail()">인증번호 확인</button>
                     </div>
                 </div>
                 <span id="timeZone"></span>
@@ -77,51 +79,6 @@
     </div>
 </div>
 <script>
-
-    $(function() {
-        $("#nickName").on("keyup", function() {
-            var flag1 = true;
-            flag1 = $(this).val().length > 0 ? false : true;
-            $("#checkNickname").attr("disabled", flag1);
-        });
-
-        $("#email_1").on("keyup", function() {
-            var flag2 = true;
-            flag2 = $(this).val().length > 0 ? false : true;
-            $("#emailCheck").attr("disabled", flag2);
-        });
-
-        $("#authCode").on("keyup", function() {
-            var flag = true;
-            flag = $(this).val().length > 0 ? false : true;
-            $("#checkAuthCode").attr("disabled", flag) && $("#myPageCheck").attr("disabled", flag);
-        });
-
-    });
-
-    $('#email_3').change(function(){
-        $("#email_3 option:selected").each(function () {
-
-            if($(this).val()== '1'){ //직접입력일 경우
-                $("#email_2").val('');                        //값 초기화
-                $("#email_2").attr("disabled",false); //활성화
-            }else{ //직접입력이 아닐경우
-                $("#email_2").val($(this).text());      //선택값 입력
-                $("#email_2").attr("disabled",true); //비활성화
-            }
-        });
-    });
-    let inputEmail = 0;
-    $("#email_1,#email_3").keyup(function () {
-        inputEmail = 1;
-        $("#emailCheck").removeAttr("disabled");
-    })
-
-
-
-
-
-
     // 변경사항이 있을경우 -> 변경된 input value를 servlet에 보내줘야함
     // 변경된 input에 대해서 무조건 유효성 검사 해야함 -> 버튼 클릭을 해야함.
     // 변경하기 클릭시
@@ -181,29 +138,27 @@
     });
 
 
-    /*
-        $('#email_3').keyup(function(){
-            $("#email_3 option:selected").each(function () {
+    $('#email_3').change(function(){
+        $("#email_3 option:selected").each(function () {
 
-                if($(this).val()== '1'){ //직접입력일 경우
-                    $("#email_2").val('');                        //값 초기화
-                    $("#email_2").attr("disabled",false); //활성화
-                }else{ //직접입력이 아닐경우
-                    $("#email_2").val($(this).text());      //선택값 입력
-                    $("#email_2").attr("disabled",true); //비활성화
-                }
-            });
+            if($(this).val()== '1'){ //직접입력일 경우
+                $("#email_2").val('');                        //값 초기화
+                $("#email_2").attr("disabled",false); //활성화
+            }else{ //직접입력이 아닐경우
+                $("#email_2").val($(this).text());      //선택값 입력
+                $("#email_2").attr("disabled",true); //비활성화
+            }
         });
-        let inputEmail = 0;
-        $("#email_1,#email_3").keyup(function () {
-            inputEmail = 1;
-            $("#emailCheck").removeAttr("disabled");
-        })
-    */
+    });
+    let inputEmail = 0;
+    $("#email_1,#email_3,#email_2").change(function () {
+        inputEmail = 1;
+        $("#emailCheck").removeAttr("disabled");
+    })
 
     function sendMail() {
-        const memberMail2 = $("#email_1").val() + $("#email_2").val()
-        console.log(memberMail2);
+        const memberMail2 = $("#email_1").val() +"@"+$("#email_2").val()
+        $("#certified").show();
 
         $.ajax({
             url: "<%= request.getContextPath()%>/sendMail.do",
@@ -281,11 +236,9 @@
             $("#authMsg").text("인증시간이 만료되었습니다.");
             checkMail = 0;
         }
-        console.log(inputValue);
-        console.log(mailCode);
     };
 
-    $(".form-group>input").keyup(function () {
+    $(".form-group>input,select").keyup(function () {
         $("#myPageCheck").removeAttr("disabled");
     })
 
@@ -299,11 +252,10 @@
             alert("이메일 인증 해주세요.");
             return false;
         }
-
-
     };
 
 </script>
+
 
 
 </body>

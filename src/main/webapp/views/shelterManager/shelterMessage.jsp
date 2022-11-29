@@ -8,19 +8,24 @@
     ArrayList<Subscription> sList = (ArrayList<Subscription>) request.getAttribute("sList");
     ArrayList<Volunteer> vList = (ArrayList<Volunteer>)request.getAttribute("vList");
 
-    ManageService ms = new ManageService();
     PageInfo pi = (PageInfo) request.getAttribute("pi");
     int currentPage = pi.getCurrentPage();
     int startPage = pi.getStartPage();
     int endPage = pi.getEndPage();
     int maxPage = pi.getMaxPage();
+
+    PageInfo pi2 = (PageInfo) request.getAttribute("pi2");
+    int currentPage2 = pi2.getCurrentPage();
+    int startPage2 = pi2.getStartPage();
+    int endPage2 = pi2.getEndPage();
+    int maxPage2 = pi2.getMaxPage();
 %>
 <html>
 <head>
     <title>메세지함</title>
     <link href="<%=request.getContextPath()%>/css/shelterManager/shelterMessage.css" rel="stylesheet">
-    <%@ include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/shelterManager/shelterMessage.css" rel="stylesheet">
+    <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
 <header><%@include file="/views/shelterManager/shelterHeader.jsp"%></header>
@@ -102,12 +107,7 @@
 
             </div>
             <script>
-                // $(".delete").on("click",function(){
-                //
-                //     let thisRow = $(this).closest("tr");
-                //     let addr = thisRow.find("td:eq(0)").val();
-                //     console.log(addr);
-                // })
+
                 $(".vol-info").click(function(e){
                     // 클릭시 해당 shelter_no 를 넘김
                     //해당 tr 요소의 자손들중 첫번째 td영역의 내용이 필요
@@ -203,21 +203,21 @@
                 </table>
 
                 <div id="pagingForm2" align="center">
-                    <% if(currentPage != 1) { %>
-                    <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+                    <% if(currentPage2 != 1) { %>
+                    <button onclick="doPageClick(<%=currentPage2-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
 
                     <% } %>
 
-                    <% for(int i=startPage; i<=endPage; i++) { %>
-                    <% if(i != currentPage) {%>
+                    <% for(int i=startPage2; i<=endPage2; i++) { %>
+                    <% if(i != currentPage2) {%>
                     <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
                     <% } else { %>
                     <button disabled><%=i %></button>
                     <% } %>
                     <% } %>
 
-                    <% if(currentPage != maxPage) { %>
-                    <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+                    <% if(currentPage2 != maxPage2) { %>
+                    <button onclick="doPageClick(<%=currentPage2+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
 
                     <% } %>
                 </div>
@@ -263,12 +263,6 @@
 
         })
     })
-
-
-
-
-
-
 </script>
 
 </body>
