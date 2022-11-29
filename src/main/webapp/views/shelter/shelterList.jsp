@@ -1,8 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.Shelter" %>
-<%@ page import="java.lang.reflect.Array" %>
-<%@ page import="tk.newsoulmate.domain.vo.City" %>
-<%@ page import="tk.newsoulmate.domain.vo.Village" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: PC
   Date: 2022-11-08
