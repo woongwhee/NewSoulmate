@@ -1,0 +1,108 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+.content-wrap {
+    width: 1080px;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
+.title-wrap {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    color: #319493;
+}
+
+.userInfo-wrap input {
+    font-size: 16px;
+    font-weight: 400;
+    width: 270px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px lightgray solid;
+    margin: 0 10px 20px 0;
+    margin-top: 10px;
+}
+
+.userInfo-wrap select{
+    font-size: 16px;
+    font-weight: 400;
+    width: 70px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px lightgray solid;
+    margin: 0 10px 20px 0;
+    margin-top: 10px;
+}
+
+.userInfo-wrap {
+    width: 550px;
+    text-align: left;
+    padding-left: 90px;
+}
+
+.userInfo-wrap span {
+    font-size: 16px;
+    margin: 3px;
+    font-weight: 400;
+}
+
+
+.userInfo-wrap label {
+    font-size: 18px;
+    margin: 10px 0 0 5px;
+    font-weight: 500;
+}
+
+#pwChkMsg,
+#pwReChkMsg {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#authMsg,
+#pwChkMsg,
+#pwReChkMsg {
+    color: #f45d48;
+}
+
+#signup-btn-box button{
+    width: 180px;
+    height: 50px;
+    margin: 20px 20px 0 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+}
+
+#cancleBtn{
+    background-color: lightgray;
+    color: #39393a;
+}
+
+#signupBtn{
+    background-color: #319493;
+    color: white;
+}
+
+.userInfo-wrap button{
+    background-color: lightgray;
+    color: #39393a;
+    width: 110px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+}

@@ -52,7 +52,7 @@ public class VolunteerDao {
         return listCount;
     }
 
-    public ArrayList<Volunteer> volunteerApplyList(Connection conn, PageInfo pi, long shelterNo) {
+    public ArrayList<Volunteer> volunteerApplyList(Connection conn, PageInfo pi2, long shelterNo) {
         ArrayList<Volunteer> list = new ArrayList<>();
         PreparedStatement psmt = null;
         ResultSet rset = null;
@@ -60,11 +60,11 @@ public class VolunteerDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            if (pi.getCurrentPage() == 0) {
+            if (pi2.getCurrentPage() == 0) {
                 return list;
             }
-            int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-            int endRow = startRow + pi.getBoardLimit() - 1;
+            int startRow = (pi2.getCurrentPage() - 1) * pi2.getBoardLimit() + 1;
+            int endRow = startRow + pi2.getBoardLimit() - 1;
 
             psmt.setLong(1, shelterNo);
             psmt.setInt(2, startRow);
@@ -191,7 +191,7 @@ public class VolunteerDao {
         } finally {
             JDBCTemplet.close(psmt);
         }
-        System.out.println(result);
+
         return result;
     }
 }

@@ -157,3 +157,8 @@ body {
 .board-info{
     width: 220px;
 }
+
+#board-content img{
+    width: 90%;
+    height: 80%;
+}

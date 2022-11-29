@@ -1,8 +1,6 @@
 package tk.newsoulmate.web.manger.shelter.controller;
 
 import tk.newsoulmate.web.manger.shelter.sevice.ShelterMangerService;
-import tk.newsoulmate.web.manger.site.service.ManageService;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;

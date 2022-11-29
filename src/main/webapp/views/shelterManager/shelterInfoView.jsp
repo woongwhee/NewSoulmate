@@ -71,11 +71,9 @@
 
                 <button type="button" onclick="sendMail()" id="emailCheck">인증번호 발송</button>
                 <div id="auth"></div>
-                <div id="certified">
+                <div id="certified" style="display: none">
                     <input type="text" id="authCode" placeholder="인증번호">
-                    <button type="button" class="" id="checkAuthCode" onclick="authenticationMail()" disabled>인증번호
-                        확인
-                    </button>
+                    <button type="button" class="" id="checkAuthCode" onclick="authenticationMail()" disabled>인증번호 확인</button>
                 </div>
             </div>
             <span id="timeZone"></span>
@@ -98,7 +96,7 @@
 
     function shelterInfoUpdate() {
         if (checkMail === 0) {
-            alert("이메일 인증 해주세요.");
+            alert("이메일 인증을 해주세요.");
             return;
         }
 
@@ -106,6 +104,7 @@
         let tel = $("#tel").val()
         let address = $("#shelterAddress").val()
         let email = $("#email_1").val() + "@" + $("#email_2").val()
+
 
         $.ajax({
             url: "<%=request.getContextPath()%>/shelter/update",
@@ -189,7 +188,8 @@
 
     function sendMail() {
         const memberMail2 = $("#email_1").val() + "@" + $("#email_2").val()
-        console.log(memberMail2);
+
+        $("#certified").show();
 
         $.ajax({
             url: "<%= request.getContextPath()%>/sendMail.do",

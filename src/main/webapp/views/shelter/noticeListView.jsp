@@ -19,7 +19,7 @@
     <title>유기동물목록</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/shelter/noticeList.css" rel="stylesheet">
-</head>s
+</head>
 <body>
 <%@ include file="/views/template/menubar.jsp"%>
 

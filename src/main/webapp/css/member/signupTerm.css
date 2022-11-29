@@ -1,0 +1,75 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f8f5f2;
+}
+
+.content-wrap {
+    width: 1080px;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
+.title-wrap {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    color: #319493;
+}
+
+.agree{
+    width: 500px;
+    text-align: left;
+}
+
+.agree input {
+    zoom: 1.5;
+    margin-right: 2px;
+}
+
+.agree label{
+    font-size: 16px;
+    vertical-align: super;
+}
+
+.textarea-form{
+    width: 500px;
+    height: 180px;
+    margin: 10px 0 30px 0;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    border: lightgray 1px solid;
+    text-align: left;
+    font-size: 15px;
+    resize: none;
+}
+
+#agree-btn-box button{
+    width: 180px;
+    height: 50px;
+    margin: 20px 20px 0 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+}
+
+#cancleBtn{
+    background-color: lightgray;
+}
+
+#agree-btn-box a{
+    text-decoration: none;
+    color: #39393a;
+}
+
+#signupBtn{
+    background-color: #319493;
+    color: white;
+}
