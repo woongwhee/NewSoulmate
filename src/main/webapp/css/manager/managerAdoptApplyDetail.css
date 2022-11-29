@@ -24,3 +24,62 @@
     font-size: 23px;
     padding: 15px 25px;
 }
+
+.check-area {
+    font-size: 23px;
+    border: 1px solid rgb(203, 203, 203);
+    padding: 10px 10px;
+    width: 865px;
+    height: 500px;
+}
+
+.check-area th {
+    border: 1px solid rgb(203, 203, 203);
+    background-color: rgb(236, 236, 236);
+    width: 300px;
+}
+
+.check-area td {
+    border: 1px solid rgb(203, 203, 203);
+}
+
+.adoptApplyAll {
+    font-size: 23px;
+    font-weight: bold;
+    margin: 10px 0;
+    width: 400px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.adoptApplyAnswer {
+    font-size: 20px;
+    width: 865px;
+    word-break: break-word;
+    background-color: #eeeeee;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#confirm {
+    border: none;
+    border-radius: 5px;
+    font-size: 19px;
+    width: 100px;
+    height: 45px;
+    margin: 8px;
+    background-color: #676767;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    left: 750px;
+}
+
+#adoptApplyListView {
+    padding-top: 20px;
+    width: 865px;
+}
+
+#confirm:hover {
+    background-color: #319493;
+}
