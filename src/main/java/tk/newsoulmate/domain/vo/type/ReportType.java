@@ -12,7 +12,7 @@ public enum ReportType {
     @SerializedName("notice")
     NOTICE("notice","유기동물댓글",2);
     public String typeName;
-    public String koreanName;
+    private String koreanName;
     public int typeNo;
     ReportType(String typeName,String koreanName, int typeNo) {
         this.typeName = typeName;
@@ -24,5 +24,9 @@ public enum ReportType {
     }
     public static ReportType valueOfName(String typeName){
         return Arrays.asList(ReportType.values()).stream().filter(e->e.typeName.equals(typeName)).findAny().orElse(BOARD);
+    }
+
+    public String getKoreanName() {
+        return koreanName;
     }
 }

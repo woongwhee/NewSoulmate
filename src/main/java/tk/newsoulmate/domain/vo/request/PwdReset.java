@@ -1,9 +1,13 @@
-package tk.newsoulmate.domain.vo;
+package tk.newsoulmate.domain.vo.request;
+
+import com.google.gson.annotations.SerializedName;
 
 public class PwdReset {
-
+    @SerializedName("memberId")
     private String memberId;
+    @SerializedName("password")
     private String password;
+    @SerializedName("passwordConfirm")
     private String passwordConfirm;
 
     public PwdReset(String memberId, String password, String passwordConfirm) {

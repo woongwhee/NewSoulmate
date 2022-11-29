@@ -17,7 +17,7 @@
     <title>마이페이지 - 비밀번호 변경</title>
 
     <%@ include file="/views/template/styleTemplate.jsp" %>
-    <link href="<%=request.getContextPath()%>/css/mypage/mtPagePwReset.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/mypage/myPagePwReset.css" rel="stylesheet">
 
 
 </head>
@@ -56,15 +56,15 @@
         let passwordConfirm = $("#passwordConfirm").val()
 
         $.ajax({
-            url: '<%=request.getContextPath()%>/pwdReset.do',
+            url: '${context}/pwdReset.do',
             type: 'post',
-            contentType: "application/json; charset=utf-8",
+            // contentType: "application/json; charset=utf-8",
             // JSON.stringify() : JavaScript 값이나 객체를 JSON 문자열로 변환
-            data: JSON.stringify({
+            data: {PwdReset:JSON.stringify({
                 'memberId': memberId,
                 'password': password,
                 'passwordConfirm': passwordConfirm
-            }),
+            })},
             success: function(data) {
                 if (data == 1) {
                     alert("패스워드 변경에 성공했습니다!");

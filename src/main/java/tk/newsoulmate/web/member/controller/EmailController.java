@@ -20,17 +20,17 @@ public class EmailController {
         return result;
     }
 
-    public int sendPasswordMail(Member m) {
+    public int sendPasswordMail(String newPwd,String Email) {
         String subject="환승주인 비밀번호 안내 입니다.";
-        String content="<h1>비밀번호는 " + m.getMemberPwd() + " 입니다.</h1>";
-        int result= sendMail(subject,content,m.getEmail());
+        String content="<h1>비밀번호는 " + newPwd + " 입니다.</h1>";
+        int result= sendMail(subject,content,Email);
         return result;
     }
 
     public static String rannum() {
         Random rcode = new Random();
         StringBuilder rannum = new StringBuilder();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 8; i++) {
             int rcd = rcode.nextInt(3);
             if (rcd == 0) {
                 int randomNum = rcode.nextInt(10);
@@ -46,6 +46,13 @@ public class EmailController {
         return rannum.toString();
     }
 
+    /**
+     * 전달받은 문자열에 따라 이메일을 전송하는 메소드
+     * @param subject 제목
+     * @param content 내용
+     * @param email 이메일주소
+     * @return
+     */
     private int sendMail(String subject,String content,String email) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -54,11 +61,10 @@ public class EmailController {
         prop.put("mail.smtp.port", 25); // 앱코드 비밀번호를 사용하기 때문에 port번호를 모바일로 해야 작동함
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
         Session session = Session.getDefaultInstance(prop, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                PasswordAuthentication pw = new PasswordAuthentication(APIKeys.emailId, APIKeys.emailPwd);//구글계정
-                return pw;
-            }
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() { return new PasswordAuthentication(APIKeys.emailId, APIKeys.emailPwd);}//구글계정}
         });
+
         MimeMessage msg = new MimeMessage(session);
 
         try {

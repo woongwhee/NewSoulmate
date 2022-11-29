@@ -14,18 +14,16 @@ public class EmailVerificationController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("memberMail");
         EmailController ec = new EmailController();
-        String randomCode = EmailController.rannum();
+        String confirmCode = EmailController.rannum();
+        new EmailController().sendConfirmMail(confirmCode,email);
         MemberService ms=new MemberService();
-        int confirmCode=ms.insertConfirm(randomCode);
-
-
-        request.getSession().setAttribute("emailCode",randomCode);
+        int confirmNo=ms.insertConfirm(confirmCode);
         PrintWriter out = response.getWriter();
-        out.print(1);
+        out.print(confirmNo);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 }

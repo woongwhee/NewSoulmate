@@ -190,23 +190,19 @@ public class MemberDao {
     }
 
 
-    public Member findPwd(Connection conn, String memberId, String memberName, String email) {
+    public int findUser(Connection conn, String memberName, String memberId, String email) {
         PreparedStatement psmt = null;
         ResultSet rset = null;
-        Member m = null;
-        String sql = prop.getProperty("findPwd");
+        String sql = prop.getProperty("findUser");
+        int result=0;
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setString(1, memberId);
-            psmt.setString(2, memberName);
+            psmt.setString(1, memberName);
+            psmt.setString(2, memberId);
             psmt.setString(3, email);
             rset = psmt.executeQuery();
-            /*if(rset.next()) {
-                m = this.mapToMember(rset);
-            }*/
             if (rset.next()) {
-                m = new Member();
-                m.setMemberPwd(rset.getString("MEMBER_PWD"));
+                result=rset.getInt("MEMBER_NO");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -214,7 +210,7 @@ public class MemberDao {
             JDBCTemplet.close(rset);
             JDBCTemplet.close(psmt);
         }
-        return m;
+        return result;
     }
 
 
@@ -231,17 +227,18 @@ public class MemberDao {
     }
 
 
-    public int updatePassword(Connection conn, String memberId, String password) {
+
+
+    public int updatePassword(Connection conn,int memberNo, String password) {
         PreparedStatement psmt = null;
         int result = 0;
-        String sql = prop.getProperty("pwdReset");
+        String sql = prop.getProperty("updatePassword");
 
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, password);
-            psmt.setString(2, memberId);
+            psmt.setInt(2, memberNo);
             result = psmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

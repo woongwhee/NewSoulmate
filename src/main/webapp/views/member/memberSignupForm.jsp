@@ -12,10 +12,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="<%=request.getContextPath()%>/css/member/memberSignupForm.css" rel="stylesheet">
 
-    <%@include file="/views/template/styleTemplate.jsp"%>
+    <%@include file="/views/template/styleTemplate.jsp" %>
 </head>
 <body>
-<%@include file="/views/template/menubar.jsp"%>
+<%@include file="/views/template/menubar.jsp" %>
 <div class="content-wrap" align="center">
     <div class="title-wrap">
         <p>회원가입</p>
@@ -53,7 +53,7 @@
                 <label for="nickname">닉네임</label>
                 <br>
                 <input type="text" name="nickName" id="nickName" placeholder="*닉네임">
-                <button type="button" id="checkNickname" onclick="nicknameCheck();">중복확인</button>
+                <button type="button" id="checkNickname" >중복확인</button>
             </div>
 
             <div class="phone-wrap">
@@ -80,7 +80,8 @@
                         <div id="certified" style="display: none">
                             <input type="text" id="authCode" placeholder="인증번호">
                             <button type="button" class="authBtn" id="authBtn"
-                                    onclick="authenticationMail()">인증하기</button>
+                                    onclick="authenticationMail()">인증하기
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -96,15 +97,10 @@
     </div>
 </div>
 
-<%@include file="/views/template/footer.jsp"%>
-
+<%@include file="/views/template/footer.jsp" %>
 
 
 <script>
-    var context='${context}'
-</script>
-<script>
-
     $(function () {
         $("#memberMail").on("keyup", function () {
             var flag2 = true;
@@ -117,21 +113,23 @@
     let checkMail = 0;
     let mailCode;
     let intervalId;
+    let confirmNo;
 
     function sendMail() {
         const memberMail2 = $("#memberMail").val();
-
         $("#certified").show();
-
         $.ajax({
-            url:context+"/sendMail.do",
-            data: { memberMail: memberMail2 },
+            url: "sendMail.do",
+            data: {memberMail: memberMail2},
             type: "get",
-            success: function(data) {
-                if (data != null) {
+            success: function (data) {
+                if (data !=0) {
+                    confirmNo = data;
                     mailCode = "notNull";
-                    $("#auth").css("display","flex");
+                    $("#auth").css("display", "flex");
                     authTime();
+                }else{
+                    alert('요청실패');
                 }
             }
         });
@@ -140,15 +138,13 @@
     // 입력시간 출력
     function authTime() {
         $("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
-        intervalId = window.setInterval(function() {
+        intervalId = window.setInterval(function () {
             timeCount();
         }, 1000);
     }
 
     function timeCount() {
-
         const min = Number($("#min").text());
-
         const sec = $("#sec").text();
         if (sec == "00") {
             if (min == 0) {
@@ -157,7 +153,6 @@
             } else {
                 $("#min").text(min - 1);
                 $("#sec").text(59);
-
             }
         } else {
             const Sec2 = Number(sec) - 1;
@@ -173,10 +168,13 @@
         const inputValue = $("#authCode").val();
         if (mailCode != null) {
             $.ajax({
-                url: context+'/checkAuth',
+                url: 'checkAuth',
                 type: 'get',
-                data: {authCode: inputValue},
-                success: (result)=> {
+                data: {
+                    authCode: inputValue,
+                    confirmNo: confirmNo
+                },
+                success: (result) => {
                     if (result == 1) {
                         $("#authMsg").text("인증에 성공하셨습니다.");
                         clearInterval(intervalId);
@@ -193,7 +191,7 @@
                 }
 
             });
-        }else{
+        } else {
             $("#authMsg").text("인증시간이 만료되었습니다.");
             checkMail = 0;
         }
@@ -202,48 +200,36 @@
     };
 
 
-
-
     // Phone - number maxlength 지정
 
-    function maxLengthChk(pNum){
-        if (pNum.value.length > pNum.maxLength){
+    function maxLengthChk(pNum) {
+        if (pNum.value.length > pNum.maxLength) {
             pNum.value = pNum.value.slice(0, pNum.maxLength);
         }
     }
 
-    $( "#memberPhone" ).change(function(){
-        $("#memberPhone").val( $("#Phone").val());
+    $("#memberPhone").change(function () {
+        $("#memberPhone").val($("#Phone").val());
     });
-
-
-
-
-
 
     let checkId = 0;
     let checkPwd = 0;
     let checkPwdRe = 0;
     let checkNickname = 0;
-
-
-
     $(document).ready(function () {
-
         // 아이디 유효성검사 & 중복 검사 - 완료
         const memberId = document.querySelector("#memberId");
         const idReg = /^[a-zA-Z0-9]{5,}/;
-
-        $('#checkid').click(function() {
+        $('#checkid').click(function () {
 
             let memberIds = $('#memberId').val();
-            if(idReg.test(memberIds)){
+            if (idReg.test(memberIds)) {
                 $.ajax({
-                    url : context+'/ajaxCheckId.do',
+                    url: 'ajaxCheckId.do',
                     type: 'get',
-                    data : { memberId: memberIds },
-                    dataType : 'json',
-                    success: function(result) {
+                    data: {memberId: memberIds},
+                    dataType: 'json',
+                    success: function (result) {
 
                         if (result == 1) {
                             alert("이미 사용중인 아이디 입니다.");
@@ -253,25 +239,23 @@
                             checkId = 1;
                         }
                     },
-                    error : function(){
+                    error: function () {
                         alert("서버요청실패");
                         checkId = 0;
                     }
                 })
-            }else {
+            } else {
                 alert("아이디가 6자 이상이어야 합니다.")
                 checkId = 0;
             }
         });
 
 
-
-
         //비밀번호 유효성 검사 - 완료
         const memberPw = document.querySelector("#memberPw");
         const memberPwRe = document.querySelector("#memberPwRe");
 
-        memberPw.addEventListener("change", function() {
+        memberPw.addEventListener("change", function () {
 
             const inputPw = memberPw.value;
             const pwReg = /^[a-zA-Z0-9@$!%*#?&]{6,}$/;
@@ -287,22 +271,22 @@
                 pwChkMsg.innerText = "사용 불가능한 비밀번호 입니다."
                 checkPwd = 0;
             }
-            if(inputPwRe != ""){
-                if(inputPw == inputPwRe){
+            if (inputPwRe != "") {
+                if (inputPw == inputPwRe) {
                     pwReChkMsg.innerText = "비밀번호가 일치합니다."
                     checkPwdRe = 1;
-                }else{
+                } else {
                     pwReChkMsg.innerText = "비밀번호가 일치하지않습니다."
                     checkPwdRe = 0;
                 }
-            }else{
+            } else {
 
             }
         });
 
 
         // 비밀번호 일치 검사 - 완료
-        memberPwRe.addEventListener("change", function() {
+        memberPwRe.addEventListener("change", function () {
             const inputPw = memberPw.value;
             const inputPwRe = memberPwRe.value;
             const pwReChkMsg = document.querySelector("#pwReChkMsg");
@@ -320,17 +304,15 @@
         const nickName = document.querySelector("#nickName");
         const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,}/;
 
-        $('#checkNickname').click(function() {
-
+        $('#checkNickname').click( function() {
             let nickNames = $('#nickName').val();
-
-            if(nickReg.test(nickNames)){
+            if (nickReg.test(nickNames)) {
                 $.ajax({
-                    url : '<%= request.getContextPath()%>/ajaxCheckNickname.do',
+                    url: 'ajaxCheckNickname.do',
                     type: 'get',
-                    data : { nickName: nickNames },
-                    dataType : 'json',
-                    success: function(result) {
+                    data: {nickName: nickNames},
+                    dataType: 'json',
+                    success: function (result) {
 
                         if (result == 1) {
                             alert("이미 사용중인 닉네임 입니다.");
@@ -340,12 +322,12 @@
                             checkNickname = 1;
                         }
                     },
-                    error : function(){
+                    error: function () {
                         alert("서버요청실패");
                         checkNickname = 0;
                     }
                 })
-            }else {
+            } else {
                 alert("닉네임은 3자 이상이어야 합니다.")
                 checkNickname = 0;
             }
@@ -355,7 +337,7 @@
     });
 
     // 필수입력사항 모두 입력돼야 회원가입 할 수 있게 - 완료
-    function signupCheck(){
+    function signupCheck() {
         if (!(checkId == 1 && checkPwd == 1 && checkPwdRe == 1 && checkNickname == 1 && checkMail == 1)) {
             alert("필수 입력창을 모두 입력해주세요.")
             return false;

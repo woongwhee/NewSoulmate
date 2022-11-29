@@ -84,6 +84,7 @@
     let checkMail = 0;
     let mailCode;
     let intervalId;
+    let confirmNo;
 
     function sendMail() {
         const memberMail2 = $("#memberMail").val();
@@ -94,6 +95,7 @@
             success: function (data) {
                 if (data != null) {
                     mailCode = "notNull";
+                    confirmNo=data;
                     $("#auth").css("display", "flex");
                     authTime();
                 }
@@ -139,7 +141,9 @@
             $.ajax({
                 url: '<%= request.getContextPath()%>/checkAuth',
                 type: 'get',
-                data: {authCode: inputValue},
+                data: {authCode: inputValue,
+                    confirmNo:confirmNo
+                },
                 success: (result)=> {
                     if (result == 1) {
                         $("#authMsg").text("인증에 성공하셨습니다.");
