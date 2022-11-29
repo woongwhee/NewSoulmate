@@ -1,0 +1,142 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.headcontainer {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#right_view {
+    float: right;
+    padding: 20px;
+    margin: 0px;
+    width: 910px;
+    height: auto;
+}
+
+#volunteerApplyDetail {
+    font-size: 23px;
+    padding: 15px 25px;
+}
+
+.check-area {
+    font-size: 23px;
+    border: 1px solid rgb(203, 203, 203);
+    padding: 10px 10px;
+    width: 865px;
+    height: 500px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.check-area th {
+    border: 1px solid rgb(203, 203, 203);
+    background-color: rgb(236, 236, 236);
+    width: 300px;
+}
+
+.check-area td {
+    border: 1px solid rgb(203, 203, 203);
+}
+
+#btn-box {
+    text-align: right;
+    padding-top: 20px;
+}
+
+#btn-box button {
+    width: 200px;
+    height: 40px;
+    margin-left: 55px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.modal-footer button {
+    width: 120px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+#send-btn{
+    margin-right: 100px;
+}
+
+#list-btn , #back-btn{
+    background-color: lightgray;
+}
+
+#msg-btn , #send-btn {
+    background-color: #319493;
+    color: white;
+}
+
+#msgLabel{
+    font-size: 24px;
+    color: #39393a;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.modal-body{
+    text-align: center;
+}
+
+.modal-body #user-info{
+    display: flex;
+    height: 40px;
+    width: 100%;
+    padding-left: 60px;
+}
+
+#user-name{
+    width: 100px;
+    margin-right:20px;
+    height: 40px;
+}
+
+#user-phone{
+    width: 200px;
+    height: 40px;
+}
+
+#user-info input , #msg-content{
+    border-radius: 5px;
+    border: lightgray 1px solid;
+    font-size: 14px;
+}
+
+#msg-content{
+    margin:20px 0 20px 0 ;
+    width: 330px;
+    height: 280px;
+}
+
+.modal-content{
+    background-color: #eeeeee;
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+}
+
+.modal-header{
+    height: 70px;
+    width: auto;
+}
+
