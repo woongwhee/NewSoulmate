@@ -3,7 +3,6 @@
 <html>
 <head>
   <link href="<%=request.getContextPath()%>/css/shelterManager/shelterHeader.css" rel="stylesheet">
-  <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 <div class="headcontainer">

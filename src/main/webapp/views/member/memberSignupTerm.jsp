@@ -12,8 +12,7 @@
 
 
     <%@include file="/views/template/styleTemplate.jsp"%>
-
-
+    <link href="<%=request.getContextPath()%>/css/member/signupTerm.css" rel="stylesheet">
 </head>
 <body>
 

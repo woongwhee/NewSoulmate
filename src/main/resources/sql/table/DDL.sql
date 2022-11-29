@@ -239,14 +239,13 @@ CREATE TABLE "BOARD_TYPE" (
 
 --인증서--
 CREATE TABLE "CONFIRM" (
-                           "CONFIRM_NO" NUMBER
-                               CONSTRAINT PK_CONFIRM PRIMARY KEY,
-                           "MEMBER_NO"   NUMBER
-                               CONSTRAINT CF_MN_NN NOT NULL ,
-                           "CONFIRM_TIME"   DATE DEFAULT SYSDATE
-                               CONSTRAINT CF_CT_NN NOT NULL,
-                           "CONFIRM_CODE"   VARCHAR2(20)
-                               CONSTRAINT CF_CC_NN NOT NULL
+       "CONFIRM_NO" NUMBER
+           CONSTRAINT PK_CONFIRM PRIMARY KEY,
+       "MEMBER_NO"   NUMBER,
+       "CONFIRM_TIME"   DATE DEFAULT SYSDATE
+           CONSTRAINT CF_CT_NN NOT NULL,
+       "CONFIRM_CODE"   VARCHAR2(20)
+           CONSTRAINT CF_CC_NN NOT NULL
 );
 
 --입양신청서---
@@ -689,6 +688,16 @@ CREATE SEQUENCE SQ_TRANSFER_PK
     NOORDER;
 COMMIT;
 CREATE SEQUENCE SQ_GRADEUP_PK
+    INCREMENT BY 1
+    START WITH 10000
+    MINVALUE 1
+    MAXVALUE 99999
+    NOCYCLE
+    NOCACHE
+    NOORDER;
+COMMIT;
+
+CREATE SEQUENCE SQ_CONFIRM_PK
     INCREMENT BY 1
     START WITH 10000
     MINVALUE 1

@@ -19,9 +19,9 @@ public class AjaxGradeAllowController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 회원 등급 n => y 로 바꾸기
 
-        String[] memberNo =request.getParameterValues("checkMember");
+        String[] memberNoArr =request.getParameterValues("checkMember");
 //        Integer[] memArr = Stream.of(memberNo).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
-        int result = new ManageService().changeStatus(memberNo);
+        int result = new ManageService().changeStatus(memberNoArr);
 
         response.setContentType("application/json; charset=UTF-8");
         Gson gson = new Gson();

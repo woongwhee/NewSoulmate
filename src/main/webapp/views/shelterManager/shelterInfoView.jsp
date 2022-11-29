@@ -16,7 +16,7 @@
 <head>
     <title>보호소 정보수정</title>
     <%@ include file="/views/template/styleTemplate.jsp" %>
-    <link href="<%=request.getContextPath()%>/css/shelterManager/shelterInfoView.css" rel="stylesheet">
+    <link href="${context}/css/shelterManager/shelterInfoView.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -31,12 +31,10 @@
                 <p>
                     <%=loginUser.getShelterNo()%>
                 </p>
-
                 <label>보호소이름</label>
                 <p>
                     <%=shelter.getShelterName()%>
                 </p>
-
             </div>
             <div class="form-group">
                 <label for="landline">유선 전화번호</label>
@@ -46,7 +44,7 @@
             <div class="form-group">
                 <label for="tel">무선 전화번호</label>
                 <input type="text" name="tel" id="tel"
-                       value="<%if(shelter.getShelterTel() == null) { %><%} else { %><%=shelter.getShelterTel()%><%}%>">
+                       value="<%=shelter.getShelterTel()%>">
             </div>
 
             <div class="form-group">
@@ -187,7 +185,7 @@
         console.log(memberMail2);
 
         $.ajax({
-            url: "<%= request.getContextPath()%>/sendMail.do",
+            url: "${context}/sendMail.do",
             data: {memberMail: memberMail2},
             type: "get",
             success: function (data) {
@@ -236,7 +234,7 @@
         const inputValue = $("#authCode").val();
         if (mailCode != null) {
             $.ajax({
-                url: '<%= request.getContextPath()%>/checkAuth',
+                url: '${context}/checkAuth',
                 type: 'get',
                 data: {authCode: inputValue},
                 success: (result) => {

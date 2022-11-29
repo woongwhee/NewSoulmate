@@ -17,6 +17,8 @@ public  class APIKeys {
     public static String ImportSecretKey;
     public static String SolapiKey;
     public static String SolapiSecretKey;
+    public static String emailId;
+    public static String emailPwd;
     public APIKeys(){
             String FilePath= APIKeys.class.getResource("/key/APIKey.xml").getPath();
             this.prop=new Properties();
@@ -28,6 +30,8 @@ public  class APIKeys {
                 this.ImportSecretKey=prop.getProperty("ImportSecretKey");
                 this.SolapiKey=prop.getProperty("SolapiKey");
                 this.SolapiSecretKey=prop.getProperty("SolapiSecretKey");
+                this.emailId=prop.getProperty("emailId");
+                this.emailPwd=prop.getProperty("emailPwd");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
