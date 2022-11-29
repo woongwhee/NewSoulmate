@@ -56,7 +56,7 @@
                     <label for="user-genderF" class="label">여자</label>
                 </div>
                 <div class="info-group">입양희망날짜</div>
-                <input id="wishdate" type="date" name="wishdate" required>
+                <input id="wishdate" type="date" name="wishDate" required>
             </div>
             <table id="adopt-mind">
                 <tr>
