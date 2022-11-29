@@ -1,14 +1,19 @@
 package tk.newsoulmate.domain.vo;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 public class ExtMessage{
     private int messageNo;
     private int fromMemberNo;
+    @SerializedName("toMemberNo")
     private int toMemberNo;
     private Date messageDate;
-    private String TelNum;
+    @SerializedName("telNum")
+    private String telNum;
+    @SerializedName("messageContent")
     private String messageContent;
     public ExtMessage() {
     }
@@ -46,11 +51,11 @@ public class ExtMessage{
     }
 
     public String getTelNum() {
-        return TelNum;
+        return telNum;
     }
 
     public void setTelNum(String telNum) {
-        TelNum = telNum;
+        this.telNum = telNum;
     }
 
     public String getMessageContent() {
