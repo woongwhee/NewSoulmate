@@ -18,8 +18,9 @@ public class VolunteerApplyEnrollController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Member loginUser = (Member) session.getAttribute("loginUser");
+        System.out.println(loginUser);
         int memberNo = loginUser.getMemberNo();
-
+        System.out.println(memberNo);
 
         String name = request.getParameter("name");
         String startDate = request.getParameter("wishDate");
@@ -40,9 +41,9 @@ public class VolunteerApplyEnrollController extends HttpServlet {
         int result = new VolunteerService().volApplyInset(vol);
 
         if(result > 0) {
-            request.getSession().setAttribute("alertMsg", "봉사신청 완료");
+            request.getSession().setAttribute("alertMsg", "봉사신청이 완료되었습니다");
         }else{
-            request.getSession().setAttribute("alertMsg","봉사신청에 실패하였습니다.");
+            request.getSession().setAttribute("alertMsg","서버요청 실패");
         }
         response.sendRedirect(request.getContextPath());
     }
