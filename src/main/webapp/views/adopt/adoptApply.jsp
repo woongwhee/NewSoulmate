@@ -38,32 +38,32 @@
             <div id="form-title">입양신청서</div>
             <div id="user-info">
                 <div class="info-group">이름</div>
-                <input type="text" id="user-name" name="name">
+                <input type="text" id="user-name" name="name" required>
 
                 <div class="info-group">공고번호</div>
                 <% if(dno==null){%>
-                <input type="text" id="animalNo" name="animalNo">
+                <input type="text" id="animalNo" name="animalNo" required>
                 <% }else{ %>
-                <input type="text" id="animalNo" name="animalNo" value="${dno}" disabled>
+                <input type="text" id="animalNo" name="animalNo" value="${dno}" disabled required>
                 <%}%>
                 <div class="info-group">전화번호</div>
-                <input type="text" id="user-phone" name="telNum">
+                <input type="text" id="user-phone" name="telNum" required>
                 <div class="info-group">성별</div>
                 <div id="gender-btn-box">
-                    <input type="radio" id="user-genderM" name="gender" value="M" id="male"><label
+                    <input type="radio" id="user-genderM" name="gender" value="M" id="male" required><label
                         for="user-genderM" class="label">남자</label>
                     <input type="radio" id="user-genderF" name="gender" value="F" id="female">
                     <label for="user-genderF" class="label">여자</label>
                 </div>
                 <div class="info-group">입양희망날짜</div>
-                <input id="wishdate" type="date" name="wishDate">
+                <input id="wishdate" type="date" name="wishDate" required>
             </div>
             <table id="adopt-mind">
                 <tr>
                     <th colspan="4">입양을 결정하게 된 이유</th>
                 </tr>
                 <tr>
-                    <td colspan="4"><textarea name="adoptReason" style="resize: none"></textarea></td>
+                    <td colspan="4"><textarea name="adoptReason" style="resize: none" minlength="50"></textarea></td>
                 </tr>
                 <tr>
                     <th colspan="4">가족 구성원의 반대가 없었는지?</th>
@@ -75,13 +75,13 @@
                     <th colspan="4">입양해간 아이가 많이 아프다면?</th>
                 </tr>
                 <tr>
-                    <td colspan="4"><textarea name="whenSick" style="resize: none"></textarea></td>
+                    <td colspan="4"><textarea name="whenSick" style="resize: none" minlength="50"></textarea></td>
                 </tr>
                 <tr>
                     <th colspan="4">평생 사랑으로 책임질 수 있는지?</th>
                 </tr>
                 <tr>
-                    <td colspan="4"><textarea name="bigDuty" style="resize: none"></textarea></td>
+                    <td colspan="4"><textarea name="bigDuty" style="resize: none" minlength="50"></textarea></td>
                 </tr>
             </table>
             <div id="apply-date">

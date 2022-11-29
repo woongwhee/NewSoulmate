@@ -41,10 +41,10 @@ public class ShelterMangerService {
 
     }
 
-    public ArrayList<Volunteer> volunteerApplyList(PageInfo pi, long shelterNo) {
+    public ArrayList<Volunteer> volunteerApplyList(PageInfo pi2, long shelterNo) {
         Connection conn = getConnection();
 
-        ArrayList<Volunteer> list = new VolunteerDao().volunteerApplyList(conn, pi ,shelterNo);
+        ArrayList<Volunteer> list = new VolunteerDao().volunteerApplyList(conn, pi2 ,shelterNo);
         close();
         return list;
     }
