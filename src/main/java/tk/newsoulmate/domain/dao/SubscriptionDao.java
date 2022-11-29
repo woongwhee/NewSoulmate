@@ -266,7 +266,7 @@ public class SubscriptionDao {
         } finally {
             JDBCTemplet.close(psmt);
         }
-        System.out.println(result);
+
         return result;
     }
 }

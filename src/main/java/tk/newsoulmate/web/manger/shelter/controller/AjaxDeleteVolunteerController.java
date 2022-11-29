@@ -13,7 +13,6 @@ public class AjaxDeleteVolunteerController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int volunteerNo = Integer.parseInt(request.getParameter("volNo"));
         int result = new ShelterMangerService().deleteVolunteer(volunteerNo);
-        System.out.println(result);
         response.getWriter().print(result);
     }
 

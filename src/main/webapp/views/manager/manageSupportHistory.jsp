@@ -31,7 +31,6 @@
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
-            <div id="supportShelterList">
                 <table>
                     <thead>
                     <tr>
@@ -86,7 +85,6 @@
                     <% } %>
                     <tbody>
                 </table>
-            </div>
 
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"

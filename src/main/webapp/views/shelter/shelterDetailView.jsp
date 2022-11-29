@@ -15,7 +15,7 @@
 <head>
     <title>보호소 상세 페이지</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
-    <link rel="stylesheet" href="${context}/css/shelter/shelterDetailView.css">
+    <link href="<%=request.getContextPath()%>/css/shelter/shelterDetailView.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="/views/template/menubar.jsp"%>
@@ -43,9 +43,9 @@
         </tr>
     </table>
     <div id="map"></div>
-</div>
-<div id="listBtn">
-    <button id="list-btn" onclick="location.href='<%=request.getContextPath()%>/shelterList';">목록으로 돌아가기</button>
+    <div id="listBtn">
+        <button onclick="location.href='<%=request.getContextPath()%>/shelterList;'">목록으로 돌아가기</button>
+    </div>
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25a11b9a945a1d444011113fe431e818&libraries=services"></script>

@@ -1,6 +1,5 @@
 package tk.newsoulmate.web.adopt.controller;
 
-import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.Subscription;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 
@@ -22,6 +21,7 @@ public class adoptApplyInsertController extends HttpServlet {
         int memberNo = ((Member) session.getAttribute("loginUser")).getMemberNo();
 
         String name = request.getParameter("name");
+
         String animalNo = request.getParameter("animalNo");
         String telNum = request.getParameter("telNum");
         String gender = request.getParameter("gender");

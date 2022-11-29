@@ -71,12 +71,10 @@ select {
     width: 230px;
 }
 
-#user-genderM,
-#user-genderF {
+#gender-btn-box input{
     width: 60px;
     height: 30px;
 }
-
 .label {
     vertical-align: super;
     font-size: 20px;
