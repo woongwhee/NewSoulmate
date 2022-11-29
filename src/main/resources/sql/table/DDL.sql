@@ -19,7 +19,7 @@ DROP TABLE NewSoulmate.CATEGORY CASCADE CONSTRAINTS PURGE ;
 DROP TABLE NewSoulmate.REPORT CASCADE CONSTRAINTS PURGE ;
 -- DROP TABLE ANIMAL;
 DROP SEQUENCE SQ_BOARD_PK;
-DROP SEQUENCE SQ_CARD_PK;
+
 DROP SEQUENCE SQ_COMMENT_PK;
 DROP SEQUENCE SQ_MEMBER_PK;
 DROP SEQUENCE SQ_VOLUNTEER_PK;
@@ -275,53 +275,53 @@ CREATE TABLE "SUBSCRIPTION" (
 );
 --첨부파일--
 CREATE TABLE "ATTACHMENT" (
-                              "FILE_NO"   NUMBER
-                                  CONSTRAINT PK_ATTACHMENT PRIMARY KEY ,
-                              "REPLY_NO"   NUMBER   DEFAULT 0,
-                              "BOARD_NO"   NUMBER   DEFAULT 0,
-                              "ORIGIN_NAME"   VARCHAR2(250)
-                                  CONSTRAINT AT_ON_NN   NOT NULL,
-                              "CHANGE_NAME"   VARCHAR2(250)
-                                  CONSTRAINT AT_CN_NN      NOT NULL,
-                              "FILE_PATH"   VARCHAR2(1000)
-                                  CONSTRAINT AT_FP_NN NOT NULL ,
-                              "UPLOAD_DATE"   DATE   DEFAULT SYSDATE,
-                              "STATUS"   VARCHAR2(1) DEFAULT 'Y'
-                                  CONSTRAINT AT_ST_CK CHECK ( STATUS in('Y','N'))
+      "FILE_NO"   NUMBER
+          CONSTRAINT PK_ATTACHMENT PRIMARY KEY ,
+      "REPLY_NO"   NUMBER   DEFAULT 0,
+      "BOARD_NO"   NUMBER   DEFAULT 0,
+      "ORIGIN_NAME"   VARCHAR2(250)
+          CONSTRAINT AT_ON_NN   NOT NULL,
+      "CHANGE_NAME"   VARCHAR2(250)
+          CONSTRAINT AT_CN_NN      NOT NULL,
+      "FILE_PATH"   VARCHAR2(1000)
+          CONSTRAINT AT_FP_NN NOT NULL ,
+      "UPLOAD_DATE"   DATE   DEFAULT SYSDATE,
+      "STATUS"   VARCHAR2(1) DEFAULT 'Y'
+          CONSTRAINT AT_ST_CK CHECK ( STATUS in('Y','N'))
 );
 --댓글--
 CREATE TABLE "REPLY" (
-                         "REPLY_NO"   NUMBER
-                             CONSTRAINT PK_COMMENT PRIMARY KEY ,
-                         "BOARD_NO"   NUMBER,
-                         "NOTICE_NO" NUMBER,
-                         "MEMBER_NO"   NUMBER
-                             CONSTRAINT CM_MN_NN NOT NULL,
-                         "REPLY_CONTENT" VARCHAR2(400)
-                             CONSTRAINT CM_CT_NN NOT NULL,
-                         "REPLY_STATUS" VARCHAR2(1) DEFAULT 'Y'
-                             CONSTRAINT CM_CS_CK CHECK (REPLY_STATUS IN('Y','N')),
-                         "REPLY_TYPE"   NUMBER   DEFAULT 0,
-                         "REPLY_DATE" DATE DEFAULT SYSDATE
+ "REPLY_NO"   NUMBER
+     CONSTRAINT PK_COMMENT PRIMARY KEY ,
+ "BOARD_NO"   NUMBER,
+ "NOTICE_NO" NUMBER,
+ "MEMBER_NO"   NUMBER
+     CONSTRAINT CM_MN_NN NOT NULL,
+ "REPLY_CONTENT" VARCHAR2(400)
+     CONSTRAINT CM_CT_NN NOT NULL,
+ "REPLY_STATUS" VARCHAR2(1) DEFAULT 'Y'
+     CONSTRAINT CM_CS_CK CHECK (REPLY_STATUS IN('Y','N')),
+ "REPLY_TYPE"   NUMBER   DEFAULT 0,
+ "REPLY_DATE" DATE DEFAULT SYSDATE
 
 );
 --문자--
 CREATE TABLE "MESSAGE" (
-                           "MESSAGE_NO" NUMBER
-                               CONSTRAINT "PK_MESSAGE" PRIMARY KEY ,
-                           "MEMBER_NO"   NUMBER,
-                           "SHELTER_NO" NUMBER,
-                           "MESSAGE_DATE"   DATE   DEFAULT SYSDATE,
-                           "TEL_NUM"   VARCHAR2(20)
-                               CONSTRAINT MS_TN_NN NOT NULL,
-                           "MESSAGE_CONTENT" VARCHAR2(1000)
-                               CONSTRAINT MS_MC_NN NOT NULL
+   "MESSAGE_NO" NUMBER
+       CONSTRAINT "PK_MESSAGE" PRIMARY KEY ,
+   "MEMBER_NO"   NUMBER,
+   "SHELTER_NO" NUMBER,
+   "MESSAGE_DATE"   DATE   DEFAULT SYSDATE,
+   "TEL_NUM"   VARCHAR2(20)
+       CONSTRAINT MS_TN_NN NOT NULL,
+   "MESSAGE_CONTENT" VARCHAR2(1000)
+       CONSTRAINT MS_MC_NN NOT NULL
 );
 CREATE TABLE CATEGORY(
-                         CATEGORY_NO NUMBER
-                             CONSTRAINT PK_CATEGORY PRIMARY KEY,
-                         CATEGORY_NAME VARCHAR2(40),
-                         TYPE_NO NUMBER
+     CATEGORY_NO NUMBER
+         CONSTRAINT PK_CATEGORY PRIMARY KEY,
+     CATEGORY_NAME VARCHAR2(40),
+     TYPE_NO NUMBER
 
 );
 
@@ -453,15 +453,13 @@ COMMENT ON COLUMN "BOARD"."CREATE_DATE" IS '작성일';
 COMMENT ON COLUMN "BOARD"."ISSUE_DATE" IS '입양/봉사일';
 COMMENT ON COLUMN "BOARD"."CATEGORY_NO" IS '카테고리';
 
-/*COMMENT ON COLUMN "TRANSFER"."TRANSFER_NO" IS '이체 후원 번호';
-COMMENT ON COLUMN "TRANSFER"."BANK" IS '은행';
+--출금
+COMMENT ON COLUMN "TRANSFER"."TRANSFER_NO" IS '출금신청번호';
+COMMENT ON COLUMN "TRANSFER"."SUPPORT_NO" IS '후원번호';
+COMMENT ON COLUMN "TRANSFER"."BANK" IS '은행명';
 COMMENT ON COLUMN "TRANSFER"."NAME" IS '예금주명';
 COMMENT ON COLUMN "TRANSFER"."ACCOUNT_NUMBER" IS '계좌번호';
-
-COMMENT ON COLUMN "CARD"."CARD_NO" IS '카드 후원 번호';
-COMMENT ON COLUMN "CARD"."COMPANY" IS '카드사';
-COMMENT ON COLUMN "CARD"."CARD_NUM" IS '카드 번호';
-COMMENT ON COLUMN "CARD"."VALIDITY" IS '카드유효기간';*/
+COMMENT ON COLUMN "TRANSFER"."STATUS" IS '출금신청번호';
 
 
 COMMENT ON COLUMN "BREED"."BREED_NO" IS '품종번호';
