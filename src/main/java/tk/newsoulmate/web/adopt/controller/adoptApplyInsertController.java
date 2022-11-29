@@ -18,11 +18,10 @@ public class adoptApplyInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 신청서 번호는 넥스트바로 가능.
-        int memberNo=((Member)request.getAttribute("loginUser")).getMemberNo();
+        HttpSession session = request.getSession();
+        int memberNo = ((Member) session.getAttribute("loginUser")).getMemberNo();
+
         String name = request.getParameter("name");
-        // 유효한 animalNo인지 확인해서
-        // 만약에 잘못되었다면 alert창 띄어주기
-        // 잘 썻다면 입양 신청 db에 저장 -> 입양신청이 성공적으로 되었습니다. 페이지 만들까??
 
         String animalNo = request.getParameter("animalNo");
         String telNum = request.getParameter("telNum");
