@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>봉사후기 작성하기-환승주인</title>
+    <title>봉사후기 작성하기</title>
     <%@include file="/views/template/styleTemplate.jsp"%>
 
     <script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
