@@ -18,7 +18,7 @@ import java.net.http.HttpRequest;
             "replyDelete", "ManageAdoptApplyListController","NoticeReplyInsertController",
             "InquireEnrollController","inquireUpdate", "InquireUpdateFromController",
             "SupportHistoryServlet","SupportHistory","SupportNumberCreate",
-            "supportPaymentPage", "SupportVerify","MyPageInfoController"
+            "supportPaymentPage", "SupportVerify","MyPageInfoController","volunteerApply"
     }
 )
 public class LoginFilter implements Filter {
