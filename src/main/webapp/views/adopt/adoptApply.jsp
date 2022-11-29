@@ -56,7 +56,7 @@
                     <label for="user-genderF" class="label">여자</label>
                 </div>
                 <div class="info-group">입양희망날짜</div>
-                <input id="wishdate" type="date" name="wishDate" required>
+                <input id="wishdate" type="date" name="wishdate" required>
             </div>
             <table id="adopt-mind">
                 <tr>
@@ -94,7 +94,10 @@
     </form>
 </div>
 <script>
-
+    let now_utc = Date.now()
+    let timeOff = new Date().getTimezoneOffset()*60000;
+    let today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    document.getElementById("wishdate").setAttribute("min", today);
 </script>
 
 </body>
