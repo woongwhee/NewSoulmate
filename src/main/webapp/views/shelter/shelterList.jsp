@@ -12,9 +12,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ArrayList<Shelter> sList = (ArrayList<Shelter>) request.getAttribute("sList");
-    ArrayList<City> cList = (ArrayList<City>)request.getAttribute("cList");
-    ArrayList<Village> vList = (ArrayList<Village>)request.getAttribute("vList");
-
 %>
 <!doctype html>
 <html lang="en">
@@ -61,32 +58,6 @@
         </tbody>
     </table>
 </div>
-    <script>
-
-            function choice() {
-                // 메인페이지 선택시 서브쿼리 삭제
-                $("#subCategory").children().remove();
-                $.ajax({
-                    url: "jqAjaxCity",
-                    data: {city: $("#mainCategory").val()},
-                    success: function (result) {
-                        console.log(result, "어라?");
-                        let str = '<option value="0">전체</option>';
-                        for (let i = 0; i < result.length; i++) {
-                            str += "<option value="+result[i].villageNo+ ">" + result[i].villageName + "</option>"
-                        }
-                        $("#subCategory").html(str);
-
-                    }
-                })
-            }
-
-            //1 . /shelter/updateShelter 비동기로 요청
-            //2. 응답정보를 html로 받아오고
-            //3. succes시 tbody\태그에 html메서드 사용해서 데이터뿌려주기.
-
-
-    </script>
 <script>
     $(function(){
         $.ajax({
@@ -96,21 +67,18 @@
             }
         })
     })
-</script>
 
-    <script>
-        $(".list-area>tbody>tr").click(function(){
-            // 클릭시 해당 shelter_no 를 넘김
-            //해당 tr 요소의 자손들중 첫번째 td영역의 내용이 필요
-            let shelterNo = $(this).children().eq(0).text().trim();
-            // textnode를 가져옴
-            console.log(shelterNo);
+    $(".list-area>tbody>tr").click(function(){
+        // 클릭시 해당 shelter_no 를 넘김
+        //해당 tr 요소의 자손들중 첫번째 td영역의 내용이 필요
+        let shelterNo = $(this).children().eq(0).text().trim();
+        // textnode를 가져옴
+        console.log(shelterNo);
 
-            location.href = '<%=request.getContextPath()%>/ShelterDetail?shelterNo='+shelterNo;
-        })
+        location.href = '<%=request.getContextPath()%>/ShelterDetail?shelterNo='+shelterNo;
+    })
 
 </script>
-
 <%@include file="/views/template/footer.jsp"%>
 </body>
 </html>
