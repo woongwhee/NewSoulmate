@@ -25,9 +25,7 @@ public class SupportVerifyController extends HttpServlet {
 		// get 메소드로 전달한 값을 받음, impUid로 iamport에 요청해서 결제정보를 다시 받아옴
 		String impUid = request.getParameter("impUid");
 		String merchantUid = request.getParameter("merchantUid");
-
 		boolean result = supportService.verify(impUid, merchantUid);
-
 		if (result) {
 			supportService.complete(merchantUid);
 			response.setStatus(200);

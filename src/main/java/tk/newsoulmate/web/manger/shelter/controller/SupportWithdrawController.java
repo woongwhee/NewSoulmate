@@ -35,7 +35,6 @@ public class SupportWithdrawController extends HttpServlet {
 		} else {
 			Member member = (Member)loginUser;
 			long shelterNo = member.getShelterNo();
-
 			SupportWithdrawRequest req = new Gson().fromJson(request.getReader(), SupportWithdrawRequest.class);
 			int result = supportService.withdraw(req);
 
