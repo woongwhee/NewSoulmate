@@ -49,7 +49,6 @@
             <div><button id="adopt-step">입양절차 안내</button></div>
         </div>
     </div>
-
     <div id="main_right">
         <div class="main_right_box1">
             <div class="wrap">
@@ -64,26 +63,29 @@
                     <div class="textbox">봉사는 어떻게 하나요?</div>
                 </div>
                 <div class="chat ch2">
-                    <div class="textbox">봉사신청 후
-                                         자세한 내용은 홈페이지 내 입양절차안내 페이지를 통해 확인가능합니다.</div>
+                    <div class="textbox">봉사신청서를 작성해주시면 보호소관계자가 검토 후 안내문자를 보내드립니다.
+                                         봉사신청서는 홈페이지 내 봉사신청 페이지에서 작성하실 수 있습니다.</div>
                 </div>
                 <div class="chat ch1">
                     <div class="textbox">보호중인 동물들이 보고싶어요</div>
                 </div>
                 <div class="chat ch2">
-                    <div class="textbox">A</div>
+                    <div class="textbox">메인화면 내 입양가능동물 버튼을 클릭하시거나 유기동물 > 동물목록 페이지에서 상세하게
+                                         조회가 가능합니다. 동물들에게 많은 관심 부탁드립니다♥</div>
                 </div>
                 <div class="chat ch1">
                     <div class="textbox">보호소관계자는 어떻게 가입하나요?</div>
                 </div>
                 <div class="chat ch2">
-                    <div class="textbox">A</div>
+                    <div class="textbox">일반회원으로 회원가입하신 후 마이페이지에서 보호소관계자 등록신청을 해주시면 검토 후
+                                         보호소관계자회원으로 승인처리해드립니다</div>
                 </div>
                 <div class="chat ch1">
-                    <div class="textbox">보호소관계자는 어떻게 가입하나요?</div>
+                    <div class="textbox">후원금은 어디에 쓰이는지 궁금합니다</div>
                 </div>
                 <div class="chat ch2">
-                    <div class="textbox">A</div>
+                    <div class="textbox">보호소 관리와 보호중인 동물들의 사료구입, 병원비지불 등 꼭 필요한 곳에만 쓰입니다.
+                                         여러분의 후원이 동물들에게 많은 도움이 됩니다.</div>
                 </div>
             </div>
         </div>
