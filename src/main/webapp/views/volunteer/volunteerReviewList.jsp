@@ -7,7 +7,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>봉사후기-환승주인</title>
     <%@include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/board/volunteerReviewList.css" rel="stylesheet">
 </head>

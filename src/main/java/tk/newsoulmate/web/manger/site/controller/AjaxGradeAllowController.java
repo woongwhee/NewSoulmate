@@ -18,7 +18,6 @@ public class AjaxGradeAllowController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 회원 등급 n => y 로 바꾸기
-        // gra
 
         String[] memberNo =request.getParameterValues("checkMember");
 //        Integer[] memArr = Stream.of(memberNo).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);

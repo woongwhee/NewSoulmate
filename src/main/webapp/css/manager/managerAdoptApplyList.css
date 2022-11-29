@@ -20,9 +20,9 @@
     height: auto;
 }
 
-#user_information {
+#applyList {
     font-size: 23px;
-    padding: 15px 25px;
+    padding: 15px 20px;
 }
 
 .box {
@@ -35,21 +35,16 @@
     color: #f45d48;
 }
 
-#applyList {
-    margin-top: 30px;
-}
-
 table {
     border-collapse: collapse;
     width: 860px;
-    border: 1px solid rgb(203, 203, 203);
 }
 
 thead th {
     font-size: 15px;
-    border: 1px solid rgb(203, 203, 203);
+    border-top: 1px solid rgb(203, 203, 203);
     background-color: rgb(236, 236, 236);
-    padding: 10px 10px;
+    padding: 10px 0px;
     text-align: center;
 }
 
@@ -58,40 +53,98 @@ thead th:first-child {
 }
 
 tbody td {
-    border: 1px solid rgb(203, 203, 203);
+    border-top: 1px solid rgb(203, 203, 203);
     text-align: center;
     font-size: 12px;
+    padding: 5px;
 }
 
 td input[type=submit] {
     border: none;
     border-radius: 5px;
     font-size: 12px;
-    width: 60px;
+    width: 70px;
     height: 30px;
     margin: 8px;
     background-color: #676767;
     color: white;
     cursor: pointer;
-}
 
-#buttonBox {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#buttonBox input[type=button] {
-    margin: 10px;
-    width: 100px;
-    height: 35px;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(236, 236, 236);
-    cursor: pointer;
 }
 
 td input[type=submit]:hover {
     background-color: #393939;
     color: white;
+}
+
+/**/
+.box span[id=countMember] {
+    padding-left: 30px;
+    font-weight: bold;
+    color: #f45d48;
+}
+
+
+.box span[id=memberGrade] {
+    padding-left: 44px;
+}
+
+.box select[name=selectMemberGrade] {
+    border: none;
+    font-size: 20px;
+}
+
+#updateGradeMemberBtn {
+    border: none;
+    background-color: #319493;
+    color: white;
+}
+
+#updateGradeMemberBtn:hover {
+    background-color: #177372;
+    color: white;
+}
+
+
+#deleteMemberBtn {
+    border: none;
+    background-color: #f45d48;
+    color: white;
+}
+
+#deleteMemberBtn:hover, #deleteMemberBtn2:hover {
+    background-color: #e14330;
+    color: white;
+}
+
+#deleteMemberBtn2 {
+    border: none;
+    background-color: #f45d48;
+    width: 95px;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #319493;
+    border: none;
+}
+
+.paging-area {
+    margin-top: 20px;
+}
+
+.checkRef {
+    border: none;
+    background-color: #319493;
+    color: white;
+    width: 71px;
+    margin-top: 5px;
+}
+
+.confirm {
+    border: none;
+    background-color: #f45d48;
+    width: 71px;
+    color: white;
+    margin-top: 5px;
 }

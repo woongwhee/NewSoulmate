@@ -14,9 +14,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    List<Support> allList = (List<Support>)request.getAttribute("mList");
+    List<Support> allList = (List<Support>) request.getAttribute("mList");
 
-    PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+    PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
 
     int currentPage = pageInfo.getCurrentPage();
     int startPage = pageInfo.getStartPage();
@@ -61,82 +61,87 @@
             <div id="supportSupportAllHistory">
 
             </div>
-        </div>
 
-        <div>
+            <div>
 
-            <div id="supportAllrList">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>후원번호</th>
-                        <th>결제번호</th>
-                        <th>후원보호소명</th>
-                        <th>후원일시</th>
-                        <th>후원금액</th>
-                        <th>후원자</th>
-                        <th>결제상태</th>
-                        <th>출금여부</th>
-                    </tr>
-                    </thead>
-                    <%if (allList == null || allList.isEmpty()) {%>
-                    <tr>
-                        <td colspan="8">존재하는 후원내역이 없습니다.</td>
-                    </tr>
+                <div id="supportAllrList">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>후원번호</th>
+                            <th>결제번호</th>
+                            <th>후원보호소명</th>
+                            <th>후원일시</th>
+                            <th>후원금액</th>
+                            <th>후원자</th>
+                            <th>결제상태</th>
+                            <th>출금여부</th>
+                        </tr>
+                        </thead>
+                        <%if (allList == null || allList.isEmpty()) {%>
+                        <tr>
+                            <td colspan="8">존재하는 후원내역이 없습니다.</td>
+                        </tr>
 
-                    <%} else { %>
-                    <%for (Support su : allList) {%>
-                    <tr>
-                        <td><%=su.getSupportNo()%></td>
-                        <td><%=su.getMerchantUid()%></td>
-                        <td><%=su.getShelterName() %></td>
-                        <td><%=su.getPayTime() %></td>
-                        <td><%=su.getAmount()%> 원</td>
-                        <td><%=su.getMemberName()%></td>
-                        <td>
-                            <%if (su.getStatus() == SupportStatus.DONE) { %>
-                            결제완료
-                            <%}else if (su.getStatus() == SupportStatus.PENDING) { %>
-                            취소
-                            <%} else { %>
-                            결제실패
-                            <%} %>
-                        </td>
-                        <td>
-                            <%if (su.getWithdrawStatus() == WithdrawStatus.DONE) { %>
-                            출금승인
-                            <%}else if (su.getWithdrawStatus() == WithdrawStatus.PENDING) { %>
-                            출금신청전
-                            <%}else if (su.getWithdrawStatus() == WithdrawStatus.REQUESTED) { %>
-                            출금신청중
-                            <%}else {%>
-                            취소
-                            <%} %>
-                        </td>
-                    </tr>
+                        <%} else { %>
+                        <%for (Support su : allList) {%>
+                        <tr>
+                            <td><%=su.getSupportNo()%>
+                            </td>
+                            <td><%=su.getMerchantUid()%>
+                            </td>
+                            <td><%=su.getShelterName() %>
+                            </td>
+                            <td><%=su.getPayTime() %>
+                            </td>
+                            <td><%=su.getAmount()%> 원</td>
+                            <td><%=su.getMemberName()%>
+                            </td>
+                            <td>
+                                <%if (su.getStatus() == SupportStatus.DONE) { %>
+                                결제완료
+                                <%} else if (su.getStatus() == SupportStatus.PENDING) { %>
+                                취소
+                                <%} else { %>
+                                결제실패
+                                <%} %>
+                            </td>
+                            <td>
+                                <%if (su.getWithdrawStatus() == WithdrawStatus.DONE) { %>
+                                출금승인
+                                <%} else if (su.getWithdrawStatus() == WithdrawStatus.PENDING) { %>
+                                출금신청전
+                                <%} else if (su.getWithdrawStatus() == WithdrawStatus.REQUESTED) { %>
+                                출금신청중
+                                <%} else {%>
+                                취소
+                                <%} %>
+                            </td>
+                        </tr>
+                        <% } %>
+                        <% } %>
+                        <tbody>
+                    </table>
+                </div>
+                <div align="center" class="paging-area"> <!--페이징바-->
+                    <% if (currentPage != 1) { %>
+                    <button onclick="doPageClick(<%=currentPage - 1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+                    <% } %>
+
+                    <% for (int i = startPage; i <= endPage; i++) { %>
+                    <% if (i != currentPage) {%>
+                    <button onclick="doPageClick(<%= i %>)" class="btn btn-secondary btn-sm"><%= i %>
+                    </button>
+                    <% } else { %>
+                    <button disabled><%=i %>
+                    </button>
                     <% } %>
                     <% } %>
-                    <tbody>
-                </table>
-            </div>
-            <div align="center" class="paging-area"> <!--페이징바-->
-                <% if (currentPage != 1) { %>
-                <button onclick="doPageClick(<%=currentPage - 1%>)" class="btn btn-secondary btn-sm">&lt;</button>
-                <% } %>
 
-                <% for (int i = startPage; i <= endPage; i++) { %>
-                <% if (i != currentPage) {%>
-                <button onclick="doPageClick(<%= i %>)" class="btn btn-secondary btn-sm"><%= i %>
-                </button>
-                <% } else { %>
-                <button disabled><%=i %>
-                </button>
-                <% } %>
-                <% } %>
-
-                <% if (currentPage != maxPage) { %>
-                <button onclick="doPageClick(<%=currentPage + 1%>)" class="btn btn-secondary btn-sm">&gt;</button>
-                <% } %>
+                    <% if (currentPage != maxPage) { %>
+                    <button onclick="doPageClick(<%=currentPage + 1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
@@ -146,6 +151,7 @@
     function doPageClick(currentPage) {
         location.href = "${context}/manageSupportAllHistory?page=" + currentPage + "&filter=" + $("#shelterName").val();
     }
+
     function searchByFilter() {
         location.href = "${context}/manageSupportAllHistory?page=1&filter=" + $("#shelterName").val();
     }

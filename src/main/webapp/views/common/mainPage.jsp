@@ -18,7 +18,7 @@
 <div id="container">
 
     <div id="main_top">
-        <div id="comment">지금 새로운 주인을 기다리고있어요..</div>
+<%--        <div id="comment">지금 새로운 주인을 기다리고있어요..</div>--%>
         <div class="slider">
             <%@include file="/views/common/noticeSlide.jsp"%>
         </div>
@@ -61,13 +61,26 @@
                                          자세한 내용은 홈페이지 내 입양절차안내 페이지를 통해 확인가능합니다.</div>
                 </div>
                 <div class="chat ch1">
-                    <div class="textbox">Q</div>
+                    <div class="textbox">봉사는 어떻게 하나요?</div>
+                </div>
+                <div class="chat ch2">
+                    <div class="textbox">봉사신청 후
+                                         자세한 내용은 홈페이지 내 입양절차안내 페이지를 통해 확인가능합니다.</div>
+                </div>
+                <div class="chat ch1">
+                    <div class="textbox">보호중인 동물들이 보고싶어요</div>
                 </div>
                 <div class="chat ch2">
                     <div class="textbox">A</div>
                 </div>
                 <div class="chat ch1">
-                    <div class="textbox">Q</div>
+                    <div class="textbox">보호소관계자는 어떻게 가입하나요?</div>
+                </div>
+                <div class="chat ch2">
+                    <div class="textbox">A</div>
+                </div>
+                <div class="chat ch1">
+                    <div class="textbox">보호소관계자는 어떻게 가입하나요?</div>
                 </div>
                 <div class="chat ch2">
                     <div class="textbox">A</div>
@@ -81,12 +94,8 @@
 
     <div id="main_bottom">
         <div id="graph_1">
-            <div class="graph_comment">축종별 유기율</div>
-            <div><img src="${context}/image/유기율.png"></div>
-        </div>
-        <div id="graph_2">
-            <div class="graph_comment">유기동물 안락사율</div>
-            <div><img src="${context}/image/안락사율.png"></div>
+            <div class="graph_comment">유기동물 현황</div>
+            <div><img src="${context}/image/유기동물현황.png"></div>
         </div>
     </div>
 </div>

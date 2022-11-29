@@ -4,6 +4,7 @@ import oracle.jdbc.proxy.annotation.Pre;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Subscription;
+import tk.newsoulmate.web.common.JDBCTemplet;
 
 
 import java.io.FileInputStream;
@@ -33,7 +34,7 @@ public class SubscriptionDao {
     public int insertSubscription(Connection conn, Subscription sb) {
         int result = 0;
         PreparedStatement psmt = null;
-        String sql = prop.getProperty("adoptApplyInsert");
+        String sql = prop.getProperty("insertSubscription");
 
         try {
             psmt = conn.prepareStatement(sql);
@@ -234,7 +235,7 @@ public class SubscriptionDao {
                 list.add(new Subscription(
                         rset.getInt("SUB_NO")
                         , rset.getLong("ANIMAL_NO")
-                        , rset.getString("MEMBER_NO")
+                        , rset.getString("MEMBER_ID")
                         , rset.getString("NAME")
                         , rset.getString("TEL_NUM")
                         , rset.getDate("SUB_DATE")
@@ -250,5 +251,23 @@ public class SubscriptionDao {
         return list;
     }
 
+    public int deleteSubscription(Connection conn, int subNo) {
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("deleteSubscription");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,subNo);
+
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+
+        return result;
+    }
 }
 

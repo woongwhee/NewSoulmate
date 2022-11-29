@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>환승주인 - 상세보기</title>
+    <title>상세보기 - 환승주인</title>
     <%@include file="/views/template/styleTemplate.jsp"%>
 <%
     Notice n=(Notice)request.getAttribute("n");
@@ -95,6 +95,8 @@
                     <c:if test="${!empty r.at}">
                     <td><img class="replyImg" src="${r.at.filePath}/${r.at.changeName}" alt="${r.at.originName}"></td>
                     </c:if>
+                </tr>
+                <tr>
                     <td class="replyContent" colspan="4"> ${r.replyContent}</td>
                 </tr>
                 </c:forEach>
@@ -104,8 +106,8 @@
             <div id="replyInput">
                 <input type="hidden" name="noticeNo" value="${n.desertionNo}">
                 <input type="text" name="replyContent"id="replyApply" placeholder="댓글을 입력해주세요">
-                <input type="file" id="replyFile" name="upfile" placeholder="댓글을 입력해주세요">
                 <button type="submit" id="reply-btn">댓글작성</button>
+                <input type="file" id="replyFile" name="upfile" placeholder="댓글을 입력해주세요">
             </div>
             </form>
             </c:if>

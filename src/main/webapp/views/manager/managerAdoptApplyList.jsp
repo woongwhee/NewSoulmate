@@ -20,7 +20,7 @@
 %>
 <html>
 <head>
-    <title>입양신청목록</title>
+    <title>입양관리</title>
     <%@ include file="/views/template/styleTemplate.jsp" %>
     <link href="<%=request.getContextPath()%>/css/manager/managerAdoptApplyList.css" rel="stylesheet">
 </head>
@@ -34,7 +34,7 @@
         <div id="user_information">
 
             <div class="box">
-                총 내역 <span id="countApply" style="color: #f45d48;"><%= ms.selectAdoptApplyListCount()%></span> 개
+                총 내역 <span id="countApply"><%= ms.selectAdoptApplyListCount()%></span> 개
             </div>
 
             <div id="applyList">

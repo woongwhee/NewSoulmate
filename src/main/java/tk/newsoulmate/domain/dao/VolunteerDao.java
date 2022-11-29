@@ -29,8 +29,7 @@ public class VolunteerDao {
     }
 
 
-
-    public int volunteerApplyListCount(Connection conn , long shelterNo) {
+    public int volunteerApplyListCount(Connection conn, long shelterNo) {
 
         int listCount = 0;
         PreparedStatement psmt = null;
@@ -39,7 +38,7 @@ public class VolunteerDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setLong(1,shelterNo);
+            psmt.setLong(1, shelterNo);
             rset = psmt.executeQuery();
             if (rset.next()) {
                 listCount = rset.getInt("cnt");
@@ -67,7 +66,7 @@ public class VolunteerDao {
             int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
             int endRow = startRow + pi.getBoardLimit() - 1;
 
-            psmt.setLong(1,shelterNo);
+            psmt.setLong(1, shelterNo);
             psmt.setInt(2, startRow);
             psmt.setInt(3, endRow);
 
@@ -76,7 +75,7 @@ public class VolunteerDao {
             while (rset.next()) {
                 Volunteer vo = new Volunteer();
                 vo.setVolunteerNo(rset.getInt("VOLUNTEER_NO"));
-                vo.setShelterNo(rset.getInt("SHELTER_NO"));
+                vo.setShelterNo(rset.getLong("SHELTER_NO"));
                 vo.setMemberNo(rset.getInt("MEMBER_NO"));
                 vo.setStartDate(rset.getDate("START_DATE"));
                 vo.setTelNumber(rset.getString("TEL_NUMBER"));
@@ -84,7 +83,7 @@ public class VolunteerDao {
                 vo.setMemberId(rset.getString("MEMBER_ID"));
                 vo.setShelterName(rset.getString("SHELTER_NAME"));
                 vo.setVolRead(rset.getString("VOL_READ"));
-
+                list.add(vo);
             }
 
         } catch (SQLException e) {
@@ -94,7 +93,7 @@ public class VolunteerDao {
             close(psmt);
         }
         return list;
-        }
+    }
 
     public int volApplyInsert(Connection conn, Volunteer vol) {
 
@@ -106,17 +105,90 @@ public class VolunteerDao {
 
         try {
             psmt = conn.prepareStatement(sql);
-            psmt.setLong(1,vol.getShelterNo());
-            psmt.setInt(2,vol.getMemberNo());
-            psmt.setDate(3,vol.getStartDate());
-            psmt.setString(4,vol.getTelNumber());
-            psmt.setString(5,vol.getName());
+            psmt.setLong(1, vol.getShelterNo());
+            psmt.setInt(2, vol.getMemberNo());
+            psmt.setDate(3, vol.getStartDate());
+            psmt.setString(4, vol.getTelNumber());
+            psmt.setString(5, vol.getName());
             psmt.setString(6, vol.getGender());
 
             result = psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+
+        return result;
+    }
+
+    public Volunteer selectVolunteer(Connection conn, int volunteerNo) {
+        Volunteer v = new Volunteer();
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectVolunteer");
+
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, volunteerNo);
+            rset = psmt.executeQuery();
+            while (rset.next()) {
+                v.setVolunteerNo(rset.getInt("VOLUNTEER_NO"));
+                v.setShelterNo(rset.getLong("SHELTER_NO"));
+                v.setMemberNo(rset.getInt("MEMBER_NO"));
+                v.setStartDate(rset.getDate("START_DATE"));
+                v.setTelNumber(rset.getString("TEL_NUMBER"));
+                v.setApplyDate(rset.getDate("APPLY_DATE"));
+                v.setName(rset.getString("NAME"));
+                v.setGender(rset.getString("GENDER"));
+                v.setShelterName(rset.getString("SHELTER_NAME"));
+                v.setVolRead(rset.getString("VOL_READ"));
+                v.setMemberId(rset.getString("MEMBER_ID"));
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(rset);
+            close(psmt);
+        }
+        return v;
+    }
+
+    public int ReadVolunteer(Connection conn, int volunteerNo) {
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("ReadVolunteer");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,volunteerNo);
+
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCTemplet.close(psmt);
+        }
+
+        return result;
+    }
+
+    public int deleteVolunteer(Connection conn, int volunteerNo) {
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String sql = prop.getProperty("deleteVolunteer");
+        try {
+            psmt = conn.prepareStatement(sql);
+            psmt.setInt(1,volunteerNo);
+
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
             JDBCTemplet.close(psmt);
         }
 

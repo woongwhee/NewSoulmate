@@ -88,6 +88,7 @@ tbody td {
     border-top: 1px solid rgb(203, 203, 203);
     text-align: center;
     font-size: 12px;
+    padding: 5px;
 }
 
 td input[type=submit] {

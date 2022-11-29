@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.adopt.controller;
 
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.Subscription;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 
@@ -17,7 +18,7 @@ public class adoptApplyInsertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 신청서 번호는 넥스트바로 가능.
-        int memberNo = 1;
+        int memberNo=((Member)request.getAttribute("loginUser")).getMemberNo();
         String name = request.getParameter("name");
         // 유효한 animalNo인지 확인해서
         // 만약에 잘못되었다면 alert창 띄어주기
@@ -56,7 +57,7 @@ public class adoptApplyInsertController extends HttpServlet {
 
         int checkAnimal = new AdoptService().checkAnimal(animalNo);
         if(checkAnimal==0){
-            request.getSession().setAttribute("alertMsg","입양신청에 실패하였습니다.");
+            request.getSession().setAttribute("alertMsg","입력하신 공고번호는 존재하지 않는 번호입니다.");
             request.getRequestDispatcher("/views/adopt/adoptApply.jsp").forward(request,response);
             return;
         }

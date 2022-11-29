@@ -107,8 +107,8 @@
                 'memberNo':'${loginUser.memberNo}',
                 'boardNo':'${b.boardNo}',
                 'replyContent':null
-            }완
-            <c:if test="${loginUser.memberNo eq (b.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
+            }
+            <c:if test="${loginUser.memberNo eq b.memberNo or loginUser.memberGrade.SITE_MANAGER}">
             $('#deleteBoard').click(()=>{
                 if(confirm('정말삭제하시겠습니까?')){
                     location.href='${context}/adoptRevDelete?bno=${b.boardNo}';

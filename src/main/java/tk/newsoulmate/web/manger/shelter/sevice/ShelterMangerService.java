@@ -10,8 +10,7 @@ import tk.newsoulmate.web.common.JDBCTemplet;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import static tk.newsoulmate.web.common.JDBCTemplet.close;
-import static tk.newsoulmate.web.common.JDBCTemplet.getConnection;
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 public class ShelterMangerService {
     public int shelterNoAdoptApplyListCount(long shelterNo) {
@@ -50,28 +49,68 @@ public class ShelterMangerService {
         return list;
     }
 
-
-
-
-/*    // 갱신된 정보 다시 조회
-    public Shelter updateShelterInfo(Shelter s) {
+    public Subscription selectAdoptApplyDetail(int subNo){
         Connection conn = getConnection();
-        int result = new ShelterDao().updateShelterInfo(conn, s);
-        Shelter updateShelter = null;
 
-        if(result > 0) {
+        Subscription s = new SubscriptionDao().selectAdoptApplyDetail(conn,subNo);
+        close();
+
+        return s;
+    }
+
+    public Volunteer selectVolunteer(int volunteerNo) {
+            Connection conn = getConnection();
+            Volunteer v = new VolunteerDao().selectVolunteer(conn,volunteerNo);
+            close();
+            return v;
+    }
+
+    public int ReadVolunteer(int volunteerNo) {
+        Connection conn = getConnection();
+        int result = new VolunteerDao().ReadVolunteer(conn,volunteerNo);
+        if(result>0){
             commit();
-            updateShelter = new ShelterDao().updateShelterInfo(s.setShelterNo(), conn);
+        }else{
+            rollback();
+        }        close();
+
+        return result;
+    }
+
+    public int deleteVolunteer(int volunteerNo) {
+        Connection conn = getConnection();
+        int result = new VolunteerDao().deleteVolunteer(conn,volunteerNo);
+
+        if(result>0){
+            commit();
         }else{
             rollback();
         }
         close();
-        return updateShelter;
-    }*/
+        return result;
+    }
 
+    public int deleteSubscription(int subNo) {
+        Connection conn = getConnection();
+        int result = new SubscriptionDao().deleteSubscription(conn,subNo);
 
-
-
-
-
+        if(result>0){
+            commit();
+        }else{
+            rollback();
+        }
+        close();
+        return result;
+    }
+    public int changeAdoptApplySubRead(int subNo){
+        Connection conn = getConnection();
+        int result = new SubscriptionDao().changeAdoptApplySubRead(conn,subNo);
+        if(result > 0){
+            commit();
+        } else{
+            rollback();
+        }
+        close();
+        return result;
+    }
 }

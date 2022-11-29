@@ -21,9 +21,11 @@ public class ShelterMessageController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Member loginUser=(Member)request.getSession().getAttribute("loginUser");
         PageInfo pi;
+        PageInfo pi2;
         long shelterNo = loginUser.getShelterNo();
         if(loginUser==null){
             pi=new PageInfo(0,1);
+            pi2=new PageInfo(0,1);
         }else {
             int listCount = new ShelterMangerService().shelterNoAdoptApplyListCount(shelterNo);
             int listCount2 = new ShelterMangerService().volunteerApplyListCount(shelterNo);
@@ -39,6 +41,7 @@ public class ShelterMessageController extends HttpServlet {
                 endPage=maxPage;
             }
             pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
+            pi2 = new PageInfo(listCount2,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
 
             ArrayList<Subscription> sList = new ShelterMangerService().shelterNoAdoptApplyList(pi,shelterNo);
             ArrayList<Volunteer> vList = new ShelterMangerService().volunteerApplyList(pi,shelterNo);
@@ -46,6 +49,7 @@ public class ShelterMessageController extends HttpServlet {
             request.setAttribute("vList",vList);
         }
         request.setAttribute("pi", pi);
+        request.setAttribute("pi2", pi2);
         request.getRequestDispatcher("/views/shelterManager/shelterMessage.jsp").forward(request, response);
 
     }

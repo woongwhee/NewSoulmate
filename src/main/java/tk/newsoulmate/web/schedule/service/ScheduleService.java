@@ -21,8 +21,8 @@ import java.util.List;
 
 public class ScheduleService {
     public int scrapNotice() {
-        int result=0;
         System.out.println(new Date()+"공고문업데이트 시작");
+        int result=0;
         Request request = new Request();
         request.setPageNo(1);
         request.setNumberOfRows(1);
