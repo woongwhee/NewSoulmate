@@ -491,8 +491,8 @@ public class MemberDao {
         return result;
     }
 
-    public int changeGrade(Connection conn, String[] memberNo) {
-        int result = 0;
+    public int changeGrade(Connection conn, String[] memberNoArr) {
+        int result = 1;
         PreparedStatement psmt = null;
 
         String sql = prop.getProperty("changeGrade");
@@ -500,15 +500,15 @@ public class MemberDao {
         try {
             psmt = conn.prepareStatement(sql);
 
-            for (int i = 0; i < memberNo.length; i++) {
-                psmt.setString(1, memberNo[i]);
-                result += psmt.executeUpdate();
+            for (int i = 0; i < memberNoArr.length; i++) {
+                psmt.setString(1, memberNoArr[i]);
+                psmt.setString(2, memberNoArr[i]);
+                result *= psmt.executeUpdate();
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(psmt);
+            close(psmt);
         }
 
         return result;

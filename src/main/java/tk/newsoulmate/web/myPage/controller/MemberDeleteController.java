@@ -27,10 +27,8 @@ public class MemberDeleteController extends HttpServlet {
         if(result > 0) {
             request.getSession().invalidate();
             request.getSession(true);
-
             request.getSession().setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다.");
             response.sendRedirect(request.getContextPath());
-
         }else {
             request.setAttribute("errorMsg", "회원 탈퇴에 실패했습니다.");
             request.getRequestDispatcher("views/myPage/myPageInfoView.jsp").forward(request, response);

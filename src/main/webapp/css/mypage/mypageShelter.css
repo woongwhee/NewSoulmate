@@ -56,13 +56,6 @@
     text-align: left;
 }
 
-
-#certified {
-    margin-top: 20px;
-}
-
-
-
 button[type=submit] {
     position: relative;
     left: 115px;
@@ -80,7 +73,6 @@ button:hover {
     background-color: #319493;
     color: white;
 }
-<!---->
 
 .btn-primary {
     width: 150px;

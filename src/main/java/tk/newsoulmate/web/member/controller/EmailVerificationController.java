@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.member.controller;
-import tk.newsoulmate.web.member.service.EmailVerificationService;
+
+import tk.newsoulmate.web.member.service.MemberService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,10 +12,13 @@ import java.io.PrintWriter;
 public class EmailVerificationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String email = request.getParameter("memberMail");
-        EmailVerificationService service = new EmailVerificationService();
-        String randomCode = service.sendMail(email);
+        EmailController ec = new EmailController();
+        String randomCode = EmailController.rannum();
+        MemberService ms=new MemberService();
+        int confirmCode=ms.insertConfirm(randomCode);
+
+
         request.getSession().setAttribute("emailCode",randomCode);
         PrintWriter out = response.getWriter();
         out.print(1);

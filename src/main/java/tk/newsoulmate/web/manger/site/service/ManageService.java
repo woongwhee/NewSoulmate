@@ -84,9 +84,15 @@ public class ManageService {
 
         AttachmentDao at = new AttachmentDao();
         //new AttachmentDao().selectGradeUpAttachment(conn,gList);
-        at.selectGradeUpAttachment(conn,gList);
+        at.selectGradeUpAttachment(conn, gList);
         close();
         return gList;
+    }
+    public boolean isSubmit(int memberNo) {
+        Connection conn = getConnection();
+        boolean result= new GradeUpDao().isSubmit(conn,memberNo);
+        close();
+        return result;
     }
 
 
@@ -160,12 +166,12 @@ public class ManageService {
         return s;
     }
 
-    public int changeStatus(String[] memberNo) {
+    public int changeStatus(String[] memberNoArr) {
         Connection conn = getConnection();
-        int result1 = new GradeUpDao().changeGrade(conn,memberNo);
-        int result2 = new MemberDao().changeGrade(conn,memberNo);
+        int result1 = new GradeUpDao().changeGrade(conn,memberNoArr);
+        int result2 = new MemberDao().changeGrade(conn,memberNoArr);
 
-        if(result1 == memberNo.length && result2 == memberNo.length){
+        if(result1 == memberNoArr.length && result2 == memberNoArr.length){
             commit();
         }else{
             rollback();

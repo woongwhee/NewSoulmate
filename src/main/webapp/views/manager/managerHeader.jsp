@@ -1,10 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link href="<%=request.getContextPath()%>/image/titlelogo.png" rel="shortcut icon" type="image/x-icon">
     <link href="<%=request.getContextPath()%>/css/manager/managerHeader.css" rel="stylesheet">
-    <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 <div class="headcontainer">
@@ -46,8 +44,8 @@
     </ul>
 
     <div id="right_text_fiex">
-        <div class="right_text">
-            <h1>회원리스트</h1>
+        <div class="right_text" id="right_text">
+            <h1><span class="list-text">회원리스트</span></h1>
             <!--수정필요 해당 게시글명 가져오기-->
         </div>
     </div>
@@ -88,6 +86,9 @@
         ss.removeAttribute("alertMsg");
       }
     %>
+
+
+
 
 </script>
 

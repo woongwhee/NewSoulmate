@@ -3,7 +3,6 @@
 <html>
 <head>
   <link href="<%=request.getContextPath()%>/css/shelterManager/shelterHeader.css" rel="stylesheet">
-  <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 <div class="headcontainer">
@@ -28,7 +27,7 @@
 
   <div id="right_text_fiex">
     <div class="right_text">
-      <h1>메세지함</h1>
+      <h1><span class="list-text">메세지함</span></h1>
       <!--수정필요 해당 게시글명 가져오기-->
     </div>
   </div>

@@ -84,6 +84,10 @@
     </div>
 </div>
 <script>
+    $(function(){
+        $(".list-text").text("보호소 관계자 신청");
+    })
+
     $("#selectAll").click(function () {
         if ($("#selectAll").is(":checked")) $("input[name=select]").prop("checked", true);
         else $("input[name=select]").prop("checked", false);

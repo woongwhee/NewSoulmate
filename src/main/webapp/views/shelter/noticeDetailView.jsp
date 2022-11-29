@@ -105,7 +105,7 @@
             <form action="replyInsert.no" enctype="multipart/form-data" method="post">
             <div id="replyInput">
                 <input type="hidden" name="noticeNo" value="${n.desertionNo}">
-                <input type="text" name="replyContent"id="replyApply" placeholder="댓글을 입력해주세요">
+                <input type="text" name="replyContent"id="replyApply" required placeholder="댓글을 입력해주세요">
                 <button type="submit" id="reply-btn">댓글작성</button>
                 <input type="file" id="replyFile" name="upfile" placeholder="댓글을 입력해주세요">
             </div>

@@ -16,7 +16,7 @@
 <head>
     <title>보호소 정보수정</title>
     <%@ include file="/views/template/styleTemplate.jsp" %>
-    <link href="<%=request.getContextPath()%>/css/shelterManager/shelterInfoView.css" rel="stylesheet">
+    <link href="${context}/css/shelterManager/shelterInfoView.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -31,12 +31,10 @@
                 <p>
                     <%=loginUser.getShelterNo()%>
                 </p>
-
                 <label>보호소이름</label>
                 <p>
                     <%=shelter.getShelterName()%>
                 </p>
-
             </div>
             <div class="form-group">
                 <label for="landline">유선 전화번호</label>
@@ -46,7 +44,7 @@
             <div class="form-group">
                 <label for="tel">무선 전화번호</label>
                 <input type="text" name="tel" id="tel"
-                       value="<%if(shelter.getShelterTel() == null) { %><%} else { %><%=shelter.getShelterTel()%><%}%>">
+                       value="<%=shelter.getShelterTel()%>">
             </div>
 
             <div class="form-group">
@@ -71,11 +69,9 @@
 
                 <button type="button" onclick="sendMail()" id="emailCheck">인증번호 발송</button>
                 <div id="auth"></div>
-                <div id="certified">
+                <div id="certified" style="display: none">
                     <input type="text" id="authCode" placeholder="인증번호">
-                    <button type="button" class="" id="checkAuthCode" onclick="authenticationMail()" disabled>인증번호
-                        확인
-                    </button>
+                    <button type="button" class="" id="checkAuthCode" onclick="authenticationMail()" disabled>인증번호 확인</button>
                 </div>
             </div>
             <span id="timeZone"></span>
@@ -87,13 +83,18 @@
 
 
 <script>
+    $(function (){
+        $(".list-text").text("보호소 정보수정");
+    })
+
+
     $(".form-group>input").keyup(function () {
         $("#myPageCheck").removeAttr("disabled");
     })
 
     function shelterInfoUpdate() {
         if (checkMail === 0) {
-            alert("이메일 인증 해주세요.");
+            alert("이메일 인증을 해주세요.");
             return;
         }
 
@@ -101,6 +102,7 @@
         let tel = $("#tel").val()
         let address = $("#shelterAddress").val()
         let email = $("#email_1").val() + "@" + $("#email_2").val()
+
 
         $.ajax({
             url: "<%=request.getContextPath()%>/shelter/update",
@@ -184,10 +186,11 @@
 
     function sendMail() {
         const memberMail2 = $("#email_1").val() + "@" + $("#email_2").val()
-        console.log(memberMail2);
+
+        $("#certified").show();
 
         $.ajax({
-            url: "<%= request.getContextPath()%>/sendMail.do",
+            url: "${context}/sendMail.do",
             data: {memberMail: memberMail2},
             type: "get",
             success: function (data) {
@@ -236,7 +239,7 @@
         const inputValue = $("#authCode").val();
         if (mailCode != null) {
             $.ajax({
-                url: '<%= request.getContextPath()%>/checkAuth',
+                url: '${context}/checkAuth',
                 type: 'get',
                 data: {authCode: inputValue},
                 success: (result) => {

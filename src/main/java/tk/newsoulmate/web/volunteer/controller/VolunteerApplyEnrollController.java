@@ -18,12 +18,12 @@ public class VolunteerApplyEnrollController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Member loginUser = (Member) session.getAttribute("loginUser");
-        System.out.println(loginUser);
         int memberNo = loginUser.getMemberNo();
-        System.out.println(memberNo);
 
         String name = request.getParameter("name");
-        String startDate = request.getParameter("wishDate");
+        String wishDate = request.getParameter("wishDate");
+        java.sql.Date sqlDate = java.sql.Date.valueOf(wishDate);
+
         String telNumber = request.getParameter("telNum");
         String gender = request.getParameter("gender");
         long shelterNo = Long.parseLong(request.getParameter("shelterNo"));
@@ -32,8 +32,6 @@ public class VolunteerApplyEnrollController extends HttpServlet {
         vol.setName(name);
         vol.setTelNumber(telNumber);
         vol.setMemberNo(memberNo);
-
-        java.sql.Date sqlDate = java.sql.Date.valueOf(startDate);
         vol.setStartDate(sqlDate);
         vol.setGender(gender);
         vol.setShelterNo(shelterNo);

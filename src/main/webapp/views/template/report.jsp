@@ -8,7 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="<%=request.getContextPath()%>/css/common/report.css" rel="stylesheet">
-
 <%--사용시 카테고리 리스트를 가저올것!--%>
 <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

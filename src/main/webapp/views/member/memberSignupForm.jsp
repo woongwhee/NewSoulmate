@@ -75,9 +75,9 @@
                     <label for="memberMail">이메일</label>
                     <br>
                     <input type="text" name="memberMail" id="memberMail" placeholder="*이메일">
-                    <button type="button" onclick="sendMail();">인증번호 발송</button>
+                    <button type="button" id="emailCheck" onclick="sendMail();" disabled>인증번호 발송</button>
                     <div id="auth">
-                        <div>
+                        <div id="certified" style="display: none">
                             <input type="text" id="authCode" placeholder="인증번호">
                             <button type="button" class="authBtn" id="authBtn"
                                     onclick="authenticationMail()">인증하기</button>
@@ -99,11 +99,19 @@
 <%@include file="/views/template/footer.jsp"%>
 
 
-<%//todo: 자바스크립트 파일 분리해줘요 분리하면 코드가 안먹혀요 선언을해줘야한다는데,,%>
+
 <script>
     var context='${context}'
 </script>
 <script>
+
+    $(function () {
+        $("#memberMail").on("keyup", function () {
+            var flag2 = true;
+            flag2 = $(this).val().length > 0 ? false : true;
+            $("#emailCheck").attr("disabled", flag2);
+        });
+    });
 
     // 메일 인증번호 - 완료
     let checkMail = 0;
@@ -112,6 +120,9 @@
 
     function sendMail() {
         const memberMail2 = $("#memberMail").val();
+
+        $("#certified").show();
+
         $.ajax({
             url:context+"/sendMail.do",
             data: { memberMail: memberMail2 },
@@ -345,7 +356,7 @@
 
     // 필수입력사항 모두 입력돼야 회원가입 할 수 있게 - 완료
     function signupCheck(){
-        if (!(checkId == 1 && checkPwd == 1 && checkPwdRe == 1 && checkNickname == 1 && checkMail ==1)) {
+        if (!(checkId == 1 && checkPwd == 1 && checkPwdRe == 1 && checkNickname == 1 && checkMail == 1)) {
             alert("필수 입력창을 모두 입력해주세요.")
             return false;
         }
