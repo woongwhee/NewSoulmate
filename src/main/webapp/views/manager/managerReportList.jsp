@@ -54,6 +54,10 @@
     </div>
 </div>
 <script>
+    $(function(){
+        $(".list-text").text("신고접수");
+    })
+
     $('.checkRef').click((e) => {
         let reportNo = $(e.target).data('rno');
         window.open('reportDetail?rno=' + reportNo);

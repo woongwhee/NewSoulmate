@@ -46,8 +46,8 @@
     </ul>
 
     <div id="right_text_fiex">
-        <div class="right_text">
-            <h1>회원리스트</h1>
+        <div class="right_text" id="right_text">
+            <h1><span class="list-text">회원리스트</span></h1>
             <!--수정필요 해당 게시글명 가져오기-->
         </div>
     </div>
@@ -88,6 +88,9 @@
         ss.removeAttribute("alertMsg");
       }
     %>
+
+
+
 
 </script>
 
