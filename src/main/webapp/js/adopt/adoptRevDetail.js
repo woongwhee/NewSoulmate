@@ -1,6 +1,12 @@
 $('#replySubmit').on('click',submitReply);
 function submitReply(){
-    reply.replyContent=$('#replyInput').val();
+    let replyContent=$('#replyInput').val();
+    if(replyContent.length==0){
+        alert('댓글내용을 입력해주세요');
+        $('#replyInput').focus();
+        return;
+    }
+    reply.replyContent=replyContent;
     $.ajax({
         url :'replyInsert.bo',
         type:'post',
@@ -27,7 +33,7 @@ $('.replyDelete').click((e)=>{
             data:{rno:rno},
             success:(result)=>{
                 if(result>0){
-                    alert("댓글삭제ㄴ성공")
+                    alert("댓글삭제성공")
                     location.reload()
                 }else{
                     alert("댓글삭제실패")

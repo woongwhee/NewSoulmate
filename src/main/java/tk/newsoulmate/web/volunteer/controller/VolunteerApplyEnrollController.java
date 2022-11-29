@@ -20,9 +20,10 @@ public class VolunteerApplyEnrollController extends HttpServlet {
         Member loginUser = (Member) session.getAttribute("loginUser");
         int memberNo = loginUser.getMemberNo();
 
-
         String name = request.getParameter("name");
-        String startDate = request.getParameter("wishDate");
+        String wishDate = request.getParameter("wishDate");
+        java.sql.Date sqlDate = java.sql.Date.valueOf(wishDate);
+
         String telNumber = request.getParameter("telNum");
         String gender = request.getParameter("gender");
         long shelterNo = Long.parseLong(request.getParameter("shelterNo"));
@@ -31,8 +32,6 @@ public class VolunteerApplyEnrollController extends HttpServlet {
         vol.setName(name);
         vol.setTelNumber(telNumber);
         vol.setMemberNo(memberNo);
-
-        java.sql.Date sqlDate = java.sql.Date.valueOf(startDate);
         vol.setStartDate(sqlDate);
         vol.setGender(gender);
         vol.setShelterNo(shelterNo);
@@ -40,9 +39,9 @@ public class VolunteerApplyEnrollController extends HttpServlet {
         int result = new VolunteerService().volApplyInset(vol);
 
         if(result > 0) {
-            request.getSession().setAttribute("alertMsg", "봉사신청 완료");
+            request.getSession().setAttribute("alertMsg", "봉사신청이 완료되었습니다");
         }else{
-            request.getSession().setAttribute("alertMsg","봉사신청에 실패하였습니다.");
+            request.getSession().setAttribute("alertMsg","서버요청 실패");
         }
         response.sendRedirect(request.getContextPath());
     }

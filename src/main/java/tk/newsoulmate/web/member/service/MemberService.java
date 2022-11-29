@@ -1,10 +1,12 @@
 package tk.newsoulmate.web.member.service;
 
+import tk.newsoulmate.domain.dao.ConfirmDao;
 import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PwdReset;
 import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
 import tk.newsoulmate.web.common.JDBCTemplet;
+import tk.newsoulmate.web.member.controller.EmailController;
 
 import java.sql.Connection;
 
@@ -65,6 +67,8 @@ public class MemberService {
     public Member findPwd(String memberName, String memberId, String Email) {
         Connection conn = getConnection();
         Member m = new MemberDao().findPwd(conn, memberName, memberId, Email);
+        new EmailController().sendPasswordMail(m);
+
         close();
         return m;
 
@@ -122,4 +126,19 @@ public class MemberService {
         JDBCTemplet.close();
         return result;
     }
+
+
+    /**
+     * 인증번호를 집어넣고
+     * 인증번호 키를 반환하는 함수
+     * @return
+     */
+    public int insertConfirm(String confirmCode){
+        Connection conn = JDBCTemplet.getConnection();
+        int confirmNo=new ConfirmDao().selectConfirmNo();
+
+
+        return confirmNo;
+    }
+
 }

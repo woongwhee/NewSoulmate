@@ -71,7 +71,7 @@
 #Fcontent p {
     background-color: rgb(236, 236, 236);
     width: 600px;
-    height: 100px;
+    height: auto;
     margin: auto;
     border-radius: 5px;
     padding: 10px;

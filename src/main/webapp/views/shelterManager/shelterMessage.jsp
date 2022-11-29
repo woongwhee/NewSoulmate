@@ -18,6 +18,7 @@
 <html>
 <head>
     <title>메세지함</title>
+    <link href="<%=request.getContextPath()%>/css/shelterManager/shelterMessage.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/shelterManager/shelterMessage.css" rel="stylesheet">
 </head>
@@ -35,7 +36,7 @@
                 <table class="adoptList-area">
                     <thead>
                     <tr>
-                        <th>신청번호</th>
+                        <th width="20px">신청번호</th>
                         <th>공고번호</th>
                         <th>아이디</th>
                         <th>신청인</th>
@@ -145,7 +146,7 @@
                         </c:choose>
                         <td>
                             <!--관리-->
-                            <button type="button" data-vno="<%=v.getVolunteerNo()%>">삭제</button>
+                            <button type="button" class="btn btn-primary volDelete"  data-vno="<%=v.getVolunteerNo()%>">삭제</button>
                         </td>
                     </tr>
                     <% }%>
@@ -155,21 +156,21 @@
                 </table>
 
                 <div id="pagingForm2" align="center">
-                    <% if(currentPage != 1) { %>
-                    <button onclick="doPageClick(<%=currentPage-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
+                    <% if(currentPage2 != 1) { %>
+                    <button onclick="doPageClick(<%=currentPage2-1%>)" class="btn btn-secondary btn-sm">&lt;</button>
 
                     <% } %>
 
-                    <% for(int i=startPage; i<=endPage; i++) { %>
-                    <% if(i != currentPage) {%>
+                    <% for(int i=startPage2; i<=endPage2; i++) { %>
+                    <% if(i != currentPage2) {%>
                     <button onclick="doPageClick(<%=i%>)" class="btn btn-secondary btn-sm"><%=i %></button>
                     <% } else { %>
                     <button disabled><%=i %></button>
                     <% } %>
                     <% } %>
 
-                    <% if(currentPage != maxPage) { %>
-                    <button onclick="doPageClick(<%=currentPage+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
+                    <% if(currentPage2 != maxPage2) { %>
+                    <button onclick="doPageClick(<%=currentPage2+1%>)" class="btn btn-secondary btn-sm">&gt;</button>
 
                     <% } %>
                 </div>
@@ -258,5 +259,6 @@
         })
     })
 </script>
+
 </body>
 </html>

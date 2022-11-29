@@ -1,10 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link href="<%=request.getContextPath()%>/image/titlelogo.png" rel="shortcut icon" type="image/x-icon">
     <link href="<%=request.getContextPath()%>/css/manager/managerHeader.css" rel="stylesheet">
-    <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 <div class="headcontainer">

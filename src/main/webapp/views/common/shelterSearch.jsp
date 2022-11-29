@@ -10,7 +10,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ArrayList<City> cList = (ArrayList<City>)request.getAttribute("cList");
-    ArrayList<Village> vList = (ArrayList<Village>)request.getAttribute("vList");
 %>
 <html>
 <head>
@@ -18,7 +17,7 @@
 </head>
 <body>
 <div id="search">
-    <form action="<%=request.getContextPath()%>/updateShelter" method="get">
+    <form action="<%=request.getContextPath()%>/shelterList" method="get">
         <table id="searchBox">
             <tr>
                 <td>시도</td>
@@ -46,6 +45,23 @@
         </table>
     </form>
 </div>
+<script>
+    function choice() {
+        // 메인페이지 선택시 서브쿼리 삭제
+        $("#subCategory").children().remove();
+        $.ajax({
+            url: "jqAjaxCity",
+            data: {city: $("#mainCategory").val()},
+            success: function (result) {
+                let str = '<option value="0">전체</option>';
+                for (let i = 0; i < result.length; i++) {
+                    str += "<option value="+result[i].villageNo+ ">" + result[i].villageName + "</option>"
+                }
+                $("#subCategory").html(str);
+            }
+        })
+    }
+</script>
 
 
 </body>

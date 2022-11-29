@@ -34,7 +34,7 @@
                 <input type="text" id="user-name" name="name" required>
 
                 <div class="info-group"> 봉사희망날짜</div>
-                <input type="date" id="wishDate" name="wishDate" required>
+                <input type="date" id="wishDate" name="wishdate"  required>
 
                 <div class="info-group">전화번호</div>
                 <input type="text" id="user-phone" name="telNum" required>
@@ -92,6 +92,12 @@
 </div>
 
 <script>
+
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset()*60000;
+    var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    document.getElementById("wishDate").setAttribute("min", today);
+
     $(".list-area>tbody>tr").click(function () {
         let shelterNo = $(this).children().eq(0).text().trim();
         $("#selectShelter").val(shelterNo);

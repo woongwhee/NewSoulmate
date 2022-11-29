@@ -22,5 +22,11 @@
         SET GRADE_STATUS = 'Y'
         WHERE MEMBER_NO = ?
     </entry>
+    <entry key="isSubmit">
+        SELECT
+            COUNT(*) as cnt
+        FROM GRADE_UP
+        WHERE MEMBER_NO=?
+    </entry>
 
 </properties>

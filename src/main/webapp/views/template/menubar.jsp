@@ -2,8 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="context" value="${pageContext.request.contextPath}"/>
-<c:set var="loginUser" value="${sessionScope.loginUser}" scope="session"/>
 
 
 <div class="headcontainer">

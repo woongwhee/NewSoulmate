@@ -16,9 +16,9 @@ public class AdoptApplyReadController extends HttpServlet {
         if(subRead.equals("Y")){
             request.getRequestDispatcher("ShelterMessage?page=1").forward(request, response);
         }else{
-            int s = new ShelterMangerService().changeAdoptApplySubRead(subNo);
+            int result = new ShelterMangerService().changeAdoptApplySubRead(subNo);
 
-            if(s>0){
+            if(result>0){
                 response.sendRedirect("ShelterMessage?page=1");
             } else {
                 request.getSession().setAttribute("errorMsg", "서버요청 실패");

@@ -104,5 +104,16 @@ public class JDBCTemplet{
 
     }
 
-
+    public static void close(ResultSet rset,Statement stat){
+        try{
+            if(rset!=null&&!rset.isClosed()){
+                rset.close();
+            }
+            if(stat!=null&&!stat.isClosed()){
+                stat.close();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
