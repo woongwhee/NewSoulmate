@@ -83,3 +83,100 @@
 #confirm:hover {
     background-color: #319493;
 }
+
+
+#btn-box {
+    text-align:center;
+    padding-top: 40px;
+}
+
+#btn-box button {
+    width: 200px;
+    height: 50px;
+    margin-left: 55px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.modal-footer button {
+    width: 120px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+#send-btn{
+    margin-right: 100px;
+}
+
+#list-btn , #back-btn{
+    background-color: lightgray;
+}
+
+#msg-btn , #send-btn {
+    background-color: #319493;
+    color: white;
+}
+
+#msgLabel{
+    font-size: 24px;
+    color: #39393a;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.modal-body{
+    text-align: center;
+}
+
+.modal-body #user-info{
+    display: flex;
+    height: 40px;
+    width: 100%;
+    padding-left: 60px;
+}
+
+#user-name{
+    width: 100px;
+    margin-right:20px;
+    height: 40px;
+}
+
+#user-phone{
+    width: 200px;
+    height: 40px;
+}
+
+#user-info input , #msg-content{
+    border-radius: 5px;
+    border: lightgray 1px solid;
+    font-size: 14px;
+}
+
+#msg-content{
+    margin:20px 0 20px 0 ;
+    width: 330px;
+    height: 280px;
+}
+
+.modal-content{
+    background-color: #eeeeee;
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+}
+
+.modal-header{
+    height: 70px;
+    width: auto;
+}

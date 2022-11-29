@@ -23,7 +23,6 @@
 </head>
 <body>
 <header><%@include file="/views/shelterManager/shelterHeader.jsp"%></header>
-<body>
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
@@ -258,9 +257,6 @@
 
         })
     })
-
 </script>
-
-
 </body>
 </html>
