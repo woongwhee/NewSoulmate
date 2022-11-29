@@ -23,13 +23,6 @@ body {
     margin: 30px 0 30px 0;
 }
 
-.content_date {
-    margin: 0 auto;
-    background-color: rgb(221, 221, 221);
-    width: 900px;
-    height: 800px;
-}
-
 #supportDate {
     padding-bottom: 50px;
     font-size: 20px;
@@ -47,10 +40,6 @@ span input[type=date] {
     font-size: 15px;
     border-radius: 5px;
     cursor: pointer;
-}
-
-#supportList {
-    margin-top: 50px;
 }
 
 table {
@@ -77,8 +66,6 @@ tbody td {
 }
 
 #supportTotal {
-    /* position: absolute; */
-    /* right: 500px; */
     font-size: 25px;
     margin: 50px 0px;
 }

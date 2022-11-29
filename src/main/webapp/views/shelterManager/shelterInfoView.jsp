@@ -85,6 +85,11 @@
 
 
 <script>
+    $(function (){
+        $(".list-text").text("보호소 정보수정");
+    })
+
+
     $(".form-group>input").keyup(function () {
         $("#myPageCheck").removeAttr("disabled");
     })

@@ -18,17 +18,12 @@
     margin: 0px;
     width: 910px;
     height: auto;
-    /* text-align: center; */
 }
 
 #user_information {
     font-size: 23px;
     padding: 15px 25px;
 }
-
-
-
-/* -------------------------수정중----------- */
 
 #memberList {
     margin-top: 30px;

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>입양후기</title>
     <%@include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/board/adoptReviewList.css" rel="stylesheet">
 </head>

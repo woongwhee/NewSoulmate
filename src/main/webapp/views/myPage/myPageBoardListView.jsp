@@ -99,6 +99,10 @@
 </div>
 <script>
     $(function(){
+        $(".list-text").text("작성게시글 확인");
+    })
+
+    $(function(){
         $(".list-area>tbody>tr").click(function(){
             // 클릭시 해당 공지사항의 번호를 넘겨야함.
             // 해당 tr요소의 자손중에서 첫번째 td의 영역의 내용이 필요.
