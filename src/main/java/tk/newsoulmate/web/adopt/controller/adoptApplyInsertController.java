@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.adopt.controller;
 
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.Subscription;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 
