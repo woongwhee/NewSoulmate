@@ -18,12 +18,12 @@
 <html>
 <head>
     <title>메세지함</title>
-    <link href="<%=request.getContextPath()%>/css/shelterManager/shelterMessage.css" rel="stylesheet">
     <%@ include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/shelterManager/shelterMessage.css" rel="stylesheet">
 </head>
 <body>
 <header><%@include file="/views/shelterManager/shelterHeader.jsp"%></header>
+<body>
 <div class="headcontainer">
     <div id="right_view">
         <div id="user_information">
@@ -36,7 +36,7 @@
                 <table class="adoptList-area">
                     <thead>
                     <tr>
-                        <th width="20px">신청번호</th>
+                        <th>신청번호</th>
                         <th>공고번호</th>
                         <th>아이디</th>
                         <th>신청인</th>
@@ -53,28 +53,28 @@
                     </tr>
                     <% } else {%>
                     <% for (Subscription s : sList) {%>
-                            <tr>
-                                <td class="vol-info"><%=s.getSubNo()%></td>
-                                <td class="vol-info"><%=s.getAnimalNo()%></td>
-                                <td class="vol-info"><%=s.getMemberId()%></td>
-                                <td class="vol-info"><%=s.getName()%></td>
-                                <td class="vol-info"><%=s.getTelNum()%></td>
-                                <td class="vol-info"><%=s.getSubDate()%></td>
-                                <c:set var = "subRead" value="<%=s.getSubRead()%>"/>
-                                <c:choose>
-                                    <c:when test="${subRead eq 'N'}">
-                                        <td class="vol-info">미확인</td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td class="vol-info">확인</td>
-                                    </c:otherwise>
-                                </c:choose>
+                    <tr>
+                        <td class="vol-info"><%=s.getSubNo()%></td>
+                        <td class="vol-info"><%=s.getAnimalNo()%></td>
+                        <td class="vol-info"><%=s.getMemberId()%></td>
+                        <td class="vol-info"><%=s.getName()%></td>
+                        <td class="vol-info"><%=s.getTelNum()%></td>
+                        <td class="vol-info"><%=s.getSubDate()%></td>
+                        <c:set var = "subRead" value="<%=s.getSubRead()%>"/>
+                        <c:choose>
+                            <c:when test="${subRead eq 'N'}">
+                                <td class="vol-info">미확인</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td class="vol-info">확인</td>
+                            </c:otherwise>
+                        </c:choose>
 
-                                <td>
-                                    <button type="button"  class="btn btn-primary subDelete"  data-sno="<%=s.getSubNo()%>">삭제</button>
-                                </td>
-                            </tr>
-                        <% }%>
+                        <td>
+                            <button type="button" data-sno="<%=s.getSubNo()%>">삭제</button>
+                        </td>
+                    </tr>
+                    <% }%>
                     <% } %>
 
                     </tbody>
@@ -101,53 +101,6 @@
                 </div>
 
             </div>
-            <script>
-                // $(".delete").on("click",function(){
-                //
-                //     let thisRow = $(this).closest("tr");
-                //     let addr = thisRow.find("td:eq(0)").val();
-                //     console.log(addr);
-                // })
-                $(".vol-info").click(function(e){
-                    // 클릭시 해당 shelter_no 를 넘김
-                    //해당 tr 요소의 자손들중 첫번째 td영역의 내용이 필요
-                    let subNo = $(e.target).parent().children().eq(0).text().trim()
-                    // textnode를 가져옴
-                    console.log(subNo);
-
-                    location.href = '<%=request.getContextPath()%>/AdoptDetail?subNo='+subNo;
-                })
-
-                $(".subDelete").on("click",function(e){
-
-                    let sno =$(e.target).data('sno') ;
-
-                    console.log(sno);
-
-                    $.ajax({
-                        type: "POST",
-                        traditional: true,
-                        data: {"sno": sno},
-                        url: "DeleteSubscription",
-                        success: function (data) {
-                            if (data >0) {
-                                alert("성공적으로 삭제되었습니다");
-                                location.reload();
-                            }
-                        },
-                        error: function () {
-                            alert("삭제 실패");
-                            location.reload();
-                        }
-
-                    })
-                })
-
-            </script>
-
-
-
-
             <div class="box2">
                 <p>봉사신청함</p>
             </div>
@@ -156,7 +109,7 @@
                 <table class="volunteer-area">
                     <thead>
                     <tr>
-                        <th width="20px">신청번호</th>
+                        <th>신청번호</th>
                         <th>아이디</th>
                         <th>신청인</th>
                         <th>보호소명</th>
@@ -193,7 +146,7 @@
                         </c:choose>
                         <td>
                             <!--관리-->
-                            <button type="button" class="btn btn-primary volDelete"  data-vno="<%=v.getVolunteerNo()%>">삭제</button>
+                            <button type="button" data-vno="<%=v.getVolunteerNo()%>">삭제</button>
                         </td>
                     </tr>
                     <% }%>
@@ -225,7 +178,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $(".sub-Info").click(function(e){
         // 클릭시 해당 shelter_no 를 넘김
@@ -263,13 +215,52 @@
 
         })
     })
+</script>
 
+<script>
+    // $(".delete").on("click",function(){
+    //
+    //     let thisRow = $(this).closest("tr");
+    //     let addr = thisRow.find("td:eq(0)").val();
+    //     console.log(addr);
+    // })
+    $(".vol-info").click(function(e){
+        // 클릭시 해당 shelter_no 를 넘김
+        //해당 tr 요소의 자손들중 첫번째 td영역의 내용이 필요
+        let subNo = $(e.target).parent().children().eq(0).text().trim()
+        // textnode를 가져옴
+        console.log(subNo);
 
+        location.href = '<%=request.getContextPath()%>/AdoptDetail?subNo='+subNo;
+    })
 
+    $(".subDelete").on("click",function(e){
 
+        let sno =$(e.target).data('sno') ;
 
+        console.log(sno);
+
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            data: {"sno": sno},
+            url: "DeleteSubscription",
+            success: function (data) {
+                if (data >0) {
+                    alert("성공적으로 삭제되었습니다");
+                    location.reload();
+                }
+            },
+            error: function () {
+                alert("삭제 실패");
+                location.reload();
+            }
+
+        })
+    })
 
 </script>
+
 
 </body>
 </html>

@@ -17,11 +17,11 @@
 <html>
 <head>
   <title>입양신청서확인</title>
-  <link href="<%=request.getContextPath()%>/css/manager/managerAdoptApplyDetail.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/shelterManager/managerAdoptApplyDetail.css" rel="stylesheet">
   <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
-<header><%@include file="/views/manager/managerHeader.jsp"%></header>
+<header><%@include file="/views/shelterManager/shelterHeader.jsp"%></header>
 
 <div class="headcontainer">
   <div id="right_view">
