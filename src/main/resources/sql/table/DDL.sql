@@ -276,53 +276,53 @@ CREATE TABLE "SUBSCRIPTION" (
 );
 --첨부파일--
 CREATE TABLE "ATTACHMENT" (
-                              "FILE_NO"   NUMBER
-                                  CONSTRAINT PK_ATTACHMENT PRIMARY KEY ,
-                              "REPLY_NO"   NUMBER   DEFAULT 0,
-                              "BOARD_NO"   NUMBER   DEFAULT 0,
-                              "ORIGIN_NAME"   VARCHAR2(250)
-                                  CONSTRAINT AT_ON_NN   NOT NULL,
-                              "CHANGE_NAME"   VARCHAR2(250)
-                                  CONSTRAINT AT_CN_NN      NOT NULL,
-                              "FILE_PATH"   VARCHAR2(1000)
-                                  CONSTRAINT AT_FP_NN NOT NULL ,
-                              "UPLOAD_DATE"   DATE   DEFAULT SYSDATE,
-                              "STATUS"   VARCHAR2(1) DEFAULT 'Y'
-                                  CONSTRAINT AT_ST_CK CHECK ( STATUS in('Y','N'))
+      "FILE_NO"   NUMBER
+          CONSTRAINT PK_ATTACHMENT PRIMARY KEY ,
+      "REPLY_NO"   NUMBER   DEFAULT 0,
+      "BOARD_NO"   NUMBER   DEFAULT 0,
+      "ORIGIN_NAME"   VARCHAR2(250)
+          CONSTRAINT AT_ON_NN   NOT NULL,
+      "CHANGE_NAME"   VARCHAR2(250)
+          CONSTRAINT AT_CN_NN      NOT NULL,
+      "FILE_PATH"   VARCHAR2(1000)
+          CONSTRAINT AT_FP_NN NOT NULL ,
+      "UPLOAD_DATE"   DATE   DEFAULT SYSDATE,
+      "STATUS"   VARCHAR2(1) DEFAULT 'Y'
+          CONSTRAINT AT_ST_CK CHECK ( STATUS in('Y','N'))
 );
 --댓글--
 CREATE TABLE "REPLY" (
-                         "REPLY_NO"   NUMBER
-                             CONSTRAINT PK_COMMENT PRIMARY KEY ,
-                         "BOARD_NO"   NUMBER,
-                         "NOTICE_NO" NUMBER,
-                         "MEMBER_NO"   NUMBER
-                             CONSTRAINT CM_MN_NN NOT NULL,
-                         "REPLY_CONTENT" VARCHAR2(400)
-                             CONSTRAINT CM_CT_NN NOT NULL,
-                         "REPLY_STATUS" VARCHAR2(1) DEFAULT 'Y'
-                             CONSTRAINT CM_CS_CK CHECK (REPLY_STATUS IN('Y','N')),
-                         "REPLY_TYPE"   NUMBER   DEFAULT 0,
-                         "REPLY_DATE" DATE DEFAULT SYSDATE
+ "REPLY_NO"   NUMBER
+     CONSTRAINT PK_COMMENT PRIMARY KEY ,
+ "BOARD_NO"   NUMBER,
+ "NOTICE_NO" NUMBER,
+ "MEMBER_NO"   NUMBER
+     CONSTRAINT CM_MN_NN NOT NULL,
+ "REPLY_CONTENT" VARCHAR2(400)
+     CONSTRAINT CM_CT_NN NOT NULL,
+ "REPLY_STATUS" VARCHAR2(1) DEFAULT 'Y'
+     CONSTRAINT CM_CS_CK CHECK (REPLY_STATUS IN('Y','N')),
+ "REPLY_TYPE"   NUMBER   DEFAULT 0,
+ "REPLY_DATE" DATE DEFAULT SYSDATE
 
 );
 --문자--
 CREATE TABLE "MESSAGE" (
-                           "MESSAGE_NO" NUMBER
-                               CONSTRAINT "PK_MESSAGE" PRIMARY KEY ,
-                           "MEMBER_NO"   NUMBER,
-                           "SHELTER_NO" NUMBER,
-                           "MESSAGE_DATE"   DATE   DEFAULT SYSDATE,
-                           "TEL_NUM"   VARCHAR2(20)
-                               CONSTRAINT MS_TN_NN NOT NULL,
-                           "MESSAGE_CONTENT" VARCHAR2(1000)
-                               CONSTRAINT MS_MC_NN NOT NULL
+   "MESSAGE_NO" NUMBER
+       CONSTRAINT "PK_MESSAGE" PRIMARY KEY ,
+   "MEMBER_NO"   NUMBER,
+   "SHELTER_NO" NUMBER,
+   "MESSAGE_DATE"   DATE   DEFAULT SYSDATE,
+   "TEL_NUM"   VARCHAR2(20)
+       CONSTRAINT MS_TN_NN NOT NULL,
+   "MESSAGE_CONTENT" VARCHAR2(1000)
+       CONSTRAINT MS_MC_NN NOT NULL
 );
 CREATE TABLE CATEGORY(
-                         CATEGORY_NO NUMBER
-                             CONSTRAINT PK_CATEGORY PRIMARY KEY,
-                         CATEGORY_NAME VARCHAR2(40),
-                         TYPE_NO NUMBER
+     CATEGORY_NO NUMBER
+         CONSTRAINT PK_CATEGORY PRIMARY KEY,
+     CATEGORY_NAME VARCHAR2(40),
+     TYPE_NO NUMBER
 
 );
 
