@@ -29,7 +29,7 @@
     text-align: center;
 }
 
-input  {
+input {
     width: 550px;
     height: 60px;
     margin-top: 20px;
@@ -48,8 +48,4 @@ input  {
     border-radius: 5px;
     background-color: #676767;
     color: white;
-}
-
-#submitButton:hover {
-    background-color: #319493;
 }

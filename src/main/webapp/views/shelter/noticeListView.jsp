@@ -16,7 +16,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>유기동물목록-환승주인</title>
+    <title>유기동물목록</title>
     <%@ include file="/views/template/styleTemplate.jsp"%>
     <link href="<%=request.getContextPath()%>/css/shelter/noticeList.css" rel="stylesheet">
 </head>

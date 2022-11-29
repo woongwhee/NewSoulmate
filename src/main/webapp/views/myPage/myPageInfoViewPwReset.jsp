@@ -7,7 +7,7 @@
 %>
 <html>
 <head>
-  <title>회원정보 수정</title>
+  <title>비밀번호 변경</title>
 
   <%@ include file="/views/template/styleTemplate.jsp"%>
   <link href="<%=request.getContextPath()%>/css/mypage/mypageInfo.css" rel="stylesheet">
@@ -38,7 +38,9 @@
   </div>
 </div>
 <script>
-
+  $(function(){
+    $(".list-text").text("비밀번호 변경");
+  })
 
   function checkPwd() {
     let pwChkMsg = document.querySelector("#pwChkMsg");

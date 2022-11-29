@@ -210,7 +210,8 @@
 
     <entry key="changeGrade">
         UPDATE MEMBER
-        SET MEMBER_GRADE = 1
+        SET MEMBER_GRADE = 1,
+            SHELTER_NO = (SELECT SHELTER_NO FROM GRADE_UP WHERE MEMBER_NO=?)
         WHERE MEMBER_NO = ?
     </entry>
 

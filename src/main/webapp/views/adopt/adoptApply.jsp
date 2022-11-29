@@ -78,7 +78,7 @@
                     <td colspan="4"><textarea name="whenSick" style="resize: none" minlength="50"></textarea></td>
                 </tr>
                 <tr>
-                    <th colspan="4">평생 사랑으로 책일질 수 있는지?</th>
+                    <th colspan="4">평생 사랑으로 책임질 수 있는지?</th>
                 </tr>
                 <tr>
                     <td colspan="4"><textarea name="bigDuty" style="resize: none" minlength="50"></textarea></td>

@@ -115,6 +115,10 @@
     </div>
 </div>
 <script>
+    $(function (){
+        $(".list-text").text("보호소관계자 등록신청");
+    })
+    
     let selectedShelterNo = 0;
     $(".list-area>tbody>tr").click(function () {
         let shelterNo = $(this).children().eq(0).text().trim();

@@ -1,6 +1,4 @@
 /*폰트 : 노토산스 */
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-
 * {
     box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
@@ -26,9 +24,6 @@
     padding: 15px 25px;
 }
 
-
-
-/* -------------------------수정중----------- */
 .box,
 .box2 {
     text-align: left;
@@ -77,11 +72,12 @@ table {
 }
 
 thead th {
-    font-size: 18px;
+    font-size: 16px;
     border-top: 1px solid rgb(203, 203, 203);
     background-color: rgb(236, 236, 236);
     padding: 10px 10px;
     text-align: center;
+    width: auto;
 }
 
 thead th:first-child {
@@ -95,7 +91,7 @@ tbody td {
     font-size: 15px;
 }
 
-td input[type=submit] {
+td button {
     border: none;
     border-radius: 5px;
     font-size: 12px;
@@ -108,7 +104,7 @@ td input[type=submit] {
 
 }
 
-input[type=submit]:hover {
+td button:hover {
     background-color: #f45d48;
     color: white;
 }

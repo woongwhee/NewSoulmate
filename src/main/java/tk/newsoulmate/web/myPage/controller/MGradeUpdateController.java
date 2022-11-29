@@ -3,6 +3,7 @@ package tk.newsoulmate.web.myPage.controller;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.GradeUp;
 import tk.newsoulmate.domain.vo.Member;
+import tk.newsoulmate.domain.vo.type.MemberGrade;
 import tk.newsoulmate.web.common.UploadUtil;
 
 
@@ -23,29 +24,24 @@ import java.util.ArrayList;
 public class MGradeUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<GradeUp> gList = new ManageService().selectGradeUp();
+        Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+        int memberNo = loginUser.getMemberNo();
+        MemberGrade loginGrade = loginUser.getMemberGrade();
+        if(loginGrade==MemberGrade.SHELTER_MANAGER){
+            error(request,response,"관리자는 등업 신청을 할 수 없습니다.");
+            return;
+        }
+        boolean isSub= new ManageService().isSubmit(memberNo);
         long shelterNo = Long.parseLong(request.getParameter("shelterNo"));
-
-        boolean isManager=((Member)request.getSession().getAttribute("loginUser")).getMemberGrade().isSHELTER_MANAGER();
-
-        int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-        for(int i =0; i<gList.size();i++){
-            if(gList.get(i).getMemberNo() == memberNo && isManager ){
-                error(request, response,"이미 신청된 회원입니다.");
-                return;
-            } else if (isManager) {
-                error(request,response,"관리자는 등업 신청을 할 수 없습니다.");
-                return;
-
-            }
+        if(isSub){
+            error(request, response,"이미 신청된 회원입니다.");
+            return;
         }
 
-
-
-        String shelterCompNo = (String)request.getParameter("shelterCompNo");
-        String shelterLandLine = (String)request.getParameter("shelterLandLine");
-        String shelterTel = (String)request.getParameter("shelterTel");
-        String shelterAddress = (String)request.getParameter("shelterAddress");
+        String shelterCompNo = request.getParameter("shelterCompNo");
+        String shelterLandLine = request.getParameter("shelterLandLine");
+        String shelterTel = request.getParameter("shelterTel");
+        String shelterAddress = request.getParameter("shelterAddress");
 
         GradeUp up = new GradeUp(memberNo,shelterNo,shelterTel,shelterLandLine,shelterCompNo,shelterAddress);
 

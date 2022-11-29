@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import static tk.newsoulmate.web.common.JDBCTemplet.close;
+
 public class GradeUpDao {
 
     private Properties prop = new Properties();
@@ -52,7 +54,7 @@ public class GradeUpDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(psmt);
+            close(psmt);
         }
         return result;
     }
@@ -85,8 +87,8 @@ public class GradeUpDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(psmt);
-            JDBCTemplet.close(rset);
+            close(psmt);
+            close(rset);
         }
         return gList;
     }
@@ -108,10 +110,31 @@ public class GradeUpDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            JDBCTemplet.close(psmt);
+            close(psmt);
         }
 
         return result;
+    }
+
+    public boolean isSubmit(Connection conn, int memberNo) {
+        PreparedStatement psmt=null;
+        ResultSet rset=null;
+        boolean result=false;
+        String sql=prop.getProperty("isSubmit");
+        try {
+            psmt=conn.prepareStatement(sql);
+            psmt.setInt(1,memberNo);
+            rset=psmt.executeQuery();
+            if(rset.next()){
+                result=rset.getInt("cnt")>0?true:false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close(rset,psmt);
+        }
+        return result;
+
     }
 }
 

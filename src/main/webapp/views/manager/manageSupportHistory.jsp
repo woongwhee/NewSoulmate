@@ -10,7 +10,7 @@
 <html>
 
 <head>
-    <title>후원관리-후원내역 확인</title>
+    <title>후원관리-보호소별 출금신청 내역</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -120,6 +120,10 @@
 
 
 <script>
+    $(function(){
+        $(".list-text").text("보호소별 출금신청 내역");
+    })
+
     let supportNo;
 
     function setWithdrawInfo(_supportNo, shelterName, bank, accountNumber, accountName, amount) {

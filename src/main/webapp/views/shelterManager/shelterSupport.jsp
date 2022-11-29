@@ -140,6 +140,10 @@
 </body>
 
 <script>
+    $(function (){
+        $(".list-text").text("받은 후원함");
+    })
+
     let supportNo = 0
     function setWithdrawInfo(_supportNo, _amount) {
         supportNo = _supportNo
