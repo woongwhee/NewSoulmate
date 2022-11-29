@@ -26,7 +26,7 @@
             </table>
         </div>
         <div id="adopt-review-btn">
-            <button id="return" type="button" onclick="location.href = '${context}/adoptRevList';">목록으로 돌아가기</button>
+            <button id="return" type="button" onclick="location.href = '${context}/adoptRevList'">목록으로 돌아가기</button>
             <button type="button" id="save">작성하기</button>
         </div>
 </div>

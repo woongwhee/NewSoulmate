@@ -35,7 +35,7 @@
             </table>
         </div>
         <div id="adopt-update-btn">
-            <button type="button" id="return" onclick="location.href = '${context}/adoptRevList.bo'">목록으로 돌아가기</button>
+            <button type="button" id="return" onclick="location.href = '${context}/adoptRevList'">목록으로 돌아가기</button>
             <button type="button" id="save">수정하기</button>
         </div>
 </div>

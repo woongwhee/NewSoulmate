@@ -57,7 +57,7 @@
         JOIN BOARD_TYPE USING(TYPE_NO)
         WHERE TYPE_NO = ?
         AND BOARD_STATUS='Y'
-        AND( MEMBER_NO=? OR 2=?)
+        AND(MEMBER_NO=? OR 2=?)
     </entry>
     <entry key="selectMyPageBoardList">
         SELECT *

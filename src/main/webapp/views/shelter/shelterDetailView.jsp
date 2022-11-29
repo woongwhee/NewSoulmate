@@ -44,7 +44,7 @@
     </table>
     <div id="map"></div>
     <div id="listBtn">
-        <button onclick="location.href='<%=request.getContextPath()%>/shelterList;'">목록으로 돌아가기</button>
+        <button onclick="location.href='<%=request.getContextPath()%>/shelterList'">목록으로 돌아가기</button>
     </div>
 </div>
 
