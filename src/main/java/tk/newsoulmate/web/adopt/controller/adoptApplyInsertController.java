@@ -22,6 +22,7 @@ public class adoptApplyInsertController extends HttpServlet {
         int memberNo = ((Member) session.getAttribute("loginUser")).getMemberNo();
 
         String name = request.getParameter("name");
+
         String animalNo = request.getParameter("animalNo");
         String telNum = request.getParameter("telNum");
         String gender = request.getParameter("gender");
@@ -29,15 +30,14 @@ public class adoptApplyInsertController extends HttpServlet {
         String agreement = request.getParameter("agreement");
         String whenSick = request.getParameter("whenSick");
         String bigDuty = request.getParameter("bigDuty");
-        String wishDate_ = request.getParameter("wishDate");
+
+        String wishDate = request.getParameter("wishDate");
+        java.sql.Date sqlDate = java.sql.Date.valueOf(wishDate);
+
         String subRead = request.getParameter("subRead");
-        DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
-        Date wishDate= null;
-        try {
-            wishDate =new Date( df.parse(wishDate_).getTime());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        };
+
+
+
         long shelterNo = new AdoptService().shelterNoByName(animalNo);
         Subscription sb = new Subscription();
         sb.setMemberNo(memberNo);
@@ -49,7 +49,7 @@ public class adoptApplyInsertController extends HttpServlet {
         sb.setFamilyAgreement(agreement);
         sb.setWhenSick(whenSick);
         sb.setBigDuty(bigDuty);
-        sb.setWishDate(wishDate);
+        sb.setWishDate(sqlDate);
         sb.setSubRead(subRead);
         sb.setShelterNo(shelterNo);
 

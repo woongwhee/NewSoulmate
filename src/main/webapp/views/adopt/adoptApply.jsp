@@ -94,7 +94,10 @@
     </form>
 </div>
 <script>
-
+    let now_utc = Date.now()
+    let timeOff = new Date().getTimezoneOffset()*60000;
+    let today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    document.getElementById("wishdate").setAttribute("min", today);
 </script>
 
 </body>
