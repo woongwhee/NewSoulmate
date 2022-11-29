@@ -10,7 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "VolunteerApplyController", value = "/volunteerApply")
+@WebServlet(name = "volunteerApply", value = "/volunteerApply")
 public class VolunteerApplyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -17,50 +17,47 @@
 <html>
 <head>
   <title>입양신청서확인</title>
-  <link href="<%=request.getContextPath()%>/css/manager/managerAdoptApplyDetail.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/css/shelterManager/shelterAdoptApply.css" rel="stylesheet">
   <%@ include file="/views/template/styleTemplate.jsp"%>
 </head>
 <body>
-<header><%@include file="/views/manager/managerHeader.jsp"%></header>
+<header><%@include file="/views/shelterManager/shelterHeader.jsp"%></header>
 
 <div class="headcontainer">
   <div id="right_view">
     <div id="adoptApplyDetail">
-      <br>
-      <br>
       <table class="check-area" style="text-align: center">
-
-        <tr width="150">
+        <tr>
           <th>공고 번호</th>
           <td>${n.desertionNo}</td>
         </tr>
 
-        <tr width="150">
+        <tr>
           <th>신청인</th>
           <td>${s.name}</td>
         </tr>
 
-        <tr width="150">
+        <tr>
           <th>보호소 이름</th>
           <td>${n.careNm}</td>
         </tr>
-        <tr width="150">
+        <tr>
           <th>보호소 연락처</th>
           <td>${n.officetel}</td>
         </tr>
-        <tr width="150">
+        <tr>
           <th>입양 희망일</th>
           <td>${s.wishDate}</td>
         </tr>
-        <tr width="150">
+        <tr>
           <th>신청인 전화번호</th>
           <td>${s.telNum}</td>
         </tr>
-        <tr width="150">
+        <tr>
           <th>신청일자</th>
           <td>${s.subDate}</td>
         </tr>
-        <tr width="150">
+        <tr>
           <th>성별</th>
           <td>
             <c:if test="${s.gender eq 'M'}">남자</c:if>
@@ -68,27 +65,59 @@
           </td>
         </tr>
       </table>
-      <br><br>
-      <h4>입양을 결정하게 된 이유</h4>
-      <p>${s.adoptReason}</p>
-      <h4>가족 구성원의 반대가 없었는지?</h4>
-      <p>${s.familyAgreement}</p>
-      <h4>입양해 간 아이가 많이 아프다면?</h4>
-      <p>${s.whenSick}</p>
-      <h4>평생 사랑으로 책임질 수있는지?</h4>
-      <p>${s.bigDuty}</p>
+
+      <div id="adoptApplyListView">
+        <div class="adoptApplyAll">입양을 결정하게 된 이유</div>
+        <div class="adoptApplyAnswer">${s.adoptReason}</div>
+        <div class="adoptApplyAll">가족 구성원의 반대가 없었는지?</div>
+        <div class="adoptApplyAnswer">${s.familyAgreement}</div>
+        <div class="adoptApplyAll">입양해 간 아이가 많이 아프다면?</div>
+        <div class="adoptApplyAnswer">${s.whenSick}</div>
+        <div class="adoptApplyAll">평생 사랑으로 책임질 수있는지?</div>
+        <div class="adoptApplyAnswer">${s.bigDuty}</div>
+      </div>
+
       <form action="${context}/AdoptApplyRead" type="post">
         <input type="hidden" name="sno" value="${s.subNo}">
         <input type="hidden" name="subRead" value="${s.subRead}">
-        <input type="submit" id="confirm" value="확인" >
+        <input type="submit" id="confirm" value="처리여부">
       </form>
 
+      <div id="btn-box">
+        <button id="list-btn" onclick="">목록으로 돌아가기</button>
+        <button type="button" id="msg-btn" data-toggle="modal" data-target="#msg">
+          메세지 보내기
+        </button>
+      </div>
+      <!-- 모달창 -->
+      <div class="modal fade" id="msg" tabindex="-1" aria-labelledby="msgLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="modal-title" id="msgLabel">메세지 입력</div>
+            </div>
+            <div class="modal-body">
+              <div id="user-info">
+                <input type="text" id="user-name" value="${s.name}">
+                <input type="text" id="user-phone" value="${s.telNum}">
+              </div>
+              <textarea id="msg-content"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="back-btn" data-dismiss="modal">취소</button>
+              <button type="button" id="send-btn">전송하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-
-
-
+<script>
+  $(function () {
+    $(".list-text").text("입양신청서 확인");
+  })
+</script>
 </body>
 </html>

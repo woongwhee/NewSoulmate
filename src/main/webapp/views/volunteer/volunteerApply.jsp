@@ -34,7 +34,7 @@
                 <input type="text" id="user-name" name="name" required>
 
                 <div class="info-group"> 봉사희망날짜</div>
-                <input type="date" id="wishDate" name="wishDate"  required>
+                <input type="date" id="wishDate" name="wishdate"  required>
 
                 <div class="info-group">전화번호</div>
                 <input type="text" id="user-phone" name="telNum" required>
