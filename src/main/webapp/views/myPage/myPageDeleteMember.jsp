@@ -32,6 +32,12 @@
         </div>
     </div>
 </div>
+<script>
+    $(function (){
+        $(".list-text").text("회원탈퇴");
+    })
+
+</script>
 
 </body>
 </html>

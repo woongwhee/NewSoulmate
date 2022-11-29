@@ -31,13 +31,12 @@
 
 <div class="headcontainer">
     <div id="right_view">
-        <div id="user_information">
+        <div id="applyList">
 
             <div class="box">
                 총 내역 <span id="countApply"><%= ms.selectAdoptApplyListCount()%></span> 개
             </div>
-
-            <div id="applyList">
+            <br>
                 <table class="list-area">
                     <thead>
                     <tr>
@@ -117,12 +116,15 @@
                     }
                 </script>
             </div>
-
         </div>
     </div>
 </div>
 
 <script>
+    $(function(){
+        $(".list-text").text("입양관리");
+    })
+
     $(function () {
         $(".list-area>tbody>tr").click(function () {
             // 클릭시 해당 공지사항의 번호를 넘겨야함.

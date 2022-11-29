@@ -80,6 +80,9 @@
     </div>
 </div>
 <script>
+    $(function(){
+        $(".list-text").text("회원정보 수정");
+    })
 
     $(function() {
         $("#nickName").on("keyup", function() {

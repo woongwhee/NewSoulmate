@@ -148,6 +148,10 @@
 </div>
 
 <script>
+    $(function(){
+        $(".list-text").text("전체 후원내역");
+    })
+
     function doPageClick(currentPage) {
         location.href = "${context}/manageSupportAllHistory?page=" + currentPage + "&filter=" + $("#shelterName").val();
     }
