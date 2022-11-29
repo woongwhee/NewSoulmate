@@ -45,10 +45,9 @@
 
 <script>
     function changePassword() {
-        let memberId = $("#memberId").val()
-        let password = $("#password").val()
-        let passwordConfirm = $("#passwordConfirm").val()
-
+        let memberId = $("#memberId").val();
+        let password = $("#password").val();
+        let passwordConfirm = $("#passwordConfirm").val();
         $.ajax({
             url: '<%=request.getContextPath()%>/pwdReset.do',
             type: 'post',

@@ -43,9 +43,9 @@
                 <button onclick="submitLogin()" class="loginBtn">로그인하기</button>
             </div>
             <div id="find-box">
-                <a href="views/member/findId.jsp">아이디찾기</a>
-                <a href="views/member/findPwd.jsp">비밀번호찾기</a>
-                <a href="views/member/memberSignupTerm.jsp">회원가입</a>
+                <a href="${context}/findId">아이디찾기</a>
+                <a href="${context}/findPwd">비밀번호찾기</a>
+                <a href="${context}/memberSignupTerm">회원가입</a>
             </div>
         </form>
     </div>

@@ -88,7 +88,6 @@ $(document).ready(function () {
             alert(msg)
         }
     }
-
 });
 </script>
 </body>

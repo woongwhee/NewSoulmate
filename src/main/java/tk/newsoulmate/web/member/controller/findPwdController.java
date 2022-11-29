@@ -9,30 +9,21 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 
-@WebServlet(name = "findPwd", value = "/findPwd.do")
+@WebServlet(name = "findPwddo", value = "/findPwd.do")
 public class findPwdController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        request.setCharacterEncoding("utf-8");
-
         String memberId = request.getParameter("memberId");
         String memberName = request.getParameter("memberName");
         String Email = request.getParameter("Email");
-        MemberService service = new MemberService();
-        Member m = service.findPwd(memberId, memberName, Email);
 
-        if(m == null){
-            response.getWriter().print("0");
-        }else{
-            response.getWriter().print("1");
-        }
-
-        //request.getRequestDispatcher("views/member/findPwdReset.jsp").forward(request, response);
+        System.out.println(memberId+memberName+Email);
+        int result = new MemberService().resetPwd(memberName, memberId, Email);
+        response.getWriter().print(result);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 }
