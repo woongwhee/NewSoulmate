@@ -80,7 +80,7 @@
       <form action="${context}/AdoptApplyRead" type="post">
         <input type="hidden" name="sno" value="${s.subNo}">
         <input type="hidden" name="subRead" value="${s.subRead}">
-        <input type="submit" id="confirm" value="처리여부" >
+        <input type="submit" id="confirm" value="확인" >
       </form>
 
     </div>
