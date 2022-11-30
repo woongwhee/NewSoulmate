@@ -66,7 +66,7 @@
         </tr>
       </table>
       <div id="btn-box">
-        <button id="list-btn" onclick="">목록으로 돌아가기</button>
+        <button id="list-btn" onclick="location.href='<%=request.getContextPath()%>/ShelterMessage;'">목록으로 돌아가기</button>
         <button type="button" id="msg-btn" data-toggle="modal" data-target="#msg">
           메세지 보내기
         </button>
