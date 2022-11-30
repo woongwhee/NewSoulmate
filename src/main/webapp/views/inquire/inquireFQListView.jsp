@@ -87,12 +87,8 @@
         <div class="topTextQna">1:1 문의</div>
         <br>
 
-<%--        <div id="box1" align="center" style="float: left; margin-left: 400px;"><input type="checkbox" id="" >나의 문의내역 보기</div> --%>
-<%--        나의 문의내역 없애기로함--%>
-
         <c:if test="${!empty loginUser and !loginUser.memberGrade.SITE_MANAGER}">
             <input type="button" name="" value="글쓰기" id="writingQna" onclick="location.href='${context}/inquireEnroll.bo';">
-<%--            <a href="${context}/inquireEnroll.bo" class="btn btn-secondary btn-sm">글작성</a>--%>
             <br>
             <br>
         </c:if>
@@ -135,8 +131,6 @@
                         let bno = $(this).children().eq(1).text(); // 1 => b.getBoardNo()
                         // 현재 내가클릭한 tr의 자손들중 1번째에 위치한 자식의 textnode내용을 가져온다.
 
-                        // 요청할 url?키=밸류&키=밸류&키=밸류
-                        // 물음표 뒤의 내용을 쿼리스트링이라고 부른다. => 직접 만들어서 넘겨야함.
                         location.href = "<%=request.getContextPath()%>/inquireDetail?bno=" + bno;
                     }
                 });
