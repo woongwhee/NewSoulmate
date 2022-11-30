@@ -77,14 +77,13 @@
         <div class="adoptApplyAnswer">${s.bigDuty}</div>
       </div>
 
-      <form action="${context}/AdoptApplyRead" type="post">
-        <input type="hidden" name="sno" value="${s.subNo}">
-        <input type="hidden" name="subRead" value="${s.subRead}">
-        <input type="submit" id="confirm" value="처리여부">
-      </form>
 
       <div id="btn-box">
-        <button id="list-btn" onclick="">목록으로 돌아가기</button>
+        <form action="${context}/AdoptApplyRead" type="post">
+          <input type="hidden" name="sno" value="${s.subNo}">
+          <input type="hidden" name="subRead" value="${s.subRead}">
+          <button id="list-btn" onclick="">처리여부</button>
+        </form>
         <button type="button" id="msg-btn" data-toggle="modal" data-target="#msg">
           메세지 보내기
         </button>
