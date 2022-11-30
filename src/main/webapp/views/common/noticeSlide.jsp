@@ -7,11 +7,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%List<Notice> nlist= (List<Notice>) request.getAttribute("nList");%>
-<%for(Notice n:nlist){
-%>
+<%--시연용 공고문--%>
 <div class="post">
-    <img id="<%=n.getDesertionNo()%>" src="<%=n.getPopfile()%>" class="notice-img">
+    <img id="1111111111111" src="/file/resources/board_upfiles/2022/11/30/example.jpg" class="notice-img">
 </div>
-<%
-}%>
+<c:forEach items="${nList}" var="n" >
+<div class="post">
+    <img id="${n.desertionNo}" src="${n.popfile}" class="notice-img">
+</div>
+</c:forEach>
