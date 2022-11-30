@@ -131,7 +131,7 @@
                         let bno = $(this).children().eq(1).text(); // 1 => b.getBoardNo()
                         // 현재 내가클릭한 tr의 자손들중 1번째에 위치한 자식의 textnode내용을 가져온다.
 
-                        location.href = "<%=request.getContextPath()%>/inquireDetail?bno=" + bno;
+                        location.href = "${context}/inquireDetail?bno=" + bno;
                     }
                 });
 

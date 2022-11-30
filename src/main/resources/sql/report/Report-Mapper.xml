@@ -32,29 +32,29 @@
 
     <entry key="selectReportDetail">
         SELECT
-        REPORT_NO,
-        REF_NO ,
-        TYPE_NO as"TYPE_NO"
+            REPORT_NO,
+            REF_NO ,
+            TYPE_NO as"TYPE_NO"
         FROM REPORT R
-        LEFT JOIN BOARD b ON  b.BOARD_NO=R.REF_NO
-        WHERE REPORT_NO = ? AND REF_TYPE=0
+            LEFT JOIN BOARD b ON  b.BOARD_NO=R.REF_NO
+            WHERE REPORT_NO = ? AND REF_TYPE=0
         UNION
         SELECT
-        REPORT_NO,
-        RL.BOARD_NO as "REF_NO",
-        b.TYPE_NO as"TYPE_NO"
+            REPORT_NO,
+            RL.BOARD_NO as "REF_NO",
+            b.TYPE_NO as"TYPE_NO"
         FROM REPORT RP
-        LEFT JOIN REPLY RL ON RL.REPLY_NO=RP.REF_NO
-        LEFT JOIN BOARD b ON  b.BOARD_NO=RL.BOARD_NO
-        WHERE REPORT_NO = ? AND REF_TYPE=1
+            LEFT JOIN REPLY RL ON RL.REPLY_NO=RP.REF_NO
+            LEFT JOIN BOARD b ON  b.BOARD_NO=RL.BOARD_NO
+            WHERE REPORT_NO = ? AND REF_TYPE=1
         UNION
         SELECT
-        REPORT_NO,
-        NOTICE_NO as"REF_NO",
-        6 as"TYPE_NO"
+            REPORT_NO,
+            NOTICE_NO as"REF_NO",
+            6 as"TYPE_NO"
         FROM REPORT RP
-        LEFT JOIN REPLY RL ON RL.REPLY_NO=RP.REF_NO
-        LEFT JOIN ANIMAL A ON  A."desertionNo"=RL.NOTICE_NO
+            LEFT JOIN REPLY RL ON RL.REPLY_NO=RP.REF_NO
+            LEFT JOIN ANIMAL A ON  A."desertionNo"=RL.NOTICE_NO
         WHERE REPORT_NO = ? AND REF_TYPE=2
     </entry>
 
