@@ -2,7 +2,6 @@
 <%@ page import="tk.newsoulmate.domain.vo.Shelter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <%
     Member loginUser = (Member) session.getAttribute("loginUser");
     Shelter shelter = (Shelter) request.getAttribute("shelter");
@@ -31,7 +30,6 @@
                 <p>
                     <%=loginUser.getShelterNo()%>
                 </p>
-
                 <label>보호소이름</label>
                 <p>
                     <%=shelter.getShelterName()%>
@@ -82,7 +80,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
     $(".form-group>input").keyup(function () {
@@ -154,10 +151,6 @@
         });
     });
 
-
-
-
-
     $('#email_3').change(function(){
         $("#email_3 option:selected").each(function () {
 
@@ -176,16 +169,13 @@
         $("#emailCheck").removeAttr("disabled");
     })
 
-
     let checkMail = 0;
     let mailCode;
     let intervalId;
 
     function sendMail() {
         const memberMail2 = $("#email_1").val() + "@" + $("#email_2").val()
-
         $("#certified").show();
-
         $.ajax({
             url: "<%= request.getContextPath()%>/sendMail.do",
             data: {memberMail: memberMail2},
@@ -210,7 +200,6 @@
 
     function timeCount() {
         const min = Number($("#min").text());
-
         const sec = $("#sec").text();
         if (sec == "00") {
             if (min == 0) {
@@ -219,7 +208,6 @@
             } else {
                 $("#min").text(min - 1);
                 $("#sec").text(59);
-
             }
         } else {
             const Sec2 = Number(sec) - 1;
@@ -254,19 +242,15 @@
                     alert("서버요청실패");
                     checkMail = 0;
                 }
-
             });
         } else {
             $("#authMsg").text("인증시간이 만료되었습니다.");
             checkMail = 0;
         }
-        console.log(inputValue);
-        console.log(mailCode);
+        /*console.log(inputValue);
+        console.log(mailCode);*/
     };
-
-
 </script>
-
 
 </body>
 </html>

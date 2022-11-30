@@ -16,7 +16,7 @@ public class EmailVerificationController extends HttpServlet {
         EmailController ec = new EmailController();
         String confirmCode = EmailController.rannum();
         new EmailController().sendConfirmMail(confirmCode,email);
-        MemberService ms=new MemberService();
+        MemberService ms = new MemberService();
         int confirmNo=ms.insertConfirm(confirmCode);
         PrintWriter out = response.getWriter();
         out.print(confirmNo);

@@ -5,8 +5,6 @@
     String[] email = loginUser.getEmail().split("@");
     String firstEmail = email[0];
     String secondEmail = email[1];
-
-
 %>
 <html>
 <head>
@@ -22,8 +20,6 @@
         <div id="user_information">
             <b> ${loginUser.memberName}님 환영합니다.
             </b> <br><br>
-
-
             <form action="${context}/MyPageUpdate"  method="post" name="myPageInfo">
 
                 <div class="form-group">
@@ -73,7 +69,6 @@
                 <span id="timeZone"></span>
                 <span id="authMsg"></span>
                 <button type="submit" id="myPageCheck" onclick="return myPageUpdate()" disabled>변경사항 저장하기</button>
-
             </form>
         </div>
     </div>
@@ -94,7 +89,6 @@
     let mailCode;
     let intervalId;
 
-
     let inputNickName = 0;
     $("#nickName").keyup(function(){
         inputNickName = 1;
@@ -103,8 +97,6 @@
     // 닉네임 중복체크 - 완료
     const nickName = document.querySelector("#nickName");
     const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,}/;
-
-
 
     $('#checkNickname').click(function() {
         inputNickName = 0;

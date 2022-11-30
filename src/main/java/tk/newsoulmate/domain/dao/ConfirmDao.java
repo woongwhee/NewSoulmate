@@ -33,9 +33,10 @@ public class ConfirmDao {
             psmt=conn.prepareStatement(sql);
             rset=psmt.executeQuery();
             if (rset.next()){
-            confirmNo=rset.getInt("nextval");
+                confirmNo=rset.getInt("nextval");
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }finally {
             close(rset,psmt);
@@ -74,7 +75,7 @@ public class ConfirmDao {
             psmt.setString(2,confirmCode);
             rset=psmt.executeQuery();
             if (rset.next()){
-            result=rset.getInt("result");}
+                result=rset.getInt("result");}
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
