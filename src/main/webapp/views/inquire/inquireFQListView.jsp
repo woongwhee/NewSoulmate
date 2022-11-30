@@ -111,7 +111,11 @@
             <% } else { %>
                 <% for(Board b : list) { %>
             <tr>
-                <td><%= b.getResultStatus() %></td>
+                <% if(b.getResultStatus().equals("답변완료")){%>
+                    <td style="color: #f45d48"><%= b.getResultStatus()%></td>
+                <% } else {%>
+                    <td><%= b.getResultStatus()%></td>
+                <% }%>
                 <td><%= b.getBoardNo() %></td>
                 <td><%= b.getBoardTitle() %></td>
                 <td><%= b.getMemberName() %></td>
