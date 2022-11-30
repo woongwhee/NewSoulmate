@@ -217,7 +217,6 @@
     let checkPwdRe = 0;
     let checkNickname = 0;
     $(document).ready(function () {
-        // 아이디 유효성검사 & 중복 검사 - 완료
         const memberId = document.querySelector("#memberId");
         const idReg = /^[a-zA-Z0-9]{5,}/;
         $('#checkid').click(function () {
@@ -230,7 +229,6 @@
                     data: {memberId: memberIds},
                     dataType: 'json',
                     success: function (result) {
-
                         if (result == 1) {
                             alert("이미 사용중인 아이디 입니다.");
                             checkId = 0;
@@ -284,7 +282,6 @@
             }
         });
 
-
         // 비밀번호 일치 검사 - 완료
         memberPwRe.addEventListener("change", function () {
             const inputPw = memberPw.value;
@@ -298,8 +295,6 @@
                 checkPwdRe = 0;
             }
         });
-
-
         // 닉네임 중복체크 - 완료
         const nickName = document.querySelector("#nickName");
         const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,}/;
@@ -313,7 +308,6 @@
                     data: {nickName: nickNames},
                     dataType: 'json',
                     success: function (result) {
-
                         if (result == 1) {
                             alert("이미 사용중인 닉네임 입니다.");
                             checkNickname = 0;
@@ -332,8 +326,6 @@
                 checkNickname = 0;
             }
         });
-
-
     });
 
     // 필수입력사항 모두 입력돼야 회원가입 할 수 있게 - 완료

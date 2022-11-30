@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Volunteer {
 
-
     private  String gender;
     private  String volRead;
     private  String shelterName;
@@ -19,7 +18,6 @@ public class Volunteer {
     private Date applyDate;
     private String name;
     private String telNumber;
-
 
     public Volunteer() {
         super();

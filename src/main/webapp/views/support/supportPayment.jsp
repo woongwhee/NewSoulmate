@@ -61,6 +61,9 @@
                 <td>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-danger">
+                            <input type="radio" name="amountCheck" value="5000"> 5000원
+                        </label>
+                        <label class="btn btn-danger">
                             <input type="radio" name="amountCheck" value="10000"> 10,000원
                         </label>
                         <label class="btn btn-danger">
@@ -74,9 +77,6 @@
                         </label>
                         <label class="btn btn-danger">
                             <input type="radio" name="amountCheck" value="100000"> 100,000원
-                        </label>
-                        <label class="btn btn-danger">
-                            <input type="radio" name="amountCheck" value="5000"> 5000원
                         </label>
                     </div>
                 </td>
@@ -227,7 +227,6 @@
             alert("후원할 보호소를 선택해주세요.");
             return;
         }
-
         var IMP = window.IMP;
         var code = "imp38841066";
         IMP.init(code);
@@ -242,22 +241,17 @@
                     merchant_uid: data,
                     name: "환승주인 후원하기",
                     amount: $("[name=amountCheck]:checked").val(),
-                    buyer_email: $('#email').val(),
-                    buyer_name: $('#memberName').val(),
-                    buyer_tel: $('#phone').val(),
                     m_redirect_url: '${context}/supportHistoryPage'
                 }, function (rsp) {
                     if (rsp.success) {
                         // 결제가 성공한다면
-                        console.log(rsp); // imp_uid, merchant_uid
+                        /*console.log(rsp);*/ // imp_uid, merchant_uid
                         saveInfo(rsp.paid_amount);
-
                         // 검증
                         $.ajax({
                             url: "${context}/support/verify?impUid=" + rsp.imp_uid + "&merchantUid=" + rsp.merchant_uid,
                             type: "get",
                             success: function () {
-                                //alert("원 후원에 성공했습니다.");
                                 alertInfo();
                             },
                             error: function () {

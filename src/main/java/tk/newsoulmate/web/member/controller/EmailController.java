@@ -16,14 +16,14 @@ public class EmailController {
     public int sendConfirmMail(String confirmCode,String email) {
         String subject="환승주인 인증번호 안내 입니다.";
         String content= "<h1>인증번호는 " + confirmCode + " 입니다.</h1>";
-        int result=sendMail(subject,content,email);
+        int result = sendMail(subject,content,email);
         return result;
     }
 
     public int sendPasswordMail(String newPwd,String Email) {
         String subject="환승주인 비밀번호 안내 입니다.";
         String content="<h1>비밀번호는 " + newPwd + " 입니다.</h1>";
-        int result= sendMail(subject,content,Email);
+        int result = sendMail(subject,content,Email);
         return result;
     }
 
@@ -68,21 +68,15 @@ public class EmailController {
         MimeMessage msg = new MimeMessage(session);
 
         try {
-
             msg.setSentDate(new Date());
             msg.setFrom(new InternetAddress(APIKeys.emailId+"@gmail.com", APIKeys.emailId));
-
             InternetAddress to = new InternetAddress(email,"");
             /*InternetAddress to = new InternetAddress(email,userName);*/
             msg.setRecipient(Message.RecipientType.TO, to);
-
             msg.setSubject(subject,"UTF-8");
-
             msg.setContent(content,"text/html;charset=utf-8");
-
             Transport.send(msg);
             return 1;
-
         } catch (MessagingException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
