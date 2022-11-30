@@ -51,11 +51,15 @@
         <div id="board-btn-box">
             <c:if test="${!empty loginUser and (loginUser.memberNo eq b.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
                 <button type="button" id="deleteBoard">삭제하기</button>
+                <c:if test="${!loginUser.memberGrade.SITE_MANAGER}">
                 <button type="button" id="updateBoard">수정하기</button>
+                </c:if>
             </c:if>
+            <c:if test="${!(loginUser.memberNo eq b.memberNo or empty loginUser or loginUser.memberGrade.SITE_MANAGER)}">
             <button type="button" id="reportBoard" data-toggle="modal" data-target="#reportModal" data-kind="board"
                     data-ref="${b.boardNo}">신고하기
             </button>
+            </c:if>
         </div>
         <p>댓글</p>
         <div id="reply-area">

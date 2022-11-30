@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "ManageAdoptApplyDetailController", value = "/adoptApplyDetail")
 public class ManageAdoptApplyDetailController extends HttpServlet {

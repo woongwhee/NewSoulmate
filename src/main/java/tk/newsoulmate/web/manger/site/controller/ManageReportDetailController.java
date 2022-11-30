@@ -24,10 +24,11 @@ public class ManageReportDetailController extends HttpServlet {
             return;
         }
         if(r.getBoardType()== BoardType.NOTICE){
-            path+="/noticeDetail?dno"+r.getRefNo();
+            path+="/noticeDetail?dno="+r.getRefNo();
         }else{
             path+="/"+r.getBoardType().boardName+"Detail?bno="+r.getRefNo();
         }
+        System.out.println(path);
         response.sendRedirect(path);
 
 
