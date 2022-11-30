@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "findId", value = "/findId.do")
+@WebServlet(name = "findIddo", value = "/findId.do")
 public class findIdController extends HttpServlet {
 
     @Override

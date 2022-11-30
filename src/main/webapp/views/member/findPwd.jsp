@@ -53,13 +53,13 @@
 <script>
 
     $(".findPwdBtn").on("click", function() {
-        const memberId = $("#memberId").val();
-        const memberName = $("#memberName").val();
-        const Email = $("#Email").val();
+        let memberId = $("#searchId").val();
+        let memberName = $("#searchName").val();
+        let Email = $("#memberMail").val();
 
         $.ajax({
-            url: "${context}/findPwd.do",
-            type: "get",
+            url: "findPwd.do",
+            type: "post",
             data: {
                 memberId: memberId,
                 memberName: memberName,
@@ -67,12 +67,12 @@
             },
             success: function(data) {
                 console.log(data);
-                if (data == 1) {
+                if (data == 0) {
                     alert("일치하는 회원정보가 없습니다.");
                 } else {
-                    alert("비밀번호 재설정으로 이동합니다.");
+                    alert("비밀번호 재설정된 비밀번호가 이메일로 발송되었습니다..");
                 }
-                $(location).attr("href","${context}/pwdResetpage");
+                $(location).attr("href","${context}");
             },
             error: function() {
                 console.log("서버호출실패");
@@ -85,16 +85,17 @@
     let checkMail = 0;
     let mailCode;
     let intervalId;
-
+    let confirmNo;
     function sendMail() {
         const memberMail2 = $("#memberMail").val();
         $.ajax({
-            url: "<%= request.getContextPath()%>/sendMail.do",
+            url: "sendMail.do",
             data: { memberMail: memberMail2 },
             type: "get",
             success: function(data) {
                 if (data != null) {
                     mailCode = "notNull";
+                    confirmNo=data;
                     $("#auth").css("display","flex");
                     authTime();
                 }
@@ -140,7 +141,10 @@
             $.ajax({
                 url: '<%= request.getContextPath()%>/checkAuth',
                 type: 'get',
-                data: {authCode: inputValue},
+                data: {
+                    authCode: inputValue,
+                    confirmNo: confirmNo
+                    },
                 success: (result)=> {
                     if (result == 1) {
                         $("#authMsg").text("인증에 성공하셨습니다.");

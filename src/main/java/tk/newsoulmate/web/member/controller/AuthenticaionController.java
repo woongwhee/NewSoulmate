@@ -1,5 +1,8 @@
 package tk.newsoulmate.web.member.controller;
 
+
+import tk.newsoulmate.web.member.service.MemberService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -10,13 +13,13 @@ public class AuthenticaionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String input =request.getParameter("authCode");
-        String code= (String) request.getSession().getAttribute("emailCode");
-        if(input.equals(code)){
-            response.getWriter().print(1);
-        }else{
-            response.getWriter().print(0);
+        String authCode =request.getParameter("authCode");
+        int confirmNo=0;
+        if(request.getParameterMap().containsKey("confirmNo")) {
+            confirmNo =Integer.parseInt(request.getParameter("confirmNo"));
         }
+        int result= new MemberService().copareConfirm(confirmNo,authCode);
+        response.getWriter().print(result);
 
     }
 

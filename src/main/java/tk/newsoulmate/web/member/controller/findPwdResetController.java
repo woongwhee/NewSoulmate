@@ -1,11 +1,10 @@
 package tk.newsoulmate.web.member.controller;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 
+import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.member.service.MemberService;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import tk.newsoulmate.domain.vo.PwdReset;
+import tk.newsoulmate.domain.vo.request.PwdReset;
 
 @WebServlet(name = "PwdReset", value = "/pwdReset.do")
 public class findPwdResetController extends HttpServlet {
@@ -34,19 +33,16 @@ public class findPwdResetController extends HttpServlet {
          *     "password": "1234",
          *     "passwordConfirm": "1234"
          *  }
-         * '{"password":"1234","passwordConfirm":"1234"}' -> JSON 형태의 문자열
+         * '{PwdReset:{"password":"1234","passwordConfirm":"1234"}}' -> JSON 형태의 문자열
          * Library : ObjectMapper, Gson
          * 데이터 타입은 json / 자바의 객체로 변환하기 위해서 gson 라이브러리 사용
          */
-        BufferedReader reader = request.getReader();
-
         Gson gson = new Gson();
-        PwdReset pwdReset = gson.fromJson(reader, PwdReset.class);
-
+        PwdReset pwdReset = gson.fromJson(request.getParameter("PwdReset"), PwdReset.class);
+        int memberNo=((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
         MemberService ms = new MemberService();
-        int result = ms.updatePassword(pwdReset);
+        int result = ms.updatePassword(memberNo,pwdReset.getPassword());
         response.getWriter().println(result);
         response.getWriter().flush();
     }
-
 }

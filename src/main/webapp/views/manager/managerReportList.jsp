@@ -37,7 +37,7 @@
                         <c:forEach items="${rList}" var="rp">
                             <tr>
                                 <td>${rp.reportNo}</td>
-                                <td>${rp.refType}</td>
+                                <td>${rp.refType.koreanName}</td>
                                 <td>${rp.reportContent}</td>
                                 <td>${rp.categoryName}</td>
                                 <td>미처리</td>

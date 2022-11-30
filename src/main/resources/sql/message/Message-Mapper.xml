@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="insertMessage">
+        INSERT INTO MESSAGE (MESSAGE_NO,FROM_MEMBER_NO,TO_MEMBER_NO,TEL_NUM,MESSAGE_CONTENT)
+        VALUES(SQ_MESSAGE_PK.NEXTVAL,?,?,?,?)
+    </entry>
+
+
+</properties>

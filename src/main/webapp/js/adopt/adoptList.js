@@ -6,8 +6,7 @@ window.addEventListener('scroll', () => {
     if(val >= document.body.offsetHeight&& !wait){
         page++;
         $loadingImg.css('display','block');
-
-        setTimeout(nextPage,1000);
+        nextPage();
     }
 });
 function nextPage(){
@@ -28,6 +27,5 @@ function nextPage(){
             $loadingImg.css('display','none');
         }
     })
-
 }
 

@@ -44,7 +44,7 @@
                 <% if(dno==null){%>
                 <input type="text" id="animalNo" name="animalNo" required>
                 <% }else{ %>
-                <input type="text" id="animalNo" name="animalNo" value="${dno}" disabled required>
+                <input type="text" id="animalNo" name="animalNo" value="${dno}" required>
                 <%}%>
                 <div class="info-group">전화번호</div>
                 <input type="text" id="user-phone" name="telNum" required>

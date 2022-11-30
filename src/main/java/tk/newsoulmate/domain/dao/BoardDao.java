@@ -140,7 +140,6 @@ public class BoardDao {
             close(psmt);
         }
         return list;
-
     }
 
 
