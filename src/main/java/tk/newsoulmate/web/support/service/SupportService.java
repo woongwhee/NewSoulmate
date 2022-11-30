@@ -21,7 +21,7 @@ public class SupportService {
 	public String createNumber(int loginMemberNo, long shelterNo, long amount) {
 		String number = "NS_" + loginMemberNo + "_" + LocalTime.now();
 		Connection conn = JDBCTemplet.getConnection();
-		int result = new SupportDao().initializeSupport(conn, shelterNo, loginMemberNo, number, amount);
+		int result = new SupportDao().initializeSupport(conn, shelterNo, loginMemberNo, number, amount); // 3. amount 클라이언트가 결제하겠다고 한 금액
 		if (result <= 0) {
 			JDBCTemplet.rollback(conn);
 		}
@@ -31,7 +31,7 @@ public class SupportService {
 
 	public boolean verify(String impUid, String merchantUid) {
 		// 실제 결제된 amount
-		long amount = new IamportClient().getPaymentAmount(impUid);
+		long amount = new IamportClient().getPaymentAmount(impUid); // getPaymentAmount 아임포트쪽에서 주는 실제로 결제된금액
 		Support support = this.find(merchantUid);
 		return support.verify(amount); // 사용자가 클릭해서 넘어온 amount
 	}

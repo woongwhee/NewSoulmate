@@ -62,7 +62,8 @@ public class EmailController {
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
         Session session = Session.getDefaultInstance(prop, new Authenticator() {
             @Override
-            protected PasswordAuthentication getPasswordAuthentication() { return new PasswordAuthentication(APIKeys.emailId, APIKeys.emailPwd);}//구글계정}
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(APIKeys.emailId, APIKeys.emailPwd);}
         });
 
         MimeMessage msg = new MimeMessage(session);
@@ -71,7 +72,6 @@ public class EmailController {
             msg.setSentDate(new Date());
             msg.setFrom(new InternetAddress(APIKeys.emailId+"@gmail.com", APIKeys.emailId));
             InternetAddress to = new InternetAddress(email,"");
-            /*InternetAddress to = new InternetAddress(email,userName);*/
             msg.setRecipient(Message.RecipientType.TO, to);
             msg.setSubject(subject,"UTF-8");
             msg.setContent(content,"text/html;charset=utf-8");
