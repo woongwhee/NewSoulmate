@@ -26,7 +26,7 @@
 <body>
 <%@include file="/views/template/menubar.jsp"%>
 <div id="content">
-    <form action="<%=request.getContextPath()%>/volunteerApplyEnroll" method="post">
+    <form action="<%=request.getContextPath()%>/volunteerApplyEnroll" id="vol-form" method="post">
         <div id="volunteer-form">
             <p>봉사신청서</p>
             <div id="form-table">
@@ -34,7 +34,7 @@
                 <input type="text" id="user-name" name="name" required>
 
                 <div class="info-group"> 봉사희망날짜</div>
-                <input type="date" id="wishDate" name="wishdate"  required>
+                <input type="date" id="wishDate" name="wishDate"  required>
 
                 <div class="info-group">전화번호</div>
                 <input type="text" id="user-phone" name="telNum" required>
@@ -57,7 +57,7 @@
                     <%}%>
                 </select>
             </div>
-            <button>봉사신청하기</button>
+            <button type="button" id="submitBtn">봉사신청하기</button>
         </div>
     </form>
 
@@ -104,6 +104,22 @@
         console.log(shelterNo);
         console.log($("#wishDate").val())
     })
+    $('#submitBtn').click(()=>{
+        if(validate()){
+            $('#vol-form').submit();
+
+        }else{
+            $('#user-phone').focus();
+            alert('올바르지 못한 핸드폰 번호입니다.');
+        }
+
+
+    })
+
+    function validate(){
+        let regPhone =/^01([1|6|7|8|9])?([0-9]{7,8})$/
+        return !regPhone.test($('#user-phone').val())
+    }
 </script>
 <%@include file="/views/template/footer.jsp"%>
 </body>

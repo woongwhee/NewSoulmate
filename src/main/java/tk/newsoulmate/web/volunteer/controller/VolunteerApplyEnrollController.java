@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 
@@ -22,8 +23,9 @@ public class VolunteerApplyEnrollController extends HttpServlet {
 
         String name = request.getParameter("name");
         String wishDate = request.getParameter("wishDate");
-        java.sql.Date sqlDate = java.sql.Date.valueOf(wishDate);
-
+        System.out.println(wishDate);
+        Date sqlDate = Date.valueOf(wishDate);
+        System.out.println(sqlDate);
         String telNumber = request.getParameter("telNum");
         String gender = request.getParameter("gender");
         long shelterNo = Long.parseLong(request.getParameter("shelterNo"));

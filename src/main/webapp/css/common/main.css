@@ -96,6 +96,12 @@
     font-weight: bolder;
 }
 
+#supportBtn:hover{
+    color: #39393a;
+    background-color: #eeeeee;
+}
+
+
 #main_bottom {
     width: 100%;
     height: 550px;
@@ -189,6 +195,11 @@
     border: 3px white solid;
     float: right;
     cursor: pointer;
+}
+
+#shelterbtn:hover{
+    color: #39393a;
+    background-color: #eeeeee;
 }
 
 #volunteer-review-list li{

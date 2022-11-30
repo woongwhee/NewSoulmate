@@ -19,6 +19,7 @@ public  class APIKeys {
     public static String SolapiSecretKey;
     public static String emailId;
     public static String emailPwd;
+    public static String telNum;
     public APIKeys(){
             String FilePath= APIKeys.class.getResource("/key/APIKey.xml").getPath();
             this.prop=new Properties();
@@ -32,6 +33,7 @@ public  class APIKeys {
                 this.SolapiSecretKey=prop.getProperty("SolapiSecretKey");
                 this.emailId=prop.getProperty("emailId");
                 this.emailPwd=prop.getProperty("emailPwd");
+                this.telNum=prop.getProperty("telNum");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
