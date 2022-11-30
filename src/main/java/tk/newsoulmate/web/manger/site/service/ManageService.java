@@ -82,9 +82,8 @@ public class ManageService {
         Connection conn = getConnection();
         ArrayList<GradeUp> gList = new GradeUpDao().selectAllGrade(conn);
 
-        AttachmentDao at = new AttachmentDao();
-        //new AttachmentDao().selectGradeUpAttachment(conn,gList);
-        at.selectGradeUpAttachment(conn, gList);
+        new AttachmentDao().selectGradeUpAttachment(conn,gList);
+
         close();
         return gList;
     }

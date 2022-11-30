@@ -1,5 +1,4 @@
 package tk.newsoulmate.web.myPage.controller;
-
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.myPage.service.MyPageService;
 
@@ -34,6 +33,7 @@ public class MyPageUpdateController extends HttpServlet {
     }
 
     @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
