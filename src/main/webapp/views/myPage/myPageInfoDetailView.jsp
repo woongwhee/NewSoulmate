@@ -98,6 +98,8 @@
     let inputNickName = 0;
     $("#nickName").keyup(function(){
         inputNickName = 1;
+            checkNickname=0;
+
         $("#checkNickname").removeAttr("disabled");
     })
     // 닉네임 중복체크 - 완료
@@ -153,6 +155,7 @@
     let inputEmail = 0;
     $("#email_1,#email_3,#email_2").change(function () {
         inputEmail = 1;
+        checkMail=0;
         $("#emailCheck").removeAttr("disabled");
     })
 
