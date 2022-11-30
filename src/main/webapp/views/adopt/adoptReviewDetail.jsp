@@ -98,30 +98,8 @@
             </div>
         </div>
         <%@ include file="/views/template/report.jsp"%>
-    </main>
-            <table id="reply-write-table">
-                <c:choose>
-                    <c:when test="${!empty loginUser}">
-                        <tr>
-                            <td colspan="3"><input type="text" id="replyInput" placeholder="댓글을 입력해주세요"></td>
-                            <td>
-                                <button type="button" id="replySubmit">댓글작성</button>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <tr>
-                            <td colspan="5" id="only-user">로그인한 회원만 작성할수 있습니다.</td>
-                        </tr>
-                    </c:otherwise>
-                </c:choose>
-            </table>
+
         </div>
-        <div id="boardList-btn-box">
-            <button id="boardList-btn">목록으로 돌아가기</button>
-        </div>
-    </div>
-    <%@ include file="/views/template/report.jsp" %>
 </main>
 
 <footer>
