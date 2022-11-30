@@ -12,7 +12,6 @@
 <div class="post">
     <img id="1111111111111" src="/file/resources/board_upfiles/2022/11/30/example.jpg" class="notice-img">
 </div>
-<jsp:include page="noticeSlide.jsp"/>
 <c:forEach items="${nList}" var="n" >
 <div class="post">
     <img id="${n.desertionNo}" src="${n.popfile}" class="notice-img">
