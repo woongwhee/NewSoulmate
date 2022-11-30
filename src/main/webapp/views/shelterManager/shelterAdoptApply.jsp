@@ -99,9 +99,9 @@
             <div class="modal-body">
               <div id="user-info">
                 <p id="user-name">${s.name}</p>
-                <p id="user-phone">${s.telNumber}</p>
+                <p id="user-phone">${s.telNum}</p>
               </div>
-              <textarea id="msg-content">${s.shelterName}입니다. 입양신청이 접수되었습니다. ${s.startDate}에 방문해주시면 됩니다.-환승주인 WEB발송-</textarea>
+              <textarea id="msg-content">${n.careNm}입니다. 입양신청이 접수되었습니다. ${s.wishDate}에 방문해주시면 됩니다.-환승주인 WEB발송-</textarea>
             </div>
             <div class="modal-footer">
               <button type="button" id="back-btn" data-dismiss="modal">취소</button>
