@@ -74,9 +74,8 @@
                                 <td class="vol-info">확인</td>
                             </c:otherwise>
                         </c:choose>
-
                         <td>
-                            <button type="button" data-sno="<%=s.getSubNo()%>">삭제</button>
+                            <button type="button" class="delete-btn"  data-sno="<%=s.getSubNo()%>">삭제</button>
                         </td>
                     </tr>
                     <% }%>
@@ -151,7 +150,7 @@
                         </c:choose>
                         <td>
                             <!--관리-->
-                            <button type="button" class="btn btn-primary volDelete"  data-vno="<%=v.getVolunteerNo()%>">삭제</button>
+                            <button type="button" class="delete-btn"  data-vno="<%=v.getVolunteerNo()%>">삭제</button>
                         </td>
                     </tr>
                     <% }%>

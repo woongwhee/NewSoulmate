@@ -76,10 +76,13 @@ body {
     color: #f45d48;
 }
 
+#signup-btn-box{
+    text-align: left;
+}
 #signup-btn-box button{
     width: 180px;
     height: 50px;
-    margin: 20px 20px 0 20px;
+    margin: 20px 40px 0 0;
     font-size: 16px;
     font-weight: 500;
     border-radius: 5px;
@@ -97,12 +100,17 @@ body {
 }
 
 .userInfo-wrap button{
-    background-color: lightgray;
-    color: #39393a;
+    background-color: #39393a;
+    color: #eeeeee;
     width: 110px;
     height: 40px;
     font-size: 14px;
     font-weight: 500;
     border-radius: 5px;
     border: none;
+}
+
+.userInfo-wrap .email-wrap button:disabled{
+    background-color: #eeeeee;
+    color: #39393a;
 }
