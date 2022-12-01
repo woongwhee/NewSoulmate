@@ -64,8 +64,10 @@
                 <tr>
                     <th>${r.replyWriter}</th>
                     <td>
+                        <c:if test="${!(loginUser.memberNo eq r.memberNo or empty loginUser or loginUser.memberGrade.SITE_MANAGER)}">
                         <button type="button" class="bi bi-exclamation-triangle" data-toggle="modal"
                                 data-target="#reportModal" data-kind="reply" data-ref="${r.replyNo}"></button>
+                        </c:if>
                         <c:if test="${!empty loginUser and (loginUser.memberNo eq r.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
                             <button class="bi bi-trash" ref="${r.replyNo}" id="replyDelete"></button>
                         </c:if>
