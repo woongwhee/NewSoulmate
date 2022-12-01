@@ -43,7 +43,7 @@
                 <th>성별</th>
                 <td>${n.sexCd}</td>
                 <th>중성화여부</th>
-                <td>${n.sexCd}</td>
+                <td>${n.neuterYn}</td>
             </tr>
             <tr>
                 <th>보호소 이름</th>

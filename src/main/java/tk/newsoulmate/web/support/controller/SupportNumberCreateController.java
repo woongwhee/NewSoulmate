@@ -22,14 +22,8 @@ public class SupportNumberCreateController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
-		Object object = session.getAttribute("loginUser");
-		if (object == null) {
-			response.sendRedirect(request.getContextPath());
-		}
-		Member loginMember = (Member) object;
-
+		Member loginMember = (Member) session.getAttribute("loginUser");
 		long shelterNo = Long.parseLong(request.getParameter("shelterNo"));
 		long amount = Long.parseLong(request.getParameter("amount"));
 		String supportNumber = new SupportService().createNumber(loginMember.getMemberNo(), shelterNo, amount);

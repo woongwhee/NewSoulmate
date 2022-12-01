@@ -1,4 +1,4 @@
-package tk.newsoulmate.web.member.controller;
+package tk.newsoulmate.web.common.controller;
 
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.web.common.APIKeys;

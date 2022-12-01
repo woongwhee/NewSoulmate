@@ -1,5 +1,6 @@
 package tk.newsoulmate.web.member.controller;
 
+import tk.newsoulmate.web.common.controller.EmailController;
 import tk.newsoulmate.web.member.service.MemberService;
 
 import javax.servlet.*;

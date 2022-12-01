@@ -20,16 +20,16 @@ class ScheduleServiceTest {
         Request request=new Request();
         System.out.println();
         DateFormat df=Request.getUrlDate();
-        Date[] day={new Date(df.parse("20221114").getTime()),new Date(df.parse("20221128").getTime()),new Date(df.parse("20221127").getTime()), new Date(df.parse("20221126").getTime())};
+//        Date[] day={new Date(df.parse("20221130").getTime()),new Date(df.parse("2022").getTime()),new Date(df.parse("20221127").getTime()), new Date(df.parse("20221126").getTime())};
+
+
         request.setNumberOfRows(1);
         request.setPageNo(1);
-        for (Date d: day) {
-            request.setBgndate(d);
-            int result=ss.getTotalCount(request);
+//        for (Date d: day) {
+        request.setBgndate(new Date(df.parse("20221130").getTime()));
+//            int result=ss.getTotalCount(request);
             System.out.println(request.toUrl());
-            System.out.println(result);
-
-        }
+//        }
 
     }
     @Test
@@ -37,5 +37,13 @@ class ScheduleServiceTest {
         Request r=new Request();
         r.setValid();
         System.out.println(r.getBgndate());
+    }
+    @Test
+    void scrapTest() {
+        new APIKeys();
+        new ScheduleService().scrapNotice();
+
+
+
     }
 }

@@ -25,21 +25,18 @@ public class AdoptReviewInsertController extends HttpServlet {
                 create();
         JsonObject jobj = new JsonObject();
         response.setContentType("application/json; charset=UTF-8");
-        Integer fileCount = (Integer) session.getAttribute("fileCount");
-        if (fileCount == null) {
+        Board b = gson.fromJson(request.getParameter("board"), Board.class);
+
+        if (b.getFileCount()==0) {
             jobj.addProperty("result", 0);
             jobj.addProperty("msg", "첨부파일이 1개 이상 필요합니다.");
             gson.toJson(jobj, response.getWriter());
             return;
-        }else{
-            session.removeAttribute("fileCount");
         }
 
         AdoptService as = new AdoptService();
-        Board b = gson.fromJson(request.getParameter("board"), Board.class);
         int memberNo = ((Member) session.getAttribute("loginUser")).getMemberNo();
         b.setMemberNo(memberNo);
-        b.setFileCount(fileCount);
         Integer bno = (Integer) session.getAttribute("bno");
         if (bno == null) {
             bno = as.selectBoardNo();

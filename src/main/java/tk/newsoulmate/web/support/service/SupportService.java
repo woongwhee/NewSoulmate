@@ -17,15 +17,17 @@ import tk.newsoulmate.domain.vo.type.WithdrawStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
 import tk.newsoulmate.web.support.controller.IamportClient;
 
+import static tk.newsoulmate.web.common.JDBCTemplet.*;
+
 public class SupportService {
 	public String createNumber(int loginMemberNo, long shelterNo, long amount) {
 		String number = "NS_" + loginMemberNo + "_" + LocalTime.now();
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		int result = new SupportDao().initializeSupport(conn, shelterNo, loginMemberNo, number, amount);
 		if (result <= 0) {
-			JDBCTemplet.rollback(conn);
+			rollback(conn);
 		}
-		JDBCTemplet.close();
+		close();
 		return number;
 	}
 
@@ -37,86 +39,86 @@ public class SupportService {
 	}
 
 	public Support find(String merchantUid) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		Support support = new SupportDao().findByMerchantUid(conn, merchantUid);
-		JDBCTemplet.close();
+		close();
 		return support;
 	}
 
 	public void complete(String merchantUid) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		new SupportDao().updateSupportStatus(conn, merchantUid, SupportStatus.DONE);
 		new SupportDao().updateWithdrawStatus(conn, merchantUid, WithdrawStatus.PENDING);
-		JDBCTemplet.close();
+		close();
 	}
 
 	public void failed(String merchantUid) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		new SupportDao().updateSupportStatus(conn, merchantUid, SupportStatus.FAILED);
-		JDBCTemplet.close();
+		close();
 	}
 
 	public List<Support> findAllOnlyDone(Member member, SupportPage page) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		List<Support> supportList = new SupportDao().findAllOnlyDone(conn, member.getMemberNo(), page);
-		JDBCTemplet.close();
+		close();
 		return supportList;
 	}
 
 	public List<Support> findAllOnlyDoneByDate(Member member, LocalDate startDate, LocalDate endDate, SupportPage page) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		List<Support> supportList = new SupportDao().findAllOnlyDoneByDate(conn, member.getMemberNo(), startDate, endDate, page);
-		JDBCTemplet.close();
+		close();
 		return supportList;
 	}
 
 	public List<Support> findAllByFilter(PageInfo page, String filter) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		List<Support> supportList = new SupportDao().findAllByFilter(conn, page, filter);
-		JDBCTemplet.close();
+		close();
 		return supportList;
 	}
 
 	public int countOnlyDone(Member member) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		int count = new SupportDao().countOnlyDone(conn, member.getMemberNo());
-		JDBCTemplet.close();
+		close();
 		return count;
 	}
 
 	public int countByFilter(String filter) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		int count = new SupportDao().countByFilter(conn, filter);
-		JDBCTemplet.close();
+		close();
 		return count;
 	}
 
 	public int countOnlyDoneByDate(Member member, LocalDate startDate, LocalDate endDate) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		int count = new SupportDao().countOnlyDoneByDate(conn, member.getMemberNo(), startDate, endDate);
-		JDBCTemplet.close();
+		close();
 		return count;
 	}
 
 	public List<Support> findAllOnlyDoneByShelterNo(long shelterNo) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		List<Support> supports = new SupportDao().findAllOnlyDoneByShelterNo(conn, shelterNo);
-		JDBCTemplet.close();
+		close();
 		return supports;
 	}
 
 	public int withdraw(SupportWithdrawRequest request) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		int result = new SupportDao().updateWithdrawStatus(conn, request.getSupportNo(), WithdrawStatus.REQUESTED);
 		new TransferDao().withdraw(conn, request);
-		JDBCTemplet.close();
+		close();
 		return result;
 	}
 
 	public int withdrawApprove(long supportNo) {
-		Connection conn = JDBCTemplet.getConnection();
+		Connection conn = getConnection();
 		int result = new SupportDao().updateWithdrawStatus(conn, supportNo, WithdrawStatus.DONE);
-		JDBCTemplet.close();
+		close();
 		return result;
 	}
 

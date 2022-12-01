@@ -62,6 +62,6 @@
         });
     });
  </script>
-<script src="js/volunteer/volunteerRevUpdate.jsp"></script>
+<script src="js/volunteer/volunteerRevUpdate.js"></script>
 </body>
 </html>

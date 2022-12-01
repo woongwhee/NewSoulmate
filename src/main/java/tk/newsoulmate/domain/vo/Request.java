@@ -151,6 +151,11 @@ public class Request {
         this.setBgndate(cal.getTime());
         this.setState("protect");
     }
+
+    /**
+     * 유기동물 요청 url을 반환하는 함수
+     * @return
+     */
     public URL toUrl() {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
         URL url;

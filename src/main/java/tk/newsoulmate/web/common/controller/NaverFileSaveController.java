@@ -11,11 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "saveAttach", value = "/saveAttach")
+@WebServlet(name = "SSaveAttach", value = "/saveAttach")
 public class NaverFileSaveController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             //파일정보
+            request.setCharacterEncoding("utf-8");
             String sFileInfo = "";
             //파일명을 받는다 - 일반 원본파일명
             String filename = request.getHeader("file-name");
@@ -56,11 +57,6 @@ public class NaverFileSaveController extends HttpServlet {
                     session.setAttribute("bno",bno);
                     at.setBoardNo(bno);
                     int result=as.insertAttachment(at);
-                    if(result>0){
-                        Integer fileCount =(Integer)session.getAttribute("fileCount");
-                        fileCount=fileCount==null?1:fileCount+1;
-                        session.setAttribute("fileCount",fileCount);
-                    }
                 }
                 // 정보 출력
 

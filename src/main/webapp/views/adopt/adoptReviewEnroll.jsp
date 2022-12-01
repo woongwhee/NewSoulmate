@@ -59,6 +59,9 @@ $(document).ready(function () {
         if(toDay<inputDay){
             return '유효한 날짜를 입력해주세요';
         }
+        if(board.fileCount==0){
+            return '첨부파일을 하나 이상 있어야 합니다.'
+        }
         return msg;
     }
     function submitBoard(){
@@ -66,8 +69,10 @@ $(document).ready(function () {
             boardTitle:$('#boardTitle').val(),
             boardContent:$('#boardContent').val(),
             issueDate:$('#adoptDate').val(),
-            boardType:'ADOPT'
+            boardType:'ADOPT',
+            fileCount:$('#boardContent').val().split("img src").length
         };
+
         let msg=vaildate(board);
         if(msg==='Y'){
             $.ajax({
@@ -88,6 +93,7 @@ $(document).ready(function () {
             alert(msg)
         }
     }
+
 });
 </script>
 </body>

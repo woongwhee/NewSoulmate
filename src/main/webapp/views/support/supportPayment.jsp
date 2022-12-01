@@ -231,7 +231,10 @@
         var code = "imp38841066";
         IMP.init(code);
         $.ajax({
-            url: "${context}/support/number?shelterNo=" + selectedShelterNo + "&amount=" + $("[name=amountCheck]:checked").val(),
+            url: "${context}/support/number",
+            data:{shelterNo : selectedShelterNo,
+                amount:$("[name=amountCheck]:checked").val()
+            },
             //url: "/support/verify?impUid=" + rsp.imp_uid + "&merchantUid=" + rsp.merchant_uid,
             type: "post",
             success: function (data) {

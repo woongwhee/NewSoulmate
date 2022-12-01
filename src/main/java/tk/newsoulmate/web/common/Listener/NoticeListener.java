@@ -17,18 +17,20 @@ public class NoticeListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         new APIKeys();
-////        m = new Timer();
-////        task = new ScrapTimmer();
-//        long time = task.StartTimming();
-//        long oneDay = 1000 * 60 * 60 * 24;
-//        //새벽 1시마다 전날 업데이트된 데이터를 긁어오는 함수
-////        m.schedule(task,time, oneDay);
+        m = new Timer();
+        task = new ScrapTimmer();
+        //새벽 1시까지 남은 시간을 반환한는 함수
+        long time = task.StartTimming();
+        long oneDay = 1000 * 60 * 60 * 24;
+        //특정한 시간에 원하는 작업을 수행하고자 할 때 사용하는 메소드
+        m.schedule(task,time, oneDay);
+
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-//        task.cancel();
-//        m.cancel();
+        task.cancel();
+        m.cancel();
     }
 
 }

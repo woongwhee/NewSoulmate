@@ -79,7 +79,7 @@
             boardTitle:$('#boardTitle').val(),
             boardContent:$('#boardContent').val(),
             issueDate:$('#adoptDate').val(),
-            fileCount:nImageInfoCnt
+            fileCount:$('#boardContent').val().split("img src").length
         };
         let msg=vaildate(board);
         if(msg==='Y'){
