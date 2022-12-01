@@ -105,7 +105,6 @@ public class ShelterService {
 
     public List<Notice> getNoticeList(Request request) {
         URL url = request.toUrl();
-        System.out.println(url.toString());
         ResponseMapper responseMapper = null;
         List<Notice> nlist = null;
         try {

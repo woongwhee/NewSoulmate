@@ -8,6 +8,7 @@ import java.io.IOException;
 @WebServlet(name = "volunteerRevEnroll", value = "/volunteerRevEnroll")
 public class VolunteerRevEnrollController extends HttpServlet {
     @Override
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("views/volunteer/volunteerReviewEnroll.jsp").forward(request,response);
     }

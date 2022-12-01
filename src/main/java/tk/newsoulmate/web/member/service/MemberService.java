@@ -4,7 +4,7 @@ import tk.newsoulmate.domain.dao.ConfirmDao;
 import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
-import tk.newsoulmate.web.member.controller.EmailController;
+import tk.newsoulmate.web.common.controller.EmailController;
 
 import java.sql.Connection;
 
