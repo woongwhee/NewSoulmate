@@ -51,11 +51,15 @@
         <div id="board-btn-box">
             <c:if test="${!empty loginUser and (loginUser.memberNo eq b.memberNo or loginUser.memberGrade.SITE_MANAGER)}">
                 <button type="button" id="deleteBoard">삭제하기</button>
+                <c:if test="${!loginUser.memberGrade.SITE_MANAGER}">
                 <button type="button" id="updateBoard">수정하기</button>
+                </c:if>
             </c:if>
+            <c:if test="${!(loginUser.memberNo eq b.memberNo or empty loginUser or loginUser.memberGrade.SITE_MANAGER)}">
             <button type="button" id="reportBoard" data-toggle="modal" data-target="#reportModal" data-kind="board"
                     data-ref="${b.boardNo}">신고하기
             </button>
+            </c:if>
         </div>
         <p>댓글</p>
         <div id="reply-area">
@@ -98,30 +102,8 @@
             </div>
         </div>
         <%@ include file="/views/template/report.jsp"%>
-    </main>
-            <table id="reply-write-table">
-                <c:choose>
-                    <c:when test="${!empty loginUser}">
-                        <tr>
-                            <td colspan="3"><input type="text" id="replyInput" placeholder="댓글을 입력해주세요"></td>
-                            <td>
-                                <button type="button" id="replySubmit">댓글작성</button>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <tr>
-                            <td colspan="5" id="only-user">로그인한 회원만 작성할수 있습니다.</td>
-                        </tr>
-                    </c:otherwise>
-                </c:choose>
-            </table>
+
         </div>
-        <div id="boardList-btn-box">
-            <button id="boardList-btn">목록으로 돌아가기</button>
-        </div>
-    </div>
-    <%@ include file="/views/template/report.jsp" %>
 </main>
 
 <footer>

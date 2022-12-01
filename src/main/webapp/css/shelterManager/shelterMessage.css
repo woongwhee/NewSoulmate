@@ -91,20 +91,20 @@ tbody td {
     font-size: 15px;
 }
 
-td button {
+
+.delete-btn:hover {
+    background-color: #f45d48;
+    color: white;
+}
+
+.delete-btn{
     border: none;
     border-radius: 5px;
     font-size: 12px;
     width: 70px;
     height: 30px;
     margin: 8px;
-    background-color: #676767;
+    background-color: #39393a;
     color: white;
     cursor: pointer;
-
-}
-
-td button:hover {
-    background-color: #f45d48;
-    color: white;
 }

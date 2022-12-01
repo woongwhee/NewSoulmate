@@ -21,6 +21,7 @@ public class Board{
     private String nickName;
     private Date createDate;
     private String resultStatus;//답변조회용
+    @SerializedName("fileCount")
     private int fileCount;
     @SerializedName("categoryNo")
     private int categoryNo;

@@ -24,8 +24,6 @@
         select *
         from ANIMAL
         where "desertionNo"=?
-
-
     </entry>
     <entry key="truncNotice">
         DELETE TABLE ANIMAL

@@ -22,16 +22,11 @@
 
 <div class="term-wrapper" align="center">
     <div>
-        <div>
-            <h2>회원가입</h2>
+        <div class="title-wrap">
+            <p>회원가입 약관동의</p>
         </div>
-
         <div class="agree">
-            <label><input type="checkbox" name="agreeCheckBox" class="allcheck" >이용약관의 내용에 모두 동의합니다.</label>
-        </div>
-
-        <div class="agree">
-            <label><input type="checkbox" name="agreeCheckBox" class="required_checked">이용약관에 동의합니다.(필수)</label>
+            <input type="checkbox" name="agreeCheckBox" id="agree1" class="required_checked"><label for="agree1">이용약관에 동의합니다.(필수)</label>
         </div>
 
         <div>
@@ -49,7 +44,7 @@
             </div>
 
             <div class="agree">
-                <label><input type="checkbox" name="agreeCheckBox" class="required_checked">개인정보 수집약관의 내용에 동의합니다.(필수)</label>
+                <input type="checkbox" name="agreeCheckBox" class="required_checked"><label>개인정보 수집약관의 내용에 동의합니다.(필수)</label>
             </div>
 
             <div>
@@ -75,7 +70,10 @@
                 </textarea>
             </div>
 
-            <div>
+            <div class="agree">
+                <input type="checkbox" name="agreeCheckBox" class="allcheck" ><label>이용약관의 내용에 모두 동의합니다.</label>
+            </div>
+            <div id="agree-btn-box">
                 <button id="cancelBtn"><a href="index.jsp">취소</a></button>
                 <button id="signupBtn">가입하기</button>
             </div>

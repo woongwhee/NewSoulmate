@@ -67,10 +67,9 @@
     </entry>
 
     <entry key="selectAdoptApplyDetail">
-        SELECT
-            *
-        FROM SUBSCRIPTION SB
-        WHERE SB.SUB_NO = ?
+        SELECT *
+        FROM SUBSCRIPTION
+        WHERE SUB_NO = ?
     </entry>
 
     <entry key="changeAdoptApplySubRead">

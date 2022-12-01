@@ -215,17 +215,7 @@ public class AttachmentDao {
         }
         return at;
     }
-    private Attachment groupUpAttachmentMapper(ResultSet rset) throws SQLException {
-        Attachment at=null;
-        if(rset.next()){
-            at=Attachment.groupUpAttachment(rset.getInt("FILE_NO"),
-                    rset.getString("ORIGIN_NAME"),
-                    rset.getString("CHANGE_NAME"),
-                    rset.getString("FILE_PATH"),
-                    rset.getDate("UPLOAD_DATE"));
-        }
-        return at;
-    }
+
     private Attachment thumbNailMapper(ResultSet rset)throws SQLException {
         Attachment at=null;
         if(rset.next()){
@@ -302,6 +292,18 @@ public class AttachmentDao {
             close(rset);
             close(psmt);
         }
+    }
+
+    private Attachment groupUpAttachmentMapper(ResultSet rset) throws SQLException {
+        Attachment at=null;
+        if(rset.next()){
+            at=Attachment.groupUpAttachment(rset.getInt("FILE_NO"),
+                    rset.getString("ORIGIN_NAME"),
+                    rset.getString("CHANGE_NAME"),
+                    rset.getString("FILE_PATH"),
+                    rset.getDate("UPLOAD_DATE"));
+        }
+        return at;
     }
 
 
