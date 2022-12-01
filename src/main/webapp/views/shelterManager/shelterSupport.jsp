@@ -64,28 +64,17 @@
                         <td><%=supports.get(i).getAmount() %></td>
                         <td><%=supports.get(i).getPhoneNumber() %></td>
                         <td>
-                            <%
-                                switch (supports.get(i).getWithdrawStatus()) {
-                                    case PENDING:
-                            %>
-                            출금가능
-                            <%
-                                    break;
-                                case REQUESTED:
-                            %>
-                            출금 대기중
-                            <%
-                                    break;
-                                case DONE:
-                            %>
-                            출금완료
-                            <% } %>
+                            <%switch (supports.get(i).getWithdrawStatus()) {
+                                case PENDING: %>출금가능
+                            <%break; case REQUESTED:%>출금 대기중
+                            <% break; case DONE:%>출금완료 <% } %>
                         </td>
                         <td>
                             <% if (supports.get(i).getWithdrawStatus().equals(PENDING)) { %>
                             <input type="submit" class="btn btn-primary" data-bs-toggle="modal"
                                    data-bs-target="#staticBackdrop" value="출금 신청"
-                                   onclick="setWithdrawInfo(<%=supports.get(i).getSupportNo()%>, <%=supports.get(i).getAmount()%>)">
+                                   onclick="setWithdrawInfo(<%=supports.get(i).getSupportNo()%>,
+                                       <%=supports.get(i).getAmount()%>)">
                             <% } %>
                         </td>
                     </tr>

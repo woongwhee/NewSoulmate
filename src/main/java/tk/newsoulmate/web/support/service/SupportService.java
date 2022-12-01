@@ -22,8 +22,9 @@ import static tk.newsoulmate.web.common.JDBCTemplet.*;
 public class SupportService {
 	public String createNumber(int loginMemberNo, long shelterNo, long amount) {
 		String number = "NS_" + loginMemberNo + "_" + LocalTime.now();
-		Connection conn = getConnection();
-		int result = new SupportDao().initializeSupport(conn, shelterNo, loginMemberNo, number, amount);
+		Connection conn = JDBCTemplet.getConnection();
+		int result = new SupportDao().initializeSupport
+				(conn, shelterNo, loginMemberNo, number, amount);
 		if (result <= 0) {
 			rollback(conn);
 		}
@@ -33,7 +34,7 @@ public class SupportService {
 
 	public boolean verify(String impUid, String merchantUid) {
 		// 실제 결제된 amount
-		long amount = new IamportClient().getPaymentAmount(impUid);
+		long amount = new IamportClient().getPaymentAmount(impUid); // getPaymentAmount 아임포트쪽에서 주는 실제로 결제된금액
 		Support support = this.find(merchantUid);
 		return support.verify(amount); // 사용자가 클릭해서 넘어온 amount
 	}

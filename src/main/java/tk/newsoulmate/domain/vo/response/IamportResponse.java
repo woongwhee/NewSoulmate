@@ -4,7 +4,6 @@ public class IamportResponse <T> {
 
 	private final long code;
 	private final String message;
-
 	private final T response;
 
 	public IamportResponse(long code, String message, T response) {

@@ -20,14 +20,14 @@ public class ManageSupportApproveController extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		long supportNo = Long.parseLong(req.getParameter("supportNo"));
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		long supportNo = Long.parseLong(request.getParameter("supportNo"));
 		int result = supportService.withdrawApprove(supportNo);
 
 		if (result > 0) {
-			resp.setStatus(200);
+			response.setStatus(200);
 		} else {
-			resp.setStatus(500);
+			response.setStatus(500);
 		}
 	}
 

@@ -189,7 +189,6 @@
                     alert("서버요청실패");
                     checkMail = 0;
                 }
-
             });
         } else {
             $("#authMsg").text("인증시간이 만료되었습니다.");
@@ -216,9 +215,15 @@
     let checkPwd = 0;
     let checkPwdRe = 0;
     let checkNickname = 0;
+
     $(document).ready(function () {
         const memberId = document.querySelector("#memberId");
-        const idReg = /^[a-zA-Z0-9]{5,}/;
+        const idReg = /^[a-zA-Z0-9]{5,20}/;
+
+        $('#checkid').keyup(function(){
+            checkid = 0;
+        })
+
         $('#checkid').click(function () {
 
             let memberIds = $('#memberId').val();
@@ -282,7 +287,7 @@
             }
         });
 
-        // 비밀번호 일치 검사 - 완료
+        // 비밀번호 일치 검사
         memberPwRe.addEventListener("change", function () {
             const inputPw = memberPw.value;
             const inputPwRe = memberPwRe.value;
@@ -295,9 +300,15 @@
                 checkPwdRe = 0;
             }
         });
-        // 닉네임 중복체크 - 완료
+
+
+        // 닉네임 중복체크
         const nickName = document.querySelector("#nickName");
-        const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,}/;
+        const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,15}/;
+
+        $('#nickName').keyup(function(){
+            checkNickname = 0;
+        })
 
         $('#checkNickname').click( function() {
             let nickNames = $('#nickName').val();
@@ -328,10 +339,10 @@
         });
     });
 
-    // 필수입력사항 모두 입력돼야 회원가입 할 수 있게 - 완료
+    // 필수입력사항 모두 입력돼야 회원가입 할 수 있게
     function signupCheck() {
         if (!(checkId == 1 && checkPwd == 1 && checkPwdRe == 1 && checkNickname == 1 && checkMail == 1)) {
-            alert("필수 입력창을 모두 입력해주세요.")
+            alert("필수 입력창을 모두 확인해주세요.")
             return false;
         }
     };

@@ -24,7 +24,7 @@ public class SupportWithdrawController extends HttpServlet {
 	private final ShelterService shelterService;
 
 	public SupportWithdrawController() {
-		this.supportService = new SupportService(); // 객체 생성 -> 곧 메모리 -> Singleton
+		this.supportService = new SupportService();
 		this.shelterService = new ShelterService();
 	}
 	@Override

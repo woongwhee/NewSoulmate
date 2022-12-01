@@ -252,7 +252,10 @@
                         saveInfo(rsp.paid_amount);
                         // 검증
                         $.ajax({
-                            url: "${context}/support/verify?impUid=" + rsp.imp_uid + "&merchantUid=" + rsp.merchant_uid,
+                            url: "${context}/support/verify?impUid=" + rsp.imp_uid
+                                + "&merchantUid=" + rsp.merchant_uid,
+                            // 4. 실제로 결제요청이 일어나면 식별자가 impuid를 돌려줌 callbacksusseecxx
+                            // imp_uid는 import에서 생성된 번호아 merchant_uid는 내가 만든 번호 이 금액이 같은지 검증하는게 verify - supportVerifyController
                             type: "get",
                             success: function () {
                                 alertInfo();
