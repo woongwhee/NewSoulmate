@@ -21,7 +21,8 @@ public class SupportService {
 	public String createNumber(int loginMemberNo, long shelterNo, long amount) {
 		String number = "NS_" + loginMemberNo + "_" + LocalTime.now();
 		Connection conn = JDBCTemplet.getConnection();
-		int result = new SupportDao().initializeSupport(conn, shelterNo, loginMemberNo, number, amount); // 3. amount 클라이언트가 결제하겠다고 한 금액
+		int result = new SupportDao().initializeSupport
+				(conn, shelterNo, loginMemberNo, number, amount);
 		if (result <= 0) {
 			JDBCTemplet.rollback(conn);
 		}

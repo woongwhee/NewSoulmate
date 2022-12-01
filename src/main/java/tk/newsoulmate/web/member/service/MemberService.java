@@ -127,12 +127,10 @@ public class MemberService {
 
     public int updateGrade(ManageMemberUpdateGradeRequest updateGradeReq) {
         Connection conn = getConnection();
-
         int result = new MemberDao().updateGrade(updateGradeReq, conn);
         if (updateGradeReq.isToUser()) {
             new MemberDao().deleteShelterInfo(updateGradeReq.getMemberNo(), conn);
         }
-
         if (result > 0) {
             commit();
         } else {

@@ -218,7 +218,7 @@
 
     $(document).ready(function () {
         const memberId = document.querySelector("#memberId");
-        const idReg = /^[a-zA-Z0-9]{5,}/;
+        const idReg = /^[a-zA-Z0-9]{5,20}/;
 
         $('#checkid').keyup(function(){
             checkid = 0;
@@ -304,7 +304,7 @@
 
         // 닉네임 중복체크
         const nickName = document.querySelector("#nickName");
-        const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,}/;
+        const nickReg = /^[a-zA-Z1-9ㄱ-힣]{3,15}/;
 
         $('#nickName').keyup(function(){
             checkNickname = 0;

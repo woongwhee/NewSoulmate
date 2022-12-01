@@ -22,19 +22,16 @@ public class SupportNumberCreateController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		Object object = session.getAttribute("loginUser");
 		if (object == null) {
 			response.sendRedirect(request.getContextPath());
 		}
 		Member loginMember = (Member) object;
-
 		long shelterNo = Long.parseLong(request.getParameter("shelterNo"));
 		long amount = Long.parseLong(request.getParameter("amount"));
 		// 2. 쉘터번호랑 얼마 후원할지 받아서 랜덤한 키값을 생성해서(supportService - 그 값과 어떤 쉘터 얼마 데이터베이스에 (SupportService createNumber) 클라이언트가 결제 하겠다고 한 금액을 저장
 		String supportNumber = new SupportService().createNumber(loginMember.getMemberNo(), shelterNo, amount);
-
 		response.getWriter().print(supportNumber);
 		response.getWriter().flush();
 	}

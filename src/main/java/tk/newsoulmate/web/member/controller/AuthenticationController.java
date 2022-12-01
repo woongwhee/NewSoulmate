@@ -13,7 +13,7 @@ public class AuthenticationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authCode = request.getParameter("authCode");
-        int confirmNo=0;
+        int confirmNo = 0;
         if(request.getParameterMap().containsKey("confirmNo")) {
             confirmNo = Integer.parseInt(request.getParameter("confirmNo"));
         }
