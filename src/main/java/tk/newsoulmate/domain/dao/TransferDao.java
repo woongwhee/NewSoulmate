@@ -12,8 +12,8 @@ import java.util.Properties;
 
 import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.domain.vo.Transfer;
-import tk.newsoulmate.domain.vo.request.SupportWithdrawRequest;
-import tk.newsoulmate.domain.vo.type.WithdrawStatus;
+import tk.newsoulmate.domain.dto.request.SupportWithdrawRequest;
+import tk.newsoulmate.domain.type.WithdrawStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 public class TransferDao {

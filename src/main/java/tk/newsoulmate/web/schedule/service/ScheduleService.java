@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import tk.newsoulmate.domain.dao.NoticeDao;
 import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.domain.vo.Request;
-import tk.newsoulmate.domain.vo.response.Body;
-import tk.newsoulmate.domain.vo.response.ResponseMapper;
+import tk.newsoulmate.domain.dto.response.response.Body;
+import tk.newsoulmate.domain.dto.response.response.ResponseMapper;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.IOException;
@@ -20,6 +20,10 @@ import java.util.Date;
 import java.util.List;
 
 public class ScheduleService {
+    private NoticeDao noticeDao;
+    public ScheduleService() {
+    }
+
     public int scrapNotice() {
         System.out.println(new Date()+"공고문업데이트 시작");
         int result=0;
@@ -38,7 +42,7 @@ public class ScheduleService {
                 @Override
                 public void run() {
                     Connection conn= JDBCTemplet.getConnection();
-                int result=new NoticeDao().insertNotice(conn,list);
+                int result=noticeDao.insertNotice(conn,list);
                 if(result>0){
                     JDBCTemplet.commit();
                 }else{

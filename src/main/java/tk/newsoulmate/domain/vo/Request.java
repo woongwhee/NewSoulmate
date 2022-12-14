@@ -1,5 +1,5 @@
 package tk.newsoulmate.domain.vo;
-import tk.newsoulmate.domain.vo.type.Species;
+import tk.newsoulmate.domain.type.Species;
 import tk.newsoulmate.web.common.APIKeys;
 
 import java.io.UnsupportedEncodingException;

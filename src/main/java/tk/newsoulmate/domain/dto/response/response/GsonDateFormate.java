@@ -1,4 +1,4 @@
-package tk.newsoulmate.domain.vo.response;
+package tk.newsoulmate.domain.dto.response.response;
 
 import com.google.gson.*;
 

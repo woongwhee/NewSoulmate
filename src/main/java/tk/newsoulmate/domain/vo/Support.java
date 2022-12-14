@@ -1,10 +1,9 @@
 package tk.newsoulmate.domain.vo;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
-import tk.newsoulmate.domain.vo.type.SupportStatus;
-import tk.newsoulmate.domain.vo.type.WithdrawStatus;
+import tk.newsoulmate.domain.type.SupportStatus;
+import tk.newsoulmate.domain.type.WithdrawStatus;
 
 public class Support {
 

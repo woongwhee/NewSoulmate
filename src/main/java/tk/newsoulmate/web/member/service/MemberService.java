@@ -3,7 +3,7 @@ package tk.newsoulmate.web.member.service;
 import tk.newsoulmate.domain.dao.ConfirmDao;
 import tk.newsoulmate.domain.dao.MemberDao;
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
+import tk.newsoulmate.domain.dto.request.ManageMemberUpdateGradeRequest;
 import tk.newsoulmate.web.member.controller.EmailController;
 
 import java.sql.Connection;

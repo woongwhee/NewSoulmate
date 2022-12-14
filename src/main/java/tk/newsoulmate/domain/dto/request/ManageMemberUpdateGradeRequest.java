@@ -1,6 +1,6 @@
-package tk.newsoulmate.domain.vo.request;
+package tk.newsoulmate.domain.dto.request;
 
-import tk.newsoulmate.domain.vo.type.MemberGrade;
+import tk.newsoulmate.domain.type.MemberGrade;
 
 public class ManageMemberUpdateGradeRequest {
 	private final long memberNo;

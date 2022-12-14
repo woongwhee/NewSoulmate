@@ -3,7 +3,7 @@ package tk.newsoulmate.web.common.controller;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Notice;
-import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.type.BoardType;
 import tk.newsoulmate.web.common.service.CommonService;
 
 import javax.servlet.ServletException;

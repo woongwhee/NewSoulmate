@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import tk.newsoulmate.domain.vo.request.PwdReset;
+import tk.newsoulmate.domain.dto.request.PwdReset;
 
 @WebServlet(name = "PwdReset", value = "/pwdReset.do")
 public class findPwdResetController extends HttpServlet {

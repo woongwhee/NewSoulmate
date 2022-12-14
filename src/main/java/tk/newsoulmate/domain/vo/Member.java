@@ -1,6 +1,6 @@
 package tk.newsoulmate.domain.vo;
 
-import tk.newsoulmate.domain.vo.type.MemberGrade;
+import tk.newsoulmate.domain.type.MemberGrade;
 
 import java.sql.Date;
 

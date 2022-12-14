@@ -13,8 +13,8 @@ import java.util.Properties;
 
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
-import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
-import tk.newsoulmate.domain.vo.type.MemberGrade;
+import tk.newsoulmate.domain.dto.request.ManageMemberUpdateGradeRequest;
+import tk.newsoulmate.domain.type.MemberGrade;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 public class MemberDao {

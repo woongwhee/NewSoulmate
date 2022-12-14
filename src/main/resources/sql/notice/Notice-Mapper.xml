@@ -17,8 +17,6 @@
         ORDER BY "noticeSdt")a
         )
         WHERE rnum between ? and ?
-
-
     </entry>
     <entry key="selectNotice">
         select *
@@ -49,7 +47,29 @@
         ?,?,?,?,
         ?,?,?,?,
         ?,?,?,?,
-        ?,?)
+        ?,?
+        )
+    </entry>
+    <!---->
+    <entry key="mergeNotice">
+
+        MERGE INTO ANIMAL USING DUAL ON("desertionNo"=?)
+        WHEN MATCHED THEN
+        UPDATE SET
+        "filename" =?,"happenDt"=? ,"happenPlace"=? ,
+        "kindCd"=? ,"colorCd"=? ,"age"=? , "weight"=? ,
+        "noticeNo" =?, "noticeSdt"=? ,"noticeEdt"=? , "popfile" =?,
+        "processState" =?, "sexCd"=?,"neuterYn"=?, "specialMark"=?,
+        "careNm"=?, "careTel"=?,"careAddr"=? , "orgNm"=?,
+        "chargeNm" =?, "officetel"=?
+        WHEN NOT MATCHED THEN INSERT(
+        "desertionNo" ,"filename" ,"happenDt" ,"happenPlace" ,"kindCd" ,"colorCd" ,"age" , "weight" ,
+        "noticeNo" , "noticeSdt" ,"noticeEdt" , "popfile" ,"processState" , "sexCd","neuterYn",
+        "specialMark","careNm", "careTel","careAddr" , "orgNm","chargeNm" , "officetel")
+        VALUES ( ?,?,?,?, ?,?,?,?, ?,?,?,?, ?,?,?,?, ?,?,?,?, ?,? );
+
+
+
     </entry>
     <entry key="checkAnimal">
         SELECT

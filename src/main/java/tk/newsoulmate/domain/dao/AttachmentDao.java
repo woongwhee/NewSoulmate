@@ -1,12 +1,10 @@
 package tk.newsoulmate.domain.dao;
 
-import oracle.jdbc.proxy.annotation.Pre;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.GradeUp;
 import tk.newsoulmate.domain.vo.Reply;
-import tk.newsoulmate.domain.vo.Request;
-import tk.newsoulmate.domain.vo.type.BoardType;
-import tk.newsoulmate.domain.vo.type.ReplyType;
+import tk.newsoulmate.domain.type.BoardType;
+import tk.newsoulmate.domain.type.ReplyType;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;

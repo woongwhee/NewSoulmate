@@ -1,4 +1,4 @@
-package tk.newsoulmate.domain.vo.request;
+package tk.newsoulmate.domain.dto.request;
 
 import com.google.gson.annotations.SerializedName;
 

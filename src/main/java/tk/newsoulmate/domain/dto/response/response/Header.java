@@ -1,5 +1,5 @@
 
-package tk.newsoulmate.domain.vo.response;
+package tk.newsoulmate.domain.dto.response.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

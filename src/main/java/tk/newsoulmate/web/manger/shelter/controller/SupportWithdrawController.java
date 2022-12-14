@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 
 import tk.newsoulmate.domain.vo.Member;
 
-import tk.newsoulmate.domain.vo.request.SupportWithdrawRequest;
+import tk.newsoulmate.domain.dto.request.SupportWithdrawRequest;
 
 import tk.newsoulmate.web.support.service.SupportService;
 import tk.newsoulmate.web.shelter.service.ShelterService;

@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="tk.newsoulmate.domain.vo.Transfer" %>
 <%@ page import="tk.newsoulmate.domain.vo.Support" %>
-<%@ page import="static tk.newsoulmate.domain.vo.type.WithdrawStatus.*" %>
+<%@ page import="static tk.newsoulmate.domain.type.WithdrawStatus.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%

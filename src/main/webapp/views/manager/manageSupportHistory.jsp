@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="tk.newsoulmate.domain.vo.type.WithdrawStatus" %>
+<%@ page import="tk.newsoulmate.domain.type.WithdrawStatus" %>
 <%@ page import="tk.newsoulmate.domain.vo.Support" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 

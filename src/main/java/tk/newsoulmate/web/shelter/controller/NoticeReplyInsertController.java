@@ -1,10 +1,9 @@
 package tk.newsoulmate.web.shelter.controller;
 
-import com.google.gson.Gson;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.Reply;
-import tk.newsoulmate.domain.vo.type.ReplyType;
+import tk.newsoulmate.domain.type.ReplyType;
 import tk.newsoulmate.web.common.UploadUtil;
 import tk.newsoulmate.web.common.service.CommonService;
 
@@ -12,7 +11,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.Set;
 
 @WebServlet(name = "NoticeReplyInsertController", value = "/replyInsert.no")
 @MultipartConfig(

@@ -1,6 +1,6 @@
 package tk.newsoulmate.domain.vo;
 
-import tk.newsoulmate.domain.vo.type.Species;
+import tk.newsoulmate.domain.type.Species;
 
 public class Breed {
     private transient Species Species_name;

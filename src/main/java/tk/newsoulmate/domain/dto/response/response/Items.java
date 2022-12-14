@@ -1,5 +1,5 @@
 
-package tk.newsoulmate.domain.vo.response;
+package tk.newsoulmate.domain.dto.response.response;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

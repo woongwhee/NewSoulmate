@@ -9,8 +9,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="tk.newsoulmate.domain.vo.PageInfo" %>
 <%@ page import="java.util.List" %>
-<%@ page import="tk.newsoulmate.domain.vo.type.SupportStatus" %>
-<%@ page import="tk.newsoulmate.domain.vo.type.WithdrawStatus" %>
+<%@ page import="tk.newsoulmate.domain.type.SupportStatus" %>
+<%@ page import="tk.newsoulmate.domain.type.WithdrawStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%

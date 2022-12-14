@@ -107,12 +107,11 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2</version>
 		</dependency>
-
-<!--		<dependency>-->
-<!--			<groupId>net.nurigo</groupId>-->
-<!--			<artifactId>sdk</artifactId>-->
-<!--			<version>4.2.4</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>net.nurigo</groupId>
+			<artifactId>sdk</artifactId>
+			<version>4.2.4</version>
+		</dependency>
 
 	</dependencies>
 

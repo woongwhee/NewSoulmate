@@ -1,4 +1,4 @@
-package tk.newsoulmate.domain.vo.type;
+package tk.newsoulmate.domain.type;
 
 public enum SupportStatus {
     PENDING, DONE, FAILED

@@ -1,9 +1,7 @@
 package tk.newsoulmate.web.manger.site.controller;
 
-import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.domain.vo.Report;
-import tk.newsoulmate.domain.vo.Subscription;
-import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.type.BoardType;
 import tk.newsoulmate.web.manger.site.service.ManageService;
 
 import javax.servlet.*;

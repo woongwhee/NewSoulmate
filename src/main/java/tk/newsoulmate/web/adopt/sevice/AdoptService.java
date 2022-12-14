@@ -2,7 +2,7 @@ package tk.newsoulmate.web.adopt.sevice;
 
 import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
-import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.type.BoardType;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
