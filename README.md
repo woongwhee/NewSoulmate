@@ -12,21 +12,19 @@
 
 # 2. 환승주인을 만드는 사람
 
-| <img src="https://avatars.githubusercontent.com/24siefil" width=150px><br />[진웅휘](https://github.com/woongwhee) | <img src="https://avatars.githubusercontent.com/9yujin" width=150px><br />[염서학](https://github.com/YEOMCODING) | <img src="https://avatars.githubusercontent.com/rms5213" width=150px><br />[장현정](https://github.com/HyunjeongJang) | <img src="https://avatars.githubusercontent.com/sanbonai06" width=150px><br />[김지호](https://github.com/KJeeu) | <img src="https://avatars.githubusercontent.com/ozzing" width=150px><br />[김도윤](https://github.com/kimdory) |
-|:---------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------:|
+| <img src="readme/img/웅휘.jpeg" width=150px><br />[진웅휘](https://github.com/woongwhee) | <img src="readme/img/서학.jpeg" width=150px><br />[염서학](https://github.com/YEOMCODING) | <img src="readme/img/현정.jpeg" width=150px><br />[장현정](https://github.com/HyunjeongJang) | <img src="readme/img/지호.jpeg" width=150px><br />[김지호](https://github.com/KJeeu) | <img src="readme/img/도윤.jpeg" width=150px><br />[김도윤](https://github.com/kimdory) |
+|:-----------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
 
 <br/>
 
 # 3. 환승주인를 만드는 기술
 
-- **서버**: JAVA, Servlet,JDBC 
+- **서버**: JAVA 11, tomcat9, Servlet3, JDBC 
 - **프론트엔드**:  JAVASCRIPT,JQUERY
 - **데이터베이스**: ORACLE 11g
-- **디자인 시스템**: [storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme-provider
-- **버전 관리**:MAVEN,Git with GitHub
-- **CI/CD**: Github-actions, Docker-compose
-- **웹뷰 앱**: React Native with EXPO
+- **버전 관리**:MAVEN, Git with GitHub
 
+<br>
 <details>
 <summary>디랙토리 구조</summary>
 <div markdown="1">
@@ -55,18 +53,6 @@ file #첨부파일 저장용폴더 ($tomcathome/webapps/file)
   ```
 </div>
 </details>
-
-<details>
-<summary>Architecture</summary>
-<div markdown="1">
-
-  <img src="README.assets/178255707-814eb2ac-be3a-4350-940c-f060890c2420.jpeg" alt="KakaoTalk_Photo_2022-07-11-20-35-48" style="zoom: 67%;" />
-
-뱅키즈의 개발 환경은 테스트 환경(dev)과 실 서비스 환경(main)이 분리되어 있습니다. 각 환경(branch)은 Github-actions, Dock-compose 기반 CI/CD 및 AWS EC2 인스턴스 기반 서버가 구축되어 있습니다. 또한, push 및 태깅 이벤트 감지를 통해 Docker-compose로 이미지 push가 trigger 됩니다. 실 서비스 환경의 이미지는 Github의 Relase 버저닝을 통해 관리됩니다.
-
-</div>
-</details>
-
 <br/>
 
 # 4. 주요 기능
