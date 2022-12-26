@@ -1,5 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="tk.newsoulmate.domain.vo.type.MemberGrade" %>
+<%@ page import="tk.newsoulmate.domain.type.MemberGrade" %>
 <%@ page import="java.util.List" %>
 <%@ page import="tk.newsoulmate.domain.vo.Member" %>
 <%@ page import="tk.newsoulmate.domain.vo.PageInfo" %><%--

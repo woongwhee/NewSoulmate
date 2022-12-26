@@ -1,7 +1,7 @@
 package tk.newsoulmate.domain.vo;
 
 import com.google.gson.annotations.SerializedName;
-import tk.newsoulmate.domain.vo.type.ReplyType;
+import tk.newsoulmate.domain.type.ReplyType;
 
 import java.sql.Date;
 

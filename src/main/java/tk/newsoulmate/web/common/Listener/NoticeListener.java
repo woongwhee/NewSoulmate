@@ -1,30 +1,30 @@
 package tk.newsoulmate.web.common.Listener;
 
 import tk.newsoulmate.web.common.APIKeys;
-import tk.newsoulmate.web.schedule.service.ScrapTimmer;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import java.util.Timer;
 
+
 @WebListener
 public class NoticeListener implements ServletContextListener {
     private ScrapTimmer task;
-    private Timer m;
+     private Timer m;
+    final private static long oneDay=1000 * 60 * 60 * 24;
     public NoticeListener() {
+
     }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        //
         new APIKeys();
         m = new Timer();
         task = new ScrapTimmer();
-        //새벽 1시까지 남은 시간을 반환한는 함수
         long time = task.StartTimming();
-        long oneDay = 1000 * 60 * 60 * 24;
-        //특정한 시간에 원하는 작업을 수행하고자 할 때 사용하는 메소드
+//        새벽 1시마다 전날 업데이트된 데이터를 긁어오는 함수
         m.schedule(task,time, oneDay);
-
     }
 
     @Override

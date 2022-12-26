@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
-import tk.newsoulmate.domain.vo.type.MemberGrade;
+import tk.newsoulmate.domain.type.MemberGrade;
 
 public class ManageService {
 

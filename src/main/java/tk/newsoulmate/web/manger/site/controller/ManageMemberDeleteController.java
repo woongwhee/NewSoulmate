@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import tk.newsoulmate.domain.vo.request.ManageMemberDeleteRequest;
+import tk.newsoulmate.domain.dto.request.ManageMemberDeleteRequest;
 import tk.newsoulmate.web.member.service.MemberService;
 
 @WebServlet(name = "ManageMemberDeleteController", value = "/manage/delete-member")

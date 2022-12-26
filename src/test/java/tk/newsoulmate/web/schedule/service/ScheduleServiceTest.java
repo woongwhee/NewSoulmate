@@ -3,13 +3,11 @@ package tk.newsoulmate.web.schedule.service;
 import org.junit.jupiter.api.Test;
 import tk.newsoulmate.domain.vo.Request;
 import tk.newsoulmate.web.common.APIKeys;
+import tk.newsoulmate.web.common.service.ScheduleService;
 
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ScheduleServiceTest {
 

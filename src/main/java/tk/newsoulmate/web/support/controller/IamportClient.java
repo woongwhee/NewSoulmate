@@ -13,9 +13,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import tk.newsoulmate.domain.vo.response.AccessTokenResponse;
-import tk.newsoulmate.domain.vo.response.IamportResponse;
-import tk.newsoulmate.domain.vo.response.PaymentDataResponse;
+import tk.newsoulmate.domain.dto.response.response.AccessTokenResponse;
+import tk.newsoulmate.domain.dto.response.response.IamportResponse;
+import tk.newsoulmate.domain.dto.response.response.PaymentDataResponse;
 import tk.newsoulmate.web.common.APIKeys;
 
 public class IamportClient {

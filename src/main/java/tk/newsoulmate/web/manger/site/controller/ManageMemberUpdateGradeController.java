@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import tk.newsoulmate.domain.vo.request.ManageMemberUpdateGradeRequest;
+import tk.newsoulmate.domain.dto.request.ManageMemberUpdateGradeRequest;
 import tk.newsoulmate.web.member.service.MemberService;
 
 @WebServlet(name = "ManageMemberUpdateGradeController", value = "/manage/grade")

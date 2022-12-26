@@ -6,13 +6,11 @@ import com.google.gson.JsonObject;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.response.GsonDateFormate;
-import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.dto.response.response.GsonDateFormate;
 import tk.newsoulmate.web.adopt.sevice.AdoptService;
 import tk.newsoulmate.web.common.UploadUtil;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 

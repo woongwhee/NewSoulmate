@@ -15,8 +15,8 @@ import com.google.gson.GsonBuilder;
 
 import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
-import tk.newsoulmate.domain.vo.response.ResponseMapper;
-import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.dto.response.response.ResponseMapper;
+import tk.newsoulmate.domain.type.BoardType;
 
 public class ShelterService {
 
@@ -90,7 +90,23 @@ public class ShelterService {
 
     public Notice selectNotice(long dno) {
         Connection conn = getConnection();
-        Notice n = new NoticeDao().selectNotice(conn, dno);
+        NoticeDao noticeDao=new NoticeDao();
+        Notice n = noticeDao.selectNotice(conn, dno);
+        if(n!=null){
+            close();
+            return n;
+        }
+        n=noticeDao.getChache(dno);
+        if(n!=null){
+            List<Notice> nlist=new ArrayList<>();
+            nlist.add(n);
+            int result=noticeDao.insertNotice(conn,nlist);
+            if(result>0){
+                commit();
+            }else{
+                rollback();
+            }
+        }
         close();
         return n;
     }
@@ -105,7 +121,7 @@ public class ShelterService {
 
     public List<Notice> getNoticeList(Request request) {
         URL url = request.toUrl();
-        ResponseMapper responseMapper = null;
+        System.out.println(url.toString());
         List<Notice> nlist = null;
         try {
             HttpURLConnection httpConn = (HttpURLConnection)url.openConnection();
@@ -113,7 +129,7 @@ public class ShelterService {
             httpConn.setRequestProperty("Content-type", "application/json");
             if (httpConn.getResponseCode() >= 200 && httpConn.getResponseCode() <= 300) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
-                responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"),
+                ResponseMapper responseMapper = gson.fromJson(new InputStreamReader(httpConn.getInputStream(), "UTF-8"),
                         ResponseMapper.class);
                 nlist = responseMapper.getResponse().getBody().getItems().getItem();
             }
@@ -121,6 +137,7 @@ public class ShelterService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        new NoticeDao().putChache(nlist);
         return nlist;
 
     }

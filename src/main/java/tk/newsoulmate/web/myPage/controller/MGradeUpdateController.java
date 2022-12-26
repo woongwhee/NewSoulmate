@@ -3,7 +3,7 @@ package tk.newsoulmate.web.myPage.controller;
 import tk.newsoulmate.domain.vo.Attachment;
 import tk.newsoulmate.domain.vo.GradeUp;
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.type.MemberGrade;
+import tk.newsoulmate.domain.type.MemberGrade;
 import tk.newsoulmate.web.common.UploadUtil;
 
 
@@ -14,7 +14,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "MGradeUpdateController", value = "/mGradeUpdate")
 @MultipartConfig(

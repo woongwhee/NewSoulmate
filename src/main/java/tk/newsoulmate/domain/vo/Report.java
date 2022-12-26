@@ -1,7 +1,7 @@
 package tk.newsoulmate.domain.vo;
 
-import tk.newsoulmate.domain.vo.type.BoardType;
-import tk.newsoulmate.domain.vo.type.ReportType;
+import tk.newsoulmate.domain.type.BoardType;
+import tk.newsoulmate.domain.type.ReportType;
 
 public class Report {
     private int reportNo;

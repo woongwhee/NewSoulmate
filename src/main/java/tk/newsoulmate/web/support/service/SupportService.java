@@ -11,9 +11,9 @@ import tk.newsoulmate.domain.vo.Member;
 import tk.newsoulmate.domain.vo.PageInfo;
 import tk.newsoulmate.domain.vo.Support;
 import tk.newsoulmate.domain.vo.SupportPage;
-import tk.newsoulmate.domain.vo.request.SupportWithdrawRequest;
-import tk.newsoulmate.domain.vo.type.SupportStatus;
-import tk.newsoulmate.domain.vo.type.WithdrawStatus;
+import tk.newsoulmate.domain.dto.request.SupportWithdrawRequest;
+import tk.newsoulmate.domain.type.SupportStatus;
+import tk.newsoulmate.domain.type.WithdrawStatus;
 import tk.newsoulmate.web.common.JDBCTemplet;
 import tk.newsoulmate.web.support.controller.IamportClient;
 

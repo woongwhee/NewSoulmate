@@ -10,12 +10,14 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
 public class NoticeDao {
 
     private static Properties prop=new Properties();
+    private static Map<Long, Notice> noticeMap=new ConcurrentHashMap<>();
     public NoticeDao(){
         
         String FilePath=NoticeDao.class.getResource("/sql/notice/Notice-Mapper.xml").getPath();
@@ -120,6 +122,9 @@ public class NoticeDao {
             close(rset);
             close(psmt);
         }
+        if(n==null) {
+            n = noticeMap.get(dno);
+        }
         return n;
     }
 
@@ -180,28 +185,21 @@ public class NoticeDao {
 
 
     }
-    /**
-     * ANimal테이블을 비워주는 메소드
-     * @param conn
-     * @return
-     */
-    public boolean trunkNotice(Connection conn) {
-        PreparedStatement psmt=null;
-        String sql=prop.getProperty("truncNotice");
-        boolean result=false;
-        try {
-            psmt=conn.prepareStatement(sql);
-            result=psmt.execute();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }finally {
-            close(psmt);
-        }
-        return result;
+    public void emptyNotice() {
+        noticeMap=new ConcurrentHashMap<>();
     }
-
+    public void putChache(List<Notice> nList) {
+        nList.stream().forEach(e->noticeMap.put(e.getDesertionNo(),e));
+    }
+    public Notice getChache(long dno) {
+        return noticeMap.get(dno);
+    }
     public List<Notice> selectNoticeList(Connection conn, Notice n) {
+
         return null;
+
     }
+
+
 }

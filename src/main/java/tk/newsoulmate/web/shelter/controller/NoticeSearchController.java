@@ -3,16 +3,12 @@ package tk.newsoulmate.web.shelter.controller;
 import com.google.gson.Gson;
 import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.domain.vo.Request;
-import tk.newsoulmate.domain.vo.response.Body;
 import tk.newsoulmate.web.shelter.service.ShelterService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.net.URL;
-import java.sql.Connection;
-import java.util.Calendar;
 import java.util.List;
 
 @WebServlet(name = "noticeSearch", value = "/noticeSearch")

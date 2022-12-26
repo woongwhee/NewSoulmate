@@ -5,8 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import tk.newsoulmate.domain.vo.Board;
 import tk.newsoulmate.domain.vo.Member;
-import tk.newsoulmate.domain.vo.response.GsonDateFormate;
-import tk.newsoulmate.web.adopt.sevice.AdoptService;
+import tk.newsoulmate.domain.dto.response.response.GsonDateFormate;
 import tk.newsoulmate.web.volunteer.service.VolunteerService;
 
 import javax.servlet.*;

@@ -2,7 +2,7 @@ package tk.newsoulmate.web.volunteer.service;
 
 import tk.newsoulmate.domain.dao.*;
 import tk.newsoulmate.domain.vo.*;
-import tk.newsoulmate.domain.vo.type.BoardType;
+import tk.newsoulmate.domain.type.BoardType;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.sql.Connection;
@@ -177,7 +177,6 @@ public class VolunteerService {
         Connection conn = JDBCTemplet.getConnection();
         ArrayList<Shelter> sList = new ShelterDao().volAbleShelter(conn);
         JDBCTemplet.close();
-
         return sList;
     }
 

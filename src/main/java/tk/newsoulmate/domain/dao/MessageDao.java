@@ -1,6 +1,7 @@
 package tk.newsoulmate.domain.dao;
 
 import tk.newsoulmate.domain.vo.ExtMessage;
+import tk.newsoulmate.domain.vo.Notice;
 import tk.newsoulmate.web.common.JDBCTemplet;
 
 import java.io.FileInputStream;
@@ -8,7 +9,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static tk.newsoulmate.web.common.JDBCTemplet.*;
 
