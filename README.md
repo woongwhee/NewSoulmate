@@ -133,8 +133,16 @@ file #첨부파일 저장용폴더 ($tomcathome/webapps/file)
 </details>
 
 <br/>
-# 5. 서비스 개발기
 
-- **진웅휘** | [환승주인 개발기]()
-
+# 5. 문서
+###기획보고서
+https://drive.google.com/file/d/1L6zZkbqxW-iPZNCHpkdetDZk2rc9NBJs/view?usp=share_link
+###ERD다이어그램
+https://www.erdcloud.com/d/KswtGB5amNor7KgTn
+###데이터베이스기술서
+https://docs.google.com/spreadsheets/d/1J3zE1rpJmOWnnTh2TjGaZumdDqmRdL-S/edit?usp=share_link&ouid=114521314021540923644&rtpof=true&sd=true
+###UI설계
+https://drive.google.com/file/d/18kj2KG9glaGqy_R7XCG7SbCxSkAlR_o4/view?usp=share_link
+###최종보고서
+https://docs.google.com/presentation/d/10xP-GvdzqPMvrpfWyeb0FNHUrRTNBbTGDzxrwljUmnE/edit?usp=sharing
 <br/>
